@@ -35,23 +35,26 @@ export const ProfileCreatorView: React.FC = () => {
                 { SiteUser.IsCreatorApplicationPending() ? (
                     <>
                         <h3>{'Your Creator application'}</h3>
+                        <p>
+                            {'Your application has been received.'}
+                        </p>
                     </>
                 ) : (
-                    <></>
-                )}
-                    <h3>{'Join the creator program'}</h3>
-                    <p>{'Register as a creator and promote your Trench Crusade STL on Trench Companion.'}</p>
+                    <>
+                        <h3>{'Join the creator program'}</h3>
+                        <p>{'Register as a creator and promote your Trench Crusade STL on Trench Companion.'}</p>
 
-                    <Link
-                        to={ROUTES.PAGE_CREATOR_APPLICATION}
-                        className="btn btn-primary"
-                    >
-                        {'Apply here'}
-                        <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l" />
-                    </Link>
+                        <Link
+                            to={ROUTES.PAGE_CREATOR_APPLICATION}
+                            className="btn btn-primary"
+                        >
+                            {'Apply here'}
+                            <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
+                        </Link>
+                    </>
+                )}
                 </>
             )}
-
         </div>
     );
 };

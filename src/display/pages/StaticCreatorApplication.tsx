@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import {ROUTES} from "../../resources/routes-constants";
+import {SYNOD} from "../../resources/api-constants";
 
 export const StaticCreatorApplication: React.FC = () => {
     const { SiteUser, authToken, userId } = useAuth();
@@ -18,14 +19,35 @@ export const StaticCreatorApplication: React.FC = () => {
         city: "",
         state: "",
         companyUrl: "",
-        mmfUrl: "",
-        cultsUrl: "",
-        cgtraderUrl: "",
-        instagramUrl: "",
-        facebookUrl: "",
-        patreonUrl: ""
+        mmf_url: "",
+        cults_url: "",
+        cgtrader_url: "",
+        instagram_url: "",
+        facebook_url: "",
+        patreon_url: ""
     });
 
+    const third_party_urls = [
+        {
+            id: 'mmf_url',
+            label: 'My Mini Factory URL'
+        },{
+            id: 'cults_url',
+            label: 'Cults 3D URL'
+        },{
+            id: 'cgtrader_url',
+            label: 'CG Trader URL'
+        },{
+            id: 'instagram_url',
+            label: 'Instagram URL'
+        },{
+            id: 'facebook_url',
+            label: 'Facebook URL'
+        },{
+            id: 'patreon_url',
+            label: 'Patreon URL'
+        },
+    ]
     const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -58,7 +80,7 @@ export const StaticCreatorApplication: React.FC = () => {
         }
 
         try {
-            const response = await fetch("/wp-json/synod/v1/creator-application/", {
+            const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/creator-application/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -174,15 +196,16 @@ export const StaticCreatorApplication: React.FC = () => {
                                 </div>
 
                                 {/* Optional URLs */}
-                                {["mmfUrl", "cultsUrl", "cgtraderUrl", "instagramUrl", "facebookUrl", "patreonUrl"].map((field, i) => (
-                                    <div className="mb-3" key={field}>
-                                        <label htmlFor={field} className="form-label">{field}</label>
+                                {third_party_urls.map((field, i) => (
+                                    <div className="mb-3" key={field.id}>
+                                        <label htmlFor={field.id} className="form-label">{field.label}</label>
                                         <input
                                             type="url"
                                             className="form-control"
-                                            id={field}
-                                            value={formData[field as keyof typeof formData]}
+                                            id={field.id}
+                                            value={formData[field.id as keyof typeof formData]}
                                             onChange={handleChange}
+                                            name={field.id}
                                         />
                                     </div>
                                 ))}
