@@ -3262,7 +3262,7 @@
         "description":  [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Plague Knights of the warband are called Butcher Knights. They have the Ravenous Infection rule and are mounted on 32mm or 40mm bases. They may be equipped with their own twisted Knightly Rank of Butchery, which grants them +1 MELEE for an additional +5 ducats."
+                "content": "Plague Knights of the warband are called Butcher Knights. They have the Ravenous Infection rule and are mounted on 32mm or 40mm bases. They may be equipped with their own twisted Knightly Rank of Butchery, which grants them +1 MELEE for an additional +5 ducats. This can be taken multiple times, as each Butcher Knight strives to follow this path."
             }
         ],
         "options": []
@@ -3277,7 +3277,7 @@
         "description":  [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "In campaign play, after deployment, if you have thralls in reserve, you may deploy up to six (6) of those thralls onto the battlefield. These Thralls do not count against your Maximum Field Strength. These models must be counted for purposes of Morale. In addition to this, in campaign play, you may alternatively recruit Thralls to your Warband for 1 Glory (to a maximum of 6 Thralls) each instead of their ducat cost (the cost of further upgrades remain unchanged)."
+                "content": "A Great Hunger Warband may recruit Thralls to your Warband for 1 Glory (to a maximum of 6 Thralls) each instead of their ducat cost (the cost of further upgrades remain unchanged). In campaign play, after deployment, if you have thralls in reserve, you may deploy up to six (6) of those thralls onto the battlefield. These “Glory Thralls” do not count against your Maximum Field Strength. These models must be counted for purposes of Morale."
             }
         ],
         "options": []
@@ -3340,7 +3340,7 @@
                             },
                             {
                                 "tags": {"desc_type" : "default"},
-                                "content": "Any Ranged Weapons except for Shotguns, and Putrid Shotguns."
+                                "content": "Any Ranged Weapons except for Shotguns, Black Spot Rifles, and Putrid Shotguns. This restriction does not apply to Glory Items."
                             }
                         ]
                     }
@@ -3359,7 +3359,7 @@
         "description":  [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Thralls have the Ravenous Infection rule and are mounted on 25mm or 32mm bases."
+                "content": "Thralls have the Ravenous Infection rule and are mounted on 25mm or 32mm bases. All Thralls may be equipped with Blighted Claws or Grasping Maws."
             }
         ],
         "options": []

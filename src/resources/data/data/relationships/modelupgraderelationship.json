@@ -909,7 +909,7 @@
             "up_plagueknightrottencross",
             "rel_md_plagueknight_up_plagueknightalmoner"
         ],
-        "warband_limit": 1,
+        "warband_limit": 0,
         "required_upgrades":[]
     },
     {

@@ -1286,6 +1286,11 @@
                         "category": "equipment",
                         "res_type": "id",
                         "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
                     }
                 ]
             },          
@@ -1351,6 +1356,11 @@
                         "category": "equipment",
                         "res_type": "id",
                         "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
                     }
                 ]
             },   
