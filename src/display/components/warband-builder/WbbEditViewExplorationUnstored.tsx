@@ -54,8 +54,30 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [keyvar, setkeyvar] = useState(0);
     const [updateState, setUpdateState] = useState(0);
     const [contextMessage, setContextMessage] = useState<string[]>([]);
-    const [cansave, setcansave] = useState<boolean>(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && CheckRelevantFullOptions(location.base_item).length > 0 && (location.base_item.options.length != CheckRelevantBaseOptions(location.base_item).length )));
+    const [cansave, setcansave] = useState<boolean>(GetCanSave() );
     
+    function GetCanSave() {
+        const IsRealID = location.base_item.location?.GetID()
+        const IsForced = !(containsTag(location.base_item.location.Tags, 'unforced'))
+        const optionList = location.base_item?.options
+        const ListOfFullOptions = CheckRelevantFullOptions(location.base_item)
+        const FilteredOptions = location.selected_options
+        const BaseOptions = CheckRelevantBaseOptions(location.base_item)
+        let OptionsAreValid = false
+        if (optionList != undefined) {
+            OptionsAreValid = true
+        }
+
+        console.log(IsRealID)
+        console.log(IsForced)
+        console.log(optionList)
+        console.log(ListOfFullOptions)
+        console.log(FilteredOptions)
+        console.log(BaseOptions)
+
+        return !IsRealID || IsForced && OptionsAreValid && ListOfFullOptions.length > 0 && (FilteredOptions.length != BaseOptions.length )
+    }
+
     function createBaseItem() {
         if (!warband) { return; }
         warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {
@@ -106,7 +128,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
         if (found == false) {
             location.selected_options.push(newoption);
         }
-        setcansave(!location.base_item.location?.GetID() || (!(containsTag(location.base_item.location.Tags, 'unforced')) && location.base_item?.options && CheckRelevantFullOptions(location.base_item).length > 0 && (location.base_item.options.length != CheckRelevantBaseOptions(location.base_item).length )))
+        setcansave(GetCanSave() )
         setUpdateState(updateState + 1);
         createBaseItem()
     }
