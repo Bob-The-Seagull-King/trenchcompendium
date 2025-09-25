@@ -97,6 +97,20 @@ class WarbandUpdater {
                 DoAdd = false;
             }
             
+            // Alchemist's Workshop
+            if (locations[i].object_id == "el_ransackedalchemistworkshop") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_ransackedalchemistworkshop_mod", selections: locations[i].selections, consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_ransackedalchemistworkshop_mod", selections: locations[i].selections, consumables : [] } ] }
+                locations[i].selections = [];
+            }
+            
+            // Ressurection Machine
+            if (locations[i].object_id == "el_abandonedressurectionmachine") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_abandonedressurectionmachine_mod", selections: locations[i].selections, consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_abandonedressurectionmachine_mod", selections: locations[i].selections, consumables : [] } ] }
+                locations[i].selections = [];
+            }
+            
             // Pot of Manna
             if (locations[i].object_id == "el_potofmanna") {
                 if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_potofmanna_mod", selections: [], consumables : [] } )
@@ -109,6 +123,44 @@ class WarbandUpdater {
                     if (locations[i].selections[j].selection_ID == "el_moonshinestash_distribute") {
                         if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_moonshinestash_distribute", selections: [], consumables : [] } )
                         } else { wb.exploration.location_mods =[ { object_id: "el_moonshinestash_distribute", selections: [], consumables : [] } ] }
+                    }
+                }
+            }
+            
+            // Stash of Drugs & Erotica Indulge
+            if (locations[i].object_id == "el_stashofdrugsanderotica") {
+                for (let j = 0; j < locations[i].selections.length; j++) {
+                    if (locations[i].selections[j].selection_ID == "el_stashofdrugsanderotica_indulge") {
+                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_stashofdrugsanderotica_indulge", selections: [], consumables : [] } )
+                        } else { wb.exploration.location_mods =[ { object_id: "el_stashofdrugsanderotica_indulge", selections: [], consumables : [] } ] }
+                    }
+                }
+            }
+            
+            // Esoteric Library
+            if (locations[i].object_id == "el_esotericlibrary") {
+                for (let j = 0; j < locations[i].selections.length; j++) {
+                    if (locations[i].selections[j].selection_ID == "el_esotericlibrary_plague") {
+                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_esotericlibrary_plague", selections: [], consumables : [] } )
+                        } else { wb.exploration.location_mods =[ { object_id: "el_esotericlibrary_plague", selections: [], consumables : [] } ] }
+                    }
+                    if (locations[i].selections[j].selection_ID == "el_esotericlibrary_study") {
+                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_esotericlibrary_study", selections: [], consumables : [] } )
+                        } else { wb.exploration.location_mods =[ { object_id: "el_esotericlibrary_study", selections: [], consumables : [] } ] }
+                    }
+                }
+            }
+            
+            // Jabirean Books
+            if (locations[i].object_id == "el_jabireanalchemicalbooks") {
+                for (let j = 0; j < locations[i].selections.length; j++) {
+                    if (locations[i].selections[j].selection_ID == "el_jabireanalchemicalbooks_study") {
+                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_jabireanalchemicalbooks_study", selections: [], consumables : [] } )
+                        } else { wb.exploration.location_mods =[ { object_id: "el_jabireanalchemicalbooks_study", selections: [], consumables : [] } ] }
+                    }
+                    if (locations[i].selections[j].selection_ID == "el_jabireanalchemicalbooks_keep") {
+                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_jabireanalchemicalbooks_keep", selections: [], consumables : [] } )
+                        } else { wb.exploration.location_mods =[ { object_id: "el_jabireanalchemicalbooks_keep", selections: [], consumables : [] } ] }
                     }
                 }
             }

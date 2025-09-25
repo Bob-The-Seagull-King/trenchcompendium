@@ -1556,6 +1556,27 @@
             "unforced": true
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_ransackedalchemistworkshop_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You scavenge some of the life-giving potions within. Add Curative Fluids to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+            }
+        ],
+        "location_value": 12,
+        "options": [ ]
+    },
+    {
+        "id": "el_ransackedalchemistworkshop_mod",
+        "name": "Ransacked Alchemical Workshop",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "scar_heal": {
                 "count": 1
             },
@@ -1566,10 +1587,9 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You scavenge some of the life-giving potions within. Add Curative Fluids to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+                "content": "During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
             }
         ],
-        "location_value": 12,
         "options": [ {
             "ref_id" : "ot_ransackedalchemistworkshop_a",
             "name" : "",
@@ -1866,6 +1886,7 @@
             "location_option": "el_stashofdrugsanderotica"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -2069,6 +2090,27 @@
             "unforced": true
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_abandonedressurectionmachine_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find remnants of machines that were once used as part of the Meta-Christ Program. Most of them are broken, torn apart by some immense force, but one of them works and can be dismantled. Add a Salvaged Resurrection Machine to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
+            }
+        ],
+        "location_value": 32,
+        "options": []
+    },
+    {
+        "id": "el_abandonedressurectionmachine_mod",
+        "name": "Abandoned Ressurection Machine",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "actviated": {},
             "scar_heal": {
                 "all": true
@@ -2080,10 +2122,9 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You find remnants of machines that were once used as part of the Meta-Christ Program. Most of them are broken, torn apart by some immense force, but one of them works and can be dismantled. Add a Salvaged Resurrection Machine to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
+                "content": "During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
             }
         ],
-        "location_value": 32,
         "options": [{
             "ref_id" : "ot_abandonedressurectionmachine_a",
             "name" : "",
@@ -2228,12 +2269,13 @@
     },
     {
         "id": "el_esotericlibrary_study",
-        "name": "Burn",
+        "name": "Study Esoteric Library",
         "source": "core",
         "tags": {
             "location_option": "el_esotericlibrary"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -2255,12 +2297,13 @@
     },
     {
         "id": "el_esotericlibrary_plague",
-        "name": "Plague",
+        "name": "Plague Esoteric Library",
         "source": "core",
         "tags": {
             "location_option": "el_esotericlibrary"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -2398,12 +2441,13 @@
     },
     {
         "id": "el_jabireanalchemicalbooks_keep",
-        "name": "Keep",
+        "name": "Keep Alchemical Books",
         "source": "core",
         "tags": {
             "location_option": "el_jabireanalchemicalbooks"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "location_rule_option": {},
             "faction_choose_equipment": {
                 "ids": [
@@ -2429,12 +2473,13 @@
     },
     {
         "id": "el_jabireanalchemicalbooks_study",
-        "name": "Study",
+        "name": "Study Alchemical Books",
         "source": "core",
         "tags": {
             "location_option": "el_jabireanalchemicalbooks"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
