@@ -7084,7 +7084,7 @@
         "description": [   
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Any weapon that has a bayonet lug can be fitted with a Butcher Bayonet - which is essentially a heavy glaive-like attachment. Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry. The weapon adds +1 DICE to rolls on the injury table.",
+                "content": "Any weapon that has a bayonet lug can be fitted with a Butcher Bayonet - which is essentially a heavy glaive-like attachment. Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry. The weapon adds +1 DICE to rolls on the injury table. Models attacking with a Butcher Bayonet benefit from the Overwhelming Horde rule.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -7113,7 +7113,7 @@
         "description": [ 
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "This weapon ignores armour on a critical hit, and always inflicts an INFECTION MARKER in addition to any BLOOD MARKERS it may cause",
+                "content": "This weapon ignores armour on a critical hit, and always inflicts an INFECTION MARKER in addition to any BLOOD MARKERS it may cause.",
                 "glossary": [
                     {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
                     {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}

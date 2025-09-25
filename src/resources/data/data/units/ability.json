@@ -2861,7 +2861,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"}, 
-                "content": "All THRALLS within 12” of the MATAGOT HAG gain +1 DICE when attempting to dash. It requires all of the hag’s concentration to reign in the hungry fruit of her loins.",
+                "content": "All models within 8” of the MATAGOT HAG gain +1 DICE when attempting to dash, except for herself. It requires all of the hag’s concentration to reign in the hungry fruit of her loins.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
                 ]
