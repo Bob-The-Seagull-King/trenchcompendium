@@ -68,13 +68,6 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             OptionsAreValid = true
         }
 
-        console.log(IsRealID)
-        console.log(IsForced)
-        console.log(optionList)
-        console.log(ListOfFullOptions)
-        console.log(FilteredOptions)
-        console.log(BaseOptions)
-
         return !IsRealID || IsForced && OptionsAreValid && ListOfFullOptions.length > 0 && (FilteredOptions.length != BaseOptions.length )
     }
 
@@ -86,8 +79,19 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     }
 
     async function onbaseItemCreate() {
-        console.log(warband?.warband_data.Exploration.CurLocation)
-            setkeyvar(keyvar + 1);
+        setkeyvar(keyvar + 1);
+        
+        if (location.true_obj) {
+            const Events : EventRunner = new EventRunner();
+            const IDString = await Events.runEvent(
+                "getLocationMessage",
+                location.true_obj,
+                [],
+                [],
+                null
+            )
+            setContextMessage(IDString)
+        }
     }
 
     useEffect(() => {
@@ -95,6 +99,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             if (CheckRelevantBaseOptions(location.base_item).length == 0 && location.true_obj == undefined) {
                 createBaseItem();
             }
+            
         }
 
         GetMessage();

@@ -2066,7 +2066,12 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             relayVar.push("The warband gains " + context_func["count"] + " ducats.");
-
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push("The warband gained " + context_func["count"] + " ducats.");
+            
             return relayVar;
         },
         async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
