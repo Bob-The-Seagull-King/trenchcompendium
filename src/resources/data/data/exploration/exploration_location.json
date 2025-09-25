@@ -49,12 +49,13 @@
     },
     {
         "id": "el_moonshinestash_distribute",
-        "name": "Distribute",
+        "name": "Distribute Moonshine Stash",
         "source": "core",
         "tags": {
             "location_option": "el_moonshinestash"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -1514,7 +1515,10 @@
         },
         "contextdata": {
             "location_rule_option": {},
-            "add_to_warband": {}
+            "add_to_warband": {},
+            "add_location_modifier": {
+                "id": ["el_potofmanna_mod"]
+            }
         },
         "description": [            
             {
@@ -1523,6 +1527,24 @@
             }
         ],
         "location_value": 11,
+        "options": [  ]
+    },
+    {
+        "id": "el_potofmanna_mod",
+        "name": "Pot of Manna",
+        "source": "core",
+        "tags": {            
+            "modifier": true
+        },
+        "contextdata": {
+            "location_rule_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whenever your Warband rolls to explore, your Warband gains an additional 10 ducats from Looting due to the lowered cost of rations."
+            }
+        ],
         "options": [  ]
     },
     {

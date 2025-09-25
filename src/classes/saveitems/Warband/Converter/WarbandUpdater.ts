@@ -5,7 +5,7 @@ import { ConvertCompendiumToCompanionID } from "../../../../resources/staticcont
 import { ToolsController } from "../../../_high_level_controllers/ToolsController";
 import { IUserWarband, UserWarband } from "../UserWarband";
 import { SumWarband, WarbandManager } from "../WarbandManager";
-import { WarbandProperty } from "../WarbandProperty";
+import { IWarbandProperty, WarbandProperty } from "../WarbandProperty";
 import { EquipmentFactory } from "../../../../factories/features/EquipmentFactory";
 import { FactionModelRelationship } from "../../../relationship/faction/FactionModelRelationship";
 import { ModelFactory } from "../../../../factories/features/ModelFactory";
@@ -65,10 +65,11 @@ class WarbandUpdater {
         wb.tags[UPDATETAGNAME] = 1;
 
         const locations = wb.exploration.locations;
-
+        const fin_locations : IWarbandProperty[] = []
+        console.log(locations)
         // Update a warband's Locations to include new modifiers
         for (let i = 0; i < locations.length; i++) {
-            
+            let DoAdd = true
             // Black Network Contact
             if (locations[i].object_id == "el_blacknetworkcontact") {
                 if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_blacknetworkcontact_mod", selections: [], consumables : [] } )
@@ -87,8 +88,36 @@ class WarbandUpdater {
                 if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_blackmarket_mod", selections: [], consumables : [] } )
                 } else { wb.exploration.location_mods =[ { object_id: "el_blackmarket_mod", selections: [], consumables : [] } ] }
             }
-        }
+            
+            // Golgatha Tektites
+            if (locations[i].object_id == "el_golgothatektites_apply") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_golgothatektites_apply", selections: locations[i].selections, consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_golgothatektites_apply", selections: locations[i].selections, consumables : [] } ] }
+                locations[i].selections = [];
+                DoAdd = false;
+            }
+            
+            // Pot of Manna
+            if (locations[i].object_id == "el_potofmanna") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_potofmanna_mod", selections: [], consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_potofmanna_mod", selections: [], consumables : [] } ] }
+            }
+            
+            // Moonshine Stash Distribute
+            if (locations[i].object_id == "el_moonshinestash") {
+                for (let j = 0; j < locations[i].selections.length; j++) {
+                    if (locations[i].selections[j].selection_ID == "el_moonshinestash_distribute") {
+                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_moonshinestash_distribute", selections: [], consumables : [] } )
+                        } else { wb.exploration.location_mods =[ { object_id: "el_moonshinestash_distribute", selections: [], consumables : [] } ] }
+                    }
+                }
+            }
 
+            if (DoAdd) {
+                fin_locations.push(locations[i])
+            }
+        }
+        wb.exploration.locations = fin_locations;
         return wb;
     }
 

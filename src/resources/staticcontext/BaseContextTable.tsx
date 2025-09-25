@@ -3985,6 +3985,8 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             if (IsMe) {
+                console.log("TESST")
+                console.log(val)
                 if (val != null && !containsTag(val.Tags, "secondarylevel") ) {
                     val.Tags["secondarylevel"] = true
                     await warband.AddExplorationMod(val as ExplorationLocation, [])
