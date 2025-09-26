@@ -112,7 +112,11 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                         onSubmit={handleSubmit}
                         submitBtnString={'Add to stash'}
                         cost={cache[item].cost + " " + getCostType(cache[item].facrel.CostType)}
-                        limit={"Limit: " + (cache[item].count_cur + "/" + cache[item].limit)}
+                        limit={
+                            cache[item].limit > 0
+                                ? "Limit: " + (cache[item].count_cur + "/" + cache[item].limit)
+                                : ""
+                        }
                         restrictions={cache[item].restrictions}
                     />
                 ))}
