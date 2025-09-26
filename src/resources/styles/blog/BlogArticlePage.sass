@@ -40,6 +40,32 @@
 
     .article-content // the main text wrapper
 
+    // WP content styles
+
+    // gallery block
+    .wp-block-gallery
+        display: grid
+        gap: 10px
+
+        &.columns-2
+            grid-template-columns: repeat(2, 1fr)
+        &.columns-3
+            grid-template-columns: repeat(3, 1fr)
+
+            @media(max-width: 575px)
+                grid-template-columns: repeat(2, 1fr)
+        .wp-block-image
+            margin-bottom: 0
+
+    // Image Block
+    .wp-block-image
+        > a // link in images
+            display: block
+
+        img // the image itself
+            width: 100%
+            height: auto
+
     // previous / next navigation in blog articles like .rules-page-links
     .blog-adjacent-navigation
         display: flex
@@ -80,3 +106,4 @@
 
         i, svg
             right: 5px
+    // END Blog post navigation
