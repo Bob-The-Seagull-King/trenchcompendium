@@ -25,6 +25,7 @@ const BlogArticlePreview: React.FC<BlogArticlePreviewProps> = ({ post, onClick }
                         imageId={post.featured_media}
                         className={'preview-image'}
                         imageKey={post.slug}
+                        size={'large'}
                     />
                 </div>
             }
@@ -34,7 +35,7 @@ const BlogArticlePreview: React.FC<BlogArticlePreviewProps> = ({ post, onClick }
                     className=""
                     dangerouslySetInnerHTML={{__html: post.title.rendered}}
                 />
-                <div className="mb-4">
+                <div className="mb-3">
                     {new Date(post.date).toLocaleDateString()}
                 </div>
                 <div
