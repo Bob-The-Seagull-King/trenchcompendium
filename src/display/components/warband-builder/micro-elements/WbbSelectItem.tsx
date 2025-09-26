@@ -47,8 +47,6 @@ function WbbSelectItemEquipment({
        unavailableString
    }: WbbSelectItemEquipmentProps) {
 
-    console.log('opened');
-    console.log(opened);
     return (
         <React.Fragment>
             <div
