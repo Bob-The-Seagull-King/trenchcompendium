@@ -4,17 +4,17 @@
 //
 
 .BlogArticlePage
-    margin-top: 60px
     margin-bottom: 60px
 
-    h1
 
+
+    h1
         margin-bottom: 5px
 
     .post-date-author
         margin-bottom: 30px
 
-    .article-wrap
+    .article-wrap // the <article> element
         @media(min-width: 786px) and (max-width: 1199px)
             margin: auto
             width: 75%
@@ -24,3 +24,49 @@
 
         .wp-block-heading
             margin-top: 30px
+
+    .banner-image-wrap
+        margin-bottom: 30px
+
+    .article-content // the main text wrapper
+
+    // previous / next navigation in blog articles like .rules-page-links
+    .blog-adjacent-navigation
+        display: flex
+        justify-content: space-between
+        gap: 15px // min gap
+        margin: 30px 0 40px
+
+    .blog-adjacent-navigation_element
+        display: inline-block
+        position: relative
+        color: $color-text
+        text-decoration: none
+        background-color: $color-bg-2
+        border-bottom: 1px solid $color-highlight
+        padding: 10px 20px
+
+        transition: background-color .2s ease, border-bottom-color .2s ease
+
+        &:hover
+            background-color: $color-bg-3
+            border-bottom-color: $color-highlight-text
+            text-decoration: none
+            color: currentColor
+
+        .page-link-label
+            display: block
+            color: $color-highlight-text
+            font-size: 14px
+            margin-bottom: 2px
+
+
+    .blog-adjacent-navigation_previous
+        i, svg
+            left: 5px
+    .blog-adjacent-navigation_next
+        margin-left: auto
+        text-align: right
+
+        i, svg
+            right: 5px
