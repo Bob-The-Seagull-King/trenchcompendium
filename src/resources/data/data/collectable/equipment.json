@@ -86,7 +86,7 @@
     },
     {
         "id": "eq_alchemicalammunition",
-        "name": "Alchemical Ammunication",
+        "name": "Alchemical Ammunition",
         "source": "core",
         "tags": {"trait": true},
         "category": "equipment",
