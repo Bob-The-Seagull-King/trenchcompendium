@@ -117,10 +117,10 @@ const BlogArticlePage: React.FC = () => {
 
             <article className={'article-wrap'}>
                 {post.featured_media &&
-                    <div className={'banner-image-wrap'}>
+                    <div className={'blog-hero-image-wrap'}>
                         <SynodImageWithCredit
                             imageId={post.featured_media}
-                            className={'banner-image'}
+                            className={'blog-hero-image'}
                             size={'full'}
                             imageKey={post.slug}
                         />
@@ -160,7 +160,7 @@ const BlogArticlePage: React.FC = () => {
                         </Link>
                     ) : <span></span>}
 
-                    {previousPost ? (
+                    {(previousPost && previousPost.slug ) ? (
                         <Link to={`/blog/${previousPost.slug}`}
                               className="blog-adjacent-navigation_element blog-adjacent-navigation_next"
                         >

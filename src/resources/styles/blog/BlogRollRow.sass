@@ -1,0 +1,31 @@
+// // // // //
+//
+// The Blog roll component
+//
+
+
+
+.BlogRollRow
+    // default fallback
+    .BlogRollRow-item
+        display: block
+
+    // XS/SM: only show first
+    @media (max-width: 767px)
+        .BlogRollRow-item
+            &:nth-child(n+2)
+                display: none
+
+    // md up (≥768px): show first 2
+    @media (min-width: 768px) and (max-width: 991px)
+        .BlogRollRow-item
+            display: block // reset
+            &:nth-child(n+3)
+                display: none
+
+    // lg up (≥992px): only show first 2
+    @media (min-width: 992px)
+        .BlogRollRow-item
+            display: block
+            &:nth-child(n+3)
+                display: none

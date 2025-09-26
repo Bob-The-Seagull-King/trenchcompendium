@@ -49,7 +49,7 @@ const BlogListPage: React.FC = () => {
 
     return (
         <div className="BlogListPage container">
-            <h1 className="mb-4">Developer Blog</h1>
+            <h1 className="mb-4">Trench Companion Blog</h1>
 
             <p className={'mb-4'}>
                 {'Stay up to date with the latest progress on the Trench Companion project.\n' +
