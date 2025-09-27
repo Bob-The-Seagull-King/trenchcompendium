@@ -5,10 +5,12 @@ import { OptionCallTable } from "../../resources/staticcontext/optioncontexttabl
 import { StaticOptionContextObject } from "./StaticOptionContextObject";
 import { ContextObject } from "../../classes/contextevent/contextobject";
 import { EventRunner } from "../contextevent/contexteventhandler";
+import { ObjectTag } from "../../classes/CompendiumItem";
 
 interface IStaticOption {
     ref_id : string, // ID of the option (unique only to the parent object)
     name : string, // Representation name of the option
+    tags : ObjectTag,
     description : [], // Description of what this option means
     category : string, // Used to determine if the option is basic or uses context objects
     contextvars : ContextEventEntry, // Variables used for events.
@@ -42,6 +44,7 @@ class StaticOption {
     public DynaForce : boolean;
     public AutoSelect : boolean;
     public Single : boolean;
+    public Tags : ObjectTag;
     
     public Description;
     public Selections : IChoice[] = [];
@@ -61,6 +64,7 @@ class StaticOption {
         this.Single = (data.single != undefined)? data.single : false;
         this.DynaForce = (data.dyna_only != undefined)? data.dyna_only : false;
         this.AutoSelect = (data.autoselect != undefined)? data.autoselect : false;
+        this.Tags = (data.tags != undefined)? data.tags : {};
         this.OptionContext = data.option_context;
     }
 

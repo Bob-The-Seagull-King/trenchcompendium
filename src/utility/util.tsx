@@ -48,11 +48,11 @@ export function ConvertContentWithGlossary(glossary: any[] | undefined, content:
             splitSet = tempsplit;
             
         }
-        
+
         return (
             <span>
-                {splitSet.map((item) => (
-                    <span key='glossarysplititem' >
+                {splitSet.map((item, index) => (
+                    <span key={`glossarysplititem-${index}`}>
                         {ArrayItemIntoHtml(item, glossary)}
                     </span>
                 ))}
