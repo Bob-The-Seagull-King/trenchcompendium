@@ -3279,11 +3279,14 @@
                                 "subcontent": [
                                     {
                                         "tags": {"desc_type" : "bold"},
-                                        "content": "Knightly Rank of Butchery: "
+                                        "content": "Butcher King: "
                                     },
                                     {
                                         "tags": {"desc_type" : "default"},
-                                        "content": "Grants a Butcher Knight +1 MELEE for an additional +5 ducats."
+                                        "content": "Gain 1 Glory for each enemy model this Butcher Knight took out of action with a Melee Attack ACTION if the knight is not Down or Out of Action at the end of the battle. Costs 10 ducats.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
                                     }
                                 ]
                             },
@@ -3397,7 +3400,7 @@
                             },
                             {
                                 "tags": {"desc_type" : "default"},
-                                "content": "Any Ranged Weapons except for Shotguns, Black Spot Rifles, and Putrid Shotguns. This restriction does not apply to Glory Items."
+                                "content": "Any Ranged Weapons except for Shotguns, Black Spot Rifles, Parasite Grenades, and Putrid Shotguns. This restriction does not apply to Glory Items."
                             }
                         ]
                     }
@@ -3415,8 +3418,12 @@
         "name": "Grail Thralls & Fly Thralls",
         "description":  [
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Thralls have the Ravenous Infection rule and are mounted on 25mm or 32mm bases. All Thralls may be equipped with Blighted Claws or Grasping Maws."
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grail and Fly Thralls in a Great Hunger Warband cost 35 ducats, and gain the Ravenous Infection Ability and the Blighted Claws equipment. They may be based on 25mm or 32mm bases, but all Thralls of the same type (Grail or Fly) must be on the same sized base."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In addition, Grail and Fly Thralls may have the Unending Starvation and Grasping Maw equipment."
             }
         ],
         "options": []

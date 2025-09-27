@@ -1337,6 +1337,24 @@
         "options": []
     },
     {
+        "id": "up_plagueknightrankbutcherking",
+        "name": "Butcher King",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Gain 1 Glory for each enemy model this Butcher Knight took out of action with a Melee Attack ACTION if the knight is not Down or Out of Action at the end of the battle.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
         "id": "up_plagueknightrankofthefeast",
         "name": "Knightly Rank of the Feast",
         "source": "core",
@@ -2175,7 +2193,7 @@
     },
     {
         "id": "up_putrescere_hunger",
-        "name": "Hunger",
+        "name": "Feral Hunger",
         "source": "creature_caster",
         "tags": {"trait": true, "special_category": "arcana_putrescere"
                 },
@@ -2184,7 +2202,7 @@
         "description": [          
             {
                 "tags": {"desc_type" : "default"},
-                "content": "When this model charges an enemy model, it can always move the maximum distance of 12”, although it suffers penalties to this movement as standard (Difficult Terrain, Standing etc)."
+                "content": "When this model charges an enemy model, it can always treat the dice roll added to the models movement as the maximum value (6 unless otherwise specified). The model suffers penalties to this movement as standard (Difficult Terrain, Standing etc)."
             }
         ],
         "options": []
@@ -2220,7 +2238,7 @@
         "description": [      
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "As a PUTRESCERE (1) arcana, this model can command any friendly Thrall model within 12” to do one of the following:",
+                "content": "As a PUTRESCERE (1) arcana, this model can command any friendly Thrall model within 8” to do one of the following:",
                 "glossary": [
                     {"val": "PUTRESCERE (1)", "id": "kw_putrescere"}
                 ]
@@ -2375,6 +2393,21 @@
                     {"val": "PUTRESCERE (1)", "id": "kw_putrescere"},
                     {"val": "FIRE", "id": "kw_fire"}
                 ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_unendingstarvation",
+        "name": "Unending Starvation",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model with this upgrade adds +1” to their movement Characteristic and may target themselves with the Ravenous Infection Ability. In addition, if this model is more than 1” away from an enemy model, its first action each Activation must be a Move or Charge Action towards the nearest enemy model (choose in the case of a tie)."
             }
         ],
         "options": []
