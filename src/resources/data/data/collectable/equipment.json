@@ -6976,7 +6976,7 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "As a RISKY ACTION, a model can drag an enemy model within 6\" directly towards them that is within Line of Sight. Roll 1d6 and that is how many inches that model moves directly towards the model that executes this action. If this ability is used on a target in melee combat, it will be extricated from the combat and will not be subject to Free Strikes. A target cannot be dragged through difficult terrain, and will stop immediately if they come in contact with difficult terrain or enemy model while being dragged.",
+                "content": "A model with this Equipment may, as a RISKY ACTION, move an enemy model within Line of Sight D6” in a straight line towards them. This ability can be used to make the target model move within 1” of an enemy, retreat (though they are not subject to Free Strikes), or Jump Down, but may not be used to make a model move through Difficult or Dangerous terrain, Climb or Jump across a gap.",
                 "glossary": [
                     {"val": "RISKY ACTION", "id": "kw_riskyaction"}
                 ]
@@ -7000,7 +7000,7 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "This relic grants the wearer an additional attack ACTION in melee combat without penalty. Each time the model is activated, it also receives 1 BLOOD MARKER.",
+                "content": "This relic grants the wearer an additional attack ACTION in melee combat without penalty. Each time the model is activated, it also receives 1 BLOOD MARKER. Once this has been equipped, it can never be unequipped or removed from the model for any reason.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
@@ -7086,7 +7086,7 @@
         "category": "melee",
         "distance": null,
         "stats": {
-            "hands_melee": 0,
+            "hands_melee": 2,
             "melee": true
         },
         "contextdata": {
@@ -7096,16 +7096,18 @@
         "description": [   
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "Any weapon that has a bayonet lug can be fitted with a Butcher Bayonet - which is essentially a heavy glaive-like attachment. Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry. The weapon adds +1 DICE to rolls on the injury table. Models attacking with a Butcher Bayonet benefit from the Overwhelming Horde rule.",
+                "content": "The Butcher Bayonet has the Bayonet Lug and Shield Combo rules. Add +1 DICE to rolls on the Injury Table made with this weapon. In addition, if a model with a Butcher Bayonet made a Charge ACTION in the same round it  attacks with it, add +1 to Melee Attacks made with a Butcher Bayonet for each friendly BLACK GRAIL model (including itself) within 3” of the attacking model (to a maximum of +4 DICE).",
                 "glossary": [
-                    {"val": "-1 DICE", "id": "kw_minusdice"},
-                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+4 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
                 ]
             }  
         ],
         "lore": [        ],
         "options": [],
-        "keywords": ["kw_cumbersome","kw_shieldcombo"],
+        "keywords": ["kw_cumbersome","kw_shieldcombo","kw_bayonetlug"],
         "modifiers": ["+1D to Injuries"]
     },
     {

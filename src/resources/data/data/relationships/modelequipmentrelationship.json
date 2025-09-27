@@ -480,7 +480,7 @@
         "name": "Cradle Thrall Equipment",
         "contextdata": {},
         "options": [],
-        "model_id": ["md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger"],
+        "model_id": ["md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger","md_grailthrall_hunger","md_grailthrall_flythrall_hunger"],
         "mandatory_equipment": ["eq_blightedclaws"],
         "removable": false
     }

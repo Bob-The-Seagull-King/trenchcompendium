@@ -2825,7 +2825,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"}, 
-                "content": "Some infected with The Great Hunger care only to proliferate their agonizing disease. A model with the Ravenous Infection ability may make a RISKY ACTION to spread the virus. On a success, the model may place an INFECTION MARKER on themselves or any other model within 1”, as the Great Hunger virus burns through the battlefield.",
+                "content": "Some infected with The Great Hunger care only to proliferate their agonizing disease. A model with the Ravenous Infection Ability may make a RISKY ACTION to spread the virus. On a success, the model may place an INFECTION MARKER on any other model within 1”, as the Great Hunger virus burns through the battlefield. A model’s Activation ends immediately after using this Ability.",
                 "glossary": [
                     {"val": "RISKY ACTION", "id": "kw_riskyaction"},
                     {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
