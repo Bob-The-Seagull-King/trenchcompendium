@@ -7022,6 +7022,18 @@
         "stats": {
         },
         "contextdata": {
+            
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "melee"
+                    }
+                ],
+                "additions": [
+                    "kw_critical"
+                ]
+            },
             "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}},
         "description": [       
             {
