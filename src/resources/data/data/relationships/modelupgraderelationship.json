@@ -843,7 +843,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight","md_plagueknight_executor","md_plagueknight_butcherknight"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
         "upgrade_id": "up_plagueknightcompanionofthefly_base",
         "cost": 5,
         "cost_type": 0,
@@ -862,7 +862,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight","md_plagueknight_executor","md_plagueknight_butcherknight"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
         "upgrade_id": "up_plagueknightrottencross",
         "cost": 5,
         "cost_type": 0,
@@ -881,7 +881,7 @@
         "name": "",
         "contextdata": {},
         "options": [],
-        "model_id_set": ["md_plagueknight","md_plagueknight_executor","md_plagueknight_butcherknight"],
+        "model_id_set": ["md_plagueknight","md_plagueknight_executor"],
         "upgrade_id": "up_plagueknightalmoner",
         "cost": 10,
         "cost_type": 0,
@@ -905,9 +905,44 @@
         "cost": 5,
         "cost_type": 0,
         "restricted_upgrades": [
-            "up_plagueknightcompanionofthefly_base",
-            "up_plagueknightrottencross",
-            "rel_md_plagueknight_up_plagueknightalmoner"
+            "up_plagueknightrankofthefeast",
+            "up_plagueknightrankofferocity"
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_plagueknight_up_plagueknightrankofbutcher",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_plagueknight_butcherknight"],
+        "upgrade_id": "up_plagueknightrankofthefeast",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_plagueknightrankofbutcher",
+            "up_plagueknightrankofferocity"
+        ],
+        "warband_limit": 0,
+        "required_upgrades":[]
+    },
+    {
+        "id": "rel_md_plagueknight_up_plagueknightrankofferocity",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {},
+        "options": [],
+        "model_id_set": ["md_plagueknight_butcherknight"],
+        "upgrade_id": "up_plagueknightrankofferocity",
+        "cost": 5,
+        "cost_type": 0,
+        "restricted_upgrades": [
+            "up_plagueknightrankofbutcher",
+            "up_plagueknightrankofthefeast"
         ],
         "warband_limit": 0,
         "required_upgrades":[]
@@ -1371,7 +1406,7 @@
         "options": [],
         "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
         "upgrade_id": "up_putrescere_vomitus",
-        "cost": 15,
+        "cost": 40,
         "cost_type": 0,
         "restricted_upgrades": [],
         "warband_limit": 2,

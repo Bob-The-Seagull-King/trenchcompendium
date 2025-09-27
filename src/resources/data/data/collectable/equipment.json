@@ -7044,7 +7044,7 @@
         "source": "core",
         "tags": {"action": true, "weapon": true, "rifle": true},
         "category": "ranged",
-        "distance": 36,
+        "distance": 30,
         "stats": {
             "hands_ranged": 2,
             "ranged": true

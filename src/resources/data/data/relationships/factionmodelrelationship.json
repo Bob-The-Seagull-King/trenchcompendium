@@ -1910,17 +1910,17 @@
         "faction_model_count_group": {
             "filter": [
                 {
-                    "id": ["md_grailthrall_hunger","md_grailthrall_flythrall_hunger"]
+                    "id": ["md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger"]
                 }
             ],
-            "number": 6
+            "number": 3
         }},
         "options": [],
         "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
-        "model_id" : "md_grailthrall_hunger",
+        "model_id" : "md_grailthrall_cradle_hunger",
         "captain" : false,
         "mercenary": false,
-        "cost" : 1,
+        "cost" : 2,
         "cost_type" : 1,
         "restricted_models" : [],
         "warband_minimum" : 0,
@@ -2004,17 +2004,17 @@
         "faction_model_count_group": {
             "filter": [
                 {
-                    "id": ["md_grailthrall_hunger","md_grailthrall_flythrall_hunger"]
+                    "id": ["md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger"]
                 }
             ],
-            "number": 6
+            "number": 3
         }},
         "options": [],
         "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
-        "model_id" : "md_grailthrall_flythrall_hunger",
+        "model_id" : "md_grailthrall_flythrall_cradle_hunger",
         "captain" : false,
         "mercenary": false,
-        "cost" : 1,
+        "cost" : 2,
         "cost_type" : 1,
         "restricted_models" : [],
         "warband_minimum" : 0,
