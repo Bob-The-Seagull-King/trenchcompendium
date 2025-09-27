@@ -2195,7 +2195,7 @@ class UserWarband extends DynamicContextObject {
 
         const LineList : string[] = [];
         const elite = this.GetFighters().filter((item) => (item.model.IsElite() && item.model.State == "active"))
-        const troops = this.GetFighters().filter((item) => (!item.model.IsElite() && item.model.State == "active"))
+        const troops = this.GetFighters().filter((item) => (item.model.IsTroop() && item.model.State == "active"))
         const mercenaries = this.GetFighters().filter((item) => (item.model.IsMercenary() && item.model.State == "active"))
         const reserves = this.GetFighters().filter((item) => (item.model.State == "reserved"))
         const lost = this.GetFighters().filter((item) => (item.model.State == "lost"))

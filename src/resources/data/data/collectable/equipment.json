@@ -86,7 +86,7 @@
     },
     {
         "id": "eq_alchemicalammunition",
-        "name": "Alchemical Ammunication",
+        "name": "Alchemical Ammunition",
         "source": "core",
         "tags": {"trait": true},
         "category": "equipment",
@@ -7022,6 +7022,18 @@
         "stats": {
         },
         "contextdata": {
+            
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "melee"
+                    }
+                ],
+                "additions": [
+                    "kw_critical"
+                ]
+            },
             "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}},
         "description": [       
             {
@@ -7044,7 +7056,7 @@
         "source": "core",
         "tags": {"action": true, "weapon": true, "rifle": true},
         "category": "ranged",
-        "distance": 36,
+        "distance": 30,
         "stats": {
             "hands_ranged": 2,
             "ranged": true

@@ -2861,7 +2861,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"}, 
-                "content": "All models within 8” of the MATAGOT HAG gain +1 DICE when attempting to dash, except for herself. It requires all of the hag’s concentration to reign in the hungry fruit of her loins.",
+                "content": "All friendly models within 8” of the MATAGOT HAG gain +1 DICE when attempting to dash, except for herself. It requires all of the hag’s concentration to reign in the hungry fruit of her loins.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
                 ]
@@ -2878,11 +2878,12 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"}, 
-                "content": "When a MATAGOT HAG is forced to roll on the Injury Table, any THRALL within 4” of her may have the result resolved against them instead. This includes any other effects being wounded may cause (such as FIRE, INFECTION, SHRAPNEL, etc)",
+                "content": "When a MATAGOT HAG is forced to roll on the Injury Table, any THRALL within 4” of her may have the result resolved against them instead. This includes any other effects being wounded may cause (such as FIRE, INFECTION, SHRAPNEL, etc). This ability cannot be used against BLAST weapons.",
                 "glossary": [
                     {"val": "FIRE", "id": "kw_fire"},
                     {"val": "INFECTION", "id": "kw_infectionmarker"},
-                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                    {"val": "BLAST", "id": "kw_blast"}
                 ]
             }
         ],
@@ -2969,10 +2970,8 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "A Gregori Gula that scores two hits against a target may attempt to pull and bite them apart. A third attack may be attempted, and if this attack is successful, it is rolled with +1 DICE on the Injury Chart.",
-                "glossary": [
-                    {"val": "+1 DICE", "id": "kw_plusdice"}
-                ]
+                "content": "A Gregori Gula that scores two hits against a target may attempt to pull and bite them apart. A third attack may be attempted, and if this attack is successful, it is rolled with +1 INJURY MODIFER on the Injury Chart.",
+                "glossary": []
             }
         ],
         "options": []
@@ -2986,7 +2985,24 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The first time a Gregori Gula would be taken Out of Action in a round, it instead goes DORMANT. Remove all markers from the Gregori Gula and replace its model with a suitable 60mm Token to represent its dormant state, counting as dangerous terrain. If, at any point a friendly thrall is within 1” of the Token, you may remove the thrall and replace the Token with the Gregori Gula. The Gregori Gula may activate if it has not done so already this round. A Gregori Gula in a DORMANT state does not contest objectives, nor can it take actions or be activated. It counts as though it has been removed from play for Morale purposes. In campaign play, a Gregor Gula in a DORMANT state at the end of the game is considered Out of Action."
+                "content": "Once per round, when a Gregori Gula would be taken Out of Action, it instead goes DORMANT. Remove all markers from the Gregori Gula and replace its model with a suitable 60mm Token to represent its dormant state, counting as dangerous terrain. If, at any point a friendly thrall is within 1” of the Token, you may remove the thrall and replace the Token with the Gregori Gula. The Gregori Gula may activate if it has not done so already this round. A Gregori Gula in a DORMANT state does not contest objectives, nor can it take actions or be activated. It counts as though it has been removed from play for Morale purposes. In campaign play, a Gregori Gula in a DORMANT state at the end of the game is considered Out of Action."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "ab_specialdeployment_cradle",
+        "name": "Special Deployment",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "contextdata": {      },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If the scenario you are playing allows INFILTRATORS to use their special deployment rules, after any INFILTRATORS have deployed, you can deploy these Cradle Thralls within 1” of any edge of the battlefield and more than 8” away from any enemy models.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+                ]
             }
         ],
         "options": []

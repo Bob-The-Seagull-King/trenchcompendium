@@ -1218,7 +1218,7 @@
         "id": "rel_fc_eq_alchemicalammunition",
         "source": "core",
         "tags": {},
-        "name": "Alchemical Ammunication",
+        "name": "Alchemical Ammunition",
         "contextdata": { 
             "faction_eq_restriction": {
                 "permitted": [

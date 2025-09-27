@@ -107,7 +107,11 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
                         onSubmit={handleSubmit}
                         submitBtnString={'Add Equipment'}
                         cost={cache[item].cost + " " + getCostType(cache[item].facrel.CostType)}
-                        limit={"Limit: " + (cache[item].count_cur + "/" + cache[item].limit)}
+                        limit={
+                            cache[item].limit > 0
+                                ? "Limit: " + (cache[item].count_cur + "/" + cache[item].limit)
+                                : ""
+                        }
                         restrictions={cache[item].restrictions}
                     />
                 ))}
