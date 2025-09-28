@@ -14,6 +14,7 @@ import { StaticOption } from "../../../options/StaticOption";
 import { IChoice } from "../../../options/StaticOption";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
 import { containsTag } from "../../../../utility/functions";
+import { WarbandConsumable } from "../WarbandConsumable";
 
 interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
@@ -439,17 +440,27 @@ class WarbandExplorationSet extends DynamicContextObject {
         if (this.CurLocation.true_obj == null) {
             return;
         }
-        this.Locations.push(this.CurLocation.true_obj);
+        const refitem = this.CurLocation.true_obj
+        this.Locations.push(refitem);
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
             "onGainLocation",
-            this.CurLocation.true_obj,
+            refitem,
             [this.MyContext as UserWarband],
             null,
-            this.CurLocation.true_obj
+            refitem
         )
         this.GeneralCache.exploration_skills = undefined;
         this.CurLocation = null;
+
+        const consumables_past_save : WarbandConsumable[] = []
+        for (let i = 0; i < refitem.Consumables.length; i++) {
+            if (refitem.Consumables[i].SelectItem != null || refitem.Consumables[i].Tags["post_save"]) {
+                consumables_past_save.push(refitem.Consumables[i])
+            }
+        }
+
+        refitem.Consumables = consumables_past_save;
     }
     
     public async AddTempExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {

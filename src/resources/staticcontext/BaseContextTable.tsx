@@ -3876,6 +3876,9 @@ export const BaseContextCallTable : CallEventTable = {
                 if (cost > 0 && obeylimit && origin != null && origin != undefined) {
                     const Tags = context_static.Tags;
                     Tags["consumable_type_equipment"] = true
+                    if (context_func["post_save"]) {
+                        Tags["post_save"] = true
+                    }
                     const NewData = {
                         id: trackVal.GetID() + Date.now().toString(), 
                         name: trackVal.GetTrueName(),
@@ -3978,6 +3981,9 @@ export const BaseContextCallTable : CallEventTable = {
                         if (context_func["gain_new_item"]) {
                             const Tags = context_static.Tags;
                             Tags["consumable_type_equipment"] = true
+                            if (context_func["post_save"]) {
+                                Tags["post_save"] = true
+                            }
                             const NewData = {
                                 id: context_static.GetID() + Date.now().toString(), 
                                 name: context_static.GetTrueName(),
@@ -3995,6 +4001,9 @@ export const BaseContextCallTable : CallEventTable = {
                         if (context_func["single_exploration_glory_item"]) {
                             const Tags = context_static.Tags;
                             Tags["consumable_type_equipment"] = true
+                            if (context_func["post_save"]) {
+                                Tags["post_save"] = true
+                            }
                             const NewData = {
                                 id: context_static.GetID() + Date.now().toString(), 
                                 name: context_static.GetTrueName(),
@@ -4012,6 +4021,9 @@ export const BaseContextCallTable : CallEventTable = {
                         if (context_func["gain_new_item_from_list"]) {
                             const Tags = context_static.Tags;
                             Tags["consumable_type_equipment"] = true
+                            if (context_func["post_save"]) {
+                                Tags["post_save"] = true
+                            }
                             const NewData = {
                                 id: context_static.GetID() + Date.now().toString(), 
                                 name: context_static.GetTrueName(),
@@ -4029,6 +4041,9 @@ export const BaseContextCallTable : CallEventTable = {
                         if (context_func["spend_money"]) {
                             const Tags = context_static.Tags;
                             Tags["consumable_type_equipment"] = true
+                            if (context_func["post_save"]) {
+                                Tags["post_save"] = true
+                            }
                             const NewData = {
                                 id: context_static.GetID() + Date.now().toString(), 
                                 name: context_static.GetTrueName(),
