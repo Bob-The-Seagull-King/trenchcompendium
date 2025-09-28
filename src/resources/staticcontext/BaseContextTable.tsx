@@ -1812,6 +1812,50 @@ export const BaseContextCallTable : CallEventTable = {
     },
     get_exploration_skills: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["add_skill"]
+
+            const factorymodule = await import("../../factories/features/SkillFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.SkillFactory.CreateNewSkill(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item.GetTrueName();
+            }
+            
+            relayVar.push("Your warband will gain the " + StrList + " skill" + (listitems.length > 1? "s":"") + ".");
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["add_skill"]
+
+            const factorymodule = await import("../../factories/features/SkillFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.SkillFactory.CreateNewSkill(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item.GetTrueName();
+            }
+            
+            relayVar.push("Your warband gained the " + StrList + " skill" + (listitems.length > 1? "s":"") + ".");
+            
+            return relayVar;
+        },
         async getExplorationSkills(this: EventRunner, eventSource : any, relayVar : WarbandProperty[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
 
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
@@ -3398,6 +3442,12 @@ export const BaseContextCallTable : CallEventTable = {
 
             return relayVar;
         },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const count = context_static != null? (context_static as any).MyOptions.length : 0
+            relayVar.push("The selected model" + (count > 1? "s" : "") + " each gained " + context_func["gains"] + "XP.");
+            
+            return relayVar;
+        },
         async onSelectPropertyValue(this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null ,hostobj : DynamicOptionContextObject, warband : UserWarband | null) {
             const ModelModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
             
@@ -3562,7 +3612,20 @@ export const BaseContextCallTable : CallEventTable = {
         }
     },
     single_exploration_glory_item: {
-        event_priotity: 0,
+        event_priotity: 0, 
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            relayVar.push( "You will purchase the selected item for the indicated cost and add it to your stash.");
+
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return relayVar;}
+            relayVar.push( ((context_static as any).SelectItem as any).GetTrueName() + " has been purchased and added to your stash.");
+            
+            return relayVar;
+        },
         async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
@@ -3656,7 +3719,19 @@ export const BaseContextCallTable : CallEventTable = {
         }
     },
     gain_new_item: {
-        event_priotity: 0,
+        event_priotity: 0, 
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const count = context_func["count"]
+            relayVar.push( "The selected item" + (count>0 ? "s":"") + " will be added to your stash.");
+
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const count = context_func["count"]
+            relayVar.push( "The selected item" + (count>0 ? "s":"") + " were added to your stash.");
+            
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
     
             await warband.AddStash((context_static as any).SelectItem as any, true);
@@ -3725,6 +3800,18 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_new_item_from_list: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const count = context_func["count"]
+            relayVar.push( "The selected item" + (count>0 ? "s":"") + " from the list will be added to your stash.");
+
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const count = context_func["count"]
+            relayVar.push( "The selected item" + (count>0 ? "s":"") + " from the list were added to your stash.");
+            
+            return relayVar;
+        },
         async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
@@ -3755,6 +3842,21 @@ export const BaseContextCallTable : CallEventTable = {
     },
     spend_money: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if (!relayVar.includes("The selected items will be added to your stash.")) {
+                relayVar.push( "The selected items will be added to your stash.");
+            }
+
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return relayVar;}
+            relayVar.push( ((context_static as any).SelectItem as any).GetTrueName() + " has been added to your stash.");
+            
+            return relayVar;
+        },
         async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
             
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
@@ -3792,6 +3894,7 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
     
+            if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return;}
             await warband.AddStash((context_static as any).SelectItem as any, true);
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
@@ -3946,6 +4049,16 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_glory: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push("The warband gains " + context_func["count"] + " glory.");
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push("The warband gained " + context_func["count"] + " glory.");
+            
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
@@ -3969,8 +4082,26 @@ export const BaseContextCallTable : CallEventTable = {
                     }
         }
     },
+    activated: {
+        event_priotity: 0,
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push("This modifier is supposed to be deleted after use.");
+            
+            return relayVar;
+        }
+    },
     add_as_modifier: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push("Your warband will gain the new modifier " + context_static.GetTrueName() + ".");
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            relayVar.push("Your warband gained the modifier " + context_static.GetTrueName() + ".");
+            
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             const {ExplorationLocation} = await import("../../classes/feature/exploration/ExplorationLocation")
             const val = context_static
@@ -3990,8 +4121,6 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             if (IsMe) {
-                console.log("TESST")
-                console.log(val)
                 if (val != null && !containsTag(val.Tags, "secondarylevel") ) {
                     val.Tags["secondarylevel"] = true
                     await warband.AddExplorationMod(val as ExplorationLocation, [])
@@ -4001,6 +4130,51 @@ export const BaseContextCallTable : CallEventTable = {
     },
     add_location_modifier: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/ExplorationFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.ExplorationFactory.CreateNewExplorationLocation(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item.GetTrueName();
+            }
+            
+            relayVar.push("Your warband will gain the new modifier" + (listitems.length > 1? "s":"") + " " + StrList + ".");
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/ExplorationFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.ExplorationFactory.CreateNewExplorationLocation(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item.GetTrueName();
+            }
+            
+            
+            relayVar.push("Your warband gained the modifier" + (listitems.length > 1? "s":"") + " " + StrList + ".");
+            
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             const ExplorationLocModule = await import("../../factories/features/ExplorationFactory")
             let IsMe = false
@@ -4030,6 +4204,49 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_all_from_list: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/EquipmentFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.EquipmentFactory.CreateNewFactionEquipment(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item?.EquipmentItem.GetTrueName();
+            }
+            
+            relayVar.push(StrList + " will be added to your stash.");
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/EquipmentFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.EquipmentFactory.CreateNewFactionEquipment(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item?.EquipmentItem.GetTrueName();
+            }
+            
+            relayVar.push(StrList + " has been added to your stash.");
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
@@ -4082,6 +4299,49 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_all_from_list_find: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/EquipmentFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.EquipmentFactory.CreateNewEquipment(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item.GetTrueName();
+            }
+            
+            relayVar.push(StrList + " will be added to your stash.");
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/EquipmentFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.EquipmentFactory.CreateNewEquipment(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item.GetTrueName();
+            }
+            
+            relayVar.push(StrList + " has been added to your stash.");
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
@@ -4149,6 +4409,50 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_new_model_from_list: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/ModelFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.ModelFactory.CreateNewFactionModel(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item?.Model.GetTrueName();
+            }
+            
+            relayVar.push(StrList + " will be added to your warband for free.");
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/ModelFactory")
+
+            let StrList = ""
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.ModelFactory.CreateNewFactionModel(listitems[i], null);
+                if (i > 0) {
+                    StrList += ", "
+                    if (i == listitems.length - 1) {
+                        StrList += "and "
+                    }
+                }
+                StrList += Item?.Model.GetTrueName();
+            }
+            
+            relayVar.push(StrList + " was added to your warband for free.");
+            
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {

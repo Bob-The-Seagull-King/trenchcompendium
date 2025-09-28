@@ -79,7 +79,6 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     }
 
     async function onbaseItemCreate() {
-        setkeyvar(keyvar + 1);
         
         if (location.true_obj) {
             const Events : EventRunner = new EventRunner();
@@ -92,12 +91,15 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             )
             setContextMessage(IDString)
         }
+        setkeyvar(keyvar + 1);
     }
 
     useEffect(() => {
         async function GetMessage() {
             if (CheckRelevantBaseOptions(location.base_item).length == 0 && location.true_obj == undefined) {
                 createBaseItem();
+            } else {
+                await onbaseItemCreate();
             }
             
         }
@@ -156,7 +158,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             </div>
 
             <Collapse in={open}>
-                <div>
+                <div key={keyvar}>
                     <div className={'exploration-body'}>
                         {/* Main description text */}
                         <div className={'exploration-description'}>
