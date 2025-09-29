@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useAuth } from '../../../utility/AuthContext';
 
-// const isProduction = window.location.hostname === 'trench-companion.com';
-const isProduction = true;
+const isProduction = window.location.hostname === 'trench-companion.com';
+// const isProduction = true;
 
 declare global {
     interface Window {
