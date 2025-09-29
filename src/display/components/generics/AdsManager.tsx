@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { useAuth } from '../../../utility/AuthContext';
 
-const isProduction = window.location.hostname === 'trench-companion.com';
-// const isProduction = true;
+const host = window.location.hostname;
+const isLiveHost = host === 'trench-companion.com';
+const isTestHost = !isLiveHost;
 
 declare global {
     interface Window {
@@ -16,7 +17,7 @@ export const AdsManager: React.FC = () => {
     const pushedRef = useRef(false); // sicherstellen, dass wir nur einmal pushen pro Slot-Mount
 
     useEffect(() => {
-        if (!isProduction || SiteUser?.Premium?.IsPremium) return;
+        if (SiteUser?.Premium?.IsPremium) return;
 
         const tryRenderAd = () => {
             if (pushedRef.current) return;
@@ -71,7 +72,7 @@ export const AdsManager: React.FC = () => {
                     data-ad-slot="7868779249"
                     data-ad-format="auto"
                     data-full-width-responsive="true"
-                    {...(!isProduction ? { 'data-adtest': 'on' } : {})}
+                    {...(isTestHost ? { 'data-adtest': 'on' } as any : {})}
                 />
             </div>
 
