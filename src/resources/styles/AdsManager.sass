@@ -39,6 +39,24 @@ $mobile-height: 70px
         display: none !important
     &.has-ad .Ads-text-below
         display: none
+
+
+    .AdSlot
+        margin: 0 auto
+        width: 100%
+        // kleine Mindesthöhe gegen CLS; 60–90px sind üblich für Leaderboard
+        min-height: 60px
+
+    // Leaderboard: wähle nur Breiten, die zu ≤100px hohen Formaten führen
+    .AdSlot--leader
+        max-width: 320px    // Mobile → 320×100 oder 320×50
+        @media (min-width: 480px)
+            max-width: 468px  // 468×60 (≤100px)
+        @media (min-width: 740px)
+            max-width: 728px  // 728×90
+        @media (min-width: 1040px)
+            max-width: 970px  // 970×90
+
 .AdsManager-bottom-spacer
     height: $desktop-height
     @media (max-width: 768px)

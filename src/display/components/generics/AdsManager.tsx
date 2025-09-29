@@ -65,15 +65,18 @@ export const AdsManager: React.FC = () => {
                     ❤️ Support Trench Companion for an ad-free experience
                 </div>
 
-                <ins
-                    className="adsbygoogle"
-                    style={{ display: 'block' }}
-                    data-ad-client="ca-pub-3744837400491966"
-                    data-ad-slot="7868779249"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"
-                    {...(isTestHost ? { 'data-adtest': 'on' } as any : {})}
-                />
+                {/* Wrapper begrenzt die max. Breite → AdSense wählt flaches Format */}
+                <div className="AdSlot AdSlot--leader">
+                    <ins
+                        className="adsbygoogle"
+                        style={{ display: 'block', width: '100%' }}
+                        data-ad-client="ca-pub-3744837400491966"
+                        data-ad-slot="7868779249"
+                        data-ad-format="horizontal"                 // ⬅️ flache Ads
+                        data-full-width-responsive="true"
+                        {...(isTestHost ? { 'data-adtest': 'on' } as any : {})}
+                    />
+                </div>
             </div>
 
             <div className="AdsManager-bottom-spacer"></div>
