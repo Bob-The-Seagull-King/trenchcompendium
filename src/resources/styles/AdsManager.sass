@@ -38,25 +38,45 @@ $mobile-height: 70px
     // Hide in all print views
     @media print
         display: none !important
+
+    .Ads-text-below
+        position: absolute
+        inset: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        padding: 5px 15px
+        text-align: center
+        pointer-events: none
+        z-index: 1
+
+    // center the ad inside the bar
+    .AdSlot
+        display: flex
+        align-items: center
+        justify-content: center
+        height: 100%
+        width: 100%
+        margin: 0 auto
+        min-height: 60px
+
+    // optional width caps; keep only if you want a narrower bar than the viewport
+    .AdSlot--leader
+        max-width: 970px
+        @media (max-width: 1039px)
+            max-width: 728px
+        @media (max-width: 739px)
+            max-width: 468px
+        @media (max-width: 479px)
+            max-width: 320px
+
+    // hide helper text once an ad is confirmed as filled (if you toggle .has-ad in JS)
     &.has-ad .Ads-text-below
         display: none
 
-
-    .AdSlot
-        margin: 0 auto
-        width: 100%
-        // kleine Mindesthöhe gegen CLS; 60–90px sind üblich für Leaderboard
-        min-height: 90px
-
-    // Leaderboard: wähle nur Breiten, die zu ≤100px hohen Formaten führen
-    .AdSlot--leader
-        max-width: 320px    // Mobile → 320×100 oder 320×50
-        @media (min-width: 480px)
-            max-width: 468px  // 468×60 (≤100px)
-        @media (min-width: 740px)
-            max-width: 728px  // 728×90
-        @media (min-width: 1040px)
-            max-width: 970px  // 970×90
+    // do not force size here; React inline styles set the exact width/height
+    .adsbygoogle
+        display: inline-block
 
 .AdsManager-bottom-spacer
     height: $desktop-height
