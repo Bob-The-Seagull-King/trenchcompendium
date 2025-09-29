@@ -2,7 +2,7 @@
 var klaroConfig = {
     elementID: 'privacy-modal',
     storageMethod: 'localStorage',
-    storageName: 'trench_companion_consent_v2',
+    storageName: 'trench_companion_consent_v3',
     mustConsent: true,
     acceptAll: true,
     hideDeclineAll: false,
@@ -75,21 +75,25 @@ var klaroConfig = {
             title: 'Google Ads (Personalisierung)',
             purposes: ['advertising'],
             onAccept: `
-                gtag('consent', 'update', {
-                  ad_user_data: 'granted',
-                  ad_personalization: 'granted',
-                  ad_storage: 'granted'
+                // Consent Mode
+                gtag('consent','update',{
+                  ad_user_data:'granted', ad_personalization:'granted', ad_storage:'granted'
                 });
-                gtag('set', 'ads_data_redaction', false);
+                gtag('set','ads_data_redaction', false);
+                // Personalisierte Ads -> NPA aus
+                window.adsbygoogle = window.adsbygoogle || [];
+                window.adsbygoogle.requestNonPersonalizedAds = 0;
             `,
             onDecline: `
-                gtag('consent', 'update', {
-                  ad_user_data: 'denied',
-                  ad_personalization: 'denied',
-                  ad_storage: 'denied'
+                // Consent Mode
+                gtag('consent','update',{
+                  ad_user_data:'denied', ad_personalization:'denied', ad_storage:'denied'
                 });
-                gtag('set', 'ads_data_redaction', true);
-            `,
+                gtag('set','ads_data_redaction', true);
+                // Nicht-personalisierte Ads -> NPA an
+                window.adsbygoogle = window.adsbygoogle || [];
+                window.adsbygoogle.requestNonPersonalizedAds = 1;
+          `,
         },
         // Dieses Service lassen wir sichtbar (Transparenz), aber fürs Laden relyen wir NICHT nur auf onAccept.
         {
