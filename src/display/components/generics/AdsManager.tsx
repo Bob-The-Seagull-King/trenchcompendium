@@ -4,14 +4,12 @@ import { useAuth } from '../../../utility/AuthContext';
 declare global {
     interface Window {
         adsbygoogle?: unknown[];
-        adsenseScriptLoaded?: boolean; // set true by your Klaro loader
+        adsenseScriptLoaded?: boolean;
     }
 }
 
-// Horizontal <=100px sizes we support
 type AdSize = { w: number; h: number };
 
-// Pick a valid <=100px size for a given container width
 const pickSize = (w: number): AdSize =>
     w >= 1040 ? { w: 970, h: 90 } :
         w >= 740  ? { w: 728, h: 90 } :
@@ -21,73 +19,57 @@ const pickSize = (w: number): AdSize =>
 export const AdsManager: React.FC = () => {
     const { SiteUser } = useAuth();
 
-    // Measure the container, not the viewport
     const wrapRef = useRef<HTMLDivElement | null>(null);
-    const slotRef = useRef<HTMLModElement | null>(null); // <ins> element
+    const slotRef = useRef<HTMLModElement | null>(null);
 
-    // Start with a safe default; updated on mount/resize
     const [size, setSize] = useState<AdSize>({ w: 320, h: 50 });
-
-    // Changing `key` forces <ins> to remount → new adsbygoogle.push({})
     const [key, setKey] = useState(0);
-
-    // Ensure we only push once per <ins> mount
     const pushedRef = useRef(false);
 
-    // Detect host for test creatives (no top-level window access to keep SSR-safe)
+    // NEW: track whether the ad is actually filled
+    const [hasAd, setHasAd] = useState(false);
+
     const isTestHost =
         typeof window !== 'undefined' ? window.location.hostname !== 'trench-companion.com' : false;
 
-    // Reset push flag when we remount the <ins>
     useEffect(() => {
+        // When we remount the <ins>, allow a new push and reset 'hasAd' until we know the status
         pushedRef.current = false;
+        setHasAd(false);
     }, [key]);
 
-    // Measure container width and bucket into <=100px sizes
+    // Measure container and pick a fixed <=100px tall size
     useEffect(() => {
-        const win = (typeof window !== 'undefined' ? window : undefined) as
-            | (Window & typeof globalThis)
-            | undefined;
-        if (!win) return; // SSR safety
+        const win = (typeof window !== 'undefined' ? window : undefined) as Window | undefined;
+        if (!win) return;
 
         const measure = () => {
-            const cw = wrapRef.current?.clientWidth ?? win.innerWidth ?? 0;
-            const w = Math.floor(cw);
+            const w = Math.floor(wrapRef.current?.clientWidth ?? win.innerWidth ?? 0);
             const next = pickSize(w);
             if (next.w !== size.w || next.h !== size.h) {
                 setSize(next);
-                setKey(k => k + 1); // force <ins> remount so we can push again
+                setKey(k => k + 1);
             }
         };
 
-        // Prefer ResizeObserver for layout changes
-        const hasRO = typeof (win as any).ResizeObserver !== 'undefined';
-        if (hasRO && wrapRef.current) {
-            const RO: typeof ResizeObserver = (win as any).ResizeObserver;
-            const ro = new RO(() => measure());
+        if ('ResizeObserver' in win && wrapRef.current) {
+            const ro = new (win as any).ResizeObserver(() => measure());
             ro.observe(wrapRef.current);
-            // initial
             measure();
             return () => ro.disconnect();
+        } else {
+            const onResize = () => measure();
+            win.addEventListener('resize', onResize);
+            measure();
+            return () => win.removeEventListener('resize', onResize);
         }
-
-        // Fallback to window resize
-        const onResize = () => measure();
-        win.addEventListener('resize', onResize);
-        // initial
-        measure();
-        return () => win.removeEventListener('resize', onResize);
-        // Dependencies: do NOT include wrapRef.current; it isn't stable and
-        // causes needless re-subscriptions. We rely on RO/resize to re-measure.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [size.w, size.h]);
 
-    // Push the ad when AdSense is ready and the slot is mounted
+    // Push the ad when ready (same as before)
     useEffect(() => {
-        const win = (typeof window !== 'undefined' ? window : undefined) as
-            | (Window & typeof globalThis)
-            | undefined;
-        if (!win) return; // SSR safety
+        const win = (typeof window !== 'undefined' ? window : undefined) as Window | undefined;
+        if (!win) return;
         if (SiteUser?.Premium?.IsPremium) return;
 
         const tryRenderAd = () => {
@@ -97,22 +79,18 @@ export const AdsManager: React.FC = () => {
                     win.adsbygoogle.push({});
                     pushedRef.current = true;
                 } catch (e) {
-                    // eslint-disable-next-line no-console
                     console.error('AdSense push error:', e);
                 }
             }
         };
 
-        // 1) Try immediately if loader already injected the script
         if (win.adsenseScriptLoaded) {
             tryRenderAd();
         }
 
-        // 2) Listen for your custom loader event (typed to avoid TS issues)
         const onLoaded = (_e: Event) => tryRenderAd();
         win.addEventListener('adsense:loaded' as any, onLoaded as EventListener);
 
-        // 3) Fallback polling to cover rare timing races
         let attempts = 0;
         const interval = win.setInterval(() => {
             attempts++;
@@ -128,21 +106,49 @@ export const AdsManager: React.FC = () => {
         };
     }, [SiteUser, key]);
 
+    // NEW: observe the <ins> attribute 'data-ad-status' to toggle .has-ad
+    useEffect(() => {
+        const slot = slotRef.current;
+        if (!slot) return;
+
+        // Helper to read current status and update state
+        const syncStatus = () => {
+            const status = slot.getAttribute('data-ad-status'); // "filled" | "unfilled" | null
+            setHasAd(status === 'filled');
+        };
+
+        // Initial check (in case it's already filled by the time we attach)
+        syncStatus();
+
+        // Watch only the attribute we care about
+        const mo = new MutationObserver((mutations) => {
+            for (const m of mutations) {
+                if (m.type === 'attributes' && m.attributeName === 'data-ad-status') {
+                    syncStatus();
+                }
+            }
+        });
+
+        mo.observe(slot, { attributes: true, attributeFilter: ['data-ad-status'] });
+
+        return () => mo.disconnect();
+    }, [key]);
+
     if (SiteUser?.Premium?.IsPremium) return null;
 
     return (
-        <div className="AdsManager">
+        <div className={`AdsManager${hasAd ? ' has-ad' : ''}`}>
             <div className="Ads-text-below">
-                {/* Keep copy short to minimize layout movement */}
+                {/* This helper text disappears once an ad is filled (via .has-ad) */}
                 ❤️ Support Trench Companion for an ad-free experience
             </div>
 
-            {/* This wrapper is what we measure for choosing the size */}
             <div ref={wrapRef} className="AdSlot AdSlot--leader">
                 <ins
-                    key={key}                 // force remount on size change
+                    key={key} // remount on size change
                     ref={slotRef}
                     className="adsbygoogle"
+                    // exact, policy-safe ad sizes (<=100px tall)
                     style={{ display: 'inline-block', width: size.w, height: size.h }}
                     data-ad-client="ca-pub-3744837400491966"
                     data-ad-slot="7868779249"
