@@ -72,7 +72,7 @@ export const AdsManager: React.FC = () => {
                         style={{ display: 'block', width: '100%' }}
                         data-ad-client="ca-pub-3744837400491966"
                         data-ad-slot="7868779249"
-                        data-ad-format="horizontal"                 // ⬅️ flache Ads
+                        data-ad-format="horizontal" // flat ads
                         data-full-width-responsive="true"
                         {...(isTestHost ? { 'data-adtest': 'on' } as any : {})}
                     />
