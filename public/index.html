@@ -20,61 +20,51 @@
          <meta property="og:type" content="website" data-react-helmet="true">
 
         <!-- GTM Init -->
+        <!-- Consent defaults: denied/NPA until user accepts -->
         <script>
+            // Basic gtag setup
             window.dataLayer = window.dataLayer || [];
             window.gtag = function(){ dataLayer.push(arguments); };
 
-            // Initial default consent — nur einmal global
-            gtag('consent', 'default', {
-                ad_storage: 'denied',
-                analytics_storage: 'denied',
-                ad_user_data: 'denied',
-                ad_personalization: 'denied'
+            // Consent Mode defaults (GDPR-safe before any consent)
+            gtag('consent','default',{
+                ad_storage:'denied',
+                analytics_storage:'denied',
+                ad_user_data:'denied',
+                ad_personalization:'denied'
             });
+            gtag('set','ads_data_redaction', true);
 
-            gtag('set', 'ads_data_redaction', true);
+            // Default to Non-Personalized Ads until user opts in
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adsbygoogle.requestNonPersonalizedAds = 1;
         </script>
 
-        <!-- Adsense helper script -->
+        <!-- Load AdSense library ALWAYS so the crawler can detect it -->
+        <script
+                id="adsbygoogle-js"
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
+                crossorigin="anonymous"></script>
+
+        <!-- Mark library readiness and notify the app (used by AdsManager) -->
         <script>
-            (function () {
-                // Lädt das AdSense-Script genau einmal und signalisiert 'adsense:loaded'
-                window.__loadAdSenseOnce = function () {
-                    if (window.adsenseScriptLoaded) return;
-
-                    // Früh setzen, um Race Conditions bei schnellem mehrfachen Aufruf zu vermeiden
-                    window.adsenseScriptLoaded = true;
-
-                    var s = document.createElement('script');
-                    s.async = true;
-                    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966";
-                    s.crossOrigin = "anonymous";
-                    s.onload = function () {
-                        // Signal an die App/Komponenten: AdSense ist bereit
+            (function(){
+                var s = document.getElementById('adsbygoogle-js');
+                if (s) {
+                    s.addEventListener('load', function(){
+                        window.adsenseScriptLoaded = true;
+                        // Notify React components that AdSense is ready
                         window.dispatchEvent(new Event('adsense:loaded'));
-                    };
-                    s.onerror = function () {
-                        // Falls es schief geht, Freigabe zurücksetzen, damit später erneut versucht werden kann
+                    });
+                    s.addEventListener('error', function(){
                         window.adsenseScriptLoaded = false;
                         console.warn('AdSense script failed to load.');
-                    };
-                    document.head.appendChild(s);
-                };
-
-                // Prüft, ob der Nutzer bereits eine Entscheidung bestätigt hat
-                window.__maybeLoadAdsenseNow = function () {
-                    try {
-                        var m = window.klaro && window.klaro.getManager ? window.klaro.getManager() : null;
-                        if (m && m.confirmed) {
-                            // Entscheidung existiert (Accept all oder gespeicherte Auswahl) -> jetzt laden
-                            window.__loadAdSenseOnce();
-                        }
-                    } catch (e) {
-                        console.warn('maybeLoadAdsenseNow error:', e);
-                    }
-                };
+                    });
+                }
             })();
         </script>
+
 
         <!-- Klaro styles -->
         <link rel="stylesheet" href="%PUBLIC_URL%/klaro.css">
@@ -85,19 +75,6 @@
             window.addEventListener('DOMContentLoaded', function () {
                 klaro.setup(klaroConfig);
             });
-        </script>
-
-
-        <script>
-            // Falls Klaro erst später verfügbar ist, prüfen wir periodisch,
-            // ob bereits bestätigt wurde und laden dann AdSense.
-            (function waitForKlaro() {
-                if (window.klaro && window.klaro.getManager) {
-                    window.__maybeLoadAdsenseNow();
-                } else {
-                    setTimeout(waitForKlaro, 100);
-                }
-            })();
         </script>
 
 

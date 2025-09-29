@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../../utility/AuthContext';
 
+// Toggle this to true when you actually want to show your own sticky ad bar.
+// While false, AdsManager returns nothing and anchor ads handle the sticky placement.
+const ENABLE_STICKY_AD = false;
+
 declare global {
     interface Window {
         adsbygoogle?: unknown[];
@@ -134,7 +138,10 @@ export const AdsManager: React.FC = () => {
         return () => mo.disconnect();
     }, [key]);
 
-    if (SiteUser?.Premium?.IsPremium) return null;
+    // If user is Premium OR sticky ads are disabled, do nothing.
+    if (SiteUser?.Premium?.IsPremium || !ENABLE_STICKY_AD) {
+        return null;
+    }
 
     return (
         <div className={`AdsManager${hasAd ? ' has-ad' : ''}`}>

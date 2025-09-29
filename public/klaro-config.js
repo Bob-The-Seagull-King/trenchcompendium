@@ -8,8 +8,11 @@ var klaroConfig = {
     hideDeclineAll: false,
     privacyPolicy: 'https://trench-companion.com/page/privacy',
     noCss: true,
-    callback: function (consent, app) {
-        window.__maybeLoadAdsenseNow();
+    callback: function (consent) {
+        // Switch NPA depending on the user's Advertising choice
+        window.adsbygoogle = window.adsbygoogle || [];
+        // 'google-ads' = your Klaro service name for advertising consent
+        window.adsbygoogle.requestNonPersonalizedAds = consent['google-ads'] ? 0 : 1;
     },
     translations: {
         de: {
@@ -75,44 +78,21 @@ var klaroConfig = {
             title: 'Google Ads (Personalisierung)',
             purposes: ['advertising'],
             onAccept: `
-                // Consent Mode
                 gtag('consent','update',{
-                  ad_user_data:'granted', ad_personalization:'granted', ad_storage:'granted'
+                  ad_user_data:'granted',
+                  ad_personalization:'granted',
+                  ad_storage:'granted'
                 });
                 gtag('set','ads_data_redaction', false);
-                // Personalisierte Ads -> NPA aus
-                window.adsbygoogle = window.adsbygoogle || [];
-                window.adsbygoogle.requestNonPersonalizedAds = 0;
-            `,
+              `,
             onDecline: `
-                // Consent Mode
                 gtag('consent','update',{
-                  ad_user_data:'denied', ad_personalization:'denied', ad_storage:'denied'
+                  ad_user_data:'denied',
+                  ad_personalization:'denied',
+                  ad_storage:'denied'
                 });
                 gtag('set','ads_data_redaction', true);
-                // Nicht-personalisierte Ads -> NPA an
-                window.adsbygoogle = window.adsbygoogle || [];
-                window.adsbygoogle.requestNonPersonalizedAds = 1;
-          `,
-        },
-        // Dieses Service lassen wir sichtbar (Transparenz), aber fürs Laden relyen wir NICHT nur auf onAccept.
-        {
-            name: 'google-adsense',
-            title: 'Google AdSense',
-            purposes: ['advertising'],
-            required: false,
-            onInit: `
-                // Wird auf JEDEM Pageview ausgeführt:
-                // Falls der User bereits bestätigt hat, laden wir hier AdSense sofort.
-                try {
-                  var m = window.klaro && window.klaro.getManager ? window.klaro.getManager() : null;
-                  if (m && m.confirmed) window.__loadAdSenseOnce();
-                } catch (e) {}
               `,
-            // Optional: onAccept kann zusätzlich aufrufen (redundant, aber schadet nicht)
-            onAccept: `window.__loadAdSenseOnce && window.__loadAdSenseOnce();`,
-            // KEIN onDecline nötig — wir wollen nur nach bestätigter Entscheidung laden (confirmed),
-            // Personalisierung steuert 'google-ads' via Consent Mode.
-        }
+        },
     ]
 };
