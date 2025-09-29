@@ -3652,6 +3652,9 @@ export const BaseContextCallTable : CallEventTable = {
     },
     single_exploration_glory_item: {
         event_priotity: 0, 
+        async getConsumableSelectType(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
+            return 2;
+        },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             relayVar.push( "You will purchase the selected item for the indicated cost and add it to your stash.");
@@ -3782,6 +3785,9 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_new_item: {
         event_priotity: 0, 
+        async getConsumableSelectType(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
+            return 2;
+        },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const count = context_func["count"]
             relayVar.push( "The selected item" + (count>0 ? "s":"") + " will be added to your stash.");
@@ -3862,6 +3868,9 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_new_item_from_list: {
         event_priotity: 0,
+        async getConsumableSelectType(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
+            return 1;
+        },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const count = context_func["count"]
             relayVar.push( "The selected item" + (count>0 ? "s":"") + " from the list will be added to your stash.");
@@ -3874,11 +3883,9 @@ export const BaseContextCallTable : CallEventTable = {
             
             return relayVar;
         },
-        async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
-            const ContWarband = await GetWarbandOrNull(sourceband);
-            if (ContWarband == null) { return }
-
-            await ContWarband.AddStash(trackVal.SelectItem as any, true);
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+    
+            await warband.AddStash((context_static as any).SelectItem as any, true);
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
 
@@ -3904,6 +3911,9 @@ export const BaseContextCallTable : CallEventTable = {
     },
     spend_money: {
         event_priotity: 0,
+        async getConsumableSelectType(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
+            return 3;
+        },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             
             if (!relayVar.includes("The selected items will be added to your stash.")) {

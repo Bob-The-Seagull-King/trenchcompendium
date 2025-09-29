@@ -1029,6 +1029,7 @@ class UserWarband extends DynamicContextObject {
     }
     
     public async AddStash ( stash: FactionEquipmentRelationship, free = false, replace : null | FactionEquipmentRelationship = null) {
+        if (stash == null || stash == undefined) { return; }
         let itemcost = stash.Cost;
         if ((this).EquipmentRelCache[stash.ID] != null) {
             itemcost = (this).EquipmentRelCache[stash.ID].cost

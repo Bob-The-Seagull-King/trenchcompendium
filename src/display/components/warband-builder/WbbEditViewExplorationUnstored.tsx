@@ -17,17 +17,8 @@ import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbExploration_OptionSelect_Radio from "./Exploration/WbbExploration-OptionSelect-Radio";
-import WbbExploration_Selection_Fallen_Knight from "./Exploration/WbbExploration_Selection_Fallen_Knight";
+import WbbExploration_Selection_SmallList from "./Exploration/WbbExploration_Selection_SmallListEquipment";
 import WbbExploration_Selection_SingleEquipment from "./Exploration/WbbExploration_Selection_SingleEquipment";
-import WbbExploration_Selection_MoonshineStash_Destroy
-    from "./Exploration/WbbExploration_Selection_MoonshineStash_Destroy";
-import WbbExploration_Selection_AngelicInstrument from "./Exploration/WbbExploration_Selection_AngelicInstrument";
-import WbbExploration_Selection_HolyDNA from "./Exploration/WbbExploration_Selection_HolyDNA";
-import WbbExploration_Selection_GolgothaTektites from "./Exploration/WbbExploration_Selection_GolgothaTektites";
-import WbbExploration_Selection_Fruit from "./Exploration/WbbExploration_Selection_Fruit";
-import WbbExploration_Selection_BattlefieldOfCorpses from "./Exploration/WbbExploration_Selection_BattlefieldOfCorpses";
-import WbbExploration_Selection_FallenSoldier from "./Exploration/WbbExploration_Selection_FallenSoldier";
-import WbbExploration_Selection_GloryPurchase from "./Exploration/WbbExploration_Selection_GloryPurchase";
 import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploration_Selection_MultiEquipment";
 import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
 import { ExplorationLocation } from '../../../classes/feature/exploration/ExplorationLocation';
@@ -38,6 +29,7 @@ import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandCon
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { ContextObject } from '../../../classes/contextevent/contextobject';
 import { CheckRelevantBaseOptions, CheckRelevantFullOptions, StoredLocation } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
+import WbbExploration_Selection_Parent from './Exploration/WbbExploration_Selection_Parent';
 
 interface WbbEditViewExplorationProps {
     location : StoredLocation;
@@ -101,6 +93,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             } else {
                 await onbaseItemCreate();
             }
+            setkeyvar(keyvar + 1);
             
         }
 
@@ -138,6 +131,8 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
         setcansave(GetCanSave() )
         setUpdateState(updateState + 1);
         createBaseItem()
+            setkeyvar(keyvar + 1);
+
     }
 
 
@@ -254,9 +249,10 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                 <div className="stash-items-wrap">
                                     <div className={'stash-items-category'}>
                                         {location.true_obj.Consumables.map((item: WarbandConsumable, index: number) => (
-                                            <WbbConsumableSelect
+                                            <WbbExploration_Selection_Parent
                                                 key={index}
                                                 property={item}
+                                                doshow={true}
                                             />
                                         ))}
                                     </div>
@@ -289,20 +285,9 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         >
                             {'Save Exploration'}
                         </button>
+                        
 
-                        {/* @TODO: remove - this is for reference */}
-                        {/*{location.SelfDynamicProperty.Selections.length > 0 &&*/}
-                        {/*    <>*/}
-                        {/*        {location.SelfDynamicProperty.Selections.map((item) =>*/}
-                        {/*            <WbbOptionSelect*/}
-                        {/*                overrideplay={false}*/}
-                        {/*                property={location}*/}
-                        {/*                key={location.SelfDynamicProperty.Selections.indexOf(item)}*/}
-                        {/*                choice={item}*/}
-                        {/*            />*/}
-                        {/*        )}*/}
-                        {/*    </>*/}
-                        {/*}*/}
+
                     </div>
                 </div>
             </Collapse>
