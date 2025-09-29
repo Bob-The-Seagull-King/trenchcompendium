@@ -57,7 +57,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
             const IDString = await Events.runEvent(
                 "getLocationSavedMessage",
                 location,
-                [],
+                [warband?.warband_data],
                 [],
                 null
             )

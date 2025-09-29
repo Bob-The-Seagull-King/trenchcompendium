@@ -2109,13 +2109,28 @@ export const BaseContextCallTable : CallEventTable = {
     gain_ducats: {
         event_priotity: 0,
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            relayVar.push("The warband gains " + context_func["count"] + " ducats.");
-            
+            if (context_func["count"]) {
+                relayVar.push("The warband gains " + context_func["count"] + " ducats.");
+            } 
+            if (context_func["dice"]) {
+                relayVar.push("The warband gains " + context_func["dice"] + "D6" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " ducats.");
+            }
+            if (context_func["dice3"]) {
+                relayVar.push("The warband gains " + context_func["dice3"] + "D3" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " ducats.");
+            }
+
             return relayVar;
         },
         async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            relayVar.push("The warband gained " + context_func["count"] + " ducats.");
-            
+            if (context_func["count"]) {
+                relayVar.push("The warband gained " + context_func["count"] + " ducats.");
+            }
+            if (context_func["dice"]) {
+                relayVar.push("The warband gained " + context_func["dice"] + "D6" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " ducats.");
+            }
+            if (context_func["dice3"]) {
+                relayVar.push("The warband gained " + context_func["dice"] + "D3" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " ducats.");
+            }
             return relayVar;
         },
         async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
@@ -2142,6 +2157,30 @@ export const BaseContextCallTable : CallEventTable = {
             if (IsMe) {
                 if (context_func["count"]) {
                     warband.AddStashValue(context_func["count"],0)
+                }
+                if (context_func["dice"]) {
+                    let value = 0;
+
+                    for (let j = 0; j < context_func["dice"]; j++) {
+                        value += Math.ceil(Math.random()*6)
+                    }
+
+                    if (context_func["mod"]) {
+                        value *= context_func["mod"]
+                    }
+                    warband.AddStashValue(value,0)
+                }
+                if (context_func["dice3"]) {
+                    let value = 0;
+
+                    for (let j = 0; j < context_func["dice3"]; j++) {
+                        value += Math.ceil(Math.random()*3)
+                    }
+
+                    if (context_func["mod"]) {
+                        value *= context_func["mod"]
+                    }
+                    warband.AddStashValue(value,0)
                 }
             }
         }
@@ -3665,6 +3704,29 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_replaced_item: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const factorymodule = await import("../../factories/features/EquipmentFactory")
+            let replacename = ""
+            
+            const Item = await factorymodule.EquipmentFactory.CreateNewEquipment(context_func["id"], null);
+            if (context_func["treat_as"]) {    
+                const ReplaceItem = await factorymodule.EquipmentFactory.CreateNewEquipment(context_func["treat_as"], null);
+                replacename = ReplaceItem.GetTrueName();
+            }
+            
+            relayVar.push( Item.GetTrueName() + " will be added to your stash" + (replacename.length > 0 ? (", replacing " + replacename + " if needed") : "") + ".");
+
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
+            
+            const factorymodule = await import("../../factories/features/EquipmentFactory")
+            
+            const Item = await factorymodule.EquipmentFactory.CreateNewEquipment(context_func["id"], null);
+            relayVar.push(Item.GetTrueName() + " was added to your stash.")
+            return relayVar;
+        },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
@@ -4065,12 +4127,29 @@ export const BaseContextCallTable : CallEventTable = {
     gain_glory: {
         event_priotity: 0,
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            relayVar.push("The warband gains " + context_func["count"] + " glory.");
             
+            if (context_func["count"]) {
+                relayVar.push("The warband gains " + context_func["count"] + " glory.");
+            }
+            if (context_func["dice"]) {
+                relayVar.push("The warband gains " + context_func["dice"] + "D6" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " glory.");
+            }
+            if (context_func["dice3"]) {
+                relayVar.push("The warband gains " + context_func["dice"] + "D3" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " glory.");
+            }
             return relayVar;
         },
         async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            relayVar.push("The warband gained " + context_func["count"] + " glory.");
+            
+            if (context_func["count"]) {
+                relayVar.push("The warband gained " + context_func["count"] + " glory.");
+            }
+            if (context_func["dice"]) {
+                relayVar.push("The warband gained " + context_func["dice"] + "D6" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " glory.");
+            }
+            if (context_func["dice3"]) {
+                relayVar.push("The warband gained " + context_func["dice3"] + "D3" + (context_func["mod"]? ("X"+context_func["mod"]):"") + " glory.");
+            }
             
             return relayVar;
         },
@@ -4093,6 +4172,30 @@ export const BaseContextCallTable : CallEventTable = {
             if (IsMe) {
                         if (context_func["count"]) {
                             warband.AddStashValue(context_func["count"],1)
+                        }
+                        if (context_func["dice"]) {
+                            let value = 0;
+
+                            for (let j = 0; j < context_func["dice"]; j++) {
+                                value += Math.ceil(Math.random()*6)
+                            }
+
+                            if (context_func["mod"]) {
+                                value *= context_func["mod"]
+                            }
+                            warband.AddStashValue(value,1)
+                        }
+                        if (context_func["dice3"]) {
+                            let value = 0;
+
+                            for (let j = 0; j < context_func["dice3"]; j++) {
+                                value += Math.ceil(Math.random()*3)
+                            }
+
+                            if (context_func["mod"]) {
+                                value *= context_func["mod"]
+                            }
+                            warband.AddStashValue(value,1)
                         }
                     }
         }

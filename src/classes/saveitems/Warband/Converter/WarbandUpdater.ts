@@ -111,6 +111,20 @@ class WarbandUpdater {
                 locations[i].selections = [];
             }
             
+            // Sample of Holy DNA
+            if (locations[i].object_id == "el_sampleofholydna") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_sampleofholydna_mod", selections: locations[i].selections, consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_sampleofholydna_mod", selections: locations[i].selections, consumables : [] } ] }
+                locations[i].selections = [];
+            }
+            
+            // Fruit of Good and Evil
+            if (locations[i].object_id == "el_fruitfromthetreeofgoodandevilknowledge") {
+                if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_fruitfromthetreeofgoodandevilknowledge_mod", selections: locations[i].selections, consumables : [] } )
+                } else { wb.exploration.location_mods =[ { object_id: "el_fruitfromthetreeofgoodandevilknowledge_mod", selections: locations[i].selections, consumables : [] } ] }
+                locations[i].selections = [];
+            }
+            
             // Pot of Manna
             if (locations[i].object_id == "el_potofmanna") {
                 if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_potofmanna_mod", selections: [], consumables : [] } )

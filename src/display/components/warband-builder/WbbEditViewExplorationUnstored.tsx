@@ -209,7 +209,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         }
 
                         {((location.true_obj != undefined) && (location.true_obj != null)) &&
-                            <div key={keyvar}>
+                            <div>
                                 
                                 {(location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.length > 0 ) && 
                                     <ul className={'exploration-description-options'}>
@@ -271,7 +271,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
 
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
-                        <div key={keyvar} className={'alert-exploration alert-exploration-info'}>
+                        <div className={'alert-exploration alert-exploration-info'}>
                             <ul>
                                 {contextMessage.map((item, index) => 
                                 <li key={index}>

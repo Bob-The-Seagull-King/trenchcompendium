@@ -2561,6 +2561,7 @@
         "contextdata": {
             "location_rule_option": {},
             "consumable": {
+                "post_save": true,
                 "single_exploration_glory_item": {
                     "cost": 999999
                 }
@@ -2769,6 +2770,32 @@
             "unforced": true
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_sampleofholydna_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSING MARKER instead.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "location_value": 26,
+        "options": [ ]
+    },
+    {
+        "id": "el_sampleofholydna_mod",
+        "name": "Sample of Holy DNA",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
             "warband_attatch": {
@@ -2794,7 +2821,6 @@
                 ]
             }
         ],
-        "location_value": 26,
         "options": [ {
                 "ref_id" : "ot_sampleofholydna_a",
                 "name" : "",
@@ -2942,6 +2968,30 @@
             "exploration_table": "et_legendarylocations"
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_fruitfromthetreeofgoodandevilknowledge_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Amongst bones of giant humans unearthed by the ravages of war you discover a golden-hued fruit wrapped in spun cloth.Any model eating this fruit will immediately gain any Skill of your choice normally available to your Warband/this model (including any Exploration Skill). In addition the model will gain the Keyword DEMONIC.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "location_value": 36,
+        "options": [ ]
+    },
+    {
+        "id": "el_fruitfromthetreeofgoodandevilknowledge_mod",
+        "name": "Fruit from the Tree of Good and Evil Knowledge",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
             "warband_attatch": {
@@ -2965,7 +3015,6 @@
                 ]
             }
         ],
-        "location_value": 36,
         "options": [{
             "ref_id" : "ot_fruitfromthetreeofgoodandevilknowledge_a",
             "name" : "",
