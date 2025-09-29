@@ -8,6 +8,9 @@ var klaroConfig = {
     hideDeclineAll: false,
     privacyPolicy: 'https://trench-companion.com/page/privacy',
     noCss: true,
+    callback: function (consent, app) {
+        window.__maybeLoadAdsenseNow();
+    },
     translations: {
         de: {
             consentNotice: {
@@ -88,21 +91,24 @@ var klaroConfig = {
                 gtag('set', 'ads_data_redaction', true);
             `,
         },
+        // Dieses Service lassen wir sichtbar (Transparenz), aber fürs Laden relyen wir NICHT nur auf onAccept.
         {
             name: 'google-adsense',
             title: 'Google AdSense',
             purposes: ['advertising'],
-            required: true, // immer laden!
+            required: false,
             onInit: `
-                if (!window.adsenseScriptLoaded) {
-                    var s = document.createElement('script');
-                    s.async = true;
-                    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966";
-                    s.crossOrigin = "anonymous";
-                    document.head.appendChild(s);
-                    window.adsenseScriptLoaded = true;
-                }
-            `,
+                // Wird auf JEDEM Pageview ausgeführt:
+                // Falls der User bereits bestätigt hat, laden wir hier AdSense sofort.
+                try {
+                  var m = window.klaro && window.klaro.getManager ? window.klaro.getManager() : null;
+                  if (m && m.confirmed) window.__loadAdSenseOnce();
+                } catch (e) {}
+              `,
+            // Optional: onAccept kann zusätzlich aufrufen (redundant, aber schadet nicht)
+            onAccept: `window.__loadAdSenseOnce && window.__loadAdSenseOnce();`,
+            // KEIN onDecline nötig — wir wollen nur nach bestätigter Entscheidung laden (confirmed),
+            // Personalisierung steuert 'google-ads' via Consent Mode.
         }
     ]
 };

@@ -35,6 +35,47 @@
             gtag('set', 'ads_data_redaction', true);
         </script>
 
+        <!-- Adsense helper script -->
+        <script>
+            (function () {
+                // Lädt das AdSense-Script genau einmal und signalisiert 'adsense:loaded'
+                window.__loadAdSenseOnce = function () {
+                    if (window.adsenseScriptLoaded) return;
+
+                    // Früh setzen, um Race Conditions bei schnellem mehrfachen Aufruf zu vermeiden
+                    window.adsenseScriptLoaded = true;
+
+                    var s = document.createElement('script');
+                    s.async = true;
+                    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966";
+                    s.crossOrigin = "anonymous";
+                    s.onload = function () {
+                        // Signal an die App/Komponenten: AdSense ist bereit
+                        window.dispatchEvent(new Event('adsense:loaded'));
+                    };
+                    s.onerror = function () {
+                        // Falls es schief geht, Freigabe zurücksetzen, damit später erneut versucht werden kann
+                        window.adsenseScriptLoaded = false;
+                        console.warn('AdSense script failed to load.');
+                    };
+                    document.head.appendChild(s);
+                };
+
+                // Prüft, ob der Nutzer bereits eine Entscheidung bestätigt hat
+                window.__maybeLoadAdsenseNow = function () {
+                    try {
+                        var m = window.klaro && window.klaro.getManager ? window.klaro.getManager() : null;
+                        if (m && m.confirmed) {
+                            // Entscheidung existiert (Accept all oder gespeicherte Auswahl) -> jetzt laden
+                            window.__loadAdSenseOnce();
+                        }
+                    } catch (e) {
+                        console.warn('maybeLoadAdsenseNow error:', e);
+                    }
+                };
+            })();
+        </script>
+
         <!-- Klaro styles -->
         <link rel="stylesheet" href="%PUBLIC_URL%/klaro.css">
         <!-- Klaro config -->
@@ -44,6 +85,19 @@
             window.addEventListener('DOMContentLoaded', function () {
                 klaro.setup(klaroConfig);
             });
+        </script>
+
+
+        <script>
+            // Falls Klaro erst später verfügbar ist, prüfen wir periodisch,
+            // ob bereits bestätigt wurde und laden dann AdSense.
+            (function waitForKlaro() {
+                if (window.klaro && window.klaro.getManager) {
+                    window.__maybeLoadAdsenseNow();
+                } else {
+                    setTimeout(waitForKlaro, 100);
+                }
+            })();
         </script>
 
         <!-- Noscript Fallback for GTM -->
