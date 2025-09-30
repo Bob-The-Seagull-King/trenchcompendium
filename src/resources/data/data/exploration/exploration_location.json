@@ -1573,7 +1573,7 @@
     },
     {
         "id": "el_ransackedalchemistworkshop_mod",
-        "name": "Ransacked Alchemical Workshop",
+        "name": "Curative Fluids",
         "source": "core",
         "tags": {
             "modifier": true
@@ -1589,7 +1589,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+                "content": "During any Reallocate Equipment step for the rest of the Campaign your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
             }
         ],
         "options": [ {
