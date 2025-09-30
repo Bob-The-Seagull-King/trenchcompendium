@@ -66,7 +66,7 @@ class WarbandUpdater {
 
         const locations = wb.exploration.locations;
         const fin_locations : IWarbandProperty[] = []
-        console.log(locations)
+        
         // Update a warband's Locations to include new modifiers
         for (let i = 0; i < locations.length; i++) {
             let DoAdd = true

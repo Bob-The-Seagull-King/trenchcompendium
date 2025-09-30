@@ -120,6 +120,7 @@ class UserWarband extends DynamicContextObject {
         this.EquipmentRelCache = {}
         this.ModelRelCache = {}
         this.GeneralCache = {}
+        this.Exploration.GeneralCache = {};
         for (let i = 0; i < this.Models.length; i++) {
             const Mod = this.Models[i].HeldObject as WarbandMember
             Mod.GeneralCache = {}
