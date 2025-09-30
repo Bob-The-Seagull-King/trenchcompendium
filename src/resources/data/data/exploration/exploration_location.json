@@ -2107,7 +2107,7 @@
     },
     {
         "id": "el_abandonedressurectionmachine_mod",
-        "name": "Abandoned Ressurection Machine",
+        "name": "Salvaged Resurrection Machine",
         "source": "core",
         "tags": {
             "modifier": true
