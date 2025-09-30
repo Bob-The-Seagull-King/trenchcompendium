@@ -2652,7 +2652,7 @@
                 "content": "",
                 "subcontent": [
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": "A saint guides your troops before each battle. The model with the "
                     },
                     {
@@ -2660,7 +2660,7 @@
                         "content": "eq_faithfulskull"
                     },          
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": " gains the following skill:"
                     }
                 ]
@@ -2698,7 +2698,7 @@
                 "content": "",
                 "subcontent": [
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": "The "
                     },
                     {
@@ -2706,7 +2706,7 @@
                         "content": "eq_hellskull"
                     },           
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": " screams as you mount it on a pole to mock God and paint it with blasphemous names. This item counts as a banner."
                     }
                 ]
