@@ -921,7 +921,7 @@
     },
     {
         "id": "el_trenchmerchant_trade_mod",
-        "name": "Black Network Contact",
+        "name": "Trench Merchant Trade",
         "source": "core",
         "tags": {
             "modifier": true
