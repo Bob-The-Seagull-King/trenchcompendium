@@ -1860,12 +1860,15 @@ export const BaseContextCallTable : CallEventTable = {
 
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
             const WarbandPropModule = await import('../../classes/saveitems/Warband/WarbandProperty');
+            console.log(context_static)
+            console.log(context_main)
             if (context_func["add_skill"]) {
                 for (let i = 0; i < context_func["add_skill"].length; i++) {
                     const SkillNew : Skill = await SkillFactory.CreateNewSkill(context_func["add_skill"][i], eventSource);                    
                     const NewRuleProperty = new WarbandPropModule.WarbandProperty(SkillNew, eventSource, null, null);
                     await NewRuleProperty.HandleDynamicProps(SkillNew, eventSource, null, null);
                     await NewRuleProperty.BuildConsumables([]);
+                    NewRuleProperty.Tags["SkillOrigin"] = context_static.GetTrueName();
                     relayVar.push(NewRuleProperty);
                 }
             }
