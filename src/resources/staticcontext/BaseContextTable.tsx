@@ -3022,6 +3022,7 @@ export const BaseContextCallTable : CallEventTable = {
             
             const { ExplorationFactory } = await import("../../factories/features/ExplorationFactory");
             const { ExplorationLocation } = await import("../../classes/feature/exploration/ExplorationLocation");
+            const { FactionFactory } = await import("../../factories/features/FactionFactory");
 
             for (let i = 0; i < relayVar.length; i++) {
                 const ModelItem = ((relayVar[i].value instanceof ExplorationLocation)? relayVar[i].value :
@@ -3029,6 +3030,32 @@ export const BaseContextCallTable : CallEventTable = {
                 )
                 relayVar[i].value = ModelItem;
                 relayVar[i].display_str = ModelItem.Name? ModelItem.Name : "";
+      
+
+                const AddedCollection : string[] = []
+
+                for (let l = 0; l < ModelItem.RestrictedSelection.length; l++) {
+                    const LocationList : LocationRestriction = ModelItem.RestrictedSelection[l]
+
+                    if (LocationList.allowed) {
+                        for (let j = 0; j < LocationList.allowed.length; j++) {
+                            const Requirement = LocationList.allowed[j]
+                            const NewStringParts = []
+
+                            if (Requirement.type == "faction") {
+                                for (let k = 0; k < Requirement.value.length; k++) {
+                                    const ValKey : Faction = await FactionFactory.CreateNewFaction(Requirement.value[k], null)
+                                    NewStringParts.push((ValKey.GetTrueName()))
+                                }
+                            }              
+
+                            AddedCollection.push(NewStringParts.join(', '));
+                        }
+                    }
+                }
+                if (AddedCollection.join('').length > 0) {
+                    relayVar[i].display_str += " (" + AddedCollection.join(', ') + ")";
+                }
             }
 
             return relayVar
