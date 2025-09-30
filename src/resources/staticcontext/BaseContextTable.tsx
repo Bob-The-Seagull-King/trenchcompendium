@@ -3932,6 +3932,23 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                     }
                 }
+                if (context_func["required"] != undefined) {
+                    if (context_func["required"] == false) {
+                            relayVar.push(
+                                {
+                                    display_str: "None",
+                                    id: "op_none",
+                                    value: new ContextObject({
+                                        contextdata: {},
+                                        id: "op_none",
+                                        name: "None",
+                                        source: "core",
+                                        tags: {}
+                                    }, null)
+                                }
+                            )
+                    }
+                }
             }
             return relayVar;
         }
