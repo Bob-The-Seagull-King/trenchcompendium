@@ -130,13 +130,13 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                             }
 
                                             {/* options for selected location */}
-                                            {(selectedLocation != null && selectedLocation.options.length > 0) &&
+                                            {(selectedLocation != null && selectedLocation.location.MyOptions.length > 0) &&
                                                 <ul className="exploration-description-options">
                                                     {/* options */}
-                                                    {selectedLocation.options.map(opt =>
+                                                    {selectedLocation.location.MyOptions.map(opt =>
 
                                                         <>
-                                                            {opt.selection_valid.map(choice => (
+                                                            {opt.Selections.map(choice => (
                                                                 <>
                                                                     {/* @TODO: Show all option (even unavailable ones) here */}
                                                                     <li className={'exploration-description-option'}>
