@@ -210,7 +210,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                     <ul className={'exploration-description-options'}>
                                         {location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
                                             <div key={location.true_obj!.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
-                                                {item.Tags.base_loc == undefined &&
+                                                {(item.Tags.base_loc == undefined && item.Tags.hide_info == undefined) &&
                                                     <>
                                             {item.Selections.map((selectedchoice) => 
                                                 <div key={item.Selections.indexOf(selectedchoice)}>
