@@ -2908,7 +2908,7 @@ export const BaseContextCallTable : CallEventTable = {
                 relayVar.push("Your warband can purchase " + Stringlist.join(', ') + " .")
             }
             return relayVar;
-        },
+        }
     },
     new_upgrade: {
         event_priotity: 0,
@@ -4970,7 +4970,46 @@ export const BaseContextCallTable : CallEventTable = {
         }
     },
     purchase_modifier_upgrade: {
-        event_priotity: 0,        
+        event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory");
+            if (context_func["mod"]) {
+                for (let i = 0 ; i < context_func["mod"].length; i++) {
+                    const Stringlist : string[] = [];
+                    
+                    for (let j = 0; j < context_func["mod"][i]["requirements"].length; j++) {
+                        const requirement = context_func["mod"][i]["requirements"][j]
+                        if (requirement["tag"]) {
+                            Stringlist.push("with the tag " + makestringpresentable(requirement["tag"]))
+                        }
+                    }
+
+                    relayVar.push("Upgrades " + Stringlist.join(' and ') + " will have their cost changed by " + context_func["mod"][i]["cost"] + ".")
+                }
+            }
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory");
+            if (context_func["mod"]) {
+                for (let i = 0 ; i < context_func["mod"].length; i++) {
+                    const Stringlist : string[] = [];
+                    
+                    for (let j = 0; j < context_func["mod"][i]["requirements"].length; j++) {
+                        const requirement = context_func["mod"][i]["requirements"][j]
+                        if (requirement["tag"]) {
+                            Stringlist.push("with the tag " + makestringpresentable(requirement["tag"]))
+                        }
+                    }
+
+                    relayVar.push("Upgrades " + Stringlist.join(' and ') + " had their cost changed by " + context_func["mod"][i]["cost"] + ".")
+                }
+            }
+            return relayVar;
+        },
         async onRemoveLocation(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) {
             const alllist = warband.GetEntireWarbandUpgrade()
             const appliedMods = new Map<WarbandProperty, Set<number>>();
