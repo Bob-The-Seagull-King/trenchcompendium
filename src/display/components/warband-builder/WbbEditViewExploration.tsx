@@ -144,12 +144,12 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
                         <div key={keyvar} className={'alert-exploration alert-exploration-info'}>
-                            <ul>
+                            <span>
                                 {contextMessage.map((item, index) => 
-                                <li key={index}>
-                                    {item}
-                                </li>)}
-                            </ul>
+                                <span key={index}>
+                                    {item + " "}
+                                </span>)}
+                            </span>
                         </div>
                         }
 

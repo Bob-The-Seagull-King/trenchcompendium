@@ -270,12 +270,12 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
                             <div className={'alert-exploration alert-exploration-info'}>
-                                <ul>
+                                <span>
                                     {contextMessage.map((item, index) =>
-                                    <li key={index}>
-                                        {item}
-                                    </li>)}
-                                </ul>
+                                    <span key={index}>
+                                        {item + " "}
+                                    </span>)}
+                                </span>
                             </div>
                         }
 
