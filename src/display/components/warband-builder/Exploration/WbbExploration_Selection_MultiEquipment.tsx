@@ -7,6 +7,8 @@ import { ContextObject } from "../../../../classes/contextevent/contextobject";
 import { WarbandConsumable } from "../../../../classes/saveitems/Warband/WarbandConsumable";
 import { ToolsController } from "../../../../classes/_high_level_controllers/ToolsController";
 import { IChoice } from "../../../../classes/options/StaticOption";
+import WbbSelectItemEquipment from "../micro-elements/WbbSelectItem";
+import {getCostType} from "../../../../utility/functions";
 
 interface Option {
     id: string;
@@ -28,6 +30,7 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
 
     const [showModal, setshowModal] = useState(false);
     const [_keyvar, setkeyvar] = useState(0);
+    const [openedID, setOpenedID] = useState<string | null>(null);
 
 
     const handleSubmit = (foundOption : IChoice | null) => {
@@ -53,77 +56,82 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
     }
 
     return (
-        <div className="WbbExploration_Selection_MultiEquipment mb-3">
-
+        <div className="WbbExploration_Selection_MultiEquipment">
             {/* List of selected items */}
-            <div className={'items-list'}>
-                {selectedoption != null ? (
-                    
-                    <div  className="item">
-                        <span>{getDisplayString()}</span>
+            {selectedoption != null ? (
+                <div  className="item">
+                    <span>{getDisplayString()}</span>
+                    <span className={'remove'}
+                        onClick={() => {
+                            // @TODO: remove this item on click
+                            alert('add remove here')
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faTrash} />
+                    </span>
+                </div>
+            ) : (
+                <div>
+                    <div
+                        className={'btn btn-primary w-100'}
+                        onClick={() => setshowModal(true)}
+                    >
+                        {'Add Item'}
                     </div>
-                ) : (
-                    <div>
-                        <div
-                            className={'btn btn-primary w-100'}
-                            onClick={() => setshowModal(true)}
-                        >
-                            {'Add Item'}
-                        </div>
-                    </div>
-                )}
+                </div>
+            )}
 
-            </div>
-<Modal show={showModal} onHide={() => setshowModal(false)}
-                        className="WbbModal WbbModalSelect WbbModalAddEquipment" centered>
-                                <Modal.Header closeButton={false}>
-                                    <Modal.Title>Select Equipment</Modal.Title>
-                                    <FontAwesomeIcon
-                                        icon={faXmark}
-                                        className="modal-close-icon"
-                                        role="button"
-                                        onClick={() => setshowModal(false)}
-                                    />
-                                </Modal.Header>
+            {selectedoption == null && (
+                <Modal show={showModal} onHide={() => setshowModal(false)}
+                       className="WbbModal WbbModalSelect WbbModalAddEquipment" centered
+                >
+                    <Modal.Header closeButton={false}>
+                        <Modal.Title>Add Equipment</Modal.Title>
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            className="modal-close-icon"
+                            role="button"
+                            onClick={() => setshowModal(false)}
+                        />
+                    </Modal.Header>
 
-                                <Modal.Body>
-                                    {/* loop through available items and mark disabled if over cost limit */}
-                                    {property.Options.map((opt) => 
-                                    <div
-                                        key={property.Options.indexOf(opt)}
-                                        className={`select-item ${selectedoption === opt.value ? 'selected' : ''}`}
-                                        onClick={() => settempoption(opt)}
-                                    >
-                                        <span className={'item-left'}>
-                                        <span className={'item-name'}>
-                                            {opt.display_str}
-                                        </span>
-                                    </span>
-                                    {tempoption === opt && (
-                                    <div className={'details-wrap'}>
+                    <Modal.Body>
+                        {/* @TODO: loop through available items and mark disabled if over cost limit */}
+                        {property.Options.map((opt) => (
+                            <WbbSelectItemEquipment
+                                key={`select-item-${opt.id}`}
 
-                                        <div className={'details-quick-action'}>
-                                            <Button variant="primary"
-                                                    onClick={() => handleSubmit(opt)}
-                                                    className={' mb-3 btn-sm w-100'}
-                                            >
-                                                <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
-                                                {'Select Item'}
-                                            </Button>
-                                        </div>
-                                    </div>
-                                )}
-                                    </div>
-                                    )}
-                                </Modal.Body>
+                                id={opt.id}
+                                title={opt.value.Name}
+                                opened={openedID === opt.id}
+                                available={true} // @TODO add availability here
+                                onClick={() => {
+                                    setOpenedID(opt.id === openedID ? null : opt.id)
+                                }}
+                                equipment={opt.value.EquipmentItem}
+                                isSubmitting={false}
+                                onSubmit={() => handleSubmit(opt)}
+                                submitBtnString={'Add Equipment'}
+                                cost={opt.value.Cost + " " + getCostType(opt.value.CostType)}
+                                // @TODO: add limit and restrictions
+                                // limit={
+                                //     opt.value.limit > 0
+                                //         ? "Limit: " + (cache[item].count_cur + "/" + cache[item].limit)
+                                //         : ""
+                                // }
+                                // restrictions={cache[item].restrictions}
+                            />
+                        ))}
+                    </Modal.Body>
 
-                                <Modal.Footer>
-                                    <Button variant="secondary" onClick={() => setshowModal(false)}>
-                                        Cancel
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal>
-            
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setshowModal(false)}>
+                            Cancel
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            )}
+
         </div>
     );
 };

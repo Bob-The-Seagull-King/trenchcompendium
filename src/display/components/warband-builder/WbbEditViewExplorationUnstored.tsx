@@ -172,19 +172,21 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                     <div key={CheckRelevantBaseOptions(location.base_item).indexOf(item)}>
                                         {item.baseopt.Tags.base_loc != undefined &&
                                             <>
-                                        {item.baseopt.Selections.map((choice) => 
-                                        <li key={item.baseopt.Selections.indexOf(choice)} className={'exploration-description-option'}>
-                                            <span className={'option-name'}>
-                                                {choice.display_str}
-                                            </span>
-                                            <span className={'option-description'}>
-                                                {returnDescription(choice.value, choice.value.Description)}
-                                            </span>
-                                        </li>)
+                                                {item.baseopt.Selections.map((choice) =>
+                                                    <li key={item.baseopt.Selections.indexOf(choice)} className={'exploration-description-option'}>
+                                                        <span className={'option-name'}>
+                                                            {choice.display_str}
+                                                        </span>
 
-                                        }</>}
+                                                        <span className={'option-description'}>
+                                                            {returnDescription(choice.value, choice.value.Description)}
+                                                        </span>
+                                                    </li>
+                                                )}
+                                            </>
+                                        }
                                     </div>   
-                                ) }
+                                )}
                             </ul>
                         }
 
@@ -205,7 +207,6 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
 
                         {((location.true_obj != undefined) && (location.true_obj != null)) &&
                             <div>
-                                
                                 {(location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.length > 0 ) && 
                                     <ul className={'exploration-description-options'}>
                                         {location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
@@ -218,6 +219,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                     <span className={'option-name'}>
                                                         {selectedchoice.display_str}
                                                     </span>
+
                                                     <span className={'option-description'}>
                                                         {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
                                                     </span>
@@ -228,26 +230,27 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                         ) }
                                     </ul>
                                 }
+
                                 {location.true_obj.SelfDynamicProperty.Selections.length > 0 &&
                                     <>
                                     {location.true_obj.SelfDynamicProperty.Selections.map((item) =>
-                                        <div
-                                            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}>
-                                                {item.Option.Tags.base_loc == undefined &&
-                                                    <>
+                                        <React.Fragment
+                                            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}
+                                        >
+                                            {item.Option.Tags.base_loc == undefined &&
                                                 <WbbOptionSelect
                                                     property={location.true_obj!}
                                                     hidedesc={true}
                                                     choice={item}
-                                                /></>
-                                                }
-                                        </div>
+                                                />
+                                            }
+                                        </React.Fragment>
                                     )}
                                 </>
                                 }
+
                                 {location.true_obj.Consumables.length > 0 &&
-                                <div className="stash-items-wrap">
-                                    <div className={'stash-items-category'}>
+                                    <div className="exploration-consumable-list">
                                         {location.true_obj.Consumables.map((item: WarbandConsumable, index: number) => (
                                             <WbbExploration_Selection_Parent
                                                 key={index}
@@ -256,28 +259,27 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                             />
                                         ))}
                                     </div>
-                                </div>
                                 }
                             </div>
                         }
 
                         {contextMessage.length == 0 &&
-                        <br/>
+                            <br/>
                         }
 
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
-                        <div className={'alert-exploration alert-exploration-info'}>
-                            <ul>
-                                {contextMessage.map((item, index) => 
-                                <li key={index}>
-                                    {item}
-                                </li>)}
-                            </ul>
-                        </div>
+                            <div className={'alert-exploration alert-exploration-info'}>
+                                <ul>
+                                    {contextMessage.map((item, index) =>
+                                    <li key={index}>
+                                        {item}
+                                    </li>)}
+                                </ul>
+                            </div>
                         }
 
-                        {/* @TODO: disable if necessary options are not made*/}
+                        {/* @TODO: disable if necessary options are not made */}
                         <button
                             className={'btn btn-primary'}
                             onClick={handleApply}
@@ -285,8 +287,6 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         >
                             {'Save Exploration'}
                         </button>
-                        
-
 
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import { IChoice } from "../../../../classes/options/StaticOption";
 import { ContextObject } from "../../../../classes/contextevent/contextobject";
 import { WarbandConsumable } from "../../../../classes/saveitems/Warband/WarbandConsumable";
 import { useWarband } from "../../../../context/WarbandContext";
-import React, { useEffect, useState } from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import { ToolsController } from "../../../../classes/_high_level_controllers/ToolsController";
 import { EventRunner } from "../../../../classes/contextevent/contexteventhandler";
 import WbbConsumableSelect from "../modals/warband/WbbConsumableSelect";
@@ -45,7 +45,7 @@ const WbbExploration_Selection_Parent: React.FC<
         }, [updateKey]);
         
         return (
-            <div className={'WbbOptionSelect'} key={keyvar}>
+            <React.Fragment key={keyvar}>
                 {selecttype == 0 &&
                     <WbbConsumableSelect
                         property={property}
@@ -79,8 +79,7 @@ const WbbExploration_Selection_Parent: React.FC<
                         />
                     </>
                 }
-
-            </div>
+            </React.Fragment>
         );
 };
 
