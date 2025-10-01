@@ -60,17 +60,16 @@ const WbbExploration_Selection_GloryPurchase: React.FC<
                         <>
                             {selectedoption.GetTrueName()}
 
-                            {/* @TODO: this is only for glory purchase items */}
                             {((selectedoption as FactionEquipmentRelationship)?.Cost != null &&
-                                    (selectedoption as FactionEquipmentRelationship)?.CostType != null)
-                                && (
-                                    <span className={'fw-normal'}>
+                            (selectedoption as FactionEquipmentRelationship)?.CostType != null)
+                            && (
+                                <span className={'fw-normal'}>
                                     {' - '}
-                                        {(selectedoption as FactionEquipmentRelationship).Cost}
-                                        {' '}
-                                        {getCostType((selectedoption as FactionEquipmentRelationship).CostType)}
+                                    {(selectedoption as FactionEquipmentRelationship).Cost}
+                                    {' '}
+                                    {getCostType((selectedoption as FactionEquipmentRelationship).CostType)}
                                 </span>
-                                )}
+                            )}
                         </>
                     ) : (
                         <>
