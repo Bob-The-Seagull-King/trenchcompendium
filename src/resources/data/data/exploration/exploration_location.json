@@ -580,7 +580,7 @@
     },
     {
         "id": "el_survivor_yeoman",
-        "name": "New Antioch",
+        "name": "Survivor Yeoman",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -613,7 +613,7 @@
     },
     {
         "id": "el_survivor_trenchpilgrims",
-        "name": "Trench Pilgrims",
+        "name": "Ecclesiastic Prisoner",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -642,7 +642,7 @@
     },
     {
         "id": "el_survivor_ironsultanate",
-        "name": "Iron Sultanate",
+        "name": "Azeb",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -671,7 +671,7 @@
     },
     {
         "id": "el_survivor_hereticlegion",
-        "name": "Heretic Legions",
+        "name": "Heretic Wretched",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -700,7 +700,7 @@
     },
     {
         "id": "el_survivor_court",
-        "name": "The Court",
+        "name": "Court Wretched",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -729,7 +729,7 @@
     },
     {
         "id": "el_survivor_blackgrail",
-        "name": "Black Grail",
+        "name": "Grail Thrall",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
