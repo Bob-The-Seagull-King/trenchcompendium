@@ -327,7 +327,6 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
     for (const eq of EquipList) {
         const abilityObject = (eq.equipment.MyEquipment.SelfDynamicProperty?.OptionChoice as Equipment | undefined);
 
-        console.log("Equipment:", eq.equipment.Name);
 
         let eq_name = '';
 
@@ -471,8 +470,6 @@ export async function ConvertModelToTTSText(wb_model : RealWarbandPurchaseModel,
 
     /** Fighter Skills */
     for (const skill of M_Model.Skills) {
-        console.log('skill:');
-        console.log(skill);
 
         const sk_name = i_skill+' ' + skill.SelfDynamicProperty.OptionChoice.GetTrueName();
 

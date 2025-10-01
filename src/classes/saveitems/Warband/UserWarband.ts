@@ -932,7 +932,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     public HasModifier(mod : WarbandProperty) {
-        return (this.Modifiers.includes(mod));
+        return (this.Modifiers.includes(mod)) || (this.Exploration.LocationMods.includes(mod));
     }
     
     public async Deletemod( mod : WarbandProperty ) {
@@ -941,6 +941,13 @@ class UserWarband extends DynamicContextObject {
             if (mod == (this.Modifiers[i])) {
                 await mod.SendConsumablesUp();
                 this.Modifiers.splice(i, 1);
+                break;
+            }
+        }
+        for (let i = 0; i < this.Exploration.LocationMods.length; i++) {
+            if (mod == (this.Exploration.LocationMods[i])) {
+                await mod.SendConsumablesUp();
+                this.Exploration.LocationMods.splice(i, 1);
                 break;
             }
         }
@@ -1148,6 +1155,9 @@ class UserWarband extends DynamicContextObject {
      */
     public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
         await this.Exploration.AddExplorationLocation(location, option);
+    }
+    public async AddExplorationMod ( location: ExplorationLocation, option: ISelectedOption[]) {
+        await this.Exploration.AddExplorationMod(location, option);
     }
 
 
