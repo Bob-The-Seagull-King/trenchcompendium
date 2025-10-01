@@ -1020,11 +1020,23 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                 <Modal.Body>
                     <div className={'mb-3'}>
-                        {'Are you sure you want to delete this Exploration?'}
+                        {'Are you sure you want to delete this exploration location?'}
+                        <br/>
+                        <br/>
+                        <strong>{item.Name}</strong>?
                     </div>
-                    <div >
-                        <strong>{item.Name }</strong>?
-                    </div>
+                    <AlertCustom
+                        type={'danger'}
+                        className={'mx-2 my-3'}
+                    >
+                        <h5>{'Caution'}</h5>
+                        <p>
+                            {'This will only remove the location.'}
+                            <br />
+                            <br />
+                            {'Any effects the location had on your warband and any equipment you gained will not be removed.'}
+                        </p>
+                    </AlertCustom>
                 </Modal.Body>
 
                 <Modal.Footer>
