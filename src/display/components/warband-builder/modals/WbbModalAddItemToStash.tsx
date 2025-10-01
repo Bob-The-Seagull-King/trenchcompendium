@@ -26,7 +26,6 @@ interface WbbModalAddItemToStashProps {
 }
 
 const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, onClose, onSubmit, category, exploration }) => {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
     const [openedID, setOpenedID] = useState<string | null>(null);
 
     const { warband, updateKey } = useWarband();
@@ -39,7 +38,6 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
         const weapon = listofoptions.find(w => w.ID === openedID);
         if (weapon) {
             onSubmit(weapon);
-            setSelectedId(null);
             onClose();
         }
     });
