@@ -131,10 +131,6 @@ class UserWarband extends DynamicContextObject {
         for (let i = 0; i < this.Equipment.length; i++) {
             (this.Equipment[i].HeldObject as WarbandEquipment).EquipmentCache = null
         }
-        if (this.Exploration.CurLocation != null) {
-            this.Exploration.CurLocation.true_obj = undefined;
-            this.Exploration.CurLocation.selected_options = [];
-        }
     }
 
     public DucatLimit : number[] = [700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800];
