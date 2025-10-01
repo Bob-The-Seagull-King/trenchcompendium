@@ -4504,7 +4504,7 @@ export const BaseContextCallTable : CallEventTable = {
                                     canadd = false;
                                 }
                             }
-                            if ( canadd) {
+                            if ( canadd == true) {
                                 await warband.AddStash(NewModel, true);
                             } else {
                                 if (context_func["alternate_value"] == true) {
