@@ -22,7 +22,6 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     const { warband, updateKey, reloadDisplay } = useWarband();
 
     const [selectedLocation, setSelectedLocation] = useState<FilteredLocation | null>(null);
-    const [selectedOptionIds, setSelectedOptionIds] = useState<ISelectedOption[]>([]);
     const [availableoptions, setavailableoptions] = useState<ExplorationTableSuite[]>([]);
 
     const [isubmitdisabled, setisubmitdisabled] = useState<boolean>(true);
@@ -35,7 +34,6 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             const filteredop : FilteredLocation = expl.valid_locs.filter((item) => item.location.ID == selectedLocation.location.ID)[0]
             onSubmit(filteredop);
             setSelectedLocation(null);
-            setSelectedOptionIds([]);
             onClose();
         }
     });
@@ -59,7 +57,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
         }
 
         RunUpdate()
-    }, [updateKey, selectedOptionIds, selectedLocation]);
+    }, [updateKey, selectedLocation]);
 
     function RedoSubmitDisabled() {
         setisubmitdisabled(!selectedLocation?.location.GetID());
@@ -103,11 +101,10 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                         key={loc.location.ID}
                                         className={`select-item 
                                             ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected details-open' : ''}
-                                        
+                                            
                                         `}
                                         onClick={() => {
                                             handleLocationClick(loc);
-                                            setSelectedOptionIds([]); // reset when switching location
                                         }}
                                     >
                                         <div className="item-name">
