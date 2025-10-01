@@ -140,6 +140,11 @@ class WarbandExplorationSet extends DynamicContextObject {
             const CurVal = this.Skills[i]
             await CurVal.RegenerateOptions();
         }
+        if (this.CurLocation != null) {
+            if (this.CurLocation.true_obj) {
+                await this.CurLocation.true_obj.RegenerateOptions();
+            }
+        }
     }
 
     public ConvertToInterface() {
