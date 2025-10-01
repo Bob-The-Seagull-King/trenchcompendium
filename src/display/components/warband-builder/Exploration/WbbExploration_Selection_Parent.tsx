@@ -9,6 +9,7 @@ import WbbConsumableSelect from "../modals/warband/WbbConsumableSelect";
 import WbbExploration_Selection_SmallList from "./WbbExploration_Selection_SmallListEquipment";
 import WbbExploration_Selection_SingleEquipment from "./WbbExploration_Selection_SingleEquipment";
 import WbbExploration_Selection_MultiEquipment from "./WbbExploration_Selection_MultiEquipment";
+import WbbExploration_Selection_GloryPurchase from "./WbbExploration_Selection_GloryPurchase";
 
 interface WbbExploration_Selection_Parent_Props {
     property : WarbandConsumable;
@@ -50,23 +51,35 @@ const WbbExploration_Selection_Parent: React.FC<
                         property={property}
                         />
                 }
+
                 {selecttype == 1 &&
-                
                     <WbbExploration_Selection_SmallList
                         property={property}
                         doshow={doshow}
-                    />}
-                {selecttype == 2 &&
-                
+                    />
+                }
 
-                <WbbExploration_Selection_SingleEquipment
-                        property={property}
-                />}
+                {selecttype == 2 &&
+                    <WbbExploration_Selection_SingleEquipment
+                            property={property}
+                    />
+                }
+
+
                 {selecttype == 3 &&
-                
                         <WbbExploration_Selection_MultiEquipment
                         property={property}
-                        />}
+                        />
+                }
+
+                {selecttype == 4 &&
+                    <>
+                        <WbbExploration_Selection_GloryPurchase
+                            property={property}
+                        />
+                    </>
+                }
+
             </div>
         );
 };

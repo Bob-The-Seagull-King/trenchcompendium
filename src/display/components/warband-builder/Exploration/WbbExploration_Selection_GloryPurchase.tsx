@@ -9,49 +9,68 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 import {useWbbMode} from "../../../../context/WbbModeContext";
+import {WarbandConsumable} from "../../../../classes/saveitems/Warband/WarbandConsumable";
+import {useWarband} from "../../../../context/WarbandContext";
+import {ContextObject} from "../../../../classes/contextevent/contextobject";
+import {IChoice} from "../../../../classes/options/StaticOption";
+import {ToolsController} from "../../../../classes/_high_level_controllers/ToolsController";
+import {FactionEquipmentRelationship} from "../../../../classes/relationship/faction/FactionEquipmentRelationship";
+import {getCostType} from "../../../../utility/functions";
+import WbbSelectItemEquipment from "../micro-elements/WbbSelectItem";
 
-interface Option {
-    id: string;
-    name: string;
-    available: boolean;
-}
+
 
 interface WbbExploration_Selection_GloryPurchase_Props {
-    onSubmit: (selected: string) => void;
+    property : WarbandConsumable;
 }
 
 const WbbExploration_Selection_GloryPurchase: React.FC<
     WbbExploration_Selection_GloryPurchase_Props
-> = (props) => {
-    const { edit_mode } = useWbbMode();
+> = ({property}) => {
 
+    const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
+
+    const { warband, reloadDisplay, updateKey } = useWarband();
     const [showModal, setshowModal] = useState(false);
 
-    // @TODO: Include all items within the glory limit as options
-    // @TODO: Items that exceed the current unspent glory are disabled
-    const options: Option[] = [
-        { id: "glory_sword", name: "Glorious Sword", available: true },
-        { id: "glory_banner", name: "Banner of Glory", available: true },
-        { id: "glory_armor", name: "Armor of Triumph", available: false },
-    ];
+    const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);
 
-    const [selectedID, setSelectedID] = useState<string | null>(null);
+    const [openedID, setOpenedID] = useState<string | null>(null);
 
-    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
-        if (selectedID) props.onSubmit(selectedID);
-    });
+    const handleSubmit = (foundOption : IChoice | null) => {
+        if (foundOption != null) {
+            property.OnSelect(foundOption).then(() => {
+                setSelectedoption(property.SelectItem)
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        }
+    };
 
     return (
         <div className="WbbExploration_Selection_GloryPurchase mb-3">
             <div className={'fw-bold mb-2'}>
-                {'Select Glory Reward'}
+                {'Select Glory Purchase'}
             </div>
 
             <div className={'equipment-select'}>
                 <div className={'equipment-select-string'}>
-                    {selectedID ? (
+                    {selectedoption ? (
                         <>
-                            {selectedID}
+                            {selectedoption.GetTrueName()}
+
+                            {/* @TODO: this is only for glory purchase items */}
+                            {((selectedoption as FactionEquipmentRelationship)?.Cost != null &&
+                                    (selectedoption as FactionEquipmentRelationship)?.CostType != null)
+                                && (
+                                    <span className={'fw-normal'}>
+                                    {' - '}
+                                        {(selectedoption as FactionEquipmentRelationship).Cost}
+                                        {' '}
+                                        {getCostType((selectedoption as FactionEquipmentRelationship).CostType)}
+                                </span>
+                                )}
                         </>
                     ) : (
                         <>
@@ -62,17 +81,18 @@ const WbbExploration_Selection_GloryPurchase: React.FC<
 
                 {(edit_mode) &&
                     <div className={'btn btn-primary'} onClick={() => setshowModal(true)}>
-                        <FontAwesomeIcon icon={selectedID ? faArrowsRotate : faPlus}
+                        <FontAwesomeIcon icon={selectedoption ? faArrowsRotate : faPlus}
                                          className={'icon-inline-left-l'}/>
-                        {selectedID ? "Change Item" : "Select Item"}
+                        {selectedoption ? "Change Item" : "Select Item"}
                     </div>
                 }
             </div>
 
+
             <Modal show={showModal} onHide={() => setshowModal(false)}
                    className="WbbModal WbbModalSelect WbbModalAddEquipment" centered>
                 <Modal.Header closeButton={false}>
-                    <Modal.Title>Select Glory Item</Modal.Title>
+                    <Modal.Title>Select Equipment</Modal.Title>
 
                     <FontAwesomeIcon
                         icon={faXmark}
@@ -83,61 +103,31 @@ const WbbExploration_Selection_GloryPurchase: React.FC<
                 </Modal.Header>
 
                 <Modal.Body>
-                    {options.map((opt) => (
-                        <React.Fragment key={opt.id}>
-                            <div
-                                className={`select-item ${selectedID === opt.id ? 'selected' : ''} ${!opt.available ? 'disabled' : ''}`}
-                                onClick={() => opt.available && setSelectedID(opt.id)}
-                            >
-                                <span className={'item-left'}>
-                                    <span className={'item-name'}>
-                                        {opt.name}
-                                    </span>
-                                </span>
+                    {/* @TODO: show all options and make unavailable ones unavailable */}
+                    {property.Options.map((opt) => (
+                        <WbbSelectItemEquipment
+                            key={`select-item-${opt.id}`}
 
-                                <span className={'item-right'}>
-                                    <span className={'item-cost'}>
-                                        {'5 G'}
-                                    </span>
-
-                                    {/* If has LIMIT */}
-                                    <span className={'item-limit'}>
-                                        Limit: {'1' + "/" + '2'}
-                                    </span>
-
-                                    {/* If has restrictions */}
-                                    <span className={'item-limit'}>
-                                            Restrictions: {'Bob Only'}
-                                    </span>
-
-                                </span>
-                            </div>
-
-                            {selectedID === opt.id && (
-                                <div className={'details-wrap'}>
-                                    {/* @TODO: connect equipment here */}
-                                    {/*<WbbEquipmentDetails*/}
-                                    {/*    equipment={cache[item].facrel.EquipmentItem}*/}
-                                    {/*    showType={false}*/}
-                                    {/*/>*/}
-
-                                    <div className={'details-quick-action'}>
-                                        <Button variant="primary"
-                                                onClick={handleSubmit} disabled={!selectedID || isSubmitting}
-                                                className={' mb-3 btn-sm w-100'}
-                                        >
-                                            {isSubmitting ? (
-                                                <FontAwesomeIcon icon={faCircleNotch}
-                                                                 className={'icon-inline-left fa-spin '}/>
-                                            ) : (
-                                                <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
-                                            )}
-                                            {'Select Item'}
-                                        </Button>
-                                    </div>
-                                </div>
-                            )}
-                        </React.Fragment>
+                            id={opt.id}
+                            title={opt.value.Name}
+                            opened={openedID === opt.id}
+                            available={true} // @TODO add availability here
+                            onClick={() => {
+                                setOpenedID(opt.id === openedID ? null : opt.id)
+                            }}
+                            equipment={opt.value.EquipmentItem}
+                            isSubmitting={false}
+                            onSubmit={() => handleSubmit(opt)}
+                            submitBtnString={'Add Equipment'}
+                            cost={opt.value.Cost + " " + getCostType(opt.value.CostType)}
+                            // @TODO: add limit and restrictions
+                            // limit={
+                            //     opt.value.limit > 0
+                            //         ? "Limit: " + (cache[item].count_cur + "/" + cache[item].limit)
+                            //         : ""
+                            // }
+                            // restrictions={cache[item].restrictions}
+                        />
                     ))}
                 </Modal.Body>
 
