@@ -909,6 +909,9 @@
         "contextdata": {
             "add_location_modifier": {
                 "id": ["el_trenchmerchant_trade_mod"]
+            },
+            "set_exploration_purchase_cap": {
+                "cost": 5
             }
         },
         "description": [            
@@ -1617,6 +1620,9 @@
             "location_rule_option": {},
             "add_location_modifier": {
                 "id": ["el_blackmarket_mod"]
+            },
+            "set_exploration_purchase_cap": {
+                "cost": 8
             }
         },
         "description": [            
@@ -2520,6 +2526,9 @@
         },
         "contextdata": {
             "location_rule_option": {},
+            "set_exploration_purchase_cap": {
+                "cost": 99
+            },
             "add_location_modifier": {
                 "id": ["el_blacknetworkcontact_mod"]
             }

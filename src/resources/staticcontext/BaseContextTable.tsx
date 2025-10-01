@@ -4572,6 +4572,27 @@ export const BaseContextCallTable : CallEventTable = {
     },
     set_exploration_purchase_cap: {
         event_priotity: 0,
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["cost"] < 99) {
+
+                relayVar.push("Your warband will be able to purchase exploration only glory items that cost " + context_func["cost"] + " Glory or less")
+            } else {
+                
+                relayVar.push("Your warband will be able to purchase exploration only glory items at any cost.")
+            }
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            if (context_func["cost"] < 99) {
+
+                relayVar.push("Your warband is now able to purchase exploration only glory items that cost " + context_func["cost"] + " Glory or less")
+            } else {
+                
+                relayVar.push("Your warband is now able to purchase exploration only glory items at any cost.")
+            }
+            return relayVar;
+        },
         async getExplorationLimit(this: EventRunner, eventSource : any, relayVar: number, trackVal: UserWarband,  context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
 
             if (relayVar < context_func["cost"]) {
