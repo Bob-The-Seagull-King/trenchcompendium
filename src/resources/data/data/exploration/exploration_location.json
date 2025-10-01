@@ -1791,8 +1791,12 @@
         "contextdata": {"location_rule_option": {}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "You find a motherlode of forbidden objects and chemicals, highly sought after and in demand. Choose one:"
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Trench Pilgrims must select the Confiscate option."
             }
         ],
         "location_value": 21,
