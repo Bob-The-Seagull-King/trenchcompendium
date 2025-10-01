@@ -3261,8 +3261,68 @@
         "name": "Butcher Knights",
         "description":  [
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Plague Knights of the warband are called Butcher Knights. They have the Ravenous Infection rule and are mounted on 32mm or 40mm bases. They may be equipped with their own twisted Knightly Rank of Butchery, which grants them +1 MELEE for an additional +5 ducats. This can be taken multiple times, as each Butcher Knight strives to follow this path."
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Plague Knights of the warband are called Butcher Knights. They have the Ravenous Infection rule and are mounted on 32mm or 40mm bases. They may only be equipped with one of the following Knightly Ranks:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Butcher King: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Gain 1 Glory for each enemy model this Butcher Knight took out of action with a Melee Attack ACTION if the knight is not Down or Out of Action at the end of the battle. Costs 10 ducats.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Knightly Rank of the Feast: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Grants a Butcher Knights and any models within 3” of that Butcher knight +1 DICE on Ravenous Infection Tests for an additional +5 ducats."
+                                    }
+                                ]
+                            },
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Knightly Rank of Ferocity: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Allows the Butcher Knight to ingore the Off-Hand special rule (-1 to attacks with an off-hand weapon) and gives them the CRITICAL keyword on any melee weapon they choose to wield for an additional +5 ducats."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ],
         "options": []
@@ -3277,7 +3337,7 @@
         "description":  [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "A Great Hunger Warband may recruit Thralls to your Warband for 1 Glory (to a maximum of 6 Thralls) each instead of their ducat cost (the cost of further upgrades remain unchanged). In campaign play, after deployment, if you have thralls in reserve, you may deploy up to six (6) of those thralls onto the battlefield. These “Glory Thralls” do not count against your Maximum Field Strength. These models must be counted for purposes of Morale."
+                "content": "There are those thralls who have become the vanguard of the Great Hunger, and where others seek the comfort of their matron, these thralls push forward in search of fresh meat. A Great Hunger Warband may recruit up to 3 Grail or Fly Thralls equipped with Blighted Claws to your Warband for 2 Glory each instead of their regular cost. Thralls recruited in this way are known as Cradle Thralls. If you are playing a campaign, after deployment, you may deploy up to three Cradle Thralls in reserve onto the battlefield. Cradle Thralls do not count towards your Maximum Field Strength, but do count for the purposes of Morale. In addition, if the scenario you are playing allows Infiltrators to use their special deployment rules, after any Infiltrators have deployed, you can deploy these Cradle Thralls within 1” of any edge of the battlefield and more than 8” away from any enemy models."
             }
         ],
         "options": []
@@ -3340,7 +3400,7 @@
                             },
                             {
                                 "tags": {"desc_type" : "default"},
-                                "content": "Any Ranged Weapons except for Shotguns, Black Spot Rifles, and Putrid Shotguns. This restriction does not apply to Glory Items."
+                                "content": "Any Ranged Weapons except for Shotguns, Black Spot Rifles, Parasite Grenades, and Putrid Shotguns. This restriction does not apply to Glory Items."
                             }
                         ]
                     }
@@ -3358,8 +3418,12 @@
         "name": "Grail Thralls & Fly Thralls",
         "description":  [
             {
-                "tags": {"desc_type" : "default"},
-                "content": "Thralls have the Ravenous Infection rule and are mounted on 25mm or 32mm bases. All Thralls may be equipped with Blighted Claws or Grasping Maws."
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grail and Fly Thralls in a Great Hunger Warband cost 35 ducats, and gain the Ravenous Infection Ability and the Blighted Claws equipment. They may be based on 25mm or 32mm bases, but all Thralls of the same type (Grail or Fly) must be on the same sized base."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In addition, Grail and Fly Thralls may have the Unending Starvation and Grasping Maw equipment."
             }
         ],
         "options": []
@@ -3455,7 +3519,7 @@
             },
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "These INFECTION MARKERS can be taken from any model currently taking part in the battle, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
+                "content": "These INFECTION MARKERS can be taken from any models within 12” of the caster, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
                 "glossary": [
                     {"val": "ACTIONS", "id": "kw_action"},
                     {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},

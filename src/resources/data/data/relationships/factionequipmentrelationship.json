@@ -1218,7 +1218,7 @@
         "id": "rel_fc_eq_alchemicalammunition",
         "source": "core",
         "tags": {},
-        "name": "Alchemical Ammunication",
+        "name": "Alchemical Ammunition",
         "contextdata": { 
             "faction_eq_restriction": {
                 "permitted": [
@@ -1999,7 +1999,7 @@
         "tags": {},
         "name": "Parasite Grenades",
         "contextdata": {},
-        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"],
+        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_cultoftheblackgrail_fv_thegreathunger"],
         "equipment_id": "eq_parasitegrenades",
         "cost": 15,
         "costtype": 0,
@@ -4067,7 +4067,7 @@
         },
         "faction_id": ["fc_cultoftheblackgrail_fv_thegreathunger"],
         "equipment_id": "eq_butcherbayonet",
-        "cost": 20,
+        "cost": 15,
         "costtype": 0,
         "limit": 2
     },
@@ -4122,7 +4122,7 @@
         },
         "faction_id": ["fc_cultoftheblackgrail_fv_thegreathunger"],
         "equipment_id": "eq_pestilentfang",
-        "cost": 25,
+        "cost": 15,
         "costtype": 0,
         "limit": 1
     }

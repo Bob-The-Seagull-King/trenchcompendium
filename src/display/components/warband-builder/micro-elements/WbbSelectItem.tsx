@@ -47,7 +47,6 @@ function WbbSelectItemEquipment({
        unavailableString
    }: WbbSelectItemEquipmentProps) {
 
-    
     return (
         <React.Fragment>
             <div

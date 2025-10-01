@@ -31,13 +31,13 @@ const RulesMenuItem: React.FC<{ data: RulesMenuItemProps[], level?: number; pare
     return (
         <ul className={`menu-list level-${level}`}>
             {data.map((item) => 
-            <RulesMenuSubItem 
-                data={item}
-                key={parentPath+item.title}
-                level={level}
-                parentPath={parentPath}
-                onNavigate={onNavigate}
-            />)}
+                <RulesMenuSubItem
+                    data={item}
+                    key={parentPath+item.title}
+                    level={level}
+                    parentPath={parentPath}
+                    onNavigate={onNavigate}
+                />)}
         </ul>
     );
 };

@@ -2208,7 +2208,7 @@ class UserWarband extends DynamicContextObject {
 
         const LineList : string[] = [];
         const elite = this.GetFighters().filter((item) => (item.model.IsElite() && item.model.State == "active"))
-        const troops = this.GetFighters().filter((item) => (!item.model.IsElite() && item.model.State == "active"))
+        const troops = this.GetFighters().filter((item) => (item.model.IsTroop() && item.model.State == "active"))
         const mercenaries = this.GetFighters().filter((item) => (item.model.IsMercenary() && item.model.State == "active"))
         const reserves = this.GetFighters().filter((item) => (item.model.State == "reserved"))
         const lost = this.GetFighters().filter((item) => (item.model.State == "lost"))
@@ -2221,7 +2221,6 @@ class UserWarband extends DynamicContextObject {
         LineList.push("Patron: " + this.GetPatronName())
 
         if (elite.length > 0) {
-            LineList.push(" ")
             LineList.push(" ")
             LineList.push("## Elites ##")
             for (let i = 0; i < elite.length; i++) {
@@ -2259,7 +2258,6 @@ class UserWarband extends DynamicContextObject {
 
         if (troops.length > 0) {
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Troops ##")
             for (let i = 0; i < troops.length; i++) {
                 LineList.push("  ")
@@ -2292,7 +2290,6 @@ class UserWarband extends DynamicContextObject {
             }
         }
         if (mercenaries.length > 0) {
-            LineList.push("  ")
             LineList.push("  ")
             LineList.push("## Mercenaries ##")
             for (let i = 0; i < mercenaries.length; i++) {
@@ -2328,7 +2325,6 @@ class UserWarband extends DynamicContextObject {
 
         if (reserves.length > 0 && full) {
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Reserves ##")
             for (let i = 0; i < reserves.length; i++) {
                 LineList.push("  ")
@@ -2363,7 +2359,6 @@ class UserWarband extends DynamicContextObject {
 
         if (lost.length > 0 && full) {
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Lost & Captured ##")
             for (let i = 0; i < lost.length; i++) {
                 LineList.push("  ")
@@ -2396,7 +2391,6 @@ class UserWarband extends DynamicContextObject {
             }
         }
         if (dead.length > 0 && full) {
-            LineList.push("  " )
             LineList.push("  " )
             LineList.push("## Dead ##")
             for (let i = 0; i < dead.length; i++) {
@@ -2432,7 +2426,6 @@ class UserWarband extends DynamicContextObject {
         if (full) {
 
             LineList.push("  " )
-            LineList.push("  " )
             LineList.push("## Stash ##")
             LineList.push("  " )
 
@@ -2462,7 +2455,6 @@ class UserWarband extends DynamicContextObject {
         if (this.Modifiers.length > 0) {
 
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Modifiers ##")
             LineList.push("  ")
 
@@ -2480,7 +2472,6 @@ class UserWarband extends DynamicContextObject {
         if (this.Fireteams.length > 0 && full) {
 
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Fireteams ##")
             LineList.push("  ")
 
@@ -2497,7 +2488,6 @@ class UserWarband extends DynamicContextObject {
         const Locations = this.GetLocations();
         if (Locations.length > 0) {
 
-            LineList.push("  ")
             LineList.push("  ")
             LineList.push("## Locations ##")
             LineList.push("  ")
@@ -2517,7 +2507,7 @@ class UserWarband extends DynamicContextObject {
          * Add link to the list
          * - Check if is integer first
          */
-        if (Number.isInteger(Number(this.GetPostId()))) {
+        if (Number.isInteger(Number(this.GetPostId())) && Number(this.GetPostId()) > 0 ) {
             LineList.push("  ")
             LineList.push("---")
             LineList.push(" ")

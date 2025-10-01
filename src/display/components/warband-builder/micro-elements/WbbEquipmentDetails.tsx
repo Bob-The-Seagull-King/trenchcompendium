@@ -5,6 +5,7 @@ import {Equipment} from "../../../../classes/feature/equipment/Equipment";
 import GenericHover from "../../generics/GenericHover";
 import KeywordDisplay from "../../features/glossary/KeywordDisplay";
 import {returnDescription} from "../../../../utility/util";
+import { Keyword } from '../../../../classes/feature/glossary/Keyword';
 
 interface WbbEquipmentDetailsProps {
     equipment: Equipment;
@@ -12,6 +13,23 @@ interface WbbEquipmentDetailsProps {
 }
 
 const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, showType }) => {
+
+    const keywordlist = GetKeywords()
+
+    function GetKeywords() {
+        const Arr : Keyword[] = []
+        const NameList : string[] = [];
+        const Base = equipment.GetKeyWords()
+
+        for (let i = 0; i < Base.length; i++) {
+            if (!NameList.includes(Base[i].GetTrueName())) {
+                Arr.push(Base[i])
+                NameList.push(Base[i].GetTrueName())
+            }
+        }
+
+        return Arr;
+    }
 
     return (
         <div className={'WbbEquipmentDetails'}>
@@ -49,14 +67,14 @@ const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, sh
                 }
             </table>
 
-            { equipment.GetKeyWords().length > 0 &&
+            { keywordlist.length > 0 &&
                 <div className={'keywords-wrap'}>
                     <div className={'text-label'}>
                         {'Keywords'}
                     </div>
                     <div className={'keywords'}>
                         <p className={'keywords'}>
-                            {equipment.GetKeyWords().map((item, index) => (
+                            {keywordlist.map((item, index) => (
                                 <span className='' key={"equipment_keyword_" + item.GetID() + "_keyword_id"}>
                                         <GenericHover
                                             d_colour={'grey'}
@@ -65,7 +83,7 @@ const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, sh
                                             d_type={""}
                                             d_method={() => <KeywordDisplay data={item}/>}
                                         />
-                                    {index < equipment.GetKeyWords().length - 1 && ", "}
+                                    {index < keywordlist.length - 1 && ", "}
                                     </span>
                             )) /* Keywords */}
                         </p>

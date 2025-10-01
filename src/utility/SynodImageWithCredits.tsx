@@ -12,9 +12,10 @@ interface SynodImageWithCreditProps {
     imageId: number;
     size?: string;
     className?: string;
+    imageKey?: string; // can be used to make multiple of the same images use unique credits popovers
 }
 
-const SynodImageWithCredit: React.FC<SynodImageWithCreditProps> = ({ imageId, size = 'medium', className = '' }) => {
+const SynodImageWithCredit: React.FC<SynodImageWithCreditProps> = ({ imageId, size = 'medium', className = '', imageKey = '' }) => {
     const { url, sourceTitle, sourceUrl } = useSynodImageData(imageId, size);
 
     const { activeId, setActiveId } = useImageCreditPopover();
@@ -58,7 +59,7 @@ const SynodImageWithCredit: React.FC<SynodImageWithCreditProps> = ({ imageId, si
             <ImageCredits
                 sourceTitle={sourceTitle}
                 sourceUrl={sourceUrl}
-                popoverSlug={imageId.toString()}
+                popoverSlug={imageId.toString()+imageKey}
             />
         </>
 
