@@ -137,7 +137,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
 
 
     return (
-        <div className="WbbEditViewExploration">
+        <div className="WbbEditViewExploration WbbEditViewExplorationUnstored">
             <div className={'WbbEditViewExploration-title'}
                  onClick={() => setOpen(!open)}
             >

@@ -31,7 +31,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
     if (warband == null) return (<div>Loading...</div>);
 
     // @TODO: set initially open if this exploration location has NOT been applied yet
-    const [open, setOpen] = useState<boolean>(initiallyOpen ?? true);
+    const [open, setOpen] = useState<boolean>(initiallyOpen ?? false);
     const [contextMessage, setContextMessage] = useState<string[]>([]);
     const [keyvar, setkeyvar] = useState(0);
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
