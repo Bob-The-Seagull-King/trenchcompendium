@@ -322,6 +322,8 @@
         },
         "contextdata": {
             "gain_all_from_list_find": {
+                "obey_faction": true,
+                "obey_restriction": true,
                 "id": ["eq_troopflag"]
             }
         },

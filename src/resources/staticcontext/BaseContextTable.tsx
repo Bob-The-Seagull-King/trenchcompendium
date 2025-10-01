@@ -4581,8 +4581,10 @@ export const BaseContextCallTable : CallEventTable = {
             if (IsMe) {
                 const List = await warband.GetFactionEquipmentOptions(true, false, true);
                 const ids = List.map(obj => obj.ID);
+                const idsequip = List.map(obj => obj.EquipmentItem.ID);
                 const FilterList = await warband.GetFactionEquipmentOptions(true, false, false);
                 const filterids = FilterList.map(obj => obj.ID);
+                const filteridsequip = FilterList.map(obj => obj.EquipmentItem.ID);
                 if (context_func["id"]) {
                     for (let j = 0; j < context_func["id"].length; j++) {
                         let canadd = true;
@@ -4594,12 +4596,12 @@ export const BaseContextCallTable : CallEventTable = {
                         }
                         if (NewModel) {
                             if (context_func["obey_faction"]) {
-                                if (!ids.includes(context_func["id"][j])) {
+                                if (!(ids.includes(context_func["id"][j]) || idsequip.includes(context_func["id"][j]))) {
                                     canadd = false;
                                 }
                             }
                             if (context_func["obey_restriction"]) {
-                                if (!filterids.includes(context_func["id"][j])) {
+                                if (!(filterids.includes(context_func["id"][j]) || filteridsequip.includes(context_func["id"][j]))) {
                                     canadd = false;
                                 }
                             }
