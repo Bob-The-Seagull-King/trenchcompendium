@@ -3849,13 +3849,17 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const count = context_func["count"]
-            relayVar.push( "The selected item" + (count>0 ? "s":"") + " will be added to your stash.");
+            if (!relayVar.includes("The selected item will be added to your stash.") && !relayVar.includes("The selected items will be added to your stash.")) {
+                relayVar.push( "The selected item" + (count>0 ? "s":"") + " will be added to your stash.");
+            }
 
             return relayVar;
         },
         async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const count = context_func["count"]
-            relayVar.push( "The selected item" + (count>0 ? "s":"") + " were added to your stash.");
+            if (!relayVar.includes("The selected item were added to your stash.") && !relayVar.includes("The selected items were added to your stash.")) {
+                relayVar.push( "The selected item" + (count>0 ? "s":"") + " were added to your stash.");
+            }
             
             return relayVar;
         },
@@ -3932,13 +3936,17 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const count = context_func["count"]
-            relayVar.push( "The selected item" + (count>0 ? "s":"") + " from the list will be added to your stash.");
+            if (!relayVar.includes("The selected item will be added to your stash.") && !relayVar.includes("The selected items will be added to your stash.")) {
+                relayVar.push( "The selected item" + (count>0 ? "s":"") + " from the list will be added to your stash.");
+            }
 
             return relayVar;
         },
         async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const count = context_func["count"]
-            relayVar.push( "The selected item" + (count>0 ? "s":"") + " from the list were added to your stash.");
+            if (!relayVar.includes("The selected item were added to your stash.") && !relayVar.includes("The selected items were added to your stash.")) {
+                relayVar.push( "The selected item" + (count>0 ? "s":"") + " from the list were added to your stash.");
+            }
             
             return relayVar;
         },
