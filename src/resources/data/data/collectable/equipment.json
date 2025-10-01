@@ -6976,7 +6976,7 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "A model with this Equipment may, as a RISKY ACTION, move an enemy model within Line of Sight D6” in a straight line towards them. This ability can be used to make the target model move within 1” of an enemy, retreat (though they are not subject to Free Strikes), or Jump Down, but may not be used to make a model move through Difficult or Dangerous terrain, Climb or Jump across a gap.",
+                "content": "A model with this Equipment may, as a RISKY ACTION, move an enemy model within Line of Sight within 6” by 1D6” in a straight line towards them. This ability can be used to make the target model move within 1” of an enemy, retreat (though they are not subject to Free Strikes), or Jump Down, but may not be used to make a model move through Difficult or Dangerous terrain, Climb or Jump across a gap.",
                 "glossary": [
                     {"val": "RISKY ACTION", "id": "kw_riskyaction"}
                 ]
