@@ -83,8 +83,13 @@ class EquipmentFactory {
             return cache.EquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "equipment", id: _val}}) as IEquipment
-        const rulenew = await EquipmentFactory.CreateEquipment(ruledata, parent, skipcheck)
-        return rulenew;
+        try {
+            const rulenew = await EquipmentFactory.CreateEquipment(ruledata, parent, skipcheck)
+            return rulenew;
+        } catch (e) {
+            const rulenew = await EquipmentFactory.CreateEquipment(ruledata, parent, skipcheck)
+            return rulenew;
+        }
     }
 
     static async CreateModelEquipment(_rule: IModelEquipmentRelationship, parent : ContextObject | null, skipcheck = false) {

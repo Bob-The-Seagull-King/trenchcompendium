@@ -1829,8 +1829,8 @@ class UserWarband extends DynamicContextObject {
             if (this.IsUnRestricted || canaddupgrade) {
                 ListOfRels.push(BaseRels[i]);
             }
-
         }
+            console.log(ListOfRels)
 
         return ListOfRels
     }
