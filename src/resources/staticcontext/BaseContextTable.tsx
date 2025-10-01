@@ -3720,7 +3720,7 @@ export const BaseContextCallTable : CallEventTable = {
     single_exploration_glory_item: {
         event_priotity: 0, 
         async getConsumableSelectType(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
-            return 2;
+            return 4;
         },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             

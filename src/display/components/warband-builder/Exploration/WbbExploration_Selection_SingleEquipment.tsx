@@ -18,6 +18,8 @@ import { ContextObject } from "../../../../classes/contextevent/contextobject";
 import { IChoice } from "../../../../classes/options/StaticOption";
 import { ToolsController } from "../../../../classes/_high_level_controllers/ToolsController";
 import { useWarband } from "../../../../context/WarbandContext";
+import WbbSelectItemEquipment from "../micro-elements/WbbSelectItem";
+import {FactionEquipmentRelationship} from "../../../../classes/relationship/faction/FactionEquipmentRelationship";
 
 
 interface WbbExploration_Selection_SingleEquipment_Props {
@@ -35,9 +37,10 @@ const WbbExploration_Selection_SingleEquipment: React.FC<
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [showModal, setshowModal] = useState(false);
 
-    const [hasSelectedItem, setHasSelectedItem] = useState(false);
     const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);
-    
+
+    const [openedID, setOpenedID] = useState<string | null>(null);
+
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null) {
             property.OnSelect(foundOption).then(() => {
@@ -91,26 +94,31 @@ const WbbExploration_Selection_SingleEquipment: React.FC<
                 </Modal.Header>
 
                 <Modal.Body>
+                    {/* @TODO: show all options and make unavailable ones unavailable */}
                     {property.Options.map((opt) => (
-                        <React.Fragment
-                            key={opt.id}
-                        >
-                            <div
-                                className={`select-item ${selectedoption === opt.value ? 'selected' : ''}`}
-                                onClick={() => handleSubmit(opt)}
-                            >
-                                <span className={'item-left'}>
-                                    <span className={'item-name'}>
-                                        {opt.display_str}
-                                    </span>
-                                </span>
+                            <WbbSelectItemEquipment
+                                key={`select-item-${opt.id}`}
 
-                                <span className={'item-right'}>
-                                    
-                                </span>
-                            </div>
-
-                        </React.Fragment>
+                                id={opt.id}
+                                title={opt.value.Name}
+                                opened={openedID === opt.id}
+                                available={true} // @TODO add availability here
+                                onClick={() => {
+                                    setOpenedID(opt.id === openedID ? null : opt.id)
+                                }}
+                                equipment={opt.value.EquipmentItem}
+                                isSubmitting={false}
+                                onSubmit={() => handleSubmit(opt)}
+                                submitBtnString={'Add Equipment'}
+                                cost={opt.value.Cost + " " + getCostType(opt.value.CostType)}
+                                // @TODO: add limit and restrictions
+                                // limit={
+                                //     opt.value.limit > 0
+                                //         ? "Limit: " + (cache[item].count_cur + "/" + cache[item].limit)
+                                //         : ""
+                                // }
+                                // restrictions={cache[item].restrictions}
+                            />
                     ))}
                 </Modal.Body>
 
