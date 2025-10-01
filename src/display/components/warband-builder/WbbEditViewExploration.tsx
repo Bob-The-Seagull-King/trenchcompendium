@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Collapse, Modal, OverlayTrigger, Popover} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
@@ -31,7 +31,6 @@ import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploratio
 import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
-import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 
 interface WbbEditViewExplorationProps {
     location : WarbandProperty;
@@ -40,34 +39,18 @@ interface WbbEditViewExplorationProps {
 
 const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  location, initiallyOpen }) => {
 
-    const { warband , updateKey} = useWarband();
+    const { warband } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
 
     // @TODO: set initially open if this exploration location has NOT been applied yet
     const [open, setOpen] = useState<boolean>(initiallyOpen ?? true);
-    const [contextMessage, setContextMessage] = useState<string[]>([]);
-    const [keyvar, setkeyvar] = useState(0);
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
-    
-    useEffect(() => {
-        async function GetMessage() {
-            
-            const Events : EventRunner = new EventRunner();
-            const IDString = await Events.runEvent(
-                "getLocationSavedMessage",
-                location,
-                [],
-                [],
-                null
-            )
-            setContextMessage(IDString)
-            setkeyvar(keyvar + 1)
-        }
-
-        GetMessage();
-    }, [updateKey]);
-    
+    // Handler to apply an exploration location
+    const handleApply = () => {
+        // @TODO
+        alert('Apply Exploration now');
+    }
 
 
     return (
@@ -151,18 +134,6 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                             </div>
                         </div>
                         }
-                        
-                        {/* Bottom info and apply action */}
-                        {contextMessage.length > 0 &&
-                        <div key={keyvar} className={'alert-exploration alert-exploration-info'}>
-                            <ul>
-                                {contextMessage.map((item, index) => 
-                                <li key={index}>
-                                    {item}
-                                </li>)}
-                            </ul>
-                        </div>
-                        }
 
                         {/* Show additional Selection Options for the location */}
 
@@ -240,7 +211,28 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                         {/*        alert('roll result = ' + result)*/}
                         {/*    }}*/}
                         {/*/>*/}
-                        
+
+
+
+
+                            {/*<div className={'alert-exploration alert-exploration-success'}>
+                                {@TODO: Add descriptive text what this has done }
+                                {'XY and Z has been added to your to your stash'}
+                            </div>*/}
+
+                        {/* @TODO: remove - this is for reference */}
+                        {/*{location.SelfDynamicProperty.Selections.length > 0 &&*/}
+                        {/*    <>*/}
+                        {/*        {location.SelfDynamicProperty.Selections.map((item) =>*/}
+                        {/*            <WbbOptionSelect*/}
+                        {/*                overrideplay={false}*/}
+                        {/*                property={location}*/}
+                        {/*                key={location.SelfDynamicProperty.Selections.indexOf(item)}*/}
+                        {/*                choice={item}*/}
+                        {/*            />*/}
+                        {/*        )}*/}
+                        {/*    </>*/}
+                        {/*}*/}
                     </div>
                 </div>
             </Collapse>

@@ -298,15 +298,6 @@ class WarbandProperty extends DynamicContextObject  {
         for (let i = 0; i < static_packages.length; i++) {
             static_packages[i].callpath.push("WarbandProperty")
         }
-
-        for (let j = 0; j < this.Consumables.length; j++) {
-            const packages_2 : ContextPackage[] = await this.Consumables[j].GrabContextPackages(event_id, source_obj, arrs_extra);
-            for (let i = 0; i < packages_2.length; i++) {
-                packages_2[i].callpath.push("WarbandProperty")
-                static_packages.push(packages_2[i])
-            }
-        }
-
         return static_packages;
     }
 

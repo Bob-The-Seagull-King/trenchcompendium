@@ -5,7 +5,6 @@ import { UserWarband, IUserWarband } from './UserWarband';
 import { UserFactory } from '../../../factories/synod/UserFactory';
 import { SYNOD } from '../../../resources/api-constants';
 import { EventRunner } from '../../contextevent/contexteventhandler';
-import { UPDATETAGNAME, UPDATEVALUE } from './Converter/WarbandUpdater';
 
 export interface ISumWarband {
     id : number // -1 means LOCAL warband
@@ -258,8 +257,7 @@ class WarbandManager {
             contextdata: {},
             name: _title,
             source: 'user_warband',
-            tags: {
-            },
+            tags: {},
             ducat_bank: isNaN(ducats)? 123e34 : ducats,
             glory_bank: isNaN(glory)? 123e34 : glory,
             notes: [],
@@ -317,8 +315,6 @@ class WarbandManager {
             consumables: [],
             restrictions_list: rest_list
         }
-
-        _Item.tags[UPDATETAGNAME] = UPDATEVALUE;
 
         if (this.UserProfile != null) {
             const id  = await this.CreateWarbandSynod(_Item)

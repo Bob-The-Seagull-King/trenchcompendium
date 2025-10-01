@@ -2074,12 +2074,7 @@ export const BaseContextCallTable : CallEventTable = {
         event_priotity: 0,
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             relayVar.push("The warband gains " + context_func["count"] + " ducats.");
-            
-            return relayVar;
-        },
-        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            relayVar.push("The warband gained " + context_func["count"] + " ducats.");
-            
+
             return relayVar;
         },
         async onGainSkill(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
@@ -3574,20 +3569,8 @@ export const BaseContextCallTable : CallEventTable = {
         async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
-            for (let i = 0; i < ContWarband.Exploration.Locations.length; i++) {
 
-                for (let j = 0; j < ContWarband.Exploration.Locations[i].Consumables.length; j++) {
-                    if (ContWarband.Exploration.Locations[i].Consumables[j].GetID() == eventSource.GetID()) {
-                        await ContWarband.AddStash((context_static as any).SelectItem as any);
-                        break;
-                    }
-                }
-            }
-        },
-        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-    
-            if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return;}
-            await warband.AddStash((context_static as any).SelectItem as any);
+            await ContWarband.AddStash(trackVal.SelectItem as any);
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
 
@@ -3665,9 +3648,11 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_new_item: {
         event_priotity: 0,
-        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-    
-            await warband.AddStash((context_static as any).SelectItem as any, true);
+        async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
+            const ContWarband = await GetWarbandOrNull(sourceband);
+            if (ContWarband == null) { return }
+
+            await ContWarband.AddStash(trackVal.SelectItem as any, true);
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
 
@@ -3769,6 +3754,7 @@ export const BaseContextCallTable : CallEventTable = {
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
 
+            await ContWarband.AddStash(trackVal.SelectItem as any, true);
             if (context_func["count"]) {
                 let cost = context_func["count"]
                 cost -= (trackVal.SelectItem as any).Cost
@@ -3798,10 +3784,6 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
         },
-        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-    
-            await warband.AddStash((context_static as any).SelectItem as any, true);
-        },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
             const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory")
             if (sourceband) {
@@ -3829,17 +3811,18 @@ export const BaseContextCallTable : CallEventTable = {
                 }
                 for (let i = 0; i < OptionList.length; i++) {
                     let canadd = true;
-                    if (context_func["type"] != undefined) {
-                        if ((parseInt(context_func["type"]) != parseInt(OptionList[i].CostType)) == true) {
+                    
+                    if (context_func["type"]) {
+                        if (context_func["type"] != (OptionList[i].CostType)) {
                             canadd = false;
                         }
                     }
-                    if (context_func["count"] != undefined) {
+                    if (context_func["count"]) {
                         if (context_func["count"] < (OptionList[i].Cost)) {
                             canadd = false;
                         }
                     }
-                    
+
                     if (canadd == true) {
                         relayVar.push(
                             {
@@ -3851,13 +3834,13 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
             }
-            
             return relayVar;
         }
     },
     consumable: {
         event_priotity: 0,
-        async onPickLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+             
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
             let IsMe = false
             if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
@@ -3998,40 +3981,9 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             if (IsMe) {
-                console.log("TESST")
-                console.log(val)
                 if (val != null && !containsTag(val.Tags, "secondarylevel") ) {
                     val.Tags["secondarylevel"] = true
-                    await warband.AddExplorationMod(val as ExplorationLocation, [])
-                }
-            }
-        }
-    },
-    add_location_modifier: {
-        event_priotity: 0,
-        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-            const ExplorationLocModule = await import("../../factories/features/ExplorationFactory")
-            let IsMe = false
-            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
-                IsMe = true
-            }
-            if (!IsMe) {
-                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
-                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
-                    if (CurSel.SelectedChoice != null) {
-                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
-                            IsMe = true;
-                        }
-                        
-                    }
-                }
-            }
-            if (IsMe) {
-                if (context_func["id"]) {
-                    for (let i = 0; i < context_func["id"].length; i++) {
-                        const Loc = await ExplorationLocModule.ExplorationFactory.CreateNewExplorationLocation(context_func["id"][i], warband , true)
-                        await warband.AddExplorationMod(Loc, [])
-                    }
+                    await warband.AddExplorationLocation(val as ExplorationLocation, [])
                 }
             }
         }

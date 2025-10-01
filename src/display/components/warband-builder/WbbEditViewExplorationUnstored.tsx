@@ -32,15 +32,15 @@ import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploratio
 import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
 import { ExplorationLocation } from '../../../classes/feature/exploration/ExplorationLocation';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
+import { LocationHold } from './Exploration/WbbLocationsList';
 import { containsTag } from '../../../utility/functions';
 import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
 import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { ContextObject } from '../../../classes/contextevent/contextobject';
-import { CheckRelevantBaseOptions, CheckRelevantFullOptions, StoredLocation } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 
 interface WbbEditViewExplorationProps {
-    location : StoredLocation;
+    location : LocationHold;
     initiallyOpen?: boolean;
     clear: () => void;
 }
@@ -54,52 +54,44 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [keyvar, setkeyvar] = useState(0);
     const [updateState, setUpdateState] = useState(0);
     const [contextMessage, setContextMessage] = useState<string[]>([]);
-    const [cansave, setcansave] = useState<boolean>(GetCanSave() );
+    const [selectedOptions, setselectedOptions] = useState<ISelectedOption[]>([]);
+    const [cansave, setcansave] = useState<boolean>(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )));
     
-    function GetCanSave() {
-        const IsRealID = location.base_item.location?.GetID()
-        const IsForced = !(containsTag(location.base_item.location.Tags, 'unforced'))
-        const optionList = location.base_item?.options
-        const ListOfFullOptions = CheckRelevantFullOptions(location.base_item)
-        const FilteredOptions = location.selected_options
-        const BaseOptions = CheckRelevantBaseOptions(location.base_item)
-        let OptionsAreValid = false
-        if (optionList != undefined) {
-            OptionsAreValid = true
-        }
+    useEffect(() => {
+        async function GetMessage() {
+            /*
+            const EventProc : EventRunner = new EventRunner();
 
-        return !IsRealID || IsForced && OptionsAreValid && ListOfFullOptions.length > 0 && (FilteredOptions.length != BaseOptions.length )
-    }
-
-    function createBaseItem() {
-        if (!warband) { return; }
-        warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {
-            onbaseItemCreate()
-        })
-    }
-
-    async function onbaseItemCreate() {
-        setkeyvar(keyvar + 1);
-        
-        if (location.true_obj) {
-            const Events : EventRunner = new EventRunner();
-            const IDString = await Events.runEvent(
+            let MessageList : string[]  = await EventProc.runEvent(
                 "getLocationMessage",
-                location.true_obj,
+                location.loc ,
                 [],
                 [],
                 null
             )
-            setContextMessage(IDString)
-        }
-    }
-
-    useEffect(() => {
-        async function GetMessage() {
-            if (CheckRelevantBaseOptions(location.base_item).length == 0 && location.true_obj == undefined) {
-                createBaseItem();
-            }
             
+            for (let i = 0; i < selectedOptions.length; i++) {
+                const value = location.loc.MyOptions.filter((item) => item.RefID == selectedOptions[i].option_refID)
+
+                if (value.length > 0) {
+                    const option = value[0].Selections.filter((item) => item.id == selectedOptions[i].selection_ID)
+                    if (option.length > 0) {
+                        if (option[0].value instanceof ContextObject) {
+                            MessageList = await EventProc.runEvent(
+                                "getLocationMessage",
+                                option[0].value,
+                                [],
+                                [],
+                                null
+                            )
+                        }
+                    }
+                }
+                selectedOptions[i].option_refID
+            }
+
+            setContextMessage(MessageList);
+            setkeyvar(keyvar + 1);*/
         }
 
         GetMessage();
@@ -110,32 +102,25 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     // Handler to apply an exploration location
     const handleApply = () => {
         if (!warband) { return; }
-        if (location.true_obj == undefined) {
-            warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {warband.warband_data.Exploration.AssignTempLocation().then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
-        })})} else {
-        warband.warband_data.Exploration.AssignTempLocation().then(() => {
+        warband.warband_data.Exploration.AddExplorationLocation(location.loc, selectedOptions).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })
     }
-    }
     
     function UpdateSelectedOptionIDs(newoption : ISelectedOption) {
         let found = false
-        for (let i = 0; i < location.selected_options.length; i++) {
-            if (location.selected_options[i].option_refID == newoption.option_refID) {
+        for (let i = 0; i < selectedOptions.length; i++) {
+            if (selectedOptions[i].option_refID == newoption.option_refID) {
                 found = true;
-                location.selected_options[i].selection_ID = newoption.selection_ID;
+                selectedOptions[i].selection_ID = newoption.selection_ID;
             }
         }
         if (found == false) {
-            location.selected_options.push(newoption);
+            selectedOptions.push(newoption);
         }
-        setcansave(GetCanSave() )
+        setcansave(!location.loc?.GetID() || (!(containsTag(location.suite.location.Tags, 'unforced')) && location.suite?.options && location.suite.options.length > 0 && (location.suite.options.length != selectedOptions.length )))
         setUpdateState(updateState + 1);
-        createBaseItem()
     }
 
 
@@ -145,7 +130,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                  onClick={() => setOpen(!open)}
             >
                 <div className={'exploration-name'}>
-                    {location.base_item.location.GetName()}
+                    {location.loc.GetName()}
                     <FontAwesomeIcon icon={faTriangleExclamation} className="icon-inline-right-l icon-wraning"/>
                 </div>
 
@@ -160,23 +145,21 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                     <div className={'exploration-body'}>
                         {/* Main description text */}
                         <div className={'exploration-description'}>
-                            {(location.base_item.location.Description != null) &&
+                            {(location.loc.Description != null) &&
                                 <>
                                     {
-                                        returnDescription(location.base_item.location, location.base_item.location.Description)
+                                        returnDescription(location.loc, location.loc.Description)
                                     }
                                 </>
                             }
                         </div>
                         {/* Show option descriptions if any */}
-                        {(CheckRelevantBaseOptions(location.base_item).length > 0 )  &&
+                        {(location.loc.MyOptions.length > 0 )  &&
                             <ul className={'exploration-description-options'}>
-                                {CheckRelevantBaseOptions(location.base_item).map((item) => 
-                                    <div key={CheckRelevantBaseOptions(location.base_item).indexOf(item)}>
-                                        {item.baseopt.Tags.base_loc != undefined &&
-                                            <>
-                                        {item.baseopt.Selections.map((choice) => 
-                                        <li key={item.baseopt.Selections.indexOf(choice)} className={'exploration-description-option'}>
+                                {location.loc.MyOptions.map((item) => 
+                                    <div key={location.loc.MyOptions.indexOf(item)}>
+                                        {item.Selections.map((choice) => 
+                                        <li key={item.Selections.indexOf(choice)} className={'exploration-description-option'}>
                                             <span className={'option-name'}>
                                                 {choice.display_str}
                                             </span>
@@ -185,20 +168,19 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                             </span>
                                         </li>)
 
-                                        }</>}
+                                        }
                                     </div>   
                                 ) }
                             </ul>
                         }
 
                         {/* Show option Radio 1 */}
-                        { (CheckRelevantBaseOptions(location.base_item).length > 0) &&
+                        { (location.suite.options.length > 0) &&
                             <>
-                                {CheckRelevantBaseOptions(location.base_item).map((item, index) =>
+                                {location.suite.options.map((item) =>
                                     <WbbExploration_OptionSelect_Radio
-                                        key={location.base_item.options.indexOf(item)}
+                                        key={location.suite.options.indexOf(item)}
                                         options={item}
-                                        curSelection={location.selected_options[index]? location.selected_options[index] : null}
                                         onChange={UpdateSelectedOptionIDs}
                                     />
                                 )}
@@ -206,62 +188,83 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                             </>
                         }
 
-                        {((location.true_obj != undefined) && (location.true_obj != null)) &&
-                            <div key={keyvar}>
-                                
-                                {(location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.length > 0 ) && 
-                                    <ul className={'exploration-description-options'}>
-                                        {location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
-                                            <div key={location.true_obj!.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
-                                                {item.Tags.base_loc == undefined &&
-                                                    <>
-                                            {item.Selections.map((selectedchoice) => 
-                                                <div key={item.Selections.indexOf(selectedchoice)}>
-                                                <li  className={'exploration-description-option'}>
-                                                    <span className={'option-name'}>
-                                                        {selectedchoice.display_str}
-                                                    </span>
-                                                    <span className={'option-description'}>
-                                                        {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
-                                                    </span>
-                                                </li></div>
-                                                )}</>
-                                                }
-                                            </div>   
-                                        ) }
-                                    </ul>
-                                }
-                                {location.true_obj.SelfDynamicProperty.Selections.length > 0 &&
-                                    <>
-                                    {location.true_obj.SelfDynamicProperty.Selections.map((item) =>
-                                        <div
-                                            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}>
-                                                {item.Option.Tags.base_loc == undefined &&
-                                                    <>
-                                                <WbbOptionSelect
-                                                    property={location.true_obj!}
-                                                    hidedesc={true}
-                                                    choice={item}
-                                                /></>
-                                                }
-                                        </div>
-                                    )}
-                                </>
-                                }
-                                {location.true_obj.Consumables.length > 0 &&
-                                <div className="stash-items-wrap">
-                                    <div className={'stash-items-category'}>
-                                        {location.true_obj.Consumables.map((item: WarbandConsumable, index: number) => (
-                                            <WbbConsumableSelect
-                                                key={index}
-                                                property={item}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-                                }
-                            </div>
-                        }
+
+                        {/* Show additional Selection Options for the location */}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Show selection of sword or polearm */}
+                        {/*<WbbExploration_Selection_Fallen_Knight*/}
+                        {/*    onChange={() => {alert('option changed - fallen knight')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Show selection for falles soldier*/}
+                        {/*<WbbExploration_Selection_FallenSoldier*/}
+                        {/*    onChange={() => {alert('option changed - fallen soldier')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select a single equipment from a list */}
+                        {/*<WbbExploration_Selection_SingleEquipment*/}
+                        {/*    onSubmit={() => {console.log('equipment selected')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/*/!* Select 4 fighters to gain 1 XP *!/*/}
+                        {/*<WbbExploration_Selection_MoonshineStash_Destroy*/}
+                        {/*    // onChange={() => {alert('changed')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select one fighter with an instrument */}
+                        {/*<WbbExploration_Selection_AngelicInstrument*/}
+                        {/*    // onChange={() => {alert('changed')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select one fighter to gain Holy DNA*/}
+                        {/*<WbbExploration_Selection_HolyDNA*/}
+                        {/*    // onChange={() => {alert('changed')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select one armour to Upgrade*/}
+                        {/*<WbbExploration_Selection_GolgothaTektites*/}
+                        {/*    // onChange={() => {alert('changed')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select one skill for a fighter*/}
+                        {/*<WbbExploration_Selection_Fruit*/}
+                        {/*    // onSubmit={() => {alert('skill selected')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select two items costing 100D or less */}
+                        {/*<WbbExploration_Selection_BattlefieldOfCorpses*/}
+                        {/*    // onSubmit={() => {alert('skill selected')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select one items glory to purchase */}
+                        {/*<WbbExploration_Selection_GloryPurchase*/}
+                        {/*    onSubmit={() => {alert('glory item selected')}}*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select multiple items from a list within a limit */}
+                        {/*<WbbExploration_Selection_MultiEquipment*/}
+                        {/*/>*/}
+
+                        {/* @TODO: show this conditionally */}
+                        {/* Select a die Roll value */}
+                        {/*<WbbExploration_Selection_DieRollResult*/}
+                        {/*    label={'6D6 roll result'}*/}
+                        {/*    onChange={(result) => {*/}
+                        {/*        /!* @TODO: ceck if entered number is withing range and disable submit if not*!/*/}
+                        {/*        alert('roll result = ' + result)*/}
+                        {/*    }}*/}
+                        {/*/>*/}
 
                         {contextMessage.length == 0 &&
                         <br/>

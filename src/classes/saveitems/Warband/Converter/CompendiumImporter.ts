@@ -348,6 +348,7 @@ class CompendiumImporter {
                 wb.Exploration.Skills.push(NewSkill);
             } catch(e) {
                 console.log(e)
+                console.log(SkillSet[i].id)
             }
         }
     }

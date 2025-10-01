@@ -14,25 +14,29 @@ import { ExplorationLocation } from '../../../../classes/feature/exploration/Exp
 import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
 import {useWbbMode} from "../../../../context/WbbModeContext";
 import WbbEditViewExplorationUnstored from '../WbbEditViewExplorationUnstored';
-import { ExplorationTableSuite, FilteredLocation, StoredLocation } from '../../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
+import { ExplorationTableSuite, FilteredLocation } from '../../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
+
+export interface LocationHold {
+    loc : ExplorationLocation,
+    suite : FilteredLocation
+}
 
 const WbbLocationsList = () => {
     const { warband, updateKey, reloadDisplay } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     const [keyvar, setkeyvar] = useState(0);
     const [locations, setlocations] = useState<WarbandProperty[]>([]);
-    const [templocation, settemplocation] = useState<StoredLocation | null>(warband? warband.warband_data.Exploration.CurLocation : null);
+    const [templocations, settemplocations] = useState<LocationHold[]>([]);
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
 
-    const handleSaveExplorationLocation = (optionsuite : FilteredLocation) => {
+    const handleSaveExplorationLocation = (location: ExplorationLocation, optionsuite : FilteredLocation) => {
         if (!warband) { return; }
-        warband.warband_data.Exploration.CurLocation = {
-            base_item: optionsuite,
-            selected_options: []
-        }
-        settemplocation(warband.warband_data.Exploration.CurLocation)
+        settemplocations([{
+            loc: location,
+            suite: optionsuite
+        }])
         reloadDisplay()
     };
     
@@ -63,12 +67,13 @@ const WbbLocationsList = () => {
                 />
             )}
 
-            {templocation != null &&
+            {templocations.map((item, index) =>
                 <WbbEditViewExplorationUnstored
-                    location={templocation}
-                    clear={() => settemplocation(null)}
+                    key={index}
+                    location={item}
+                    clear={() => settemplocations([])}
                 />
-            }
+            )}
 
             {edit_mode &&
             <div className={'btn btn-add-element btn-block'}
