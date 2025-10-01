@@ -2878,7 +2878,37 @@ export const BaseContextCallTable : CallEventTable = {
               });
 
             return NewChoices
-        }
+        },
+        async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            
+            const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory");
+            if (context_func["ids"]) {
+                const Stringlist : string[] = [];
+                for (let i = 0 ; i < context_func["ids"].length; i++) {
+                    const NewItem = await EquipmentFactoryModule.EquipmentFactory.CreateNewFactionEquipment(context_func["ids"], null);
+                    if (NewItem != null) {
+                        Stringlist.push(NewItem.EquipmentItem.GetTrueName())
+                    }
+                }
+                relayVar.push("Your warband will be able to purchase " + Stringlist.join(', ') + " .")
+            }
+            
+            return relayVar;
+        },
+        async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory");
+            if (context_func["ids"]) {
+                const Stringlist : string[] = [];
+                for (let i = 0 ; i < context_func["ids"].length; i++) {
+                    const NewItem = await EquipmentFactoryModule.EquipmentFactory.CreateNewFactionEquipment(context_func["ids"], null);
+                    if (NewItem != null) {
+                        Stringlist.push(NewItem.EquipmentItem.GetTrueName())
+                    }
+                }
+                relayVar.push("Your warband can purchase " + Stringlist.join(', ') + " .")
+            }
+            return relayVar;
+        },
     },
     new_upgrade: {
         event_priotity: 0,
