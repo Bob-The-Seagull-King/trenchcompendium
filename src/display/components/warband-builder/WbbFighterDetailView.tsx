@@ -64,6 +64,7 @@ import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbDetailViewCollapse from './WbbDetailViewCollapse';
 import WbbTextarea from './WbbTextarea';
+import FighterStlList from "../StlPromotions/FighterStlList";
 
 
 interface WbbFighterDetailViewProps {
@@ -76,7 +77,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const {warband, updateKey, reloadDisplay } = useWarband();
 
     const fighter = warbandmember.model;
-    
+
     const [complexstate, setComplexState] = useState({
         stats: {} as ModelStatistics,
         canchange: true as boolean,
@@ -884,6 +885,15 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             {complexstate.abilities.map((ability, index) => (
                                 <WbbAbilityDisplay key={index} ability={ability}/>
                             ))}
+                        </div>
+                    </WbbFighterCollapse>
+                }
+
+                {/* STL Promotions */}
+                {(!play_mode) &&
+                    <WbbFighterCollapse title="STL Finder">
+                        <div key={complexstate.keyvar}>
+                            <FighterStlList curModel={fighter.CurModel} />
                         </div>
                     </WbbFighterCollapse>
                 }
