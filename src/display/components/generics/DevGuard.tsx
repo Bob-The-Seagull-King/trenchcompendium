@@ -24,8 +24,8 @@ const DevGuard: React.FC<DevGuardProps> = ({
                                                storageKey = DEFAULT_STORAGE_KEY,
                                            }) => {
     // Determine if we are on the dev host
-    const isDevHost = typeof window !== 'undefined' && window.location.hostname === devHost;
-    // const isDevHost = true;
+    // const isDevHost = typeof window !== 'undefined' && window.location.hostname === devHost;
+    const isDevHost = true;
 
     // If not on dev host, render nothing
     if (!isDevHost) return null;
@@ -84,8 +84,7 @@ const DevGuard: React.FC<DevGuardProps> = ({
 
     // Stop clicks from closing the modal (no outside click close)
     const stop = (e: React.MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.stopPropagation();           // default nicht verhindern!
     };
 
     if (!isOpen) return null;
@@ -111,8 +110,6 @@ const DevGuard: React.FC<DevGuardProps> = ({
         >
             <div
                 className="DevGuard-Modal"
-                onMouseDown={stop}
-                onClick={stop}
                 style={{
                     width: 'min(520px, 92vw)',
                     background: '#111',
