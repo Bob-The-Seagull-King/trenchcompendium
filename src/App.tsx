@@ -52,6 +52,7 @@ import {ToastContainer} from "react-toastify";
 import HeadScripts from "./display/components/generics/HeadScripts";
 import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
 import MaintananceNotice from "./display/components/generics/MaintananceNotice";
+import DevGuard from './display/components/generics/DevGuard'
 
 
 const App: React.FC = () => {
@@ -128,6 +129,8 @@ const App: React.FC = () => {
                             </ImageCreditPopoverProvider>
                             <AdsManager />
                             <TrackingManager />
+
+                            <DevGuard expectedPassword="bob" />
                             {/*<EmergencyAlert />*/}
 
                             <ToastContainer
