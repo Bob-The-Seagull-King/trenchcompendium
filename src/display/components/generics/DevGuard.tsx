@@ -24,8 +24,8 @@ const DevGuard: React.FC<DevGuardProps> = ({
                                                storageKey = DEFAULT_STORAGE_KEY,
                                            }) => {
     // Determine if we are on the dev host
-    // const isDevHost = typeof window !== 'undefined' && window.location.hostname === devHost;
-    const isDevHost = true;
+    const isDevHost = typeof window !== 'undefined' && window.location.hostname === devHost;
+    // const isDevHost = true;
 
     // If not on dev host, render nothing
     if (!isDevHost) return null;
