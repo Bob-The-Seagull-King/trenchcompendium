@@ -135,6 +135,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                                 key={index}
                                                 property={item}
                                                 doshow={false}
+                                                dochange={false}
                                             />
                                 ))}
                             </div>

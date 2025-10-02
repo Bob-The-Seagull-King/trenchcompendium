@@ -37,16 +37,8 @@ class ModelEquipmentRelationship extends StaticOptionContextObject {
     // Build the equipment item
     public async BuildEquipment(equipment : string[], skipcheck = true) {
         for (let i = 0; i < equipment.length; i++) {
-            if (this.SelfData.model_id.includes("md_combatbiologist")) {
-                console.log("FOUND1")
-                console.log(equipment[i])
-            }
             const EquipObj = await  EquipmentFactory.CreateNewEquipment(equipment[i], this, skipcheck);
             this.EquipmentItems.push(EquipObj);
-            if (this.SelfData.model_id.includes("md_combatbiologist")) {
-                console.log("FOUND2")
-                console.log(equipment[i])
-            }
         }
     }
 

@@ -1207,7 +1207,7 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                     if (context_func["additions"]) {
                         for (let i = 0; i < context_func["additions"].length; i++) {
-                            console.log(context_func["additions"][i])
+                            
                             if (relayVar.filter((item) => (context_func["additions"][i] == (item.GetID()))).length == 0) {
                                 
                                 const NewKeyword = await keywordmodule.KeywordFactory.CreateNewKeyword(context_func["additions"][i], null)
@@ -3729,9 +3729,12 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         },
         async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            
-            if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return relayVar;}
-            relayVar.push( ((context_static as any).SelectItem as any).GetTrueName() + " has been purchased and added to your stash.");
+            if (context_static.Tags["failed_purchase"] == true) {
+                relayVar.push("No item was purchased, as the warband lacked funds.")
+            } else { 
+                if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return relayVar;}
+                relayVar.push( ((context_static as any).SelectItem as any).GetTrueName() + " has been purchased and added to your stash.");
+            }
             
             return relayVar;
         },
@@ -3742,7 +3745,9 @@ export const BaseContextCallTable : CallEventTable = {
 
                 for (let j = 0; j < ContWarband.Exploration.Locations[i].Consumables.length; j++) {
                     if (ContWarband.Exploration.Locations[i].Consumables[j].GetID() == eventSource.GetID()) {
-                        await ContWarband.AddStash((context_static as any).SelectItem as any);
+                        if (ContWarband.HasEnoughDucats(((context_static as any).SelectItem as any).Cost, ((context_static as any).SelectItem as any).CostType) == true) {
+                            await ContWarband.AddStash((context_static as any).SelectItem as any);
+                        }
                         break;
                     }
                 }
@@ -3751,7 +3756,11 @@ export const BaseContextCallTable : CallEventTable = {
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
     
             if ((context_static as any).SelectItem == null || (context_static as any).SelectItem == undefined) {return;}
-            await warband.AddStash((context_static as any).SelectItem as any);
+            if (warband.HasEnoughDucats(((context_static as any).SelectItem as any).Cost, ((context_static as any).SelectItem as any).CostType) == true) {
+                await warband.AddStash((context_static as any).SelectItem as any);
+            } else {
+                context_static.Tags["failed_purchase"] = true
+            }
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
 

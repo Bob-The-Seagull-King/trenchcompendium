@@ -14,11 +14,12 @@ import WbbExploration_Selection_GloryPurchase from "./WbbExploration_Selection_G
 interface WbbExploration_Selection_Parent_Props {
     property : WarbandConsumable;
     doshow : boolean;
+    dochange : boolean;
 }
 
 const WbbExploration_Selection_Parent: React.FC<
     WbbExploration_Selection_Parent_Props
-> = ({property, doshow}) => {
+> = ({property, doshow, dochange}) => {
     
     
         const { warband, reloadDisplay, updateKey } = useWarband();
@@ -49,6 +50,7 @@ const WbbExploration_Selection_Parent: React.FC<
                 {selecttype == 0 &&
                     <WbbConsumableSelect
                         property={property}
+                        dochange={dochange}
                         />
                 }
 
@@ -62,6 +64,7 @@ const WbbExploration_Selection_Parent: React.FC<
                 {selecttype == 2 &&
                     <WbbExploration_Selection_SingleEquipment
                             property={property}
+                            dochange={dochange}
                     />
                 }
 
@@ -69,6 +72,7 @@ const WbbExploration_Selection_Parent: React.FC<
                 {selecttype == 3 &&
                         <WbbExploration_Selection_MultiEquipment
                         property={property}
+                            dochange={dochange}
                         />
                 }
 
@@ -76,6 +80,7 @@ const WbbExploration_Selection_Parent: React.FC<
                     <>
                         <WbbExploration_Selection_GloryPurchase
                             property={property}
+                            dochange={dochange}
                         />
                     </>
                 }

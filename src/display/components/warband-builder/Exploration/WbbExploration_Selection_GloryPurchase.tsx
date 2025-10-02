@@ -22,11 +22,12 @@ import WbbSelectItemEquipment from "../micro-elements/WbbSelectItem";
 
 interface WbbExploration_Selection_GloryPurchase_Props {
     property : WarbandConsumable;
+    dochange: boolean
 }
 
 const WbbExploration_Selection_GloryPurchase: React.FC<
     WbbExploration_Selection_GloryPurchase_Props
-> = ({property}) => {
+> = ({property, dochange}) => {
 
     const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
@@ -78,7 +79,7 @@ const WbbExploration_Selection_GloryPurchase: React.FC<
                     )}
                 </div>
 
-                {(edit_mode) &&
+                {(edit_mode && dochange) &&
                     <div className={'btn btn-primary'} onClick={() => setshowModal(true)}>
                         <FontAwesomeIcon icon={selectedoption ? faArrowsRotate : faPlus}
                                          className={'icon-inline-left-l'}/>

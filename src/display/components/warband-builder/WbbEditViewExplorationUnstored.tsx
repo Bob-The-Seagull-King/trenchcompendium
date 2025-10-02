@@ -256,6 +256,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                 key={index}
                                                 property={item}
                                                 doshow={true}
+                                                dochange={true}
                                             />
                                         ))}
                                     </div>

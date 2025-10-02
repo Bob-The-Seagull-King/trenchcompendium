@@ -1009,6 +1009,16 @@ class UserWarband extends DynamicContextObject {
         }
     }
 
+    public HasEnoughDucats(cost : number, costtype : number) {
+        if (costtype == 1) {
+            const ducatval = this.GetSumCurrentGlory();
+            return ducatval >= cost;
+        } else {
+            const ducatval = this.GetSumCurrentDucats();
+            return ducatval >= cost;
+        }
+    }
+
     public async CustomStash( item : Equipment, cost : number, costtype : number) {
         if (!this.Restrictions.includes("custom_equipment")) {
             this.Restrictions.push("custom_equipment")

@@ -18,11 +18,12 @@ interface Option {
 
 interface WbbExploration_Selection_MultiEquipment_Props {
     property : WarbandConsumable;
+    dochange : boolean
 }
 
 const WbbExploration_Selection_MultiEquipment: React.FC<
     WbbExploration_Selection_MultiEquipment_Props
-> = ({ property }) => {
+> = ({ property, dochange }) => {
     
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);

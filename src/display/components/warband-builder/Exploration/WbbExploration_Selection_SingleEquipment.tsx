@@ -24,6 +24,7 @@ import {FactionEquipmentRelationship} from "../../../../classes/relationship/fac
 
 interface WbbExploration_Selection_SingleEquipment_Props {
     property : WarbandConsumable;
+    dochange : boolean;
 }
 
 // This lets the user select a single equipment item from a list of items
@@ -31,7 +32,7 @@ interface WbbExploration_Selection_SingleEquipment_Props {
 
 const WbbExploration_Selection_SingleEquipment: React.FC<
     WbbExploration_Selection_SingleEquipment_Props
-> = ({property}) => {
+> = ({property, dochange}) => {
     const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
     const { warband, reloadDisplay, updateKey } = useWarband();
@@ -71,7 +72,7 @@ const WbbExploration_Selection_SingleEquipment: React.FC<
                     )}
                 </div>
 
-                {(edit_mode) &&
+                {(edit_mode && dochange) &&
                     <div className={'btn btn-primary'} onClick={() => setshowModal(true)}>
                         <FontAwesomeIcon icon={selectedoption ? faArrowsRotate : faPlus}
                                          className={'icon-inline-left-l'}/>
