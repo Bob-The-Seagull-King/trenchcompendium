@@ -335,6 +335,20 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    upgrade_budget_max: {
+        event_priotity: 0,   
+        async withinUpgradeBudget(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, upg : number, upgtype : number) {
+            const ducatbuget = await trackVal.model.GetUpgradeCosts(0, true, false)
+            const glorybudget = await trackVal.model.GetUpgradeCosts(1, true, false)
+            if (context_func["ducats"] && upgtype == 0) {
+                return (ducatbuget + upg) <= context_func["ducats"]
+            }
+            if (context_func["glory"] && upgtype == 1) {
+                return (glorybudget+ upg) <= context_func["glory"]
+            }
+            return relayVar
+        }
+    },
     upgrade_budget_free: {
         event_priotity: 0,        
         async getUpgradeBudget(this: EventRunner, eventSource : any, relayVar : number,  trackVal : WarbandMember ,context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, costtype : number) {
@@ -5136,6 +5150,9 @@ export const BaseContextCallTable : CallEventTable = {
                             const modsForItem = appliedMods.get(CurEqItem)!;
                             if (!modsForItem.has(k)) {
                                 CurEq.ItemCost += context_func["mod"][k]["cost"];
+                                if (context_func["mod"][k]["min"]) {
+                                    CurEq.ItemCost = Math.max(context_func["mod"][k]["min"], CurEq.ItemCost)
+                                }
                                 modsForItem.add(k);
                             }
                         }
@@ -5174,6 +5191,9 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                     if (CanAdd) {
                         HoldVar += context_func["mod"][k]["cost"]
+                        if (context_func["mod"][k]["min"]) {
+                            HoldVar = Math.max(context_func["mod"][k]["min"], HoldVar)
+                        }
                     }
                 }
             }
