@@ -224,10 +224,10 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
         if (type == "exploration_temp") {
             if (warband != undefined) {
-                warband.warband_data.Exploration.CurLocation = null;
+                warband.warband_data.Exploration.DeleteTempLocation(item).then(() => {
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                    () => reloadDisplay())
+                    () => reloadDisplay())})
             }
         } else {
 

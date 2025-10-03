@@ -90,7 +90,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hy
         <div className={'WbbOptionSelect'} key={updateKey}>
             <WbbOptionBox
                 title={choice.Option.Name}
-                value={leadtext + choice.GetSelectedTitle()}
+                value={((leadtext != undefined)? leadtext: '') + choice.GetSelectedTitle()}
                 onClick={() => setshowModal(true)}
                 overrideplay={overrideplay || choice.Option.AutoSelect || (!choice.CanChange() && choice.SelectedChoice != null)}
             />

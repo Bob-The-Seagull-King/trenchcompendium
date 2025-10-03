@@ -65,7 +65,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
 
     function createBaseItem() {
         if (!warband) { return; }
-        warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {
+        warband.warband_data.Exploration.AddTempExplorationLocation(location, location.base_item.location, location.selected_options).then(() => {
             onbaseItemCreate()
         })
     }
@@ -106,11 +106,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const handleApply = () => {
         if (!warband) { return; }
         if (location.true_obj == undefined) {
-            warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {warband.warband_data.Exploration.AssignTempLocation().then(() => {
+            warband.warband_data.Exploration.AddTempExplorationLocation(location, location.base_item.location, location.selected_options).then(() => {warband.warband_data.Exploration.AssignTempLocation(location).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })})} else {
-        warband.warband_data.Exploration.AssignTempLocation().then(() => {
+        warband.warband_data.Exploration.AssignTempLocation(location).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })
@@ -135,6 +135,10 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
 
     }
 
+    function isValidNameTag(val : any) {
+        if (val.Tags == undefined) { return false;}
+        return val.Tags["validation_rules"] != undefined
+    }
 
     return (
         <div className="WbbEditViewExploration WbbEditViewExplorationUnstored">
@@ -185,7 +189,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                             {choice.display_str}
                                                         </span>
 
-                                                        {choice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                                        {isValidNameTag(choice.value) &&                                                                            
                                                             <span className={'option-description'}>
                                                                 {choice.value.Tags["validation_rules"]}
                                                             </span>
@@ -232,7 +236,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                         {selectedchoice.display_str}
                                                     </span>
 
-                                                    {selectedchoice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                                    {isValidNameTag(selectedchoice.value) &&                                                                            
                                                         <span className={'option-description'}>
                                                             {selectedchoice.value.Tags["validation_rules"]}
                                                         </span>

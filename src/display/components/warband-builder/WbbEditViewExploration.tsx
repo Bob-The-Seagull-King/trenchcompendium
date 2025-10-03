@@ -55,7 +55,10 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
         GetMessage();
     }, [updateKey]);
     
-
+    function isValidNameTag(val : any) {
+        if (val.Tags == undefined) { return false;}
+        return val.Tags["validation_rules"] != undefined
+    }
 
     return (
         <div className="WbbEditViewExploration">
@@ -103,7 +106,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                             <span className={'option-name'}>
                                                 {selectedchoice.display_str}
                                             </span>
-                                            {selectedchoice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                            {isValidNameTag(selectedchoice.value) &&                                                                            
                                                 <span className={'option-description'}>
                                                     {selectedchoice.value.Tags["validation_rules"]}
                                                 </span>

@@ -104,6 +104,11 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
         }
     }
 
+    function isValidNameTag(val : any) {
+        if (val.Tags == undefined) { return false;}
+        return val.Tags["validation_rules"] != undefined
+    }
+
     return (
         <Modal show={show} onHide={onClose} className="WbbModal WbbModalSelect WbbModalSelect_Exploration WbbModalAddExplorationLocation" centered>
             <Modal.Header closeButton={false}>
@@ -172,7 +177,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                                                         <span className={'option-name'}>
                                                                             {choice.display_str}
                                                                         </span>
-                                                                        {choice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                                                        {isValidNameTag(choice.value) &&                                                                            
                                                                             <span className={'option-description'}>
                                                                                 {choice.value.Tags["validation_rules"]}
                                                                             </span>

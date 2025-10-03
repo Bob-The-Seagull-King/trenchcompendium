@@ -82,7 +82,7 @@ class WarbandExplorationSet extends DynamicContextObject {
     Locations : WarbandProperty[] = [];
     LocationMods : WarbandProperty[] = [];
     GeneralCache : GeneralLocationCache = {};
-    CurLocation : StoredLocation | null = null;
+    CurLocation : StoredLocation[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -140,9 +140,10 @@ class WarbandExplorationSet extends DynamicContextObject {
             const CurVal = this.Skills[i]
             await CurVal.RegenerateOptions();
         }
-        if (this.CurLocation != null) {
-            if (this.CurLocation.true_obj) {
-                await this.CurLocation.true_obj.RegenerateOptions();
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            const CurVal = this.CurLocation[i]
+            if (CurVal.true_obj != undefined) {
+                await CurVal.true_obj.RegenerateOptions();
             }
         }
     }
@@ -437,15 +438,15 @@ class WarbandExplorationSet extends DynamicContextObject {
 
     }
 
-    public async AssignTempLocation() {
+    public async AssignTempLocation(loc : StoredLocation) {
         
-        if (this.CurLocation == null) {
+        if (loc == null) {
             return;
         }
-        if (this.CurLocation.true_obj == null) {
+        if (loc.true_obj == undefined) {
             return;
         }
-        const refitem = this.CurLocation.true_obj
+        const refitem = loc.true_obj
         this.Locations.push(refitem);
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
@@ -456,7 +457,7 @@ class WarbandExplorationSet extends DynamicContextObject {
             refitem
         )
         this.GeneralCache.exploration_skills = undefined;
-        this.CurLocation = null;
+        await this.DeleteTempLocation(loc);
 
         const consumables_past_save : WarbandConsumable[] = []
         for (let i = 0; i < refitem.Consumables.length; i++) {
@@ -467,8 +468,17 @@ class WarbandExplorationSet extends DynamicContextObject {
 
         refitem.Consumables = consumables_past_save;
     }
+
+    public async DeleteTempLocation( loc : StoredLocation ) {
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            if (loc == (this.CurLocation[i])) {
+                this.CurLocation.splice(i, 1);
+                break;
+            }
+        }
+    }
     
-    public async AddTempExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
+    public async AddTempExplorationLocation ( loc : StoredLocation, location: ExplorationLocation, option: ISelectedOption[]) {
         if (this.CurLocation == null) {
             return;
         }
@@ -480,7 +490,7 @@ class WarbandExplorationSet extends DynamicContextObject {
 
         const NewRuleProperty = new WarbandProperty(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
         await NewRuleProperty.HandleDynamicProps(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
-        this.CurLocation.true_obj = NewRuleProperty;
+        loc.true_obj = NewRuleProperty;
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
             "onPickLocation",
