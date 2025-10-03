@@ -39,7 +39,7 @@ import { ConvertModelToTTSText } from '../../../classes/saveitems/Warband/Conver
 
 interface WbbContextualPopoverProps {
     id: string;
-    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'equipment_model' | 'warband';
+    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'equipment_model' | 'warband' | 'exploration_temp';
     item: any;
     context?: RealWarbandPurchaseModel | null;
     contextuallimit?: boolean;
@@ -222,11 +222,21 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const handleDeleteExploration = () => {
         setshowConfirmDeleteExplorationModal(false);
 
-        warband?.warband_data.DeleteLocation(item).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())
-        })
+        if (type == "exploration_temp") {
+            if (warband != undefined) {
+                warband.warband_data.Exploration.CurLocation = null;
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            }
+        } else {
+
+            warband?.warband_data.DeleteLocation(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        }
     }
 
     /** Equipment Actions */
@@ -567,6 +577,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             }
 
                             {type === 'exploration' &&
+                                <>
+                                    <div className="action action-delete" onClick={showConfirmDeleteExploration}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Exploration'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'exploration_temp' &&
                                 <>
                                     <div className="action action-delete" onClick={showConfirmDeleteExploration}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>

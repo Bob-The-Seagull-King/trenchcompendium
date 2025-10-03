@@ -147,9 +147,16 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                 </div>
 
                 {/* Collapse icon */}
-                <span className={'collapse-chevron-wrap mx-1'}>
+                <span className={'collapse-chevron-wrap mx-4'}>
                     <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown} className=""/>
                 </span>
+
+                {/* actions */}
+                <WbbContextualPopover
+                    id={`exploration-temp-${location.base_item.location.ID}`}
+                    type="exploration_temp"
+                    item={location}
+                />
             </div>
 
             <Collapse in={open}>

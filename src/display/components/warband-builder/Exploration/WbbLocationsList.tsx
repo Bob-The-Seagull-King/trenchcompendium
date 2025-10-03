@@ -42,6 +42,7 @@ const WbbLocationsList = () => {
                 const Modifiers = warband?.warband_data.GetLocations();
                 setlocations(Modifiers);
             }
+            settemplocation(warband? warband.warband_data.Exploration.CurLocation : null)
             setkeyvar(keyvar + 1);
         }
 
