@@ -38,6 +38,7 @@ class WarbandConsumable extends DynamicContextObject  {
     public AssociateID : string;
     public SelectType : string | null = null;
     public Options : IChoice[] = [];
+    public FullOptions : IChoice[] = [];
     public MyOrigin : WarbandProperty | null = null;
 
     /**
@@ -70,6 +71,13 @@ class WarbandConsumable extends DynamicContextObject  {
         const eventmon : EventRunner = new EventRunner();
         this.Options = await eventmon.runEvent(
             "getConsumableOptionsList",
+            this,
+            [this.MyContext, this.MyOrigin],
+            [],
+            this
+        )
+        this.FullOptions = await eventmon.runEvent(
+            "getConsumableFullOptionsList",
             this,
             [this.MyContext, this.MyOrigin],
             [],

@@ -3793,6 +3793,24 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             return relayVar;
+        },
+        async getConsumableFullOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
+
+            if (sourceband) {
+            const OptionList = await (sourceband).GetFactionEquipmentOptions(true, false, true, false);
+                for (let i = 0; i < OptionList.length; i++) {
+                    if (OptionList[i].CostType == 1 && OptionList[i].Cost <= context_func["cost"]) {
+                        relayVar.push(
+                            {
+                                display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " Glory",
+                                id: OptionList[i].ID,
+                                value: OptionList[i]
+                            }
+                        )
+                    }
+                }
+            }
+            return relayVar;
         }
     },
     gain_replaced_item: {
