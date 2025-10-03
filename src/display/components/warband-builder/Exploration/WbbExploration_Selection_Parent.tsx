@@ -10,6 +10,7 @@ import WbbExploration_Selection_SmallList from "./WbbExploration_Selection_Small
 import WbbExploration_Selection_SingleEquipment from "./WbbExploration_Selection_SingleEquipment";
 import WbbExploration_Selection_MultiEquipment from "./WbbExploration_Selection_MultiEquipment";
 import WbbExploration_Selection_GloryPurchase from "./WbbExploration_Selection_GloryPurchase";
+import WbbExploration_Selection_DieRollResult from "./WbbExploration_Selection_DieRollResult";
 
 interface WbbExploration_Selection_Parent_Props {
     property : WarbandConsumable;
@@ -24,7 +25,7 @@ const WbbExploration_Selection_Parent: React.FC<
     
         const { warband, reloadDisplay, updateKey } = useWarband();
 
-        const [selecttype, setselecttype] = useState(0);
+        const [selecttype, setselecttype] = useState(-1);
         const [keyvar, setkeyvar] = useState(0);
         
         useEffect(() => {
@@ -79,6 +80,15 @@ const WbbExploration_Selection_Parent: React.FC<
                 {selecttype == 4 &&
                     <>
                         <WbbExploration_Selection_GloryPurchase
+                            property={property}
+                            dochange={dochange}
+                        />
+                    </>
+                }
+
+                {selecttype == 5 &&
+                    <>
+                        <WbbExploration_Selection_DieRollResult
                             property={property}
                             dochange={dochange}
                         />

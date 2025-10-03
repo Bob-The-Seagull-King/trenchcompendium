@@ -35,6 +35,7 @@ interface IWarbandConsumable extends IContextObject {
 
 class WarbandConsumable extends DynamicContextObject  {
     public SelectItem : ContextObject | null = null;
+    public SelectData : any = null;
     public AssociateID : string;
     public SelectType : string | null = null;
     public Options : IChoice[] = [];
@@ -56,6 +57,7 @@ class WarbandConsumable extends DynamicContextObject  {
 
     public async OnSelect(option : IChoice) {
         this.SelectItem = option.value;
+        this.SelectData = option.value;
         
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
@@ -91,6 +93,10 @@ class WarbandConsumable extends DynamicContextObject  {
                 case "faction_equipment":
                     this.SelectItem = await EquipmentFactory.CreateNewFactionEquipment(warband_data.object_id, null)
                     this.SelectType = "faction_equipment"
+                    return;
+                case "number":
+                    this.SelectData = warband_data.object_id
+                    this.SelectType = "number"
                     return;
                 default:
                     return;

@@ -2130,8 +2130,96 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar.filter(item => !(context_func["upgrades"].includes(item.ID)))
         }
     },
+    gain_ducats_consumable: {
+        event_priotity: 0,
+        async getConsumableSelectType(this: EventRunner, eventSource : any, relayVar : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
+            return 5;
+        },
+        async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
+
+            if (sourceband) {
+                const min = (context_func["dice"] != undefined)? context_func["dice"] : (context_func["dice3"] != undefined)? context_func["dice3"] : 0
+                const max = (context_func["dice"] != undefined)? context_func["dice"]*6 : (context_func["dice3"] != undefined)? context_func["dice3"]*3 : 0
+                for (let i = min; i <= max; i++) {
+                    relayVar.push(
+                            {
+                                display_str: i + " Ducats",
+                                id: "ducat_val_"+i,
+                                value: i
+                            }
+                        )
+                }
+            }
+            return relayVar;
+        },
+        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            
+            console.log(context_func)
+            console.log(context_static)
+            if (context_func["dice"]) {
+                let value = 0;
+                console.log(context_func)
+                console.log(context_static)
+                value += (context_static as any).SelectData
+                console.log(value)
+                if (context_func["mod"]) {
+                    value *= context_func["mod"]
+                }
+                console.log(value)
+                warband.AddStashValue(value,0)
+            }
+            if (context_func["dice3"]) {
+                let value = 0;
+
+                value += (context_static as any).SelectData
+
+                if (context_func["mod"]) {
+                    value *= context_func["mod"]
+                }
+                warband.AddStashValue(value,0)
+            }
+        }
+    },
     gain_ducats: {
         event_priotity: 0,
+        async onPickLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+            const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
+            let IsMe = false
+            if (trackVal.SelfDynamicProperty.OptionChoice.ID == context_static.GetID()) {
+                IsMe = true
+            }
+            if (!IsMe) {
+                for (let i = 0; i < trackVal.SelfDynamicProperty.Selections.length; i++) {
+                    const CurSel = trackVal.SelfDynamicProperty.Selections[i]
+                    if (CurSel.SelectedChoice != null) {
+                        if (CurSel.SelectedChoice.value.ID == context_static.GetID()) {
+                            IsMe = true;
+                        }
+                        
+                    }
+                }
+            }
+            if (IsMe) {
+                const Tags = context_static.Tags;
+                Tags["consumable_die_result"] = true
+                if (context_func["post_save"]) {
+                    Tags["post_save"] = true
+                }
+                const NewData = {
+                    id: context_static.GetID() + Date.now().toString(), 
+                    name: context_static.GetTrueName(),
+                    source: context_static.Source? context_static.Source : "",
+                    tags: Tags,
+                    contextdata: {"gain_ducats_consumable" : context_func},
+                    associate_id : context_static.GetID(),
+                    object_id:  null,
+                    object_type :  "number"
+                }
+                const CreateNewConsumable = new WarbandConsumable(NewData, warband, trackVal);
+                await CreateNewConsumable.GrabOptions();
+                trackVal.Consumables.push(CreateNewConsumable);
+            }
+        },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             if (context_func["count"]) {
                 relayVar.push("The warband gains " + context_func["count"] + " ducats.");
@@ -2181,30 +2269,6 @@ export const BaseContextCallTable : CallEventTable = {
             if (IsMe) {
                 if (context_func["count"]) {
                     warband.AddStashValue(context_func["count"],0)
-                }
-                if (context_func["dice"]) {
-                    let value = 0;
-
-                    for (let j = 0; j < context_func["dice"]; j++) {
-                        value += Math.ceil(Math.random()*6)
-                    }
-
-                    if (context_func["mod"]) {
-                        value *= context_func["mod"]
-                    }
-                    warband.AddStashValue(value,0)
-                }
-                if (context_func["dice3"]) {
-                    let value = 0;
-
-                    for (let j = 0; j < context_func["dice3"]; j++) {
-                        value += Math.ceil(Math.random()*3)
-                    }
-
-                    if (context_func["mod"]) {
-                        value *= context_func["mod"]
-                    }
-                    warband.AddStashValue(value,0)
                 }
             }
         }
