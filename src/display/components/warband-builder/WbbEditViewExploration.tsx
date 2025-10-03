@@ -118,6 +118,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                 <div
                                     key={location.SelfDynamicProperty.Selections.indexOf(item)}>
                                         <WbbOptionSelect
+                                            leadtext={"Your Choice: "}
                                             property={location}
                                             hidedesc={true}
                                             choice={item}
