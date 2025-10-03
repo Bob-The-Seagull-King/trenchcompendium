@@ -3108,7 +3108,7 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                 }
                 if (AddedCollection.join('').length > 0) {
-                    relayVar[i].display_str += " (" + AddedCollection.join(', ') + ")";
+                    relayVar[i].value.Tags["validation_rules"] = " (" + AddedCollection.join(', ') + ") ";
                 }
             }
 

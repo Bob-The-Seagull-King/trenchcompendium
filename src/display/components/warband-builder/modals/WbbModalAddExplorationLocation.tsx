@@ -172,6 +172,11 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                                                                         <span className={'option-name'}>
                                                                             {choice.display_str}
                                                                         </span>
+                                                                        {choice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                                                            <span className={'option-description'}>
+                                                                                {choice.value.Tags["validation_rules"]}
+                                                                            </span>
+                                                                        }
                                                                         <span className={'option-description'}>
                                                                             {returnDescription(choice.value, choice.value.Description)}
                                                                         </span>

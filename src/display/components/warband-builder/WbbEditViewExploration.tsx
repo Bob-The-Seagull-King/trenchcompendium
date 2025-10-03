@@ -103,6 +103,11 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                             <span className={'option-name'}>
                                                 {selectedchoice.display_str}
                                             </span>
+                                            {selectedchoice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                                <span className={'option-description'}>
+                                                    {selectedchoice.value.Tags["validation_rules"]}
+                                                </span>
+                                            }
                                             <span className={'option-description'}>
                                                 {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
                                             </span>

@@ -185,6 +185,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                             {choice.display_str}
                                                         </span>
 
+                                                        {choice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                                            <span className={'option-description'}>
+                                                                {choice.value.Tags["validation_rules"]}
+                                                            </span>
+                                                        }
                                                         <span className={'option-description'}>
                                                             {returnDescription(choice.value, choice.value.Description)}
                                                         </span>
@@ -227,6 +232,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                         {selectedchoice.display_str}
                                                     </span>
 
+                                                    {selectedchoice.value.Tags["validation_rules"] != undefined &&                                                                            
+                                                        <span className={'option-description'}>
+                                                            {selectedchoice.value.Tags["validation_rules"]}
+                                                        </span>
+                                                    }
                                                     <span className={'option-description'}>
                                                         {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
                                                     </span>
