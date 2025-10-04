@@ -14,23 +14,25 @@ const WbbExploration_Selection_DieRollResult: React.FC<
     WbbExploration_Selection_DieRollResult_Props
 > = ({ property,  dochange }) => {
 
-    const [result, setResult] = useState<number | undefined>(GetMin());
+    const [result, setResult] = useState<number | undefined>(GetCur());
+    const [isvalid, setisvalid] = useState<boolean>(IsValidAnswer(result));
+    const [keyvar, setkeyvar] = useState(0);
 
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [showModal, setshowModal] = useState(false);
 
     const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);
     const [curval, setcurval] = useState(0);
-    const OptionList = ((property.FullOptions.length == 0)? property.Options : property.FullOptions)
 
-    const [openedID, setOpenedID] = useState<string | null>(null);
 
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null) {
             property.OnSelect(foundOption).then(() => {
                 setSelectedoption(property.SelectItem)
                 setcurval(parseInt(foundOption.value))
+                setisvalid(true);
                 setResult(parseInt(foundOption.value))
+                setkeyvar(keyvar + 1)
                 const Manager : ToolsController = ToolsController.getInstance();
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => reloadDisplay())
@@ -48,19 +50,38 @@ const WbbExploration_Selection_DieRollResult: React.FC<
         return CurMin
     }
 
+
+    function GetCur() {
+        console.log(property)
+        if (property.SelectData != null) {
+            return property.SelectData
+        }
+        return undefined;
+    }
+
     function TrySubmit(val : any) {
-        console.log(val)
         let IsFound = false;
         for (let i = 0; i < property.Options.length; i++) {
             if (parseInt(property.Options[i].value) == parseInt(val)) {
-                console.log("found")
                 IsFound = true;
-                handleSubmit(property.Options[i])
+                handleSubmit(property.Options[i]);
             }
         }
         if (IsFound == false) {
-            setResult(curval)
+            setResult(parseInt(val))
+            setisvalid(IsValidAnswer(val));
+            setkeyvar(keyvar + 1)
         }
+    }
+
+    function IsValidAnswer(val : any) {
+        for (let i = 0; i < property.Options.length; i++) {
+            if (parseInt(property.Options[i].value) == parseInt(val)) {
+                return true;
+            }
+        }
+        console.log("FALSE")
+        return false;
     }
 
 
@@ -79,6 +100,12 @@ const WbbExploration_Selection_DieRollResult: React.FC<
                 }}
                 onFocus={(e) => e.target.select()}
             />
+
+            <div key={keyvar}>
+                {isvalid == false &&
+                    <div className="fw-light mb-2">This is an invalid result, and will be ignored.</div>
+                }
+            </div>
         </div>
     );
 };

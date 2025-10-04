@@ -16,6 +16,7 @@ import { WarbandProperty } from './WarbandProperty';
 interface IWarbandConsumable extends IContextObject {
     associate_id : string,
     object_id: string | null,
+    object_data: any | null,
     object_type : string | null
 }
 
@@ -94,8 +95,14 @@ class WarbandConsumable extends DynamicContextObject  {
                     this.SelectItem = await EquipmentFactory.CreateNewFactionEquipment(warband_data.object_id, null)
                     this.SelectType = "faction_equipment"
                     return;
+                default:
+                    return;
+            }
+        }
+        if (warband_data.object_data && warband_data.object_type) {
+            switch (warband_data.object_type) {
                 case "number":
-                    this.SelectData = warband_data.object_id
+                    this.SelectData = warband_data.object_data;
                     this.SelectType = "number"
                     return;
                 default:
@@ -115,7 +122,8 @@ class WarbandConsumable extends DynamicContextObject  {
             contextdata: this.ContextKeys,
             associate_id : this.AssociateID,
             object_id: this.SelectItem? this.SelectItem.ID : null,
-            object_type: this.SelectType? this.SelectType : null
+            object_type: this.SelectType? this.SelectType : null,
+            object_data: this.SelectData? this.SelectData : null
         }
 
         this.SelfData = _objint;
