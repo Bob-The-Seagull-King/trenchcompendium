@@ -3897,11 +3897,24 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         },
         async getLocationSavedMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband: UserWarband) {
-            
+
             const factorymodule = await import("../../factories/features/EquipmentFactory")
             
             const Item = await factorymodule.EquipmentFactory.CreateNewEquipment(context_func["id"], null);
-            relayVar.push(Item.GetTrueName() + " was added to your stash.")
+
+            let replaced_item = false;
+            if (context_main) {
+                if (context_main.MyContext) {
+                    if (context_main.MyContext.Tags["replaced_item"]) {
+                        replaced_item = true;
+                    }
+                }
+            }
+            if (replaced_item == true) {
+                relayVar.push(Item.GetTrueName() + " was added to your stash, replacing " + context_main?.MyContext?.Tags["replaced_item"] + ".")
+            } else {
+                relayVar.push(Item.GetTrueName() + " was added to your stash.")
+            }
             return relayVar;
         },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
@@ -3942,6 +3955,8 @@ export const BaseContextCallTable : CallEventTable = {
                                     for (let k = 0; k < list.length; k++) {
                                         if (list[k].purchase.PurchaseInterface == OptionList[i].GetID()) {
                                             if (list[k].equipment.MyContext != null ) {
+                                                trackVal.Tags["replaced_item"] = list[k].equipment.GetTrueName();
+                                                trackVal.SelfData.tags["replaced_item"] = list[k].equipment.GetTrueName();
                                                 await (list[k].equipment.MyContext as any).DeleteStash(list[k]);
                                                 break;
                                             }

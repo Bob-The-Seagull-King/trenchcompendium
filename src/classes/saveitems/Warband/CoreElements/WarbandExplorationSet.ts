@@ -112,6 +112,10 @@ class WarbandExplorationSet extends DynamicContextObject {
             const NewLocation = new WarbandProperty(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.BuildConsumables(CurVal.consumables);
+            if (CurVal.tags) {
+                console.log(CurVal);
+                NewLocation.Tags = CurVal.tags
+            }
             this.Locations.push(NewLocation);
         }
     }
