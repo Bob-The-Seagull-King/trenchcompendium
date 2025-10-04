@@ -1030,8 +1030,8 @@
         }]
     },
     {
-        "id": "el_snipersnest_antiochpilgrim",
-        "name": "New Antioch or Trench Pilgrims",
+        "id": "el_snipersnest_antioch",
+        "name": "New Antioch",
         "source": "core",
         "tags": {
             "location_option": "el_snipersnest"
@@ -1041,7 +1041,7 @@
                 "allowed": [
                     {
                         "type": "faction",
-                        "value": ["fc_newantioch","fc_trenchpilgrim"]
+                        "value": ["fc_newantioch"]
                     }
                 ]
             },
@@ -1064,6 +1064,41 @@
                 "tags": {"desc_type" : "default"},
                 "content": " or "
             },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_sniperscope"
+            },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_snipersnest_pilgrim",
+        "name": "Trench Pilgrims",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["eq_sniperrifle"]
+            }
+        },
+        "description": [
             {
                 "tags": {"desc_type" : "equipmentslim"},
                 "content": "eq_sniperscope"
