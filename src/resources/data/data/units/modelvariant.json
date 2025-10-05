@@ -1171,6 +1171,7 @@
         "cut_keywords" : [],
         "keywords" : ["kw_golem"],
         "stats" : {
+            "potential": 2
         },
         "cut_abilities" : ["ab_artificialbody"],
         "new_abilities" : []
