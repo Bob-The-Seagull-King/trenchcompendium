@@ -4973,7 +4973,7 @@ export const BaseContextCallTable : CallEventTable = {
                     const rel_mod = context_func['mods'][i]
                     
                     if (rel_mod['type'] == 'remove') {
-                        relayVar = relayVar.filter(item => !(item != rel_mod['value']))
+                        relayVar = relayVar.filter(item => (item != rel_mod['value']))
                     }
                     
                 }
