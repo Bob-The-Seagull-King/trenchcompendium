@@ -1836,8 +1836,6 @@ class UserWarband extends DynamicContextObject {
                 ListOfRels.push(BaseRels[i]);
             }
         }
-            console.log(ListOfRels)
-
         return ListOfRels
     }
 

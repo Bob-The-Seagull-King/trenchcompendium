@@ -2154,18 +2154,13 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             
-            console.log(context_func)
-            console.log(context_static)
             if (context_func["dice"]) {
                 let value = 0;
-                console.log(context_func)
-                console.log(context_static)
                 value += (context_static as any).SelectData
-                console.log(value)
+                
                 if (context_func["mod"]) {
                     value *= context_func["mod"]
                 }
-                console.log(value)
                 warband.AddStashValue(value,0)
             }
             if (context_func["dice3"]) {
@@ -4377,8 +4372,6 @@ export const BaseContextCallTable : CallEventTable = {
         },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
             
-            console.log(context_func)
-            console.log(context_static)
             if (context_func["dice"]) {
                 let value = 0;
                 
@@ -4711,6 +4704,57 @@ export const BaseContextCallTable : CallEventTable = {
     },
     gain_all_from_list_find: {
         event_priotity: 0,
+        async canChooseOptionLocation(this: EventRunner, eventSource : any, relayVar : boolean, trackVal: UserWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            const listitems = context_func["id"]
+
+            const factorymodule = await import("../../factories/features/EquipmentFactory")
+            const ItemList : Equipment[] = []
+
+            for (let i = 0; i < listitems.length; i++) {
+                const Item = await factorymodule.EquipmentFactory.CreateNewEquipment(listitems[i], null);
+                if (!Item) {continue;}
+                ItemList.push(Item );
+            }
+            const List = await trackVal.GetFactionEquipmentOptions(true, false, true);
+            const ids = List.map(obj => obj.ID);
+            const idsequip = List.map(obj => obj.EquipmentItem.ID);
+            const FilterList = await trackVal.GetFactionEquipmentOptions(true, false, false);
+            const filterids = FilterList.map(obj => obj.ID);
+            const filteridsequip = FilterList.map(obj => obj.EquipmentItem.ID);
+    
+            let NoneAllowed = true;
+            for (let j = 0; j < ItemList.length; j++) {
+                let canadd = true;
+                let NewModel = null;
+                for (let k = 0; k < List.length; k++) {
+                    if (List[k].EquipmentItem.ID == ItemList[j].GetID()) {
+                        NewModel = List[k]
+                    }
+                }
+                
+                if (NewModel) {
+                    if (context_func["obey_faction"]) {
+                        if (!(ids.includes(context_func["id"][j]) || idsequip.includes(context_func["id"][j]))) {
+                            canadd = false;
+                        }
+                    }
+                    if (context_func["obey_restriction"]) {
+                        if (!(filterids.includes(context_func["id"][j]) || filteridsequip.includes(context_func["id"][j]))) {
+                            canadd = false;
+                        }
+                    }
+                    if ( canadd) {
+                        NoneAllowed = false;
+                    } else {
+                        if (context_func["alternate_value"] == true) {
+                            NoneAllowed = false;
+                        }
+                    }
+                }
+            }
+
+            return relayVar && !NoneAllowed;
+        },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
             const listitems = context_func["id"]
 

@@ -52,7 +52,6 @@ const WbbExploration_Selection_DieRollResult: React.FC<
 
 
     function GetCur() {
-        console.log(property)
         if (property.SelectData != null) {
             return property.SelectData
         }
@@ -80,7 +79,6 @@ const WbbExploration_Selection_DieRollResult: React.FC<
                 return true;
             }
         }
-        console.log("FALSE")
         return false;
     }
 
