@@ -5599,7 +5599,7 @@
         "id": "eq_armourofthefly",
         "name": "Armour of the Fly",
         "source": "core",
-        "tags": {"trait": true, "armour": true, "headgear": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
