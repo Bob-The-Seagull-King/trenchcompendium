@@ -42,6 +42,14 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                  () => reloadDisplay())
             })
+        } else {
+            property.OnEmpty().then(() => {
+                setSelectedoption(null)
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                 () => reloadDisplay())
+            })
+
         }
     };
 
@@ -64,8 +72,7 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
                     <span>{getDisplayString()}</span>
                     <span className={'remove'}
                         onClick={() => {
-                            // @TODO: remove this item on click
-                            alert('add remove here')
+                            handleSubmit(null)
                         }}
                     >
                         <FontAwesomeIcon icon={faTrash} />

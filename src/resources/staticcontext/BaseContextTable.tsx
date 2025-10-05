@@ -4138,6 +4138,85 @@ export const BaseContextCallTable : CallEventTable = {
             
             return relayVar;
         },
+        async runConsumableEmpty(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
+            
+            const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
+            const ContWarband = await GetWarbandOrNull(sourceband);
+            if (ContWarband == null) { return }
+            if (origin == null) { return }
+            let cost = 999999999
+            const costadd = (trackVal.SelectItem as any).Cost
+            const tempstore = context_func
+
+            let obeylimit = true;
+            if (context_func["limit"]) {
+                tempstore["limit"] -= 1;
+                obeylimit = tempstore["limit"] > 0;
+            }
+
+            for (let i = 0; i < origin.Consumables.length; i++) {
+                if (origin.Consumables[i].Name == trackVal.GetTrueName()) {
+                    if (origin.Consumables[i].ContextKeys["spend_money"]) {
+                        if (origin.Consumables[i].ContextKeys["spend_money"]["count"]) {
+                            if (cost > origin.Consumables[i].ContextKeys["spend_money"]["count"]) {
+                                cost = origin.Consumables[i].ContextKeys["spend_money"]["count"]
+                            }
+                        }
+                    }
+                }
+            }
+
+            cost += costadd
+
+            tempstore["count"] = cost;
+            
+            let isempty = false
+            while (!isempty) {
+                isempty = true;
+                for (let i = 0; i < origin.Consumables.length; i++) {
+                    if (origin.Consumables[i].SelectItem == null) {
+                        if ((origin.Consumables[i].ContextKeys["spend_money"])) {
+                            if (origin.Consumables[i].ContextKeys["spend_money"]["count"]) {
+                                isempty = false;
+                                origin.Consumables.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (cost > 0 && obeylimit && origin != null && origin != undefined) {
+                const Tags = context_static.Tags;
+                Tags["consumable_type_equipment"] = true
+                if (context_func["post_save"]) {
+                    Tags["post_save"] = true
+                }
+                const NewData = {
+                    id: trackVal.GetID() + Date.now().toString(), 
+                    name: trackVal.GetTrueName(),
+                    source: trackVal.Source? trackVal.Source : "",
+                    tags: Tags,
+                    contextdata: {"spend_money" : tempstore},
+                    associate_id : trackVal.AssociateID,
+                    object_id:  null,
+                    object_data: null,
+                    object_type :  "faction_equipment"
+                }
+                const CreateNewConsumable = new WarbandConsumable(NewData, ContWarband, origin);
+                await CreateNewConsumable.GrabOptions();
+                origin.Consumables.push(CreateNewConsumable);
+            }
+
+            
+            for (let i = 0; i < origin.Consumables.length; i++) {
+                if (trackVal == (origin.Consumables[i])) {
+                    origin.Consumables.splice(i, 1);
+                    break;
+                }
+            }
+
+        },
         async runConsumableSelect(this: EventRunner, eventSource : any, trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : WarbandConsumable, origin : WarbandProperty | null) {
             
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
@@ -4216,6 +4295,53 @@ export const BaseContextCallTable : CallEventTable = {
                     }
                     if (context_func["count"] != undefined) {
                         if (context_func["count"] < (OptionList[i].Cost)) {
+                            canadd = false;
+                        }
+                    }
+                    
+                    if (canadd == true) {
+                        relayVar.push(
+                            {
+                                display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " " + getCostType(OptionList[i].CostType),
+                                id: OptionList[i].ID,
+                                value: OptionList[i]
+                            }
+                        )
+                    }
+                }
+            }
+            
+            return relayVar;
+        },
+        async getConsumableFullOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
+            const EquipmentFactoryModule = await import("../../factories/features/EquipmentFactory")
+            if (sourceband) {
+                let OptionList : any[] = []
+                if (context_func["obey_faction"] != undefined) {
+                    if (context_func["obey_faction"] == false) {
+                        let include : string[] = []
+                        const ban : string[] = []
+
+                        if (context_func["include_faction"]) {
+                            include = context_func["include_faction"]
+                        }
+                        if (context_func["include_self"]) {
+                            if (context_func["include_self"] == false) {
+                                const fac = sourceband.Faction.GetFaction()
+                                ban.push(fac? fac.GetID() : "")
+                            }
+                        }
+                        OptionList = await EquipmentFactoryModule.EquipmentFactory.GetAllFactionEquipment(true, ban, include);
+                    } else {
+                        OptionList = await (sourceband).GetFactionEquipmentOptions(true, false, false, false); 
+                    }
+                } else {
+                    OptionList = await (sourceband).GetFactionEquipmentOptions(true, false, false, false);
+                }
+                for (let i = 0; i < OptionList.length; i++) {
+                    let canadd = true;
+                    if (context_func["type"] != undefined) {
+                        if ((parseInt(context_func["type"]) != parseInt(OptionList[i].CostType)) == true) {
                             canadd = false;
                         }
                     }

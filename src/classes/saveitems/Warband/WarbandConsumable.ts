@@ -70,6 +70,19 @@ class WarbandConsumable extends DynamicContextObject  {
         )
     }
 
+    public async OnEmpty() {        
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "runConsumableEmpty",
+            this,
+            [this.MyContext, this.MyOrigin],
+            null,
+            this
+        )
+        this.SelectItem = null;
+        this.SelectData = null;
+    }
+
     public async GrabOptions() {
         const eventmon : EventRunner = new EventRunner();
         this.Options = await eventmon.runEvent(
