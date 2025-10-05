@@ -624,7 +624,11 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "model_attatch": {},
+            "model_attatch": {
+                "apply_to_attatch": {
+                   "keyword_ignore":  {"value": ["kw_fear"]}
+                }
+            },
             "warband_general_hook": {},
             "warband_wide": {}, 
             "add_onto_warband": {}
