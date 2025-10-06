@@ -30,6 +30,8 @@ import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { ContextObject } from '../../../classes/contextevent/contextobject';
 import { CheckRelevantBaseOptions, CheckRelevantFullOptions, StoredLocation } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 import WbbExploration_Selection_Parent from './Exploration/WbbExploration_Selection_Parent';
+import WbbExploration_Selection_MoonshineStash_Destroy
+    from "./Exploration/WbbExploration_Selection_MoonshineStash_Destroy";
 
 interface WbbEditViewExplorationProps {
     location : StoredLocation;
@@ -176,6 +178,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                 </>
                             }
                         </div>
+
                         {/* Show option descriptions if any */}
                         {(CheckRelevantBaseOptions(location.base_item).length > 0 )  &&
                             <ul className={'exploration-description-options'}>
@@ -288,6 +291,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         {contextMessage.length == 0 &&
                             <br/>
                         }
+
+                        {/*<WbbExploration_Selection_MoonshineStash_Destroy*/}
+
+                        {/*    />*/}
+
 
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
