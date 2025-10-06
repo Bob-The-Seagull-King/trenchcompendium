@@ -197,6 +197,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                                 {choice.value.Tags["validation_rules"]}
                                                             </span>
                                                         }
+
                                                         <span className={'option-description'}>
                                                             {returnDescription(choice.value, choice.value.Description)}
                                                         </span>
@@ -255,23 +256,24 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                     </ul>
                                 }
 
-                                {location.true_obj.SelfDynamicProperty.Selections.length > 0 &&
-                                    <>
-                                    {location.true_obj.SelfDynamicProperty.Selections.map((item) =>
-                                        <React.Fragment
-                                            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}
-                                        >
-                                            {item.Option.Tags.base_loc == undefined &&
-                                                <WbbOptionSelect
-                                                    property={location.true_obj!}
-                                                    hidedesc={true}
-                                                    choice={item}
-                                                />
-                                            }
-                                        </React.Fragment>
-                                    )}
-                                </>
-                                }
+                                {/* @TODO: Not sure, if this is needed to make selection. If no selections can be made: this should be hidden / not displayed at all */}
+                                {/*{location.true_obj.SelfDynamicProperty.Selections.length > 0 &&*/}
+                                {/*    <>*/}
+                                {/*    {location.true_obj.SelfDynamicProperty.Selections.map((item) =>*/}
+                                {/*        <React.Fragment*/}
+                                {/*            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}*/}
+                                {/*        >*/}
+                                {/*            {item.Option.Tags.base_loc == undefined &&*/}
+                                {/*                <WbbOptionSelect*/}
+                                {/*                    property={location.true_obj!}*/}
+                                {/*                    hidedesc={true}*/}
+                                {/*                    choice={item}*/}
+                                {/*                />*/}
+                                {/*            }*/}
+                                {/*        </React.Fragment>*/}
+                                {/*    )}*/}
+                                {/*    </>*/}
+                                {/*}*/}
 
                                 {location.true_obj.Consumables.length > 0 &&
                                     <div className="exploration-consumable-list">
@@ -286,10 +288,6 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                     </div>
                                 }
                             </div>
-                        }
-
-                        {contextMessage.length == 0 &&
-                            <br/>
                         }
 
                         {/*<WbbExploration_Selection_MoonshineStash_Destroy*/}
@@ -315,7 +313,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                             onClick={handleApply}
                             disabled={cansave}
                         >
-                            {'Save Exploration'}
+                            {'Apply Exploration'}
                         </button>
 
                     </div>
