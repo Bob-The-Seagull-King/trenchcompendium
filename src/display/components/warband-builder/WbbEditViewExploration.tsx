@@ -100,21 +100,24 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                             <ul className={'exploration-description-options'}>
                                 {location.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
                                     <div key={location.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
-                                    {item.Selections.map((selectedchoice) => 
-                                        <div key={item.Selections.indexOf(selectedchoice)}>
-                                        <li  className={'exploration-description-option'}>
-                                            <span className={'option-name'}>
-                                                {selectedchoice.display_str}
-                                            </span>
-                                            {isValidNameTag(selectedchoice.value) &&                                                                            
-                                                <span className={'option-description'}>
-                                                    {selectedchoice.value.Tags["validation_rules"]}
-                                                </span>
-                                            }
-                                            <span className={'option-description'}>
-                                                {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
-                                            </span>
-                                        </li></div>
+                                        {item.Selections.map((selectedchoice) =>
+                                            <div key={item.Selections.indexOf(selectedchoice)}>
+                                                <li  className={'exploration-description-option'}>
+                                                    <span className={'option-name'}>
+                                                        {selectedchoice.display_str}
+                                                    </span>
+
+                                                    {isValidNameTag(selectedchoice.value) &&
+                                                        <span className={'option-description'}>
+                                                            {selectedchoice.value.Tags["validation_rules"]}
+                                                        </span>
+                                                    }
+
+                                                    <span className={'option-description'}>
+                                                        {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
+                                                    </span>
+                                                </li>
+                                            </div>
                                         )}
                                     </div>   
                                 ) }
