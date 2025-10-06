@@ -89,7 +89,7 @@ const WbbExploration_Selection_DieRollResult: React.FC<
 
             <input
                 type="number"
-                className="form-control"
+                className={`form-control ${!isvalid ? 'is-invalid' : ''}`}
                 min={GetMin()}
                 disabled={!dochange}
                 value={result  ?? ''}
@@ -98,12 +98,6 @@ const WbbExploration_Selection_DieRollResult: React.FC<
                 }}
                 onFocus={(e) => e.target.select()}
             />
-
-            <div key={keyvar}>
-                {isvalid == false &&
-                    <div className="fw-light mb-2">This is an invalid result, and will be ignored.</div>
-                }
-            </div>
         </div>
     );
 };
