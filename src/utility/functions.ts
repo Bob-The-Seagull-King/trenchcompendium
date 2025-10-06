@@ -542,12 +542,11 @@ export function sort<T extends object> (arr: T[], ...sortBy: Array<sortArg<T>>) 
     arr.sort(byPropertiesOf<T>(sortBy))
 }
 
-export function DescriptionFactory(data: any[], parent : any | null) {
-    let i = 0;
-    const array: AdvancedDescription[] = []
-    for (i = 0; i < data.length; i++) {
-        const tempAD = AdvancedDescriptionItemFactory.CreateAdvancedDescriptionItem(data[i], parent)
-        array.push(tempAD)
+export function DescriptionFactory(data: any, parent: any | null) {
+    const list = Array.isArray(data) ? data : (data == null ? [] : [data]);
+    const array: AdvancedDescription[] = [];
+    for (let i = 0; i < list.length; i++) {
+        array.push(AdvancedDescriptionItemFactory.CreateAdvancedDescriptionItem(list[i], parent));
     }
     return array;
 }
