@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import AlertCustom from "./AlertCustom";
 
 export interface DevGuardProps {
     /** Optional: override the dev host check (defaults to 'dev.trench-companion.com') */
@@ -133,6 +134,20 @@ const DevGuard: React.FC<DevGuardProps> = ({
                     Go to live site
                     <FontAwesomeIcon icon={faChevronRight} />
                 </a>
+
+                <AlertCustom
+                    type={'info'}
+                >
+                    <h4>
+                        {'Missing your warbands?'}
+                    </h4>
+                    <p>
+                        {'If you have been using this dev site without creating an account, your warbands have been store in the locat storage and are not available on the live site.'}
+                        <br />
+                        <br />
+                        {'We will have a solution ready within the next days.'}
+                    </p>
+                </AlertCustom>
 
                 {showConfigWarning && (
                     <div

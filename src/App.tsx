@@ -130,7 +130,7 @@ const App: React.FC = () => {
                             <AdsManager />
                             <TrackingManager />
 
-                            <DevGuard expectedPassword="bob" />
+                            <DevGuard expectedPassword="companion" />
                             {/*<EmergencyAlert />*/}
 
                             <ToastContainer
