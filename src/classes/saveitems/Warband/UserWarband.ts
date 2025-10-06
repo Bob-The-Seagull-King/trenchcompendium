@@ -1469,10 +1469,7 @@ class UserWarband extends DynamicContextObject {
         if (CaptainFound == false) {
             AlertList.push("The warband lacks a Leader")
         }
-        
-        if (this.IsUnRestricted == true) {
-            AlertList.push("The warband has been set to Unrestricted mode")
-        } 
+
 
         if (this.Restrictions.includes("custom_equipment") == true) {
             AlertList.push("The warband has been given a custom piece of equipment")
