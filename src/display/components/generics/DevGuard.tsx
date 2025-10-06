@@ -16,7 +16,10 @@ export interface DevGuardProps {
 }
 
 const DEFAULT_DEV_HOST = 'dev.trench-companion.com';
-const DEFAULT_STORAGE_KEY = 'DEV_GUARD_UNLOCKED';
+const DEFAULT_STORAGE_KEY = 'DEV_GUARD_UNLOCKED'; // change this to re-trigger the popup
+
+const LIVE_IMPORT_URL = 'https://trench-companion.com/dev-import/'; // Zielseite auf LIVE
+const STORAGE_KEY = 'userwarbanditem';
 
 const DevGuard: React.FC<DevGuardProps> = ({
                                                devHost = DEFAULT_DEV_HOST,
@@ -27,6 +30,7 @@ const DevGuard: React.FC<DevGuardProps> = ({
     // Determine if we are on the dev host
     const isDevHost = typeof window !== 'undefined' && window.location.hostname === devHost;
     // const isDevHost = true;
+
 
     // If not on dev host, render nothing
     if (!isDevHost) return null;
@@ -88,6 +92,30 @@ const DevGuard: React.FC<DevGuardProps> = ({
         e.stopPropagation();           // default nicht verhindern!
     };
 
+    const handleImportClick = async () => {
+        const text = localStorage.getItem(STORAGE_KEY) ?? '[]';
+
+        // 1) In die Zwischenablage kopieren (Best-Effort)
+        try {
+            await navigator.clipboard.writeText(text);
+            // Optionales Feedback:
+            // alert('Warbands in Zwischenablage kopiert. Importseite wird geöffnet …');
+        } catch (e) {
+            // Fallback: Datei-Download, falls Clipboard blockiert ist.
+            const blob = new Blob([text], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'warbands.dev.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            alert('Copy was blocked – JSON-file has been downloaded. Open the import page.');
+        }
+
+        // 2) LIVE-Importseite öffnen (neuer Tab)
+        window.open(LIVE_IMPORT_URL, '_blank', 'noopener,noreferrer');
+    };
+
     if (!isOpen) return null;
 
     return (
@@ -142,11 +170,17 @@ const DevGuard: React.FC<DevGuardProps> = ({
                         {'Missing your warbands?'}
                     </h4>
                     <p>
-                        {'If you have been using this dev site without creating an account, your warbands have been store in the locat storage and are not available on the live site.'}
+                        {'If you have been using this dev site without creating an account, your warbands have been stored in the local storage of this site and are not available on the live site.'}
                         <br />
                         <br />
                         {'We will have a solution ready within the next days.'}
                     </p>
+                    <button type={'button'} onClick={handleImportClick}
+                        className={'btn btn-secondary w-100'}
+                    >
+                        {'Migrate warbands to live site'}
+                    </button>
+
                 </AlertCustom>
 
                 {showConfigWarning && (

@@ -53,6 +53,7 @@ import HeadScripts from "./display/components/generics/HeadScripts";
 import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
 import MaintananceNotice from "./display/components/generics/MaintananceNotice";
 import DevGuard from './display/components/generics/DevGuard'
+import DevImport from "./display/pages/DevImport";
 
 
 const App: React.FC = () => {
@@ -123,6 +124,7 @@ const App: React.FC = () => {
                                     {/* Blog Pages */}
                                     <Route path="/blog" element={<BlogListPage />} />
                                     <Route path="/blog/:slug" element={<BlogArticlePage />} />
+                                    <Route path="/dev-import/" element={<DevImport />} />
                                 </Routes>
 
                                 <FooterMain />
