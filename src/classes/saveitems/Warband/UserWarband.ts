@@ -2390,9 +2390,8 @@ class UserWarband extends DynamicContextObject {
             LineList.push("  " )
             LineList.push("## Dead ##")
             for (let i = 0; i < dead.length; i++) {
-                LineList.push("• Cost: ")
                 LineList.push(dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName())
-                LineList.push("  " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push("• Cost: " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (dead[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
                     for (let j = 0; j < dead[i].model.Upgrades.length; j++) {
