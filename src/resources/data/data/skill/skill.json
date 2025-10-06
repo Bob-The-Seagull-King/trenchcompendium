@@ -1010,7 +1010,6 @@
         "source": "core",
         "tags": { "trait": true, "faction": true},
         "contextdata": {      
-            "add_onto_warband": {},
             "get_elite_count_cap": { "modify_value": 1 }       
         },
         "description": [            

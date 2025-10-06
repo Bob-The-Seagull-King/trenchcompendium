@@ -1128,7 +1128,9 @@ class UserWarband extends DynamicContextObject {
             curcount = this.GetCountOfEquipmentRel(RefModel.ID)
         }
         if (curcount < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
-            if (!containsTag(RefModel.Tags, "exploration_only")) {
+            const limitofglory = await this.GetExplorationLimit()
+            if (!containsTag(RefModel.Tags, "exploration_only") || this.IsWarbandExplorationOnly()
+                || (limitofglory >= RefModel.Cost)) {
                 return false;
             }
         }

@@ -64,7 +64,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     };
 
     const { activePopoverId, setActivePopoverId } = usePopover();
-    const { warband, reloadDisplay, modalIsOpen, setModalIsOpen } = useWarband();
+    const { warband, reloadDisplay, modalIsOpen, setModalIsOpen, updateKey } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode, isOwner } = useWbbMode(); // play mode v2
 
     const [newname, setName] = useState("")
@@ -108,7 +108,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
         } else if (exportType === 'tts-text') {
             // no export text for now
         }
-    }, [exportType, item]);
+    }, [exportType, item, updateKey]);
 
 
     const isActive = activePopoverId === id;
