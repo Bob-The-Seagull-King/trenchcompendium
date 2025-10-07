@@ -870,13 +870,55 @@ class WarbandMember extends DynamicContextObject {
         return options;
     }
 
+    /**
+     * Gets the concatenated string of equipment for a fighter
+     * - Sorts the equipment by type
+     * 
+     */
     public GetEquipmentAsString() {
         const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
+
+        console.log(CurEquip);
+        console.log(this.ModelEquipments);
+
         const returnVal : string[] = [];
 
-        for (let i = 0; i < CurEquip.length; i++) {
-            returnVal.push(CurEquip[i].equipment.MyEquipment.SelfDynamicProperty.GetTrueName())
+        // --- sort CurEquip by category: "ranged" > "melee" > "equipment" (others last) ---
+        // lower number = higher priority in sort
+        const CATEGORY_ORDER: Record<string, number> = {
+            ranged: 0,
+            melee: 1,
+            equipment: 2,
+        };
+
+        const norm = (v: unknown) => String(v ?? '').trim().toLowerCase();
+        const getCat = (x: RealWarbandPurchaseEquipment) =>
+            norm(x?.equipment?.MyEquipment?.SelfDynamicProperty?.SelfData?.category);
+
+        // Decorate (with rank & name), sort (by rank, then name, then original index), undecorate
+        const sortedEquip = CurEquip
+            .map((it, idx) => ({
+                it,
+                idx,
+                rank: CATEGORY_ORDER[getCat(it)] ?? 99, // unknown categories go last
+                name: it?.equipment?.MyEquipment?.SelfDynamicProperty?.GetTrueName?.() ?? ''
+            }))
+            .sort((a, b) =>
+                a.rank - b.rank ||                      // category order
+                a.name.localeCompare(b.name) ||         // optional: alpha inside same category
+                a.idx - b.idx                           // stable fallback to original order
+            )
+            .map(x => x.it);
+
+        // sort CurEquip by CurEquip[i].equipment.MyEquipment.SelfDynamicProperty.SelfData.category
+        // sort by string being "ranged" > "melee" > "equipment"
+
+        // Build string in sorted order
+        for (let i = 0; i < sortedEquip.length; i++) {
+            const name = sortedEquip[i]?.equipment?.MyEquipment?.SelfDynamicProperty?.GetTrueName?.();
+            if (name) returnVal.push(name);
         }
+
         for (let i = 0; i < this.ModelEquipments.length; i++) {
             for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
                 const SelecCur = this.ModelEquipments[i].SelfDynamicProperty.Selections[j].SelectedChoice;
