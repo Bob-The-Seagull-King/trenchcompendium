@@ -1632,7 +1632,7 @@
         ],
         "options": [],
         "keywords": ["kw_critical","kw_consumable"],
-        "modifiers": ["+1 to Injuries"]
+        "modifiers": ["+1D to Injuries","Ignore Armour" ]
     },
     {
         "id": "eq_masterworksjezzail",
@@ -5599,7 +5599,7 @@
         "id": "eq_armourofthefly",
         "name": "Armour of the Fly",
         "source": "core",
-        "tags": {"trait": true, "armour": true, "headgear": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {

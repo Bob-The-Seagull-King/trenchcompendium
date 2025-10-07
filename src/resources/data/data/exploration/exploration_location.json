@@ -1966,7 +1966,7 @@
     },
     {
         "id": "el_saintsreliquary",
-        "name": "Saint's Reqliary",
+        "name": "Saint's Reliquary",
         "source": "core",
         "tags": {
             "exploration_table": "et_rarelocations"

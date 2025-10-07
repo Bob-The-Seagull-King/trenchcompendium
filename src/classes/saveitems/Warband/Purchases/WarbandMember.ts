@@ -1733,9 +1733,6 @@ class WarbandMember extends DynamicContextObject {
             BaseList.push(this.CurModel.KeyWord[i].ID);
         }
 
-        if (!BaseList.includes("kw_elite") && this.IsElite()) {
-            BaseList.push("kw_elite")
-        }
 
         const Events : EventRunner = new EventRunner();
         if (this.MyContext != null) {
@@ -1753,6 +1750,9 @@ class WarbandMember extends DynamicContextObject {
                 result,
                 this
             )
+            if (!result_fin.includes("kw_elite") && this.IsElite()) {
+                result_fin.push("kw_elite")
+            }
             for (let i = 0; i < result_fin.length; i++) {
                 const Keyword = await KeywordFactory.CreateNewKeyword(result_fin[i], null)
                 KeywordsAvailable.push(Keyword);

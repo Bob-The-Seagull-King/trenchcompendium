@@ -1141,7 +1141,9 @@ class UserWarband extends DynamicContextObject {
             curcount = this.GetCountOfEquipmentRel(RefModel.ID)
         }
         if (curcount < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
-            if (!containsTag(RefModel.Tags, "exploration_only")) {
+            const limitofglory = await this.GetExplorationLimit()
+            if (!containsTag(RefModel.Tags, "exploration_only") || this.IsWarbandExplorationOnly()
+                || (limitofglory >= RefModel.Cost)) {
                 return false;
             }
         }
@@ -1480,10 +1482,7 @@ class UserWarband extends DynamicContextObject {
         if (CaptainFound == false) {
             AlertList.push("The warband lacks a Leader")
         }
-        
-        if (this.IsUnRestricted == true) {
-            AlertList.push("The warband has been set to Unrestricted mode")
-        } 
+
 
         if (this.Restrictions.includes("custom_equipment") == true) {
             AlertList.push("The warband has been given a custom piece of equipment")
@@ -2233,7 +2232,11 @@ class UserWarband extends DynamicContextObject {
             LineList.push("## Elites ##")
             for (let i = 0; i < elite.length; i++) {
                 LineList.push("  ")
-                LineList.push(elite[i].model.GetTrueName() + " - " + elite[i].model.GetModelName())
+                if(elite[i].model.GetTrueName() != elite[i].model.GetModelName()) {
+                    LineList.push(elite[i].model.GetTrueName() + " - " + elite[i].model.GetModelName())
+                } else {
+                    LineList.push(elite[i].model.GetTrueName())
+                }
 
                 LineList.push("• Cost: "+elite[i].purchase.GetTotalDucats().toString() + " Ducats | " + elite[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (elite[i].model.Upgrades.length > 0) {
@@ -2269,7 +2272,11 @@ class UserWarband extends DynamicContextObject {
             LineList.push("## Troops ##")
             for (let i = 0; i < troops.length; i++) {
                 LineList.push("  ")
-                LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName())
+                if(troops[i].model.GetTrueName() != troops[i].model.GetModelName()) {
+                    LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName())
+                } else {
+                    LineList.push(troops[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + troops[i].purchase.GetTotalDucats().toString() + " Ducats | " + troops[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (troops[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2302,7 +2309,11 @@ class UserWarband extends DynamicContextObject {
             LineList.push("## Mercenaries ##")
             for (let i = 0; i < mercenaries.length; i++) {
                 LineList.push("  ")
-                LineList.push(mercenaries[i].model.GetTrueName() + " - " + mercenaries[i].model.GetModelName())
+                if(mercenaries[i].model.GetTrueName() != mercenaries[i].model.GetModelName()) {
+                    LineList.push(mercenaries[i].model.GetTrueName() + " - " + mercenaries[i].model.GetModelName())
+                } else {
+                    LineList.push(mercenaries[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + mercenaries[i].purchase.GetTotalDucats().toString() + " Ducats | " + mercenaries[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (mercenaries[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2336,7 +2347,11 @@ class UserWarband extends DynamicContextObject {
             LineList.push("## Reserves ##")
             for (let i = 0; i < reserves.length; i++) {
                 LineList.push("  ")
-                LineList.push(reserves[i].model.GetTrueName() + " - " + reserves[i].model.GetModelName())
+                if(reserves[i].model.GetTrueName() != reserves[i].model.GetModelName()) {
+                    LineList.push(reserves[i].model.GetTrueName() + " - " + reserves[i].model.GetModelName())
+                } else {
+                    LineList.push(reserves[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + reserves[i].purchase.GetTotalDucats().toString() + " Ducats | " + reserves[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (reserves[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2370,7 +2385,11 @@ class UserWarband extends DynamicContextObject {
             LineList.push("## Lost & Captured ##")
             for (let i = 0; i < lost.length; i++) {
                 LineList.push("  ")
-                LineList.push(lost[i].model.GetTrueName() + " - " + lost[i].model.GetModelName())
+                if(lost[i].model.GetTrueName() != lost[i].model.GetModelName()) {
+                    LineList.push(lost[i].model.GetTrueName() + " - " + lost[i].model.GetModelName())
+                } else {
+                    LineList.push(lost[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + lost[i].purchase.GetTotalDucats().toString() + " Ducats | " + lost[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (lost[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2398,13 +2417,18 @@ class UserWarband extends DynamicContextObject {
                 }
             }
         }
+
         if (dead.length > 0 && full) {
             LineList.push("  " )
             LineList.push("## Dead ##")
             for (let i = 0; i < dead.length; i++) {
-                LineList.push("• Cost: ")
-                LineList.push(dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName())
-                LineList.push("  " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push("  ")
+                if(dead[i].model.GetTrueName() != dead[i].model.GetModelName()) {
+                    LineList.push(dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName())
+                } else {
+                    LineList.push(dead[i].model.GetTrueName())
+                }
+                LineList.push("• Cost: " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (dead[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
                     for (let j = 0; j < dead[i].model.Upgrades.length; j++) {
