@@ -35,17 +35,15 @@ export const AdsManagerv2: React.FC = () => {
 
     // All gates before enabling Auto/Anchor ads
     const canEnableAutoAds = () => {
-        // 1) Domain gate (disable on dev unless explicitly forced)
         if (!isLiveHost && !FORCE_ENABLE_IN_DEV) return false;
-
-        // 2) No ads for premium users (auth may arrive asynchronously)
         if (SiteUser?.Premium?.IsPremium) return false;
-
-        // 3) Consent decision must exist (regardless of accept/decline)
         if (!hasConsentDecision()) return false;
 
-        // 4) AdSense library must be loaded
-        if (!window.adsenseScriptLoaded || !Array.isArray(window.adsbygoogle)) return false;
+        if (!window.adsenseScriptLoaded) return false;
+
+        const q: any = (window as any).adsbygoogle;
+        // Accept either a real array or any object that offers a push() function
+        if (!q || typeof q.push !== 'function') return false;
 
         return true;
     };
