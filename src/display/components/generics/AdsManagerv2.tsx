@@ -1,11 +1,12 @@
 // AdsManagerv2.tsx
 import React, { useEffect, useRef } from 'react';
 import { useAuth } from '../../../utility/AuthContext';
+import {useLocation} from "react-router-dom";
 
 // Gate: enable ads only on live host (or set FORCE_ENABLE_IN_DEV = true for local testing)
 const isLiveHost =
     typeof window !== 'undefined' && window.location.hostname === 'trench-companion.com';
-const FORCE_ENABLE_IN_DEV = true;
+const FORCE_ENABLE_IN_DEV = false;
 
 declare global {
     interface Window {
@@ -18,6 +19,7 @@ declare global {
 
 export const AdsManagerv2: React.FC = () => {
     const { SiteUser } = useAuth();
+    const location = useLocation();
 
     // Make sure we push Auto Ads only once per page view
     const pushedRef = useRef(false);
@@ -89,6 +91,28 @@ export const AdsManagerv2: React.FC = () => {
         };
         // Re-run effect if premium status changes at runtime
     }, [SiteUser?.Premium?.IsPremium]);
+
+    // Re-ping Auto Ads on SPA route changes
+    useEffect(() => {
+        // Guard: only when user is non-premium and consent decision exists
+        const m = (window as any).klaro?.getManager?.();
+        const consentReady = !!m?.confirmed;
+        if (SiteUser?.Premium?.IsPremium || !consentReady) return;
+
+        // Library/queue ready?
+        const q: any = (window as any).adsbygoogle;
+        if (!window.adsenseScriptLoaded || !q || typeof q.push !== 'function') return;
+
+        // Let AdSense re-evaluate this virtual page view
+        try {
+            q.push({});
+            // console.debug('[Ads] SPA route ping -> Auto Ads rescan', location.pathname + location.search);
+        } catch (e) {
+            // ignore
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname, location.search, SiteUser?.Premium?.IsPremium]);
+
 
     // Never render DOM for Anchor/Auto ads – AdSense controls the placement
     return null;
