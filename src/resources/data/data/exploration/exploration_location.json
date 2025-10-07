@@ -1001,7 +1001,7 @@
             "name" : "",
             "description" : [],
             "category" : "type",
-            "tags" : {"hide_info": true},
+            "tags" : {"hide_info": true, "base_loc": true},
             "type" : "text",
             "single": true,
             "strictness" : "strict",
@@ -1095,7 +1095,7 @@
                 "obey_faction": true,
                 "obey_restriction": true,
                 "alternate_value": true,
-                "id": ["eq_sniperrifle"]
+                "id": ["rel_fc_eq_sniperrifle_glory"]
             }
         },
         "description": [

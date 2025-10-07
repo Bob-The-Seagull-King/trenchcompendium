@@ -1042,7 +1042,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                         {'Are you sure you want to delete this exploration location?'}
                         <br/>
                         <br/>
-                        <strong>{item.Name}</strong>?
+                        <strong>{item.Name? item.Name : item.base_item?.location?.Name}</strong>?
                     </div>
                     <AlertCustom
                         type={'danger'}

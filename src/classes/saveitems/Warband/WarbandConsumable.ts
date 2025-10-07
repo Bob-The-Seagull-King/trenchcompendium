@@ -1,5 +1,5 @@
 import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumItem'
-import { DescriptionFactory } from '../../../utility/functions';
+import { DescriptionFactory, isPrimitiveValue } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
 import { DynamicOptionContextObject } from '../../options/DynamicOptionContextObject';
@@ -58,7 +58,9 @@ class WarbandConsumable extends DynamicContextObject  {
 
     public async OnSelect(option : IChoice) {
         this.SelectItem = option.value;
-        this.SelectData = option.value;
+        if (isPrimitiveValue(option.value)) {
+            this.SelectData = option.value;
+        }
         
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(

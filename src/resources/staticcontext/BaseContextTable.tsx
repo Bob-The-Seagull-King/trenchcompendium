@@ -2195,26 +2195,28 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             if (IsMe) {
-                const Tags = context_static.Tags;
-                Tags["consumable_die_result"] = true
-                if (context_func["post_save"]) {
-                    Tags["post_save"] = true
+                if (context_func["dice"] || context_func["dice3"]) {
+                    const Tags = context_static.Tags;
+                    Tags["consumable_die_result"] = true
+                    if (context_func["post_save"]) {
+                        Tags["post_save"] = true
+                    }
+                    Tags["item_name"] = "Ducats Gained"
+                    const NewData = {
+                        id: context_static.GetID() + Date.now().toString(), 
+                        name: context_static.GetTrueName(),
+                        source: context_static.Source? context_static.Source : "",
+                        tags: Tags,
+                        contextdata: {"gain_ducats_consumable" : context_func},
+                        associate_id : context_static.GetID(),
+                        object_id:  null,
+                        object_data: null,
+                        object_type :  "number"
+                    }
+                    const CreateNewConsumable = new WarbandConsumable(NewData, warband, trackVal);
+                    await CreateNewConsumable.GrabOptions();
+                    trackVal.Consumables.push(CreateNewConsumable);
                 }
-                Tags["item_name"] = "Ducats Gained"
-                const NewData = {
-                    id: context_static.GetID() + Date.now().toString(), 
-                    name: context_static.GetTrueName(),
-                    source: context_static.Source? context_static.Source : "",
-                    tags: Tags,
-                    contextdata: {"gain_ducats_consumable" : context_func},
-                    associate_id : context_static.GetID(),
-                    object_id:  null,
-                    object_data: null,
-                    object_type :  "number"
-                }
-                const CreateNewConsumable = new WarbandConsumable(NewData, warband, trackVal);
-                await CreateNewConsumable.GrabOptions();
-                trackVal.Consumables.push(CreateNewConsumable);
             }
         },
         async getLocationMessage(this: EventRunner, eventSource : any, relayVar : string[], context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
@@ -4076,24 +4078,80 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-    
-            await warband.AddStash((context_static as any).SelectItem as any, true);
+            const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+            const List = await warband.GetFactionEquipmentOptions(true, false, true);
+            const ids = List.map(obj => obj.ID);
+            const FilterList = await warband.GetFactionEquipmentOptions(true, false, false);
+            const filterids = FilterList.map(obj => obj.ID);
+            const NewModel = (context_static as any).SelectItem as any
+            if (NewModel) {
+                let canadd = true;
+                if (context_func["obey_faction"]) {
+                    if (!ids.includes(NewModel.ID)) {
+                        canadd = false;
+                    }
+                }
+                if (context_func["obey_restriction"]) {
+                    if (!filterids.includes(NewModel.ID)) {
+                        canadd = false;
+                    }
+                }
+                if ( canadd == true) {
+                    await warband.AddStash((context_static as any).SelectItem as any, true);
+                } else {
+                    if (context_func["alternate_value"] == true) {
+                        warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                    }
+                }
+            }
         },
         async getConsumableOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
 
             if (sourceband) {
+                const { EquipmentFactory } = await import("../../factories/features/EquipmentFactory");
+                const List = await sourceband.GetFactionEquipmentOptions(true, false, true);
+                const ids = List.map(obj => obj.ID);
+                const FilterList = await sourceband.GetFactionEquipmentOptions(true, false, false);
+                const filterids = FilterList.map(obj => obj.ID);
+                
                 const OptionList = await (sourceband).GetFactionEquipmentOptions(true, false, true, false);
                 for (let j = 0; j < context_func["id"].length; j++) {
                     const curitem = context_func["id"][j]
                     for (let i = 0; i < OptionList.length; i++) {
                         if (curitem == OptionList[i].EquipmentItem.ID) {
-                            relayVar.push(
-                                {
-                                    display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " " + getCostType(OptionList[i].CostType),
-                                    id: OptionList[i].ID,
-                                    value: OptionList[i]
+                            const NewModel = OptionList[i]
+                            if (NewModel) {
+                                let canadd = true;
+                                if (context_func["obey_faction"]) {
+                                    if (!ids.includes(NewModel.ID)) {
+                                        canadd = false;
+                                    }
                                 }
-                            )
+                                if (context_func["obey_restriction"]) {
+                                    if (!filterids.includes(NewModel.ID)) {
+                                        canadd = false;
+                                    }
+                                }
+                                if ( canadd == true) {
+                                    relayVar.push(
+                                        {
+                                            display_str: OptionList[i].EquipmentItem.GetTrueName(),
+                                            id: OptionList[i].ID,
+                                            value: OptionList[i]
+                                        }
+                                    )
+                                } else {
+                                    if (context_func["alternate_value"] == true) {
+                                        relayVar.push(
+                                            {
+                                                display_str: OptionList[i].Cost + " " + getCostType(OptionList[i].CostType) + " (At Limit Of Item)",
+                                                id: OptionList[i].ID,
+                                                value: OptionList[i]
+                                            }
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                 }

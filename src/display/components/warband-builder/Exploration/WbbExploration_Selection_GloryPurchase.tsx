@@ -120,7 +120,6 @@ const WbbExploration_Selection_GloryPurchase: React.FC<
                 </Modal.Header>
 
                 <Modal.Body>
-                    {/* @TODO: show all options and make unavailable ones unavailable */}
                     {OptionList.map((opt) => (
                         <WbbSelectItemEquipment
                             key={`select-item-${opt.id}`}
@@ -128,7 +127,7 @@ const WbbExploration_Selection_GloryPurchase: React.FC<
                             id={opt.id}
                             title={opt.value.Name}
                             opened={openedID === opt.id}
-                            available={canSelectLocation(opt)} // @TODO add availability here
+                            available={canSelectLocation(opt)}
                             onClick={() => {
                                 if (canSelectLocation(opt)) {
                                     setOpenedID(opt.id === openedID ? null : opt.id)

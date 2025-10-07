@@ -27,6 +27,7 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
     
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);
+    const OptionList = ((property.FullOptions.length == 0)? property.Options : property.FullOptions)
     const [tempoption, settempoption] = useState<IChoice | null>(null);
 
     const [showModal, setshowModal] = useState(false);
@@ -62,6 +63,22 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
                 }
             }
         } else {return ""}
+    }
+
+    // Returns bool if location be selected
+    function canSelectLocation (loc : IChoice) {
+        if (property.FullOptions.length == 0) { return true; }
+        if (getLocationFromTables(loc) != null) { return true; }
+        return false;
+    }
+
+    function getLocationFromTables(loc : IChoice) {
+        for (let i = 0; i < property.Options.length; i++) {
+            if (property.Options[i].id == loc.id) {
+                    return property.Options[i];
+                }
+        }
+        return null
     }
 
     return (
@@ -104,30 +121,25 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
                     </Modal.Header>
 
                     <Modal.Body>
-                        {/* @TODO: loop through available items and mark disabled if over cost limit */}
-                        {property.Options.map((opt) => (
+                        {OptionList.map((opt) => (
                             <WbbSelectItemEquipment
                                 key={`select-item-${opt.id}`}
 
                                 id={opt.id}
                                 title={opt.value.Name}
                                 opened={openedID === opt.id}
-                                available={true} // @TODO add availability here
+                                available={canSelectLocation(opt)}
                                 onClick={() => {
-                                    setOpenedID(opt.id === openedID ? null : opt.id)
+                                    
+                                    if (canSelectLocation(opt)) {
+                                        setOpenedID(opt.id === openedID ? null : opt.id)
+                                    }
                                 }}
                                 equipment={opt.value.EquipmentItem}
                                 isSubmitting={false}
                                 onSubmit={() => handleSubmit(opt)}
                                 submitBtnString={'Add Equipment'}
                                 cost={opt.value.Cost + " " + getCostType(opt.value.CostType)}
-                                // @TODO: add limit and restrictions
-                                // limit={
-                                //     opt.value.limit > 0
-                                //         ? "Limit: " + (cache[item].count_cur + "/" + cache[item].limit)
-                                //         : ""
-                                // }
-                                // restrictions={cache[item].restrictions}
                             />
                         ))}
                     </Modal.Body>

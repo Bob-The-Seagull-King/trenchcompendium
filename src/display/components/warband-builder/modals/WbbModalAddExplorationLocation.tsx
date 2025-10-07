@@ -131,7 +131,6 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                         nopad={true}
                     >
                         <>
-                            {/* @TODO: show all locations here - not only available ones*/}
                             {adv.ExplorationLocations.map((loc) =>
                                 <>
                                     {/* Select Row */}

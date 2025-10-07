@@ -58,7 +58,7 @@ export function CheckRelevantBaseOptions(loc : FilteredLocation) {
             list.push(loc.options[i])
         }
     }
-
+    
     return list;
 }
 

@@ -51,6 +51,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [cansave, setcansave] = useState<boolean>(GetCanSave() );
     
     function GetCanSave() {
+        
         const IsRealID = location.base_item.location?.GetID()
         const IsForced = !(containsTag(location.base_item.location.Tags, 'unforced'))
         const optionList = location.base_item?.options
@@ -62,7 +63,17 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             OptionsAreValid = true
         }
 
-        return !IsRealID || IsForced && OptionsAreValid && ListOfFullOptions.length > 0 && (FilteredOptions.length != BaseOptions.length )
+        let ConsumablesAllGood = true
+        if (location.true_obj) {
+            for (let i = 0; i < location.true_obj.Consumables.length; i++) {
+                const consumablecur = location.true_obj.Consumables[i]
+                if (consumablecur.SelectData == null && consumablecur.SelectItem == null) {
+                    ConsumablesAllGood = false;
+                }
+            }
+        }
+
+        return !IsRealID || (IsForced && OptionsAreValid && ListOfFullOptions.length > 0 && (FilteredOptions.length != BaseOptions.length )) || !ConsumablesAllGood
     }
 
     function createBaseItem() {
@@ -85,6 +96,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             )
             setContextMessage(IDString)
         }
+        setcansave(GetCanSave())
         setkeyvar(keyvar + 1);
     }
 
@@ -135,6 +147,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
         createBaseItem()
             setkeyvar(keyvar + 1);
 
+    }
+
+    function UpdateStateCall() {
+        
+        setcansave(GetCanSave() )
     }
 
     function isValidNameTag(val : any) {
@@ -256,25 +273,6 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                     </ul>
                                 }
 
-                                {/* @TODO: Not sure, if this is needed to make selection. If no selections can be made: this should be hidden / not displayed at all */}
-                                {/*{location.true_obj.SelfDynamicProperty.Selections.length > 0 &&*/}
-                                {/*    <>*/}
-                                {/*    {location.true_obj.SelfDynamicProperty.Selections.map((item) =>*/}
-                                {/*        <React.Fragment*/}
-                                {/*            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}*/}
-                                {/*        >*/}
-                                {/*            {item.Option.Tags.base_loc == undefined &&*/}
-                                {/*                <WbbOptionSelect*/}
-                                {/*                    property={location.true_obj!}*/}
-                                {/*                    hidedesc={true}*/}
-                                {/*                    choice={item}*/}
-                                {/*                />*/}
-                                {/*            }*/}
-                                {/*        </React.Fragment>*/}
-                                {/*    )}*/}
-                                {/*    </>*/}
-                                {/*}*/}
-
                                 {location.true_obj.Consumables.length > 0 &&
                                     <div className="exploration-consumable-list">
                                         {location.true_obj.Consumables.map((item: WarbandConsumable, index: number) => (
@@ -283,17 +281,13 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                 property={item}
                                                 doshow={true}
                                                 dochange={true}
+                                                updatestate={() => UpdateStateCall()}
                                             />
                                         ))}
                                     </div>
                                 }
                             </div>
                         }
-
-                        {/*<WbbExploration_Selection_MoonshineStash_Destroy*/}
-
-                        {/*    />*/}
-
 
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
@@ -306,6 +300,9 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                 </span>
                             </div>
                         }
+
+
+                        
 
                         {/* @TODO: disable if necessary options are not made */}
                         <button

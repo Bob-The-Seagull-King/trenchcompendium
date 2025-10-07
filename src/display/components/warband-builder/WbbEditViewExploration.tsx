@@ -148,11 +148,40 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                                 property={item}
                                                 doshow={false}
                                                 dochange={false}
+                                                updatestate={() => {undefined}}
                                             />
                                 ))}
                             </div>
                         </div>
                         }
+
+                        <div key={keyvar}>
+                        {location.SubProperties.length > 0 &&
+                            <>
+                                {location.SubProperties.map((item) =>
+                                    <div
+                                        key={location!.SubProperties.indexOf(item)}
+                                    >
+                                        {item.SelfDynamicProperty.Selections.length > 0 &&
+                                            <>
+                                            {item.SelfDynamicProperty.Selections.map((subitem) =>
+                                                <div
+                                            key={location!.SelfDynamicProperty.Selections.indexOf(subitem)}
+                                            >
+                                           {subitem.Option.Tags.base_loc == undefined &&
+                                                <WbbOptionSelect
+                                                    property={item}
+                                                    hidedesc={true}
+                                                    choice={subitem}
+                                                    overrideplay={true}
+                                                />
+                                            }
+                                        </div>)}</>
+                                        }
+                                    </div>
+                                )}
+                                </>
+                            }</div>
                         
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&

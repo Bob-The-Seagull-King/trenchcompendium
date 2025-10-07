@@ -8,11 +8,12 @@ import { ToolsController } from "../../../../classes/_high_level_controllers/Too
 interface WbbExploration_Selection_DieRollResult_Props {
     property : WarbandConsumable;
     dochange: boolean;
+    updateparent: () => void
 }
 
 const WbbExploration_Selection_DieRollResult: React.FC<
     WbbExploration_Selection_DieRollResult_Props
-> = ({ property,  dochange }) => {
+> = ({ property,  dochange, updateparent }) => {
 
     const [result, setResult] = useState<number | undefined>(GetCur());
     const [isvalid, setisvalid] = useState<boolean>(IsValidAnswer(result));
@@ -25,7 +26,7 @@ const WbbExploration_Selection_DieRollResult: React.FC<
     const [curval, setcurval] = useState(0);
 
 
-    const handleSubmit = (foundOption : IChoice | null) => {
+    const handleSubmit = (foundOption : IChoice | null, val : any = 0) => {
         if (foundOption != null) {
             property.OnSelect(foundOption).then(() => {
                 setSelectedoption(property.SelectItem)
@@ -37,6 +38,10 @@ const WbbExploration_Selection_DieRollResult: React.FC<
                 Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
                     () => reloadDisplay())
             })
+        } else {
+            property.SelectData = null;
+            property.SelectItem = null;
+            updateparent() 
         }
     };
 
@@ -67,9 +72,9 @@ const WbbExploration_Selection_DieRollResult: React.FC<
             }
         }
         if (IsFound == false) {
+            handleSubmit(null, val);
             setResult(parseInt(val))
             setisvalid(IsValidAnswer(val));
-            setkeyvar(keyvar + 1)
         }
     }
 

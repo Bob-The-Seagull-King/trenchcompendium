@@ -36,6 +36,28 @@ export function capitalizeString(stringVal: string) {
     return "";
 }
 
+export function isPrimitiveValue(value: any): boolean {
+  if (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "boolean"
+  ) {
+    return true;
+  }
+
+  if (Array.isArray(value)) {
+    return (
+      value.every(
+        v =>
+          typeof v === "string" ||
+          typeof v === "number"
+      )
+    );
+  }
+
+  return false;
+}
+
 export function isValidList(listA: string[], bannedList: string[], requiredList: string[]): boolean {
     const hasBanned = bannedList.some(item => listA.includes(item));
     if (hasBanned) return false;

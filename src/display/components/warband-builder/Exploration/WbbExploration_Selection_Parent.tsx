@@ -16,11 +16,12 @@ interface WbbExploration_Selection_Parent_Props {
     property : WarbandConsumable;
     doshow : boolean;
     dochange : boolean;
+    updatestate: () => void
 }
 
 const WbbExploration_Selection_Parent: React.FC<
     WbbExploration_Selection_Parent_Props
-> = ({property, doshow, dochange}) => {
+> = ({property, doshow, dochange, updatestate}) => {
     
     
         const { warband, reloadDisplay, updateKey } = useWarband();
@@ -91,6 +92,7 @@ const WbbExploration_Selection_Parent: React.FC<
                         <WbbExploration_Selection_DieRollResult
                             property={property}
                             dochange={dochange}
+                            updateparent={() => updatestate()}
                         />
                     </>
                 }
