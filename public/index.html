@@ -40,30 +40,49 @@
             window.adsbygoogle.requestNonPersonalizedAds = 1;
         </script>
 
-        <!-- Load AdSense library ALWAYS so the crawler can detect it -->
+        <!-- Load AdSense library ONCE in <head> so Google can detect it -->
         <script
                 id="adsbygoogle-js"
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
                 crossorigin="anonymous"></script>
 
-        <!-- Mark library readiness and notify the app (used by AdsManager) -->
+        <!-- Mark library readiness and notify the app (used by AdsManagerv2) -->
         <script>
-            (function(){
-                var s = document.getElementById('adsbygoogle-js');
-                if (s) {
-                    s.addEventListener('load', function(){
-                        window.adsenseScriptLoaded = true;
-                        // Notify React components that AdSense is ready
-                        window.dispatchEvent(new Event('adsense:loaded'));
-                    });
-                    s.addEventListener('error', function(){
-                        window.adsenseScriptLoaded = false;
-                        console.warn('AdSense script failed to load.');
-                    });
+            (function () {
+                // Prevent double-bootstrap on hot reloads
+                if (window.__adsenseBootstrapped) return;
+                window.__adsenseBootstrapped = true;
+
+                var tag = document.getElementById('adsbygoogle-js');
+                if (!tag) {
+                    console.warn('[Ads] adsbygoogle.js tag not found');
+                    return;
                 }
+
+                // Helper to set state and broadcast a single, consistent event
+                function setLoaded(ok) {
+                    window.adsenseScriptLoaded = !!ok;
+                    window.dispatchEvent(new Event(ok ? 'adsense:loaded' : 'adsense:error'));
+                }
+
+                // Normal path: rely on the script load/error events
+                tag.addEventListener('load',  function () { setLoaded(true);  });
+                tag.addEventListener('error', function () { setLoaded(false); });
+
+                // Safety fallback: in rare cases the load event may be missed (aggressive cache, preload, etc.).
+                // If 2s after DOMContentLoaded the global queue exists, assume loaded and emit the event once.
+                document.addEventListener('DOMContentLoaded', function () {
+                    setTimeout(function () {
+                        if (typeof window.adsenseScriptLoaded === 'undefined' &&
+                            typeof window.adsbygoogle === 'object') {
+                            setLoaded(true);
+                        }
+                    }, 2000);
+                });
             })();
         </script>
+
 
 
         <!-- Klaro styles -->

@@ -1,0 +1,97 @@
+// AdsManagerv2.tsx
+import React, { useEffect, useRef } from 'react';
+import { useAuth } from '../../../utility/AuthContext';
+
+// Gate: enable ads only on live host (or set FORCE_ENABLE_IN_DEV = true for local testing)
+const isLiveHost =
+    typeof window !== 'undefined' && window.location.hostname === 'trench-companion.com';
+const FORCE_ENABLE_IN_DEV = true;
+
+declare global {
+    interface Window {
+        adsbygoogle?: unknown[];
+        adsenseScriptLoaded?: boolean; // you set this in your <script onload> in index.html
+        // DO NOT redeclare `klaro` here – it already exists in another ambient declaration
+        // which causes TS2717 if we change the type.
+    }
+}
+
+export const AdsManagerv2: React.FC = () => {
+    const { SiteUser } = useAuth();
+
+    // Make sure we push Auto Ads only once per page view
+    const pushedRef = useRef(false);
+
+    // Check if Klaro has a recorded decision (accept OR decline). We cast to any on purpose
+    // because another global typing defined `klaro` narrowly (show/hide).
+    const hasConsentDecision = () => {
+        try {
+            const m = (window as any).klaro?.getManager?.();
+            return !!m?.confirmed;
+        } catch {
+            return false;
+        }
+    };
+
+    // All gates before enabling Auto/Anchor ads
+    const canEnableAutoAds = () => {
+        // 1) Domain gate (disable on dev unless explicitly forced)
+        if (!isLiveHost && !FORCE_ENABLE_IN_DEV) return false;
+
+        // 2) No ads for premium users (auth may arrive asynchronously)
+        if (SiteUser?.Premium?.IsPremium) return false;
+
+        // 3) Consent decision must exist (regardless of accept/decline)
+        if (!hasConsentDecision()) return false;
+
+        // 4) AdSense library must be loaded
+        if (!window.adsenseScriptLoaded || !Array.isArray(window.adsbygoogle)) return false;
+
+        return true;
+    };
+
+    const enableOnce = () => {
+        if (pushedRef.current) return;
+        if (!canEnableAutoAds()) return;
+
+        try {
+            // Single bootstrap call for AdSense Auto Ads. Anchor Ads must be enabled in AdSense UI.
+            // The library must be included once in <head> with ?client=ca-pub-XXXX.
+            window.adsbygoogle!.push({});
+            pushedRef.current = true;
+            // console.debug('[Ads] Auto Ads enabled');
+        } catch (e) {
+            // If something fails, we'll try again on the next event (consent/auth/library)
+            // console.warn('[Ads] enable failed; will retry', e);
+        }
+    };
+
+    useEffect(() => {
+        // Try immediately in case everything is already ready
+        enableOnce();
+
+        // Re-check on key events:
+        // - Klaro fires `tc:consent-changed` in your config callback (after any decision)
+        // - Head script should dispatch `adsense:loaded` on successful library load
+        // - On visibility change (tab re-activated), try again
+        const onConsent = () => enableOnce();
+        const onAdsJsLoaded = () => enableOnce();
+        const onVisibility = () => {
+            if (document.visibilityState === 'visible') enableOnce();
+        };
+
+        window.addEventListener('tc:consent-changed', onConsent as EventListener);
+        window.addEventListener('adsense:loaded', onAdsJsLoaded as EventListener);
+        document.addEventListener('visibilitychange', onVisibility);
+
+        return () => {
+            window.removeEventListener('tc:consent-changed', onConsent as EventListener);
+            window.removeEventListener('adsense:loaded', onAdsJsLoaded as EventListener);
+            document.removeEventListener('visibilitychange', onVisibility);
+        };
+        // Re-run effect if premium status changes at runtime
+    }, [SiteUser?.Premium?.IsPremium]);
+
+    // Never render DOM for Anchor/Auto ads – AdSense controls the placement
+    return null;
+};
