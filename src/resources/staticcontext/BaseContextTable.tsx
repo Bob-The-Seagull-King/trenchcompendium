@@ -4626,26 +4626,28 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             if (IsMe) {
-                const Tags = context_static.Tags;
-                Tags["consumable_die_result"] = true
-                if (context_func["post_save"]) {
-                    Tags["post_save"] = true
+                if (context_func["dice"] || context_func["mod"]) {
+                    const Tags = context_static.Tags;
+                    Tags["consumable_die_result"] = true
+                    if (context_func["post_save"]) {
+                        Tags["post_save"] = true
+                    }
+                    Tags["item_name"] = "Glory Gained"
+                    const NewData = {
+                        id: context_static.GetID() + Date.now().toString(), 
+                        name: context_static.GetTrueName(),
+                        source: context_static.Source? context_static.Source : "",
+                        tags: Tags,
+                        contextdata: {"gain_glory_consumable" : context_func},
+                        associate_id : context_static.GetID(),
+                        object_id:  null,
+                                    object_data: null,
+                        object_type :  "number"
+                    }
+                    const CreateNewConsumable = new WarbandConsumable(NewData, warband, trackVal);
+                    await CreateNewConsumable.GrabOptions();
+                    trackVal.Consumables.push(CreateNewConsumable);
                 }
-                Tags["item_name"] = "Glory Gained"
-                const NewData = {
-                    id: context_static.GetID() + Date.now().toString(), 
-                    name: context_static.GetTrueName(),
-                    source: context_static.Source? context_static.Source : "",
-                    tags: Tags,
-                    contextdata: {"gain_glory_consumable" : context_func},
-                    associate_id : context_static.GetID(),
-                    object_id:  null,
-                                object_data: null,
-                    object_type :  "number"
-                }
-                const CreateNewConsumable = new WarbandConsumable(NewData, warband, trackVal);
-                await CreateNewConsumable.GrabOptions();
-                trackVal.Consumables.push(CreateNewConsumable);
             }
         },
         async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
