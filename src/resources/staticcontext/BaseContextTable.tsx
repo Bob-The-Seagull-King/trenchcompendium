@@ -4250,6 +4250,7 @@ export const BaseContextCallTable : CallEventTable = {
                 if (context_func["post_save"]) {
                     Tags["post_save"] = true
                 }
+                Tags["relaxed_requirement"] = true
                 const NewData = {
                     id: trackVal.GetID() + Date.now().toString(), 
                     name: trackVal.GetTrueName(),
@@ -4297,6 +4298,7 @@ export const BaseContextCallTable : CallEventTable = {
                     if (context_func["post_save"]) {
                         Tags["post_save"] = true
                     }
+                    Tags["relaxed_requirement"] = true
                     const NewData = {
                         id: trackVal.GetID() + Date.now().toString(), 
                         name: trackVal.GetTrueName(),
@@ -4513,6 +4515,7 @@ export const BaseContextCallTable : CallEventTable = {
                             if (context_func["post_save"]) {
                                 Tags["post_save"] = true
                             }
+                            Tags["relaxed_requirement"] = true
                             const NewData = {
                                 id: context_static.GetID() + Date.now().toString(), 
                                 name: context_static.GetTrueName(),

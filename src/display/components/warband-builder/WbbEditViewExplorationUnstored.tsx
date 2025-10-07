@@ -68,7 +68,9 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             for (let i = 0; i < location.true_obj.Consumables.length; i++) {
                 const consumablecur = location.true_obj.Consumables[i]
                 if (consumablecur.SelectData == null && consumablecur.SelectItem == null) {
-                    ConsumablesAllGood = false;
+                    if (consumablecur.Tags["relaxed_requirement"] == undefined) {
+                        ConsumablesAllGood = false;
+                    }
                 }
             }
         }
