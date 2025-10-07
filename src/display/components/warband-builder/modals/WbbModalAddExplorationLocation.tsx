@@ -208,7 +208,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                     ): (
                         <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
                     )}
-                    {'Add Location'}
+                    {'Unlock Location'}
                 </Button>
             </Modal.Footer>
         </Modal>
