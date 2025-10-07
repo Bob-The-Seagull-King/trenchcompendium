@@ -309,7 +309,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The model is supernaturally tainted by Hell and is vulnerable to holy powers."
+                "content": "The model is supernaturally tainted by Hell and is vulnerable to holy powers. Due to their infernal origins, models with the Keyword DEMONIC negate additional BLOOD MARKERS caused by the Keyword FIRE."
             }
         ]
     },
