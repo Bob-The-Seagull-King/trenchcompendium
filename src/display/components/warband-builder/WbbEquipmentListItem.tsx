@@ -135,7 +135,10 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                 </div>
             }
 
-            {((canRemove == true) && (edit_mode)) &&
+            {   (canRemove
+                && edit_mode
+                && ( fighter == null || fighter.model.State != 'dead')
+            ) &&
                 <WbbContextualPopover
                     id={`equipment-${GetIDRel()}`}
                     type={(fighter == null || fighter == undefined)? "equipment" : "equipment_model"}
