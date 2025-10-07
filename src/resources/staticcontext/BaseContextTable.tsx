@@ -4844,7 +4844,6 @@ export const BaseContextCallTable : CallEventTable = {
     keyword_ignore: {
         event_priotity: 0,        
         async getContextuallyRelevantKeywordsByObject(this: EventRunner, eventSource : any, relayVar : Keyword[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log(context_func)
 
             const ValKey : Keyword = KeywordFactory.CreateNewKeyword("kw_negate", null)
             for (let i = 0; i < context_func["value"].length; i++) {
@@ -4862,7 +4861,6 @@ export const BaseContextCallTable : CallEventTable = {
     ignore_element: {
         event_priotity: 0,        
         async getContextuallyRelevantKeywordsByObject(this: EventRunner, eventSource : any, relayVar : Keyword[], trackVal : Model, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
-            console.log(context_func)
 
             const ValKey : Keyword = KeywordFactory.CreateNewKeyword("kw_negate", null)
             for (let i = 0; i < context_func["element"].length; i++) {

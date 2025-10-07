@@ -878,9 +878,6 @@ class WarbandMember extends DynamicContextObject {
     public GetEquipmentAsString() {
         const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
 
-        console.log(CurEquip);
-        console.log(this.ModelEquipments);
-
         const returnVal : string[] = [];
 
         // --- sort CurEquip by category: "ranged" > "melee" > "equipment" (others last) ---
