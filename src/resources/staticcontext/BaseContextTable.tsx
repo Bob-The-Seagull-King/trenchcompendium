@@ -4054,6 +4054,45 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             return relayVar;
+        },
+        async getConsumableFullOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
+            
+            if (sourceband) {
+            const OptionList = await (sourceband).GetFactionEquipmentOptions(true, false, false, false);
+                for (let i = 0; i < OptionList.length; i++) {
+                    let canadd = true;
+                    
+                    if (context_func["limitations"]["category"]) {
+                        if (!context_func["limitations"]["category"].includes(OptionList[i].EquipmentItem.Category)) {
+                            canadd = false;
+                        }
+                    }
+                    
+                    if (context_func["limitations"]["keyword"]) {
+                        let isvalid = false;
+                        const keylist = OptionList[i].EquipmentItem.GetKeyWordIDs();
+                        for (let k = 0; k < context_func["limitations"]["keyword"].length; k++) {
+                            if (keylist.includes(context_func["limitations"]["keyword"][k])) {
+                                isvalid = true;
+                            }
+                        }
+                        if (!isvalid) {
+                            canadd = false;
+                        }
+                    }
+
+                    if (canadd == true) {
+                        relayVar.push(
+                            {
+                                display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " " + getCostType(OptionList[i].CostType),
+                                id: OptionList[i].ID,
+                                value: OptionList[i]
+                            }
+                        )
+                    }
+                }
+            }
+            return relayVar;
         }
     },
     gain_new_item_from_list: {
