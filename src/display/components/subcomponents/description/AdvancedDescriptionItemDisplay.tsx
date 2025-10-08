@@ -542,14 +542,14 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             titlename={component.Name}
                             d_method={() =>
                                 
-                                <div className={'rules-equipment-main'}>                    
+                                <span className={'rules-equipment-main'}>                    
                                     {/* Stats */}
                                     <RulesEquipmentStats
                                         facrelObject={undefined}
                                         baseobject={component}
                                     />
                                     <RulesEquipmentMain data={component}/>
-                                </div>
+                                </span>
                                 }/>
                 </>
                 }

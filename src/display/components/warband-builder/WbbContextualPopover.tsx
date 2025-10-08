@@ -39,7 +39,7 @@ import { ConvertModelToTTSText } from '../../../classes/saveitems/Warband/Conver
 
 interface WbbContextualPopoverProps {
     id: string;
-    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'equipment_model' | 'warband';
+    type: 'fighter' | 'injury' | 'advancement' | 'modifier' | 'exploration' | 'equipment' | 'equipment_model' | 'warband' | 'exploration_temp';
     item: any;
     context?: RealWarbandPurchaseModel | null;
     contextuallimit?: boolean;
@@ -222,11 +222,21 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
     const handleDeleteExploration = () => {
         setshowConfirmDeleteExplorationModal(false);
 
-        warband?.warband_data.DeleteLocation(item).then(() => {
-            const Manager : ToolsController = ToolsController.getInstance();
-            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                () => reloadDisplay())
-        })
+        if (type == "exploration_temp") {
+            if (warband != undefined) {
+                warband.warband_data.Exploration.DeleteTempLocation(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())})
+            }
+        } else {
+
+            warband?.warband_data.DeleteLocation(item).then(() => {
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                    () => reloadDisplay())
+            })
+        }
     }
 
     /** Equipment Actions */
@@ -567,6 +577,15 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             }
 
                             {type === 'exploration' &&
+                                <>
+                                    <div className="action action-delete" onClick={showConfirmDeleteExploration}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Exploration'}
+                                    </div>
+                                </>
+                            }
+
+                            {type === 'exploration_temp' &&
                                 <>
                                     <div className="action action-delete" onClick={showConfirmDeleteExploration}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
@@ -1020,11 +1039,23 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
 
                 <Modal.Body>
                     <div className={'mb-3'}>
-                        {'Are you sure you want to delete this Exploration?'}
+                        {'Are you sure you want to delete this exploration location?'}
+                        <br/>
+                        <br/>
+                        <strong>{item.Name? item.Name : item.base_item?.location?.Name}</strong>?
                     </div>
-                    <div >
-                        <strong>{item.Name }</strong>?
-                    </div>
+                    <AlertCustom
+                        type={'danger'}
+                        className={'mx-2 my-3'}
+                    >
+                        <h5>{'Caution'}</h5>
+                        <p>
+                            {'This will only remove the location.'}
+                            <br />
+                            <br />
+                            {'Any effects the location had on your warband and any equipment you gained will not be removed.'}
+                        </p>
+                    </AlertCustom>
                 </Modal.Body>
 
                 <Modal.Footer>

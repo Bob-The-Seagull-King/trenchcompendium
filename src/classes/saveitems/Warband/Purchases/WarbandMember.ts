@@ -1706,6 +1706,18 @@ class WarbandMember extends DynamicContextObject {
                 }
             )
         }
+        if (canaddupgrade) {
+            canaddupgrade = await Events.runEvent(
+                "withinUpgradeBudget",
+                this,
+                [maxccurcostount, upg.CostType],
+                canaddupgrade,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+        }
         return {
             upgrade : upg,
             purchase : foundpurchase,

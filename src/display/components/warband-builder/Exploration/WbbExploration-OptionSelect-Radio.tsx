@@ -46,10 +46,11 @@ const WbbExploration_OptionSelect_Radio: React.FC<
     const [selected, setSelected] = useState<ISelectedOption | null>(curSelection);
     const [keyvar, setkeyvar] = useState(0);
 
-    const handleSelect = (opt : ISelectedOption) => {
-        setSelected(opt);
+    const handleSelect = (opt : Option) => {
+        if (!opt.available) {return;}
+        setSelected(opt.option);
         if (onChange) {
-            onChange(opt);
+            onChange(opt.option);
         }
         setkeyvar(keyvar + 1)
     };
@@ -67,12 +68,12 @@ const WbbExploration_OptionSelect_Radio: React.FC<
                         value={opt.name}
                         checked={selected?.selection_ID === opt.option.selection_ID}
                         disabled={!opt.available}
-                        onClick={() => handleSelect(opt.option)}
+                        onClick={() => handleSelect(opt)}
                         readOnly // verhindert React warning bei controlled input
                     />
                     <label
                         className={`form-check-label `}
-                        onClick={() => handleSelect(opt.option)}
+                        onClick={() => handleSelect(opt)}
                         style={{ cursor: opt.available ? "pointer" : "not-allowed" }}
                     >
                         {opt.name}

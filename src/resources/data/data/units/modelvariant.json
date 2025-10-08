@@ -1145,6 +1145,9 @@
             "upgrade_budget_free": {
                 "ducats": 60
             },
+            "upgrade_budget_max": {
+                "ducats": 60
+            },
             "model_equipment_restriction": {
                 "removed": []
             },

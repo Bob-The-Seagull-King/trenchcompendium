@@ -11,6 +11,8 @@ import { ISelectedOption } from '../../../../classes/saveitems/Warband/WarbandPr
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 import WbbGeneralCollapse from "../WbbGeneralCollapse";
 import {returnDescription} from "../../../../utility/util";
+import { ExplorationFactory } from '../../../../factories/features/ExplorationFactory';
+import { ExplorationTable } from '../../../../classes/feature/exploration/ExplorationTable';
 
 interface WbbModalAddExplorationLocationProps {
     show: boolean;
@@ -22,8 +24,9 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     const { warband, updateKey, reloadDisplay } = useWarband();
 
     const [selectedLocation, setSelectedLocation] = useState<FilteredLocation | null>(null);
-    const [selectedOptionIds, setSelectedOptionIds] = useState<ISelectedOption[]>([]);
-    const [availableoptions, setavailableoptions] = useState<ExplorationTableSuite[]>([]);
+    const [openedLocation, setOpenedLocation] = useState<FilteredLocation | null>(null);
+    const [availableLocations, setavailableLocations] = useState<ExplorationTableSuite[]>([]);
+    const [fullLocations, setfullLocations] = useState<ExplorationTable[]>([]);
 
     const [isubmitdisabled, setisubmitdisabled] = useState<boolean>(true);
     const [keyvar, setkeyvar] = useState(0);
@@ -31,21 +34,22 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
     // handlesubmit in this callback for delayed submission with loading state
     const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
         if (selectedLocation) {
-            const expl : ExplorationTableSuite = availableoptions.filter((item) => item.valid_locs.filter((sub) => sub.location.ID == selectedLocation.location.ID).length > 0)[0]
+            const expl : ExplorationTableSuite = availableLocations.filter((item) => item.valid_locs.filter((sub) => sub.location.ID == selectedLocation.location.ID).length > 0)[0]
             const filteredop : FilteredLocation = expl.valid_locs.filter((item) => item.location.ID == selectedLocation.location.ID)[0]
             onSubmit(filteredop);
             setSelectedLocation(null);
-            setSelectedOptionIds([]);
             onClose();
         }
     });
 
     useEffect(() => {
         async function RunGetLocations() {
-            const Locations : ExplorationTableSuite[] | undefined = await warband?.warband_data.GetAvailableLocations();
-            if (Locations != undefined) {
-                setavailableoptions(Locations);
+            const availableLocations : ExplorationTableSuite[] | undefined = await warband?.warband_data.GetAvailableLocations();
+            const allLocations : ExplorationTable[] = await ExplorationFactory.GetAllTables(null, false);
+            if (availableLocations != undefined) {
+                setavailableLocations(availableLocations);
             }
+            setfullLocations(allLocations)
             setkeyvar(keyvar + 1)
         }
 
@@ -59,19 +63,50 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
         }
 
         RunUpdate()
-    }, [updateKey, selectedOptionIds, selectedLocation]);
+    }, [updateKey, selectedLocation]);
 
     function RedoSubmitDisabled() {
         setisubmitdisabled(!selectedLocation?.location.GetID());
     }
 
-    // will select and deselect a location on click
-    function handleLocationClick(loc : FilteredLocation) {
-        if(selectedLocation == loc) {
-            setSelectedLocation(null);
-        } else {
-            setSelectedLocation(loc);
+    // Returns bool if location be selected
+    function canSelectLocation (loc : ExplorationLocation) {
+        if (getLocationFromTables(loc) != null) { return true; }
+        return false;
+    }
+
+    function getLocationFromTables(loc : ExplorationLocation) {
+        for (let i = 0; i < availableLocations.length; i++) {
+            for (let j = 0; j < availableLocations[i].valid_locs.length; j++) {
+                if (availableLocations[i].valid_locs[j].location.ID == loc.ID) {
+                    return availableLocations[i].valid_locs[j];
+                }
+            }
         }
+        return null
+    }
+
+    // will select and deselect a location on click
+    function handleLocationClick(loc : ExplorationLocation) {
+        const locval = getLocationFromTables(loc)
+        if (locval == null) { return; }
+        if(openedLocation == locval) { // click on opened location
+            setOpenedLocation(null);
+            setSelectedLocation(null);
+        } else { // click on an unselected location
+            setOpenedLocation(locval); // open clicked location
+
+            if( canSelectLocation(loc) ) { // only select location if can be selected
+                setSelectedLocation(locval);
+            } else {
+                setSelectedLocation(null); // reset selection
+            }
+        }
+    }
+
+    function isValidNameTag(val : any) {
+        if (val.Tags == undefined) { return false;}
+        return val.Tags["validation_rules"] != undefined
     }
 
     return (
@@ -88,61 +123,64 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
             </Modal.Header>
 
             <Modal.Body>
-                {availableoptions.map((adv) => (
+                {fullLocations.map((adv) => (
                     <WbbGeneralCollapse
-                        key={adv.table.ID}
-                        title={makestringpresentable(adv.table.GetTrueName())}
+                        key={adv.ID}
+                        title={makestringpresentable(adv.GetTrueName())}
                         initiallyOpen={false}
                         nopad={true}
                     >
                         <>
-                            {adv.valid_locs.map((loc) =>
+                            {adv.ExplorationLocations.map((loc) =>
                                 <>
                                     {/* Select Row */}
                                     <div
-                                        key={loc.location.ID}
+                                        key={loc.ID}
                                         className={`select-item 
-                                            ${(selectedLocation? selectedLocation.location.ID : "") === loc.location.ID ? 'selected details-open' : ''}
-                                        
+                                            ${(openedLocation? openedLocation.location.ID : "") === loc.ID ? 'selected details-open' : ''}
+                                            ${ canSelectLocation(loc) ? '' : 'disabled'}
                                         `}
                                         onClick={() => {
                                             handleLocationClick(loc);
-                                            setSelectedOptionIds([]); // reset when switching location
                                         }}
                                     >
                                         <div className="item-name">
-                                            {loc.location.TableValue+' - '+loc.location.GetTrueName()}
+                                            {loc.TableValue+' - '+loc.GetTrueName()}
                                         </div>
 
                                     </div>
 
                                     {/* Level 1 Sub-Display when selected */}
-                                    {((selectedLocation ? selectedLocation.location.ID : "") === loc.location.ID) &&
+                                    {((openedLocation ? openedLocation.location.ID : "") === loc.ID) &&
                                         <div className={'select-item-details'}>
 
                                             {/* Location Description Text */}
-                                            {(loc.location.Description != null) &&
+                                            {(loc.Description != null) &&
                                                 <div className={'exploration-description'}>
                                                     {
-                                                        returnDescription(location, loc.location.Description)
+                                                        returnDescription(location, loc.Description)
                                                     }
                                                 </div>
                                             }
 
                                             {/* options for selected location */}
-                                            {(selectedLocation != null && selectedLocation.options.length > 0) &&
+                                            {(openedLocation != null && openedLocation.location.MyOptions.length > 0) &&
                                                 <ul className="exploration-description-options">
                                                     {/* options */}
-                                                    {selectedLocation.options.map(opt =>
+                                                    {openedLocation.location.MyOptions.map(opt =>
 
                                                         <>
-                                                            {opt.selection_valid.map(choice => (
+                                                            {opt.Selections.map(choice => (
                                                                 <>
-                                                                    {/* @TODO: Show all option (even unavailable ones) here */}
                                                                     <li className={'exploration-description-option'}>
                                                                         <span className={'option-name'}>
                                                                             {choice.display_str}
                                                                         </span>
+                                                                        {isValidNameTag(choice.value) &&                                                                            
+                                                                            <span className={'option-description'}>
+                                                                                {choice.value.Tags["validation_rules"]}
+                                                                            </span>
+                                                                        }
                                                                         <span className={'option-description'}>
                                                                             {returnDescription(choice.value, choice.value.Description)}
                                                                         </span>
@@ -170,7 +208,7 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                     ): (
                         <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'} />
                     )}
-                    {'Add Location'}
+                    {'Unlock Location'}
                 </Button>
             </Modal.Footer>
         </Modal>

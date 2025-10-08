@@ -120,6 +120,7 @@ class UserWarband extends DynamicContextObject {
         this.EquipmentRelCache = {}
         this.ModelRelCache = {}
         this.GeneralCache = {}
+        this.Exploration.GeneralCache = {};
         for (let i = 0; i < this.Models.length; i++) {
             const Mod = this.Models[i].HeldObject as WarbandMember
             Mod.GeneralCache = {}
@@ -1008,6 +1009,16 @@ class UserWarband extends DynamicContextObject {
         }
     }
 
+    public HasEnoughDucats(cost : number, costtype : number) {
+        if (costtype == 1) {
+            const ducatval = this.GetSumCurrentGlory();
+            return ducatval >= cost;
+        } else {
+            const ducatval = this.GetSumCurrentDucats();
+            return ducatval >= cost;
+        }
+    }
+
     public async CustomStash( item : Equipment, cost : number, costtype : number) {
         if (!this.Restrictions.includes("custom_equipment")) {
             this.Restrictions.push("custom_equipment")
@@ -1029,6 +1040,8 @@ class UserWarband extends DynamicContextObject {
     }
     
     public async AddStash ( stash: FactionEquipmentRelationship, free = false, replace : null | FactionEquipmentRelationship = null) {
+        if (stash == null || stash == undefined) { return; }
+        if (stash.EquipmentItem == null || stash.EquipmentItem == undefined) {return;}
         let itemcost = stash.Cost;
         if ((this).EquipmentRelCache[stash.ID] != null) {
             itemcost = (this).EquipmentRelCache[stash.ID].cost
@@ -1821,9 +1834,7 @@ class UserWarband extends DynamicContextObject {
             if (this.IsUnRestricted || canaddupgrade) {
                 ListOfRels.push(BaseRels[i]);
             }
-
         }
-
         return ListOfRels
     }
 

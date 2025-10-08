@@ -15,23 +15,10 @@ import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandPrope
 import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import {useWbbMode} from "../../../context/WbbModeContext";
-import WbbExploration_OptionSelect_Radio from "./Exploration/WbbExploration-OptionSelect-Radio";
-import WbbExploration_Selection_Fallen_Knight from "./Exploration/WbbExploration_Selection_Fallen_Knight";
-import WbbExploration_Selection_SingleEquipment from "./Exploration/WbbExploration_Selection_SingleEquipment";
-import WbbExploration_Selection_MoonshineStash_Destroy
-    from "./Exploration/WbbExploration_Selection_MoonshineStash_Destroy";
-import WbbExploration_Selection_AngelicInstrument from "./Exploration/WbbExploration_Selection_AngelicInstrument";
-import WbbExploration_Selection_HolyDNA from "./Exploration/WbbExploration_Selection_HolyDNA";
-import WbbExploration_Selection_GolgothaTektites from "./Exploration/WbbExploration_Selection_GolgothaTektites";
-import WbbExploration_Selection_Fruit from "./Exploration/WbbExploration_Selection_Fruit";
-import WbbExploration_Selection_BattlefieldOfCorpses from "./Exploration/WbbExploration_Selection_BattlefieldOfCorpses";
-import WbbExploration_Selection_FallenSoldier from "./Exploration/WbbExploration_Selection_FallenSoldier";
-import WbbExploration_Selection_GloryPurchase from "./Exploration/WbbExploration_Selection_GloryPurchase";
-import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploration_Selection_MultiEquipment";
-import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandConsumable';
 import { EventRunner } from '../../../classes/contextevent/contexteventhandler';
+import WbbExploration_Selection_Parent from './Exploration/WbbExploration_Selection_Parent';
 
 interface WbbEditViewExplorationProps {
     location : WarbandProperty;
@@ -44,7 +31,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
     if (warband == null) return (<div>Loading...</div>);
 
     // @TODO: set initially open if this exploration location has NOT been applied yet
-    const [open, setOpen] = useState<boolean>(initiallyOpen ?? true);
+    const [open, setOpen] = useState<boolean>(initiallyOpen ?? false);
     const [contextMessage, setContextMessage] = useState<string[]>([]);
     const [keyvar, setkeyvar] = useState(0);
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
@@ -57,7 +44,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
             const IDString = await Events.runEvent(
                 "getLocationSavedMessage",
                 location,
-                [],
+                [warband?.warband_data],
                 [],
                 null
             )
@@ -68,7 +55,10 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
         GetMessage();
     }, [updateKey]);
     
-
+    function isValidNameTag(val : any) {
+        if (val.Tags == undefined) { return false;}
+        return val.Tags["validation_rules"] != undefined
+    }
 
     return (
         <div className="WbbEditViewExploration">
@@ -110,16 +100,24 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                             <ul className={'exploration-description-options'}>
                                 {location.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
                                     <div key={location.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
-                                    {item.Selections.map((selectedchoice) => 
-                                        <div key={item.Selections.indexOf(selectedchoice)}>
-                                        <li  className={'exploration-description-option'}>
-                                            <span className={'option-name'}>
-                                                {selectedchoice.display_str}
-                                            </span>
-                                            <span className={'option-description'}>
-                                                {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
-                                            </span>
-                                        </li></div>
+                                        {item.Selections.map((selectedchoice) =>
+                                            <div key={item.Selections.indexOf(selectedchoice)}>
+                                                <li  className={'exploration-description-option'}>
+                                                    <span className={'option-name'}>
+                                                        {selectedchoice.display_str}
+                                                    </span>
+
+                                                    {isValidNameTag(selectedchoice.value) &&
+                                                        <span className={'option-description'}>
+                                                            {selectedchoice.value.Tags["validation_rules"]}
+                                                        </span>
+                                                    }
+
+                                                    <span className={'option-description'}>
+                                                        {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
+                                                    </span>
+                                                </li>
+                                            </div>
                                         )}
                                     </div>   
                                 ) }
@@ -131,6 +129,7 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                 <div
                                     key={location.SelfDynamicProperty.Selections.indexOf(item)}>
                                         <WbbOptionSelect
+                                            leadtext={"Your Choice: "}
                                             property={location}
                                             hidedesc={true}
                                             choice={item}
@@ -143,103 +142,60 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                         <div className="stash-items-wrap">
                             <div className={'stash-items-category'}>
                                 {location.Consumables.map((item: WarbandConsumable, index: number) => (
-                                    <WbbConsumableSelect
-                                        key={index}
-                                        property={item}
-                                    />
+                                    
+                                            <WbbExploration_Selection_Parent
+                                                key={index}
+                                                property={item}
+                                                doshow={false}
+                                                dochange={false}
+                                                updatestate={() => {undefined}}
+                                            />
                                 ))}
                             </div>
                         </div>
                         }
+
+                        <div key={keyvar}>
+                        {location.SubProperties.length > 0 &&
+                            <>
+                                {location.SubProperties.map((item) =>
+                                    <div
+                                        key={location!.SubProperties.indexOf(item)}
+                                    >
+                                        {item.SelfDynamicProperty.Selections.length > 0 &&
+                                            <>
+                                            {item.SelfDynamicProperty.Selections.map((subitem) =>
+                                                <div
+                                            key={location!.SelfDynamicProperty.Selections.indexOf(subitem)}
+                                            >
+                                           {subitem.Option.Tags.base_loc == undefined &&
+                                                <WbbOptionSelect
+                                                    property={item}
+                                                    hidedesc={true}
+                                                    choice={subitem}
+                                                    overrideplay={true}
+                                                />
+                                            }
+                                        </div>)}</>
+                                        }
+                                    </div>
+                                )}
+                                </>
+                            }</div>
                         
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
                         <div key={keyvar} className={'alert-exploration alert-exploration-info'}>
-                            <ul>
+                            <span>
                                 {contextMessage.map((item, index) => 
-                                <li key={index}>
-                                    {item}
-                                </li>)}
-                            </ul>
+                                <span key={index}>
+                                    {item + " "}
+                                </span>)}
+                            </span>
                         </div>
                         }
 
-                        {/* Show additional Selection Options for the location */}
 
-                        {/* @TODO: show this conditionally */}
-                        {/* Show selection of sword or polearm */}
-                        {/*<WbbExploration_Selection_Fallen_Knight*/}
-                        {/*    onChange={() => {alert('option changed - fallen knight')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Show selection for falles soldier*/}
-                        {/*<WbbExploration_Selection_FallenSoldier*/}
-                        {/*    onChange={() => {alert('option changed - fallen soldier')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select a single equipment from a list */}
-                        {/*<WbbExploration_Selection_SingleEquipment*/}
-                        {/*    onSubmit={() => {console.log('equipment selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/*/!* Select 4 fighters to gain 1 XP *!/*/}
-                        {/*<WbbExploration_Selection_MoonshineStash_Destroy*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one fighter with an instrument */}
-                        {/*<WbbExploration_Selection_AngelicInstrument*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one fighter to gain Holy DNA*/}
-                        {/*<WbbExploration_Selection_HolyDNA*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one armour to Upgrade*/}
-                        {/*<WbbExploration_Selection_GolgothaTektites*/}
-                        {/*    // onChange={() => {alert('changed')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one skill for a fighter*/}
-                        {/*<WbbExploration_Selection_Fruit*/}
-                        {/*    // onSubmit={() => {alert('skill selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select two items costing 100D or less */}
-                        {/*<WbbExploration_Selection_BattlefieldOfCorpses*/}
-                        {/*    // onSubmit={() => {alert('skill selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select one items glory to purchase */}
-                        {/*<WbbExploration_Selection_GloryPurchase*/}
-                        {/*    onSubmit={() => {alert('glory item selected')}}*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select multiple items from a list within a limit */}
-                        {/*<WbbExploration_Selection_MultiEquipment*/}
-                        {/*/>*/}
-
-                        {/* @TODO: show this conditionally */}
-                        {/* Select a die Roll value */}
-                        {/*<WbbExploration_Selection_DieRollResult*/}
-                        {/*    label={'6D6 roll result'}*/}
-                        {/*    onChange={(result) => {*/}
-                        {/*        /!* @TODO: ceck if entered number is withing range and disable submit if not*!/*/}
-                        {/*        alert('roll result = ' + result)*/}
-                        {/*    }}*/}
-                        {/*/>*/}
                         
                     </div>
                 </div>

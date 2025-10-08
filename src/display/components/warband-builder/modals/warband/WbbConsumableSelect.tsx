@@ -16,9 +16,10 @@ import WbbEditConsumableModal from './WbbEditConsumableModal';
 
 interface WbbEditSelectionProps {
     property : WarbandConsumable;
+    dochange: boolean;
 }
 
-const WbbConsumableSelect: React.FC<WbbEditSelectionProps> = ({property}) => {
+const WbbConsumableSelect: React.FC<WbbEditSelectionProps> = ({property, dochange}) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);
 

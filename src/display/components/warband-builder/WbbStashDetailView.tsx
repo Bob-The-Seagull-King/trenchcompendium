@@ -353,6 +353,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                                     <WbbConsumableSelect
                                         key={index}
                                         property={item}
+                                        dochange={false}
                                     />
                                 ))}
                             </div>

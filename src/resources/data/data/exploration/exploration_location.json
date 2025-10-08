@@ -49,7 +49,7 @@
     },
     {
         "id": "el_moonshinestash_distribute",
-        "name": "Distribute Moonshine Stash",
+        "name": "Distribute",
         "source": "core",
         "tags": {
             "location_option": "el_moonshinestash"
@@ -68,7 +68,11 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
+                "content": "From: Moonshine Stash"
+            },       
+            {
+                "tags": {"desc_type" : "paragraph"},
                 "content": "During the next battle, your warband rolls Morale checks with +2 DICE.",
                 "glossary": [{"val": "+2 DICE", "id": "kw_plusdice"}]
             }
@@ -97,7 +101,7 @@
     },
     {
         "id": "el_moonshinestash_destroy",
-        "name": "Destroy the Stash",
+        "name": "Destroy",
         "source": "core",
         "tags": {
             "location_option": "el_moonshinestash"
@@ -122,9 +126,13 @@
                 "gains": 1
             }
         },
-        "description": [            
+        "description": [     
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
+                "content": "From: Moonshine Stash"
+            },        
+            {
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Up to two of your ELITES each gain +1 Experience Point.",
                 "glossary": [{"val": "ELITES", "id": "kw_elite"}]
             }
@@ -314,6 +322,8 @@
         },
         "contextdata": {
             "gain_all_from_list_find": {
+                "obey_faction": true,
+                "obey_restriction": true,
                 "id": ["eq_troopflag"]
             }
         },
@@ -543,6 +553,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "tags" : {"hide_info": true},
             "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
@@ -571,7 +582,7 @@
     },
     {
         "id": "el_survivor_yeoman",
-        "name": "New Antioch",
+        "name": "Survivor Yeoman",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -604,7 +615,7 @@
     },
     {
         "id": "el_survivor_trenchpilgrims",
-        "name": "Trench Pilgrims",
+        "name": "Ecclesiastic Prisoner",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -633,7 +644,7 @@
     },
     {
         "id": "el_survivor_ironsultanate",
-        "name": "Iron Sultanate",
+        "name": "Azeb",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -662,7 +673,7 @@
     },
     {
         "id": "el_survivor_hereticlegion",
-        "name": "Heretic Legions",
+        "name": "Heretic Wretched",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -691,7 +702,7 @@
     },
     {
         "id": "el_survivor_court",
-        "name": "The Court",
+        "name": "Court Wretched",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -720,7 +731,7 @@
     },
     {
         "id": "el_survivor_blackgrail",
-        "name": "Black Grail",
+        "name": "Grail Thrall",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -908,6 +919,9 @@
         "contextdata": {
             "add_location_modifier": {
                 "id": ["el_trenchmerchant_trade_mod"]
+            },
+            "set_exploration_purchase_cap": {
+                "cost": 5
             }
         },
         "description": [            
@@ -920,7 +934,7 @@
     },
     {
         "id": "el_trenchmerchant_trade_mod",
-        "name": "Black Network Contact",
+        "name": "Trench Merchant Trade",
         "source": "core",
         "tags": {
             "modifier": true
@@ -987,6 +1001,7 @@
             "name" : "",
             "description" : [],
             "category" : "type",
+            "tags" : {"hide_info": true, "base_loc": true},
             "type" : "text",
             "single": true,
             "strictness" : "strict",
@@ -1015,8 +1030,8 @@
         }]
     },
     {
-        "id": "el_snipersnest_antiochpilgrim",
-        "name": "New Antioch or Trench Pilgrims",
+        "id": "el_snipersnest_antioch",
+        "name": "New Antioch",
         "source": "core",
         "tags": {
             "location_option": "el_snipersnest"
@@ -1026,7 +1041,7 @@
                 "allowed": [
                     {
                         "type": "faction",
-                        "value": ["fc_newantioch","fc_trenchpilgrim"]
+                        "value": ["fc_newantioch"]
                     }
                 ]
             },
@@ -1049,6 +1064,41 @@
                 "tags": {"desc_type" : "default"},
                 "content": " or "
             },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_sniperscope"
+            },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_snipersnest_pilgrim",
+        "name": "Trench Pilgrims",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["rel_fc_eq_sniperrifle_glory"]
+            }
+        },
+        "description": [
             {
                 "tags": {"desc_type" : "equipmentslim"},
                 "content": "eq_sniperscope"
@@ -1571,7 +1621,7 @@
     },
     {
         "id": "el_ransackedalchemistworkshop_mod",
-        "name": "Ransacked Alchemical Workshop",
+        "name": "Curative Fluids",
         "source": "core",
         "tags": {
             "modifier": true
@@ -1587,7 +1637,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+                "content": "During any Reallocate Equipment step for the rest of the Campaign your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
             }
         ],
         "options": [ {
@@ -1615,6 +1665,9 @@
             "location_rule_option": {},
             "add_location_modifier": {
                 "id": ["el_blackmarket_mod"]
+            },
+            "set_exploration_purchase_cap": {
+                "cost": 8
             }
         },
         "description": [            
@@ -1783,8 +1836,12 @@
         "contextdata": {"location_rule_option": {}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "You find a motherlode of forbidden objects and chemicals, highly sought after and in demand. Choose one:"
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Trench Pilgrims must select the Confiscate option."
             }
         ],
         "location_value": 21,
@@ -1880,7 +1937,7 @@
     },
     {
         "id": "el_stashofdrugsanderotica_indulge",
-        "name": "Indulge",
+        "name": "Indulge in Drugs & Erotica",
         "source": "core",
         "tags": {
             "location_option": "el_stashofdrugsanderotica"
@@ -2105,7 +2162,7 @@
     },
     {
         "id": "el_abandonedressurectionmachine_mod",
-        "name": "Abandoned Ressurection Machine",
+        "name": "Salvaged Resurrection Machine",
         "source": "core",
         "tags": {
             "modifier": true
@@ -2496,7 +2553,8 @@
                             {
                                 "tag": "takwin"
                             }
-                        ]
+                        ],
+                        "min": 5
                     }
                 ]
             }
@@ -2518,6 +2576,9 @@
         },
         "contextdata": {
             "location_rule_option": {},
+            "set_exploration_purchase_cap": {
+                "cost": 99
+            },
             "add_location_modifier": {
                 "id": ["el_blacknetworkcontact_mod"]
             }
@@ -2561,6 +2622,7 @@
         "contextdata": {
             "location_rule_option": {},
             "consumable": {
+                "post_save": true,
                 "single_exploration_glory_item": {
                     "cost": 999999
                 }
@@ -2649,7 +2711,7 @@
                 "content": "",
                 "subcontent": [
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": "A saint guides your troops before each battle. The model with the "
                     },
                     {
@@ -2657,7 +2719,7 @@
                         "content": "eq_faithfulskull"
                     },          
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": " gains the following skill:"
                     }
                 ]
@@ -2695,7 +2757,7 @@
                 "content": "",
                 "subcontent": [
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": "The "
                     },
                     {
@@ -2703,7 +2765,7 @@
                         "content": "eq_hellskull"
                     },           
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": " screams as you mount it on a pole to mock God and paint it with blasphemous names. This item counts as a banner."
                     }
                 ]
@@ -2769,6 +2831,32 @@
             "unforced": true
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_sampleofholydna_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSING MARKER instead.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "location_value": 26,
+        "options": [ ]
+    },
+    {
+        "id": "el_sampleofholydna_mod",
+        "name": "Sample of Holy DNA",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
             "warband_attatch": {
@@ -2794,7 +2882,6 @@
                 ]
             }
         ],
-        "location_value": 26,
         "options": [ {
                 "ref_id" : "ot_sampleofholydna_a",
                 "name" : "",
@@ -2942,6 +3029,30 @@
             "exploration_table": "et_legendarylocations"
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_fruitfromthetreeofgoodandevilknowledge_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Amongst bones of giant humans unearthed by the ravages of war you discover a golden-hued fruit wrapped in spun cloth.Any model eating this fruit will immediately gain any Skill of your choice normally available to your Warband/this model (including any Exploration Skill). In addition the model will gain the Keyword DEMONIC.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "location_value": 36,
+        "options": [ ]
+    },
+    {
+        "id": "el_fruitfromthetreeofgoodandevilknowledge_mod",
+        "name": "Fruit from the Tree of Good and Evil Knowledge",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
             "warband_attatch": {
@@ -2965,7 +3076,6 @@
                 ]
             }
         ],
-        "location_value": 36,
         "options": [{
             "ref_id" : "ot_fruitfromthetreeofgoodandevilknowledge_a",
             "name" : "",

@@ -22,6 +22,7 @@ const WbbModifiersList = () => {
             if (warband) {
                 const Modifiers = await warband?.warband_data.GetModifiersList();
                 const Fireteams = await warband?.warband_data.GetFireteams();
+                
                 setmodifiers(Modifiers);
                 setfireteams(Fireteams)
                 setlocations(warband?.warband_data.ModifiersLoc)

@@ -17,17 +17,8 @@ import { returnDescription } from '../../../utility/util';
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbExploration_OptionSelect_Radio from "./Exploration/WbbExploration-OptionSelect-Radio";
-import WbbExploration_Selection_Fallen_Knight from "./Exploration/WbbExploration_Selection_Fallen_Knight";
+import WbbExploration_Selection_SmallList from "./Exploration/WbbExploration_Selection_SmallListEquipment";
 import WbbExploration_Selection_SingleEquipment from "./Exploration/WbbExploration_Selection_SingleEquipment";
-import WbbExploration_Selection_MoonshineStash_Destroy
-    from "./Exploration/WbbExploration_Selection_MoonshineStash_Destroy";
-import WbbExploration_Selection_AngelicInstrument from "./Exploration/WbbExploration_Selection_AngelicInstrument";
-import WbbExploration_Selection_HolyDNA from "./Exploration/WbbExploration_Selection_HolyDNA";
-import WbbExploration_Selection_GolgothaTektites from "./Exploration/WbbExploration_Selection_GolgothaTektites";
-import WbbExploration_Selection_Fruit from "./Exploration/WbbExploration_Selection_Fruit";
-import WbbExploration_Selection_BattlefieldOfCorpses from "./Exploration/WbbExploration_Selection_BattlefieldOfCorpses";
-import WbbExploration_Selection_FallenSoldier from "./Exploration/WbbExploration_Selection_FallenSoldier";
-import WbbExploration_Selection_GloryPurchase from "./Exploration/WbbExploration_Selection_GloryPurchase";
 import WbbExploration_Selection_MultiEquipment from "./Exploration/WbbExploration_Selection_MultiEquipment";
 import WbbExploration_Selection_DieRollResult from "./Exploration/WbbExploration_Selection_DieRollResult";
 import { ExplorationLocation } from '../../../classes/feature/exploration/ExplorationLocation';
@@ -38,6 +29,9 @@ import { WarbandConsumable } from '../../../classes/saveitems/Warband/WarbandCon
 import WbbConsumableSelect from './modals/warband/WbbConsumableSelect';
 import { ContextObject } from '../../../classes/contextevent/contextobject';
 import { CheckRelevantBaseOptions, CheckRelevantFullOptions, StoredLocation } from '../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
+import WbbExploration_Selection_Parent from './Exploration/WbbExploration_Selection_Parent';
+import WbbExploration_Selection_MoonshineStash_Destroy
+    from "./Exploration/WbbExploration_Selection_MoonshineStash_Destroy";
 
 interface WbbEditViewExplorationProps {
     location : StoredLocation;
@@ -57,6 +51,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const [cansave, setcansave] = useState<boolean>(GetCanSave() );
     
     function GetCanSave() {
+        
         const IsRealID = location.base_item.location?.GetID()
         const IsForced = !(containsTag(location.base_item.location.Tags, 'unforced'))
         const optionList = location.base_item?.options
@@ -68,18 +63,29 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             OptionsAreValid = true
         }
 
-        return !IsRealID || IsForced && OptionsAreValid && ListOfFullOptions.length > 0 && (FilteredOptions.length != BaseOptions.length )
+        let ConsumablesAllGood = true
+        if (location.true_obj) {
+            for (let i = 0; i < location.true_obj.Consumables.length; i++) {
+                const consumablecur = location.true_obj.Consumables[i]
+                if (consumablecur.SelectData == null && consumablecur.SelectItem == null) {
+                    if (consumablecur.Tags["relaxed_requirement"] == undefined) {
+                        ConsumablesAllGood = false;
+                    }
+                }
+            }
+        }
+
+        return !IsRealID || (IsForced && OptionsAreValid && ListOfFullOptions.length > 0 && (FilteredOptions.length != BaseOptions.length )) || !ConsumablesAllGood
     }
 
     function createBaseItem() {
         if (!warband) { return; }
-        warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {
+        warband.warband_data.Exploration.AddTempExplorationLocation(location, location.base_item.location, location.selected_options).then(() => {
             onbaseItemCreate()
         })
     }
 
     async function onbaseItemCreate() {
-        setkeyvar(keyvar + 1);
         
         if (location.true_obj) {
             const Events : EventRunner = new EventRunner();
@@ -92,13 +98,18 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
             )
             setContextMessage(IDString)
         }
+        setcansave(GetCanSave())
+        setkeyvar(keyvar + 1);
     }
 
     useEffect(() => {
         async function GetMessage() {
             if (CheckRelevantBaseOptions(location.base_item).length == 0 && location.true_obj == undefined) {
                 createBaseItem();
+            } else {
+                await onbaseItemCreate();
             }
+            setkeyvar(keyvar + 1);
             
         }
 
@@ -111,11 +122,11 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
     const handleApply = () => {
         if (!warband) { return; }
         if (location.true_obj == undefined) {
-            warband.warband_data.Exploration.AddTempExplorationLocation(location.base_item.location, location.selected_options).then(() => {warband.warband_data.Exploration.AssignTempLocation().then(() => {
+            warband.warband_data.Exploration.AddTempExplorationLocation(location, location.base_item.location, location.selected_options).then(() => {warband.warband_data.Exploration.AssignTempLocation(location).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })})} else {
-        warband.warband_data.Exploration.AssignTempLocation().then(() => {
+        warband.warband_data.Exploration.AssignTempLocation(location).then(() => {
             const Manager : ToolsController = ToolsController.getInstance();
             Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {clear(); reloadDisplay()})
         })
@@ -136,11 +147,22 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
         setcansave(GetCanSave() )
         setUpdateState(updateState + 1);
         createBaseItem()
+            setkeyvar(keyvar + 1);
+
     }
 
+    function UpdateStateCall() {
+        
+        setcansave(GetCanSave() )
+    }
+
+    function isValidNameTag(val : any) {
+        if (val.Tags == undefined) { return false;}
+        return val.Tags["validation_rules"] != undefined
+    }
 
     return (
-        <div className="WbbEditViewExploration">
+        <div className="WbbEditViewExploration WbbEditViewExplorationUnstored">
             <div className={'WbbEditViewExploration-title'}
                  onClick={() => setOpen(!open)}
             >
@@ -150,13 +172,20 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                 </div>
 
                 {/* Collapse icon */}
-                <span className={'collapse-chevron-wrap mx-1'}>
+                <span className={'collapse-chevron-wrap mx-4'}>
                     <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown} className=""/>
                 </span>
+
+                {/* actions */}
+                <WbbContextualPopover
+                    id={`exploration-temp-${location.base_item.location.ID}`}
+                    type="exploration_temp"
+                    item={location}
+                />
             </div>
 
             <Collapse in={open}>
-                <div>
+                <div key={keyvar}>
                     <div className={'exploration-body'}>
                         {/* Main description text */}
                         <div className={'exploration-description'}>
@@ -168,6 +197,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                 </>
                             }
                         </div>
+
                         {/* Show option descriptions if any */}
                         {(CheckRelevantBaseOptions(location.base_item).length > 0 )  &&
                             <ul className={'exploration-description-options'}>
@@ -175,19 +205,27 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                     <div key={CheckRelevantBaseOptions(location.base_item).indexOf(item)}>
                                         {item.baseopt.Tags.base_loc != undefined &&
                                             <>
-                                        {item.baseopt.Selections.map((choice) => 
-                                        <li key={item.baseopt.Selections.indexOf(choice)} className={'exploration-description-option'}>
-                                            <span className={'option-name'}>
-                                                {choice.display_str}
-                                            </span>
-                                            <span className={'option-description'}>
-                                                {returnDescription(choice.value, choice.value.Description)}
-                                            </span>
-                                        </li>)
+                                                {item.baseopt.Selections.map((choice) =>
+                                                    <li key={item.baseopt.Selections.indexOf(choice)} className={'exploration-description-option'}>
+                                                        <span className={'option-name'}>
+                                                            {choice.display_str}
+                                                        </span>
 
-                                        }</>}
+                                                        {isValidNameTag(choice.value) &&                                                                            
+                                                            <span className={'option-description'}>
+                                                                {choice.value.Tags["validation_rules"]}
+                                                            </span>
+                                                        }
+
+                                                        <span className={'option-description'}>
+                                                            {returnDescription(choice.value, choice.value.Description)}
+                                                        </span>
+                                                    </li>
+                                                )}
+                                            </>
+                                        }
                                     </div>   
-                                ) }
+                                )}
                             </ul>
                         }
 
@@ -207,13 +245,12 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         }
 
                         {((location.true_obj != undefined) && (location.true_obj != null)) &&
-                            <div key={keyvar}>
-                                
+                            <div>
                                 {(location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.length > 0 ) && 
                                     <ul className={'exploration-description-options'}>
                                         {location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
                                             <div key={location.true_obj!.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
-                                                {item.Tags.base_loc == undefined &&
+                                                {(item.Tags.base_loc == undefined && item.Tags.hide_info == undefined) &&
                                                     <>
                                             {item.Selections.map((selectedchoice) => 
                                                 <div key={item.Selections.indexOf(selectedchoice)}>
@@ -221,6 +258,12 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                                     <span className={'option-name'}>
                                                         {selectedchoice.display_str}
                                                     </span>
+
+                                                    {isValidNameTag(selectedchoice.value) &&                                                                            
+                                                        <span className={'option-description'}>
+                                                            {selectedchoice.value.Tags["validation_rules"]}
+                                                        </span>
+                                                    }
                                                     <span className={'option-description'}>
                                                         {returnDescription(selectedchoice.value, selectedchoice.value.Description)}
                                                     </span>
@@ -231,76 +274,47 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                                         ) }
                                     </ul>
                                 }
-                                {location.true_obj.SelfDynamicProperty.Selections.length > 0 &&
-                                    <>
-                                    {location.true_obj.SelfDynamicProperty.Selections.map((item) =>
-                                        <div
-                                            key={location.true_obj!.SelfDynamicProperty.Selections.indexOf(item)}>
-                                                {item.Option.Tags.base_loc == undefined &&
-                                                    <>
-                                                <WbbOptionSelect
-                                                    property={location.true_obj!}
-                                                    hidedesc={true}
-                                                    choice={item}
-                                                /></>
-                                                }
-                                        </div>
-                                    )}
-                                </>
-                                }
+
                                 {location.true_obj.Consumables.length > 0 &&
-                                <div className="stash-items-wrap">
-                                    <div className={'stash-items-category'}>
+                                    <div className="exploration-consumable-list">
                                         {location.true_obj.Consumables.map((item: WarbandConsumable, index: number) => (
-                                            <WbbConsumableSelect
+                                            <WbbExploration_Selection_Parent
                                                 key={index}
                                                 property={item}
+                                                doshow={true}
+                                                dochange={true}
+                                                updatestate={() => UpdateStateCall()}
                                             />
                                         ))}
                                     </div>
-                                </div>
                                 }
                             </div>
                         }
 
-                        {contextMessage.length == 0 &&
-                        <br/>
-                        }
-
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
-                        <div key={keyvar} className={'alert-exploration alert-exploration-info'}>
-                            <ul>
-                                {contextMessage.map((item, index) => 
-                                <li key={index}>
-                                    {item}
-                                </li>)}
-                            </ul>
-                        </div>
+                            <div className={'alert-exploration alert-exploration-info'}>
+                                <span>
+                                    {contextMessage.map((item, index) =>
+                                    <span key={index}>
+                                        {item + " "}
+                                    </span>)}
+                                </span>
+                            </div>
                         }
 
-                        {/* @TODO: disable if necessary options are not made*/}
+
+                        
+
+                        {/* @TODO: disable if necessary options are not made */}
                         <button
                             className={'btn btn-primary'}
                             onClick={handleApply}
                             disabled={cansave}
                         >
-                            {'Save Exploration'}
+                            {'Apply Exploration'}
                         </button>
 
-                        {/* @TODO: remove - this is for reference */}
-                        {/*{location.SelfDynamicProperty.Selections.length > 0 &&*/}
-                        {/*    <>*/}
-                        {/*        {location.SelfDynamicProperty.Selections.map((item) =>*/}
-                        {/*            <WbbOptionSelect*/}
-                        {/*                overrideplay={false}*/}
-                        {/*                property={location}*/}
-                        {/*                key={location.SelfDynamicProperty.Selections.indexOf(item)}*/}
-                        {/*                choice={item}*/}
-                        {/*            />*/}
-                        {/*        )}*/}
-                        {/*    </>*/}
-                        {/*}*/}
                     </div>
                 </div>
             </Collapse>

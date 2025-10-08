@@ -21,17 +21,17 @@ const WbbLocationsList = () => {
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     const [keyvar, setkeyvar] = useState(0);
     const [locations, setlocations] = useState<WarbandProperty[]>([]);
-    const [templocation, settemplocation] = useState<StoredLocation | null>(warband? warband.warband_data.Exploration.CurLocation : null);
+    const [templocation, settemplocation] = useState<StoredLocation[]>(warband? warband.warband_data.Exploration.CurLocation : []);
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
 
     const handleSaveExplorationLocation = (optionsuite : FilteredLocation) => {
         if (!warband) { return; }
-        warband.warband_data.Exploration.CurLocation = {
+        warband.warband_data.Exploration.CurLocation.push({
             base_item: optionsuite,
             selected_options: []
-        }
+        })
         settemplocation(warband.warband_data.Exploration.CurLocation)
         reloadDisplay()
     };
@@ -42,6 +42,7 @@ const WbbLocationsList = () => {
                 const Modifiers = warband?.warband_data.GetLocations();
                 setlocations(Modifiers);
             }
+            settemplocation(warband? warband.warband_data.Exploration.CurLocation : [])
             setkeyvar(keyvar + 1);
         }
 
@@ -63,12 +64,13 @@ const WbbLocationsList = () => {
                 />
             )}
 
-            {templocation != null &&
+            {templocation.map((item, index) =>
                 <WbbEditViewExplorationUnstored
-                    location={templocation}
-                    clear={() => settemplocation(null)}
+                    location={item}
+                    key={index}
+                    clear={() => settemplocation([])}
                 />
-            }
+            )}
 
             {edit_mode &&
             <div className={'btn btn-add-element btn-block'}

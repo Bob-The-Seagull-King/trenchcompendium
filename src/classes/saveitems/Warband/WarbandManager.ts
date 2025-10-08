@@ -176,22 +176,33 @@ class WarbandManager {
         }
         this.UpdateLocalStorage();
     }
-
     public UpdateLocalStorage() {
-        const _list: ISumWarband[] = []
-        for (let i = 0; i < this.CurWarbands().length; i++) {
-            try {
-                _list.push(
-                    {   
-                        id: this.CurWarbands()[i].id,
-                        warband_data: this.CurWarbands()[i].warband_data.ConvertToInterface()
-                    })
-            } catch (e) {
-                console.log("Conversion Failed")
-            }
-        }
-        localStorage.setItem('userwarbanditem', JSON.stringify(_list));
+  const _list: ISumWarband[] = [];
+
+      console.warn("Start Conversion");
+  for (let i = 0; i < this.CurWarbands().length; i++) {
+    try {
+      const data = this.CurWarbands()[i].warband_data.ConvertToInterface();
+
+      _list.push({
+        id: this.CurWarbands()[i].id,
+        warband_data: data,
+      });
+    } catch (e) {
+      console.warn("Conversion failed for index", i, e);
     }
+  }
+
+  try {
+    console.log("About to save to localStorage:", _list);
+    const str = JSON.stringify(_list);
+    console.log("Stringified successfully, length:", str.length);
+    localStorage.setItem("userwarbanditem", str);
+  } catch (e) {
+    console.error("❌ Failed to stringify warbands:", e);
+    console.log("Problematic object:", _list);
+  }
+}
 
     public async UpdateItemInfo(id : number) {
         if (this.UserProfile == null) {
