@@ -13,6 +13,11 @@ var klaroConfig = {
         window.adsbygoogle = window.adsbygoogle || [];
         // 'google-ads' = your Klaro service name for advertising consent
         window.adsbygoogle.requestNonPersonalizedAds = consent['google-ads'] ? 0 : 1;
+
+        // Send "consent given" event through the app - means "any" consent to trigger ads
+        try {
+            window.dispatchEvent(new CustomEvent('tc:consent-changed', { detail: consent }));
+        } catch (e) {}
     },
     translations: {
         de: {

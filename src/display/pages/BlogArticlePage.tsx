@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import SynodImageWithCredit from "../../utility/SynodImageWithCredits";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import SynodFactionImage from "../../utility/SynodFactionImage";
+import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 
 interface WPPost {
     id: number;
@@ -35,6 +37,7 @@ const BlogArticlePage: React.FC = () => {
     const [nextPost, setNextPost] = useState<NavPost | null>(null);
     const [previousPost, setPreviousPost] = useState<NavPost | null>(null);
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -144,37 +147,41 @@ const BlogArticlePage: React.FC = () => {
 
                 <div className="blog-adjacent-navigation">
                     {(nextPost && nextPost.slug) ? (
-                        <Link to={`/blog/${nextPost.slug}`}
-                              className="blog-adjacent-navigation_element blog-adjacent-navigation_previous"
-                        >
-                        <span className={'page-link-label'}>
-                            <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l"/>
-                            {'Newer'}
-                        </span>
+                        <CustomNavLink
+                            classes={'blog-adjacent-navigation_element blog-adjacent-navigation_next'}
+                            link={`/blog/${nextPost.slug}`}
+                            runfunc={() => {
+                                navigate(`/blog/${nextPost.slug}`)
+                            }}>
+                            <span className={'page-link-label'}>
+                                <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l"/>
+                                {'Newer'}
+                            </span>
 
                             <span className={'page-name'}
                                   dangerouslySetInnerHTML={{__html: nextPost.title}}
                             >
-                        </span>
-
-                        </Link>
+                            </span>
+                        </CustomNavLink>
                     ) : <span></span>}
 
-                    {(previousPost && previousPost.slug ) ? (
-                        <Link to={`/blog/${previousPost.slug}`}
-                              className="blog-adjacent-navigation_element blog-adjacent-navigation_next"
-                        >
-                        <span className={'page-link-label'}>
-                            {'Older'}
-                            <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
-                        </span>
+                    {(previousPost && previousPost.slug) ? (
+                        <CustomNavLink
+                            classes={'blog-adjacent-navigation_element blog-adjacent-navigation_previous'}
+                            link={`/blog/${previousPost.slug}`}
+                            runfunc={() => {
+                                navigate(`/blog/${previousPost.slug}`)
+                            }}>
+                            <span className={'page-link-label'}>
+                                {'Older'}
+                                <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
+                            </span>
 
                             <span className={'page-name'}
                                   dangerouslySetInnerHTML={{__html: previousPost.title}}
                             >
-
-                        </span>
-                        </Link>
+                            </span>
+                        </CustomNavLink>
                     ) : <span></span>}
                 </div>
             </article>
