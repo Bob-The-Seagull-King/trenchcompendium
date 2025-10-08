@@ -1012,6 +1012,14 @@ class UserWarband extends DynamicContextObject {
             this.Ducats += newval;
         }
     }
+    public async AwaitedAddStashValue(newval : number, type : number) {
+        if (type == 1) {
+            this.Glory += newval;
+        } else {
+            this.Ducats += newval;
+        }
+        await this.Exploration.ReloadTempOptions();
+    }
 
     public HasEnoughDucats(cost : number, costtype : number) {
         if (costtype == 1) {

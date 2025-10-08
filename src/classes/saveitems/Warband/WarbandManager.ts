@@ -179,7 +179,6 @@ class WarbandManager {
     public UpdateLocalStorage() {
   const _list: ISumWarband[] = [];
 
-      console.warn("Start Conversion");
   for (let i = 0; i < this.CurWarbands().length; i++) {
     try {
       const data = this.CurWarbands()[i].warband_data.ConvertToInterface();
@@ -194,13 +193,10 @@ class WarbandManager {
   }
 
   try {
-    console.log("About to save to localStorage:", _list);
     const str = JSON.stringify(_list);
-    console.log("Stringified successfully, length:", str.length);
     localStorage.setItem("userwarbanditem", str);
   } catch (e) {
     console.error("❌ Failed to stringify warbands:", e);
-    console.log("Problematic object:", _list);
   }
 }
 

@@ -74,7 +74,7 @@ function ArrayItemIntoHtml(content: string, delim: any) {
         for (i = 0; i < delim.length; i ++) {
             if (content == delim[i].val) {
                 const GlossaryObject = GlossaryRuleFactory.CreateNewGlossaryRule(delim[i].id)
-                if (GlossaryObject == null) {
+                if (GlossaryObject == null || GlossaryObject.ID == undefined) {
                     const KeywordObject = KeywordFactory.CreateNewKeyword(delim[i].id, null)
                     return (<GenericHover d_colour={'grey'} d_name={content} titlename={KeywordObject.Name} d_type={""} d_method={() => <KeywordDisplay data={KeywordObject} />}/>)
                 } else {

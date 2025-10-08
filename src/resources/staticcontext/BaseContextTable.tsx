@@ -2161,7 +2161,7 @@ export const BaseContextCallTable : CallEventTable = {
                 if (context_func["mod"]) {
                     value *= context_func["mod"]
                 }
-                warband.AddStashValue(value,0)
+                await warband.AwaitedAddStashValue(value,0)
             }
             if (context_func["dice3"]) {
                 let value = 0;
@@ -2171,7 +2171,7 @@ export const BaseContextCallTable : CallEventTable = {
                 if (context_func["mod"]) {
                     value *= context_func["mod"]
                 }
-                warband.AddStashValue(value,0)
+                await warband.AwaitedAddStashValue(value,0)
             }
         }
     },
@@ -2267,7 +2267,7 @@ export const BaseContextCallTable : CallEventTable = {
             }
             if (IsMe) {
                 if (context_func["count"]) {
-                    warband.AddStashValue(context_func["count"],0)
+                    await warband.AwaitedAddStashValue(context_func["count"],0)
                 }
             }
         }
@@ -4100,7 +4100,7 @@ export const BaseContextCallTable : CallEventTable = {
                     await warband.AddStash((context_static as any).SelectItem as any, true);
                 } else {
                     if (context_func["alternate_value"] == true) {
-                        warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                        await warband.AwaitedAddStashValue(NewModel.Cost, NewModel.CostType)
                     }
                 }
             }
@@ -4568,7 +4568,7 @@ export const BaseContextCallTable : CallEventTable = {
                     value *= context_func["mod"]
                 }
 
-                warband.AddStashValue(value,1)
+                await warband.AwaitedAddStashValue(value,1)
             }
             if (context_func["dice3"]) {
                 let value = 0;
@@ -4578,7 +4578,7 @@ export const BaseContextCallTable : CallEventTable = {
                 if (context_func["mod"] != undefined) {
                     value *= context_func["mod"]
                 }
-                warband.AddStashValue(value,1)
+                await warband.AwaitedAddStashValue(value,1)
             }
         }
     },
@@ -4671,7 +4671,7 @@ export const BaseContextCallTable : CallEventTable = {
             }
             if (IsMe) {
                         if (context_func["count"]) {
-                            warband.AddStashValue(context_func["count"],1)
+                            await warband.AwaitedAddStashValue(context_func["count"],1)
                         }
                     }
         }
@@ -4882,7 +4882,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 await warband.AddStash(NewModel, true);
                             } else {
                                 if (context_func["alternate_value"] == true) {
-                                    warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                                    await warband.AwaitedAddStashValue(NewModel.Cost, NewModel.CostType)
                                 }
                             }
                         }
@@ -5034,7 +5034,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 await warband.AddStash(NewModel, true);
                             } else {
                                 if (context_func["alternate_value"] == true) {
-                                    warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                                    await warband.AwaitedAddStashValue(NewModel.Cost, NewModel.CostType)
                                 }
                             }
                         }

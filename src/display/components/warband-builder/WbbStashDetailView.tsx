@@ -56,9 +56,9 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     const handleUpdateStash = (newval: number, type : number) => {
         if (!warband) { return; } // Guard
         
-        warband.warband_data.AddStashValue(newval, type)
+        warband.warband_data.AwaitedAddStashValue(newval, type).then(() => {
         const Manager : ToolsController = ToolsController.getInstance();
-        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => reloadDisplay())})
     };
 
     

@@ -95,6 +95,18 @@ class WarbandExplorationSet extends DynamicContextObject {
         super(data, parent)
     }
 
+    public async ReloadTempOptions() {
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            const Current = this.CurLocation[i]
+            if (Current.true_obj != undefined) {
+                await Current.true_obj.RegenerateOptions();
+                for (let j = 0; j < Current.true_obj.Consumables.length; j++) {
+                    await Current.true_obj.Consumables[j].GrabOptions();
+                }
+            }
+        }
+    }
+
     public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
