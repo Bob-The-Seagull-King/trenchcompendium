@@ -58,7 +58,7 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
     function getDisplayString() {
         if (selectedoption != null) {
             for (let i = 0; i < property.Options.length; i++) {
-                if (selectedoption == property.Options[i].value) {
+                if (selectedoption.GetID() == property.Options[i].value.GetID()) {
                     return property.Options[i].display_str
                 }
             }
@@ -87,6 +87,7 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
             {selectedoption != null ? (
                 <div  className="item">
                     <span>{getDisplayString()}</span>
+                    {dochange &&
                     <span className={'remove'}
                         onClick={() => {
                             handleSubmit(null)
@@ -94,15 +95,18 @@ const WbbExploration_Selection_MultiEquipment: React.FC<
                     >
                         <FontAwesomeIcon icon={faTrash} />
                     </span>
+                    }
                 </div>
             ) : (
                 <div>
+                    {dochange && 
                     <div
                         className={'btn btn-primary w-100'}
                         onClick={() => setshowModal(true)}
                     >
                         {'Add Item'}
                     </div>
+                    }
                 </div>
             )}
 

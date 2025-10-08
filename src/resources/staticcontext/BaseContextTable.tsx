@@ -4292,6 +4292,7 @@ export const BaseContextCallTable : CallEventTable = {
                     obeylimit = tempstore["limit"] > 0;
                 }
                 tempstore["count"] = cost;
+                if (!obeylimit) {return;}
                 if (cost > 0 && obeylimit && origin != null && origin != undefined) {
                     const Tags = context_static.Tags;
                     Tags["consumable_type_equipment"] = true
