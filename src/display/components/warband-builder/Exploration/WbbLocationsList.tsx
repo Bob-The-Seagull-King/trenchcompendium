@@ -33,7 +33,8 @@ const WbbLocationsList = () => {
             selected_options: []
         })
         settemplocation(warband.warband_data.Exploration.CurLocation)
-        reloadDisplay()
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {reloadDisplay()})
     };
     
     useEffect(() => {

@@ -192,6 +192,10 @@ class UserWarband extends DynamicContextObject {
 
     }
 
+    public async BuildTempLocations(data : string[]) {
+        await this.Exploration.BuildTempLocations(data);
+    }
+
     public async BuildModifiersSkills(data : IWarbandProperty[]) {
         if (data == undefined) {return;}
         const id_list = this.Modifiers.map(obj => JSON.stringify(obj.ConvertToInterface()))

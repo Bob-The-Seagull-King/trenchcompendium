@@ -20,6 +20,7 @@ interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
     locations: IWarbandProperty[];
     location_mods? : IWarbandProperty[];
+    templocations?: string[];
 }
 
 export interface ExplorationSkillSuite {
@@ -130,6 +131,36 @@ class WarbandExplorationSet extends DynamicContextObject {
         }
     }
 
+    public async BuildTempLocations(data : string[]) {
+        
+        const validLocationsFound = await this.GetValidNewLocations();
+
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i];
+
+            let filter : FilteredLocation | null = null;
+
+            for (let j = 0; j < validLocationsFound.length; j++) {
+                for (let k = 0; k < validLocationsFound[j].valid_locs.length; k++) {
+                    const CurLoc : FilteredLocation =  validLocationsFound[j].valid_locs[k]
+                    if (CurLoc.location.GetID() == CurVal) {
+                        filter = CurLoc;
+                        break;
+                    }
+                }
+            }
+
+            if (filter != null) {
+                const NewLoc : StoredLocation = {
+                    base_item : filter,
+                    selected_options: []
+                }
+                this.CurLocation.push(NewLoc);
+            }
+
+        }
+    }
+
     public async RebuildProperties() {
         for (let i = 0; i < this.Locations.length; i++) {
             const CurVal = this.Locations[i]
@@ -164,6 +195,10 @@ class WarbandExplorationSet extends DynamicContextObject {
         for (let i = 0; i < this.LocationMods.length; i++) {
             locationmodset.push(this.LocationMods[i].ConvertToInterface())
         }
+        const templocset : string[] = [];
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            templocset.push(this.CurLocation[i].base_item.location.GetID())
+        }
         const _objint : IWarbandExplorationSet = {
             explorationskills: skillset,
             locations: locationset,
@@ -172,7 +207,8 @@ class WarbandExplorationSet extends DynamicContextObject {
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
-            tags: this.Tags
+            tags: this.Tags,
+            templocations: templocset
         }
         this.SelfData = _objint;
         return _objint;
