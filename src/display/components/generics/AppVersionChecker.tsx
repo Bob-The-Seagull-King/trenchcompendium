@@ -96,8 +96,8 @@ function performReload() {
 
 export default function AppVersionChecker({
                                               endpoint,
-                                              checkIntervalMinutes = 1,
-                                              maxAgeMinutes = 2,
+                                              checkIntervalMinutes = 20,
+                                              maxAgeMinutes = 60,
                                               onlyWhenVisible = true,
                                           }: AppVersionCheckerProps) {
     const [versionMismatch, setVersionMismatch] = useState(false);
@@ -191,10 +191,6 @@ export default function AppVersionChecker({
     }, [apiEndpoint, checkIntervalMinutes, maxAgeMinutes, onlyWhenVisible]);
 
 
-    const [debug_show, setdebug_show] = useState(true);
-
-
-    // Minimal inline UI for mismatch; replace with your design system as needed
     if (versionMismatch) {
         return (
             <Modal show={true} className="WbbModalAddItem" centered>
