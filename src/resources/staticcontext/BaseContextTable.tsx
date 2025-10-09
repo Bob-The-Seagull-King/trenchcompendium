@@ -4254,7 +4254,7 @@ export const BaseContextCallTable : CallEventTable = {
             for (let i = 0; i < origin.Consumables.length; i++) {
                 if (origin.Consumables[i].Name == trackVal.GetTrueName()) {
                     if (origin.Consumables[i].ContextKeys["spend_money"]) {
-                        if (origin.Consumables[i].ContextKeys["spend_money"]["count"]) {
+                        if (origin.Consumables[i].ContextKeys["spend_money"]["count"] != undefined) {
                             if (cost > origin.Consumables[i].ContextKeys["spend_money"]["count"]) {
                                 cost = origin.Consumables[i].ContextKeys["spend_money"]["count"]
                             }
@@ -4320,7 +4320,6 @@ export const BaseContextCallTable : CallEventTable = {
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
-
             if (context_func["count"]) {
                 let cost = context_func["count"]
                 cost -= (trackVal.SelectItem as any).Cost
