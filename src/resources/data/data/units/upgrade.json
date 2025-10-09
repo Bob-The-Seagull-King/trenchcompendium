@@ -1352,7 +1352,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Gain 1 Glory for each enemy model this Butcher Knight took out of action with a Melee Attack ACTION if the knight is not Down or Out of Action at the end of the battle.",
+                "content": "If at the end of a game, this Butcher Knight is not Out of Action and it has taken at least one enemy model Out of Action with a Melee Attack, gain 1 Glory.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"}
                 ]
@@ -2326,9 +2326,9 @@
         "description": [          
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The Great Hunger burns so deeply within the caster, that nearby thralls find their saliva growing thick with digestive fluids in anticipation. Friendly models within 4” of this model (including this model) may add the GAS Keyword to their melee attacks if they have also made a Charge action earlier this round.",
+                "content": "The Great Hunger burns so deeply within the caster, that nearby thralls find their saliva growing thick with digestive fluids in anticipation. Friendly models within 4” of this model (including this model) inflict INFECTION MARKERS instead of BLOOD MARKERS with their melee attacks if they have also made a Charge Action earlier this round.",
                 "glossary": [
-                    {"val": "GAS", "id": "kw_gas"}
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
                 ]
             }
         ],
@@ -2389,7 +2389,7 @@
         "description": [          
             {
                 "tags": {"desc_type" : "default"},
-                "content": "As a ranged attack ACTION with PUTRESCERE (1-3), this model opens their mouth and spews forth an excessive stream of vileness that burns and causes flesh to erupt into fluid-filled pustules. Do not make a Success Roll for the attack. Instead, measure a straight line 1mm wide and up to 8” long from the attacking model to a point on the ground or a model’s base. The line stops if it reaches any terrain piece that is taller than the model making the Attack. Make an Injury Roll for every model (friend or foe) that is touched by the line, apart from the attacking model itself. This is with a +1 INJURY MODIFIER on the Injury table per INFECTION MARKER used for the spell. This attack inflicts INFECTION MARKERS instead of BLOOD MARKERS.",
+                "content": "As a ranged attack ACTION with PUTRESCERE (1-3), this model opens their mouth and spews forth an excessive stream of vileness that burns and causes flesh to erupt into fluid-filled pustules. Do not make a Success Roll for the attack. Instead, measure a straight line 1mm wide and up to 8” long from the attacking model to a point on the ground or a model’s base. The line stops if it reaches any terrain piece that is taller than the model making the Attack. Make an Injury Roll for every model (friend or foe) that is touched by the line, apart from the attacking model itself. Add +1 to Injury Chart rolls per INFECTION MARKER used for the Arcana after the first (e.g. using 2 INFECTION MARKERS gives +1 to Injury Chart rolls, 3 INFECTION MARKERS gives +2 to Injury Chart rolls, etc). This attack inflicts INFECTION MARKERS Instead of BLOOD MARKERS.",
                 "glossary": [
                     {"val": "PUTRESCERE (1-3)", "id": "kw_putrescere"},
                     {"val": "ACTION", "id": "kw_action"},
