@@ -52,7 +52,10 @@ import {ToastContainer} from "react-toastify";
 import HeadScripts from "./display/components/generics/HeadScripts";
 import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
 import MaintananceNotice from "./display/components/generics/MaintananceNotice";
-import StaticCreatorApplication from "./display/pages/StaticCreatorApplication";
+import DevGuard from './display/components/generics/DevGuard'
+import DevImport from "./display/pages/DevImport";
+import {AdsManagerv2} from "./display/components/generics/AdsManagerv2";
+import AppVersionChecker from "./display/components/generics/AppVersionChecker";
 
 
 const App: React.FC = () => {
@@ -120,18 +123,19 @@ const App: React.FC = () => {
                                     {/* Static Pages - Membership & Purchases */}
                                     <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
 
-                                    {/* Static Pages - Creators */}
-                                    <Route path={ROUTES.PAGE_CREATOR_APPLICATION} element={<StaticCreatorApplication />} /> {/* Membership Plan Selection Page */}
-
                                     {/* Blog Pages */}
                                     <Route path="/blog" element={<BlogListPage />} />
                                     <Route path="/blog/:slug" element={<BlogArticlePage />} />
+                                    <Route path="/dev-import/" element={<DevImport />} />
                                 </Routes>
 
                                 <FooterMain />
                             </ImageCreditPopoverProvider>
-                            <AdsManager />
+                            <AdsManagerv2 />
                             <TrackingManager />
+                            <AppVersionChecker />
+
+                            <DevGuard expectedPassword="companion" />
                             {/*<EmergencyAlert />*/}
 
                             <ToastContainer

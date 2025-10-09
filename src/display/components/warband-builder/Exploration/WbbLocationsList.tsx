@@ -14,30 +14,27 @@ import { ExplorationLocation } from '../../../../classes/feature/exploration/Exp
 import { ToolsController } from '../../../../classes/_high_level_controllers/ToolsController';
 import {useWbbMode} from "../../../../context/WbbModeContext";
 import WbbEditViewExplorationUnstored from '../WbbEditViewExplorationUnstored';
-import { ExplorationTableSuite, FilteredLocation } from '../../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
-
-export interface LocationHold {
-    loc : ExplorationLocation,
-    suite : FilteredLocation
-}
+import { ExplorationTableSuite, FilteredLocation, StoredLocation } from '../../../../classes/saveitems/Warband/CoreElements/WarbandExplorationSet';
 
 const WbbLocationsList = () => {
     const { warband, updateKey, reloadDisplay } = useWarband();
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     const [keyvar, setkeyvar] = useState(0);
     const [locations, setlocations] = useState<WarbandProperty[]>([]);
-    const [templocations, settemplocations] = useState<LocationHold[]>([]);
+    const [templocation, settemplocation] = useState<StoredLocation[]>(warband? warband.warband_data.Exploration.CurLocation : []);
 
     // Exploration Location Modal
     const [showAddExplorationModal, setShowAddExplorationModal] = useState(false);
 
-    const handleSaveExplorationLocation = (location: ExplorationLocation, optionsuite : FilteredLocation) => {
+    const handleSaveExplorationLocation = (optionsuite : FilteredLocation) => {
         if (!warband) { return; }
-        settemplocations([{
-            loc: location,
-            suite: optionsuite
-        }])
-        reloadDisplay()
+        warband.warband_data.Exploration.CurLocation.push({
+            base_item: optionsuite,
+            selected_options: []
+        })
+        settemplocation(warband.warband_data.Exploration.CurLocation)
+        const Manager : ToolsController = ToolsController.getInstance();
+        Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => {reloadDisplay()})
     };
     
     useEffect(() => {
@@ -46,6 +43,7 @@ const WbbLocationsList = () => {
                 const Modifiers = warband?.warband_data.GetLocations();
                 setlocations(Modifiers);
             }
+            settemplocation(warband? warband.warband_data.Exploration.CurLocation : [])
             setkeyvar(keyvar + 1);
         }
 
@@ -67,11 +65,11 @@ const WbbLocationsList = () => {
                 />
             )}
 
-            {templocations.map((item, index) =>
+            {templocation.map((item, index) =>
                 <WbbEditViewExplorationUnstored
-                    key={index}
                     location={item}
-                    clear={() => settemplocations([])}
+                    key={index}
+                    clear={() => settemplocation([])}
                 />
             )}
 

@@ -2,12 +2,23 @@
 var klaroConfig = {
     elementID: 'privacy-modal',
     storageMethod: 'localStorage',
-    storageName: 'trench_companion_consent_v2',
+    storageName: 'trench_companion_consent_v3',
     mustConsent: true,
     acceptAll: true,
     hideDeclineAll: false,
     privacyPolicy: 'https://trench-companion.com/page/privacy',
     noCss: true,
+    callback: function (consent) {
+        // Switch NPA depending on the user's Advertising choice
+        window.adsbygoogle = window.adsbygoogle || [];
+        // 'google-ads' = your Klaro service name for advertising consent
+        window.adsbygoogle.requestNonPersonalizedAds = consent['google-ads'] ? 0 : 0;
+
+        // Send "consent given" event through the app - means "any" consent to trigger ads
+        try {
+            window.dispatchEvent(new CustomEvent('tc:consent-changed', { detail: consent }));
+        } catch (e) {}
+    },
     translations: {
         de: {
             consentNotice: {
@@ -33,22 +44,26 @@ var klaroConfig = {
             onInit: `
                 window.dataLayer = window.dataLayer || [];
                 window.gtag = function(){ dataLayer.push(arguments); };
-                gtag('consent', 'default', {
-                  ad_storage: 'granted',
-                  analytics_storage: 'denied',
-                  ad_user_data: 'denied',
-                  ad_personalization: 'denied'
-                });
-                gtag('set', 'ads_data_redaction', true);
             `,
             onAccept: `
                 if (!window.gtmScriptLoaded) {
-                    var s = document.createElement('script');
-                    s.async = true;
-                    s.src = "https://www.googletagmanager.com/gtm.js?id=GTM-NFVT7W7X";
-                    document.head.appendChild(s);
+                    // ensure dataLayer exists
+                    window.dataLayer = window.dataLayer || [];
+                    // push the bootstrap event (what the official snippet does before loading the script)
+                    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+            
+                    // inject the GTM script right before the first <script> tag (same as the official snippet)
+                    var f = document.getElementsByTagName('script')[0];
+                    var j = document.createElement('script');
+                    j.async = true;
+                    j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NFVT7W7X';
+                    f.parentNode.insertBefore(j, f);
+            
                     window.gtmScriptLoaded = true;
                 }
+            
+                // optional: custom event to hook other tags if needed
+                window.dataLayer.push({event: 'klaro-gtm-accepted'});
             `
         },
         {
@@ -68,35 +83,21 @@ var klaroConfig = {
             title: 'Google Ads (Personalisierung)',
             purposes: ['advertising'],
             onAccept: `
-                gtag('consent', 'update', {
-                  ad_user_data: 'granted',
-                  ad_personalization: 'granted'
+                gtag('consent','update',{
+                  ad_user_data:'granted',
+                  ad_personalization:'granted',
+                  ad_storage:'granted'
                 });
-                gtag('set', 'ads_data_redaction', false);
-            `,
+                gtag('set','ads_data_redaction', false);
+              `,
             onDecline: `
-                gtag('consent', 'update', {
-                  ad_user_data: 'denied',
-                  ad_personalization: 'denied'
+                gtag('consent','update',{
+                  ad_user_data:'denied',
+                  ad_personalization:'denied',
+                  ad_storage:'denied'
                 });
-                gtag('set', 'ads_data_redaction', true);
-            `,
+                gtag('set','ads_data_redaction', true);
+              `,
         },
-        {
-            name: 'google-adsense',
-            title: 'Google AdSense',
-            purposes: ['advertising'],
-            required: true, // immer laden!
-            onInit: `
-                if (!window.adsenseScriptLoaded) {
-                    var s = document.createElement('script');
-                    s.async = true;
-                    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966";
-                    s.crossOrigin = "anonymous";
-                    document.head.appendChild(s);
-                    window.adsenseScriptLoaded = true;
-                }
-            `,
-        }
     ]
 };

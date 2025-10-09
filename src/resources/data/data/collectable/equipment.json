@@ -86,7 +86,7 @@
     },
     {
         "id": "eq_alchemicalammunition",
-        "name": "Alchemical Ammunication",
+        "name": "Alchemical Ammunition",
         "source": "core",
         "tags": {"trait": true},
         "category": "equipment",
@@ -1632,7 +1632,7 @@
         ],
         "options": [],
         "keywords": ["kw_critical","kw_consumable"],
-        "modifiers": ["+1 to Injuries"]
+        "modifiers": ["+1D to Injuries","Ignore Armour" ]
     },
     {
         "id": "eq_masterworksjezzail",
@@ -1876,7 +1876,7 @@
         },
         "contextdata": {
             "ignore_element": {"element": ["kw_shrapnel"]},
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": ["kw_fear"]}
         },
         "description": [       
             {
@@ -3181,7 +3181,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore": {"value": ["kw_fear"]}
         },
         "description": [       
             {
@@ -4238,7 +4238,7 @@
         "stats": {
         },
         "contextdata": {
-            "keyword_ignore": {"value": "kw_fear"},
+            "keyword_ignore": {"value": ["kw_fear"]},
             
             "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}
         },
@@ -5599,7 +5599,7 @@
         "id": "eq_armourofthefly",
         "name": "Armour of the Fly",
         "source": "core",
-        "tags": {"trait": true, "armour": true, "headgear": true},
+        "tags": {"trait": true, "armour": true},
         "category": "armour",
         "distance": null,
         "stats": {
@@ -6459,7 +6459,7 @@
         },
         "contextdata": {
             "ignore_element": {"element": ["kw_shrapnel","kw_gas"]},
-            "keyword_ignore": {"value": "kw_fear"}
+            "keyword_ignore":  {"value": ["kw_fear"]}
         },
         "description": [       
             {
@@ -6902,5 +6902,245 @@
         "options": [],
         "keywords": [],
         "modifiers": []
+    },
+    {
+        "id": "eq_vivisector",
+        "name": "Vivisector",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "trait": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Pain Amplifier: "
+                    },                
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Lower the roll needed to achieve a Critical Success for a Melee Attack made by this weapon by 1 for each BLOOD MARKER next to the target by 1 (so an enemy with 1 BLOOD MARKER will suffer a Critical Success on a roll of 11+).",
+                        "glossary": [
+                            {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                        ]
+                    } 
+                ]
+            },    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Inflict Pain: "
+                    },                
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "If an attack made by this weapon against a target, without the ARTIFICIAL Keyword and mounted on a 40mm base or smaller is, a Critical Success, but the target is not taken Out of Action, then the target will move D3\" in a straight line directly away from the attacking model. It will stop if it moves into a friendly model, Impassable Terrain, a terrain piece it cannot cross without having to Climb, or immediately before it would move within 1\" of an enemy model other than the attacker. If the target model would finish the move more than 1\" from the attacking model, then the attacking model and any other models within 1\" of the target model can make an additional Melee Attack on it before it is moved, as if the target were carrying out a retreat move. If this causes the model to move a second time, add D3\" to the distance it is moved but do not attack it again.",
+                        "glossary": [
+                            {"val": "ARTIFICIAL", "id": "kw_artificial"}
+                        ]
+                    } 
+                ]
+            } 
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This weapon offers both excellent protection by keeping the targets at bay, and its haft incorporates a trigger that injects a horrifying cocktail of holy ointments, chemical toxins, nerve agents and micro-shards of holy relics into any open wound, causing pain that is unbearable to even supernatural enemies. It can also be used to quickly dissect fallen enemies so their organs can be preserved by the Combat Biologist."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_cumbersome", "kw_block"],
+        "modifiers": []
+    },
+    {
+        "id": "eq_graspingmaw",
+        "name": "Grasping Maw",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model with this Equipment may, as a RISKY ACTION, move an enemy model within Line of Sight within 6” by 1D6” in a straight line towards them. This ability can be used to make the target model move within 1” of an enemy, retreat (though they are not subject to Free Strikes), or Jump Down, but may not be used to make a model move through Difficult or Dangerous terrain, Climb or Jump across a gap.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            } 
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_devouringjaws",
+        "name": "Devouring Jaws",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {},
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This relic grants the wearer an additional attack ACTION in melee combat without penalty. Each time the model is activated, it also receives 1 BLOOD MARKER. Once this has been equipped, it can never be unequipped or removed from the model for any reason.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            } 
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_blightedclaws",
+        "name": "Blighted Claws",
+        "source": "creature_caster",
+        "tags": {"trait": true},
+        "category": "equipment",
+        "distance": null,
+        "stats": {
+        },
+        "contextdata": {
+            
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "melee"
+                    }
+                ],
+                "additions": [
+                    "kw_critical"
+                ]
+            },
+            "upgrade_stat": {"upgrades": [{"stat": "melee", "value": 1}]}},
+        "description": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Add +1 DICE and the CRITICAL Keyword to Melee Attacks made by this model.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "CRITICAL", "id": "kw_critical"}
+                ]
+            } 
+        ],
+        "lore": [],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_blackspotrifle",
+        "name": "Black Spot Rifle",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "rifle": true},
+        "category": "ranged",
+        "distance": 24,
+        "stats": {
+            "hands_ranged": 2,
+            "ranged": true
+        },
+        "contextdata": {
+            "get_weapon": {}},
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "An enormous bolt action rifle this weapon inflicts INFECTION MARKERS instead of BLOOD MARKERS. If the Black Spot Rifle successfully hits an enemy,the closest Thrall model within 12” of the target of the attack may immediately attempt a Charge action against the enemy after resolving injury. This is done outside of the Thrall’s activation.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }  
+        ],
+        "lore": [     ],
+        "options": [],
+        "keywords": [],
+        "modifiers": []
+    },
+    {
+        "id": "eq_butcherbayonet",
+        "name": "Butcher Bayonet",
+        "source": "core",
+        "tags": {"action": true, "weapon": true, "bayonet_lug": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {},
+            "ignore_count": {}
+        },
+        "description": [   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Butcher Bayonet counts as a bayonet and has the Shield Combo rule. Add +1 DICE to rolls on the Injury Table made with this weapon. In addition, lower the roll needed to achieve a Critical Success by one for Melee Attacks made by friendly Thralls within 3” of a model with a Butcher Bayonet. Butcher Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Shield Combo", "id": "kw_shieldcombo"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }  
+        ],
+        "lore": [        ],
+        "options": [],
+        "keywords": ["kw_cumbersome","kw_shieldcombo","kw_bayonetlug"],
+        "modifiers": ["+1D to Injuries"]
+    },
+    {
+        "id": "eq_pestilentfang",
+        "name": "Pestilent Fang",
+        "source": "core",
+        "tags": {"action": true, "weapon": true},
+        "category": "melee",
+        "distance": null,
+        "stats": {
+            "hands_melee": 2,
+            "melee": true
+        },
+        "contextdata": {
+            "get_weapon": {}
+        },
+        "description": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This weapon ignores armour on a critical hit, and always inflicts an INFECTION MARKER in addition to any BLOOD MARKERS it may cause.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }   
+        ],
+        "lore": [            
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mauls, clubs, maces… these are large, cumbersome weapons, often made from sturdy wood with a metal tip of steel, lead or Iron of Tartarus. It takes great strength to fight with it for any length of time. They are especially suited for attacking armoured targets."
+            }
+        ],
+        "options": [],
+        "keywords": ["kw_heavy"],
+        "modifiers": ["+1 to Injuries"]
     }
 ]

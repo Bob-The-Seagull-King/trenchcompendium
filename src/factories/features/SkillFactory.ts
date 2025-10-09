@@ -19,7 +19,9 @@ class SkillFactory {
             return cache.SkillCache[_rule.id];
         }
         const rule = new Skill(_rule, parent)
-        cache.AddToCache('skill', rule);
+        if (!skipcheck) {
+            cache.AddToCache('skill', rule);
+        }
         await rule.ReloadOptions();
         await rule.RunOptionsParse();
         return rule;

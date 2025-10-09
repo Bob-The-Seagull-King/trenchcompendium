@@ -36,6 +36,28 @@ export function capitalizeString(stringVal: string) {
     return "";
 }
 
+export function isPrimitiveValue(value: any): boolean {
+  if (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "boolean"
+  ) {
+    return true;
+  }
+
+  if (Array.isArray(value)) {
+    return (
+      value.every(
+        v =>
+          typeof v === "string" ||
+          typeof v === "number"
+      )
+    );
+  }
+
+  return false;
+}
+
 export function isValidList(listA: string[], bannedList: string[], requiredList: string[]): boolean {
     const hasBanned = bannedList.some(item => listA.includes(item));
     if (hasBanned) return false;
@@ -542,12 +564,11 @@ export function sort<T extends object> (arr: T[], ...sortBy: Array<sortArg<T>>) 
     arr.sort(byPropertiesOf<T>(sortBy))
 }
 
-export function DescriptionFactory(data: any[], parent : any | null) {
-    let i = 0;
-    const array: AdvancedDescription[] = []
-    for (i = 0; i < data.length; i++) {
-        const tempAD = AdvancedDescriptionItemFactory.CreateAdvancedDescriptionItem(data[i], parent)
-        array.push(tempAD)
+export function DescriptionFactory(data: any, parent: any | null) {
+    const list = Array.isArray(data) ? data : (data == null ? [] : [data]);
+    const array: AdvancedDescription[] = [];
+    for (let i = 0; i < list.length; i++) {
+        array.push(AdvancedDescriptionItemFactory.CreateAdvancedDescriptionItem(list[i], parent));
     }
     return array;
 }

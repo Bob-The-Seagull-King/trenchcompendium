@@ -175,6 +175,32 @@
         ]
     },
     {
+        "id": "kw_putrescere",
+        "source": "creature_caster",
+        "tags": {
+            "category": "trait"
+        },
+        "name": "PUTRESCERE (X)",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Arcana Putrescere spells are marked with the Keyword PUTRESCERE (X) where the number in brackets indicates how many INFECTION MARKERS will have to be spent to trigger the effect of the Arcana. If multiple numbers or a range of numbers are listed in the brackets, any one of those numbers can be chosen.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These INFECTION MARKERS can be taken from any models within 12” of the caster, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ]
+    },
+    {
         "id": "kw_blessingmarker",
         "source": "core",
         "tags": {
@@ -283,7 +309,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The model is supernaturally tainted by Hell and is vulnerable to holy powers."
+                "content": "The model is supernaturally tainted by Hell and is vulnerable to holy powers. Due to their infernal origins, models with the Keyword DEMONIC negate additional BLOOD MARKERS caused by the Keyword FIRE."
             }
         ]
     },
@@ -648,6 +674,40 @@
                 "content": "As long as this model is not taken Out of Action, add +1 DICE to any Morale tests the warband has to take.",
                 "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
             }
+        ]
+    },
+    {
+        "id": "kw_block",
+        "source": "core",
+        "tags": {
+            "category": "equipment",
+            "positive": true
+        },
+        "name": "BLOCK",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add -1 DICE for Melee Attacks targeting that model if the attacker made a Charge ACTION before making the attack this round.",
+                "glossary": [{"val": "ACTION", "id": "kw_action"},{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }   
+        ]
+    },
+    {
+        "id": "kw_negate",
+        "source": "core",
+        "tags": {
+            "category": "model",
+            "positive": true
+        },
+        "name": "NEGATE X",
+        "contextdata": {"option_search_viable" : {}},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When a model has the NEGATE [KEYWORD] Keyword, they are not affected by the specified Keyword’s Effect. For example, NEGATE FEAR means the model is unaffected by the FEAR keyword.",
+                "glossary": [{"val": "FEAR", "id": "kw_fear"}]
+            }   
         ]
     }
 ]

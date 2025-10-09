@@ -34,6 +34,9 @@ import { Skill } from '../../../../classes/feature/ability/Skill';
 import SkillDisplay from '../../../components/features/skill/SkillDisplay';
 import RulesBannerText from '../../../components/rules-content/RulesBannerText';
 import RulesModelDisplay from "../../rules-content/RulesModelDisplay";
+import { GloriousDeed } from '../../../../classes/feature/scenario/GloriousDeed';
+import GloriousDeedDisplay from '../../../components/features/scenario/GloriousDeedDisplay';
+import RulesGloriousDeed from '../../../components/rules-content/RulesGloriousDeed';
 
 const AdvancedDescriptionItemDisplay = (props: any) => {
     const description: AdvancedDescription = props.data
@@ -305,6 +308,20 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     </div>
                 )
             }
+            case "glorious_deed": {
+                return (
+                    <div className="">
+                        <span>
+                            {getGloriousDeedDisplay(item.Content?.toString() || "")}
+                        </span>
+                        <span>
+                            {item.SubContent?.map((subitem) => (
+                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            ))}
+                        </span>
+                    </div>
+                )
+            }
             case "equipmentslim": {
                 return (
                     <span>
@@ -442,6 +459,35 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
         return null;
     }
 
+    function getGloriousDeedDisplay(val : string) {
+        
+        const [component, setcomponent] = useState<null | GloriousDeed>(null);
+        const [keyvar, setkeyvar] = useState(0);
+
+        useEffect(() => {
+            async function getItem() {                
+                const EquipmentModule = await import("../../../../factories/features/GloriousDeedFactory");
+                const item = await EquipmentModule.GloriousDeedFactory.CreateNewGloriousDeed(val, null)
+                setcomponent(item);
+                setkeyvar(keyvar + 1);
+            }
+
+            getItem();
+        }, []);
+
+
+        return (
+            <span className={'AdvancedDescriptionItemDisplay-getEquipmentDisplay'} key={keyvar}>
+                {component !== null &&
+                    <RulesGloriousDeed
+                                data={component}
+                            />
+                
+                }
+            </span>
+        );
+    }
+
     function getEquipmentDisplay(val : string) {
         
         const [component, setcomponent] = useState<null | Equipment>(null);
@@ -496,14 +542,14 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             titlename={component.Name}
                             d_method={() =>
                                 
-                                <div className={'rules-equipment-main'}>                    
+                                <span className={'rules-equipment-main'}>                    
                                     {/* Stats */}
                                     <RulesEquipmentStats
                                         facrelObject={undefined}
                                         baseobject={component}
                                     />
                                     <RulesEquipmentMain data={component}/>
-                                </div>
+                                </span>
                                 }/>
                 </>
                 }

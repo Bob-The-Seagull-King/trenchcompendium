@@ -22,11 +22,12 @@ const WbbModifiersList = () => {
             if (warband) {
                 const Modifiers = await warband?.warband_data.GetModifiersList();
                 const Fireteams = await warband?.warband_data.GetFireteams();
+                
                 setmodifiers(Modifiers);
                 setfireteams(Fireteams)
                 setlocations(warband?.warband_data.ModifiersLoc)
+                setkeyvar(keyvar + 1);
             }
-            setkeyvar(keyvar + 1);
         }
 
         RunUpdate()
@@ -37,7 +38,7 @@ const WbbModifiersList = () => {
             {/* Warband Modifiers */}
             {modifiers.length > 0 &&
                 <>
-                    <h3 className={'category-headline'}>Modifiers</h3>
+                    <h3 className={'category-headline'} key={keyvar}>Modifiers</h3>
                     {modifiers.map((item) =>
                         <WbbEditViewExtraModifier
                             key={item.GetTrueName()}

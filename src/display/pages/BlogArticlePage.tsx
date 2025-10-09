@@ -1,15 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import LoadingOverlay from "../components/generics/Loading-Overlay";
+import SynodImageWithCredit from "../../utility/SynodImageWithCredits";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import SynodFactionImage from "../../utility/SynodFactionImage";
+import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 
 interface WPPost {
     id: number;
     title: { rendered: string };
     content: { rendered: string };
     date: string;
+    slug: string;
+    featured_media?: number;
     _embedded?: {
         author?: { name: string }[];
     };
+}
+
+
+interface NavPost {
+    id: number;
+    slug: string;
+    title: string;
+    featured_media: number;
+    date: string;
+    excerpt: string;
 }
 
 const BlogArticlePage: React.FC = () => {
@@ -17,13 +34,32 @@ const BlogArticlePage: React.FC = () => {
     const [post, setPost] = useState<WPPost | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+    const [nextPost, setNextPost] = useState<NavPost | null>(null);
+    const [previousPost, setPreviousPost] = useState<NavPost | null>(null);
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchPost = async () => {
+            setLoading(true);
             try {
                 const response = await fetch(`https://synod.trench-companion.com/wp-json/wp/v2/posts?slug=${slug}&_embed=author`);
                 const data = await response.json();
                 if (data.length > 0) {
-                    setPost(data[0]);
+                    const currentPost = data[0];
+                    setPost(currentPost);
+
+                    // load post navigation
+                    const [prevRes, nextRes] = await Promise.all([
+                        fetch(`https://synod.trench-companion.com/wp-json/synod/v1/blog/previous/${currentPost.id}`),
+                        fetch(`https://synod.trench-companion.com/wp-json/synod/v1/blog/next/${currentPost.id}`)
+                    ]);
+
+                    const prevData = await prevRes.json();
+                    const nextData = await nextRes.json();
+
+                    setPreviousPost(prevData || null);
+                    setNextPost(nextData || null);
                 } else {
                     setPost(null);
                 }
@@ -83,23 +119,76 @@ const BlogArticlePage: React.FC = () => {
         <div className="BlogArticlePage container">
 
             <article className={'article-wrap'}>
-                <h1 className="" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>
+                {post.featured_media &&
+                    <div className={'blog-hero-image-wrap'}>
+                        <SynodImageWithCredit
+                            imageId={post.featured_media}
+                            className={'blog-hero-image'}
+                            size={'full'}
+                            imageKey={post.slug}
+                        />
+                    </div>
+                }
 
-                <div className="post-date-author">
-                    <span className="post-date">{new Date(post.date).toLocaleDateString()}</span>
-                    {' - '}
-                    <span className="post-author">{authorName}</span>
+                <div className={'article-content'}>
+                    <h1 className="" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>
+
+                    <div className="post-date-author">
+                        <span className="post-date">{new Date(post.date).toLocaleDateString()}</span>
+                        {' - '}
+                        <span className="post-author">{authorName}</span>
+                    </div>
+
+                    <div
+                        className=""
+                        dangerouslySetInnerHTML={{__html: post.content.rendered}}
+                    />
                 </div>
 
+                <div className="blog-adjacent-navigation">
+                    {(nextPost && nextPost.slug) ? (
+                        <CustomNavLink
+                            classes={'blog-adjacent-navigation_element blog-adjacent-navigation_next'}
+                            link={`/blog/${nextPost.slug}`}
+                            runfunc={() => {
+                                navigate(`/blog/${nextPost.slug}`)
+                            }}>
+                            <span className={'page-link-label'}>
+                                <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l"/>
+                                {'Newer'}
+                            </span>
 
-                <div
-                    className=""
-                    dangerouslySetInnerHTML={{__html: post.content.rendered}}
-                />
+                            <span className={'page-name'}
+                                  dangerouslySetInnerHTML={{__html: nextPost.title}}
+                            >
+                            </span>
+                        </CustomNavLink>
+                    ) : <span></span>}
+
+                    {(previousPost && previousPost.slug) ? (
+                        <CustomNavLink
+                            classes={'blog-adjacent-navigation_element blog-adjacent-navigation_previous'}
+                            link={`/blog/${previousPost.slug}`}
+                            runfunc={() => {
+                                navigate(`/blog/${previousPost.slug}`)
+                            }}>
+                            <span className={'page-link-label'}>
+                                {'Older'}
+                                <FontAwesomeIcon icon={faChevronRight} className="icon-inline-right-l"/>
+                            </span>
+
+                            <span className={'page-name'}
+                                  dangerouslySetInnerHTML={{__html: previousPost.title}}
+                            >
+                            </span>
+                        </CustomNavLink>
+                    ) : <span></span>}
+                </div>
             </article>
 
+
             <script type="application/ld+json">
-            {JSON.stringify(schemaMarkup)}
+                {JSON.stringify(schemaMarkup)}
             </script>
         </div>
     );

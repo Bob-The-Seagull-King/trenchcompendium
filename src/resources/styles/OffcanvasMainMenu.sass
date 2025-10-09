@@ -64,6 +64,14 @@
                     height: 150px
                     line-height: 150px
 
+            &.minor
+                .title
+                    height: 120px
+                    line-height: 120px
+                    @media (max-width: 400px)
+                        height: 100px
+                        line-height: 100px
+
             &:after
                 content: ""
                 position: absolute
@@ -89,7 +97,7 @@
             width: 100%
             padding: 15px 30px
             border-bottom: 1px solid $color-bg-0
-            color: #fff
+            color: $color-text
             text-decoration: none
 
             &:first-of-type

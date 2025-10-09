@@ -3247,7 +3247,284 @@
         "description":  [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Few members fo the clergy are willing to serve in the unit due to the disregard of their lives they show. Your warband can have a maximum of two such characters, so you can either have 1 Trench Cleric and 1 Sniper Priest, or 2 Sniper Priests but no Trench Cleric."
+                "content": "Few members of the clergy are willing to serve in the unit due to the disregard of their lives they show. Your warband can have a maximum of two such characters, so you can either have 1 Trench Cleric and 1 Sniper Priest, or 2 Sniper Priests but no Trench Cleric."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_butcherknights",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Butcher Knights",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Plague Knights of the warband are called Butcher Knights. They have the Ravenous Infection rule and are mounted on 32mm or 40mm bases. They may only be equipped with one of the following Knightly Ranks:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Butcher King: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Gain 1 Glory for each enemy model this Butcher Knight took out of action with a Melee Attack ACTION if the knight is not Down or Out of Action at the end of the battle. Costs 10 ducats.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Knightly Rank of the Feast: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Grants a Butcher Knights and any models within 3” of that Butcher knight +1 DICE on Ravenous Infection Tests for an additional +5 ducats."
+                                    }
+                                ]
+                            },
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Knightly Rank of Ferocity: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Allows the Butcher Knight to ingore the Off-Hand special rule (-1 to attacks with an off-hand weapon) and gives them the CRITICAL keyword on any melee weapon they choose to wield for an additional +5 ducats."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_cradleoffilth",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Cradle of Filth",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "There are those thralls who have become the vanguard of the Great Hunger, and where others seek the comfort of their matron, these thralls push forward in search of fresh meat. A Great Hunger Warband may recruit up to 3 Grail or Fly Thralls equipped with Blighted Claws to your Warband for 2 Glory each instead of their regular cost. Thralls recruited in this way are known as Cradle Thralls. If you are playing a campaign, after deployment, you may deploy up to three Cradle Thralls in reserve onto the battlefield. Cradle Thralls do not count towards your Maximum Field Strength, but do count for the purposes of Morale. In addition, if the scenario you are playing allows Infiltrators to use their special deployment rules, after any Infiltrators have deployed, you can deploy these Cradle Thralls within 1” of any edge of the battlefield and more than 8” away from any enemy models."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dessicatedhusks",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Desiccated Husks",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Great Hunger Warband may include 0-2 Dessicated Husks. Dessicated Husks use the Corpse Guard Warband Entry, but replace the Bodyguard rule with the STRONG Keyword at no additional cost."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_greathunger_equipmentrestrictions",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Equipment Restrictions",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Great Hunger often forgoes weapons in order to rend and bite the foe with bare hands and teeth. They cannot be trusted with treasured relics that are Beelzebub’s pride. In addition to this, The Great Hunger functions more like a ravenous horde than a disciplined force, and they prioritize close range combat over long ranged weapons. They do not have access to the following:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Beelzebub’s Axe"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Black Grail Shields"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Troop Standards"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Musical Instruments"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Compound Eyes Helmets"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Any Ranged Weapons except for Shotguns, Black Spot Rifles, Parasite Grenades, and Putrid Shotguns. This restriction does not apply to Glory Items."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_greathunger_grailthrallsandflythralls",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Grail Thralls & Fly Thralls",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grail and Fly Thralls in a Great Hunger Warband cost 35 ducats, and gain the Ravenous Infection Ability and the Blighted Claws equipment. They may be based on 25mm or 32mm bases, but all Thralls of the same type (Grail or Fly) must be on the same sized base."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In addition, Grail and Fly Thralls may have the Unending Starvation and Grasping Maw equipment."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_prowlers",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Prowlers",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Hounds of the Black Grail of the warband are called Prowlers and may be equipped with a Grasping Maw."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_spawnofgluttony",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Spawn of Gluttony",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Great Hunger Warband must inclde either One (1) Matagot Hag or One (1) Lord of Tumours. It may not include both in a warband. It may include 0-2 Plague Knights (known as Butcher Knights).",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wastenoflesh",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Waste No Flesh",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This warband may not take an Amalgam or Heralds of Beelzebub, as all flesh left on the battleground is consumed before it can manifest as these creatures.",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_arcanaputrescere",
+        "source": "creature_caster",
+        "tags": {
+         },
+        "contextdata": {
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_arcanaputrescere",
+                "models_id": ["md_lordoftumors"]}]
+            },
+            "true_add_to_model": {  
+                "list": [
+                    {
+                        "id": "ab_arcanaputrescere_one",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_lordoftumors"]
+                            }
+                        ] 
+                    }
+                ]
+            }},
+        "name": "Arcana Putrescere",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Many of the creatures within the Great Hunger have access to the Arcana Putrescere – Powers and Spells which are fueled by the very existence of the Black Grail Virus. Beelzebub’s hatred of all things living manifests itself in weird and horrible ways, and the half-dead hordes have been taught of its use. Speaking the words of power in Corrupt Enochian, they invoke the unholy powers of Ekron and warp reality to their will. As these powers require Beelzebub’s infernal essence to work, the leaders of the warband need to send their followers forth to spread the putrid disease."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Arcana Putrescere spells are marked with the Keyword PUTRESCERE (X) where the number in brackets indicates how many INFECTION MARKERS will have to be spent to trigger the effect of the Arcana. If multiple numbers or a range of numbers are listed in the brackets, any one of those numbers can be chosen.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "PUTRESCERE (X)", "id": "kw_putrescere"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Not all of Beelzebub’s favoured are blessed with the arcana, but those who carry rank are often proficient in its use. A MATAGOT HAG may take 0-3 Arcana, a LORD OF TUMOURS may take 0-1 Arcana, and GREGORI GULAS may take 0-1 Arcana."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These INFECTION MARKERS can be taken from any models within 12” of the caster, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "PUTRESCERE (X)", "id": "kw_putrescere"}
+                ]
             }
         ],
         "options": []

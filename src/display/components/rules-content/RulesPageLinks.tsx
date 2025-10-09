@@ -32,14 +32,14 @@ const RulesPageLinks: React.FC<RulesPageLinksProps> = (prop) => {
                     runfunc={RunPrev}
                     classes={'rules-page-link rules-page-link-prev'}
                 >
-                <span className={'page-link-label'}>
-                    <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l" />
-                    {'Previous'}
-                </span>
+                    <span className={'page-link-label'}>
+                        <FontAwesomeIcon icon={faChevronLeft} className="icon-inline-left-l" />
+                        {'Previous'}
+                    </span>
 
                     <span className={'page-name'}>
-                    {(prop.prev_page != undefined)? prop.prev_page.HeldItem.Name : ""}
-                </span>
+                        {(prop.prev_page != undefined)? prop.prev_page.HeldItem.Name : ""}
+                    </span>
                 </CustomNavLink>
             }
 
@@ -57,7 +57,6 @@ const RulesPageLinks: React.FC<RulesPageLinksProps> = (prop) => {
                     <span className={'page-name'}>
                         {(prop.next_page != undefined) ? prop.next_page.HeldItem.Name : ""}
                     </span>
-
                 </CustomNavLink>
             }
         </div>

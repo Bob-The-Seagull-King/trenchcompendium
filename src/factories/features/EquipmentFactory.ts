@@ -23,7 +23,9 @@ class EquipmentFactory {
             return cache.EquipmentCache[_rule.id];
         }
         const rule = new Equipment(_rule, parent)
-        cache.AddToCache('equipment', rule);
+        if (!skipcheck) {
+            cache.AddToCache('equipment', rule);
+        }
         await rule.BuildFactionEquipment(_rule.id);
         return rule;
     }
@@ -81,8 +83,13 @@ class EquipmentFactory {
             return cache.EquipmentCache[_val];
         }
         const ruledata = Requester.MakeRequest({searchtype: "id", searchparam: {type: "equipment", id: _val}}) as IEquipment
-        const rulenew = await EquipmentFactory.CreateEquipment(ruledata, parent, skipcheck)
-        return rulenew;
+        try {
+            const rulenew = await EquipmentFactory.CreateEquipment(ruledata, parent, skipcheck)
+            return rulenew;
+        } catch (e) {
+            const rulenew = await EquipmentFactory.CreateEquipment(ruledata, parent, skipcheck)
+            return rulenew;
+        }
     }
 
     static async CreateModelEquipment(_rule: IModelEquipmentRelationship, parent : ContextObject | null, skipcheck = false) {
@@ -92,7 +99,9 @@ class EquipmentFactory {
             return cache.ModelEquipmentCache[_rule.id];
         }
         const rule = new ModelEquipmentRelationship(_rule, parent)
-        cache.AddToCache('modelequipment', rule);
+        if (!skipcheck) {
+            cache.AddToCache('modelequipment', rule);
+        }
         await rule.BuildEquipment(_rule.mandatory_equipment, skipcheck);
         await rule.ReloadOptions();
         await rule.BuildOptionEquipment();
@@ -134,7 +143,9 @@ class EquipmentFactory {
         }
         
         const rule = new FactionEquipmentRelationship(_rule, parent)
-        cache.AddToCache('factionequipment', rule);
+        if (!skipcheck) {
+            cache.AddToCache('factionequipment', rule);
+        }
         await rule.MakeItem(_rule.equipment_id, skipcheck);
         await rule.GetFactions(_rule.faction_id)
         await rule.RunEquipmentRestriction();

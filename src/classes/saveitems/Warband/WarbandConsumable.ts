@@ -1,5 +1,5 @@
 import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumItem'
-import { DescriptionFactory } from '../../../utility/functions';
+import { DescriptionFactory, isPrimitiveValue } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
 import { DynamicOptionContextObject } from '../../options/DynamicOptionContextObject';
@@ -16,6 +16,7 @@ import { WarbandProperty } from './WarbandProperty';
 interface IWarbandConsumable extends IContextObject {
     associate_id : string,
     object_id: string | null,
+    object_data: any | null,
     object_type : string | null
 }
 
@@ -35,9 +36,11 @@ interface IWarbandConsumable extends IContextObject {
 
 class WarbandConsumable extends DynamicContextObject  {
     public SelectItem : ContextObject | null = null;
+    public SelectData : any = null;
     public AssociateID : string;
     public SelectType : string | null = null;
     public Options : IChoice[] = [];
+    public FullOptions : IChoice[] = [];
     public MyOrigin : WarbandProperty | null = null;
 
     /**
@@ -55,6 +58,9 @@ class WarbandConsumable extends DynamicContextObject  {
 
     public async OnSelect(option : IChoice) {
         this.SelectItem = option.value;
+        if (isPrimitiveValue(option.value)) {
+            this.SelectData = option.value;
+        }
         
         const eventmon : EventRunner = new EventRunner();
         await eventmon.runEvent(
@@ -66,10 +72,30 @@ class WarbandConsumable extends DynamicContextObject  {
         )
     }
 
+    public async OnEmpty() {        
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "runConsumableEmpty",
+            this,
+            [this.MyContext, this.MyOrigin],
+            null,
+            this
+        )
+        this.SelectItem = null;
+        this.SelectData = null;
+    }
+
     public async GrabOptions() {
         const eventmon : EventRunner = new EventRunner();
         this.Options = await eventmon.runEvent(
             "getConsumableOptionsList",
+            this,
+            [this.MyContext, this.MyOrigin],
+            [],
+            this
+        )
+        this.FullOptions = await eventmon.runEvent(
+            "getConsumableFullOptionsList",
             this,
             [this.MyContext, this.MyOrigin],
             [],
@@ -88,6 +114,16 @@ class WarbandConsumable extends DynamicContextObject  {
                     return;
             }
         }
+        if (warband_data.object_data && warband_data.object_type) {
+            switch (warband_data.object_type) {
+                case "number":
+                    this.SelectData = warband_data.object_data;
+                    this.SelectType = "number"
+                    return;
+                default:
+                    return;
+            }
+        }
     }
 
     
@@ -101,7 +137,8 @@ class WarbandConsumable extends DynamicContextObject  {
             contextdata: this.ContextKeys,
             associate_id : this.AssociateID,
             object_id: this.SelectItem? this.SelectItem.ID : null,
-            object_type: this.SelectType? this.SelectType : null
+            object_type: this.SelectType? this.SelectType : null,
+            object_data: this.SelectData? this.SelectData : null
         }
 
         this.SelfData = _objint;

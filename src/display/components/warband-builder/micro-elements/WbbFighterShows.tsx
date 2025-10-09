@@ -66,6 +66,23 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
         setkeyvar(keyvar + 1);
     }, [updateKey]);
 
+    // define typed fighter lists
+    const elites = warband?.warband_data
+        .GetFighters()
+        .filter(f => f.model.IsElite() && f.model.State === 'active');
+
+    const troops = warband?.warband_data
+        .GetFighters()
+        .filter(f => !f.model.IsElite() && !f.model.IsMercenary() && f.model.State === 'active');
+
+    const mercs = warband?.warband_data
+        .GetFighters()
+        .filter(f => f.model.IsMercenary() && f.model.State === 'active');
+
+    const reserves = warband?.warband_data.GetFighters().filter(f => f.model.State === 'reserved');
+    const lost     = warband?.warband_data.GetFighters().filter(f => f.model.State === 'lost');
+    const dead     = warband?.warband_data.GetFighters().filter(f => f.model.State === 'dead');
+
     return (
         <div key={keyvar}>
             {warband &&
@@ -74,35 +91,33 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                 {(edit_mode || warband.warband_data.HasElites()) &&
                 <>
                 <h3 className={'category-headline'}>Elites</h3>
-                <DndContext
-                    sensors={sensors}
-                    collisionDetection={closestCenter}
-                    onDragEnd={handleDragEnd}
-                >
-                    <SortableContext
-                        items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                        strategy={verticalListSortingStrategy}
-                        disabled={modalIsOpen}
+                {elites &&
+                    <DndContext
+                        sensors={sensors}
+                        collisionDetection={closestCenter}
+                        onDragEnd={handleDragEnd}
                     >
-                        {warband.warband_data.GetFighters().map((item, index) => (
-                            <>
-                                {(item.model.IsElite() && (item.model.State == 'active')) &&
-                                    <WbbEditViewFighterSortable
-                                        key={item.model.ID}
-                                        fighter={item}
-                                        index={index}
-                                        onClick={() => openDetail('fighter', item)}
-                                        isActive={
-                                            detailType === 'fighter' &&
-                                            warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
-                                            warband.warband_data.Models.indexOf(item.purchase)
-                                        }
-                                    />
-                                }
-                            </>
-                        ))}
-                    </SortableContext>
-                </DndContext>
+                        <SortableContext
+                            items={elites.map(f => f.model.ID)}
+                            strategy={verticalListSortingStrategy}
+                            disabled={modalIsOpen}
+                        >
+                            {elites.map((item, index) => (
+                                <WbbEditViewFighterSortable
+                                    key={item.model.ID}
+                                    fighter={item}
+                                    index={index}
+                                    onClick={() => openDetail('fighter', item)}
+                                    isActive={
+                                        detailType === 'fighter' &&
+                                        warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                        warband.warband_data.Models.indexOf(item.purchase)
+                                    }
+                                />
+                            ))}
+                        </SortableContext>
+                    </DndContext>
+                }
                 </>
                 }
 
@@ -120,35 +135,34 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                 {(edit_mode || warband.warband_data.HasTroops()) &&
                 <>
                 <h3 className={'category-headline'}>Troops</h3>
-                <DndContext
-                    sensors={sensors}
-                    collisionDetection={closestCenter}
-                    onDragEnd={handleDragEnd}
-                >
-                    <SortableContext
-                        items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                        strategy={verticalListSortingStrategy}
-                        disabled={modalIsOpen}
+
+                {troops &&
+                    <DndContext
+                        sensors={sensors}
+                        collisionDetection={closestCenter}
+                        onDragEnd={handleDragEnd}
                     >
-                        {warband.warband_data.GetFighters().map((item, index) => (
-                            <>
-                                {((!item.model.IsElite() && (!item.model.IsMercenary())) && (item.model.State == 'active')) &&
-                                    <WbbEditViewFighterSortable
-                                        key={item.model.ID}
-                                        fighter={item}
-                                        index={index}
-                                        onClick={() => openDetail('fighter', item)}
-                                        isActive={
-                                            detailType === 'fighter' &&
-                                            warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
-                                            warband.warband_data.Models.indexOf(item.purchase)
-                                        }
-                                    />
-                                }
-                            </>
-                        ))}
-                    </SortableContext>
-                </DndContext>
+                        <SortableContext
+                            items={troops.map(f => f.model.ID)}
+                            strategy={verticalListSortingStrategy}
+                            disabled={modalIsOpen}
+                        >
+                            {troops.map((item, index) => (
+                                <WbbEditViewFighterSortable
+                                    key={item.model.ID}
+                                    fighter={item}
+                                    index={index}
+                                    onClick={() => openDetail('fighter', item)}
+                                    isActive={
+                                        detailType === 'fighter' &&
+                                        warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                        warband.warband_data.Models.indexOf(item.purchase)
+                                    }
+                                />
+                            ))}
+                        </SortableContext>
+                    </DndContext>
+                }
                 </>
                 }
 
@@ -166,35 +180,34 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                     <>
                         {/* Warband Mercenaries */}
                         <h3 className={'category-headline'}>Mercenaries</h3>
-                        <DndContext
-                            sensors={sensors}
-                            collisionDetection={closestCenter}
-                            onDragEnd={handleDragEnd}
-                        >
-                            <SortableContext
-                                items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}
-                                disabled={modalIsOpen}
+
+                        {mercs &&
+                            <DndContext
+                                sensors={sensors}
+                                collisionDetection={closestCenter}
+                                onDragEnd={handleDragEnd}
                             >
-                                {warband.warband_data.GetFighters().map((item, index) => (
-                                    <>
-                                        {(item.model.IsMercenary() && (item.model.State == 'active')) &&
-                                            <WbbEditViewFighterSortable
-                                                key={item.model.ID}
-                                                fighter={item}
-                                                index={index}
-                                                onClick={() => openDetail('fighter', item)}
-                                                isActive={
-                                                    detailType === 'fighter' &&
-                                                    warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
-                                                    warband.warband_data.Models.indexOf(item.purchase)
-                                                }
-                                            />
-                                        }
-                                    </>
-                                ))}
-                            </SortableContext>
-                        </DndContext>
+                                <SortableContext
+                                    items={mercs.map(f => f.model.ID)}
+                                    strategy={verticalListSortingStrategy}
+                                    disabled={modalIsOpen}
+                                >
+                                    {mercs.map((item, index) => (
+                                        <WbbEditViewFighterSortable
+                                            key={item.model.ID}
+                                            fighter={item}
+                                            index={index}
+                                            onClick={() => openDetail('fighter', item)}
+                                            isActive={
+                                                detailType === 'fighter' &&
+                                                warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                                warband.warband_data.Models.indexOf(item.purchase)
+                                            }
+                                        />
+                                    ))}
+                                </SortableContext>
+                            </DndContext>
+                        }
                     </>
                 }
 
@@ -211,35 +224,34 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                     <>
                         {/* Warband Reserve Members */}
                         <h3 className={'category-headline'}>Reserves</h3>
-                        <DndContext
-                            sensors={sensors}
-                            collisionDetection={closestCenter}
-                            onDragEnd={handleDragEnd}
-                        >
-                            <SortableContext
-                                items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}
-                                disabled={modalIsOpen}
+
+                        {reserves &&
+                            <DndContext
+                                sensors={sensors}
+                                collisionDetection={closestCenter}
+                                onDragEnd={handleDragEnd}
                             >
-                                {warband.warband_data.GetFighters().map((item, index) => (
-                                    <>
-                                        {((item.model.State == 'reserved')) &&
-                                            <WbbEditViewFighterSortable
-                                                key={item.model.ID}
-                                                fighter={item}
-                                                index={index}
-                                                onClick={() => openDetail('fighter', item)}
-                                                isActive={
-                                                    detailType === 'fighter' &&
-                                                    warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
-                                                    warband.warband_data.Models.indexOf(item.purchase)
-                                                }
-                                            />
-                                        }
-                                    </>
-                                ))}
-                            </SortableContext>
-                        </DndContext>
+                                <SortableContext
+                                    items={reserves.map(f => f.model.ID)}
+                                    strategy={verticalListSortingStrategy}
+                                    disabled={modalIsOpen}
+                                >
+                                    {reserves.map((item, index) => (
+                                        <WbbEditViewFighterSortable
+                                            key={item.model.ID}
+                                            fighter={item}
+                                            index={index}
+                                            onClick={() => openDetail('fighter', item)}
+                                            isActive={
+                                                detailType === 'fighter' &&
+                                                warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                                warband.warband_data.Models.indexOf(item.purchase)
+                                            }
+                                        />
+                                    ))}
+                                </SortableContext>
+                            </DndContext>
+                        }
                     </>
                 }
 
@@ -247,35 +259,35 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                     <>
                         {/* Warband Lost & Captured Members */}
                         <h3 className={'category-headline'}>Lost & Captured</h3>
-                        <DndContext
-                            sensors={sensors}
-                            collisionDetection={closestCenter}
-                            onDragEnd={handleDragEnd}
-                        >
-                            <SortableContext
-                                items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}
-                                disabled={modalIsOpen}
+
+                        {lost &&
+                            <DndContext
+                                sensors={sensors}
+                                collisionDetection={closestCenter}
+                                onDragEnd={handleDragEnd}
                             >
-                                {warband.warband_data.GetFighters().map((item, index) => (
-                                    <>
-                                        {((item.model.State == 'lost')) &&
-                                            <WbbEditViewFighterSortable
-                                                key={item.model.ID}
-                                                fighter={item}
-                                                index={index}
-                                                onClick={() => openDetail('fighter', item)}
-                                                isActive={
-                                                    detailType === 'fighter' &&
-                                                    warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
-                                                    warband.warband_data.Models.indexOf(item.purchase)
-                                                }
-                                            />
-                                        }
-                                    </>
-                                ))}
-                            </SortableContext>
-                        </DndContext>
+                                <SortableContext
+                                    items={lost.map(f => f.model.ID)}
+                                    strategy={verticalListSortingStrategy}
+                                    disabled={modalIsOpen}
+                                >
+                                    {lost.map((item, index) => (
+                                        <WbbEditViewFighterSortable
+                                            key={item.model.ID}
+                                            fighter={item}
+                                            index={index}
+                                            onClick={() => openDetail('fighter', item)}
+                                            isActive={
+                                                detailType === 'fighter' &&
+                                                warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                                warband.warband_data.Models.indexOf(item.purchase)
+                                            }
+                                        />
+                                    ))}
+                                </SortableContext>
+                            </DndContext>
+                        }
+
                     </>
                 }
                 
@@ -283,35 +295,34 @@ const WbbFighterShows : React.FC<WbbFighterShow> = ({ openDetail, detailType, de
                     <>
                         {/* Warband Dead Members */}
                         <h3 className={'category-headline'}>Dead</h3>
-                        <DndContext
-                            sensors={sensors}
-                            collisionDetection={closestCenter}
-                            onDragEnd={handleDragEnd}
-                        >
-                            <SortableContext
-                                items={warband.warband_data.GetFighters().map(f => f.model.ID)}
-                                strategy={verticalListSortingStrategy}
-                                disabled={modalIsOpen}
+
+                        {dead &&
+                            <DndContext
+                                sensors={sensors}
+                                collisionDetection={closestCenter}
+                                onDragEnd={handleDragEnd}
                             >
-                                {warband.warband_data.GetFighters().map((item, index) => (
-                                    <>
-                                        {((item.model.State == 'dead')) &&
-                                            <WbbEditViewFighterSortable
-                                                key={item.model.ID}
-                                                fighter={item}
-                                                index={index}
-                                                onClick={() => openDetail('fighter', item)}
-                                                isActive={
-                                                    detailType === 'fighter' &&
-                                                    warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
-                                                    warband.warband_data.Models.indexOf(item.purchase)
-                                                }
-                                            />
-                                        }
-                                    </>
-                                ))}
-                            </SortableContext>
-                        </DndContext>
+                                <SortableContext
+                                    items={dead.map(f => f.model.ID)}
+                                    strategy={verticalListSortingStrategy}
+                                    disabled={modalIsOpen}
+                                >
+                                    {dead.map((item, index) => (
+                                        <WbbEditViewFighterSortable
+                                            key={item.model.ID}
+                                            fighter={item}
+                                            index={index}
+                                            onClick={() => openDetail('fighter', item)}
+                                            isActive={
+                                                detailType === 'fighter' &&
+                                                warband.warband_data.Models.indexOf(detailPayload?.purchase) ===
+                                                warband.warband_data.Models.indexOf(item.purchase)
+                                            }
+                                        />
+                                    ))}
+                                </SortableContext>
+                            </DndContext>
+                        }
                     </>
                 }
                 </>

@@ -13,15 +13,18 @@ import {getCostType} from "../../../../utility/functions";
 import WbbEquipmentDetails from "../micro-elements/WbbEquipmentDetails";
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 import {useWbbMode} from "../../../../context/WbbModeContext";
+import { WarbandConsumable } from "../../../../classes/saveitems/Warband/WarbandConsumable";
+import { ContextObject } from "../../../../classes/contextevent/contextobject";
+import { IChoice } from "../../../../classes/options/StaticOption";
+import { ToolsController } from "../../../../classes/_high_level_controllers/ToolsController";
+import { useWarband } from "../../../../context/WarbandContext";
+import WbbSelectItemEquipment from "../micro-elements/WbbSelectItem";
+import {FactionEquipmentRelationship} from "../../../../classes/relationship/faction/FactionEquipmentRelationship";
 
-interface Option {
-    id: string;
-    name: string;
-    available: boolean;
-}
 
 interface WbbExploration_Selection_SingleEquipment_Props {
-    onSubmit: (selected: string) => void;
+    property : WarbandConsumable;
+    dochange : boolean;
 }
 
 // This lets the user select a single equipment item from a list of items
@@ -29,23 +32,42 @@ interface WbbExploration_Selection_SingleEquipment_Props {
 
 const WbbExploration_Selection_SingleEquipment: React.FC<
     WbbExploration_Selection_SingleEquipment_Props
-> = (props) => {
+> = ({property, dochange}) => {
     const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
 
+    const { warband, reloadDisplay, updateKey } = useWarband();
     const [showModal, setshowModal] = useState(false);
 
-    const options: Option[] = [
-        { id: "combat_helmet", name: "Combat Helmet", available: true },
-        { id: "jezzail", name: "Jezzail", available: true },
-        { id: "musket", name: "Musket", available: false },
-    ];
+    const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);
+    const OptionList = ((property.FullOptions.length == 0)? property.Options : property.FullOptions)
+    const [openedID, setOpenedID] = useState<string | null>(null);
 
-    const [hasSelectedItem, setHasSelectedItem] = useState(false);
-    const [selectedID, setSelectedID] = useState<string | null>(null);
+    const handleSubmit = (foundOption : IChoice | null) => {
+        if (foundOption != null) {
+            property.OnSelect(foundOption).then(() => {
+                setSelectedoption(property.SelectItem)
+                const Manager : ToolsController = ToolsController.getInstance();
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
+                 () => reloadDisplay())
+            })
+        }
+    };
 
-    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
-        alert('submitting')
-    });
+    // Returns bool if location be selected
+    function canSelectLocation (loc : IChoice) {
+        if (property.FullOptions.length == 0) { return true; }
+        if (getLocationFromTables(loc) != null) { return true; }
+        return false;
+    }
+
+    function getLocationFromTables(loc : IChoice) {
+        for (let i = 0; i < property.Options.length; i++) {
+            if (property.Options[i].id == loc.id) {
+                    return property.Options[i];
+                }
+        }
+        return null
+    }
 
     return (
         <div className="WbbExploration_Selection_SingleEquipment mb-3">
@@ -55,10 +77,9 @@ const WbbExploration_Selection_SingleEquipment: React.FC<
 
             <div className={'equipment-select'}>
                 <div className={'equipment-select-string'}>
-                    {selectedID ? (
+                    {selectedoption ? (
                         <>
-                            {/* @TODO: output acutal name here*/}
-                            {selectedID}
+                            {selectedoption.GetTrueName()}
                         </>
                     ) : (
                         <>
@@ -67,11 +88,11 @@ const WbbExploration_Selection_SingleEquipment: React.FC<
                     )}
                 </div>
 
-                {(edit_mode) &&
+                {(edit_mode && dochange) &&
                     <div className={'btn btn-primary'} onClick={() => setshowModal(true)}>
-                        <FontAwesomeIcon icon={selectedID ? faArrowsRotate : faPlus}
+                        <FontAwesomeIcon icon={selectedoption ? faArrowsRotate : faPlus}
                                          className={'icon-inline-left-l'}/>
-                        {selectedID ? "Change Item" : "Select Item"}
+                        {selectedoption ? "Change Item" : "Select Item"}
                     </div>
                 }
             </div>
@@ -90,63 +111,26 @@ const WbbExploration_Selection_SingleEquipment: React.FC<
                 </Modal.Header>
 
                 <Modal.Body>
-                    {/* @TODO: for each item in the list */}
-                    {options.map((opt) => (
-                        <React.Fragment
-                            key={opt.id}
-                        >
-                            <div
-                                className={`select-item ${selectedID === opt.id ? 'selected' : ''}`}
-                                onClick={() => setSelectedID(opt.id)}
-                            >
-                                <span className={'item-left'}>
-                                    <span className={'item-name'}>
-                                        {opt.name}
-                                    </span>
-                                </span>
+                    
+                    {OptionList.map((opt) => (
+                            <WbbSelectItemEquipment
+                                key={`select-item-${opt.id}`}
 
-                                <span className={'item-right'}>
-                                    <span className={'item-cost'}>
-                                        {'15 D'}
-                                    </span>
-
-                                    {/* If has LIMIT */}
-                                    <span className={'item-limit'}>
-                                        Limit: {'1' + "/" + '2'}
-                                    </span>
-
-                                    {/* If has restrictions */}
-                                    <span className={'item-limit'}>
-                                            Restrictions: {'Bob Only'}
-                                    </span>
-                                </span>
-                            </div>
-
-                            {selectedID === opt.id &&
-                                <div className={'details-wrap'}>
-                                    {/* @TODO: connect equipment here */}
-                                    {/*<WbbEquipmentDetails*/}
-                                    {/*    equipment={cache[item].facrel.EquipmentItem}*/}
-                                    {/*    showType={false}*/}
-                                    {/*/>*/}
-
-                                    <div className={'details-quick-action'}>
-                                        <Button variant="primary"
-                                                onClick={handleSubmit} disabled={!selectedID || isSubmitting}
-                                                className={' mb-3 btn-sm w-100'}
-                                        >
-                                            {isSubmitting ? (
-                                                <FontAwesomeIcon icon={faCircleNotch}
-                                                                 className={'icon-inline-left fa-spin '}/>
-                                            ) : (
-                                                <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
-                                            )}
-                                            {'Select Item'}
-                                        </Button>
-                                    </div>
-                                </div>
-                            }
-                        </React.Fragment>
+                                id={opt.id}
+                                title={opt.value.Name}
+                                opened={openedID === opt.id}
+                                available={canSelectLocation(opt)}
+                                onClick={() => {
+                                    if (canSelectLocation(opt)) {
+                                        setOpenedID(opt.id === openedID ? null : opt.id)
+                                    }
+                                }}
+                                equipment={opt.value.EquipmentItem}
+                                isSubmitting={false}
+                                onSubmit={() => handleSubmit(opt)}
+                                submitBtnString={'Add Equipment'}
+                                cost={opt.value.Cost + " " + getCostType(opt.value.CostType)}
+                            />
                     ))}
                 </Modal.Body>
 
@@ -161,3 +145,7 @@ const WbbExploration_Selection_SingleEquipment: React.FC<
 };
 
 export default WbbExploration_Selection_SingleEquipment;
+
+function reloadDisplay() {
+    throw new Error("Function not implemented.");
+}

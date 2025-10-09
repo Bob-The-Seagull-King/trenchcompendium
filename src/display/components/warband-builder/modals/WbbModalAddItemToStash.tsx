@@ -8,6 +8,7 @@ import {faCircleNotch, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons"
 import {useModalSubmitWithLoading} from "../../../../utility/useModalSubmitWithLoading";
 import { CachedFactionEquipment } from '../../../../classes/saveitems/Warband/UserWarband';
 import WbbEquipmentDetails from "../micro-elements/WbbEquipmentDetails";
+import WbbSelectItemEquipment from "../micro-elements/WbbSelectItem";
 
 interface Item {
     id: string;
@@ -25,23 +26,22 @@ interface WbbModalAddItemToStashProps {
 }
 
 const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, onClose, onSubmit, category, exploration }) => {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
-    
+    const [openedID, setOpenedID] = useState<string | null>(null);
+
     const { warband, updateKey } = useWarband();
     const [listofoptions, setListofOptions] = useState<FactionEquipmentRelationship[]>([])
     const [cache, setCache] = useState<CachedFactionEquipment>({});
     const [keyvar, setkevvar] = useState(0);
 
     // handlesubmit in this callback for delayed submission with loading state
-    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading(() => {
-        const weapon = listofoptions.find(w => w.ID === selectedId);
+    const { handleSubmit, isSubmitting } = useModalSubmitWithLoading((id?: string) => {
+        const weapon = listofoptions.find(w => w.ID === openedID);
         if (weapon) {
             onSubmit(weapon);
-            setSelectedId(null);
             onClose();
         }
     });
-    
+
     useEffect(() => {
         async function SetEquipmentOptions() {
             if (Object.keys(cache).length == 0) {
@@ -95,70 +95,29 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                     className={'select-items-wrap'}
                 >
                 {Object.keys(cache).map((item, index) => (
-                    <React.Fragment key={cache[item].facrel.ID}>
-                        <div
-                            className={`select-item ${selectedId === cache[item].facrel.ID ? 'selected' : ''} ${listofoptions.map(obj => obj.ID).includes(item)? '' : 'disabled'}`}
+                    <WbbSelectItemEquipment
+                        key={`select-item-${cache[item].facrel.ID}`}
 
-                            onClick={() => {
-                                if (listofoptions.map(obj => obj.ID).includes(item)) {
-                                    setSelectedId(cache[item].facrel.ID)
-                                }
-                            }}
-                        >
-                            <span className={'item-left'}>
-                                <span className={'item-name'}>
-                                    {cache[item].facrel.EquipmentItem.GetTrueName()}
-                                </span>
-                            </span>
-
-                            <span className={'item-right'}>
-                                <span className={'item-cost'}>
-                                    {cache[item].facrel.Cost &&
-                                        <>
-                                        {cache[item].cost + " " + getCostType(cache[item].facrel.CostType) }
-                                        </>
-                                    }
-                                </span>
-
-                                {((cache[item].limit > 0)) &&
-                                    <span className={'item-limit'}>
-                                        Limit: {( cache[item].count_cur + "/" + cache[item].limit ) }
-                                    </span>
-                                }
-                                {((cache[item].restrictions )).length > 0 &&
-                                    <span className={'item-limit'}>
-                                        Restrictions: {
-                                            (( cache[item].restrictions )).join(', ')
-                                        }
-                                    </span>
-                                }
-                            </span>
-                        </div>
-
-                        {selectedId === cache[item].facrel.ID &&
-                            <div className={'details-wrap'}>
-                                <WbbEquipmentDetails
-                                    equipment={cache[item].facrel.EquipmentItem}
-                                    showType={false}
-                                />
-
-                                <div className={'details-quick-action'}>
-                                    <Button variant="primary"
-                                            onClick={handleSubmit} disabled={!selectedId || isSubmitting}
-                                            className={' mb-3 btn-sm w-100'}
-                                    >
-                                        {isSubmitting ? (
-                                            <FontAwesomeIcon icon={faCircleNotch} className={'icon-inline-left fa-spin '}/>
-                                        ) : (
-                                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-left'}/>
-                                        )}
-                                        {'Add Equipment'}
-                                    </Button>
-                                </div>
-                            </div>
+                        id={cache[item].facrel.ID}
+                        title={cache[item].facrel.EquipmentItem.GetTrueName()}
+                        opened={openedID === cache[item].facrel.ID}
+                        available={listofoptions.map(obj => obj.ID).includes(item)}
+                        onClick={() => {
+                            setOpenedID(prev => prev === cache[item].facrel.ID ? null : cache[item].facrel.ID)
+                        }}
+                        equipment={cache[item].facrel.EquipmentItem}
+                        isSubmitting={isSubmitting}
+                        onSubmit={handleSubmit}
+                        submitBtnString={'Add to stash'}
+                        cost={cache[item].cost + " " + getCostType(cache[item].facrel.CostType)}
+                        limit={
+                            cache[item].limit > 0
+                                ? "Limit: " + (cache[item].count_cur + "/" + cache[item].limit)
+                                : ""
                         }
-                    </React.Fragment>
-                    ))}
+                        restrictions={cache[item].restrictions}
+                    />
+                ))}
                 </div>
             </Modal.Body>
 
