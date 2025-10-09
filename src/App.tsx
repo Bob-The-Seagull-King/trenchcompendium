@@ -55,6 +55,7 @@ import MaintananceNotice from "./display/components/generics/MaintananceNotice";
 import DevGuard from './display/components/generics/DevGuard'
 import DevImport from "./display/pages/DevImport";
 import {AdsManagerv2} from "./display/components/generics/AdsManagerv2";
+import AppVersionChecker from "./display/components/generics/AppVersionChecker";
 
 
 const App: React.FC = () => {
@@ -132,6 +133,7 @@ const App: React.FC = () => {
                             </ImageCreditPopoverProvider>
                             <AdsManagerv2 />
                             <TrackingManager />
+                            <AppVersionChecker />
 
                             {/*<DevGuard expectedPassword="companion" />*/}
                             {/*<EmergencyAlert />*/}
