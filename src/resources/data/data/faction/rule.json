@@ -3352,7 +3352,7 @@
         "description":  [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The warband may only include a maximum of two Corpse Guard known as Dessicated Husks."
+                "content": "A Great Hunger Warband may include 0-2 Dessicated Husks. Dessicated Husks use the Corpse Guard Warband Entry, but replace the Bodyguard rule with the STRONG Keyword at no additional cost."
             }
         ],
         "options": []

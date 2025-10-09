@@ -4101,7 +4101,7 @@
         },
         "faction_id": ["fc_cultoftheblackgrail_fv_thegreathunger"],
         "equipment_id": "eq_graspingmaw",
-        "cost": 25,
+        "cost": 17,
         "costtype": 0,
         "limit": 0
     },
@@ -4124,6 +4124,6 @@
         "equipment_id": "eq_pestilentfang",
         "cost": 15,
         "costtype": 0,
-        "limit": 1
+        "limit": 2
     }
 ]

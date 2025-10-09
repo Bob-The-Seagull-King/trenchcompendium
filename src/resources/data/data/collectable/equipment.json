@@ -7056,7 +7056,7 @@
         "source": "core",
         "tags": {"action": true, "weapon": true, "rifle": true},
         "category": "ranged",
-        "distance": 30,
+        "distance": 24,
         "stats": {
             "hands_ranged": 2,
             "ranged": true
@@ -7096,12 +7096,11 @@
         "description": [   
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "The Butcher Bayonet has the Bayonet Lug and Shield Combo rules. Add +1 DICE to rolls on the Injury Table made with this weapon. In addition, if a model with a Butcher Bayonet made a Charge ACTION in the same round it  attacks with it, add +1 to Melee Attacks made with a Butcher Bayonet for each friendly BLACK GRAIL model (including itself) within 3” of the attacking model (to a maximum of +4 DICE).",
+                "content": "The Butcher Bayonet counts as a bayonet and has the Shield Combo rule. Add +1 DICE to rolls on the Injury Table made with this weapon. In addition, lower the roll needed to achieve a Critical Success by one for Melee Attacks made by friendly Thralls within 3” of a model with a Butcher Bayonet. Butcher Bayonets can only be attached to weapons fitted with a ‘Bayonet lug’ (indicated in each Warband’s Armoury). They do not count towards the maximum melee weapons a model can carry.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"},
-                    {"val": "+4 DICE", "id": "kw_plusdice"},
-                    {"val": "ACTION", "id": "kw_action"},
-                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                    {"val": "Shield Combo", "id": "kw_shieldcombo"},
+                    {"val": "ACTION", "id": "kw_action"}
                 ]
             }  
         ],

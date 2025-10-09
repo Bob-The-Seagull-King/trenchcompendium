@@ -1806,7 +1806,7 @@
         "contextdata": {"option_search_viable": {}},
         "options": [],
         "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
-        "model_id" : "md_corpseguard",
+        "model_id" : "md_corpseguard_husk",
         "captain" : false,
         "mercenary": false,
         "cost" : 55,

@@ -1412,7 +1412,7 @@
         "cost": 25,
         "cost_type": 0,
         "restricted_upgrades": [],
-        "warband_limit": 2,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {
@@ -1427,7 +1427,7 @@
         "cost": 40,
         "cost_type": 0,
         "restricted_upgrades": [],
-        "warband_limit": 2,
+        "warband_limit": 1,
         "required_upgrades":[]
     },
     {
@@ -1469,7 +1469,7 @@
         "options": [],
         "model_id_set": ["md_plagueknight_butcherknight","md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger","md_grailthrall_hunger","md_grailthrall_flythrall_hunger"],
         "upgrade_id": "up_unendingstarvation",
-        "cost": 10,
+        "cost": 8,
         "cost_type": 0,
         "restricted_upgrades": [],
         "warband_limit": 0,

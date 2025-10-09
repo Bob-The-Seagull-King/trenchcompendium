@@ -1583,5 +1583,28 @@
         "stats" : {},
         "cut_abilities" : [],
         "new_abilities" : ["ab_ravenousinfection","ab_specialdeployment_cradle"]
+    },
+    {
+        "id": "md_corpseguard_husk",
+        "name": "Dessicated Husk",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_corpseguard"
+                    }
+                ]
+            }},
+        "base_id": "md_corpseguard",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_strong"],
+        "cut_abilities" : ["ab_bodyguard_blackgrail"],
+        "new_abilities" : []
     }
 ]

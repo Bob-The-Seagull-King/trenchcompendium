@@ -2893,7 +2893,7 @@
     },
     {
         "id": "ab_gnashingandwailing",
-        "name": "Gnashing and Wailing",
+        "name": "Gnashing and Tearing",
         "source": "creature_caster",
         "tags": {"trait": true},
         "contextdata": {   
@@ -2911,7 +2911,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Melee Attack Actions made by a Gregori Gula gain the CRITICAL Keyword. In addition, add +1 DICE to injury rolls caused by a Gregori Gula’s Melee Attack Actions in a round in which they have also made a Charge Action.",
+                "content": "Melee Attack Actions made by a Gregori Gula add +1 DICE to Injury Rolls. In addition, in a round in which the Gregori Gula has also made a Charge Action, it may make a third Melee Attack.",
                 "glossary": [
                     {"val": "CRITICAL", "id": "kw_critical"},
                     {"val": "+1 DICE", "id": "kw_plusdice"}
@@ -2929,7 +2929,11 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Once per round, when a Gregori Gula would be taken Out of Action, it instead goes DORMANT. Remove all markers from the Gregori Gula and replace its model with a suitable 60mm Token to represent its dormant state, counting as dangerous terrain. If, at any point a friendly thrall is within 1” of the Token, you must remove the thrall and replace the Token with the Gregori Gula. The Gregori Gula may activate if it has not done so already this round. A Gregori Gula in a DORMANT state does not contest objectives, nor can it take actions or be activated. It counts as though it has been removed from play for Morale purposes. In campaign play, a Gregori Gula in a DORMANT state at the end of the game is considered Out of Action. This terrain cannot be removed for any reason."
+                "content": "Once per round, when a Gregori Gula would be taken Out of Action, it instead goes Dormant. Remove all INFECTION MARKERS (but not BLOOD MARKERS) from the Gregori Gula and replace its model with a suitable 60mm token to represent its dormant state, which also counts as dangerous terrain. If at any point a friendly Thrall is within 1” of the Token, you must remove that Thrall and replace the token with the Gregori Gula, at least 1” away from all enemy models, and the Gula is Down. A Gregori Gula replaced this way may activate this round as normal if it has not done so already. A Gregori Gula in a Dormant state does not contest objectives, nor can it take actions, be activated or be targeted by enemy abilities that interact with terrain. A Gregori Gula in a Dormant state counts as being Out of Action for the purposes of Morale and the Trauma Step of the Campaign Phase.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
             }
         ],
         "options": []
