@@ -18,6 +18,9 @@ interface WbbPostGameDetailEliteProps {
     fighter: RealWarbandPurchaseModel;
 }
 
+const XP_BOLD_INDICES = [2, 4, 7, 10, 14, 18];
+
+
 const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter}) => {
 
     const { warband } = useWarband();
@@ -57,19 +60,26 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
         }
     };
 
-    const xpboldXpIndices = [2, 4, 7, 10, 14, 18];
     const [xp, setXp] = useState<number>(fighter.model.GetExperiencePoints());
     const initialXP = fighter.model.GetExperiencePoints();
 
     // Checks how many new bold XP indeces the fighter has reached based on XP progression
     const [newlyReachedBold, setNewlyReachedBold] = useState<number[]>([]);
     useEffect(() => {
-        // Find all bold xp values above the current xp value
-        const reached = xpboldXpIndices.filter(
+        // Compute based on current xp
+        const reached = XP_BOLD_INDICES.filter(
             (level) => level > initialXP && level <= xp
         );
-        setNewlyReachedBold(reached);
-    }, [xp, initialXP, xpboldXpIndices]);
+
+        // Prevent unnecessary state updates by shallow comparing arrays
+        setNewlyReachedBold((prev) => {
+            // --- Compare arrays; if equal, don't update state
+            if (prev.length === reached.length && prev.every((v, i) => v === reached[i])) {
+                return prev;
+            }
+            return reached;
+        });
+    }, [xp, initialXP]);
 
     // Sets the value for the modified XP based on selections
     useEffect(() => {
@@ -269,7 +279,7 @@ const WbbPostGameDetailElite: React.FC<WbbPostGameDetailEliteProps> = ( {fighter
                         {/* @TODO: Get actual Max length*/}
                         {Array.from({length: 18}, (_, i) => {
                             const level = i + 1;
-                            const isBold = xpboldXpIndices.includes(level);
+                            const isBold = XP_BOLD_INDICES.includes(level);
                             const isFilled = level <= xp; // xp = current value from state
                             const isNew = level > initialXP && level <= xp; // anything above initial value
 

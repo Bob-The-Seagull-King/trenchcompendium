@@ -23,6 +23,9 @@ interface WbbCampaignDetailViewProps {
     openPostGame: () => void;
 }
 
+const FEATURE_FLAG_HISTORY = false;
+const FEATURE_FLAG_REPORTING = false;
+
 const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose, openGameReporter, openPostGame }) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
@@ -168,13 +171,38 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose, 
                     {warband.warband_data.GetCampaignMaxFieldStrength()}
                 </div>
 
+                {/* Show if campaign Invite exists */}
+                {edit_mode &&
+                    <AlertCustom
+                        className={'my-3'}
+                        type={'info'}
+                    >
+                        <h4>{'Capmaign Invite'}</h4>
+                        <div>
+                            {'You have been invited to a campaign'}
+                        </div>
+                        <div className={'fw-bold mb-3'}>
+                            {'Campaign Name'}{' by '}{'Admin Name'}
+                        </div>
+
+                        {/* @TODO: handle campaign invite accept / decline */}
+                        <div className={'btn btn-primary me-2'}>
+                            <FontAwesomeIcon icon={faCheck} className={'me-2'} />
+                            {'Accept Invite'}
+                        </div>
+                        <div className={'btn btn-secondary'}>
+                            <FontAwesomeIcon icon={faTimes} className={'me-2'} />
+                            {'Decline Invite'}
+                        </div>
+                    </AlertCustom>
+                }
+
                 {/* Patron */}
                 <WbbOptionBox
                     title={'Patron'}
                     value={patron ? patron.GetTrueName() : ""}
                     onClick={() => setshowPatronModal(true)}
                 />
-
                 <WbbEditPatronSelectionModal
                     show={showPatronModal}
                     onClose={() => setshowPatronModal(false)}
@@ -182,185 +210,172 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose, 
                     onSubmit={handlePatronUpdate}
                 />
 
-
-                <button
-                    className={'btn btn-primary me-3'}
-                    onClick={() => openGameReporter()}
-                >
-                    <FontAwesomeIcon icon={faTrophy} className={'me-2'}/>
-                    {'Report Game'}
-                </button>
-
-                <button
-                    className={'btn btn-primary'}
-                    onClick={() => openPostGame()}
-                >
-                    <FontAwesomeIcon icon={faChartSimple} className={'me-2'}/>
-                    {'Post Game'}
-                </button>
-
-                {/* Show if campaign Invite exists */}
-                <AlertCustom
-                    className={'my-3'}
-                    type={'info'}
-                >
-                    <h4>{'Capmaign Invite'}</h4>
-                    <div>
-                        {'You have been invited to a campaign'}
-                    </div>
-                    <div className={'fw-bold mb-3'}>
-                        {'Campaign Name'}{' by '}{'Admin Name'}
-                    </div>
-
-                    {/* @TODO: handle campaign invite accept */}
-                    <div className={'btn btn-primary'}>
-                        {'Accept Invite'}
-                    </div>
-                </AlertCustom>
-
-                {/* Campaign History */}
-                <WbbDetailViewCollapse title="History" initiallyOpen={false}>
-                    {/* @TODO: Add history here */}
-
-                </WbbDetailViewCollapse>
+                {/* Victory Points */}
+                <WbbOptionBox
+                    title={'Victory Points'}
+                    value={victoryPoints}
+                    onClick={() => setshowVictoryPointsModal(true)}
+                />
+                <WbbEditVictoryPointsModal
+                    show={showVictoryPointsModal}
+                    onClose={() => setshowVictoryPointsModal(false)}
+                    currentVP={victoryPoints}
+                    onSubmit={handleVictoryPointsUpdate}
+                />
 
 
-                <WbbDetailViewCollapse title="Advanced Options" initiallyOpen={false}>
-                    <h4 className={'mb-3'}>
-                        {'Manual campaign values'}
-                    </h4>
+                {/* Campaign Cycle */}
+                <WbbOptionBox
+                    title={'Campaign Round'}
+                    value={campaignCycle}
+                    onClick={() => setshowCampaignCycleModal(true)}
+                />
+                <WbbEditCampaignCycleModal
+                    show={showCampaignCycleModal}
+                    onClose={() => setshowCampaignCycleModal(false)}
+                    currentCampaignCycle={campaignCycle}
+                    currentCampaignCycleMax={campaignCycleMax}
+                    onSubmit={handleCampaignCycleUpdate}
+                />
 
-                    {/* Victory Points */}
-                    <WbbOptionBox
-                        title={'Victory Points'}
-                        value={victoryPoints}
-                        onClick={() => setshowVictoryPointsModal(true)}
-                    />
-
-                    <WbbEditVictoryPointsModal
-                        show={showVictoryPointsModal}
-                        onClose={() => setshowVictoryPointsModal(false)}
-                        currentVP={victoryPoints}
-                        onSubmit={handleVictoryPointsUpdate}
-                    />
-
-
-                    {/* Campaign Cycle */}
-                    <WbbOptionBox
-                        title={'Campaign Round'}
-                        value={campaignCycle}
-                        onClick={() => setshowCampaignCycleModal(true)}
-                    />
-
-                    <WbbEditCampaignCycleModal
-                        show={showCampaignCycleModal}
-                        onClose={() => setshowCampaignCycleModal(false)}
-                        currentCampaignCycle={campaignCycle}
-                        currentCampaignCycleMax={campaignCycleMax}
-                        onSubmit={handleCampaignCycleUpdate}
-                    />
-
-                    {/* Failed Promotions */}
-                    <div className={'WbbFighterDetailView'}>
-                        <div className="WbbOptionBox">
-                            <div className="WbbOptionBox-title">
-                                {'Failed Promotions'}
-                            </div>
-                        </div>
-                        <div className={'failed-promo'}>
-                            {edit_mode &&
-                                <div className={'btn btn-primary btn-sm edit-btn'}
-                                     onClick={() => setshowFailedPromotionsModal(true)}>
-                                    <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
-                                    {'Edit'}
-                                </div>
-                            }
-
-                            <div className="failed-promo-boxes"
-                                 onClick={edit_mode ? () => setshowFailedPromotionsModal(true) : undefined}
-                            >
-                                {Array.from({length: 6}, (_, i) => {
-                                    const index = i + 1;
-                                    const isChecked = index <= failedpromotions;
-                                    const isSkull = index === 6;
-
-                                    return (
-                                        <div key={index} className="failed-promo-box">
-                                            {isSkull &&
-                                                <FontAwesomeIcon icon={faGift} className={'final-icon'}/>
-                                            }
-                                            {isChecked &&
-                                                <FontAwesomeIcon icon={faCheck}/>
-                                            }
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                {/* Failed Promotions */}
+                <div className={'WbbFighterDetailView'}>
+                    <div className="WbbOptionBox">
+                        <div className="WbbOptionBox-title">
+                            {'Failed Promotions'}
                         </div>
                     </div>
+                    <div className={'failed-promo'}>
+                        {edit_mode &&
+                            <div className={'btn btn-primary btn-sm edit-btn'}
+                                 onClick={() => setshowFailedPromotionsModal(true)}>
+                                <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
+                                {'Edit'}
+                            </div>
+                        }
 
-                    {edit_mode &&
-                        <WbbEditFailedPromotionsModal
-                            show={showFailedPromotionsModal}
-                            onClose={() => setshowFailedPromotionsModal(false)}
-                            currentFails={failedpromotions}
-                            onSubmit={handleFailedpromotionsUpdate}
-                        />
+                        <div className="failed-promo-boxes"
+                             onClick={edit_mode ? () => setshowFailedPromotionsModal(true) : undefined}
+                        >
+                            {Array.from({length: 6}, (_, i) => {
+                                const index = i + 1;
+                                const isChecked = index <= failedpromotions;
+                                const isSkull = index === 6;
+
+                                return (
+                                    <div key={index} className="failed-promo-box">
+                                        {isSkull &&
+                                            <FontAwesomeIcon icon={faGift} className={'final-icon'}/>
+                                        }
+                                        {isChecked &&
+                                            <FontAwesomeIcon icon={faCheck}/>
+                                        }
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                {edit_mode &&
+                    <WbbEditFailedPromotionsModal
+                        show={showFailedPromotionsModal}
+                        onClose={() => setshowFailedPromotionsModal(false)}
+                        currentFails={failedpromotions}
+                        onSubmit={handleFailedpromotionsUpdate}
+                    />
+                }
+
+
+                { edit_mode && FEATURE_FLAG_REPORTING &&
+                    <>
+                        <button
+                            className={'btn btn-primary me-3'}
+                            onClick={() => openGameReporter()}
+                        >
+                            <FontAwesomeIcon icon={faTrophy} className={'me-2'}/>
+                            {'Report Game'}
+                        </button>
+
+                        <button
+                            className={'btn btn-primary'}
+                            onClick={() => openPostGame()}
+                        >
+                            <FontAwesomeIcon icon={faChartSimple} className={'me-2'}/>
+                            {'Post Game'}
+                        </button>
+                    </>
+                }
+
+                <div className={'WbbDetailViewCollapse-wrap'}>
+                    {/* Campaign History */}
+                    {(edit_mode || view_mode) && FEATURE_FLAG_HISTORY &&
+                        <WbbDetailViewCollapse title="History" initiallyOpen={false}>
+                            {/* @TODO: Add history here */}
+
+                        </WbbDetailViewCollapse>
                     }
 
-                    <div>
+
+                    <WbbDetailViewCollapse title="Advanced Options" initiallyOpen={false}>
                         <h4 className={'mb-3'}>
-                            {'Threshold values'}
+                            {'Manual campaign values'}
                         </h4>
 
-                        {Array.from({length: 12}, (_, i) => (
-                            <div key={i} className="row mb-2 align-items-center">
-                                {/* Label column */}
-                                <div className="col-4 fw-bold">{`Round ${i + 1}`}</div>
 
-                                {/* Input column */}
-                                <div className="col-8">
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        onFocus={(e) => e.target.select()}
-                                        value={thresholds[i]}
-                                        min={0}
-                                        disabled={!thresholdsEditable}
-                                        step={1}
-                                        onChange={(e) => {
-                                            const newThresholds = [...thresholds];
-                                            newThresholds[i] = parseInt(e.target.value) || 0;
-                                            setThresholds(newThresholds);
-                                        }}
-                                    />
+
+                        <div>
+                            <h4 className={'mb-3'}>
+                                {'Threshold values'}
+                            </h4>
+
+                            {Array.from({length: 12}, (_, i) => (
+                                <div key={i} className="row mb-2 align-items-center">
+                                    {/* Label column */}
+                                    <div className="col-4 fw-bold">{`Round ${i + 1}`}</div>
+
+                                    {/* Input column */}
+                                    <div className="col-8">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            onFocus={(e) => e.target.select()}
+                                            value={thresholds[i]}
+                                            min={0}
+                                            disabled={!thresholdsEditable}
+                                            step={1}
+                                            onChange={(e) => {
+                                                const newThresholds = [...thresholds];
+                                                newThresholds[i] = parseInt(e.target.value) || 0;
+                                                setThresholds(newThresholds);
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
 
-                        <button className="btn btn-primary mt-3" onClick={handleSave}>
-                            Save Thresholds
-                        </button>
-                    </div>
-                </WbbDetailViewCollapse>
+                            <button className="btn btn-primary mt-3" onClick={handleSave}>
+                                Save Thresholds
+                            </button>
+                        </div>
+                    </WbbDetailViewCollapse>
 
-                <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
-                {/* Notes textarea */}
-                    <WbbTextarea
-                        initialText={campaigntext}
-                        title="Campaign Notes"
-                        onSave={(newText: string) => {
-                            warband?.warband_data.SaveNote(newText, 'campaign')
-                            setcampaigntext(newText);
+                    <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
+                        {/* Notes textarea */}
+                        <WbbTextarea
+                            initialText={campaigntext}
+                            title="Campaign Notes"
+                            onSave={(newText: string) => {
+                                warband?.warband_data.SaveNote(newText, 'campaign')
+                                setcampaigntext(newText);
 
-                            const Manager: ToolsController = ToolsController.getInstance();
-                            Manager.UserWarbandManager.UpdateItemInfo(warband ? warband.id : -999).then(
-                                () => reloadDisplay())
-                        }}
-                    />
-                </WbbDetailViewCollapse>
-
-
+                                const Manager: ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband ? warband.id : -999).then(
+                                    () => reloadDisplay())
+                            }}
+                        />
+                    </WbbDetailViewCollapse>
+                </div>
             </div>
         </div>
     );

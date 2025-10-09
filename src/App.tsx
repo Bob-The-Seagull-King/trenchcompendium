@@ -56,6 +56,9 @@ import DevGuard from './display/components/generics/DevGuard'
 import DevImport from "./display/pages/DevImport";
 import {AdsManagerv2} from "./display/components/generics/AdsManagerv2";
 import AppVersionChecker from "./display/components/generics/AppVersionChecker";
+import CampaignOverview from "./display/campaign-manager/CampaignOverview";
+import CampaignSetup from "./display/campaign-manager/CampaignSetup";
+import CampaignManager from "./display/campaign-manager/CampaignManager";
 
 
 const App: React.FC = () => {
@@ -123,10 +126,20 @@ const App: React.FC = () => {
                                     {/* Static Pages - Membership & Purchases */}
                                     <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
 
+                                    {/* Static page dev importer*/}
+                                    <Route path="/dev-import/" element={<DevImport />} />
+
                                     {/* Blog Pages */}
                                     <Route path="/blog" element={<BlogListPage />} />
                                     <Route path="/blog/:slug" element={<BlogArticlePage />} />
-                                    <Route path="/dev-import/" element={<DevImport />} />
+
+
+                                    {/* Campaign Manager Routes*/}
+                                    <Route path="/campaigns" element={<CampaignOverview />} />
+                                    <Route path="/campaigns/new" element={<CampaignSetup />} />
+                                    <Route path="/campaigns/:id" element={<CampaignManager />} />
+
+
                                 </Routes>
 
                                 <FooterMain />
