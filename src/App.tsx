@@ -135,7 +135,7 @@ const App: React.FC = () => {
                             <TrackingManager />
                             <AppVersionChecker />
 
-                            {/*<DevGuard expectedPassword="companion" />*/}
+                            <DevGuard expectedPassword="companion" />
                             {/*<EmergencyAlert />*/}
 
                             <ToastContainer
