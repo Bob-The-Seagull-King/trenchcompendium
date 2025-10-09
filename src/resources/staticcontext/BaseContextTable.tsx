@@ -3304,10 +3304,34 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    give_skill: {
+        event_priotity: 0,
+        async onSelectPropertyValue(this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null ,hostobj : DynamicOptionContextObject, warband : UserWarband | null) {
+            const ModelModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
+            
+            for (let i = 0; i < hostobj.Selections.length; i++) {
+                const cur = hostobj.Selections[i]
+                if (cur == trackVal) {
+                    if (cur.SelectedChoice != null) {
+                        if (cur.SelectedChoice.value instanceof ModelModule.WarbandMember) {
+                            if (context_func["id"]) {
+                                for (let j = 0; j < context_func["id"].length; j++) {
+                                    await cur.SelectedChoice.value.AddSkillByID(context_func["id"][j])
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
     skill_option: {
         event_priotity: 0,
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
+            if (context_func["id"]) {
+                if (context_static.GetID() != context_func["id"]) {return relayVar;}
+            }
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
             const { Skill } = await import("../../classes/feature/ability/Skill");
             
@@ -3323,6 +3347,9 @@ export const BaseContextCallTable : CallEventTable = {
         },
         returnOptionDisplay(this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
+            if (context_func["id"]) {
+                if (context_static.GetID() != context_func["id"]) {return (<div></div>);}
+            }
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>

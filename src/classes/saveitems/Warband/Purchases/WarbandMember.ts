@@ -1377,9 +1377,6 @@ class WarbandMember extends DynamicContextObject {
             }
         )
         let maxccurcostount = upgraw.Cost;
-        if (upgraw.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         maxccurcostount = await Events.runEvent(
             "getCostOfUpgrade",
             upgraw,
@@ -1390,9 +1387,6 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-        if (upgraw.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         maxccurcostount = await Events.runEvent(
             "getCostOfUpgrade",
             this,
@@ -1403,9 +1397,6 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-        if (upgraw.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         maxccurcostount = await Events.runEvent(
             "getCostOfUpgrade",
             this.MyContext as UserWarband,
@@ -1416,9 +1407,6 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-        if (upgraw.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         
         let discount_val = await Events.runEvent(
             "getDiscountOfUpgrade",
@@ -1592,9 +1580,6 @@ class WarbandMember extends DynamicContextObject {
             }
         )
         let maxccurcostount = upg.Cost;
-        if (upg.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         maxccurcostount = await Events.runEvent(
             "getCostOfUpgrade",
             upg,
@@ -1605,9 +1590,6 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-        if (upg.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         maxccurcostount = await Events.runEvent(
             "getCostOfUpgrade",
             this,
@@ -1618,9 +1600,6 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-        if (upg.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         maxccurcostount = await Events.runEvent(
             "getCostOfUpgrade",
             this.MyContext as UserWarband,
@@ -1631,9 +1610,6 @@ class WarbandMember extends DynamicContextObject {
                 model: this
             }
         )
-        if (upg.UpgradeObject.GetID() == "up_alchemicalformulae_elementalresistance") {
-            console.log(maxccurcostount)
-        }
         let canaddupgrade = (await this.GetCountOfUpgradeCategory(category) < limit_of_category || category == "upgrades")
         let discount_val = await Events.runEvent(
             "getDiscountOfUpgrade",
@@ -2063,6 +2039,23 @@ class WarbandMember extends DynamicContextObject {
         await eventmon.runEvent(
             "onGainSkill",
             skl,
+            [this.MyContext],
+            null,
+            NewRuleProperty
+        )
+        await this.BuildSkills(this.ConvertToInterface().list_skills)
+    }
+
+    public async AddSkillByID(skl : string) {
+        const BaseSkill = await SkillFactory.CreateNewSkill(skl, this, true);
+        const NewRuleProperty = new WarbandProperty(BaseSkill, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(BaseSkill, this, null, null);
+        await NewRuleProperty.BuildConsumables([]);
+        this.Skills.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainSkill",
+            BaseSkill,
             [this.MyContext],
             null,
             NewRuleProperty
