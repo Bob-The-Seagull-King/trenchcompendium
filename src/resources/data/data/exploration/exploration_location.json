@@ -2978,7 +2978,16 @@
             "warband_attatch": {
                 "restriction_eq": [ 
                     { "rest_type": "category", "value": "armour" }
-                ]
+                ],
+                "apply_to_attatch": {
+                "true_add_to_model": {  
+                    "list": [
+                            {
+                                "id": "ab_golgothatektites"
+                            }
+                        ]
+                    }
+                }
             }
         },
         "description": [            

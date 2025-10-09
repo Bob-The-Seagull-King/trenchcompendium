@@ -3020,5 +3020,25 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "ab_golgothatektites",
+        "name": "Applied Golgotha Tektites",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {      },
+        "description": [           
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The armour now ignores extra BLOOD MARKERS from Keywords GAS, FIRE, and SHRAPNEL.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "options": []
     }
 ]

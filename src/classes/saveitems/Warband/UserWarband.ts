@@ -276,6 +276,15 @@ class UserWarband extends DynamicContextObject {
                         if (selec.SelectedChoice.value == model) {
                             IsFound = true;
                             break;
+                        } else {
+                            if (selec.SelectedChoice.value instanceof WarbandEquipment) {
+                                if (selec.SelectedChoice.value.MyContext != null) {
+                                    if (selec.SelectedChoice.value.MyContext == model) {
+                                        IsFound = true;
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
