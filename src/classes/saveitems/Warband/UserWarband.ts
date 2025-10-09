@@ -192,6 +192,10 @@ class UserWarband extends DynamicContextObject {
 
     }
 
+    public async BuildTempLocations(data : string[]) {
+        await this.Exploration.BuildTempLocations(data);
+    }
+
     public async BuildModifiersSkills(data : IWarbandProperty[]) {
         if (data == undefined) {return;}
         const id_list = this.Modifiers.map(obj => JSON.stringify(obj.ConvertToInterface()))
@@ -272,6 +276,15 @@ class UserWarband extends DynamicContextObject {
                         if (selec.SelectedChoice.value == model) {
                             IsFound = true;
                             break;
+                        } else {
+                            if (selec.SelectedChoice.value instanceof WarbandEquipment) {
+                                if (selec.SelectedChoice.value.MyContext != null) {
+                                    if (selec.SelectedChoice.value.MyContext == model) {
+                                        IsFound = true;
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -1007,6 +1020,14 @@ class UserWarband extends DynamicContextObject {
         } else {
             this.Ducats += newval;
         }
+    }
+    public async AwaitedAddStashValue(newval : number, type : number) {
+        if (type == 1) {
+            this.Glory += newval;
+        } else {
+            this.Ducats += newval;
+        }
+        await this.Exploration.ReloadTempOptions();
     }
 
     public HasEnoughDucats(cost : number, costtype : number) {

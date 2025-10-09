@@ -156,6 +156,9 @@ class WarbandFactory {
         await rule.BuildModifiersFireteam(DataCheck.fireteams);
         await rule.BuildConsumables(DataCheck.consumables);
         await rule.RebuildProperties();
+        if (DataCheck.exploration.templocations) {
+            await rule.BuildTempLocations(DataCheck.exploration.templocations);
+        }
         return rule;
     }
 

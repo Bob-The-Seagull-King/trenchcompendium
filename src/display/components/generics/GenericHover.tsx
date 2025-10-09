@@ -17,7 +17,7 @@ const GenericHover = (props: any) => {
     const displayMethod = props.d_method
 
     const ruleName = props.titlename
-
+    
     return (
       <OverlayTrigger placement={'auto'} 
         overlay={

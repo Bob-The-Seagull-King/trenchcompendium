@@ -2431,6 +2431,7 @@
             "single": true,
             "tags" : {"base_loc": true},
             "type" : "text",
+            "hide": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -2536,7 +2537,9 @@
             "location_option": "el_jabireanalchemicalbooks"
         },
         "contextdata": {
-            "add_as_modifier": {},
+            "add_location_modifier": {
+                "id": ["el_jabireanalchemicalbooks_study_mod"]
+            },
             "validate_location": {
                 "allowed": [
                     {
@@ -2544,7 +2547,24 @@
                         "value": ["fc_ironsultanate_fv_houseofwisdom"]
                     }
                 ]
-            },
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You glean from it great secrets of Takwin creation, and all the Alchemical Formulae now cost 5 ducats less (down to minimum of 5)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_jabireanalchemicalbooks_study_mod",
+        "name": "Study Alchemical Books",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "purchase_modifier_upgrade": {
                 "mod": [
                     {
@@ -2958,7 +2978,16 @@
             "warband_attatch": {
                 "restriction_eq": [ 
                     { "rest_type": "category", "value": "armour" }
-                ]
+                ],
+                "apply_to_attatch": {
+                "true_add_to_model": {  
+                    "list": [
+                            {
+                                "id": "ab_golgothatektites"
+                            }
+                        ]
+                    }
+                }
             }
         },
         "description": [            
@@ -3055,17 +3084,10 @@
         "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
-            "warband_attatch": {
-                "apply_to_attatch": {
-                "true_add_to_model": {  
-                    "list": [
-                            {
-                                "id": "ab_fruitofgoodandevil"
-                            }
-                        ]
-                    }
-                }
-            }
+            "give_skill": {
+                "id": ["sk_fruitfromthetreeofgoodandevil"]
+            },
+            "warband_attatch": { }
         },
         "description": [            
             {
@@ -3088,6 +3110,6 @@
             "hide": true,
             "single": true,
             "question_name": "getMemberOptionsFromWarband"
-        }  ]
+        } ]
     }
 ]

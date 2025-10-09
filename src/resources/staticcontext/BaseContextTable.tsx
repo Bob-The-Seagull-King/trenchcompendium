@@ -2161,7 +2161,7 @@ export const BaseContextCallTable : CallEventTable = {
                 if (context_func["mod"]) {
                     value *= context_func["mod"]
                 }
-                warband.AddStashValue(value,0)
+                await warband.AwaitedAddStashValue(value,0)
             }
             if (context_func["dice3"]) {
                 let value = 0;
@@ -2171,7 +2171,7 @@ export const BaseContextCallTable : CallEventTable = {
                 if (context_func["mod"]) {
                     value *= context_func["mod"]
                 }
-                warband.AddStashValue(value,0)
+                await warband.AwaitedAddStashValue(value,0)
             }
         }
     },
@@ -2201,7 +2201,7 @@ export const BaseContextCallTable : CallEventTable = {
                     if (context_func["post_save"]) {
                         Tags["post_save"] = true
                     }
-                    Tags["item_name"] = "Ducats Gained"
+                    Tags["item_name"] = "Dice Ducats Result"
                     const NewData = {
                         id: context_static.GetID() + Date.now().toString(), 
                         name: context_static.GetTrueName(),
@@ -2267,7 +2267,7 @@ export const BaseContextCallTable : CallEventTable = {
             }
             if (IsMe) {
                 if (context_func["count"]) {
-                    warband.AddStashValue(context_func["count"],0)
+                    await warband.AwaitedAddStashValue(context_func["count"],0)
                 }
             }
         }
@@ -3304,10 +3304,34 @@ export const BaseContextCallTable : CallEventTable = {
             return relayVar;
         }
     },
+    give_skill: {
+        event_priotity: 0,
+        async onSelectPropertyValue(this: EventRunner, eventSource : any, trackVal : SelectedOption, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null ,hostobj : DynamicOptionContextObject, warband : UserWarband | null) {
+            const ModelModule = await import("../../classes/saveitems/Warband/Purchases/WarbandMember")
+            
+            for (let i = 0; i < hostobj.Selections.length; i++) {
+                const cur = hostobj.Selections[i]
+                if (cur == trackVal) {
+                    if (cur.SelectedChoice != null) {
+                        if (cur.SelectedChoice.value instanceof ModelModule.WarbandMember) {
+                            if (context_func["id"]) {
+                                for (let j = 0; j < context_func["id"].length; j++) {
+                                    await cur.SelectedChoice.value.AddSkillByID(context_func["id"][j])
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
     skill_option: {
         event_priotity: 0,
         async parseOptionsIntoRelevantType(this: EventRunner, eventSource : any, relayVar : IChoice[],  trackVal : number, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
+            if (context_func["id"]) {
+                if (context_static.GetID() != context_func["id"]) {return relayVar;}
+            }
             const { SkillFactory } = await import("../../factories/features/SkillFactory");
             const { Skill } = await import("../../classes/feature/ability/Skill");
             
@@ -3323,6 +3347,9 @@ export const BaseContextCallTable : CallEventTable = {
         },
         returnOptionDisplay(this: EventRunner, eventSource : any, relayVar : IChoice, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null){
             
+            if (context_func["id"]) {
+                if (context_static.GetID() != context_func["id"]) {return (<div></div>);}
+            }
             return ( 
             
                 <ErrorBoundary fallback={<div>Something went wrong with DisplayPageStatic.tsx</div>}>
@@ -4054,6 +4081,45 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             return relayVar;
+        },
+        async getConsumableFullOptionsList(this: EventRunner, eventSource : any, relayVar : IChoice[], trackVal : WarbandConsumable, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, sourceband : UserWarband, origin : WarbandProperty | null) {
+            
+            if (sourceband) {
+            const OptionList = await (sourceband).GetFactionEquipmentOptions(true, false, false, false);
+                for (let i = 0; i < OptionList.length; i++) {
+                    let canadd = true;
+                    
+                    if (context_func["limitations"]["category"]) {
+                        if (!context_func["limitations"]["category"].includes(OptionList[i].EquipmentItem.Category)) {
+                            canadd = false;
+                        }
+                    }
+                    
+                    if (context_func["limitations"]["keyword"]) {
+                        let isvalid = false;
+                        const keylist = OptionList[i].EquipmentItem.GetKeyWordIDs();
+                        for (let k = 0; k < context_func["limitations"]["keyword"].length; k++) {
+                            if (keylist.includes(context_func["limitations"]["keyword"][k])) {
+                                isvalid = true;
+                            }
+                        }
+                        if (!isvalid) {
+                            canadd = false;
+                        }
+                    }
+
+                    if (canadd == true) {
+                        relayVar.push(
+                            {
+                                display_str: OptionList[i].EquipmentItem.GetTrueName() + " " + OptionList[i].Cost + " " + getCostType(OptionList[i].CostType),
+                                id: OptionList[i].ID,
+                                value: OptionList[i]
+                            }
+                        )
+                    }
+                }
+            }
+            return relayVar;
         }
     },
     gain_new_item_from_list: {
@@ -4100,7 +4166,7 @@ export const BaseContextCallTable : CallEventTable = {
                     await warband.AddStash((context_static as any).SelectItem as any, true);
                 } else {
                     if (context_func["alternate_value"] == true) {
-                        warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                        await warband.AwaitedAddStashValue(NewModel.Cost, NewModel.CostType)
                     }
                 }
             }
@@ -4215,7 +4281,7 @@ export const BaseContextCallTable : CallEventTable = {
             for (let i = 0; i < origin.Consumables.length; i++) {
                 if (origin.Consumables[i].Name == trackVal.GetTrueName()) {
                     if (origin.Consumables[i].ContextKeys["spend_money"]) {
-                        if (origin.Consumables[i].ContextKeys["spend_money"]["count"]) {
+                        if (origin.Consumables[i].ContextKeys["spend_money"]["count"] != undefined) {
                             if (cost > origin.Consumables[i].ContextKeys["spend_money"]["count"]) {
                                 cost = origin.Consumables[i].ContextKeys["spend_money"]["count"]
                             }
@@ -4281,7 +4347,6 @@ export const BaseContextCallTable : CallEventTable = {
             const {WarbandConsumable} = await import("../../classes/saveitems/Warband/WarbandConsumable");
             const ContWarband = await GetWarbandOrNull(sourceband);
             if (ContWarband == null) { return }
-
             if (context_func["count"]) {
                 let cost = context_func["count"]
                 cost -= (trackVal.SelectItem as any).Cost
@@ -4292,6 +4357,7 @@ export const BaseContextCallTable : CallEventTable = {
                     obeylimit = tempstore["limit"] > 0;
                 }
                 tempstore["count"] = cost;
+                if (!obeylimit) {return;}
                 if (cost > 0 && obeylimit && origin != null && origin != undefined) {
                     const Tags = context_static.Tags;
                     Tags["consumable_type_equipment"] = true
@@ -4568,7 +4634,7 @@ export const BaseContextCallTable : CallEventTable = {
                     value *= context_func["mod"]
                 }
 
-                warband.AddStashValue(value,1)
+                await warband.AwaitedAddStashValue(value,1)
             }
             if (context_func["dice3"]) {
                 let value = 0;
@@ -4578,7 +4644,7 @@ export const BaseContextCallTable : CallEventTable = {
                 if (context_func["mod"] != undefined) {
                     value *= context_func["mod"]
                 }
-                warband.AddStashValue(value,1)
+                await warband.AwaitedAddStashValue(value,1)
             }
         }
     },
@@ -4635,7 +4701,7 @@ export const BaseContextCallTable : CallEventTable = {
                     if (context_func["post_save"]) {
                         Tags["post_save"] = true
                     }
-                    Tags["item_name"] = "Glory Gained"
+                    Tags["item_name"] = "Dice Glory Point Result"
                     const NewData = {
                         id: context_static.GetID() + Date.now().toString(), 
                         name: context_static.GetTrueName(),
@@ -4671,7 +4737,7 @@ export const BaseContextCallTable : CallEventTable = {
             }
             if (IsMe) {
                         if (context_func["count"]) {
-                            warband.AddStashValue(context_func["count"],1)
+                            await warband.AwaitedAddStashValue(context_func["count"],1)
                         }
                     }
         }
@@ -4882,7 +4948,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 await warband.AddStash(NewModel, true);
                             } else {
                                 if (context_func["alternate_value"] == true) {
-                                    warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                                    await warband.AwaitedAddStashValue(NewModel.Cost, NewModel.CostType)
                                 }
                             }
                         }
@@ -5034,7 +5100,7 @@ export const BaseContextCallTable : CallEventTable = {
                                 await warband.AddStash(NewModel, true);
                             } else {
                                 if (context_func["alternate_value"] == true) {
-                                    warband.AddStashValue(NewModel.Cost, NewModel.CostType)
+                                    await warband.AwaitedAddStashValue(NewModel.Cost, NewModel.CostType)
                                 }
                             }
                         }
@@ -5452,116 +5518,7 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             return relayVar;
-        },
-        async onRemoveLocation(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, id : string) {
-            const alllist = warband.GetEntireWarbandUpgrade()
-            const appliedMods = new Map<WarbandProperty, Set<number>>();
-
-            for (let o = 0; o < alllist.length; o++) {
-                const CurEq = alllist[o].purchase
-                const CurEqItem = alllist[o].upgrade
-
-                if (CurEq.Sellable == false) {
-                    continue;
-                }
-
-                if (context_func["mod"]) {
-                    for (let k = 0; k < context_func["mod"].length; k++) {
-                        let CanAdd = false
-                        let AllCriteria = true
-
-                        if (context_func["mod"][k]["requirements"]) {
-                            for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
-                                const Cur = context_func["mod"][k]["requirements"][i]
-
-                                if (Cur["tag"]) {
-                                if (!containsTag(CurEqItem.Tags, Cur["tag"]) && !containsTag((CurEqItem.SelfDynamicProperty.OptionChoice as ModelUpgradeRelationship).UpgradeObject.Tags, Cur["tag"])) {
-                                    AllCriteria = false;
-                                }
-                                }
-                                if (Cur["cost"]) {
-                                    if (Cur['req_mod'] == ">=") {
-                                        if ( Number(CurEq.ItemCost - context_func["mod"][k]["cost"]) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
-                                            AllCriteria = false;
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-                        if (AllCriteria) {
-                            CanAdd = true;
-                        }
-                        if (CanAdd) {
-                            if (!appliedMods.has(CurEqItem)) {
-                                appliedMods.set(CurEqItem, new Set());
-                            }
-                            const modsForItem = appliedMods.get(CurEqItem)!;
-                            if (!modsForItem.has(k)) {
-                                CurEq.ItemCost -= context_func["mod"][k]["cost"];
-                                modsForItem.add(k);
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        async onGainLocation(this: EventRunner, eventSource : any, trackVal : WarbandProperty, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
-            const alllist = warband.GetEntireWarbandUpgrade()
-            const appliedMods = new Map<WarbandProperty, Set<number>>();
-
-            for (let o = 0; o < alllist.length; o++) {
-                const CurEq = alllist[o].purchase
-                const CurEqItem = alllist[o].upgrade
-
-                if (CurEq.Sellable == false) {
-                    continue;
-                }
-
-                if (context_func["mod"]) {
-                    for (let k = 0; k < context_func["mod"].length; k++) {
-                        let CanAdd = false
-                        let AllCriteria = true
-
-                        if (context_func["mod"][k]["requirements"]) {
-                            for (let i = 0; i < context_func["mod"][k]["requirements"].length; i++) {
-                                const Cur = context_func["mod"][k]["requirements"][i]
-
-                                if (Cur["tag"]) {
-                                if (!containsTag(CurEqItem.Tags, Cur["tag"]) && !containsTag((CurEqItem.SelfDynamicProperty.OptionChoice as ModelUpgradeRelationship).UpgradeObject.Tags, Cur["tag"])) {
-                                    AllCriteria = false;
-                                }
-                                }
-                                if (Cur["cost"]) {
-                                    if (Cur['req_mod'] == ">=") {
-                                        if ( Number(CurEq.ItemCost - context_func["mod"][k]["cost"]) < Number(Cur["cost"]) || Number(Cur["costtype"]) != Number(CurEq.CostType)) {
-                                            AllCriteria = false;
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-                        if (AllCriteria) {
-                            CanAdd = true;
-                        }
-                        if (CanAdd) {
-                            if (!appliedMods.has(CurEqItem)) {
-                                appliedMods.set(CurEqItem, new Set());
-                            }
-                            const modsForItem = appliedMods.get(CurEqItem)!;
-                            if (!modsForItem.has(k)) {
-                                CurEq.ItemCost += context_func["mod"][k]["cost"];
-                                if (context_func["mod"][k]["min"]) {
-                                    CurEq.ItemCost = Math.max(context_func["mod"][k]["min"], CurEq.ItemCost)
-                                }
-                                modsForItem.add(k);
-                            }
-                        }
-                    }
-                }
-            }
-        },        
+        },      
         async getCostOfUpgrade(this: EventRunner, eventSource : any, relayVar: number, trackVal: MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, coreitem : ModelUpgradeRelationship) {
             
             let HoldVar = relayVar;

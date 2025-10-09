@@ -20,6 +20,7 @@ interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
     locations: IWarbandProperty[];
     location_mods? : IWarbandProperty[];
+    templocations?: string[];
 }
 
 export interface ExplorationSkillSuite {
@@ -94,6 +95,18 @@ class WarbandExplorationSet extends DynamicContextObject {
         super(data, parent)
     }
 
+    public async ReloadTempOptions() {
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            const Current = this.CurLocation[i]
+            if (Current.true_obj != undefined) {
+                await Current.true_obj.RegenerateOptions();
+                for (let j = 0; j < Current.true_obj.Consumables.length; j++) {
+                    await Current.true_obj.Consumables[j].GrabOptions();
+                }
+            }
+        }
+    }
+
     public async BuildSkills(data : IWarbandProperty[]) {
         for (let i = 0; i < data.length; i++) {
             const CurVal = data[i];
@@ -127,6 +140,36 @@ class WarbandExplorationSet extends DynamicContextObject {
             await NewLocation.HandleDynamicProps(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.BuildConsumables(CurVal.consumables);
             this.LocationMods.push(NewLocation);
+        }
+    }
+
+    public async BuildTempLocations(data : string[]) {
+        
+        const validLocationsFound = await this.GetValidNewLocations();
+
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i];
+
+            let filter : FilteredLocation | null = null;
+
+            for (let j = 0; j < validLocationsFound.length; j++) {
+                for (let k = 0; k < validLocationsFound[j].valid_locs.length; k++) {
+                    const CurLoc : FilteredLocation =  validLocationsFound[j].valid_locs[k]
+                    if (CurLoc.location.GetID() == CurVal) {
+                        filter = CurLoc;
+                        break;
+                    }
+                }
+            }
+
+            if (filter != null) {
+                const NewLoc : StoredLocation = {
+                    base_item : filter,
+                    selected_options: []
+                }
+                this.CurLocation.push(NewLoc);
+            }
+
         }
     }
 
@@ -164,6 +207,10 @@ class WarbandExplorationSet extends DynamicContextObject {
         for (let i = 0; i < this.LocationMods.length; i++) {
             locationmodset.push(this.LocationMods[i].ConvertToInterface())
         }
+        const templocset : string[] = [];
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            templocset.push(this.CurLocation[i].base_item.location.GetID())
+        }
         const _objint : IWarbandExplorationSet = {
             explorationskills: skillset,
             locations: locationset,
@@ -172,7 +219,8 @@ class WarbandExplorationSet extends DynamicContextObject {
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
-            tags: this.Tags
+            tags: this.Tags,
+            templocations: templocset
         }
         this.SelfData = _objint;
         return _objint;

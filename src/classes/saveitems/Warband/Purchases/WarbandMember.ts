@@ -2046,6 +2046,23 @@ class WarbandMember extends DynamicContextObject {
         await this.BuildSkills(this.ConvertToInterface().list_skills)
     }
 
+    public async AddSkillByID(skl : string) {
+        const BaseSkill = await SkillFactory.CreateNewSkill(skl, this, true);
+        const NewRuleProperty = new WarbandProperty(BaseSkill, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(BaseSkill, this, null, null);
+        await NewRuleProperty.BuildConsumables([]);
+        this.Skills.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainSkill",
+            BaseSkill,
+            [this.MyContext],
+            null,
+            NewRuleProperty
+        )
+        await this.BuildSkills(this.ConvertToInterface().list_skills)
+    }
+
     public UpdateStatOption(newstat: ModelStatistics, oldstat : ModelStatistics | null) {
         if (oldstat == null) {
             this.Stat_Selections.push(newstat);
