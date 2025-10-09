@@ -18,9 +18,8 @@ class ExplorationTable extends StaticContextObject {
     public Rarity : number;
 
     /**
-     * Assigns parameters and creates a series of description
-     * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * Assigns parameters and creates a series of objects
+     * @param data Object data in IExplorationTable format
      */
     public constructor(data: IExplorationTable, parent : ContextObject | null)
     {
@@ -28,8 +27,8 @@ class ExplorationTable extends StaticContextObject {
         this.Rarity = data.rarity
     }
 
-    
-    public async BuildFactionEquipment(id : string, skipcheck = false) {
+    // For a given table, creates/builds all its location objects
+    public async BuildTableLocations(id : string, skipcheck = false) {
         const LocationList = Requester.MakeRequest(
             {
                 searchtype: "complex", 
@@ -53,7 +52,6 @@ class ExplorationTable extends StaticContextObject {
             }
         ) as IExplorationLocation[]
 
-        
         LocationList.sort(byPropertiesOf<IExplorationLocation>(["location_value"]))
 
         for (let i = 0; i < LocationList.length; i++) {

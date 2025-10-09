@@ -15,6 +15,7 @@ import MenuOutLink from '../components/subcomponents/MenuOutLink';
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import RulesBannerImage from "../components/rules-content/RulesBannerImage";
 import ConfirmationModal from "../components/generics/ConfirmationModal";
+import BlogRollRow from "../components/blog/BlogRollRow";
 
 
 
@@ -99,6 +100,8 @@ const HomeRoute: React.FC = () => {
                                 />
                             </div>
                         </div>
+
+                        <BlogRollRow />
                     </div>
 
                     <div className={'spacer-20'}></div>

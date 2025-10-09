@@ -17,6 +17,7 @@
         "options": [{
             "ref_id" : "ot_moonshinestash",
             "name" : "",
+            "tags" : {"base_loc": true},
             "description" : [],
             "category" : "type",
             "type" : "text",
@@ -54,6 +55,7 @@
             "location_option": "el_moonshinestash"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -66,7 +68,11 @@
         },
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
+                "content": "From: Moonshine Stash"
+            },       
+            {
+                "tags": {"desc_type" : "paragraph"},
                 "content": "During the next battle, your warband rolls Morale checks with +2 DICE.",
                 "glossary": [{"val": "+2 DICE", "id": "kw_plusdice"}]
             }
@@ -95,7 +101,7 @@
     },
     {
         "id": "el_moonshinestash_destroy",
-        "name": "Destroy the Stash",
+        "name": "Destroy",
         "source": "core",
         "tags": {
             "location_option": "el_moonshinestash"
@@ -120,9 +126,13 @@
                 "gains": 1
             }
         },
-        "description": [            
+        "description": [     
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
+                "content": "From: Moonshine Stash"
+            },        
+            {
+                "tags": {"desc_type" : "paragraph"},
                 "content": "Up to two of your ELITES each gain +1 Experience Point.",
                 "glossary": [{"val": "ELITES", "id": "kw_elite"}]
             }
@@ -174,6 +184,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "tags" : {"base_loc": true},
             "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
@@ -277,6 +288,7 @@
             "type" : "text",
             "single": true,
             "strictness" : "strict",
+            "tags" : {"base_loc": true},
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
             "data_search" : {      
@@ -309,18 +321,10 @@
             "location_option": "el_trenchshrine"
         },
         "contextdata": {
-            "validate_location": {
-                "removed": [
-                    {
-                        "type": "faction",
-                        "value": ["fc_cultoftheblackgrail"]
-                    }
-                ]
-            },
-            "gain_all_from_list": {
+            "gain_all_from_list_find": {
                 "obey_faction": true,
                 "obey_restriction": true,
-                "id": ["rel_fc_eq_troopflag"]
+                "id": ["eq_troopflag"]
             }
         },
         "description": [            
@@ -344,9 +348,7 @@
         "id": "el_trenchshrine_standard_grail",
         "name": "Standard",
         "source": "core",
-        "tags": {
-            "location_option": "el_trenchshrine"
-        },
+        "tags": {"defunct": true},
         "contextdata": {
             "validate_location": {
                 "allowed": [
@@ -446,6 +448,7 @@
         "options": [{
             "ref_id" : "ot_ruinedhouse",
             "name" : "",
+            "tags" : {"base_loc": true},
             "description" : [],
             "category" : "type",
             "type" : "text",
@@ -550,6 +553,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "tags" : {"hide_info": true},
             "single": true,
             "strictness" : "strict",
             "predefined_options" : [],
@@ -578,7 +582,7 @@
     },
     {
         "id": "el_survivor_yeoman",
-        "name": "New Antioch",
+        "name": "Survivor Yeoman",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -611,7 +615,7 @@
     },
     {
         "id": "el_survivor_trenchpilgrims",
-        "name": "Trench Pilgrims",
+        "name": "Ecclesiastic Prisoner",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -640,7 +644,7 @@
     },
     {
         "id": "el_survivor_ironsultanate",
-        "name": "Iron Sultanate",
+        "name": "Azeb",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -669,7 +673,7 @@
     },
     {
         "id": "el_survivor_hereticlegion",
-        "name": "Heretic Legions",
+        "name": "Heretic Wretched",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -698,7 +702,7 @@
     },
     {
         "id": "el_survivor_court",
-        "name": "The Court",
+        "name": "Court Wretched",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -727,7 +731,7 @@
     },
     {
         "id": "el_survivor_blackgrail",
-        "name": "Black Grail",
+        "name": "Grail Thrall",
         "source": "core",
         "tags": {
             "location_option": "el_survivor"
@@ -859,6 +863,7 @@
             "single": true,
             "category" : "type",
             "type" : "text",
+            "tags" : {"base_loc": true},
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -912,6 +917,9 @@
             "location_option": "el_trenchmerchant"
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_trenchmerchant_trade_mod"]
+            },
             "set_exploration_purchase_cap": {
                 "cost": 5
             }
@@ -923,6 +931,26 @@
             }
         ],
         "options": []
+    },
+    {
+        "id": "el_trenchmerchant_trade_mod",
+        "name": "Trench Merchant Trade",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
+            "set_exploration_purchase_cap": {
+                "cost": 5
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase Glory Items that cost 5 Glory or less that are allowed to your Warband during the Trade step."
+            }
+        ],
+        "options": [  ]
     },
     {
         "id": "el_mapanddocumentbag",
@@ -973,6 +1001,7 @@
             "name" : "",
             "description" : [],
             "category" : "type",
+            "tags" : {"hide_info": true, "base_loc": true},
             "type" : "text",
             "single": true,
             "strictness" : "strict",
@@ -1001,8 +1030,8 @@
         }]
     },
     {
-        "id": "el_snipersnest_antiochpilgrim",
-        "name": "New Antioch or Trench Pilgrims",
+        "id": "el_snipersnest_antioch",
+        "name": "New Antioch",
         "source": "core",
         "tags": {
             "location_option": "el_snipersnest"
@@ -1012,7 +1041,7 @@
                 "allowed": [
                     {
                         "type": "faction",
-                        "value": ["fc_newantioch","fc_trenchpilgrim"]
+                        "value": ["fc_newantioch"]
                     }
                 ]
             },
@@ -1035,6 +1064,41 @@
                 "tags": {"desc_type" : "default"},
                 "content": " or "
             },
+            {
+                "tags": {"desc_type" : "equipmentslim"},
+                "content": "eq_sniperscope"
+            },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_snipersnest_pilgrim",
+        "name": "Trench Pilgrims",
+        "source": "core",
+        "tags": {
+            "location_option": "el_snipersnest"
+        },
+        "contextdata": {
+            "validate_location": {
+                "allowed": [
+                    {
+                        "type": "faction",
+                        "value": ["fc_trenchpilgrim"]
+                    }
+                ]
+            },
+            "gain_all_from_list": {
+                "obey_faction": true,
+                "obey_restriction": true,
+                "alternate_value": true,
+                "id": ["rel_fc_eq_sniperrifle_glory"]
+            }
+        },
+        "description": [
             {
                 "tags": {"desc_type" : "equipmentslim"},
                 "content": "eq_sniperscope"
@@ -1214,6 +1278,7 @@
             "name" : "",
             "description" : [],
             "category" : "type",
+            "tags" : {"base_loc": true},
             "type" : "text",
             "single": true,
             "strictness" : "strict",
@@ -1351,6 +1416,7 @@
             "type" : "text",
             "strictness" : "strict",
             "predefined_options" : [],
+            "tags" : {"base_loc": true},
             "option_context" : {"basic_option_default":{}},
             "data_search" : {      
                 "searchtype": "complex",
@@ -1499,7 +1565,10 @@
         },
         "contextdata": {
             "location_rule_option": {},
-            "add_to_warband": {}
+            "add_to_warband": {},
+            "add_location_modifier": {
+                "id": ["el_potofmanna_mod"]
+            }
         },
         "description": [            
             {
@@ -1511,12 +1580,51 @@
         "options": [  ]
     },
     {
+        "id": "el_potofmanna_mod",
+        "name": "Pot of Manna",
+        "source": "core",
+        "tags": {            
+            "modifier": true
+        },
+        "contextdata": {
+            "location_rule_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whenever your Warband rolls to explore, your Warband gains an additional 10 ducats from Looting due to the lowered cost of rations."
+            }
+        ],
+        "options": [  ]
+    },
+    {
         "id": "el_ransackedalchemistworkshop",
         "name": "Ransacked Alchemical Workshop",
         "source": "core",
         "tags": {
             "exploration_table": "et_rarelocations",
             "unforced": true
+        },
+        "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_ransackedalchemistworkshop_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You scavenge some of the life-giving potions within. Add Curative Fluids to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+            }
+        ],
+        "location_value": 12,
+        "options": [ ]
+    },
+    {
+        "id": "el_ransackedalchemistworkshop_mod",
+        "name": "Curative Fluids",
+        "source": "core",
+        "tags": {
+            "modifier": true
         },
         "contextdata": {
             "scar_heal": {
@@ -1529,10 +1637,9 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You scavenge some of the life-giving potions within. Add Curative Fluids to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
+                "content": "During any Reallocate Equipment step for the rest of the Campaign your Warband can use these fluids to remove 1 Battle Scar from a model in your Warband. Once these fluids are used, they are spent and cannot be used again."
             }
         ],
-        "location_value": 12,
         "options": [ {
             "ref_id" : "ot_ransackedalchemistworkshop_a",
             "name" : "",
@@ -1556,6 +1663,9 @@
         },
         "contextdata": {
             "location_rule_option": {},
+            "add_location_modifier": {
+                "id": ["el_blackmarket_mod"]
+            },
             "set_exploration_purchase_cap": {
                 "cost": 8
             }
@@ -1567,6 +1677,26 @@
             }
         ],
         "location_value": 15,
+        "options": [  ]
+    },
+    {
+        "id": "el_blackmarket_mod",
+        "name": "Black Network Contact",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
+            "set_exploration_purchase_cap": {
+                "cost": 8
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase Glory Items that cost 8 Glory or less that are allowed to your Warband during the Trade step."
+            }
+        ],
         "options": [  ]
     },
     {
@@ -1628,6 +1758,7 @@
             "type" : "text",
             "single": true,
             "strictness" : "strict",
+            "tags" : {"base_loc": true},
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
             "data_search" : {      
@@ -1705,8 +1836,12 @@
         "contextdata": {"location_rule_option": {}},
         "description": [            
             {
-                "tags": {"desc_type" : "default"},
+                "tags": {"desc_type" : "paragraph"},
                 "content": "You find a motherlode of forbidden objects and chemicals, highly sought after and in demand. Choose one:"
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Trench Pilgrims must select the Confiscate option."
             }
         ],
         "location_value": 21,
@@ -1717,6 +1852,7 @@
             "description" : [],
             "category" : "type",
             "type" : "text",
+            "tags" : {"base_loc": true},
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -1801,12 +1937,13 @@
     },
     {
         "id": "el_stashofdrugsanderotica_indulge",
-        "name": "Indulge",
+        "name": "Indulge in Drugs & Erotica",
         "source": "core",
         "tags": {
             "location_option": "el_stashofdrugsanderotica"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -1829,7 +1966,7 @@
     },
     {
         "id": "el_saintsreliquary",
-        "name": "Saint's Reqliary",
+        "name": "Saint's Reliquary",
         "source": "core",
         "tags": {
             "exploration_table": "et_rarelocations"
@@ -1883,6 +2020,7 @@
             "description" : [],
             "single": true,
             "category" : "type",
+            "tags" : {"base_loc": true},
             "type" : "text",
             "hide": true,
             "strictness" : "strict",
@@ -2009,6 +2147,27 @@
             "unforced": true
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_abandonedressurectionmachine_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find remnants of machines that were once used as part of the Meta-Christ Program. Most of them are broken, torn apart by some immense force, but one of them works and can be dismantled. Add a Salvaged Resurrection Machine to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
+            }
+        ],
+        "location_value": 32,
+        "options": []
+    },
+    {
+        "id": "el_abandonedressurectionmachine_mod",
+        "name": "Salvaged Resurrection Machine",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "actviated": {},
             "scar_heal": {
                 "all": true
@@ -2020,13 +2179,13 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "You find remnants of machines that were once used as part of the Meta-Christ Program. Most of them are broken, torn apart by some immense force, but one of them works and can be dismantled. Add a Salvaged Resurrection Machine to your Warband’s roster for free. During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
+                "content": "During any Reallocate Equipment step for the rest of the Campaign, your Warband can activate this machine to remove any number of Battle Scars from a single model in your Warband. Once this machine is used, it is spent and cannot be used again."
             }
         ],
-        "location_value": 32,
         "options": [{
             "ref_id" : "ot_abandonedressurectionmachine_a",
             "name" : "",
+            "tags": {"unrequired_selection": true},
             "description" : [],
             "category" : "contextobject",
             "self_ask": true,
@@ -2089,6 +2248,7 @@
             "single": true,
             "category" : "type",
             "type" : "text",
+            "tags" : {"base_loc": true},
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -2166,12 +2326,13 @@
     },
     {
         "id": "el_esotericlibrary_study",
-        "name": "Burn",
+        "name": "Study Esoteric Library",
         "source": "core",
         "tags": {
             "location_option": "el_esotericlibrary"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -2193,12 +2354,13 @@
     },
     {
         "id": "el_esotericlibrary_plague",
-        "name": "Plague",
+        "name": "Plague Esoteric Library",
         "source": "core",
         "tags": {
             "location_option": "el_esotericlibrary"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "validate_location": {
                 "allowed": [
                     {
@@ -2267,7 +2429,9 @@
             "description" : [],
             "category" : "type",
             "single": true,
+            "tags" : {"base_loc": true},
             "type" : "text",
+            "hide": true,
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -2335,12 +2499,13 @@
     },
     {
         "id": "el_jabireanalchemicalbooks_keep",
-        "name": "Keep",
+        "name": "Keep Alchemical Books",
         "source": "core",
         "tags": {
             "location_option": "el_jabireanalchemicalbooks"
         },
         "contextdata": {
+            "add_as_modifier": {},
             "location_rule_option": {},
             "faction_choose_equipment": {
                 "ids": [
@@ -2366,12 +2531,15 @@
     },
     {
         "id": "el_jabireanalchemicalbooks_study",
-        "name": "Study",
+        "name": "Study Alchemical Books",
         "source": "core",
         "tags": {
             "location_option": "el_jabireanalchemicalbooks"
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_jabireanalchemicalbooks_study_mod"]
+            },
             "validate_location": {
                 "allowed": [
                     {
@@ -2379,7 +2547,24 @@
                         "value": ["fc_ironsultanate_fv_houseofwisdom"]
                     }
                 ]
-            },
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You glean from it great secrets of Takwin creation, and all the Alchemical Formulae now cost 5 ducats less (down to minimum of 5)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_jabireanalchemicalbooks_study_mod",
+        "name": "Study Alchemical Books",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "purchase_modifier_upgrade": {
                 "mod": [
                     {
@@ -2388,7 +2573,8 @@
                             {
                                 "tag": "takwin"
                             }
-                        ]
+                        ],
+                        "min": 5
                     }
                 ]
             }
@@ -2412,6 +2598,9 @@
             "location_rule_option": {},
             "set_exploration_purchase_cap": {
                 "cost": 99
+            },
+            "add_location_modifier": {
+                "id": ["el_blacknetworkcontact_mod"]
             }
         },
         "description": [            
@@ -2424,6 +2613,26 @@
         "options": [  ]
     },
     {
+        "id": "el_blacknetworkcontact_mod",
+        "name": "Black Network Contact",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
+            "set_exploration_purchase_cap": {
+                "cost": 99
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may purchase Glory Items of any Glory Points cost that are allowed to your Warband during the Trade step."
+            }
+        ],
+        "options": [  ]
+    },
+    {
         "id": "el_treasureoftheholies",
         "name": "Treasure of the Holies",
         "source": "core",
@@ -2433,6 +2642,7 @@
         "contextdata": {
             "location_rule_option": {},
             "consumable": {
+                "post_save": true,
                 "single_exploration_glory_item": {
                     "cost": 999999
                 }
@@ -2469,6 +2679,7 @@
             "single": true,
             "category" : "type",
             "type" : "text",
+            "tags" : {"base_loc": true},
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -2520,7 +2731,7 @@
                 "content": "",
                 "subcontent": [
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": "A saint guides your troops before each battle. The model with the "
                     },
                     {
@@ -2528,7 +2739,7 @@
                         "content": "eq_faithfulskull"
                     },          
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": " gains the following skill:"
                     }
                 ]
@@ -2566,7 +2777,7 @@
                 "content": "",
                 "subcontent": [
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": "The "
                     },
                     {
@@ -2574,7 +2785,7 @@
                         "content": "eq_hellskull"
                     },           
                     {
-                        "tags": {"desc_type" : "paragraph"},
+                        "tags": {"desc_type" : "default"},
                         "content": " screams as you mount it on a pole to mock God and paint it with blasphemous names. This item counts as a banner."
                     }
                 ]
@@ -2640,6 +2851,32 @@
             "unforced": true
         },
         "contextdata": {
+            "add_location_modifier": {
+                "id": ["el_sampleofholydna_mod"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You find a sample of Holy DNA. You can treat any one model in your Warband with it. When this model is activated, one INFECTION MARKER or BLOOD MARKER the model has becomes a BLESSING MARKER instead.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "location_value": 26,
+        "options": [ ]
+    },
+    {
+        "id": "el_sampleofholydna_mod",
+        "name": "Sample of Holy DNA",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
             "warband_general_hook": {},
             "warband_wide": {}, 
             "warband_attatch": {
@@ -2665,7 +2902,6 @@
                 ]
             }
         ],
-        "location_value": 26,
         "options": [ {
                 "ref_id" : "ot_sampleofholydna_a",
                 "name" : "",
@@ -2702,6 +2938,7 @@
             "single": true,
             "category" : "type",
             "type" : "text",
+            "tags" : {"base_loc": true},
             "strictness" : "strict",
             "predefined_options" : [],
             "option_context" : {"basic_option_default":{}},
@@ -2729,7 +2966,7 @@
     },
     {
         "id": "el_golgothatektites_apply",
-        "name": "Apply",
+        "name": "Apply Golgotha Tektites",
         "source": "core",
         "tags": {
             "location_option": "el_golgothatektites"
@@ -2741,7 +2978,16 @@
             "warband_attatch": {
                 "restriction_eq": [ 
                     { "rest_type": "category", "value": "armour" }
-                ]
+                ],
+                "apply_to_attatch": {
+                "true_add_to_model": {  
+                    "list": [
+                            {
+                                "id": "ab_golgothatektites"
+                            }
+                        ]
+                    }
+                }
             }
         },
         "description": [            
@@ -2812,18 +3058,8 @@
             "exploration_table": "et_legendarylocations"
         },
         "contextdata": {
-            "warband_general_hook": {},
-            "warband_wide": {}, 
-            "warband_attatch": {
-                "apply_to_attatch": {
-                "true_add_to_model": {  
-                    "list": [
-                            {
-                                "id": "ab_fruitofgoodandevil"
-                            }
-                        ]
-                    }
-                }
+            "add_location_modifier": {
+                "id": ["el_fruitfromthetreeofgoodandevilknowledge_mod"]
             }
         },
         "description": [            
@@ -2836,6 +3072,32 @@
             }
         ],
         "location_value": 36,
+        "options": [ ]
+    },
+    {
+        "id": "el_fruitfromthetreeofgoodandevilknowledge_mod",
+        "name": "Fruit from the Tree of Good and Evil Knowledge",
+        "source": "core",
+        "tags": {
+            "modifier": true
+        },
+        "contextdata": {
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "give_skill": {
+                "id": ["sk_fruitfromthetreeofgoodandevil"]
+            },
+            "warband_attatch": { }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Amongst bones of giant humans unearthed by the ravages of war you discover a golden-hued fruit wrapped in spun cloth.Any model eating this fruit will immediately gain any Skill of your choice normally available to your Warband/this model (including any Exploration Skill). In addition the model will gain the Keyword DEMONIC.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
         "options": [{
             "ref_id" : "ot_fruitfromthetreeofgoodandevilknowledge_a",
             "name" : "",
@@ -2848,6 +3110,6 @@
             "hide": true,
             "single": true,
             "question_name": "getMemberOptionsFromWarband"
-        }  ]
+        } ]
     }
 ]

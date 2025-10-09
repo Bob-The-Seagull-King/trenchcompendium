@@ -49,7 +49,7 @@
         "name": "Fierce and Brave",
         "source": "core",
         "tags": {"trait": true},
-        "contextdata": {"keyword_ignore": {"value": "kw_fear"}},
+        "contextdata": {"keyword_ignore":  {"value": ["kw_fear"]}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -64,7 +64,7 @@
         "name": "Swiss Guard",
         "source": "core",
         "tags": {"trait": true},
-        "contextdata": {"keyword_ignore": {"value": "kw_fear"}},
+        "contextdata": {"keyword_ignore":  {"value": ["kw_fear"]}},
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
@@ -624,8 +624,13 @@
         "source": "core",
         "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
         "contextdata": {
-            "keyword_add": {"value": ["kw_fear"]},
-            "model_attatch": {},
+            
+            "keyword_ignore":  {"value": ["kw_fear"]},
+            "model_attatch": {
+                "apply_to_attatch": {
+                   "keyword_ignore":  {"value": ["kw_fear"]}
+                }
+            },
             "warband_general_hook": {},
             "warband_wide": {}, 
             "add_onto_warband": {}
@@ -650,6 +655,7 @@
                 "option_context" : {"basic_option_default":{}},
                 "dyna_only": true,
                 "parent_level": 1,
+                "hide": true,
                 "question_name": "getMemberOptionsFromWarbandModel"
             }]
     },
@@ -776,6 +782,7 @@
         "tags": {"action": true },
         "contextdata": {
             "activated": {},
+            "replace_model": { "new_id" : "md_heretictrooper_mine"},
             "set_stat": { "upgrades" : [
                 {"stat": "armour", "value": -3}
                 ]},     
@@ -850,6 +857,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
+            "replace_model": { "new_id" : "md_trenchpilgrim_martyr", "mod_price": -30},
             "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
             "reset_scar": {},
             "reset_skill": {}
@@ -873,7 +881,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-           "keyword_ignore": {"value": "kw_fear"},            
+           "keyword_ignore":  {"value": ["kw_fear"]},            
            "model_equipment_restriction": {
                "removed": [
                    {
@@ -889,7 +897,19 @@
                        "value": "shield"
                    }
                ]
-           }
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    },
+                    {
+                        "category": "ranged",
+                        "value": false
+                    }
+                ]
+            } 
         },
         "description": [           
             {
@@ -920,7 +940,19 @@
                "added": [
                 "rel_md_eq_mechanisedheavyinfantry_advanced"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {
@@ -945,9 +977,21 @@
                 "rel_md_eq_mechanisedheavyinfantry_base"
                ],
                "added": [
-                "rel_md_eq_mechanisedheavyinfantry_advanced"
+                "rel_md_eq_mechanisedheavyinfantry_highland"
                ]
-           }
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
         },
         "description": [           
             {
@@ -986,7 +1030,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-           "keyword_ignore": {"value": "kw_fear"},            
+           "keyword_ignore":  {"value": ["kw_fear"]},            
            "model_equipment_restriction": {
                "required": [
                    {
@@ -995,7 +1039,15 @@
                        "value": "shield"
                    }
                ]
-           }
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    }
+                ]
+            } 
         },
         "description": [           
             {
@@ -1268,6 +1320,93 @@
                 }                        
             }
         }]
+    },
+    {
+        "id": "up_plagueknightrankofbutcher",
+        "name": "Knightly Rank of Butchery",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "melee", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Knight gains +1 DICE to melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrankbutcherking",
+        "name": "Butcher King",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If at the end of a game, this Butcher Knight is not Out of Action and it has taken at least one enemy model Out of Action with a Melee Attack, gain 1 Glory.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrankofthefeast",
+        "name": "Knightly Rank of the Feast",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Grants a Butcher Knight and any models within 3” of that Butcher knight +1 DICE on Ravenous Infection Tests.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrankofferocity",
+        "name": "Knightly Rank of Ferocity",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": { 
+            
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "melee"
+                    }
+                ],
+                "additions": [
+                    "kw_critical"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Allows the Butcher Knight to ingore the Off-Hand special rule (-1 DICE to attacks with an off-hand weapon) and gives them the CRITICAL keyword on any melee weapon they choose to wield for an additional +5 ducats.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "CRITICAL", "id": "kw_critical"}
+                ]
+            }
+        ],
+        "options": []
     },
     {
         "id": "up_infectioushound",
@@ -2054,6 +2193,246 @@
                     {"val": "ACTIONS", "id": "kw_action"},
                     {"val": "ASSAULT", "id": "kw_assault"}
                 ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_hunger",
+        "name": "Feral Hunger",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model charges an enemy model, it can always treat the dice roll added to the models movement as the maximum value (6 unless otherwise specified). The model suffers penalties to this movement as standard (Difficult Terrain, Standing etc)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_miasmaofpestilence",
+        "name": "Miasma of Pestilence",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a PUTRESCERE (3) arcana, any models within 6” of the caster are treated as though they are in COVER (-1 DICE from shooting) and it negates any bonuses a model would gain from elevation. This lasts until the caster’s next activation.",
+                "glossary": [
+                    {"val": "PUTRESCERE (3)", "id": "kw_putrescere"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_motherscall",
+        "name": "Mother's Call",
+        "source": "creature_caster",
+        "tags": {"action": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a PUTRESCERE (1) arcana, this model can command any friendly Thrall model within 8” to do one of the following:",
+                "glossary": [
+                    {"val": "PUTRESCERE (1)", "id": "kw_putrescere"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Move: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Standard Move ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Melee Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Melee Attack ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Feast: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall can use their Ravenous Infection Ability, doubling the amount of INFECTION MARKERS from the Ravenous Infection Ability if successful.",
+                                        "glossary": [
+                                            {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This arcana does not require Line of Sight."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_rapturousfeast",
+        "name": "Rapturous Feast",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Great Hunger burns so deeply within the caster, that nearby thralls find their saliva growing thick with digestive fluids in anticipation. Friendly models within 4” of this model (including this model) inflict INFECTION MARKERS instead of BLOOD MARKERS with their melee attacks if they have also made a Charge Action earlier this round.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_vilechurning",
+        "name": "Vile Churning",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a PUTRESCERE (1-2) arcana, any models within 1” of the caster (excluding the caster themselves) without the ARTIFICIAL or DEMONIC Keywords suffer a number of BLOOD MARKERS equal to the number of INFECTION MARKERS spent. This arcana may be cast even if the caster is Engaged in Melee Combat.",
+                "glossary": [
+                    {"val": "PUTRESCERE (1-2)", "id": "kw_putrescere"},
+                    {"val": "ARTIFICIAL", "id": "kw_artificial"},
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_virulentclot",
+        "name": "Virulent Clot",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once per turn the caster may use this PUTRESCERE (2/4/6) arcana immediately before an injury is rolled against the model or any Thrall within 3” of the caster. If it is, deduct 1 from the injury result for every two INFECTION MARKERS spent unless the attack. This attack ignores the FIRE keyword.",
+                "glossary": [
+                    {"val": "PUTRESCERE (2/4/6)", "id": "kw_putrescere"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_vomitus",
+        "name": "Vomitus",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a ranged attack ACTION with PUTRESCERE (1-3), this model opens their mouth and spews forth an excessive stream of vileness that burns and causes flesh to erupt into fluid-filled pustules. Do not make a Success Roll for the attack. Instead, measure a straight line 1mm wide and up to 8” long from the attacking model to a point on the ground or a model’s base. The line stops if it reaches any terrain piece that is taller than the model making the Attack. Make an Injury Roll for every model (friend or foe) that is touched by the line, apart from the attacking model itself. Add +1 to Injury Chart rolls per INFECTION MARKER used for the Arcana after the first (e.g. using 2 INFECTION MARKERS gives +1 to Injury Chart rolls, 3 INFECTION MARKERS gives +2 to Injury Chart rolls, etc). This attack inflicts INFECTION MARKERS Instead of BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "PUTRESCERE (1-3)", "id": "kw_putrescere"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_weepingbuboes",
+        "name": "Weeping Buboes",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once per turn the caster may use this PUTRESCERE (1) arcana immediately before an injury is rolled against the caster or any model within 8” of the caster. This allows the model to ignore the FIRE keyword until the end of the round.",
+                "glossary": [
+                    {"val": "PUTRESCERE (1)", "id": "kw_putrescere"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_unendingstarvation",
+        "name": "Unending Starvation",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "movement", "value": 1}]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model with this upgrade adds +1” to their movement Characteristic and may target themselves with the Ravenous Infection Ability. In addition, if this model is more than 1” away from an enemy model, its first action each Activation must be a Move, Charge or Dash Action towards the nearest enemy model (choose in the case of a tie) moving the maximum distance possible."
             }
         ],
         "options": []

@@ -63,6 +63,7 @@ body[data-print="print"]
     // Fonts
     --color_font_main: #000
     --color_font_muted: #2a2a2a
+    --color_font_on_red: #fff
 
     // Shadows
     --box_shadow_1: 0px 0px 5px -1px rgba(0,0,0,0.45)
@@ -124,6 +125,7 @@ body[data-theme='dark']:not([data-print="print"])
     // Fonts
     --color_font_main: #fff
     --color_font_muted: #ddd
+    --color_font_on_red: #fff
 
     // Shadows
     --box_shadow_1: 0px 0px 6px -1px rgba(0,0,0,0.8)
@@ -139,6 +141,9 @@ $color-bg-inv: var(--colour_bg_inverted)
 // v2 colors:
 $color-text: var(--color_font_main)
 $color-text-muted: var(--color_font_muted)
+
+// the color for text on red BG
+$color-text-on-red: var(--color_font_on_red)
 
 $color-highlight-bg-3: var(--color_highlight_bg_3)
 $color-highlight-bg-2-50: var(--color_highlight_bg_2_50)
@@ -216,6 +221,7 @@ body[data-theme]
         .modal-header
             position: relative
             background-color: $color-highlight-bg
+            color: $color-text-on-red
             border-bottom-color: $color-bg-1
 
             .modal-close-icon
@@ -266,6 +272,8 @@ body[data-theme]
 // form control
 input.form-control
     border-radius: 0
+    -webkit-text-size-adjust: 100%
+    padding-top: 0.5rem
 
 .input-group
     .input-group-text
@@ -286,12 +294,12 @@ input.form-control
 
 .btn.btn-primary
     background-color: $color-highlight-bg !important
-    color: $color-text
+    color: $color-text-on-red
     outline: none
 
     &:hover
         background-color: $color-highlight-bg-2
-        color: $color-text
+        color: $color-text-on-red
 
     &:active,
     &:focus
@@ -342,7 +350,7 @@ body.trench-companion .popover
     .popover-headline
         padding: 5px 15px
         background-color: $color-highlight-bg
-        color: $color-text
+        color: $color-text-on-red
         font-size: 18px
 
     .popover-content

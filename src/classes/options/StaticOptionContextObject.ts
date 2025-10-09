@@ -23,7 +23,8 @@ class StaticOptionContextObject extends StaticContextObject {
         this.MyOptions = this.BuildOptions(data.options)
     }
     
-    
+    // Filter and convert the list of options into
+    // a different object type.
     public async RunOptionsParse() {
         
         const EventProc : EventRunner = new EventRunner();

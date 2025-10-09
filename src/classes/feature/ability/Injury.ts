@@ -4,9 +4,7 @@
  * as well as building any relevant variant models
  * 
  */
-import { IStaticOptionContextObject, StaticOptionContextObject } from '../../options/StaticOptionContextObject';
-import { DescriptionFactory } from '../../../utility/functions';
-import { ContextObject, IContextObject } from '../../contextevent/contextobject';
+import { ContextObject } from '../../contextevent/contextobject';
 import { BaseAddon, IBaseAddon } from './BaseAddon';
 
 interface IInjury extends IBaseAddon {
@@ -17,9 +15,8 @@ class Injury extends BaseAddon {
     public TableVal : string;
 
     /**
-     * Assigns parameters and creates a series of description
-     * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * Assigns parameters and creates a series of objects
+     * @param data Object data in IInjury format
      */
     public constructor(data: IInjury, parent : ContextObject | null)
     {

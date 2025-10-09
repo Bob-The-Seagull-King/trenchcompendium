@@ -13,7 +13,7 @@ class BaseAddon extends StaticOptionContextObject {
     /**
      * Assigns parameters and creates a series of description
      * objects with DescriptionFactory
-     * @param data Object data in IAbility format
+     * @param data Object data in IBaseAddon format
      */
     public constructor(data: IBaseAddon, parent : ContextObject | null)
     {

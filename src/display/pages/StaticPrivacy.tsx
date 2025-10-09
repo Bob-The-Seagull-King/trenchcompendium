@@ -9,23 +9,20 @@ import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 declare global {
     interface Window {
-        ezCMP?: {
-            generateCMPFromPrivacyCenter?: () => void;
+        klaro?: {
+            show: () => void;
+            hide: () => void;
+            // es gibt noch mehr Methoden, z. B. getManager, getConsents
         };
     }
 }
 
 const StaticPrivacy: React.FC = () => {
-    const [forceShowPrivacy, setForceShowPrivacy] = useState<number>(0);
-    const handleCMP = () => {
-        if (
-            typeof window !== "undefined" &&
-            window.ezCMP &&
-            typeof window.ezCMP.generateCMPFromPrivacyCenter === "function"
-        ) {
-            window.ezCMP.generateCMPFromPrivacyCenter();
+    const showKlaroCMP = () => {
+        if (window.klaro) {
+            window.klaro.show();
         }
-    }
+    };
 
     return (
         <div className="StaticPrivacy page-static">
@@ -35,8 +32,6 @@ const StaticPrivacy: React.FC = () => {
             />
 
             <div className={'container'}>
-                <TrackingManager forceShow={forceShowPrivacy}/>
-
                 <h1>
                     {'Privacy Policy for Trench Companion'}
                 </h1>
@@ -59,12 +54,9 @@ const StaticPrivacy: React.FC = () => {
                     }
 
                     <br/>
-                    <div className={'btn btn-secondary btn-sm me-3 my-3'} onClick={() => handleCMP()}>
-                        {'Change Ads Settings'}
-                    </div>
 
                     <div className={'btn btn-secondary btn-sm me-3 my-3'}
-                         onClick={() => setForceShowPrivacy(Date.now())}>
+                         onClick={showKlaroCMP}>
                         {'Change Privacy Settings'}
                     </div>
                 </p>

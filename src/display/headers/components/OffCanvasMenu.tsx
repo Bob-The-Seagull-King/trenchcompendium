@@ -151,6 +151,23 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                 />
                             </div>
 
+                            <div className={'menu-lvl-1-item-main minor'}
+                                 onClick={() => {
+                                     navigate(ROUTES.PAGE_BLOG_BASE);
+                                     handleClose();
+                                 }}
+                            >
+                                <span className={'title'}>
+                                    {'Blog'}
+                                </span>
+
+                                <SynodImageWithCredit
+                                    imageId={37014}
+                                    className={''}
+                                    size={'large'}
+                                />
+                            </div>
+
                             {/* Login Nav */}
                             {!isLoggedIn &&
                                 <CustomNavLink
@@ -184,12 +201,12 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     </CustomNavLink>
 
                                     <a href={ROUTES.LOGIN_ROUTE}
-                                        className={'menu-lvl-1-item-secondary'}
-                                        onClick={() => {
-                                            logout()
-                                            NavigateLogin()
-                                            handleClose()
-                                        }}
+                                       className={'menu-lvl-1-item-secondary'}
+                                       onClick={() => {
+                                           logout()
+                                           NavigateLogin()
+                                           handleClose()
+                                       }}
                                     >
                                         <FontAwesomeIcon icon={faRightFromBracket} className="icon-inline-left-l"/>
 
@@ -199,7 +216,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                             }
 
                             {/* Secondary Links */}
-                            { secondary_links.length > 0 &&
+                            {secondary_links.length > 0 &&
                                 <>
                                     {secondary_links.map((linkItem, j) => (
                                         <CustomNavLink

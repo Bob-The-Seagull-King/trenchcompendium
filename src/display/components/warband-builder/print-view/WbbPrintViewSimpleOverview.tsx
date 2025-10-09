@@ -24,7 +24,6 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
     useEffect(() => {
         async function RunGetLocations() {
             const facbase = await warband?.warband_data.GetFactionBase();
-            console.log(warband?.warband_data.Faction.MyFactionRules)
             if (facbase != undefined) {
                 setbasevariant(facbase);
             }

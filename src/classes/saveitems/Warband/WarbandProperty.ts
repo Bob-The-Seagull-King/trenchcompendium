@@ -1,4 +1,4 @@
-import { CompendiumItem, ICompendiumItemData, ItemType } from '../../CompendiumItem'
+import { CompendiumItem, ICompendiumItemData, ItemType, ObjectTag } from '../../CompendiumItem'
 import { DescriptionFactory, GetWarbandOrNull } from '../../../utility/functions';
 import { INote } from '../../Note';
 import { IWarbandContextItem, WarbandContextItem } from './High_Level/WarbandContextItem';
@@ -13,6 +13,7 @@ import { UserWarband } from './UserWarband';
 
 interface IWarbandProperty {
     object_id: string,
+    tags?: ObjectTag,
     selections: ISelectedOption[]
     consumables : IWarbandConsumable[];
 }
@@ -42,6 +43,7 @@ class WarbandProperty extends DynamicContextObject  {
     public SubProperties : WarbandProperty[] = [];
     public Consumables : WarbandConsumable[] = [];
     public StoredSelectionVals : IWarbandProperty | null = null;
+    public PropertyTags : ObjectTag = {};
 
     /**
      * Assigns parameters and creates a series of description
@@ -53,6 +55,11 @@ class WarbandProperty extends DynamicContextObject  {
         super(base_obj.SelfData, parent);
         this.ContextKeys = {}
         this.StoredSelectionVals = selection_vals;
+        if (selection_vals) {
+            if (selection_vals.tags) {
+                this.PropertyTags = selection_vals.tags;
+            }
+        }
     }
 
     public async SendConsumablesUp() {
@@ -91,6 +98,9 @@ class WarbandProperty extends DynamicContextObject  {
 
     public async HandleDynamicProps(base_obj : StaticOptionContextObject, parent : DynamicContextObject | null, dyna_obj : DynamicOptionContextObject | null, selection_vals: IWarbandProperty | null) {
 
+        if (selection_vals?.tags) {
+            this.Tags = Object.assign({}, this.Tags, selection_vals?.tags);
+        }
         if (dyna_obj != null) {
             this.SelfDynamicProperty = dyna_obj;
         } else {
@@ -130,6 +140,10 @@ class WarbandProperty extends DynamicContextObject  {
 
     // ITS IN HERE, KILL IT
     public async GenerateSubProperties(selection_vals: IWarbandProperty, self_selection : SelectedOption) {
+        
+        if (selection_vals?.tags) {
+            this.Tags = Object.assign({}, this.Tags, selection_vals?.tags);
+        }
         const Nested = self_selection.NestedOption
         if (Nested != null) {
             let found = false
@@ -245,7 +259,8 @@ class WarbandProperty extends DynamicContextObject  {
         const _objint : IWarbandProperty = {
             object_id: this.SelfDynamicProperty.OptionChoice.ID,
             selections: selectionarray,
-            consumables: consumablelist
+            consumables: consumablelist,
+            tags: this.Tags
         }
 
         this.SelfData = _objint;
@@ -298,6 +313,15 @@ class WarbandProperty extends DynamicContextObject  {
         for (let i = 0; i < static_packages.length; i++) {
             static_packages[i].callpath.push("WarbandProperty")
         }
+
+        for (let j = 0; j < this.Consumables.length; j++) {
+            const packages_2 : ContextPackage[] = await this.Consumables[j].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let i = 0; i < packages_2.length; i++) {
+                packages_2[i].callpath.push("WarbandProperty")
+                static_packages.push(packages_2[i])
+            }
+        }
+
         return static_packages;
     }
 

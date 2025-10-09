@@ -119,7 +119,7 @@ class WarbandEquipment extends DynamicContextObject {
             fighter
         )
 
-        const keywords = await eventmon.runEvent(
+        const keywords : Keyword[] = await eventmon.runEvent(
             "findFinalKeywordsForEquipment",
             fighter,
             [this],
@@ -135,10 +135,15 @@ class WarbandEquipment extends DynamicContextObject {
             null
         )
 
+        const uniqueItems = Array.from(
+        new Map(keywords.map(item => [item.ID, item])).values()
+        );
+
+
         this.EquipmentCache = {
             CanRemove: CanRemove,
             CanSwap: noSwap,
-            KeywordsCache : keywords,
+            KeywordsCache : uniqueItems,
             range: rangenew
         }
     }
@@ -162,7 +167,7 @@ class WarbandEquipment extends DynamicContextObject {
         }
 
         const _objint : IWarbandEquipment = {
-            contextdata : this.ContextKeys,            
+            contextdata : {},            
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",

@@ -1010,7 +1010,6 @@
         "source": "core",
         "tags": { "trait": true, "faction": true},
         "contextdata": {      
-            "add_onto_warband": {},
             "get_elite_count_cap": { "modify_value": 1 }       
         },
         "description": [            
@@ -2222,5 +2221,97 @@
             
         ],
         "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_fruitfromthetreeofgoodandevil",
+        "name": "Fruit from the Tree of Good and Evil",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_demonic"]},
+            "skill_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any model eating this fruit will immediately gain any Skill of your choice normally available to your Warband/this model (including any Exploration Skill). In addition the model will gain the Keyword DEMONIC.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_walkwithgod",
+                "name" : "",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "single": true,
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : 
+                
+            {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "skill",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {
+                                "item": "tags",
+                                "value": "patron",
+                                "equals": false,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": [
+                            {
+                                "operator": "or",
+                                "terms": [
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_meleeandstrength",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_exploration",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_ranged",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_stealthandspeed",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_wildcard",
+                                        "equals": true,
+                                        "strict": true
+                                    }
+                                ],
+                                "subparams": []
+                            }
+                        ]
+                    }
+                }   
+            }
+            }
+        ],
+        "skill_group": []
     }
 ]

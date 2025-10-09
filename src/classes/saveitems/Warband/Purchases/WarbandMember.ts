@@ -32,7 +32,12 @@ import { containsTag } from "../../../../utility/functions";
 import { Injury } from "../../../feature/ability/Injury";
 import { SkillGroup } from "../../../feature/skillgroup/SkillGroup";
 import { StaticContextObject } from "../../../contextevent/staticcontextobject";
-import { GetStatAsFullString, MergeTwoStats, ModelStatistics } from "../../../feature/model/ModelStats";
+import {
+    getModelStatMove,
+    GetStatAsFullString,
+    MergeTwoStats,
+    ModelStatistics
+} from '../../../feature/model/ModelStats'
 import { KeywordFactory } from "../../../../factories/features/KeywordFactory";
 import { Fireteam } from "../../../feature/ability/Fireteam";
 import { StaticOption } from "../../../options/StaticOption";
@@ -308,7 +313,6 @@ class WarbandMember extends DynamicContextObject {
                 this.SubProperties.push(NewRuleProperty);
             }
         }
-
         return this.SubProperties;
     }
     
@@ -383,7 +387,7 @@ class WarbandMember extends DynamicContextObject {
             const NewPurchase : WarbandPurchase = new WarbandPurchase(data[i].purchase, this, Model);
             this.Equipment.push(NewPurchase);
         }
-
+        
     }
 
     public async BuildModelEquipment(regenerate : boolean) {
@@ -521,7 +525,7 @@ class WarbandMember extends DynamicContextObject {
         }
 
         const _objint : IWarbandMember = {
-            contextdata : this.ContextKeys,            
+            contextdata : {},            
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
@@ -718,6 +722,16 @@ class WarbandMember extends DynamicContextObject {
             }
         }
 
+        const SelectedEquipment = await this.GetOptionalEquipment()
+        
+        for (let i = 0; i < SelectedEquipment.length; i++) {
+            const static_packages : ContextPackage[] = await (SelectedEquipment[i].purchase.HeldObject as Equipment).GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandMember")
+                subpackages.push(static_packages[j])
+            }
+        }
+
         for (let i = 0; i < this.SubProperties.length; i++) {
             const static_packages : ContextPackage[] = await this.SubProperties[i].GrabContextPackages(event_id, source_obj, arrs_extra);
             for (let j = 0; j < static_packages.length; j++) {
@@ -856,13 +870,52 @@ class WarbandMember extends DynamicContextObject {
         return options;
     }
 
+    /**
+     * Gets the concatenated string of equipment for a fighter
+     * - Sorts the equipment by type
+     * 
+     */
     public GetEquipmentAsString() {
         const CurEquip : RealWarbandPurchaseEquipment[] = this.GetEquipment();
+
         const returnVal : string[] = [];
 
-        for (let i = 0; i < CurEquip.length; i++) {
-            returnVal.push(CurEquip[i].equipment.MyEquipment.SelfDynamicProperty.GetTrueName())
+        // --- sort CurEquip by category: "ranged" > "melee" > "equipment" (others last) ---
+        // lower number = higher priority in sort
+        const CATEGORY_ORDER: Record<string, number> = {
+            ranged: 0,
+            melee: 1,
+            equipment: 2,
+        };
+
+        const norm = (v: unknown) => String(v ?? '').trim().toLowerCase();
+        const getCat = (x: RealWarbandPurchaseEquipment) =>
+            norm(x?.equipment?.MyEquipment?.SelfDynamicProperty?.SelfData?.category);
+
+        // Decorate (with rank & name), sort (by rank, then name, then original index), undecorate
+        const sortedEquip = CurEquip
+            .map((it, idx) => ({
+                it,
+                idx,
+                rank: CATEGORY_ORDER[getCat(it)] ?? 99, // unknown categories go last
+                name: it?.equipment?.MyEquipment?.SelfDynamicProperty?.GetTrueName?.() ?? ''
+            }))
+            .sort((a, b) =>
+                a.rank - b.rank ||                      // category order
+                a.name.localeCompare(b.name) ||         // optional: alpha inside same category
+                a.idx - b.idx                           // stable fallback to original order
+            )
+            .map(x => x.it);
+
+        // sort CurEquip by CurEquip[i].equipment.MyEquipment.SelfDynamicProperty.SelfData.category
+        // sort by string being "ranged" > "melee" > "equipment"
+
+        // Build string in sorted order
+        for (let i = 0; i < sortedEquip.length; i++) {
+            const name = sortedEquip[i]?.equipment?.MyEquipment?.SelfDynamicProperty?.GetTrueName?.();
+            if (name) returnVal.push(name);
         }
+
         for (let i = 0; i < this.ModelEquipments.length; i++) {
             for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
                 const SelecCur = this.ModelEquipments[i].SelfDynamicProperty.Selections[j].SelectedChoice;
@@ -922,6 +975,9 @@ class WarbandMember extends DynamicContextObject {
 
     public GetSubCosts(type : number, overridecap = false, discount = false) {
         let countvar = this.GetUpgradeCosts(type, overridecap, discount);
+        if (type == 0 && this.Tags["cost_mod_ducats"]) {
+            countvar += this.Tags["cost_mod_ducats"] as number
+        }
         for (let i = 0; i < this.Equipment.length; i++) {
             if (this.Equipment[i].CountCap == false && !overridecap) {continue;}
             if (this.Equipment[i].CostType == type) {
@@ -1271,8 +1327,7 @@ class WarbandMember extends DynamicContextObject {
 
                 }
             }
-        }        
-
+        }       
         this.GeneralCache.upgrade_collections = completegroups
         return completegroups;
 
@@ -1573,7 +1628,7 @@ class WarbandMember extends DynamicContextObject {
             } else {
                 discount_val += ducatbudget
             }
-            canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
+            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
         }
         if (upg.CostType == 1) {
             const glorybudget = await this.GetUpgradeBudgetGlory()
@@ -1582,7 +1637,7 @@ class WarbandMember extends DynamicContextObject {
             } else {
                 discount_val += glorybudget
             }
-            canaddupgrade = (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
+            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
         }
         if (this.IsUnRestricted == true) {
             return {
@@ -1637,13 +1692,25 @@ class WarbandMember extends DynamicContextObject {
         }
 
         if (canaddupgrade) {
-                canaddupgrade = ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
+            canaddupgrade = canaddupgrade && ((this.MyContext as UserWarband).GetCountOfUpgradeRel(upg.ID) < maxcount || ((upg.WarbandLimit == 0)))
         }
         if (canaddupgrade) {
             canaddupgrade = await Events.runEvent(
                 "canModelGetUpgrade",
                 upg,
                 [],
+                canaddupgrade,
+                {
+                    warband: this.MyContext,
+                    model: this
+                }
+            )
+        }
+        if (canaddupgrade) {
+            canaddupgrade = await Events.runEvent(
+                "withinUpgradeBudget",
+                this,
+                [maxccurcostount, upg.CostType],
                 canaddupgrade,
                 {
                     warband: this.MyContext,
@@ -1705,9 +1772,6 @@ class WarbandMember extends DynamicContextObject {
             BaseList.push(this.CurModel.KeyWord[i].ID);
         }
 
-        if (!BaseList.includes("kw_elite") && this.IsElite()) {
-            BaseList.push("kw_elite")
-        }
 
         const Events : EventRunner = new EventRunner();
         if (this.MyContext != null) {
@@ -1725,9 +1789,29 @@ class WarbandMember extends DynamicContextObject {
                 result,
                 this
             )
+            if (!result_fin.includes("kw_elite") && this.IsElite()) {
+                result_fin.push("kw_elite")
+            }
             for (let i = 0; i < result_fin.length; i++) {
                 const Keyword = await KeywordFactory.CreateNewKeyword(result_fin[i], null)
                 KeywordsAvailable.push(Keyword);
+            }
+            const result_full_fin = await Events.runEvent(
+                "getContextuallyRelevantKeywordsByObject",
+                this.MyContext,
+                [],
+                [],
+                this
+            )
+            const result_full = await Events.runEvent(
+                "getContextuallyRelevantKeywordsByObject",
+                this,
+                [],
+                result_full_fin,
+                this
+            )
+            for (let i = 0; i < result_full.length; i++) {
+                KeywordsAvailable.push(result_full[i]);
             }
         }
         this.GeneralCache.keyword_list = KeywordsAvailable
@@ -1962,6 +2046,23 @@ class WarbandMember extends DynamicContextObject {
         await this.BuildSkills(this.ConvertToInterface().list_skills)
     }
 
+    public async AddSkillByID(skl : string) {
+        const BaseSkill = await SkillFactory.CreateNewSkill(skl, this, true);
+        const NewRuleProperty = new WarbandProperty(BaseSkill, this, null, null);
+        await NewRuleProperty.HandleDynamicProps(BaseSkill, this, null, null);
+        await NewRuleProperty.BuildConsumables([]);
+        this.Skills.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainSkill",
+            BaseSkill,
+            [this.MyContext],
+            null,
+            NewRuleProperty
+        )
+        await this.BuildSkills(this.ConvertToInterface().list_skills)
+    }
+
     public UpdateStatOption(newstat: ModelStatistics, oldstat : ModelStatistics | null) {
         if (oldstat == null) {
             this.Stat_Selections.push(newstat);
@@ -2133,7 +2234,7 @@ class WarbandMember extends DynamicContextObject {
 
         for (let i = 0; i < AddedOptions.length; i++) {
 
-            const countcurrent = (this.MyContext as UserWarband).GetCountOfEquipmentRel(AddedOptions[i].ID)
+            const countcurrent = (this).GetEquipmentCount(AddedOptions[i].ID)
             let oblimit = 1
             let maxccurcostount = AddedOptions[i].Cost;
             let canadd = true;
@@ -2249,6 +2350,7 @@ class WarbandMember extends DynamicContextObject {
             [],
             null
         )
+
         
         for (let i = 0; i < NewOptions.length; i++) {
             let CanAdd = true;
@@ -2555,7 +2657,16 @@ class WarbandMember extends DynamicContextObject {
             }
         )
 
-        let IsStrong = await this.IsKeywordPresent("kw_strong");
+        const IsStrong = await this.IsKeywordPresent("kw_strong");
+        let strongcount = await eventmon.runEvent(
+            "getCountofStrong",
+            this,
+            [],
+            (IsStrong == true)? 1 : 0,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            })
         let MeleeShield = false
         let RangedShield = false
 
@@ -2581,9 +2692,9 @@ class WarbandMember extends DynamicContextObject {
             let meleeval = (EquipItem.Stats["hands_melee"] != undefined)? EquipItem.Stats["hands_melee"] : 0;
             let rangedval = (EquipItem.Stats["hands_ranged"] != undefined)? EquipItem.Stats["hands_ranged"] : 0;
             if (EquipItem.Stats["hands_melee"]) {
-                if (IsStrong && meleeval == 2) {
+                if ((strongcount > 0) && meleeval == 2) {
                     meleeval = 1;
-                    IsStrong = false;
+                    strongcount -= 1;
                 }
                 if (containsTag(EquipItem.Tags, "shield") && MeleeShield) {
                     meleeval = 0;
@@ -2613,15 +2724,29 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async HasTwoHandedMeleeWeapon() {
+        const eventmon : EventRunner = new EventRunner();
         const MyEquip = await this.GetAllEquipForShow();
+        const IsStrong = await this.IsKeywordPresent("kw_strong");
+        let strongcount = await eventmon.runEvent(
+            "getCountofStrong",
+            this,
+            [],
+            (IsStrong == true)? 1 : 0,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            })
         for (let i = 0; i < MyEquip.length; i++) {
             const EquipItem = MyEquip[i].equipment.MyEquipment.SelfDynamicProperty.OptionChoice as Equipment;
             if (EquipItem.Stats["hands_melee"]) {
                 const meleeval = EquipItem.Stats["hands_melee"];
                 if (meleeval == 2) {
-                    return true;
+                    strongcount -= 1;
                 }
             }
+        }
+        if (strongcount <= 0) {
+            return true;
         }
         return false;
 
@@ -2640,14 +2765,16 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async AddEquipment(item : FactionEquipmentRelationship) {
+        const modelpur = false
+        /*
+        
         const SpecialAddons = await this.GetSpecialCache();
         const cachekeys = Object.keys(SpecialAddons)
-        let modelpur = false
         for (let i = 0; i < cachekeys.length; i++) {
             if (SpecialAddons[cachekeys[i]].facrel == item) {
                 modelpur = true;
             }
-        }
+        }*/
         let itemcost = item.Cost;
         if ((this.MyContext as UserWarband).EquipmentRelCache[item.ID] != null) {
             itemcost = (this.MyContext as UserWarband).EquipmentRelCache[item.ID].cost
@@ -2678,22 +2805,9 @@ class WarbandMember extends DynamicContextObject {
         )
     }
 
-    public async GetAllEquipForShow() {
+    public async GetOptionalEquipment() {
         
         const options : RealWarbandPurchaseEquipment[] = [ ];
-        let UnarmedFlag = true;
-
-        for (let i = 0; i < this.Equipment.length; i++) {
-            if ((this.Equipment[i].HeldObject as WarbandEquipment).GetEquipmentItem().Category == "melee") {
-                UnarmedFlag = false;
-            }
-            options.push(
-                {
-                    purchase: this.Equipment[i],
-                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
-                }
-            )
-        }
 
         for (let i = 0; i < this.ModelEquipments.length; i++) {
             for (let j = 0; j < this.ModelEquipments[i].SelfDynamicProperty.Selections.length; j++) {
@@ -2724,14 +2838,39 @@ class WarbandMember extends DynamicContextObject {
                                     equipment: Model
                                 }
                             )
-
-                            if (Model.GetEquipmentItem().Category == "melee") {
-                                UnarmedFlag = false;
-                            }
                         }
 
                     }
                 } catch(e) { console.log(e)}
+            }
+        }
+
+        return options;
+    }
+
+    public async GetAllEquipForShow() {
+        
+        const options : RealWarbandPurchaseEquipment[] = [ ];
+        let UnarmedFlag = true;
+
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if ((this.Equipment[i].HeldObject as WarbandEquipment).GetEquipmentItem().Category == "melee") {
+                UnarmedFlag = false;
+            }
+            options.push(
+                {
+                    purchase: this.Equipment[i],
+                    equipment: this.Equipment[i].HeldObject as WarbandEquipment
+                }
+            )
+        }
+
+        const optionaloptions = await this.GetOptionalEquipment()
+        for (let i = 0; i < optionaloptions.length; i++) {
+            options.push(optionaloptions[i])
+            
+            if (optionaloptions[i].equipment.GetEquipmentItem().Category == "melee") {
+                UnarmedFlag = false;
             }
         }
 
@@ -2964,6 +3103,103 @@ class WarbandMember extends DynamicContextObject {
             null,
             this
         )
+    }
+
+
+    /**
+     * Returns the TTS Export text for this model
+     */
+    public GetTTSExportText (type: "short" | "medium" | "full") {
+
+        // define colors:
+        const cl_main = 'd01317';
+        const cl_other = 'ff0000';
+        const cl_move = 'ff0000';
+        const cl_melee = 'ff0000';
+        const cl_ranged = 'ff0000';
+        const cl_armour = 'ff0000';
+        const cl_equip = 'ff0000';
+
+        // collection of unicode chars
+        // ⊕ ✝ ⚔ ✦ 🗡 ⛨ 🛡 🎯 ✦ ✧ ✪ ⬆ ⬇ ☠ 🜏 🜍 ✜ ✢ ✠ 🜂 🜄 💀 🔼 🔪 ✹
+        // name: ☩☩
+        // ranged: ✜
+        // melee: ⚔
+        // armour: ⛨
+        // equipment: 🛠
+        // goetic: 🜏
+        // abilities: ✦
+        // upgrades: 🜍
+        // advancements: 🜂
+        // injuries: 🜄
+
+        // dummy data
+
+        // // Long version
+        // ☩☩ RFK Jr. ☩☩
+        // Anointed Heavy Infantry
+        // STRONG, ELITE
+        // 6"/Infantry | Melee +1D | Ranged +2D | Armour -2
+        //
+        // ✜ Anti-Materiel Rifle - 36"
+        // HEAVY, CRITICAL
+        // +2 to Injuries against Unactivated // short from modifer element
+        // This weapon rolls injuries against unactivated models with a flat +2 bonus. // long from actual rules
+        //
+        // ⚔ Head Taker - Melee
+        // This weapon rolls injuries against unactivated models with a flat +2 bonus.
+        //
+        // ⛨ Reinforced Armour
+        // Grants a -2 modifier to all injury rolls against the model wearing this armour.
+        //
+        // 🛠 Musical Instrument
+        // CONSUMABLE
+        // Any friendly models within 4" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.
+        //
+        // 🜍 Heretic Legionnaire - Ranged Legionnaire
+        // The Trooper becomes a Legionnaire and chooses to gain +1 DICE for either ranged or melee attacks.
+        // Melee Legionnaire
+        //
+        // ✦ Levitate
+        // The Artillery Witch can Climb up without taking an ACTION and does not roll on the Injury Chart when falling.
+        //
+        //
+        // 🜏 Slavemaster
+        // As a GOETIC (1) spell, this model can command any friendly Yoke Fiend within 12” to do one of the following:
+        //
+        // Move: The Yoke Fiend takes a Standard Move ACTION of up to 6”.
+        // Ranged Attack: The Yoke Fiend takes a Ranged Attack ACTION with any Ranged weapon it has.
+        // Melee Attack: The Yoke Fiend takes a Melee Attack ACTION.
+        // Sacrifice: The Yoke Fiend kills itself (it is removed from the board immediately as a casualty).
+        //
+        // 🜂 Sharp Eyes
+        // This model ignores penalties for long range when using ranged weapons.
+        //
+        // 🜄 Head Wound
+        // This model loses the Keyword ELITE. It can regain it in the future as normal via promotion, representing recovery.
+        //
+        // // Short Version:
+        // ☩☩ RFK Jr. ☩☩
+        // Anointed Heavy Infantry
+        // STRONG, ELITE
+        // 6"/Infantry | Melee +1D | Ranged +2D | Armour -2
+        //
+        // ✜ Anti-Materiel Rifle
+        // ⚔ Head Taker
+        // ⛨ Reinforced Armour
+        // 🛠 Musical Instrument
+        //
+        // 🜍 Heretic Legionnaire - Ranged Legionnaire
+        // ✦ Levitate
+        // 🜏 Slavemaster
+        // 🜂 Sharp Eyes
+        // 🜄 Head Wound
+
+
+        // return ex.join("\n");
+
+        return '';
+
     }
 }
 

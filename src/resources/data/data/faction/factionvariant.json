@@ -164,7 +164,7 @@
         ],
         "team": "hell",
         "cut_rules" : [],
-        "rules" : ["rl_worshipmammon","rl_mammonschosen","rl_corruptmerchants","rl_infernalrivalry","rl_goeticwarlocks","rl_debtorstomammon"],
+        "rules" : ["rl_preservetheloot","rl_worshipmammon","rl_mammonschosen","rl_corruptmerchants","rl_infernalrivalry","rl_goeticwarlocks","rl_debtorstomammon"],
         "options": []
     },
     {
@@ -348,7 +348,7 @@
         ],
         "team": "faithful",
         "cut_rules" : [],
-        "rules" : ["rl_rampantcharge","rl_meleefocused","rl_highlandmachinearmour","rl_highlandstrength","rl_strainedsupply","rl_bagpipes","rl_brave","rl_claymoresmiths","rl_lightlyarmoured"],
+        "rules" : ["rl_rampantcharge","rl_meleefocused_alba","rl_highlandmachinearmour","rl_highlandstrength","rl_strainedsupply","rl_bagpipes","rl_brave","rl_claymoresmiths","rl_lightlyarmoured"],
         "options": []
     },
     {
@@ -518,6 +518,31 @@
         "team": "faithful",
         "cut_rules" : [],
         "rules" : ["rl_molotovcocktails","rl_wearandtear","rl_noretreat","rl_trenchdogs","rl_gloryhounds","rl_rememberthefallen","rl_liveofftheland","rl_gunsblazing","rl_displeasureofthechurch"],
+        "options": []
+    },
+    {
+        "id": "fc_cultoftheblackgrail_fv_thegreathunger",
+        "name": "The Great Hunger",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_blackgrail"}
+        },
+        "base_id": "fc_cultoftheblackgrail",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Great Hunger is not merely a disease, nor is it an army - it is a lingering wound upon the world, a festering malignancy left in the wake of Beelzebub’s war against Creation. It is a strain of the Black Grail Virus that is not wielded as a tool of conquest by the Order of the Fly, but rather as a means of ensuring that the corruption endures, even in defeat. Where the armies of the Grail seek to march upon the living, the Hunger seeks only to consume and multiply."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The forces of the Black Grail taint the land itself. Where their influence takes root, all organic matter becomes a vector for further corruption, twisting and reshaping itself into a form pleasing to Beelzebub. Unlike the immediate, aggressive infections seen in the frontlines of battle, The Great Hunger is subtle, taking hold in the ruined remains of abandoned towns, charnel grounds, and forgotten battlefields. It does not seek to conquer - instead it waits. It endures. Even if a region is reclaimed from the Grail’s influence, the Hunger can lurk beneath the surface for weeks, months, or even years, waiting for the moment when the corruption is no longer expected, no longer feared. It is then, when it is almost forgotten, that The Great Hunger will reemerge, consuming everything, even itself, until nothing is left - nothing but a dormant remnant waiting to rise and feast again."
+            }
+            
+        ],
+        "team": "hell",
+        "cut_rules" : ["rl_theorderofthefly"],
+        "rules" : ["rl_arcanaputrescere","rl_cradleoffilth","rl_dessicatedhusks","rl_greathunger_equipmentrestrictions","rl_greathunger_grailthrallsandflythralls","rl_prowlers","rl_spawnofgluttony","rl_wastenoflesh"],
         "options": []
     }
 ]

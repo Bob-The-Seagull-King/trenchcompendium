@@ -3,7 +3,7 @@ export const ROUTES = {
     COMPENDIUM_ROUTE: '/compendium/*',
     WARBAND_ROUTE: '/warband/*',
     HOME_ROUTE: '*',
-    LOGIN_ROUTE: '/login/*',
+    LOGIN_ROUTE: '/login/',
     PROFILE_VIEW_ROUTE: '/profile/:id',
     PROFILE_SETTINGS_ROUTE: '/profile/:id/settings',
 

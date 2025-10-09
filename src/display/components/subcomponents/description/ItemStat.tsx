@@ -34,6 +34,9 @@ const ItemStat = (props: any) => {
                 <div className="stat-label">{Title}</div>
                 <div className="stat-value">
                     {Content}
+                    {(Title === 'Melee' || Title === 'Ranged') &&
+                        <>D</>
+                    }
                 </div>
             </div>
         </ErrorBoundary>

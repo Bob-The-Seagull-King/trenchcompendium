@@ -23,8 +23,10 @@
 
         @media (hover: none) and (pointer: coarse)
             background-color: $color-bg-2
+
     &.active
         background-color: $color-highlight-bg-2
+        color: $color-text-on-red
 
         &:after
             content: ""
@@ -38,6 +40,7 @@
             border-width: 15px 0 15px 15px
             border-color: transparent transparent transparent $color-highlight-bg-2
             transform: translateY(-50%)
+
 
     .model-name
         font-weight: bold

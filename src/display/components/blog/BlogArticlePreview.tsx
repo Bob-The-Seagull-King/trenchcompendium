@@ -1,4 +1,5 @@
 import React from 'react';
+import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 
 interface BlogArticlePreviewProps {
     post: {
@@ -7,6 +8,7 @@ interface BlogArticlePreviewProps {
         excerpt: { rendered: string };
         slug: string;
         date: string;
+        featured_media?: number;
     };
     onClick?: () => void;
 }
@@ -17,17 +19,30 @@ const BlogArticlePreview: React.FC<BlogArticlePreviewProps> = ({ post, onClick }
             className="BlogArticlePreview"
             onClick={onClick}
         >
-            <h2
-                className=""
-                dangerouslySetInnerHTML={{__html: post.title.rendered}}
-            />
-            <div className="mb-4">
-                {new Date(post.date).toLocaleDateString()}
+            {post.featured_media &&
+                <div className={'image-wrap'}>
+                    <SynodImageWithCredit
+                        imageId={post.featured_media}
+                        className={'preview-image'}
+                        imageKey={post.slug}
+                        size={'large'}
+                    />
+                </div>
+            }
+
+            <div className={'text-wrap'}>
+                <h2
+                    className=""
+                    dangerouslySetInnerHTML={{__html: post.title.rendered}}
+                />
+                <div className="mb-3">
+                    {new Date(post.date).toLocaleDateString()}
+                </div>
+                <div
+                    className="excerpt"
+                    dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}
+                />
             </div>
-            <div
-                className="excerpt"
-                dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}
-            />
         </div>
     );
 };

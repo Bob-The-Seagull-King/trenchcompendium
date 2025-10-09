@@ -18,6 +18,7 @@ import { SumWarband } from '../../classes/saveitems/Warband/WarbandManager';
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 import { SYNOD } from '../../resources/api-constants';
 import { containsTag } from '../../utility/functions';
+import { WarbandUpdater } from '../../classes/saveitems/Warband/Converter/WarbandUpdater';
 
 const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
@@ -81,6 +82,9 @@ class WarbandFactory {
         const rule = new WarbandExplorationSet(data, parent)
         await rule.BuildSkills(data.explorationskills);
         await rule.BuildLocations(data.locations);
+        if (data.location_mods) {
+            await rule.BuildLocationMods(data.location_mods);
+        }
         return rule;
     }
 
@@ -138,15 +142,23 @@ class WarbandFactory {
     }
     
     static async CreateUserWarband(data: IUserWarband, postID : number) {
-        const rule = new UserWarband(data, postID);
-        await rule.NewWarbandItems(data)
-        await rule.BuildModels(data.models);
-        await rule.BuildEquipment(data.equipment);
-        await rule.BuildModifiersSkills(data.modifiers);
-        await rule.BuildModifiersLoc(data.modifiersloc);
-        await rule.BuildModifiersFireteam(data.fireteams);
-        await rule.BuildConsumables(data.consumables);
+        const WbUpdate = WarbandUpdater.getInstance();
+        let DataCheck = data;
+        if ((WbUpdate.CheckUpdate(data)) == false) {
+            DataCheck = await WbUpdate.RunUpdate(data);
+        }
+        const rule = new UserWarband(DataCheck, postID);
+        await rule.NewWarbandItems(DataCheck)
+        await rule.BuildModels(DataCheck.models);
+        await rule.BuildEquipment(DataCheck.equipment);
+        await rule.BuildModifiersSkills(DataCheck.modifiers);
+        await rule.BuildModifiersLoc(DataCheck.modifiersloc);
+        await rule.BuildModifiersFireteam(DataCheck.fireteams);
+        await rule.BuildConsumables(DataCheck.consumables);
         await rule.RebuildProperties();
+        if (DataCheck.exploration.templocations) {
+            await rule.BuildTempLocations(DataCheck.exploration.templocations);
+        }
         return rule;
     }
 
@@ -170,8 +182,14 @@ class WarbandFactory {
 
         if (!synodcache.CheckWarbandCache(_val)) {
             synodcache.AddWarbandCallCache(_val);
-            
-            const response : Response = await fetch(`${SYNOD.URL}/wp-json/wp/v2/warband/${_val}`)
+
+            const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/warband/${_val}`)
+
+            // warband does not exist -> same as default return
+            if( response.status === 400 ) {
+                return null;
+            }
+
             if (response) {
                 const json : any = await response.json();          
                 userdata = json.warband_data

@@ -167,6 +167,30 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             </ul>
                         </AlertCustom>
                     }
+
+                    {warband.warband_data.IsUnRestricted &&
+                        <AlertCustom
+                            type={'info'}
+                            className={'my-3'}
+                        >
+                            <h6>
+                                {'Unrestriced Warband'}
+                            </h6>
+                            <div>
+                                {'This warband is in unrestricted mode.'}
+                            </div>
+
+                            {/*{warbandErrors.length == 0 &&*/}
+                            {/*    <div*/}
+                            {/*        className={'btn btn-secondary mt-3'}*/}
+                            {/*        onClick={() => alert('change to restricted mode')}*/}
+                            {/*    >*/}
+                            {/*        {'Change to restricted mode'}*/}
+                            {/*    </div>*/}
+                            {/*}*/}
+                        </AlertCustom>
+                    }
+
                 </div>
 
                 {/* Warband level options */}
@@ -217,12 +241,6 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                             )}
                         </WbbDetailViewCollapse>
                     }
-
-                    <WbbDetailViewCollapse title="Exploration Skills" initiallyOpen={true}>
-
-                        <WbbExplorationSkills />
-
-                    </WbbDetailViewCollapse>
 
                     {/* Notes textarea */}
                     <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>

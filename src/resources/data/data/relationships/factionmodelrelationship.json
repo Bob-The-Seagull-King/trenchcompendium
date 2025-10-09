@@ -425,7 +425,7 @@
         "name": "",
         "contextdata": {"option_search_viable": {}},
         "options": [],
-        "faction_id" : ["fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"],
+        "faction_id" : ["fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_thegreathunger","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty","fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate","fc_ironsultanate_fv_houseofwisdom","fc_ironsultanate_fv_defendersoftheironwall"],
         "model_id" : "md_scriptureguardian",
         "captain" : false,
         "mercenary": true,
@@ -818,7 +818,7 @@
         "name": "",
         "contextdata": {"option_search_viable": {}},
         "options": [],
-        "faction_id" : ["fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id" : ["fc_courtofthesevenheadedserpent","fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_thegreathunger","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "model_id" : "md_sineater",
         "captain" : false,
         "mercenary": true,
@@ -1177,6 +1177,23 @@
         "options": [],
         "faction_id" : ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_trenchpilgrim","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_trenchpilgrim_fv_cavalcadeofthetenthplague","fc_trenchpilgrim_fv_processionofthesacredaffliction"],
         "model_id" : "md_observer",
+        "captain" : false,
+        "mercenary": true,
+        "cost" : 3,
+        "cost_type" : 1,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_combatbiologist",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_newantioch","fc_newantioch_fv_redbrigade","fc_newantioch_fv_expeditionaryforcedofabyssinia","fc_newantioch_fv_kingdomofalbaassaultdetatchment","fc_newantioch_fc_stortruppenofthefreestateofprussia","fc_newantioch_fc_eirerangers","fc_newantioch_fv_papalstatesinterventionforce","fc_ironsultanate","fc_ironsultanate_fv_defendersoftheironwall","fc_ironsultanate_fv_fidaiofalamut","fc_ironsultanate_fv_houseofwisdom"],
+        "model_id" : "md_combatbiologist",
         "captain" : false,
         "mercenary": true,
         "cost" : 3,
@@ -1594,6 +1611,24 @@
         "warband_maximum" : 2
     },
     {
+        "id": "rel_fc_md_gergorigula",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_gergorigula",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 145,
+        "cost_type" : 0,
+        "restricted_models" : [
+        ],
+        "warband_minimum" : 0,
+        "warband_maximum" : 2
+    },
+    {
         "id": "rel_fc_md_lordoftumors",
         "source": "core",
         "tags": {},
@@ -1614,6 +1649,60 @@
         "captain" : true,
         "mercenary": false,
         "cost" : 130,
+        "cost_type" : 0,
+        "restricted_models" : [
+        ],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_lordoftumors_hunger",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_lordoftumors","md_matagothag"]
+                }
+            ],
+            "number": 1
+        }},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_lordoftumors",
+        "captain" : true,
+        "mercenary": false,
+        "cost" : 130,
+        "cost_type" : 0,
+        "restricted_models" : [
+        ],
+        "warband_minimum" : 0,
+        "warband_maximum" : 1
+    },
+    {
+        "id": "rel_fc_md_matagothag_hunger",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_lordoftumors","md_matagothag"]
+                }
+            ],
+            "number": 1
+        }},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_matagothag",
+        "captain" : true,
+        "mercenary": false,
+        "cost" : 135,
         "cost_type" : 0,
         "restricted_models" : [
         ],
@@ -1675,6 +1764,24 @@
         "warband_maximum" : 2
     },
     {
+        "id": "rel_fc_md_plagueknightbutcher",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_plagueknight_butcherknight",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 60,
+        "cost_type" : 0,
+        "restricted_models" : [
+        ],
+        "warband_minimum" : 0,
+        "warband_maximum" : 2
+    },
+    {
         "id": "rel_fc_md_corpseguard",
         "source": "core",
         "tags": {},
@@ -1692,6 +1799,23 @@
         "warband_maximum" : 3
     },
     {
+        "id": "rel_fc_md_corpseguard_hunger",
+        "source": "core",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_corpseguard_husk",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 55,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 2
+    },
+    {
         "id": "rel_fc_md_houndsoftheblackgrail",
         "source": "core",
         "tags": {},
@@ -1700,6 +1824,23 @@
         "options": [],
         "faction_id" : ["fc_cultoftheblackgrail"],
         "model_id" : "md_houndsoftheblackgrail",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 55,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : 3
+    },
+    {
+        "id": "rel_fc_md_houndsoftheblackgrail_prowler",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_houndsoftheblackgrail_prowler",
         "captain" : false,
         "mercenary": false,
         "cost" : 55,
@@ -1738,6 +1879,49 @@
         "mercenary": false,
         "cost" : 25,
         "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : -1
+    },
+    {
+        "id": "rel_fc_md_grailthrall_hunger",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_grailthrall_hunger",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 35,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : -1
+    },
+    {
+        "id": "rel_fc_md_grailthrall_hunger_glory",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger"]
+                }
+            ],
+            "number": 3
+        }},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_grailthrall_cradle_hunger",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 2,
+        "cost_type" : 1,
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : -1
@@ -1789,6 +1973,49 @@
         "mercenary": false,
         "cost" : 25,
         "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : -1
+    },
+    {
+        "id": "rel_fc_md_grailthrall_flythrall_hunger",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {}},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_grailthrall_flythrall_hunger",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 35,
+        "cost_type" : 0,
+        "restricted_models" : [],
+        "warband_minimum" : 0,
+        "warband_maximum" : -1
+    },
+    {
+        "id": "rel_fc_md_grailthrall_flythrall_hunger_glory",
+        "source": "creature_caster",
+        "tags": {},
+        "name": "",
+        "contextdata": {"option_search_viable": {},
+    
+        "faction_model_count_group": {
+            "filter": [
+                {
+                    "id": ["md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger"]
+                }
+            ],
+            "number": 3
+        }},
+        "options": [],
+        "faction_id" : ["fc_cultoftheblackgrail_fv_thegreathunger"],
+        "model_id" : "md_grailthrall_flythrall_cradle_hunger",
+        "captain" : false,
+        "mercenary": false,
+        "cost" : 2,
+        "cost_type" : 1,
         "restricted_models" : [],
         "warband_minimum" : 0,
         "warband_maximum" : -1

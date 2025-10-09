@@ -109,7 +109,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                             id={option.upgrade.ID}
                             key={keyvar.toString() + updateKey.toString()}
                             checked={selected}
-                            disabled={(!canselect)}
+                            disabled={(!canselect || view_mode)}
                             onClick={(e) => e.stopPropagation()} // prevent collapse toggle
                             onChange={handleSelectOption}
                         />

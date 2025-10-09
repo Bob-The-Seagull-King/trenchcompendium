@@ -25,10 +25,12 @@ class SelectedOption {
         this.MyParent = parent;
     }
 
+    // Re-grab options available to it from the Option object
     public async GetSelectionChoices() {
         this.SelectionSet = this.Option.Selections;
     }
 
+    // Get the display-suitable string for its selected option, or "" if not possible
     public GetSelectedTitle() {
         if (this.SelectedChoice != null) {
             return this.SelectedChoice.display_str;
@@ -36,14 +38,20 @@ class SelectedOption {
         return "";
     }
 
+    // Return the selected IChoice
     public GetSelected() {
         return this.SelectedChoice;
     }
 
+    // See if the selected option is allowed to be changed.
+    // All selections can be changed if null, but Options with single set to TRUE
+    // cannot be changed once an option is selected
     public CanChange() {
         return (this.Option.Single == false || this.SelectedChoice == null)
     }
 
+    // Update the selected choice by the ID of that choice
+    // use this when we want the change to trigger something, such as user action
     public async UserUpdateSelection(_id : string | null) {
         this.SelectOption(_id)
         
@@ -83,6 +91,8 @@ class SelectedOption {
         }}
     }
 
+    // If relevant create and build a nested option, if the choice
+    // selected needs one.
     public async HandleObjectDynamics(choice_selected : IChoice) {
         this.NestedOption = new DynamicOptionContextObject(choice_selected.value.SelfData, choice_selected.value, this.MyParent);
         await this.NestedOption.BuildSelections();

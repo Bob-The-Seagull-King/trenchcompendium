@@ -120,6 +120,7 @@ class UserWarband extends DynamicContextObject {
         this.EquipmentRelCache = {}
         this.ModelRelCache = {}
         this.GeneralCache = {}
+        this.Exploration.GeneralCache = {};
         for (let i = 0; i < this.Models.length; i++) {
             const Mod = this.Models[i].HeldObject as WarbandMember
             Mod.GeneralCache = {}
@@ -189,6 +190,10 @@ class UserWarband extends DynamicContextObject {
             this.Equipment.push(NewPurchase);
         }
 
+    }
+
+    public async BuildTempLocations(data : string[]) {
+        await this.Exploration.BuildTempLocations(data);
     }
 
     public async BuildModifiersSkills(data : IWarbandProperty[]) {
@@ -271,6 +276,15 @@ class UserWarband extends DynamicContextObject {
                         if (selec.SelectedChoice.value == model) {
                             IsFound = true;
                             break;
+                        } else {
+                            if (selec.SelectedChoice.value instanceof WarbandEquipment) {
+                                if (selec.SelectedChoice.value.MyContext != null) {
+                                    if (selec.SelectedChoice.value.MyContext == model) {
+                                        IsFound = true;
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -932,7 +946,7 @@ class UserWarband extends DynamicContextObject {
     }
 
     public HasModifier(mod : WarbandProperty) {
-        return (this.Modifiers.includes(mod));
+        return (this.Modifiers.includes(mod)) || (this.Exploration.LocationMods.includes(mod));
     }
     
     public async Deletemod( mod : WarbandProperty ) {
@@ -941,6 +955,13 @@ class UserWarband extends DynamicContextObject {
             if (mod == (this.Modifiers[i])) {
                 await mod.SendConsumablesUp();
                 this.Modifiers.splice(i, 1);
+                break;
+            }
+        }
+        for (let i = 0; i < this.Exploration.LocationMods.length; i++) {
+            if (mod == (this.Exploration.LocationMods[i])) {
+                await mod.SendConsumablesUp();
+                this.Exploration.LocationMods.splice(i, 1);
                 break;
             }
         }
@@ -960,7 +981,7 @@ class UserWarband extends DynamicContextObject {
                 ConsumableList.push(this.Consumables[i]);
             }
         }
-
+        /*
         for (let j = 0; j < this.Exploration.Locations.length; j++) {
             
             for (let i = 0; i < this.Exploration.Locations[j].Consumables.length; i++) {
@@ -969,7 +990,7 @@ class UserWarband extends DynamicContextObject {
                 }
             }
 
-        }
+        }*/
 
         return ConsumableList;
     }
@@ -1000,6 +1021,24 @@ class UserWarband extends DynamicContextObject {
             this.Ducats += newval;
         }
     }
+    public async AwaitedAddStashValue(newval : number, type : number) {
+        if (type == 1) {
+            this.Glory += newval;
+        } else {
+            this.Ducats += newval;
+        }
+        await this.Exploration.ReloadTempOptions();
+    }
+
+    public HasEnoughDucats(cost : number, costtype : number) {
+        if (costtype == 1) {
+            const ducatval = this.GetSumCurrentGlory();
+            return ducatval >= cost;
+        } else {
+            const ducatval = this.GetSumCurrentDucats();
+            return ducatval >= cost;
+        }
+    }
 
     public async CustomStash( item : Equipment, cost : number, costtype : number) {
         if (!this.Restrictions.includes("custom_equipment")) {
@@ -1022,6 +1061,8 @@ class UserWarband extends DynamicContextObject {
     }
     
     public async AddStash ( stash: FactionEquipmentRelationship, free = false, replace : null | FactionEquipmentRelationship = null) {
+        if (stash == null || stash == undefined) { return; }
+        if (stash.EquipmentItem == null || stash.EquipmentItem == undefined) {return;}
         let itemcost = stash.Cost;
         if ((this).EquipmentRelCache[stash.ID] != null) {
             itemcost = (this).EquipmentRelCache[stash.ID].cost
@@ -1121,7 +1162,9 @@ class UserWarband extends DynamicContextObject {
             curcount = this.GetCountOfEquipmentRel(RefModel.ID)
         }
         if (curcount < maxcount || (maxcount == 0 && RefModel.Limit == 0)) {
-            if (!containsTag(RefModel.Tags, "exploration_only")) {
+            const limitofglory = await this.GetExplorationLimit()
+            if (!containsTag(RefModel.Tags, "exploration_only") || this.IsWarbandExplorationOnly()
+                || (limitofglory >= RefModel.Cost)) {
                 return false;
             }
         }
@@ -1148,6 +1191,9 @@ class UserWarband extends DynamicContextObject {
      */
     public async AddExplorationLocation ( location: ExplorationLocation, option: ISelectedOption[]) {
         await this.Exploration.AddExplorationLocation(location, option);
+    }
+    public async AddExplorationMod ( location: ExplorationLocation, option: ISelectedOption[]) {
+        await this.Exploration.AddExplorationMod(location, option);
     }
 
 
@@ -1418,6 +1464,9 @@ class UserWarband extends DynamicContextObject {
             if ((this.Models[i].HeldObject as WarbandMember).IsMercenary()) {
                 continue;
             }    
+            if ((this.Models[i].HeldObject as WarbandMember).State == "dead" || (this.Models[i].HeldObject as WarbandMember).State == "lost") {
+                continue;
+            }    
             let finalsource = [] 
             const CheckList = (this.Models[i].HeldObject as WarbandMember).GeneralCache.validation_check
             if (CheckList != null) {
@@ -1454,10 +1503,7 @@ class UserWarband extends DynamicContextObject {
         if (CaptainFound == false) {
             AlertList.push("The warband lacks a Leader")
         }
-        
-        if (this.IsUnRestricted == true) {
-            AlertList.push("The warband has been set to Unrestricted mode")
-        } 
+
 
         if (this.Restrictions.includes("custom_equipment") == true) {
             AlertList.push("The warband has been given a custom piece of equipment")
@@ -1809,9 +1855,7 @@ class UserWarband extends DynamicContextObject {
             if (this.IsUnRestricted || canaddupgrade) {
                 ListOfRels.push(BaseRels[i]);
             }
-
         }
-
         return ListOfRels
     }
 
@@ -2192,7 +2236,7 @@ class UserWarband extends DynamicContextObject {
 
         const LineList : string[] = [];
         const elite = this.GetFighters().filter((item) => (item.model.IsElite() && item.model.State == "active"))
-        const troops = this.GetFighters().filter((item) => (!item.model.IsElite() && item.model.State == "active"))
+        const troops = this.GetFighters().filter((item) => (item.model.IsTroop() && item.model.State == "active"))
         const mercenaries = this.GetFighters().filter((item) => (item.model.IsMercenary() && item.model.State == "active"))
         const reserves = this.GetFighters().filter((item) => (item.model.State == "reserved"))
         const lost = this.GetFighters().filter((item) => (item.model.State == "lost"))
@@ -2206,11 +2250,14 @@ class UserWarband extends DynamicContextObject {
 
         if (elite.length > 0) {
             LineList.push(" ")
-            LineList.push(" ")
             LineList.push("## Elites ##")
             for (let i = 0; i < elite.length; i++) {
                 LineList.push("  ")
-                LineList.push(elite[i].model.GetTrueName() + " - " + elite[i].model.GetModelName())
+                if(elite[i].model.GetTrueName() != elite[i].model.GetModelName()) {
+                    LineList.push(elite[i].model.GetTrueName() + " - " + elite[i].model.GetModelName())
+                } else {
+                    LineList.push(elite[i].model.GetTrueName())
+                }
 
                 LineList.push("• Cost: "+elite[i].purchase.GetTotalDucats().toString() + " Ducats | " + elite[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (elite[i].model.Upgrades.length > 0) {
@@ -2243,11 +2290,14 @@ class UserWarband extends DynamicContextObject {
 
         if (troops.length > 0) {
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Troops ##")
             for (let i = 0; i < troops.length; i++) {
                 LineList.push("  ")
-                LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName())
+                if(troops[i].model.GetTrueName() != troops[i].model.GetModelName()) {
+                    LineList.push(troops[i].model.GetTrueName() + " - " + troops[i].model.GetModelName())
+                } else {
+                    LineList.push(troops[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + troops[i].purchase.GetTotalDucats().toString() + " Ducats | " + troops[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (troops[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2277,11 +2327,14 @@ class UserWarband extends DynamicContextObject {
         }
         if (mercenaries.length > 0) {
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Mercenaries ##")
             for (let i = 0; i < mercenaries.length; i++) {
                 LineList.push("  ")
-                LineList.push(mercenaries[i].model.GetTrueName() + " - " + mercenaries[i].model.GetModelName())
+                if(mercenaries[i].model.GetTrueName() != mercenaries[i].model.GetModelName()) {
+                    LineList.push(mercenaries[i].model.GetTrueName() + " - " + mercenaries[i].model.GetModelName())
+                } else {
+                    LineList.push(mercenaries[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + mercenaries[i].purchase.GetTotalDucats().toString() + " Ducats | " + mercenaries[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (mercenaries[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2312,11 +2365,14 @@ class UserWarband extends DynamicContextObject {
 
         if (reserves.length > 0 && full) {
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Reserves ##")
             for (let i = 0; i < reserves.length; i++) {
                 LineList.push("  ")
-                LineList.push(reserves[i].model.GetTrueName() + " - " + reserves[i].model.GetModelName())
+                if(reserves[i].model.GetTrueName() != reserves[i].model.GetModelName()) {
+                    LineList.push(reserves[i].model.GetTrueName() + " - " + reserves[i].model.GetModelName())
+                } else {
+                    LineList.push(reserves[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + reserves[i].purchase.GetTotalDucats().toString() + " Ducats | " + reserves[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (reserves[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2347,11 +2403,14 @@ class UserWarband extends DynamicContextObject {
 
         if (lost.length > 0 && full) {
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Lost & Captured ##")
             for (let i = 0; i < lost.length; i++) {
                 LineList.push("  ")
-                LineList.push(lost[i].model.GetTrueName() + " - " + lost[i].model.GetModelName())
+                if(lost[i].model.GetTrueName() != lost[i].model.GetModelName()) {
+                    LineList.push(lost[i].model.GetTrueName() + " - " + lost[i].model.GetModelName())
+                } else {
+                    LineList.push(lost[i].model.GetTrueName())
+                }
                 LineList.push("• Cost: " + lost[i].purchase.GetTotalDucats().toString() + " Ducats | " + lost[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (lost[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
@@ -2379,14 +2438,18 @@ class UserWarband extends DynamicContextObject {
                 }
             }
         }
+
         if (dead.length > 0 && full) {
-            LineList.push("  " )
             LineList.push("  " )
             LineList.push("## Dead ##")
             for (let i = 0; i < dead.length; i++) {
-                LineList.push("• Cost: ")
-                LineList.push(dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName())
-                LineList.push("  " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
+                LineList.push("  ")
+                if(dead[i].model.GetTrueName() != dead[i].model.GetModelName()) {
+                    LineList.push(dead[i].model.GetTrueName() + " - " + dead[i].model.GetModelName())
+                } else {
+                    LineList.push(dead[i].model.GetTrueName())
+                }
+                LineList.push("• Cost: " + dead[i].purchase.GetTotalDucats().toString() + " Ducats | " + dead[i].purchase.GetTotalGlory().toString() + " Glory")
                 if (dead[i].model.Upgrades.length > 0) {
                     const UpgradesList : string[] = []
                     for (let j = 0; j < dead[i].model.Upgrades.length; j++) {
@@ -2416,7 +2479,6 @@ class UserWarband extends DynamicContextObject {
         if (full) {
 
             LineList.push("  " )
-            LineList.push("  " )
             LineList.push("## Stash ##")
             LineList.push("  " )
 
@@ -2426,14 +2488,14 @@ class UserWarband extends DynamicContextObject {
             LineList.push("Stashed Ducats: " + (stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats))
             LineList.push("Unspent Glory: " + (stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory))
 
-
             // Add stashed Equipment
-            if( this.GetAllEquipment().length > 0) {
+            if( this.Equipment.length > 0) {
                 LineList.push("  " )
 
                 const UpgradesList : string[] = []
-                for (let j = 0; j < this.GetAllEquipment().length; j++) {
-                    UpgradesList.push(this.GetAllEquipment()[j].equipment.GetTrueName())
+                for (let j = 0; j < this.Equipment.length; j++) {
+                    const rel_equip = this.Equipment[j].HeldObject as WarbandEquipment
+                    UpgradesList.push(rel_equip.GetTrueName())
                 }
                 LineList.push(UpgradesList.join(', '))
             }
@@ -2445,7 +2507,6 @@ class UserWarband extends DynamicContextObject {
 
         if (this.Modifiers.length > 0) {
 
-            LineList.push("  ")
             LineList.push("  ")
             LineList.push("## Modifiers ##")
             LineList.push("  ")
@@ -2464,7 +2525,6 @@ class UserWarband extends DynamicContextObject {
         if (this.Fireteams.length > 0 && full) {
 
             LineList.push("  ")
-            LineList.push("  ")
             LineList.push("## Fireteams ##")
             LineList.push("  ")
 
@@ -2481,7 +2541,6 @@ class UserWarband extends DynamicContextObject {
         const Locations = this.GetLocations();
         if (Locations.length > 0) {
 
-            LineList.push("  ")
             LineList.push("  ")
             LineList.push("## Locations ##")
             LineList.push("  ")
@@ -2501,7 +2560,7 @@ class UserWarband extends DynamicContextObject {
          * Add link to the list
          * - Check if is integer first
          */
-        if (Number.isInteger(Number(this.GetPostId()))) {
+        if (Number.isInteger(Number(this.GetPostId())) && Number(this.GetPostId()) > 0 ) {
             LineList.push("  ")
             LineList.push("---")
             LineList.push(" ")
@@ -2526,7 +2585,14 @@ class UserWarband extends DynamicContextObject {
         const WbManager : WarbandManager = ToolsController.getInstance().UserWarbandManager;
         const WBUser : SumWarband | null = WbManager.GetItemByBaseID(this.ID);
 
-        if (WBUser == null) {return ["Something Went Wrong"]}
+        if (WBUser == null) {
+            const WBPublic : SumWarband | null = await WarbandFactory.GetWarbandPublicByID(this.PostID)
+            if (WBPublic == null) {
+                return ["Something Went Wrong"]
+            }
+            const EXPORT = await ConvertToTTSExport(WBPublic);
+            return [JSON.stringify(EXPORT, null, 2)];
+        }
 
         const EXPORT = await ConvertToTTSExport(WBUser);
         return [JSON.stringify(EXPORT, null, 2)];

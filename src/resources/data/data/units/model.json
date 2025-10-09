@@ -373,7 +373,7 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            
+            "unarmed_penalty_remove": {},
             "model_equipment_restriction": {
                 "removed": [
                     {
@@ -543,7 +543,7 @@
         "description": [
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Dogs do not suffer penalties for fighting unarmed. In battle they are treated as non-ELITE Troops. War Dogs cannot become ELITE. At an additional cost of +1 Glory Point the any dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
+                "content": "Dogs do not suffer penalties for fighting unarmed. In battle they are treated as non-ELITE Troops. War Dogs cannot become ELITE. At an additional cost the dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
                 "glossary": [{"val": "ELITE", "id": "kw_elite"},{"val": "FIRETEAM", "id": "kw_fireteam"}]
             }
         ],
@@ -915,6 +915,10 @@
                         "res_type": "ducat",
                         "value": 10,
                         "param": "maximum"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "eq_lockofsamsonshair"
                     }
                 ]
             }
@@ -1520,7 +1524,7 @@
             "potential": 0
         },
         "keywords" : ["kw_antioch"],
-        "abilities" : ["ab_finishthefallen","ab_expertmedic"]
+        "abilities" : ["ab_finishthefallen","ab_expertmedic","ab_conventconditioning"]
     },
     {
         "id": "md_witchburner",
@@ -1754,7 +1758,7 @@
         ],
         "team": "faithful",
         "stats" : {            
-            "movement": 6,
+            "movement": 8,
             "melee": 2,
             "ranged": 1,
             "base": [32],
@@ -1956,6 +1960,14 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "category": "ranged",
+                        "value": true
+                    }
+                ]
+            } 
             
         },
         "description": [
@@ -2045,6 +2057,15 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [                    
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
             
         },
         "description": [
@@ -2087,7 +2108,7 @@
         "source": "core",
         "tags": {},
         "contextdata": {
-            
+            "strong_count": {"value": 2},
             "set_arms": {"ranged": 0, "melee": 0, "special": 6},
             "no_shield_combo": {},
             "model_equipment_restriction": {
@@ -2893,6 +2914,15 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [ 
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
         },
         "description": [
             {
@@ -3092,5 +3122,209 @@
         },
         "keywords" : ["kw_thecourt","kw_demonic","kw_fear","kw_tough","kw_strong"],
         "abilities" : ["ab_demonicaura"]
+    },
+    {
+        "id": "md_combatbiologist",
+        "name": "Combat Biologist",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "keyword_ignore": {"value": ["kw_fear"]},
+            "modify_equipment_block": {}
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Combat Biologist always has Standard armour, a Gas Mask, and a Vivisector. You cannot alter the Biologist battlekit in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Combat Biologists are members of the Pontifical Office of Biological warfare, or in the case of the Sultanate, the Al-Bisţāmī School of Ninety-Nine Names, which trains some failed Alchemist apprentices in a similar fashion. These scholars specialise in battlefield vivisections and collecting samples of the most powerful servants of Hell so they can be studied, in the hopes of finding ways to develop weapons capable of driving the servants of the Pit back to the darkness."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Due to their training, hypnotic conditioning and constant exposure to captured specimens, the Combat Biologist enters a battle trance when faced with creatures that normally induce fear in ordinary troopers. They wield vivisectors, polearm blade weapons that combine sophisticated biological warfare agents and the functional brutality of trench warfare."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_prizespecimens","ab_battlefieldvivisection"]
+    },
+    {
+        "id": "md_matagothag",
+        "name": "Matagot Hag",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {            
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_devouringjaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graildevotee"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Matagot Hag is carried into battle by a writhing swarm of thralls who shield her with fanatical devotion. The Hag and the thrall swarm can never be separated and are treated as one model with a single profile. The Matagot Hag suffers no penalties to their combat ability for being unarmed.  A Matagot hag cannot take any equipment except for Devouring Jaws, Grasping Maw, Grail Devotees, and Blighted Claws.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Matagot Hag is an undying vessel of The Great Hunger and the favoured child of Beelzebub, for in his heart he hates all things in Creation and the natural circle of life. This creature is a wretched husk of a once-human mother cursed to endlessly birth monstrosities. Her bloated and distended body is locked in an obscene cycle of constant regeneration and decay - her flesh splitting open in great, festering ruptures only to stitch itself back together, swollen with the next abomination writhing in her womb. Her skin, stretched thin and sickly pale, is mottled with blackened veins and pulsing sores, her eyes long rotted away, leaving only hollow sockets weeping thick, infectious ichor. The Grail Thralls she births carry her aloft, treating her as a living effigy of gluttony and suffering. Though mindless hunger drives her, the Hag is not without purpose - her whispered, guttural croons are hymns of devotion to Beelzebub, calling forth ever more horrors to devour the world."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0,
+            "base": [60]
+        },
+        "keywords" : ["kw_blackgrail","kw_elite","kw_leader","kw_tough","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_overwhelminghorde","ab_pestilent","ab_frenziedfollowers","ab_cadreofflesh","ab_arcanaputrescere"]
+    },
+    {
+        "id": "md_gergorigula",
+        "name": "Gregori Gula",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {            
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Gregori Gula never carries any type of weapons, armour or equipment, as it has no need for them. A Gregori Gula can make two attacks at no penalty, and suffers no penalties to their combat ability for being unarmed. A Gregori Gula can be equipped with a Grasping Maw.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Gregori Gula are rare, winged predators - gaunt, angelic abominations draped in rotting flesh and hiding a myriad of waiting mouths. Unlike the mindless thralls, they stalk prey with patience, each kill chosen with eerie precision. When struck down, they do not die, but collapse into a dormant cocoon of necrotic tissue, seeping toxins and viral remnants into the battlefield. If a thrall ventures too close, it is consumed, and the Gula rises again, unfurling its wings in a storm of infectious gas that cripples all nearby. The only solution is fire and absolute destruction, for so long as even a trace remains, the Gregori Gula will endure."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 9,
+            "melee": 2,
+            "ranged": 0,
+            "armour": 0,
+            "movetype": 1,
+            "potential": 0,
+            "base": [60]
+        },
+        "keywords" : ["kw_blackgrail","kw_infiltrator","kw_fear"],
+        "abilities" : ["ab_arcanaputrescere_one","ab_plagueriddenflesh","ab_rend","ab_dormanthunger"]
     }
 ]

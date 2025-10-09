@@ -72,6 +72,11 @@ const WbbTextarea: React.FC<WbbTextareaProps> = ({ initialText, title, onSave })
                 </>
             ) : (
                 <textarea
+                    name={`${title
+                        .toLowerCase()
+                        .replace(/\s+/g, '-')        // spaces to dashes
+                        .replace(/[^a-z0-9-]/g, '')  // remove special chars
+                    }-textarea`}
                     rows={10}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
