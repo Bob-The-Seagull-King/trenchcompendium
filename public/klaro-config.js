@@ -2,12 +2,23 @@
 var klaroConfig = {
     elementID: 'privacy-modal',
     storageMethod: 'localStorage',
-    storageName: 'trench_companion_consent_v2',
+    storageName: 'trench_companion_consent_v3',
     mustConsent: true,
     acceptAll: true,
     hideDeclineAll: false,
     privacyPolicy: 'https://trench-companion.com/page/privacy',
     noCss: true,
+    callback: function (consent) {
+        // Switch NPA depending on the user's Advertising choice
+        window.adsbygoogle = window.adsbygoogle || [];
+        // 'google-ads' = your Klaro service name for advertising consent
+        window.adsbygoogle.requestNonPersonalizedAds = consent['google-ads'] ? 0 : 1;
+
+        // Send "consent given" event through the app - means "any" consent to trigger ads
+        try {
+            window.dispatchEvent(new CustomEvent('tc:consent-changed', { detail: consent }));
+        } catch (e) {}
+    },
     translations: {
         de: {
             consentNotice: {
@@ -72,37 +83,21 @@ var klaroConfig = {
             title: 'Google Ads (Personalisierung)',
             purposes: ['advertising'],
             onAccept: `
-                gtag('consent', 'update', {
-                  ad_user_data: 'granted',
-                  ad_personalization: 'granted',
-                  ad_storage: 'granted'
+                gtag('consent','update',{
+                  ad_user_data:'granted',
+                  ad_personalization:'granted',
+                  ad_storage:'granted'
                 });
-                gtag('set', 'ads_data_redaction', false);
-            `,
+                gtag('set','ads_data_redaction', false);
+              `,
             onDecline: `
-                gtag('consent', 'update', {
-                  ad_user_data: 'denied',
-                  ad_personalization: 'denied',
-                  ad_storage: 'denied'
+                gtag('consent','update',{
+                  ad_user_data:'denied',
+                  ad_personalization:'denied',
+                  ad_storage:'denied'
                 });
-                gtag('set', 'ads_data_redaction', true);
-            `,
+                gtag('set','ads_data_redaction', true);
+              `,
         },
-        {
-            name: 'google-adsense',
-            title: 'Google AdSense',
-            purposes: ['advertising'],
-            required: true, // immer laden!
-            onInit: `
-                if (!window.adsenseScriptLoaded) {
-                    var s = document.createElement('script');
-                    s.async = true;
-                    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966";
-                    s.crossOrigin = "anonymous";
-                    document.head.appendChild(s);
-                    window.adsenseScriptLoaded = true;
-                }
-            `,
-        }
     ]
 };

@@ -29,7 +29,6 @@ interface WbbModalAddEquipmentProps {
 }
 
 const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClose, onSubmit, fighter, category }) => {
-    const [selectedID, setSelectedID] = useState<string | null>(null);
     const [openedID, setOpenedID] = useState<string | null>(null);
 
     const { warband } = useWarband();
@@ -42,7 +41,6 @@ const WbbModalAddEquipment: React.FC<WbbModalAddEquipmentProps> = ({ show, onClo
         const selected = available.find(w => w.ID === openedID); // use opened id
         if (selected) {
             onSubmit(selected);
-            setSelectedID(null)
             onClose();
         }
     });

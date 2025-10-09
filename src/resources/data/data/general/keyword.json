@@ -192,7 +192,7 @@
             },
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "These INFECTION MARKERS can be taken from any models within 18” of the caster, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
+                "content": "These INFECTION MARKERS can be taken from any models within 12” of the caster, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
                 "glossary": [
                     {"val": "ACTIONS", "id": "kw_action"},
                     {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
@@ -309,7 +309,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The model is supernaturally tainted by Hell and is vulnerable to holy powers."
+                "content": "The model is supernaturally tainted by Hell and is vulnerable to holy powers. Due to their infernal origins, models with the Keyword DEMONIC negate additional BLOOD MARKERS caused by the Keyword FIRE."
             }
         ]
     },

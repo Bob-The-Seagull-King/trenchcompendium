@@ -55,6 +55,7 @@ class DynamicOptionContextObject extends DynamicContextObject {
         for (let j = 0; j < static_packages.length; j++) {
             static_packages[j].dyncontext = this;
             static_packages[j].callpath.push("DynamicOptionContextObject")
+            static_packages[j].callpath.push("Option Choice")
             subpackages.push(static_packages[j])
         }
 

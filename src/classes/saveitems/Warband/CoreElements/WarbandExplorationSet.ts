@@ -13,10 +13,14 @@ import { ExplorationLocation } from "../../../feature/exploration/ExplorationLoc
 import { StaticOption } from "../../../options/StaticOption";
 import { IChoice } from "../../../options/StaticOption";
 import { EventRunner } from "../../../contextevent/contexteventhandler";
+import { containsTag } from "../../../../utility/functions";
+import { WarbandConsumable } from "../WarbandConsumable";
 
 interface IWarbandExplorationSet extends IContextObject {
     explorationskills: IWarbandProperty[];
     locations: IWarbandProperty[];
+    location_mods? : IWarbandProperty[];
+    templocations?: string[];
 }
 
 export interface ExplorationSkillSuite {
@@ -35,6 +39,30 @@ export interface FilteredLocation {
     options : FilteredOptions[]
 }
 
+export function CheckRelevantFullOptions(loc : FilteredLocation) {
+    const list : StaticOption[] = []
+
+    for (let i = 0; i < loc.location.MyOptions.length; i++) {
+        if (!containsTag(loc.location.MyOptions[i].Tags, "unrequired_selection")) {
+            list.push(loc.location.MyOptions[i])
+        }
+    }
+
+    return list;
+}
+
+export function CheckRelevantBaseOptions(loc : FilteredLocation) {
+    const list : FilteredOptions[] = []
+
+    for (let i = 0; i < loc.options.length; i++) {
+        if (!containsTag(loc.options[i].baseopt.Tags, "unrequired_selection")) {
+            list.push(loc.options[i])
+        }
+    }
+    
+    return list;
+}
+
 export interface FilteredOptions {
     baseopt : StaticOption
     selection_valid : IChoice[]
@@ -44,10 +72,18 @@ export interface GeneralLocationCache {
     exploration_skills?: WarbandProperty[]
 }
 
+export interface StoredLocation {
+    true_obj? : WarbandProperty,
+    base_item : FilteredLocation,
+    selected_options: ISelectedOption[]
+}
+
 class WarbandExplorationSet extends DynamicContextObject {
     Skills : WarbandProperty[] = [];
     Locations : WarbandProperty[] = [];
-    GeneralCache : GeneralLocationCache = {}
+    LocationMods : WarbandProperty[] = [];
+    GeneralCache : GeneralLocationCache = {};
+    CurLocation : StoredLocation[] = [];
 
     /**
      * Assigns parameters and creates a series of description
@@ -57,6 +93,18 @@ class WarbandExplorationSet extends DynamicContextObject {
     public constructor(data: IWarbandExplorationSet, parent : DynamicContextObject | null)
     {
         super(data, parent)
+    }
+
+    public async ReloadTempOptions() {
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            const Current = this.CurLocation[i]
+            if (Current.true_obj != undefined) {
+                await Current.true_obj.RegenerateOptions();
+                for (let j = 0; j < Current.true_obj.Consumables.length; j++) {
+                    await Current.true_obj.Consumables[j].GrabOptions();
+                }
+            }
+        }
     }
 
     public async BuildSkills(data : IWarbandProperty[]) {
@@ -77,7 +125,51 @@ class WarbandExplorationSet extends DynamicContextObject {
             const NewLocation = new WarbandProperty(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.HandleDynamicProps(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
             await NewLocation.BuildConsumables(CurVal.consumables);
+            if (CurVal.tags) {
+                NewLocation.Tags = CurVal.tags
+            }
             this.Locations.push(NewLocation);
+        }
+    }
+
+    public async BuildLocationMods(data : IWarbandProperty[]) {
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i];
+            const Value = await ExplorationFactory.CreateNewExplorationLocation(CurVal.object_id, this.MyContext? this.MyContext as UserWarband : null, true);
+            const NewLocation = new WarbandProperty(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
+            await NewLocation.HandleDynamicProps(Value, this.MyContext? this.MyContext as UserWarband : null, null, CurVal);
+            await NewLocation.BuildConsumables(CurVal.consumables);
+            this.LocationMods.push(NewLocation);
+        }
+    }
+
+    public async BuildTempLocations(data : string[]) {
+        
+        const validLocationsFound = await this.GetValidNewLocations();
+
+        for (let i = 0; i < data.length; i++) {
+            const CurVal = data[i];
+
+            let filter : FilteredLocation | null = null;
+
+            for (let j = 0; j < validLocationsFound.length; j++) {
+                for (let k = 0; k < validLocationsFound[j].valid_locs.length; k++) {
+                    const CurLoc : FilteredLocation =  validLocationsFound[j].valid_locs[k]
+                    if (CurLoc.location.GetID() == CurVal) {
+                        filter = CurLoc;
+                        break;
+                    }
+                }
+            }
+
+            if (filter != null) {
+                const NewLoc : StoredLocation = {
+                    base_item : filter,
+                    selected_options: []
+                }
+                this.CurLocation.push(NewLoc);
+            }
+
         }
     }
 
@@ -86,9 +178,19 @@ class WarbandExplorationSet extends DynamicContextObject {
             const CurVal = this.Locations[i]
             await CurVal.RegenerateOptions();
         }
+        for (let i = 0; i < this.LocationMods.length; i++) {
+            const CurVal = this.LocationMods[i]
+            await CurVal.RegenerateOptions();
+        }
         for (let i = 0; i < this.Skills.length; i++) {
             const CurVal = this.Skills[i]
             await CurVal.RegenerateOptions();
+        }
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            const CurVal = this.CurLocation[i]
+            if (CurVal.true_obj != undefined) {
+                await CurVal.true_obj.RegenerateOptions();
+            }
         }
     }
 
@@ -101,14 +203,24 @@ class WarbandExplorationSet extends DynamicContextObject {
         for (let i = 0; i < this.Locations.length; i++) {
             locationset.push(this.Locations[i].ConvertToInterface())
         }
+        const locationmodset : IWarbandProperty[] = [];
+        for (let i = 0; i < this.LocationMods.length; i++) {
+            locationmodset.push(this.LocationMods[i].ConvertToInterface())
+        }
+        const templocset : string[] = [];
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            templocset.push(this.CurLocation[i].base_item.location.GetID())
+        }
         const _objint : IWarbandExplorationSet = {
             explorationskills: skillset,
             locations: locationset,
+            location_mods: locationmodset,
             contextdata : this.ContextKeys,            
             id: this.ID,
             name: this.Name != undefined? this.Name : "",
             source: this.Source != undefined? this.Source : "",
-            tags: this.Tags
+            tags: this.Tags,
+            templocations: templocset
         }
         this.SelfData = _objint;
         return _objint;
@@ -137,6 +249,14 @@ class WarbandExplorationSet extends DynamicContextObject {
             }
         }
 
+        for (let i = 0; i < this.LocationMods.length; i++) {
+            const static_packages : ContextPackage[] = await this.LocationMods[i].GrabContextPackages(event_id, source_obj, arrs_extra);
+            for (let j = 0; j < static_packages.length; j++) {
+                static_packages[j].callpath.push("WarbandExplorationSet")
+                subpackages.push(static_packages[j])
+            }
+        }
+
         return subpackages; 
     }
 
@@ -158,7 +278,7 @@ class WarbandExplorationSet extends DynamicContextObject {
     public async GetSkillsInFormat() {
         const SumSkills : ExplorationSkillSuite[] = [];
         for (let i = 0; i < this.Skills.length; i++) {
-            this.TryAddToSkillsFormat(SumSkills, this.Skills[i], "Skill")
+            this.TryAddToSkillsFormat(SumSkills, this.Skills[i], "Warband Skills")
         }
         for (let i = 0; i < (this.MyContext as UserWarband).Models.length; i++) {
             const Mdl = (this.MyContext as UserWarband).Models[i].HeldObject as WarbandMember;
@@ -170,7 +290,7 @@ class WarbandExplorationSet extends DynamicContextObject {
         
         const NewSkills = await (this.MyContext as UserWarband).GetSelfExplorationSkills();
         for (let j = 0; j < NewSkills.length; j++) {
-            this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Location")
+            this.TryAddToSkillsFormat(SumSkills, NewSkills[j], (NewSkills[j].Tags["SkillOrigin"])? NewSkills[j].Tags["SkillOrigin"]?.toString(): "Location")
         }
         return SumSkills;
     }
@@ -179,7 +299,6 @@ class WarbandExplorationSet extends DynamicContextObject {
         if (this.GeneralCache.exploration_skills != null) {
             return this.GeneralCache.exploration_skills
         }
-
 
         const SkillList : WarbandProperty[] = [];
         const Events : EventRunner = new EventRunner();
@@ -197,6 +316,11 @@ class WarbandExplorationSet extends DynamicContextObject {
                 SkillList.push(this.Locations[i])
             }
         }
+
+        for (let i = 0; i < this.LocationMods.length; i++) {
+            SkillList.push(this.LocationMods[i])
+        }
+        
         this.GeneralCache.exploration_skills = SkillList;
         return SkillList;
     }
@@ -224,6 +348,12 @@ class WarbandExplorationSet extends DynamicContextObject {
             const obj = (this.Locations[i])
             if (obj.SelfDynamicProperty.OptionChoice.ContextKeys["warband_attatch"]) {
                 List.push(this.Locations[i])
+            }
+        }
+        for (let i = 0; i < this.LocationMods.length; i++) {
+            const obj = (this.LocationMods[i])
+            if (obj.SelfDynamicProperty.OptionChoice.ContextKeys["warband_attatch"]) {
+                List.push(this.LocationMods[i])
             }
         }
 
@@ -331,6 +461,91 @@ class WarbandExplorationSet extends DynamicContextObject {
         await eventmon.runEvent(
             "onGainLocation",
             this,
+            [this.MyContext as UserWarband],
+            null,
+            NewRuleProperty
+        )
+
+    }
+    public async AddExplorationMod ( location: ExplorationLocation, option: ISelectedOption[]) {
+
+        const Selections : IWarbandProperty = {
+            object_id: location.GetID(),
+            selections: option,
+            consumables: []
+        }
+
+        const NewRuleProperty = new WarbandProperty(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
+        await NewRuleProperty.HandleDynamicProps(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
+        this.LocationMods.push(NewRuleProperty);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainLocation",
+            this,
+            [this.MyContext as UserWarband],
+            null,
+            NewRuleProperty
+        )
+
+    }
+
+    public async AssignTempLocation(loc : StoredLocation) {
+        
+        if (loc == null) {
+            return;
+        }
+        if (loc.true_obj == undefined) {
+            return;
+        }
+        const refitem = loc.true_obj
+        this.Locations.push(refitem);
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onGainLocation",
+            refitem,
+            [this.MyContext as UserWarband],
+            null,
+            refitem
+        )
+        this.GeneralCache.exploration_skills = undefined;
+        await this.DeleteTempLocation(loc);
+
+        const consumables_past_save : WarbandConsumable[] = []
+        for (let i = 0; i < refitem.Consumables.length; i++) {
+            if (refitem.Consumables[i].SelectItem != null || refitem.Consumables[i].Tags["post_save"]) {
+                consumables_past_save.push(refitem.Consumables[i])
+            }
+        }
+
+        refitem.Consumables = consumables_past_save;
+    }
+
+    public async DeleteTempLocation( loc : StoredLocation ) {
+        for (let i = 0; i < this.CurLocation.length; i++) {
+            if (loc == (this.CurLocation[i])) {
+                this.CurLocation.splice(i, 1);
+                break;
+            }
+        }
+    }
+    
+    public async AddTempExplorationLocation ( loc : StoredLocation, location: ExplorationLocation, option: ISelectedOption[]) {
+        if (this.CurLocation == null) {
+            return;
+        }
+        const Selections : IWarbandProperty = {
+            object_id: location.GetID(),
+            selections: option,
+            consumables: []
+        }
+
+        const NewRuleProperty = new WarbandProperty(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
+        await NewRuleProperty.HandleDynamicProps(location, this.MyContext? this.MyContext as UserWarband : null, null, Selections);
+        loc.true_obj = NewRuleProperty;
+        const eventmon : EventRunner = new EventRunner();
+        await eventmon.runEvent(
+            "onPickLocation",
+            NewRuleProperty,
             [this.MyContext as UserWarband],
             null,
             NewRuleProperty

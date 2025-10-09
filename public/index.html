@@ -20,20 +20,62 @@
          <meta property="og:type" content="website" data-react-helmet="true">
 
         <!-- GTM Init -->
+        <!-- Consent defaults: denied/NPA until user accepts -->
         <script>
+            // Basic gtag setup
             window.dataLayer = window.dataLayer || [];
             window.gtag = function(){ dataLayer.push(arguments); };
 
-            // Initial default consent — nur einmal global
-            gtag('consent', 'default', {
-                ad_storage: 'denied',
-                analytics_storage: 'denied',
-                ad_user_data: 'denied',
-                ad_personalization: 'denied'
+            // Consent Mode defaults (GDPR-safe before any consent)
+            gtag('consent','default',{
+                ad_storage:'denied',
+                analytics_storage:'denied',
+                ad_user_data:'denied',
+                ad_personalization:'denied'
             });
+            gtag('set','ads_data_redaction', true);
 
-            gtag('set', 'ads_data_redaction', true);
+            // Default to Non-Personalized Ads until user opts in
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adsbygoogle.requestNonPersonalizedAds = 1;
         </script>
+
+        <!-- Mark library readiness and notify the app (used by AdsManagerv2) -->
+        <script>
+            // Pre-init the global queue so Array.isArray(window.adsbygoogle) is true even before the library loads
+            window.adsbygoogle = window.adsbygoogle || [];
+            // Default to Non-Personalized Ads until consent; Klaro will override later
+            window.adsbygoogle.requestNonPersonalizedAds = 0;
+        </script>
+        <!-- Load AdSense library ONCE in <head> so Google can detect it -->
+        <script
+                id="adsbygoogle-js"
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
+                crossorigin="anonymous"></script>
+        <script>
+            (function () {
+                if (window.__adsenseBootstrapped) return;
+                window.__adsenseBootstrapped = true;
+
+                var tag = document.getElementById('adsbygoogle-js');
+                if (!tag) return;
+
+                function setLoaded(ok){ window.adsenseScriptLoaded = !!ok; window.dispatchEvent(new Event(ok?'adsense:loaded':'adsense:error')); }
+                tag.addEventListener('load',  function(){ setLoaded(true);  });
+                tag.addEventListener('error', function(){ setLoaded(false); });
+
+                document.addEventListener('DOMContentLoaded', function(){
+                    setTimeout(function(){
+                        if (typeof window.adsenseScriptLoaded === 'undefined' && typeof window.adsbygoogle === 'object') {
+                            setLoaded(true);
+                        }
+                    }, 2000);
+                });
+            })();
+        </script>
+
+
 
         <!-- Klaro styles -->
         <link rel="stylesheet" href="%PUBLIC_URL%/klaro.css">
@@ -46,15 +88,16 @@
             });
         </script>
 
+
+    </head>
+
+    <body class="trench-companion">
         <!-- Noscript Fallback for GTM -->
         <noscript>
             <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFVT7W7X"
                     height="0" width="0"
                     style="display:none;visibility:hidden"></iframe>
         </noscript>
-    </head>
-
-    <body class="trench-companion">
          <noscript>You need to enable JavaScript to run this app.</noscript>
          <style>#global-loader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#2a2a2a;z-index:9999}.spinner{width:48px;height:48px;border:4px solid rgba(135,18,20,.5);border-top:4px solid #d01317;border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}</style>
          <style>

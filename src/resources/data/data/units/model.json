@@ -915,6 +915,10 @@
                         "res_type": "ducat",
                         "value": 10,
                         "param": "maximum"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "eq_lockofsamsonshair"
                     }
                 ]
             }

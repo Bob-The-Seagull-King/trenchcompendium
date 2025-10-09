@@ -317,6 +317,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         {/* The Campaign Exploration View */}
                                         {detailType === 'exploration' && (
                                             <WbbExplorationDetailView
+                                                key={detailType}
                                                 onClose={closeDetail}
                                             />
                                         )}

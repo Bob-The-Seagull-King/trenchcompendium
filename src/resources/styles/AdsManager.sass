@@ -31,14 +31,56 @@ $mobile-height: 70px
         display: block
         width: 100%
         height: 100%
+        min-height: 60px
         position: relative
         z-index: 2
 
     // Hide in all print views
     @media print
         display: none !important
+
+    .Ads-text-below
+        position: absolute
+        inset: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        padding: 5px 15px
+        text-align: center
+        pointer-events: none
+        z-index: 1
+
+    // center the ad inside the bar
+    .AdSlot
+        display: flex
+        align-items: center
+        justify-content: center
+        height: 100%
+        width: 100%
+        margin: 0 auto
+        min-height: 60px
+
+    // optional width caps; keep only if you want a narrower bar than the viewport
+    .AdSlot--leader
+        max-width: 970px
+        @media (max-width: 1039px)
+            max-width: 728px
+        @media (max-width: 739px)
+            max-width: 468px
+        @media (max-width: 479px)
+            max-width: 320px
+
+    // hide helper text once an ad is confirmed as filled (if you toggle .has-ad in JS)
     &.has-ad .Ads-text-below
         display: none
+
+    // do not force size here; React inline styles set the exact width/height
+    .adsbygoogle
+        display: inline-block
+
+    &.has-ad .Ads-text-below
+        display: none
+
 .AdsManager-bottom-spacer
     height: $desktop-height
     @media (max-width: 768px)
