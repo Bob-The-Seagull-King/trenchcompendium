@@ -169,8 +169,8 @@ class WarbandUpdater {
             if (locations[i].object_id == "el_jabireanalchemicalbooks") {
                 for (let j = 0; j < locations[i].selections.length; j++) {
                     if (locations[i].selections[j].selection_ID == "el_jabireanalchemicalbooks_study") {
-                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_jabireanalchemicalbooks_study", selections: [], consumables : [] } )
-                        } else { wb.exploration.location_mods =[ { object_id: "el_jabireanalchemicalbooks_study", selections: [], consumables : [] } ] }
+                        if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_jabireanalchemicalbooks_study_mod", selections: [], consumables : [] } )
+                        } else { wb.exploration.location_mods =[ { object_id: "el_jabireanalchemicalbooks_study_mod", selections: [], consumables : [] } ] }
                     }
                     if (locations[i].selections[j].selection_ID == "el_jabireanalchemicalbooks_keep") {
                         if (wb.exploration.location_mods) { wb.exploration.location_mods.push( { object_id: "el_jabireanalchemicalbooks_keep", selections: [], consumables : [] } )
