@@ -2201,7 +2201,7 @@ export const BaseContextCallTable : CallEventTable = {
                     if (context_func["post_save"]) {
                         Tags["post_save"] = true
                     }
-                    Tags["item_name"] = "Ducats Gained"
+                    Tags["item_name"] = "Dice Ducats Result"
                     const NewData = {
                         id: context_static.GetID() + Date.now().toString(), 
                         name: context_static.GetTrueName(),
@@ -4674,7 +4674,7 @@ export const BaseContextCallTable : CallEventTable = {
                     if (context_func["post_save"]) {
                         Tags["post_save"] = true
                     }
-                    Tags["item_name"] = "Glory Gained"
+                    Tags["item_name"] = "Dice Glory Point Result"
                     const NewData = {
                         id: context_static.GetID() + Date.now().toString(), 
                         name: context_static.GetTrueName(),

@@ -35,8 +35,8 @@ const WbbExploration_Selection_DieRollResult: React.FC<
                 setResult(parseInt(foundOption.value))
                 setkeyvar(keyvar + 1)
                 const Manager : ToolsController = ToolsController.getInstance();
-                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                    () => reloadDisplay())
+                Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(() => 
+            updateparent() )
             })
         } else {
             property.SelectData = null;
