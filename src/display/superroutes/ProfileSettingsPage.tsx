@@ -237,9 +237,10 @@ const ProfileSettingsPage: React.FC = () => {
                     <div className={'col-12'}>
                         <ProfileSubscriptionView/>
                     </div>
-                    <div className={'col-12'}>
-                        <ProfileCreatorView/>
-                    </div>
+
+                    {/*<div className={'col-12'}>*/}
+                    {/*    <ProfileCreatorView/>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </div>
