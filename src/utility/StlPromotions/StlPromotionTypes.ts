@@ -18,23 +18,14 @@ export interface StlPromotion_Model {
     title: string;              // Title of products
     url: string;                // URL to purchase
     imageUrl?: string;          // Image
-    price?: number;             // Price
-    currency?: string;          // Currency for Price
     modelId: string;            // ID of the model
     creatorId: number;          // Post ID of the Creator Post
 }
 
 // A set of multiple promotions for a single model by a creator
-export interface StlPromotionSet_Model_Creator {
+export interface StlPromotionSet_Model {
     modelId: string;                    // ID of the model
-    creator: StlCreator;                // Creator of the promotions
     promotions: StlPromotion_Model[];   // Array of promotions
-}
-
-// A set of multiple promotions for a single model by multiple creators
-export interface StlPromotionSet_Model_Creators {
-    modelId: string;                                // ID of the model
-    promotionSets: StlPromotionSet_Model_Creator[]  // Promotion sets for this model
 }
 
 

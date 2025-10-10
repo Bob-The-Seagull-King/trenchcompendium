@@ -53,10 +53,10 @@ import HeadScripts from "./display/components/generics/HeadScripts";
 import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
 import MaintananceNotice from "./display/components/generics/MaintananceNotice";
 import DevGuard from './display/components/generics/DevGuard'
-import DevImport from "./display/pages/DevImport";
 import {AdsManagerv2} from "./display/components/generics/AdsManagerv2";
 import AppVersionChecker from "./display/components/generics/AppVersionChecker";
 import StaticCreatorApplication from "./display/pages/StaticCreatorApplication";
+import DevImport from "./display/pages/DevImport";
 
 
 const App: React.FC = () => {

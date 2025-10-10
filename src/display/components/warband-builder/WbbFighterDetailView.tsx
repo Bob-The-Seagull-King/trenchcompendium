@@ -64,7 +64,8 @@ import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbDetailViewCollapse from './WbbDetailViewCollapse';
 import WbbTextarea from './WbbTextarea';
-import FighterStlList from "../StlPromotions/FighterStlList";
+import FighterSTL_List from "../StlPromotions/FighterSTL_List";
+import StlFinderCollapse from "../rules-content/FighterCard/StlFinderCollapse";
 
 
 interface WbbFighterDetailViewProps {
@@ -893,11 +894,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
 
                 {/* STL Promotions */}
                 {(!play_mode) &&
-                    <WbbFighterCollapse title="STL Finder">
-                        <div key={complexstate.keyvar}>
-                            <FighterStlList curModel={fighter.CurModel} />
-                        </div>
-                    </WbbFighterCollapse>
+                    <StlFinderCollapse
+                        model_slug={fighter.CurModel.ID}
+                    />
                 }
             </div>
 
