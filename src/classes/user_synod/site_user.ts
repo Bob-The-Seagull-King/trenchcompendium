@@ -494,6 +494,28 @@ class SiteUser {
         return 0;
     }
 
+    /**
+     * Returns if the user is a content creator
+     */
+    IsCreator () {
+        // return true;
+        return false;
+    }
+
+    /**
+     * Returns if the user has applied for the creator program but has not been accepted
+     * @constructor
+     */
+    IsCreatorApplicationPending () {
+        if( this.IsCreator() ) {
+            return false;
+        }
+
+        // return false;
+        return true;
+
+    }
+
 }
 
 export {ISiteUser, SiteUser}
