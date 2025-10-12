@@ -1405,7 +1405,7 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetNumElite() {
-        return this.GetFighters().filter(f => (f.model.IsElite() && f.model.State == "active")).length;
+        return this.GetFighters().filter(f => (f.model.IsElite() && f.model.State != "dead" && f.model.State != "lost")).length;
     }
 
     public async CanAddMoreElite() {
