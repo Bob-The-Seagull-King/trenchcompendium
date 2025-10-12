@@ -74,7 +74,6 @@ const BlogRollRow: React.FC = () => {
                                 date: post.date,
                                 featured_media: post.featured_media ?? undefined
                             }}
-                            onClick={() => navigate(`${ROUTES.PAGE_BLOG_BASE}/${post.slug}`)}
                         />
                     </div>
                 ))}

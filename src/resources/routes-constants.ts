@@ -1,6 +1,8 @@
 export const ROUTES = {
     // Super Routes //
+    COMPENDIUM: '/compendium/',
     COMPENDIUM_ROUTE: '/compendium/*',
+    WARBAND: '/warband/',
     WARBAND_ROUTE: '/warband/*',
     HOME_ROUTE: '*',
     LOGIN_ROUTE: '/login/',
@@ -63,6 +65,7 @@ export const ROUTES = {
     PAGE_COLLABORATE: '/page/collaboration', // will show fluff and contact for B2B partners
 
     PAGE_PLAN_SELECTION : '/page/plan-selection', // will let users select and purchase membership plans
+    PAGE_CREATOR_APPLICATION : '/page/creator-application', // will let users apply as creator
 
     // Blog posts
     PAGE_BLOG_BASE: '/blog',

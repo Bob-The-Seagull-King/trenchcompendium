@@ -130,71 +130,68 @@ const WbbModalAddExplorationLocation: React.FC<WbbModalAddExplorationLocationPro
                         initiallyOpen={false}
                         nopad={true}
                     >
-                        <>
-                            {adv.ExplorationLocations.map((loc) =>
-                                <>
-                                    {/* Select Row */}
-                                    <div
-                                        key={loc.ID}
-                                        className={`select-item 
-                                            ${(openedLocation? openedLocation.location.ID : "") === loc.ID ? 'selected details-open' : ''}
-                                            ${ canSelectLocation(loc) ? '' : 'disabled'}
-                                        `}
-                                        onClick={() => {
-                                            handleLocationClick(loc);
-                                        }}
-                                    >
-                                        <div className="item-name">
-                                            {loc.TableValue+' - '+loc.GetTrueName()}
-                                        </div>
-
+                        {adv.ExplorationLocations.map((loc) =>
+                            <React.Fragment key={`location-${loc.ID}`}>
+                                {/* Select Row */}
+                                <div
+                                    key={loc.ID}
+                                    className={`select-item 
+                                        ${(openedLocation? openedLocation.location.ID : "") === loc.ID ? 'selected details-open' : ''}
+                                        ${ canSelectLocation(loc) ? '' : 'disabled'}
+                                    `}
+                                    onClick={() => {
+                                        handleLocationClick(loc);
+                                    }}
+                                >
+                                    <div className="item-name">
+                                        {loc.TableValue+' - '+loc.GetTrueName()}
                                     </div>
 
-                                    {/* Level 1 Sub-Display when selected */}
-                                    {((openedLocation ? openedLocation.location.ID : "") === loc.ID) &&
-                                        <div className={'select-item-details'}>
+                                </div>
 
-                                            {/* Location Description Text */}
-                                            {(loc.Description != null) &&
-                                                <div className={'exploration-description'}>
-                                                    {
-                                                        returnDescription(location, loc.Description)
-                                                    }
-                                                </div>
-                                            }
+                                {/* Level 1 Sub-Display when selected */}
+                                {((openedLocation ? openedLocation.location.ID : "") === loc.ID) &&
+                                    <div className={'select-item-details'}>
 
-                                            {/* options for selected location */}
-                                            {(openedLocation != null && openedLocation.location.MyOptions.length > 0) &&
-                                                <ul className="exploration-description-options">
-                                                    {/* options */}
-                                                    {openedLocation.location.MyOptions.map(opt =>
+                                        {/* Location Description Text */}
+                                        {(loc.Description != null) &&
+                                            <div className={'exploration-description'}>
+                                                {
+                                                    returnDescription(location, loc.Description)
+                                                }
+                                            </div>
+                                        }
 
-                                                        <>
-                                                            {opt.Selections.map(choice => (
-                                                                <>
-                                                                    <li className={'exploration-description-option'}>
-                                                                        <span className={'option-name'}>
-                                                                            {choice.display_str}
-                                                                        </span>
-                                                                        {isValidNameTag(choice.value) &&                                                                            
-                                                                            <span className={'option-description'}>
-                                                                                {choice.value.Tags["validation_rules"]}
-                                                                            </span>
-                                                                        }
+                                        {/* options for selected location */}
+                                        {(openedLocation != null && openedLocation.location.MyOptions.length > 0) &&
+                                            <ul className="exploration-description-options">
+                                                {/* options */}
+                                                {openedLocation.location.MyOptions.map((opt, index) =>
+                                                    <React.Fragment key={`options-${index}`}>
+                                                        {opt.Selections.map(choice => (
+                                                            <React.Fragment  key={`options-${index}-choice-${choice.id}`}>
+                                                                <li className={'exploration-description-option'}>
+                                                                    <span className={'option-name'}>
+                                                                        {choice.display_str}
+                                                                    </span>
+                                                                    {isValidNameTag(choice.value) &&
                                                                         <span className={'option-description'}>
-                                                                            {returnDescription(choice.value, choice.value.Description)}
+                                                                            {choice.value.Tags["validation_rules"]}
                                                                         </span>
-                                                                    </li>
-                                                                </>
-                                                            ))}
-                                                        </>)}
-                                                </ul>
-                                            }
-                                        </div>
-                                    }
-                                </>
-                            )}
-                        </>
+                                                                    }
+                                                                    <span className={'option-description'}>
+                                                                        {returnDescription(choice.value, choice.value.Description)}
+                                                                    </span>
+                                                                </li>
+                                                            </React.Fragment>
+                                                        ))}
+                                                    </React.Fragment>)}
+                                            </ul>
+                                        }
+                                    </div>
+                                }
+                            </React.Fragment>
+                        )}
                     </WbbGeneralCollapse>
                 ))}
             </Modal.Body>

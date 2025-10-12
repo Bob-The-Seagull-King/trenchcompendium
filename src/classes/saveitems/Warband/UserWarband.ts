@@ -1405,7 +1405,7 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetNumElite() {
-        return this.GetFighters().filter(f => f.model.IsElite()).length;
+        return this.GetFighters().filter(f => (f.model.IsElite() && f.model.State != "dead" && f.model.State != "lost")).length;
     }
 
     public async CanAddMoreElite() {
@@ -1503,15 +1503,6 @@ class UserWarband extends DynamicContextObject {
         if (CaptainFound == false) {
             AlertList.push("The warband lacks a Leader")
         }
-
-
-        if (this.Restrictions.includes("custom_equipment") == true) {
-            AlertList.push("The warband has been given a custom piece of equipment")
-        } 
-
-        if (this.Restrictions.includes("custom_fighter") == true) {
-            AlertList.push("The warband has been given a custom fighter")
-        } 
 
         const ErrorsInModelCount = await this.GetModelCountErrors();
 

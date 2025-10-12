@@ -165,6 +165,7 @@ const DevGuard: React.FC<DevGuardProps> = ({
 
                 <AlertCustom
                     type={'info'}
+                    className={'mb-3'}
                 >
                     <h4>
                         {'Missing your warbands?'}
@@ -173,7 +174,7 @@ const DevGuard: React.FC<DevGuardProps> = ({
                         {'If you have been using this dev site without creating an account, your warbands have been stored in the local storage of this site and are not available on the live site.'}
                         <br />
                         <br />
-                        {'We will have a solution ready within the next days.'}
+                        {'Click the button below to copy your local warband data and paste it on the migration page for the import.'}
                     </p>
                     <button type={'button'} onClick={handleImportClick}
                         className={'btn btn-secondary w-100'}
