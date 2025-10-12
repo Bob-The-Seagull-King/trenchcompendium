@@ -690,7 +690,7 @@
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "The Trooper becomes a Legionnaire and chooses to gain +1 DICE for either ranged or melee attacks.",
+                "content": "Up to half of your Troopers can pick this upgrade. The Trooper becomes a Legionnaire and chooses to gain +1 DICE for either ranged or melee attacks.",
                 "glossary": [
                     {"val": "+1 DICE", "id": "kw_plusdice"}
                 ]
