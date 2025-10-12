@@ -1409,7 +1409,7 @@
         "options": [],
         "model_id_set": ["rl_arcanaputrescere","md_matagothag","md_gergorigula"],
         "upgrade_id": "up_putrescere_virulentclot",
-        "cost": 25,
+        "cost": 30,
         "cost_type": 0,
         "restricted_upgrades": [],
         "warband_limit": 1,

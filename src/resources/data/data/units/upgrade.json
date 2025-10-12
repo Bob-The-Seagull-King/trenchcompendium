@@ -1379,7 +1379,7 @@
     },
     {
         "id": "up_plagueknightrankofferocity",
-        "name": "Knightly Rank of Ferocity",
+        "name": "Knight of Twin CLeavers",
         "source": "core",
         "tags": {"trait": true, "special_category": "knight_ranks"},
         "contextdata": { 
