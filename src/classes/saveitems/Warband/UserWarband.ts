@@ -1504,15 +1504,6 @@ class UserWarband extends DynamicContextObject {
             AlertList.push("The warband lacks a Leader")
         }
 
-
-        if (this.Restrictions.includes("custom_equipment") == true) {
-            AlertList.push("The warband has been given a custom piece of equipment")
-        } 
-
-        if (this.Restrictions.includes("custom_fighter") == true) {
-            AlertList.push("The warband has been given a custom fighter")
-        } 
-
         const ErrorsInModelCount = await this.GetModelCountErrors();
 
         for (let i = 0; i < ErrorsInModelCount.length; i++) {

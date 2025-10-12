@@ -168,7 +168,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         </AlertCustom>
                     }
 
-                    {warband.warband_data.IsUnRestricted &&
+                    {warband.warband_data.IsWarbandCustom() == true &&
                         <AlertCustom
                             type={'info'}
                             className={'my-3'}
