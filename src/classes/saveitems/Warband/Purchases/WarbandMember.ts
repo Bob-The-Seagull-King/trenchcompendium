@@ -1763,7 +1763,9 @@ class WarbandMember extends DynamicContextObject {
             return this.GeneralCache.keyword_list
         }
         const KeywordsAvailable : Keyword[] = []
+        const KeywordsStart : Keyword[] = []
         const BaseList : string[] = []
+        const NameList : string[] = []
 
         for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
             if (this.CurModel.KeyWord[i].ID == "kw_elite" && !this.IsElite()) {
@@ -1794,7 +1796,7 @@ class WarbandMember extends DynamicContextObject {
             }
             for (let i = 0; i < result_fin.length; i++) {
                 const Keyword = await KeywordFactory.CreateNewKeyword(result_fin[i], null)
-                KeywordsAvailable.push(Keyword);
+                KeywordsStart.push(Keyword);
             }
             const result_full_fin = await Events.runEvent(
                 "getContextuallyRelevantKeywordsByObject",
@@ -1811,7 +1813,16 @@ class WarbandMember extends DynamicContextObject {
                 this
             )
             for (let i = 0; i < result_full.length; i++) {
-                KeywordsAvailable.push(result_full[i]);
+                if (!NameList.includes(result_full[i].GetTrueName())) {
+                    KeywordsAvailable.push(result_full[i]);                
+                    NameList.push(result_full[i].GetTrueName());
+                }
+            }
+        }
+        for (let i = 0; i < KeywordsStart.length; i++) {
+            if (!NameList.includes(KeywordsStart[i].GetTrueName())) {
+                KeywordsAvailable.push(KeywordsStart[i]);                
+                NameList.push(KeywordsStart[i].GetTrueName());
             }
         }
         this.GeneralCache.keyword_list = KeywordsAvailable
