@@ -60,6 +60,7 @@ const WBBMenuBody: React.FC<WBBMenuBodyProps> = ({ controller, onBack, onNavigat
                 {
                     title: "Your Warbands",
                     slug: "",
+                    open: true,
                     children: SetOfWarbands
                 }
             ]
