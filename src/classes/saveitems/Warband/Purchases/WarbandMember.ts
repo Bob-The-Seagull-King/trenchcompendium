@@ -2681,6 +2681,15 @@ class WarbandMember extends DynamicContextObject {
                 model: this,
                 warband : this.MyContext as UserWarband
             })
+        const rangedstrong = await eventmon.runEvent(
+            "isRangedStrong",
+            this,
+            [],
+            false,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            })
         let MeleeShield = false
         let RangedShield = false
 
@@ -2715,6 +2724,10 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
             if (EquipItem.Stats["hands_ranged"]) {
+                if ((strongcount > 0) && rangedval == 2 && rangedstrong) {
+                    rangedval = 1;
+                    strongcount -= 1;
+                }
                 if (containsTag(EquipItem.Tags, "shield") && RangedShield) {
                     rangedval = 0;
                 }

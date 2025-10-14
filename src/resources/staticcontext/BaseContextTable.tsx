@@ -5583,6 +5583,12 @@ export const BaseContextCallTable : CallEventTable = {
             return HoldVar;
         }
     },
+    ranged_strong: {
+        event_priotity: 0,
+        async isRangedStrong(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return true;
+        }
+    },
     strong_count: {
         event_priotity: 0,
         async getCountofStrong(this: EventRunner, eventSource : any, relayVar : number,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {

@@ -2108,6 +2108,7 @@
         "source": "core",
         "tags": {},
         "contextdata": {
+            "ranged_strong": {},
             "strong_count": {"value": 2},
             "set_arms": {"ranged": 0, "melee": 0, "special": 6},
             "no_shield_combo": {},
