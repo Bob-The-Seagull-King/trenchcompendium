@@ -243,6 +243,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async BuildModelEquipProperties(data : IWarbandMember = this.SelfData) {
+        
         const eventmon : EventRunner = new EventRunner();
         const all_eq : ModelEquipmentRelationship[] = await eventmon.runEvent(
                 "getModelEquipmentInfo",
@@ -272,6 +273,7 @@ class WarbandMember extends DynamicContextObject {
                 this.ModelEquipments.push(NewRuleProperty);
             }
         }
+        
         return this.ModelEquipments;
     }
 
@@ -505,8 +507,9 @@ class WarbandMember extends DynamicContextObject {
         }
 
         const modelpropset : IWarbandProperty[] = [];
+        
         for (let i = 0; i < this.ModelEquipments.length; i++) {
-            subpropset.push(this.ModelEquipments[i].ConvertToInterface())
+            modelpropset.push(this.ModelEquipments[i].ConvertToInterface())
         }
         
         const equipmentlist : IWarbandPurchaseEquipment[] = []

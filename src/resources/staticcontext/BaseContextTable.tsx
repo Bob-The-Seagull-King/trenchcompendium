@@ -3173,23 +3173,24 @@ export const BaseContextCallTable : CallEventTable = {
       
 
                 const AddedCollection : string[] = []
+                if (ModelItem.RestrictedSelection != undefined && ModelItem.RestrictedSelection != null) {
+                    for (let l = 0; l < ModelItem.RestrictedSelection.length; l++) {
+                        const LocationList : LocationRestriction = ModelItem.RestrictedSelection[l]
 
-                for (let l = 0; l < ModelItem.RestrictedSelection.length; l++) {
-                    const LocationList : LocationRestriction = ModelItem.RestrictedSelection[l]
+                        if (LocationList.allowed) {
+                            for (let j = 0; j < LocationList.allowed.length; j++) {
+                                const Requirement = LocationList.allowed[j]
+                                const NewStringParts = []
 
-                    if (LocationList.allowed) {
-                        for (let j = 0; j < LocationList.allowed.length; j++) {
-                            const Requirement = LocationList.allowed[j]
-                            const NewStringParts = []
+                                if (Requirement.type == "faction") {
+                                    for (let k = 0; k < Requirement.value.length; k++) {
+                                        const ValKey : Faction = await FactionFactory.CreateNewFaction(Requirement.value[k], null)
+                                        NewStringParts.push((ValKey.GetTrueName()))
+                                    }
+                                }              
 
-                            if (Requirement.type == "faction") {
-                                for (let k = 0; k < Requirement.value.length; k++) {
-                                    const ValKey : Faction = await FactionFactory.CreateNewFaction(Requirement.value[k], null)
-                                    NewStringParts.push((ValKey.GetTrueName()))
-                                }
-                            }              
-
-                            AddedCollection.push(NewStringParts.join(', '));
+                                AddedCollection.push(NewStringParts.join(', '));
+                            }
                         }
                     }
                 }
