@@ -57,7 +57,9 @@ export const AdsManagerv2: React.FC = () => {
         try {
             // Single bootstrap call for AdSense Auto Ads. Anchor Ads must be enabled in AdSense UI.
             // The library must be included once in <head> with ?client=ca-pub-XXXX.
-            window.adsbygoogle!.push({});
+            setTimeout(() => {
+                try { (window.adsbygoogle || []).push({}); } catch {}
+            }, 100);
             pushedRef.current = true;
             // console.debug('[Ads] Auto Ads enabled');
         } catch (e) {
