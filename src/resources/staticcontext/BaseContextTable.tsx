@@ -2846,7 +2846,14 @@ export const BaseContextCallTable : CallEventTable = {
                                         }
                                     }
                                     if (ispresent == false) {
-                                        relayVar.push(selection.SelectedChoice.value)
+                                        
+                                        const NewEq = await EquipFactoryModule.EquipmentFactory.CreateNewFactionEquipment(selection.SelectedChoice.value.GetID(), null, true)
+                                        if (NewEq != null) {
+                                            if (context_func["limit_override"]) {
+                                                NewEq.Limit = context_func["limit_override"]
+                                            }
+                                            relayVar.push(NewEq)
+                                        }
                                     }
                                 }
                             }
@@ -2890,6 +2897,16 @@ export const BaseContextCallTable : CallEventTable = {
             const EventProc: EventRunner = new EventRunner();
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
+
+            const ListOfEntries : string[] = []
+            if (context_main && SubItem["strict_id"] == true) {
+
+                const ListOfEquipment : FactionEquipmentRelationship[] = (context_main as any).EquipmentItems;
+                    for (let i = 0; i < ListOfEquipment.length; i++) {
+                        ListOfEntries.push(ListOfEquipment[i].EquipmentItem.GetID())
+                    }
+            }
+
             for (let i = 0; i < relayVar.length; i++) {
                 const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationshipModule.FactionEquipmentRelationship)? relayVar[i].value :
                     await EquipmentFactoryModule.EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
@@ -2931,6 +2948,12 @@ export const BaseContextCallTable : CallEventTable = {
                             is_added = true;
                         }
                     } 
+                }
+
+                if (is_added == true && SubItem["strict_id"] == true) {
+                    if (ListOfEntries.includes(ModelItem.EquipmentItem.ID)){
+                        is_added = false;
+                    }
                 }
                 
                 if (is_added == true) {
@@ -3150,23 +3173,24 @@ export const BaseContextCallTable : CallEventTable = {
       
 
                 const AddedCollection : string[] = []
+                if (ModelItem.RestrictedSelection != undefined && ModelItem.RestrictedSelection != null) {
+                    for (let l = 0; l < ModelItem.RestrictedSelection.length; l++) {
+                        const LocationList : LocationRestriction = ModelItem.RestrictedSelection[l]
 
-                for (let l = 0; l < ModelItem.RestrictedSelection.length; l++) {
-                    const LocationList : LocationRestriction = ModelItem.RestrictedSelection[l]
+                        if (LocationList.allowed) {
+                            for (let j = 0; j < LocationList.allowed.length; j++) {
+                                const Requirement = LocationList.allowed[j]
+                                const NewStringParts = []
 
-                    if (LocationList.allowed) {
-                        for (let j = 0; j < LocationList.allowed.length; j++) {
-                            const Requirement = LocationList.allowed[j]
-                            const NewStringParts = []
+                                if (Requirement.type == "faction") {
+                                    for (let k = 0; k < Requirement.value.length; k++) {
+                                        const ValKey : Faction = await FactionFactory.CreateNewFaction(Requirement.value[k], null)
+                                        NewStringParts.push((ValKey.GetTrueName()))
+                                    }
+                                }              
 
-                            if (Requirement.type == "faction") {
-                                for (let k = 0; k < Requirement.value.length; k++) {
-                                    const ValKey : Faction = await FactionFactory.CreateNewFaction(Requirement.value[k], null)
-                                    NewStringParts.push((ValKey.GetTrueName()))
-                                }
-                            }              
-
-                            AddedCollection.push(NewStringParts.join(', '));
+                                AddedCollection.push(NewStringParts.join(', '));
+                            }
                         }
                     }
                 }
@@ -5557,6 +5581,12 @@ export const BaseContextCallTable : CallEventTable = {
                 }
             }
             return HoldVar;
+        }
+    },
+    ranged_strong: {
+        event_priotity: 0,
+        async isRangedStrong(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndWarband, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null) {
+            return true;
         }
     },
     strong_count: {

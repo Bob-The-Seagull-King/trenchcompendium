@@ -52,10 +52,10 @@ const WbbModalAddItemToStash: React.FC<WbbModalAddItemToStashProps> = ({ show, o
                 const fincache : CachedFactionEquipment = {}
                 if (options != undefined) {
                     if (category.length > 0) {
-                        optionlist = (options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category))
+                        optionlist = (options.filter((item : FactionEquipmentRelationship) => item.EquipmentItem.Category == category && !containsTag(item.Tags, 'exploration_only')))
                         
                         for (let i = 0; i < keys.length; i++) {
-                            if ((tempcache[keys[i]].facrel.EquipmentItem.Category == category)) {
+                            if ((tempcache[keys[i]].facrel.EquipmentItem.Category == category) && !containsTag(tempcache[keys[i]].facrel.Tags, 'exploration_only')) {
                                 fincache[keys[i]] = tempcache[keys[i]]
                             }
                         }

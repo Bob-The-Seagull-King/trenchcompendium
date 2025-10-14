@@ -243,6 +243,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
     public async BuildModelEquipProperties(data : IWarbandMember = this.SelfData) {
+        
         const eventmon : EventRunner = new EventRunner();
         const all_eq : ModelEquipmentRelationship[] = await eventmon.runEvent(
                 "getModelEquipmentInfo",
@@ -272,6 +273,7 @@ class WarbandMember extends DynamicContextObject {
                 this.ModelEquipments.push(NewRuleProperty);
             }
         }
+        
         return this.ModelEquipments;
     }
 
@@ -505,8 +507,9 @@ class WarbandMember extends DynamicContextObject {
         }
 
         const modelpropset : IWarbandProperty[] = [];
+        
         for (let i = 0; i < this.ModelEquipments.length; i++) {
-            subpropset.push(this.ModelEquipments[i].ConvertToInterface())
+            modelpropset.push(this.ModelEquipments[i].ConvertToInterface())
         }
         
         const equipmentlist : IWarbandPurchaseEquipment[] = []
@@ -1763,7 +1766,9 @@ class WarbandMember extends DynamicContextObject {
             return this.GeneralCache.keyword_list
         }
         const KeywordsAvailable : Keyword[] = []
+        const KeywordsStart : Keyword[] = []
         const BaseList : string[] = []
+        const NameList : string[] = []
 
         for (let i = 0; i < this.CurModel.KeyWord.length; i++) {
             if (this.CurModel.KeyWord[i].ID == "kw_elite" && !this.IsElite()) {
@@ -1794,7 +1799,7 @@ class WarbandMember extends DynamicContextObject {
             }
             for (let i = 0; i < result_fin.length; i++) {
                 const Keyword = await KeywordFactory.CreateNewKeyword(result_fin[i], null)
-                KeywordsAvailable.push(Keyword);
+                KeywordsStart.push(Keyword);
             }
             const result_full_fin = await Events.runEvent(
                 "getContextuallyRelevantKeywordsByObject",
@@ -1811,7 +1816,16 @@ class WarbandMember extends DynamicContextObject {
                 this
             )
             for (let i = 0; i < result_full.length; i++) {
-                KeywordsAvailable.push(result_full[i]);
+                if (!NameList.includes(result_full[i].GetTrueName())) {
+                    KeywordsAvailable.push(result_full[i]);                
+                    NameList.push(result_full[i].GetTrueName());
+                }
+            }
+        }
+        for (let i = 0; i < KeywordsStart.length; i++) {
+            if (!NameList.includes(KeywordsStart[i].GetTrueName())) {
+                KeywordsAvailable.push(KeywordsStart[i]);                
+                NameList.push(KeywordsStart[i].GetTrueName());
             }
         }
         this.GeneralCache.keyword_list = KeywordsAvailable
@@ -2667,6 +2681,15 @@ class WarbandMember extends DynamicContextObject {
                 model: this,
                 warband : this.MyContext as UserWarband
             })
+        const rangedstrong = await eventmon.runEvent(
+            "isRangedStrong",
+            this,
+            [],
+            false,
+            {
+                model: this,
+                warband : this.MyContext as UserWarband
+            })
         let MeleeShield = false
         let RangedShield = false
 
@@ -2701,6 +2724,10 @@ class WarbandMember extends DynamicContextObject {
                 }
             }
             if (EquipItem.Stats["hands_ranged"]) {
+                if ((strongcount > 0) && rangedval == 2 && rangedstrong) {
+                    rangedval = 1;
+                    strongcount -= 1;
+                }
                 if (containsTag(EquipItem.Tags, "shield") && RangedShield) {
                     rangedval = 0;
                 }
