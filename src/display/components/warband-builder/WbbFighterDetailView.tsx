@@ -893,9 +893,10 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 }
 
                 {/* STL Promotions */}
-                {(!play_mode) &&
+                {(!play_mode) && (fighter.CurModel.ID && warband?.warband_data?.Faction.MyFaction.ID) &&
                     <StlFinderCollapse
                         model_slug={fighter.CurModel.ID}
+                        faction_slug={warband?.warband_data?.Faction.MyFaction.ID}
                     />
                 }
             </div>
