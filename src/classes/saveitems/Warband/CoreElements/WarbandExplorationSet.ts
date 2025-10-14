@@ -282,6 +282,7 @@ class WarbandExplorationSet extends DynamicContextObject {
         }
         for (let i = 0; i < (this.MyContext as UserWarband).Models.length; i++) {
             const Mdl = (this.MyContext as UserWarband).Models[i].HeldObject as WarbandMember;
+            if (Mdl.State == "dead" || Mdl.State == "lost") { continue; }
             const NewSkills = await Mdl.GetExplorationSkills();
             for (let j = 0; j < NewSkills.length; j++) {
                 this.TryAddToSkillsFormat(SumSkills, NewSkills[j], "Model: " + Mdl.GetTrueName())

@@ -12,6 +12,7 @@ import RulesMenuItem from './RulesMenuItem';
 interface RulesMenuItemProps {
     title: string;
     slug: string;
+    open? : boolean;
     controller?: CollectionsListPage,
     superslug? : string,
     children?: RulesMenuItemProps[];
@@ -114,7 +115,7 @@ const RulesMenuSubItem: React.FC<{ data: RulesMenuItemProps, level?: number; par
         navigate(link, {state: Date.now().toString()});
         if (onNavigate) onNavigate();
     }
-    const isOpen = openItems[data.slug]; // Check if item is open
+    const isOpen = openItems[data.slug] || data.open == true; // Check if item is open
     const itemPath = (data.superslug != undefined)? data.superslug : (data.slug != "")? `${parentPath}/${data.slug}` : `${parentPath}` ; // Prepend "compendium" base path
     const basePath = (data.slug != "")? `${parentPath}/${data.slug}` : `${parentPath}` ; // Prepend "compendium" base path
     
