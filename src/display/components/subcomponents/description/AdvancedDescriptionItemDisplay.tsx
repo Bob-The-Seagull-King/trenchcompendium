@@ -71,8 +71,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </p>
@@ -86,8 +86,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </h2>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </p>
@@ -109,8 +109,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </div>
@@ -120,8 +120,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             case "headless_table": {
                 return (
                     <table className="table_headless">
-                        {item.SubContent?.map((subitem) => (
-                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        {item.SubContent?.map((subitem, index) => (
+                            <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                         ))}
                     </table>
                 )
@@ -130,8 +130,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             case "headed_table": {
                 return (
                     <table className="table_headed table_headed-highlight">
-                        {item.SubContent?.map((subitem) => (
-                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        {item.SubContent?.map((subitem, index) => (
+                            <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                         ))}
                     </table>
                 )
@@ -140,8 +140,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             case "table_row": {
                 return (
                     <tr className="table_row">
-                        {item.SubContent?.map((subitem) => (
-                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        {item.SubContent?.map((subitem, index) => (
+                            <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                         ))}
                     </tr>
                 )
@@ -150,8 +150,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
             case "table_headrow": {
                 return (
                     <tr className="table_headrow">
-                        {item.SubContent?.map((subitem) => (
-                            <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                        {item.SubContent?.map((subitem, index) => (
+                            <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                         ))}
                     </tr>
                 )
@@ -164,8 +164,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </td>
@@ -179,8 +179,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index, key) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </td>
@@ -194,8 +194,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </th>
@@ -211,8 +211,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             </b>
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </span>
@@ -227,8 +227,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             </i>
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                         <span>{" "}</span>
@@ -242,8 +242,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                         <span>{" "}</span>
@@ -255,8 +255,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <div className="">
                         <div className='addonbox'><EmptyDisplay d_colour={colour} d_name={item.DisplayData? item.DisplayData.Name : ""} d_type={"sub"} d_method={() => <TableDisplay d_colour={colour} d_type={"sub"} data={item.DisplayData} />}/></div>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                         <span>{" "}</span>
@@ -268,8 +268,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                     <div className="">
                         <div><br/></div>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                         <span>{" "}</span>
@@ -284,8 +284,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                         </span>
                         <span>
                             <ul>
-                                {item.SubContent?.map((subitem) => (
-                                    <li  key="descriptionsubitem">
+                                {item.SubContent?.map((subitem, index) => (
+                                    <li key={`descriptionsubitem-${index}`}>
                                         <AdvancedDescriptionItemDisplay data={subitem} parent={parentItem}/>
                                     </li>
                                 ))}
@@ -301,8 +301,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {getEquipmentDisplay(item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </div>
@@ -315,8 +315,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {getGloriousDeedDisplay(item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </div>
@@ -329,8 +329,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {getEquipmentSlimDisplay(item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </span>
@@ -343,8 +343,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {getSkillSlimDisplay(item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </span>
@@ -357,8 +357,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {getModelDisplay(item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </div>
@@ -371,8 +371,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {getModelSlimDisplay(item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </span>
@@ -402,8 +402,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             </CustomNavLink>
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </span>
@@ -419,8 +419,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                                 type={'inline'} />
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                               <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                               <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </span>
@@ -440,8 +440,8 @@ const AdvancedDescriptionItemDisplay = (props: any) => {
                             {ConvertContentWithGlossary((item.Glossary), item.Content?.toString() || "")}
                         </span>
                         <span>
-                            {item.SubContent?.map((subitem) => (
-                                <AdvancedDescriptionItemDisplay key="descriptionsubitem" data={subitem} parent={parentItem}/>
+                            {item.SubContent?.map((subitem, index) => (
+                                <AdvancedDescriptionItemDisplay key={`descriptionsubitem-${index}`} data={subitem} parent={parentItem}/>
                             ))}
                         </span>
                     </span>
