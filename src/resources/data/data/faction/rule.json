@@ -234,6 +234,7 @@
         "contextdata": { 
             "add_to_warband": {},
             "faction_choose_equipment": {
+                "limit_override": 1,
                 "additions": [
                     {
                         "list": "fc_trenchpilgrim",

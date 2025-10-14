@@ -2846,7 +2846,14 @@ export const BaseContextCallTable : CallEventTable = {
                                         }
                                     }
                                     if (ispresent == false) {
-                                        relayVar.push(selection.SelectedChoice.value)
+                                        
+                                        const NewEq = await EquipFactoryModule.EquipmentFactory.CreateNewFactionEquipment(selection.SelectedChoice.value.GetID(), null, true)
+                                        if (NewEq != null) {
+                                            if (context_func["limit_override"]) {
+                                                NewEq.Limit = context_func["limit_override"]
+                                            }
+                                            relayVar.push(NewEq)
+                                        }
                                     }
                                 }
                             }
