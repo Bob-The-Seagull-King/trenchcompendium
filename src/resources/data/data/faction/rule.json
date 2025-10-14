@@ -238,6 +238,7 @@
                     {
                         "list": "fc_trenchpilgrim",
                         "count": 1,
+                        "strict_id": true,
                         "option_id": 0,
                         "restriction": [
                             { "category": "melee" },
@@ -247,6 +248,7 @@
                     {
                         "list": "fc_newantioch",
                         "count": 1,
+                        "strict_id": true,
                         "option_id": 1,
                         "restriction": [
                             { "category": "melee" },

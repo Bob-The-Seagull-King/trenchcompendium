@@ -2890,6 +2890,16 @@ export const BaseContextCallTable : CallEventTable = {
             const EventProc: EventRunner = new EventRunner();
             const NewChoices : IChoice[] = []
             const SubItem = context_func["additions"][trackVal]
+
+            const ListOfEntries : string[] = []
+            if (context_main && SubItem["strict_id"] == true) {
+
+                const ListOfEquipment : FactionEquipmentRelationship[] = (context_main as any).EquipmentItems;
+                    for (let i = 0; i < ListOfEquipment.length; i++) {
+                        ListOfEntries.push(ListOfEquipment[i].EquipmentItem.GetID())
+                    }
+            }
+
             for (let i = 0; i < relayVar.length; i++) {
                 const ModelItem = ((relayVar[i].value instanceof FactionEquipmentRelationshipModule.FactionEquipmentRelationship)? relayVar[i].value :
                     await EquipmentFactoryModule.EquipmentFactory.CreateFactionEquipment(relayVar[i].value, null)
@@ -2931,6 +2941,12 @@ export const BaseContextCallTable : CallEventTable = {
                             is_added = true;
                         }
                     } 
+                }
+
+                if (is_added == true && SubItem["strict_id"] == true) {
+                    if (ListOfEntries.includes(ModelItem.EquipmentItem.ID)){
+                        is_added = false;
+                    }
                 }
                 
                 if (is_added == true) {
