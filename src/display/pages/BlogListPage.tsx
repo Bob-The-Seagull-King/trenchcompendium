@@ -65,7 +65,6 @@ const BlogListPage: React.FC = () => {
 
                         <BlogArticlePreview
                             post={post}
-                            onClick={() => navigate(`/blog/${post.slug}`)}
                         />
                     </div>
                 ))}

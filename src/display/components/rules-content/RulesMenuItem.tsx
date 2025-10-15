@@ -12,6 +12,7 @@ import RulesMenuSubItem from './RulesMenuSubItem';
 interface RulesMenuItemProps {
     title: string;
     slug: string;
+    open? : boolean;
     controller?: CollectionsListPage,
     superslug? : string,
     children?: RulesMenuItemProps[];

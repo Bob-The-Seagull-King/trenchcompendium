@@ -15,7 +15,7 @@ import { InjuryFactory } from "../../../../factories/features/InjuryFactory";
 import { ModelUpgradeRelationship } from "../../../relationship/model/ModelUpgradeRelationship";
 import { UpgradeFactory } from "../../../../factories/features/UpgradeFactory";
 
-export const UPDATEVALUE = 1;
+export const UPDATEVALUE = 2;
 export const UPDATETAGNAME = "UPDATE_VERSION_REFERENCE";
 
 class WarbandUpdater {
@@ -56,8 +56,35 @@ class WarbandUpdater {
         if (CurrentVer < 1) {
             ref_wb = await this.Update_Version1(ref_wb);
         }
+        if (CurrentVer < 2) {
+            ref_wb = await this.Update_Version2(ref_wb);
+        }
         
         return ref_wb;
+    }
+
+    
+
+    public async Update_Version2(wb : IUserWarband) : Promise<IUserWarband> {
+        
+        wb.tags[UPDATETAGNAME] = 2;
+
+        const fin_modifiers : IWarbandProperty[] = []
+
+        for (let i = 0; i < wb.modifiers.length; i++) {
+            let DoAdd = true
+            if (wb.modifiers[i].object_id == "sk_badcompany") {
+                DoAdd = false;
+            }
+
+            if (DoAdd) {
+                fin_modifiers.push(wb.modifiers[i])
+            }
+        }
+
+        wb.modifiers = fin_modifiers;
+        return wb;
+
     }
 
     public async Update_Version1(wb : IUserWarband) : Promise<IUserWarband> {

@@ -121,11 +121,12 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                 <Offcanvas.Body className="offcanvas-body">
                     {activeView === 'main' && (
                         <div className={'menu-lvl-1'}>
-                            <div className={'menu-lvl-1-item-main'}
-                                 onClick={() => {
-                                     setActiveView('compendium');
-                                 }}
-                            >
+                            <CustomNavLink
+                                classes={'menu-lvl-1-item-main'}
+                                link={ROUTES.COMPENDIUM}
+                                runfunc={() => {
+                                    setActiveView('compendium');
+                                }}>
                                 <span className={'title'}>
                                     {'Compendium'}
                                 </span>
@@ -135,11 +136,14 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     className={''}
                                     size={'large'}
                                 />
-                            </div>
+                            </CustomNavLink>
 
-                            <div className={'menu-lvl-1-item-main'}
-                                 onClick={() => setActiveView('wbb')}
-                            >
+                            <CustomNavLink
+                                classes={'menu-lvl-1-item-main'}
+                                link={ROUTES.WARBAND}
+                                runfunc={() => {
+                                    setActiveView('wbb');
+                            }}>
                                 <span className={'title'}>
                                     {'Warband Builder'}
                                 </span>
@@ -149,14 +153,15 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     className={''}
                                     size={'large'}
                                 />
-                            </div>
+                            </CustomNavLink>
 
-                            <div className={'menu-lvl-1-item-main minor'}
-                                 onClick={() => {
-                                     navigate(ROUTES.PAGE_BLOG_BASE);
-                                     handleClose();
-                                 }}
-                            >
+                            <CustomNavLink
+                                classes={'menu-lvl-1-item-main minor'}
+                                link={ROUTES.PAGE_BLOG_BASE}
+                                runfunc={() => {
+                                    navigate(ROUTES.PAGE_BLOG_BASE);
+                                    handleClose();
+                            }}>
                                 <span className={'title'}>
                                     {'Blog'}
                                 </span>
@@ -166,7 +171,7 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                                     className={''}
                                     size={'large'}
                                 />
-                            </div>
+                            </CustomNavLink>
 
                             {/* Login Nav */}
                             {!isLoggedIn &&

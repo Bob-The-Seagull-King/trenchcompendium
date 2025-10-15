@@ -1,0 +1,30 @@
+
+
+.FighterSTL_List
+    position: relative
+
+    min-height: 100px
+
+    .stl-results
+
+    .stl-results-section
+
+        &:not(:last-of-type)
+            margin-bottom: 15px
+
+    .stl-results-section-headline
+        margin-bottom: 15px
+
+    .stl-results-section-grid
+        display: grid
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+        gap: 15px
+
+        @media (min-width: 768px) and (max-width: 991px)
+            grid-template-columns: repeat(3, minmax(0, 1fr))
+
+        @media (min-width: 576px) and (max-width: 767px)
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+
+        @media (max-width: 575px)
+            grid-template-columns: repeat(2, minmax(0, 1fr))

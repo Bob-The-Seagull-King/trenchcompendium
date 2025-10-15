@@ -39,6 +39,7 @@ import { ContextObject } from '../../../classes/contextevent/contextobject';
 import { IChoice } from '../../../classes/options/StaticOption';
 import { Keyword } from '../../../classes/feature/glossary/Keyword';
 import { KeywordFactory } from '../../../factories/features/KeywordFactory';
+import StlFinderCollapse from "./FighterCard/StlFinderCollapse";
 
 const RulesModelDisplay = (props: any) => {
     const factionmodelObject: FactionModelRelationship = props.data
@@ -280,7 +281,6 @@ const RulesModelDisplay = (props: any) => {
     }, []);
 
 
-
     return (
         <ErrorBoundary fallback={<div>Something went wrong with ModelDisplay.tsx</div>}>
             <section className='RulesModelDisplay fighter-card' key={_keyvar}>
@@ -419,6 +419,14 @@ const RulesModelDisplay = (props: any) => {
                                 {returnDescription(modelcollectionObject, modelcollectionObject.Lore)}
                             </>
                             }
+                        />
+                    }
+
+                    {/* STL Promotions */}
+                    {(modelcollectionObject.ID && parentfaction.ID) &&
+                        <StlFinderCollapse
+                            model_slug={modelcollectionObject.ID}
+                            faction_slug={parentfaction.ID}
                         />
                     }
                 </div>

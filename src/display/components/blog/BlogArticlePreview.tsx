@@ -1,5 +1,8 @@
 import React from 'react';
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
+import { ROUTES } from '../../../resources/routes-constants'
+import CustomNavLink from '../subcomponents/interactables/CustomNavLink'
+import { useNavigate } from 'react-router-dom'
 
 interface BlogArticlePreviewProps {
     post: {
@@ -10,15 +13,20 @@ interface BlogArticlePreviewProps {
         date: string;
         featured_media?: number;
     };
-    onClick?: () => void;
 }
 
-const BlogArticlePreview: React.FC<BlogArticlePreviewProps> = ({ post, onClick }) => {
+const BlogArticlePreview: React.FC<BlogArticlePreviewProps> = ({ post }) => {
+
+    const navigate = useNavigate();
+
     return (
-        <div
-            className="BlogArticlePreview"
-            onClick={onClick}
-        >
+        <CustomNavLink
+            classes={'BlogArticlePreview'}
+            link={ROUTES.WARBAND}
+            runfunc={() => {
+                navigate(`${ROUTES.PAGE_BLOG_BASE}/${post.slug}`);
+            }}>
+
             {post.featured_media &&
                 <div className={'image-wrap'}>
                     <SynodImageWithCredit
@@ -43,7 +51,7 @@ const BlogArticlePreview: React.FC<BlogArticlePreviewProps> = ({ post, onClick }
                     dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}
                 />
             </div>
-        </div>
+        </CustomNavLink>
     );
 };
 

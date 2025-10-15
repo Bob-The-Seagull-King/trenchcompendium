@@ -64,6 +64,8 @@ import WbbEditFighterStatOption from './modals/fighter/WbbFighterStatOption';
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbDetailViewCollapse from './WbbDetailViewCollapse';
 import WbbTextarea from './WbbTextarea';
+import FighterSTL_List from "../StlPromotions/FighterSTL_List";
+import StlFinderCollapse from "../rules-content/FighterCard/StlFinderCollapse";
 
 
 interface WbbFighterDetailViewProps {
@@ -76,7 +78,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
     const {warband, updateKey, reloadDisplay } = useWarband();
 
     const fighter = warbandmember.model;
-    
+
     const [complexstate, setComplexState] = useState({
         stats: {} as ModelStatistics,
         canchange: true as boolean,
@@ -888,6 +890,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                             ))}
                         </div>
                     </WbbFighterCollapse>
+                }
+
+                {/* STL Promotions */}
+                {(!play_mode) && (fighter.CurModel.ID && warband?.warband_data?.Faction.MyFaction.ID) &&
+                    <StlFinderCollapse
+                        model_slug={fighter.CurModel.ID}
+                        faction_slug={warband?.warband_data?.Faction.MyFaction.ID}
+                    />
                 }
             </div>
 

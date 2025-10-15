@@ -25,10 +25,10 @@
     },
     {
         "id": "pt_orderofthefly",
-        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"]
+        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_cultoftheblackgrail_fv_thegreathunger"]
     },
     {
         "id": "pt_antipopeofavignon",
-        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon"]
+        "faction_id": ["fc_cultoftheblackgrail","fc_cultoftheblackgrail_fv_dirgeofthegreathegemon","fc_cultoftheblackgrail_fv_thegreathunger"]
     }
 ]
