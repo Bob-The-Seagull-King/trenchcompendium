@@ -44,7 +44,6 @@ import StaticSupporterPacks from "./display/pages/StaticSupporterPacks";
 import StaticCollaborate from "./display/pages/StaticCollaborate";
 import StaticAbout from './display/pages/StaticAbout'
 import StaticPlanSelection from "./display/pages/StaticPlanSelection";
-import {AdsManager} from "./display/components/generics/AdsManager";
 import BlogListPage from "./display/pages/BlogListPage";
 import BlogArticlePage from "./display/pages/BlogArticlePage";
 import {ImageCreditPopoverProvider} from "./utility/ImageCreditPopoverContext";
@@ -52,11 +51,11 @@ import {ToastContainer} from "react-toastify";
 import HeadScripts from "./display/components/generics/HeadScripts";
 import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
 import MaintananceNotice from "./display/components/generics/MaintananceNotice";
-import DevGuard from './display/components/generics/DevGuard'
-import {AdsManagerv2} from "./display/components/generics/AdsManagerv2";
+import DevGuard from "./display/components/generics/DevGuard";
 import AppVersionChecker from "./display/components/generics/AppVersionChecker";
 import StaticCreatorApplication from "./display/pages/StaticCreatorApplication";
 import DevImport from "./display/pages/DevImport";
+import {AdsenseManager} from "./display/components/generics/AdsenseManager";
 
 
 const App: React.FC = () => {
@@ -134,7 +133,7 @@ const App: React.FC = () => {
 
                                 <FooterMain />
                             </ImageCreditPopoverProvider>
-                            <AdsManagerv2 />
+                            <AdsenseManager />
                             <TrackingManager />
                             <AppVersionChecker />
 

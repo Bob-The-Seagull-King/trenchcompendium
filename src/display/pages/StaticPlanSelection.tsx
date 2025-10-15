@@ -36,13 +36,6 @@ const StaticPlanSelection: React.FC = () => {
             value = 1999 / 100
         }
 
-        trackEvent(
-            'purchase',
-            'subscription',
-            label,
-            value
-        );
-
         alert('Subscription successful with ID: '+ subscriptionID);
 
         // Fallback:
