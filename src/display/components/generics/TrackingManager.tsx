@@ -28,9 +28,3 @@ export const TrackingManager: React.FC = () => {
 
     return null;
 };
-
-// Optional: GTM-Custom-Events zentral senden
-export const trackEvent = (name: string, params?: Record<string, any>) => {
-    (window as any).dataLayer = (window as any).dataLayer || [];
-    (window as any).dataLayer.push({ event: name, ...params });
-};

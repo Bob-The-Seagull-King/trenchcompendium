@@ -19,27 +19,82 @@
          <meta property="og:title" content="Trench Companion | Trench Companion" data-react-helmet="true">
          <meta property="og:type" content="website" data-react-helmet="true">
 
-        <!-- 1) Consent Mode Defaults – ganz früh, vor allem anderen -->
-
-
-        <!-- 2) Google CMP / Funding Choices – lädt & zeigt das Banner (wenn publiziert) -->
-        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=2"></script>
-
-        <!-- 3) AdSense Auto Ads (Anchor/Vignette) – client = deine pub-ID -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966" crossorigin="anonymous"></script>
-
-        <!-- 4) GTM (GTM-NFVT7W7X) -->
+        <!-- Data‑Layer und gtag()-Wrapper -->
         <script>
-            (function(w,d,s,l,i){w[l]=w[l]||[];
-                w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-                j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-NFVT7W7X');
+            // dataLayer anlegen, bevor der Tag‑Manager geladen wird (Pflicht)
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+
+            // Consent‑Vorgabe: bis zur Nutzerentscheidung werden alle Zwecke verweigert
+            gtag('consent', 'default', {
+                ad_storage:        'denied',
+                analytics_storage: 'denied',
+                ad_user_data:      'denied',
+                ad_personalization:'denied',
+                wait_for_update:   500 // Tag‑Manager wartet max. 500 ms auf ein Update
+            });
+
+            // TCF‑Unterstützung für Google‑Tags aktivieren:contentReference[oaicite:2]{index=2}
+            window['gtag_enable_tcf_support'] = true;
+        </script>
+
+        <!-- Funding Choices / AdSense CMP für EU Regeln -->
+        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>
+        <script>
+            // Signalisieren, dass funding choices present ist.  Dieses Snippet stammt aus
+            // den offiziellen AdSense‑Anweisungen.
+            (function signalGooglefcPresent() {
+                if (!window.frames['googlefcPresent']) {
+                    if (document.body) {
+                        var iframe = document.createElement('iframe');
+                        iframe.style = 'width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;display:none;';
+                        iframe.name  = 'googlefcPresent';
+                        document.body.appendChild(iframe);
+                    } else {
+                        setTimeout(signalGooglefcPresent, 0);
+                    }
+                }
+            })();
         </script>
 
         <script>
-            console.log('1.2');
+            // Consent‑Callback registrieren
+            window.googlefc = window.googlefc || {};
+            googlefc.callbackQueue = googlefc.callbackQueue || [];
+
+            googlefc.callbackQueue.push({
+                CONSENT_MODE_DATA_READY: function () {
+                    // Aktuelle Consent‑Werte aus Funding Choices abrufen
+                    var status = googlefc.getGoogleConsentModeValues();
+                    var ConsentEnum = googlefc.ConsentModePurposeStatusEnum;
+
+                    // Helper zur Umwandlung in 'granted'/'denied'
+                    function mapStatus(value) {
+                        return value === ConsentEnum.CONSENT_MODE_PURPOSE_STATUS_GRANTED ? 'granted' : 'denied';
+                    }
+
+                    // Neue Consent‑Einstellungen anhand der vier Zwecke
+                    var consentUpdate = {
+                        ad_storage:         mapStatus(status.adStoragePurposeConsentStatus),
+                        analytics_storage:  mapStatus(status.analyticsStoragePurposeConsentStatus),
+                        ad_user_data:       mapStatus(status.adUserDataPurposeConsentStatus),
+                        ad_personalization: mapStatus(status.adPersonalizationPurposeConsentStatus)
+                    };
+
+                    // Consent‑Update an gtag senden
+                    gtag('consent','update', consentUpdate);
+
+                    // Jetzt erst den Google Tag Manager laden
+                    var gtmScript = document.createElement('script');
+                    gtmScript.async = true;
+                    gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NFVT7W7X';
+                    document.head.appendChild(gtmScript);
+                }
+            });
+        </script>
+
+        <script>
+            console.log('1.3');
         </script>
 
     </head>
