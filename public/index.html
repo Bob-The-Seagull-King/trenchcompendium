@@ -22,6 +22,19 @@
         <!-- Whatever this does -->
         <meta name="referrer" content="strict-origin-when-cross-origin">
 
+        <!-- Force FC to proceed with showing messages -->
+        <script>
+            window.googlefc = window.googlefc || {};
+            // Muss VOR dem FC/AdSense-Tag stehen.
+            window.googlefc.controlledMessagingFunction = function (message) {
+                try {
+                    console.log('[FC] controlledMessagingFunction', message && message.getType ? message.getType() : '(no type)');
+                } catch(e) {}
+                // Für den Test: immer anzeigen.
+                message.proceed(true);
+            };
+        </script>
+        
         <!-- Helps with verification (optional) -->
         <meta name="google-adsense-account" content="ca-pub-3744837400491966" />
 
