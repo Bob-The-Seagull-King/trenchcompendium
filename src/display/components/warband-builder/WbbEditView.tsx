@@ -38,6 +38,7 @@ import WbbUserinfo from "./WbbUserinfo";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
 import WbbExplorationDetailView from "./WbbExplorationDetailView";
 import WbbPostGameDetailView from "./WbbPostGameDetailView";
+import WbbGameReportDetailView from "./GameReporter/WbbGameReporterDetailView";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -63,7 +64,7 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
     }, [warbandData]);
 
     //** Start Detail view stuff
-    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | 'post-game' | null;
+    type DetailType = 'fighter' | 'stash' | 'warband' | 'campaign' | 'exploration' | 'post-game' | 'game-report' | null;
 
     const [detailType, setDetailType] = useState<DetailType>(null);
     const [detailPayload, setDetailPayload] = useState<any>(null);
@@ -265,13 +266,6 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                             />
                                         }
 
-                                        {/* @TODO: This opens the post-game helper. */}
-                                        {/*<button*/}
-                                        {/*    onClick={() => openDetail('post-game', null)}*/}
-                                        {/*>*/}
-                                        {/*    {'open post game helper'}*/}
-                                        {/*</button>*/}
-
                                         <WbbFighterShows
                                             openDetail={openDetail}
                                             detailType={detailType}
@@ -311,6 +305,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                                         {detailType === 'campaign' && (
                                             <WbbCampaignDetailView
                                                 onClose={closeDetail}
+                                                openGameReporter={() => openDetail('game-report', null)}
+                                                openPostGame={() => openDetail('post-game', null)}
                                             />
                                         )}
 
@@ -325,11 +321,20 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
 
                                         {/* The Post Ganme Helper View */}
                                         {/* @TODO this is the post game helper detail view WIP */}
-                                        {/*{detailType === 'post-game' && (*/}
-                                        {/*    <WbbPostGameDetailView*/}
-                                        {/*        onClose={closeDetail}*/}
-                                        {/*    />*/}
-                                        {/*)}*/}
+                                        {detailType === 'post-game' && (
+                                            <WbbPostGameDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
+                                        {/* The Game reporter View */}
+                                        {/* @TODO this is the game reporter detail view WIP */}
+                                        {detailType === 'game-report' && (
+                                            <WbbGameReportDetailView
+                                                onClose={closeDetail}
+                                            />
+                                        )}
+
 
                                         {/* Empty Fallback */}
                                         {detailType === null && (

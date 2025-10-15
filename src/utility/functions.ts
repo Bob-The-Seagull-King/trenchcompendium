@@ -88,6 +88,33 @@ export async function GetWarbandOrNull(object : ContextObject): Promise<null | U
     return null;
 }
 
+/**
+ * Translates an integer to a roman numeral up to 50
+ * @param num
+ */
+export function toRoman(num: number): string {
+    if (num < 1 || num > 50) return '';
+
+    const map: [number, string][] = [
+        [50, 'L'],
+        [40, 'XL'],
+        [10, 'X'],
+        [9, 'IX'],
+        [5, 'V'],
+        [4, 'IV'],
+        [1, 'I']
+    ];
+
+    let result = '';
+    for (const [value, numeral] of map) {
+        while (num >= value) {
+            result += numeral;
+            num -= value;
+        }
+    }
+    return result;
+}
+
 export function isstringdataID(stringval : string ) {
     const idsplits = stringval.split('_');
     if (idsplits.length > 1) {

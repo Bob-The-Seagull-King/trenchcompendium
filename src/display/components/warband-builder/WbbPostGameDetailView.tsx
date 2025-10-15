@@ -14,16 +14,17 @@ import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotio
 import {useWbbMode} from "../../../context/WbbModeContext";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
 import WbbLocationsList from "./Exploration/WbbLocationsList";
-import WbbPostGameDetailElite from "./micro-elements/WbbPostGameDetailElite";
-import WbbPostGameDetailTroopInjuries from "./micro-elements/WbbPostGameDetailTroopInjuries";
-import WbbPostGameDetailPromotions from "./micro-elements/WbbPostGameDetailPromotions";
-import WbbPostGameDetailExploration from "./micro-elements/WbbPostGameDetailExploration";
 import PostGameContext, {GloriousDeed} from "../../../context/PostGameContext";
-import WbbPostGameDetailGame from "./micro-elements/WbbPostGameDetailGame";
-import {RealWarbandPurchaseModel} from "../../../classes/saveitems/Warband/Purchases/WarbandPurchase";
-import WbbPostGameDetailCustom from "./micro-elements/WbbPostGameDetailCustom";
-import WbbPostGameDetailSalvageGolem from "./micro-elements/WbbPostGameDetailSalvageGolem";
-import WbbPostGameDetailKnighthood from "./micro-elements/WbbPostGameDetailKnighthood";
+import WbbPostGameDetailGame from "./PostGame/WbbPostGameDetailGame";
+import WbbPostGameDetailElite from "./PostGame/WbbPostGameDetailElite";
+import WbbPostGameDetailTroopInjuries from "./PostGame/WbbPostGameDetailTroopInjuries";
+import WbbPostGameDetailPromotions from "./PostGame/WbbPostGameDetailPromotions";
+import WbbPostGameDetailExploration from "./PostGame/WbbPostGameDetailExploration";
+import WbbPostGameDetailSalvageGolem from "./PostGame/WbbPostGameDetailSalvageGolem";
+import WbbPostGameDetailKnighthood from "./PostGame/WbbPostGameDetailKnighthood";
+import WbbPostGameDetailCustom from "./PostGame/WbbPostGameDetailCustom";
+
+
 
 interface WbbPostGameDetailViewProps {
     onClose: () => void;
@@ -64,13 +65,13 @@ const WbbPostGameDetailView: React.FC<WbbPostGameDetailViewProps> = ({ onClose }
                                 {'Elites'}
                             </h3>
                             {warband.warband_data.GetFighters().map((fighter, index) => (
-                                <>
+                                <React.Fragment key={`postgame-elites-${index}`}>
                                     {(fighter.model.IsElite() && (fighter.model.State == 'active')) &&
                                         <WbbPostGameDetailElite
                                             fighter={fighter}
                                         />
                                     }
-                                </>
+                                </React.Fragment>
                             ))}
                         </>
                     }

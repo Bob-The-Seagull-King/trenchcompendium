@@ -45,6 +45,7 @@
     "react-scripts": "^5.0.1",
     "react-snap": "^1.23.0",
     "react-toastify": "^10.0.4",
+    "recharts": "^3.2.1",
     "redux-persist": "^6.0.0",
     "sass": "^1.71.1",
     "sass-loader": "^14.1.1",
@@ -61,7 +62,11 @@
   "reactSnap": {
     "skipThirdPartyRequests": true,
     "inlineCss": true,
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"]
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { UserWarband } from "../../../classes/saveitems/Warband/UserWarband";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faChevronLeft, faDownload, faExclamation, faGift, faInfoCircle, faPen, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faChevronLeft, faDownload, faExclamation, faGift, faInfoCircle, faPen, faTimes, faChartSimple, faTrophy} from "@fortawesome/free-solid-svg-icons";
 import {useWarband} from "../../../context/WarbandContext";
 import WbbTextarea from "./WbbTextarea";
 import WbbOptionBox from "./WbbOptionBox";
@@ -12,12 +12,21 @@ import { Patron } from '../../../classes/feature/skillgroup/Patron';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import WbbOptionSelect from "./modals/warband/WbbOptionSelect";
+import WbbDetailViewCollapse from "./WbbDetailViewCollapse";
+import {toast} from "react-toastify";
+import AlertCustom from "../generics/AlertCustom";
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
+    openGameReporter: () => void;
+    openPostGame: () => void;
 }
 
-const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }) => {
+const FEATURE_FLAG_HISTORY = false;
+const FEATURE_FLAG_REPORTING = false;
+
+const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose, openGameReporter, openPostGame }) => {
     const { warband, reloadDisplay, updateKey } = useWarband();
     if (warband == null) return (<div>Loading...</div>);
     const { play_mode, edit_mode, view_mode, print_mode, mode, setMode } = useWbbMode(); // play mode v2
@@ -92,6 +101,37 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
         setKeyvar(keyvar + 1)})
     }
 
+    /** Threshold values */
+    // @TODO use warband object to get and set the values
+    const [thresholds, setThresholds] = useState<number[]>(
+        Array.from({ length: 12 }, (_, i) => 700 + i * 100)
+    );
+
+    // are the threshold values editable? Based on view mode or maybe they're set via the campaign
+    const [thresholdsEditable, setthresholdsEditable] = useState(true);
+
+    if( !edit_mode ) { // can only be edited in edit mode
+        setthresholdsEditable(false);
+    } // @TODO disable editable threshold if they are set via the campaign
+
+
+    const handleSave = () => {
+        // validate thresholds: each value must be greater than the previous
+        for (let i = 1; i < thresholds.length; i++) {
+            if (thresholds[i] <= thresholds[i - 1]) {
+                toast.error(
+                    `Threshold for Round ${i + 1} must be greater than Round ${i}`
+                );
+                return;
+            }
+        }
+        toast.success("Thresholds saved successfully!");
+        console.log("Saved thresholds:", thresholds);
+
+        //@TODO: set new warband thresholds
+    };
+
+
 
     return (
         <div className="WbbDetailView WbbCampaignDetailView">
@@ -131,13 +171,51 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     {warband.warband_data.GetCampaignMaxFieldStrength()}
                 </div>
 
+                {/* Show if campaign Invite exists */}
+                {edit_mode &&
+                    <AlertCustom
+                        className={'my-3'}
+                        type={'info'}
+                    >
+                        <h4>{'Capmaign Invite'}</h4>
+                        <div>
+                            {'You have been invited to a campaign'}
+                        </div>
+                        <div className={'fw-bold mb-3'}>
+                            {'Campaign Name'}{' by '}{'Admin Name'}
+                        </div>
+
+                        {/* @TODO: handle campaign invite accept / decline */}
+                        <div className={'btn btn-primary me-2'}>
+                            <FontAwesomeIcon icon={faCheck} className={'me-2'} />
+                            {'Accept Invite'}
+                        </div>
+                        <div className={'btn btn-secondary'}>
+                            <FontAwesomeIcon icon={faTimes} className={'me-2'} />
+                            {'Decline Invite'}
+                        </div>
+                    </AlertCustom>
+                }
+
+                {/* Patron */}
+                <WbbOptionBox
+                    title={'Patron'}
+                    value={patron ? patron.GetTrueName() : ""}
+                    onClick={() => setshowPatronModal(true)}
+                />
+                <WbbEditPatronSelectionModal
+                    show={showPatronModal}
+                    onClose={() => setshowPatronModal(false)}
+                    currentPatron={patron}
+                    onSubmit={handlePatronUpdate}
+                />
+
                 {/* Victory Points */}
                 <WbbOptionBox
                     title={'Victory Points'}
                     value={victoryPoints}
                     onClick={() => setshowVictoryPointsModal(true)}
                 />
-
                 <WbbEditVictoryPointsModal
                     show={showVictoryPointsModal}
                     onClose={() => setshowVictoryPointsModal(false)}
@@ -146,27 +224,12 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                 />
 
 
-                {/* Patron */}
-                <WbbOptionBox
-                    title={'Patron'}
-                    value={patron? patron.GetTrueName() : ""}
-                    onClick={() => setshowPatronModal(true)}
-                />
-
-                <WbbEditPatronSelectionModal
-                    show={showPatronModal}
-                    onClose={() => setshowPatronModal(false)}
-                    currentPatron={patron}
-                    onSubmit={handlePatronUpdate}
-                />
-
                 {/* Campaign Cycle */}
                 <WbbOptionBox
                     title={'Campaign Round'}
                     value={campaignCycle}
                     onClick={() => setshowCampaignCycleModal(true)}
                 />
-
                 <WbbEditCampaignCycleModal
                     show={showCampaignCycleModal}
                     onClose={() => setshowCampaignCycleModal(false)}
@@ -185,7 +248,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     <div className={'failed-promo'}>
                         {edit_mode &&
                             <div className={'btn btn-primary btn-sm edit-btn'}
-                                onClick={() => setshowFailedPromotionsModal(true)}>
+                                 onClick={() => setshowFailedPromotionsModal(true)}>
                                 <FontAwesomeIcon icon={faPen} className="icon-inline-left-l"/>
                                 {'Edit'}
                             </div>
@@ -223,36 +286,95 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                     />
                 }
 
-                {/* Notes textarea */}
-                
-                <WbbTextarea
-                        initialText={campaigntext}
-                        title="Campaign Notes"
-                        onSave={(newText : string) => {
-                            warband?.warband_data.SaveNote(newText, 'campaign')
-                            setcampaigntext(newText);
-                
-                            const Manager : ToolsController = ToolsController.getInstance();
-                            Manager.UserWarbandManager.UpdateItemInfo(warband? warband.id : -999).then(
-                                () => reloadDisplay())
-                        }}
-                    />
 
-                <div className={'info-box'}>
-                    <FontAwesomeIcon icon={faInfoCircle} className="info-box-icon"/>
+                { edit_mode && FEATURE_FLAG_REPORTING &&
+                    <>
+                        <button
+                            className={'btn btn-primary me-3'}
+                            onClick={() => openGameReporter()}
+                        >
+                            <FontAwesomeIcon icon={faTrophy} className={'me-2'}/>
+                            {'Report Game'}
+                        </button>
 
-                    <div className={'info-box-title'}>
-                        {'New Features coming Soon'}
-                    </div>
+                        <button
+                            className={'btn btn-primary'}
+                            onClick={() => openPostGame()}
+                        >
+                            <FontAwesomeIcon icon={faChartSimple} className={'me-2'}/>
+                            {'Post Game'}
+                        </button>
+                    </>
+                }
 
-                    <div className={'info-box-content'}>
-                        {'We are currently developing a complete campaign management mode, where you can connect your own warband and the warbands of your friends to a campaign.'}
-                        <br/>
-                        {'With this new release there will be many additional options for your campaign play.'}
-                        <br/>
-                        <br/>
-                        {'Your warband is structured into campaign cycles. When you finish a game or campaign cycle, you can advance to the next one. During the campaign you can reference the warband details of previous cycles. Keep in mind, that you can only edit your warband for the latest / current campaign cylce. So make sure, to check your warband before advancing to the next cycle.'}
-                    </div>
+                <div className={'WbbDetailViewCollapse-wrap'}>
+                    {/* Campaign History */}
+                    {(edit_mode || view_mode) && FEATURE_FLAG_HISTORY &&
+                        <WbbDetailViewCollapse title="History" initiallyOpen={false}>
+                            {/* @TODO: Add history here */}
+
+                        </WbbDetailViewCollapse>
+                    }
+
+
+                    <WbbDetailViewCollapse title="Advanced Options" initiallyOpen={false}>
+                        <h4 className={'mb-3'}>
+                            {'Manual campaign values'}
+                        </h4>
+
+
+
+                        <div>
+                            <h4 className={'mb-3'}>
+                                {'Threshold values'}
+                            </h4>
+
+                            {Array.from({length: 12}, (_, i) => (
+                                <div key={i} className="row mb-2 align-items-center">
+                                    {/* Label column */}
+                                    <div className="col-4 fw-bold">{`Round ${i + 1}`}</div>
+
+                                    {/* Input column */}
+                                    <div className="col-8">
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            onFocus={(e) => e.target.select()}
+                                            value={thresholds[i]}
+                                            min={0}
+                                            disabled={!thresholdsEditable}
+                                            step={1}
+                                            onChange={(e) => {
+                                                const newThresholds = [...thresholds];
+                                                newThresholds[i] = parseInt(e.target.value) || 0;
+                                                setThresholds(newThresholds);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+
+                            <button className="btn btn-primary mt-3" onClick={handleSave}>
+                                Save Thresholds
+                            </button>
+                        </div>
+                    </WbbDetailViewCollapse>
+
+                    <WbbDetailViewCollapse title="Notes & Lore" initiallyOpen={false}>
+                        {/* Notes textarea */}
+                        <WbbTextarea
+                            initialText={campaigntext}
+                            title="Campaign Notes"
+                            onSave={(newText: string) => {
+                                warband?.warband_data.SaveNote(newText, 'campaign')
+                                setcampaigntext(newText);
+
+                                const Manager: ToolsController = ToolsController.getInstance();
+                                Manager.UserWarbandManager.UpdateItemInfo(warband ? warband.id : -999).then(
+                                    () => reloadDisplay())
+                            }}
+                        />
+                    </WbbDetailViewCollapse>
                 </div>
             </div>
         </div>
