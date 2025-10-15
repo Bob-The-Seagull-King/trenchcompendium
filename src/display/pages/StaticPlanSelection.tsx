@@ -14,7 +14,6 @@ import PayPalSubButton from "../components/Profile/PayPalSubButton";
 import {SYNOD} from "../../resources/api-constants";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
-import {trackEvent} from "../components/generics/TrackingManager";
 
 const StaticPlanSelection: React.FC = () => {
 
@@ -35,13 +34,6 @@ const StaticPlanSelection: React.FC = () => {
             label = 'yearly_plan'
             value = 1999 / 100
         }
-
-        trackEvent(
-            'purchase',
-            'subscription',
-            label,
-            value
-        );
 
         alert('Subscription successful with ID: '+ subscriptionID);
 

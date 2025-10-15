@@ -10,12 +10,11 @@ const FORCE_ENABLE_IN_DEV = false;
 
 declare global {
     interface Window {
-        adsbygoogle?: unknown[];
-        adsenseScriptLoaded?: boolean; // you set this in your <script onload> in index.html
-        // DO NOT redeclare `klaro` here – it already exists in another ambient declaration
-        // which causes TS2717 if we change the type.
+        adsbygoogle?: any;              // <-- nicht unknown[]; identisch in allen Dateien halten
+        adsenseScriptLoaded?: boolean;
     }
 }
+
 
 export const AdsManagerv2: React.FC = () => {
     const { SiteUser } = useAuth();
