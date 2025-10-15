@@ -53,14 +53,9 @@ import { EmergencyAlert } from './display/components/generics/EmergencyAlert'
 import MaintananceNotice from "./display/components/generics/MaintananceNotice";
 import DevGuard from "./display/components/generics/DevGuard";
 import AppVersionChecker from "./display/components/generics/AppVersionChecker";
-
 import StaticCreatorApplication from "./display/pages/StaticCreatorApplication";
 import DevImport from "./display/pages/DevImport";
 import {AdsenseManager} from "./display/components/generics/AdsenseManager";
-
-import CampaignOverview from "./display/campaign-manager/CampaignOverview";
-import CampaignSetup from "./display/campaign-manager/CampaignSetup";
-import CampaignManager from "./display/campaign-manager/CampaignManager";
 
 
 const App: React.FC = () => {
@@ -130,20 +125,10 @@ const App: React.FC = () => {
                                     {/* Static Pages - Membership & Purchases */}
                                     <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
 
-                                    {/* Static page dev importer*/}
-                                    <Route path="/dev-import/" element={<DevImport />} />
-
                                     {/* Blog Pages */}
                                     <Route path="/blog" element={<BlogListPage />} />
                                     <Route path="/blog/:slug" element={<BlogArticlePage />} />
-
-
-                                    {/* Campaign Manager Routes*/}
-                                    <Route path="/campaigns" element={<CampaignOverview />} />
-                                    <Route path="/campaigns/new" element={<CampaignSetup />} />
-                                    <Route path="/campaigns/:id" element={<CampaignManager />} />
-
-
+                                    <Route path="/dev-import/" element={<DevImport />} />
                                 </Routes>
 
                                 <FooterMain />
