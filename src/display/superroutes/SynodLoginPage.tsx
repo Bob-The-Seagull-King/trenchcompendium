@@ -10,16 +10,12 @@ import SynodUpdateWarband from "../../utility/SynodUpdateWarband";
 import SynodUserWarbands from "../../utility/SynodUserWarbands";
 import {useAuth} from "../../utility/AuthContext";
 import SynodImage from "../../utility/SynodImage";
-import Modal_LoginWarbandMerge from "../components/Profile/Modal_LoginWarbandMerge";
 
 const SynodLoginPage: React.FC = () => {
 
     const [visbibleLogin, setvisbibleLogin] = useState(true);
     const [visbibleSignup, setvisbibleSignup] = useState(false);
     const [visbibleReset, setvisbibleReset] = useState(false);
-
-    // Shows the upload warbands modal
-    const [showWarbandMergeModal, setShowWarbandMergeModal] = useState(false);
 
     const { userId, login, logout, authToken } = useAuth();
 
@@ -161,10 +157,6 @@ const SynodLoginPage: React.FC = () => {
                 </>
             }
 
-            <Modal_LoginWarbandMerge
-                show={showWarbandMergeModal}
-                onClose={() => setShowWarbandMergeModal(false)}
-            />
         </div>
     );
 };
