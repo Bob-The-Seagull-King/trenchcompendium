@@ -25,6 +25,21 @@
         <!-- Helps with verification (optional) -->
         <meta name="google-adsense-account" content="ca-pub-3744837400491966" />
 
+        <!-- 2) Optional: FC-API Debug Hooks (nur für Debug; kann bleiben) -->
+        <script>
+            window.googlefc = window.googlefc || {};
+            window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+            window.googlefc.callbackQueue.push({
+                CONSENT_DATA_READY: () => console.log('[FC] CONSENT_DATA_READY'),
+                CONSENT_MODE_DATA_READY: () => {
+                    try {
+                        const v = googlefc.getGoogleConsentModeValues && googlefc.getGoogleConsentModeValues();
+                        console.log('[FC] CONSENT_MODE_DATA_READY', v);
+                    } catch(e) { console.log(e); }
+                }
+            });
+        </script>
+
         <!-- Script from adsense for auto ads-->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
                 crossorigin="anonymous"></script>
@@ -123,7 +138,7 @@
         </script>
 
         <script>
-            console.log('1.8');
+            console.log('1.9');
         </script>
 
     </head>
