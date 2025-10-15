@@ -51,79 +51,79 @@
             window['gtag_enable_tcf_support'] = true;
         </script>
 
-        <!-- 2) Funding Choices / AdSense CMP -->
-        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>
+<!--        &lt;!&ndash; 2) Funding Choices / AdSense CMP &ndash;&gt;-->
+<!--        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>-->
+<!--        <script>-->
+<!--            // signalGooglefcPresent (von Google bereitgestelltes Snippet)-->
+<!--            (function signalGooglefcPresent() {-->
+<!--                if (!window.frames['googlefcPresent']) {-->
+<!--                    if (document.body) {-->
+<!--                        var iframe = document.createElement('iframe');-->
+<!--                        iframe.style = 'width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;display:none;';-->
+<!--                        iframe.name  = 'googlefcPresent';-->
+<!--                        document.body.appendChild(iframe);-->
+<!--                    } else {-->
+<!--                        setTimeout(signalGooglefcPresent, 0);-->
+<!--                    }-->
+<!--                }-->
+<!--            })();-->
+<!--        </script>-->
+
+<!--        &lt;!&ndash; 3) Consent verarbeiten und DANN GTM mit OFFIZIELLEM Snippet laden &ndash;&gt;-->
+<!--        <script>-->
+<!--            (function() {-->
+<!--                var gtmLoaded = false;-->
+
+<!--                function loadGTM() {-->
+<!--                    if (gtmLoaded) return;-->
+<!--                    gtmLoaded = true;-->
+
+<!--                    // *** OFFIZIELLES GTM-SNIPPET (unverändert!) ***-->
+<!--                    (function(w,d,s,l,i){-->
+<!--                        w[l]=w[l]||[];-->
+<!--                        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});-->
+<!--                        var f=d.getElementsByTagName(s)[0],-->
+<!--                            j=d.createElement(s),-->
+<!--                            dl=l!='dataLayer'?'&l='+l:'';-->
+<!--                        j.async=true;-->
+<!--                        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;-->
+<!--                        f.parentNode.insertBefore(j,f);-->
+<!--                    })(window,document,'script','dataLayer','GTM-NFVT7W7X');-->
+<!--                }-->
+
+<!--                // Funding Choices Callback-Queue-->
+<!--                window.googlefc = window.googlefc || {};-->
+<!--                googlefc.callbackQueue = googlefc.callbackQueue || [];-->
+
+<!--                // Wenn Consent-Mode-Daten bereit: Consent-Werte lesen -> gtag update -> GTM laden-->
+<!--                googlefc.callbackQueue.push({-->
+<!--                    CONSENT_MODE_DATA_READY: function () {-->
+<!--                        try {-->
+<!--                            var status = googlefc.getGoogleConsentModeValues();-->
+<!--                            var E = googlefc.ConsentModePurposeStatusEnum;-->
+<!--                            var map = function(v){ return v === E.CONSENT_MODE_PURPOSE_STATUS_GRANTED ? 'granted' : 'denied'; };-->
+
+<!--                            gtag('consent','update', {-->
+<!--                                ad_storage:         map(status.adStoragePurposeConsentStatus),-->
+<!--                                analytics_storage:  map(status.analyticsStoragePurposeConsentStatus),-->
+<!--                                ad_user_data:       map(status.adUserDataPurposeConsentStatus),-->
+<!--                                ad_personalization: map(status.adPersonalizationPurposeConsentStatus)-->
+<!--                            });-->
+<!--                        } catch(e) {-->
+<!--                            // Falls FC keine Mode-Werte liefert, bleiben Defaults aktiv (denied)-->
+<!--                        }-->
+<!--                        loadGTM();-->
+<!--                    }-->
+<!--                });-->
+
+<!--                // Fallback: Falls FC-Callback NICHT feuert (z. B. Consent Mode in FC nicht aktiviert),-->
+<!--                // laden wir GTM nach 1500ms trotzdem – mit Defaults ("denied"), was DSGVO-konform ist.-->
+<!--                setTimeout(loadGTM, 1500);-->
+<!--            })();-->
+<!--        </script>-->
+
         <script>
-            // signalGooglefcPresent (von Google bereitgestelltes Snippet)
-            (function signalGooglefcPresent() {
-                if (!window.frames['googlefcPresent']) {
-                    if (document.body) {
-                        var iframe = document.createElement('iframe');
-                        iframe.style = 'width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;display:none;';
-                        iframe.name  = 'googlefcPresent';
-                        document.body.appendChild(iframe);
-                    } else {
-                        setTimeout(signalGooglefcPresent, 0);
-                    }
-                }
-            })();
-        </script>
-
-        <!-- 3) Consent verarbeiten und DANN GTM mit OFFIZIELLEM Snippet laden -->
-        <script>
-            (function() {
-                var gtmLoaded = false;
-
-                function loadGTM() {
-                    if (gtmLoaded) return;
-                    gtmLoaded = true;
-
-                    // *** OFFIZIELLES GTM-SNIPPET (unverändert!) ***
-                    (function(w,d,s,l,i){
-                        w[l]=w[l]||[];
-                        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                        var f=d.getElementsByTagName(s)[0],
-                            j=d.createElement(s),
-                            dl=l!='dataLayer'?'&l='+l:'';
-                        j.async=true;
-                        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                        f.parentNode.insertBefore(j,f);
-                    })(window,document,'script','dataLayer','GTM-NFVT7W7X');
-                }
-
-                // Funding Choices Callback-Queue
-                window.googlefc = window.googlefc || {};
-                googlefc.callbackQueue = googlefc.callbackQueue || [];
-
-                // Wenn Consent-Mode-Daten bereit: Consent-Werte lesen -> gtag update -> GTM laden
-                googlefc.callbackQueue.push({
-                    CONSENT_MODE_DATA_READY: function () {
-                        try {
-                            var status = googlefc.getGoogleConsentModeValues();
-                            var E = googlefc.ConsentModePurposeStatusEnum;
-                            var map = function(v){ return v === E.CONSENT_MODE_PURPOSE_STATUS_GRANTED ? 'granted' : 'denied'; };
-
-                            gtag('consent','update', {
-                                ad_storage:         map(status.adStoragePurposeConsentStatus),
-                                analytics_storage:  map(status.analyticsStoragePurposeConsentStatus),
-                                ad_user_data:       map(status.adUserDataPurposeConsentStatus),
-                                ad_personalization: map(status.adPersonalizationPurposeConsentStatus)
-                            });
-                        } catch(e) {
-                            // Falls FC keine Mode-Werte liefert, bleiben Defaults aktiv (denied)
-                        }
-                        loadGTM();
-                    }
-                });
-
-                // Fallback: Falls FC-Callback NICHT feuert (z. B. Consent Mode in FC nicht aktiviert),
-                // laden wir GTM nach 1500ms trotzdem – mit Defaults ("denied"), was DSGVO-konform ist.
-                setTimeout(loadGTM, 1500);
-            })();
-        </script>
-
-        <script>
-            console.log('1.7');
+            console.log('1.8');
         </script>
 
     </head>
