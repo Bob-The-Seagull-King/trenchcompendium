@@ -19,76 +19,33 @@
          <meta property="og:title" content="Trench Companion | Trench Companion" data-react-helmet="true">
          <meta property="og:type" content="website" data-react-helmet="true">
 
-        <!-- 1) Funding Choices (Google CMP) -->
-        <script>
-            (function() {
-                function signalGooglefcPresent() {
-                    if (!window.frames['googlefcPresent']) {
-                        if (document.body) {
-                            const iframe = document.createElement('iframe');
-                            iframe.style.cssText = 'width:0;height:0;border:none;z-index:-1;left:-9999px;position:absolute;';
-                            iframe.name = 'googlefcPresent';
-                            document.body.appendChild(iframe);
-                        } else {
-                            setTimeout(signalGooglefcPresent, 5);
-                        }
-                    }
-                }
-                signalGooglefcPresent();
-            })();
-        </script>
-        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>
-        <script>
-            (function() {
-                function handleM(e) {
-                    if ((e.source === window || e.source === window.top) && e.data && e.data.type === 'fundingchoices') {
-                        if (e.data.action === 'consent-status') {
-                            // FC wird Consent intern updaten; wir müssen hier nichts weiter tun
-                        }
-                    }
-                }
-                window.addEventListener('message', handleM);
-            })();
-        </script>
-
-        <!-- 2) Consent Mode v2 Default (denied) + dataLayer/gtag Bootstrap -->
+        <!-- 1) Consent Mode Defaults – ganz früh, vor allem anderen -->
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){ dataLayer.push(arguments); }
-
+            function gtag(){window.dataLayer.push(arguments);}
             gtag('consent', 'default', {
-                'ad_storage': 'denied',
-                'analytics_storage': 'denied',
-                'functionality_storage': 'granted',
-                'security_storage': 'granted',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'wait_for_update': 500
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                functionality_storage: 'granted',
+                security_storage: 'granted'
             });
-            gtag('set', 'ads_data_redaction', true);
-            gtag('set', 'url_passthrough', true);
         </script>
 
-        <!-- 3) AdSense Auto Ads (einmalig) -->
-        <script
-                id="adsbygoogle-js"
-                async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
-                crossorigin="anonymous"
-                onload="window.adsenseScriptLoaded=true;window.dispatchEvent(new CustomEvent('adsense:loaded'));"
-                onerror="window.adsenseScriptLoaded=false;window.dispatchEvent(new CustomEvent('adsense:error'));"
-        ></script>
-        <script>
-            // Sicherheitsnetz – falls früher zugegriffen wird:
-            window.adsbygoogle = window.adsbygoogle || [];
-        </script>
+        <!-- 2) Google CMP / Funding Choices – lädt & zeigt das Banner (wenn publiziert) -->
+        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=2"></script>
 
-        <!-- 4) Google Tag Manager (GTM-NFVT7W7X) – nach Consent-Default -->
+        <!-- 3) AdSense Auto Ads (Anchor/Vignette) – client = deine pub-ID -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966" crossorigin="anonymous"></script>
+
+        <!-- 4) GTM (GTM-NFVT7W7X) -->
         <script>
-            (function(w,d,s,l,i){
-                w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+            (function(w,d,s,l,i){w[l]=w[l]||[];
+                w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
                 var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-                j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
+                j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-NFVT7W7X');
         </script>
 
