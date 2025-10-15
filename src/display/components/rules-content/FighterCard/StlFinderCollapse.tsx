@@ -7,12 +7,13 @@ import FighterSTL_List from "../../StlPromotions/FighterSTL_List";
 
 interface StlFinderCollapseProps {
     model_slug: string;
+    faction_slug: string;
 }
 
 
 // Render order for buckets
 
-const StlFinderCollapse: React.FC<StlFinderCollapseProps> = ({ model_slug = "" }) => {
+const StlFinderCollapse: React.FC<StlFinderCollapseProps> = ({ model_slug = "", faction_slug = ''}) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -31,7 +32,8 @@ const StlFinderCollapse: React.FC<StlFinderCollapseProps> = ({ model_slug = "" }
                 <div className="fighter-card-collapse-content">
                     <div className={"fighter-card-collapse-content-inner"}>
                         <FighterSTL_List
-                            model_slug={ model_slug}
+                            model_slug={ model_slug }
+                            faction_slug={ faction_slug }
                             isOpen={open}
                         />
                     </div>
