@@ -19,33 +19,39 @@
          <meta property="og:title" content="Trench Companion | Trench Companion" data-react-helmet="true">
          <meta property="og:type" content="website" data-react-helmet="true">
 
+        <!-- Helps with verification (optional) -->
+        <meta name="google-adsense-account" content="ca-pub-3744837400491966" />
+
+        <!-- Script from adsense for auto ads-->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
                 crossorigin="anonymous"></script>
+        <!-- https://support.google.com/adsense/answer/7584263 (Beispiel) -->
+        <!-- https://support.google.com/adsense/answer/9274516 (Platzierung im <head>) -->
 
-        <!-- Data‑Layer und gtag()-Wrapper -->
+        <!-- 1) Data Layer + gtag-Wrapper + Consent-Defaults + TCF -->
         <script>
-            // dataLayer anlegen, bevor der Tag‑Manager geladen wird (Pflicht)
+            // Data Layer anlegen, bevor GTM geladen wird
             window.dataLayer = window.dataLayer || [];
             function gtag(){ dataLayer.push(arguments); }
 
-            // Consent‑Vorgabe: bis zur Nutzerentscheidung werden alle Zwecke verweigert
+            // Consent-Defaults: alles "denied" bis zur Nutzerentscheidung
             gtag('consent', 'default', {
-                ad_storage:        'denied',
-                analytics_storage: 'denied',
-                ad_user_data:      'denied',
-                ad_personalization:'denied',
-                wait_for_update:   500 // Tag‑Manager wartet max. 500 ms auf ein Update
+                ad_storage:         'denied',
+                analytics_storage:  'denied',
+                ad_user_data:       'denied',
+                ad_personalization: 'denied',
+                wait_for_update:    500
             });
 
-            // TCF‑Unterstützung für Google‑Tags aktivieren:contentReference[oaicite:2]{index=2}
+            // IAB TCF Unterstützung aktivieren (empfohlen)
+            // Quelle: "Implement the Transparency & Consent Framework"
             window['gtag_enable_tcf_support'] = true;
         </script>
 
-        <!-- Funding Choices / AdSense CMP für EU Regeln -->
+        <!-- 2) Funding Choices / AdSense CMP -->
         <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>
         <script>
-            // Signalisieren, dass funding choices present ist.  Dieses Snippet stammt aus
-            // den offiziellen AdSense‑Anweisungen.
+            // signalGooglefcPresent (von Google bereitgestelltes Snippet)
             (function signalGooglefcPresent() {
                 if (!window.frames['googlefcPresent']) {
                     if (document.body) {
@@ -60,44 +66,61 @@
             })();
         </script>
 
+        <!-- 3) Consent verarbeiten und DANN GTM mit OFFIZIELLEM Snippet laden -->
         <script>
-            // Consent‑Callback registrieren
-            window.googlefc = window.googlefc || {};
-            googlefc.callbackQueue = googlefc.callbackQueue || [];
+            (function() {
+                var gtmLoaded = false;
 
-            googlefc.callbackQueue.push({
-                CONSENT_MODE_DATA_READY: function () {
-                    // Aktuelle Consent‑Werte aus Funding Choices abrufen
-                    var status = googlefc.getGoogleConsentModeValues();
-                    var ConsentEnum = googlefc.ConsentModePurposeStatusEnum;
+                function loadGTM() {
+                    if (gtmLoaded) return;
+                    gtmLoaded = true;
 
-                    // Helper zur Umwandlung in 'granted'/'denied'
-                    function mapStatus(value) {
-                        return value === ConsentEnum.CONSENT_MODE_PURPOSE_STATUS_GRANTED ? 'granted' : 'denied';
-                    }
-
-                    // Neue Consent‑Einstellungen anhand der vier Zwecke
-                    var consentUpdate = {
-                        ad_storage:         mapStatus(status.adStoragePurposeConsentStatus),
-                        analytics_storage:  mapStatus(status.analyticsStoragePurposeConsentStatus),
-                        ad_user_data:       mapStatus(status.adUserDataPurposeConsentStatus),
-                        ad_personalization: mapStatus(status.adPersonalizationPurposeConsentStatus)
-                    };
-
-                    // Consent‑Update an gtag senden
-                    gtag('consent','update', consentUpdate);
-
-                    // Jetzt erst den Google Tag Manager laden
-                    var gtmScript = document.createElement('script');
-                    gtmScript.async = true;
-                    gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NFVT7W7X';
-                    document.head.appendChild(gtmScript);
+                    // *** OFFIZIELLES GTM-SNIPPET (unverändert!) ***
+                    (function(w,d,s,l,i){
+                        w[l]=w[l]||[];
+                        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                        var f=d.getElementsByTagName(s)[0],
+                            j=d.createElement(s),
+                            dl=l!='dataLayer'?'&l='+l:'';
+                        j.async=true;
+                        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                        f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','GTM-NFVT7W7X');
                 }
-            });
+
+                // Funding Choices Callback-Queue
+                window.googlefc = window.googlefc || {};
+                googlefc.callbackQueue = googlefc.callbackQueue || [];
+
+                // Wenn Consent-Mode-Daten bereit: Consent-Werte lesen -> gtag update -> GTM laden
+                googlefc.callbackQueue.push({
+                    CONSENT_MODE_DATA_READY: function () {
+                        try {
+                            var status = googlefc.getGoogleConsentModeValues();
+                            var E = googlefc.ConsentModePurposeStatusEnum;
+                            var map = function(v){ return v === E.CONSENT_MODE_PURPOSE_STATUS_GRANTED ? 'granted' : 'denied'; };
+
+                            gtag('consent','update', {
+                                ad_storage:         map(status.adStoragePurposeConsentStatus),
+                                analytics_storage:  map(status.analyticsStoragePurposeConsentStatus),
+                                ad_user_data:       map(status.adUserDataPurposeConsentStatus),
+                                ad_personalization: map(status.adPersonalizationPurposeConsentStatus)
+                            });
+                        } catch(e) {
+                            // Falls FC keine Mode-Werte liefert, bleiben Defaults aktiv (denied)
+                        }
+                        loadGTM();
+                    }
+                });
+
+                // Fallback: Falls FC-Callback NICHT feuert (z. B. Consent Mode in FC nicht aktiviert),
+                // laden wir GTM nach 1500ms trotzdem – mit Defaults ("denied"), was DSGVO-konform ist.
+                setTimeout(loadGTM, 1500);
+            })();
         </script>
 
         <script>
-            console.log('1.4');
+            console.log('1.5');
         </script>
 
     </head>
