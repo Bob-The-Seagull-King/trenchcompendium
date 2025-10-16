@@ -38,6 +38,7 @@ import WbbUserinfo from "./WbbUserinfo";
 import WbbEditViewExplorationLocations from "./WbbEditViewExplorationLocations";
 import WbbExplorationDetailView from "./WbbExplorationDetailView";
 import WbbPostGameDetailView from "./WbbPostGameDetailView";
+import WbbJsonLDSchema from "../JSON-LD-Schema/WbbJsonLDSchema";
 
 interface WbbEditViewProps {
     warbandData: SumWarband | null;
@@ -366,6 +367,9 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                         }
 
                     </PopoverProvider>
+
+                    {/* The Schema Markup for the Warband*/}
+                    <WbbJsonLDSchema />
                 </WarbandProvider>
             ) : (
                 <div className={'WbbLoadingOverlay'}>
@@ -377,6 +381,8 @@ const WbbEditView: React.FC<WbbEditViewProps> = ({ warbandData }) => {
                     </div>
                 </div>
             )}
+
+
         </div>
 
 
