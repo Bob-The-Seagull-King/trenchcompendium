@@ -2025,6 +2025,18 @@ class WarbandMember extends DynamicContextObject {
         }
     }
 
+    /**
+     * Is this model dead?
+     * @return boolean
+     */
+    public IsDead () {
+        if (this.State == 'dead') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public async GetMaxScars() {
         if (this.GeneralCache.max_scars != null) {
             return this.GeneralCache.max_scars

@@ -655,7 +655,6 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * 
      * Returns the total Ducats Value including stash as int
      * @constructor
      */
@@ -1307,11 +1306,24 @@ class UserWarband extends DynamicContextObject {
         }
     }
 
+    /**
+     * Returns the cost for all members of this warband as ducats
+     * - excluding stash
+     * - excluding dead models
+     * @param discount
+     */
     public GetDucatCost(discount = false) {
-        
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+
+            // Only count non-dead models
+            const WbMember = this.Models[i].HeldObject as WarbandMember;
+            if( WbMember.IsDead() ) {
+                continue;
+            }
+
             TotalDucatCost += this.Models[i].GetTotalDucats(false, discount);
+
         }
         return TotalDucatCost
     }
@@ -1346,10 +1358,23 @@ class UserWarband extends DynamicContextObject {
         return TotalDucatCost
     }
 
+    /**
+     * Returns the cost for all members of this warband as glory
+     * - excluding stash
+     * - excluding dead models
+     * @param discount
+     */
     public GetGloryCost(discount = false) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+
+            // Only count non-dead models
+            const WbMember = this.Models[i].HeldObject as WarbandMember;
+            if( WbMember.IsDead() ) {
+                continue;
+            }
+
             if (this.Models[i].CountCap == false) {
                 continue;
             }
