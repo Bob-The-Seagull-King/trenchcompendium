@@ -4,7 +4,6 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import DevMetaBlock from "./DevMetaBlock";
 
 interface PageMetaInformationProps {
     title: string;
@@ -42,6 +41,9 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
         ogImage = 'https://synod.trench-companion.com/wp-content/uploads/2025/05/Trench-Companion-Share.png';
     }
 
+    const isDevDomain = window.location.hostname.startsWith('dev.');
+    const canonicalHref = window.location.href.replace('dev.', '');
+
     return (
         <Helmet>
             <title>{title}</title>
@@ -73,7 +75,12 @@ const PageMetaInformation: React.FC<PageMetaInformationProps> = ({
 
             <meta property="og:type" content="website"/>
 
-            <DevMetaBlock />
+            {isDevDomain &&
+                <>
+                    <meta name="robots" content="noindex, nofollow"/>
+                    <link rel="canonical" href={canonicalHref}/>
+                </>
+            }
         </Helmet>
     );
 };

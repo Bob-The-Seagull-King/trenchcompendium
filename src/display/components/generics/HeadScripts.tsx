@@ -1,7 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { useLocation } from 'react-router-dom';
-import DevMetaBlock from "./DevMetaBlock";
 
 /**
  * Inserts SEO-relevant meta tags and canonical links.
