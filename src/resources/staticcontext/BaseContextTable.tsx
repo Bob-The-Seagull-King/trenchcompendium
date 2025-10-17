@@ -744,6 +744,40 @@ export const BaseContextCallTable : CallEventTable = {
             return CanAdd;
         }
     },
+    override_flat: {
+        event_priotity: 2,
+        async canModelAddItem(this: EventRunner, eventSource : any, relayVar : boolean,  trackVal : MemberAndItem, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, restrictions : EquipmentRestriction[]) {            
+            let CanOverride = false;
+            
+            if (relayVar == true) { return relayVar; }
+
+            if (context_func["id"]) {
+                for (let i = 0; i < context_func["id"].length; i++) {
+                    if (trackVal.model.CurModel.GetID() == context_func["id"][i]) {
+                        CanOverride = true;
+                    }
+                }
+            }
+            if (CanOverride == false) { return relayVar; }
+
+            CanOverride = false;
+
+            if (context_func["selections"]) {
+                const prop = context_main as DynamicOptionContextObject;
+                for (let i = 0; i < prop.Selections.length; i++) {
+                    if (prop.Selections[i].SelectedChoice != null) {
+                        if (prop.Selections[i].SelectedChoice?.value.EquipmentItem.ID == trackVal.item.EquipmentItem.ID) {
+                            CanOverride = true;
+                        }
+                    }
+                }
+            }
+
+            if (CanOverride == true) { return true; }
+
+            return relayVar;
+        }
+    },
     restriction_override: {
         event_priotity: 1,
         modEquipmentRestriction(this: EventRunner, eventSource : any, relayVar : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, refeq : FactionEquipmentRelationship) { 
@@ -5629,13 +5663,13 @@ export const BaseContextCallTable : CallEventTable = {
         async onGainEquipment(this: EventRunner, eventSource : any, trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, equipmentHolder : any) {
             const FacModModule = await import("../../factories/features/ModelFactory")
             if (context_func["model_purchases"]) {
+                trackVal.Discount = trackVal.ItemCost;
+                trackVal.CountCap = false;
                 for (let i = 0; i < context_func["model_purchases"].length; i++) {
                     const ModelName = context_func["model_purchases"][i]
                     const ModelFaction = await FacModModule.ModelFactory.CreateNewFactionModel(ModelName, null)
                     await warband.AddFighter([ModelFaction]);
                 }
-                trackVal.Discount = trackVal.ItemCost;
-                trackVal.CountCap = false;
             }
         }
     },

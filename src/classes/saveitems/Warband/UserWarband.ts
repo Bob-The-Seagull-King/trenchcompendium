@@ -655,7 +655,6 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * 
      * Returns the total Ducats Value including stash as int
      * @constructor
      */
@@ -1307,11 +1306,24 @@ class UserWarband extends DynamicContextObject {
         }
     }
 
+    /**
+     * Returns the cost for all members of this warband as ducats
+     * - excluding stash
+     * - excluding dead models
+     * @param discount
+     */
     public GetDucatCost(discount = false) {
-        
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+
+            // Only count non-dead models
+            const WbMember = this.Models[i].HeldObject as WarbandMember;
+            if( WbMember.IsDead() ) {
+                continue;
+            }
+
             TotalDucatCost += this.Models[i].GetTotalDucats(false, discount);
+
         }
         return TotalDucatCost
     }
@@ -1346,10 +1358,23 @@ class UserWarband extends DynamicContextObject {
         return TotalDucatCost
     }
 
+    /**
+     * Returns the cost for all members of this warband as glory
+     * - excluding stash
+     * - excluding dead models
+     * @param discount
+     */
     public GetGloryCost(discount = false) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
+
+            // Only count non-dead models
+            const WbMember = this.Models[i].HeldObject as WarbandMember;
+            if( WbMember.IsDead() ) {
+                continue;
+            }
+
             if (this.Models[i].CountCap == false) {
                 continue;
             }
@@ -1950,11 +1975,6 @@ class UserWarband extends DynamicContextObject {
         }
 
         for (let i = 0; i < RefRels.length; i++) {
-            if (RefRels[i].EquipmentItem.ID == "eq_rocketpropelledgrenade" && use_explor == false) {
-                console.log("ME")
-                console.log(containsTag(RefRels[i].Tags, "exploration_only"))
-                console.log(!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration || this.IsUnRestricted)
-            }
             if (!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration || this.IsUnRestricted) {
                 BaseRels.push(RefRels[i]);
             }
@@ -1971,10 +1991,6 @@ class UserWarband extends DynamicContextObject {
                 BaseRels,
                 null
             )
-        }
-
-        if (BaseRels.filter(item => item.EquipmentItem.ID == "eq_rocketpropelledgrenade").length > 0 && use_explor == false) {
-            console.log("FOUND IT")
         }
 
         let FactionEquipRestrictionList : EquipmentRestriction[] = []
@@ -2101,10 +2117,6 @@ class UserWarband extends DynamicContextObject {
                     }
                 }
             }
-        }
-
-        if (ListOfRels.filter(item => item.EquipmentItem.ID == "eq_rocketpropelledgrenade").length > 0 && use_explor == false) {
-            console.log("FOUND IT")
         }
 
         return ListOfRels

@@ -3249,7 +3249,7 @@
         "team": "hell",
         "stats" : {            
             "movement": 6,
-            "melee": 1,
+            "melee": 3,
             "ranged": 1,
             "armour": 0,
             "movetype": 0,
@@ -3257,7 +3257,7 @@
             "base": [60]
         },
         "keywords" : ["kw_blackgrail","kw_elite","kw_leader","kw_tough","kw_fear"],
-        "abilities" : ["ab_undeadfortitude","ab_overwhelminghorde","ab_pestilent","ab_frenziedfollowers","ab_cadreofflesh","ab_arcanaputrescere"]
+        "abilities" : ["ab_undeadfortitude","ab_pestilent","ab_frenziedfollowers","ab_cadreofflesh","ab_arcanaputrescere"]
     },
     {
         "id": "md_gergorigula",

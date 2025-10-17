@@ -2025,6 +2025,18 @@ class WarbandMember extends DynamicContextObject {
         }
     }
 
+    /**
+     * Is this model dead?
+     * @return boolean
+     */
+    public IsDead () {
+        if (this.State == 'dead') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public async GetMaxScars() {
         if (this.GeneralCache.max_scars != null) {
             return this.GeneralCache.max_scars
@@ -3133,101 +3145,7 @@ class WarbandMember extends DynamicContextObject {
     }
 
 
-    /**
-     * Returns the TTS Export text for this model
-     */
-    public GetTTSExportText (type: "short" | "medium" | "full") {
 
-        // define colors:
-        const cl_main = 'd01317';
-        const cl_other = 'ff0000';
-        const cl_move = 'ff0000';
-        const cl_melee = 'ff0000';
-        const cl_ranged = 'ff0000';
-        const cl_armour = 'ff0000';
-        const cl_equip = 'ff0000';
-
-        // collection of unicode chars
-        // ⊕ ✝ ⚔ ✦ 🗡 ⛨ 🛡 🎯 ✦ ✧ ✪ ⬆ ⬇ ☠ 🜏 🜍 ✜ ✢ ✠ 🜂 🜄 💀 🔼 🔪 ✹
-        // name: ☩☩
-        // ranged: ✜
-        // melee: ⚔
-        // armour: ⛨
-        // equipment: 🛠
-        // goetic: 🜏
-        // abilities: ✦
-        // upgrades: 🜍
-        // advancements: 🜂
-        // injuries: 🜄
-
-        // dummy data
-
-        // // Long version
-        // ☩☩ RFK Jr. ☩☩
-        // Anointed Heavy Infantry
-        // STRONG, ELITE
-        // 6"/Infantry | Melee +1D | Ranged +2D | Armour -2
-        //
-        // ✜ Anti-Materiel Rifle - 36"
-        // HEAVY, CRITICAL
-        // +2 to Injuries against Unactivated // short from modifer element
-        // This weapon rolls injuries against unactivated models with a flat +2 bonus. // long from actual rules
-        //
-        // ⚔ Head Taker - Melee
-        // This weapon rolls injuries against unactivated models with a flat +2 bonus.
-        //
-        // ⛨ Reinforced Armour
-        // Grants a -2 modifier to all injury rolls against the model wearing this armour.
-        //
-        // 🛠 Musical Instrument
-        // CONSUMABLE
-        // Any friendly models within 4" of the musician who is not Down can add +1 DICE to their Dash ACTIONS. Musical Instruments take one hand to use at all times as if it were a weapon.
-        //
-        // 🜍 Heretic Legionnaire - Ranged Legionnaire
-        // The Trooper becomes a Legionnaire and chooses to gain +1 DICE for either ranged or melee attacks.
-        // Melee Legionnaire
-        //
-        // ✦ Levitate
-        // The Artillery Witch can Climb up without taking an ACTION and does not roll on the Injury Chart when falling.
-        //
-        //
-        // 🜏 Slavemaster
-        // As a GOETIC (1) spell, this model can command any friendly Yoke Fiend within 12” to do one of the following:
-        //
-        // Move: The Yoke Fiend takes a Standard Move ACTION of up to 6”.
-        // Ranged Attack: The Yoke Fiend takes a Ranged Attack ACTION with any Ranged weapon it has.
-        // Melee Attack: The Yoke Fiend takes a Melee Attack ACTION.
-        // Sacrifice: The Yoke Fiend kills itself (it is removed from the board immediately as a casualty).
-        //
-        // 🜂 Sharp Eyes
-        // This model ignores penalties for long range when using ranged weapons.
-        //
-        // 🜄 Head Wound
-        // This model loses the Keyword ELITE. It can regain it in the future as normal via promotion, representing recovery.
-        //
-        // // Short Version:
-        // ☩☩ RFK Jr. ☩☩
-        // Anointed Heavy Infantry
-        // STRONG, ELITE
-        // 6"/Infantry | Melee +1D | Ranged +2D | Armour -2
-        //
-        // ✜ Anti-Materiel Rifle
-        // ⚔ Head Taker
-        // ⛨ Reinforced Armour
-        // 🛠 Musical Instrument
-        //
-        // 🜍 Heretic Legionnaire - Ranged Legionnaire
-        // ✦ Levitate
-        // 🜏 Slavemaster
-        // 🜂 Sharp Eyes
-        // 🜄 Head Wound
-
-
-        // return ex.join("\n");
-
-        return '';
-
-    }
 }
 
 export {IWarbandMember, WarbandMember}

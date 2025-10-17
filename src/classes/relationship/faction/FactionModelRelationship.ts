@@ -57,6 +57,13 @@ class FactionModelRelationship extends StaticOptionContextObject {
         this.Model = await ModelFactory.CreateNewModel(model_id, null);
     }
 
+    public GetPresentationName() {
+        if (this.Model != undefined) {
+            return this.Model.GetTrueName();
+        }
+        return "name_unidentified";
+    }
+
     // Return the name of the model, updated to reflect that it's a leader
     public GetTrueName() {
         if (this.Model.Name) {

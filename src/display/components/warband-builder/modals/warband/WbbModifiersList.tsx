@@ -39,9 +39,9 @@ const WbbModifiersList = () => {
             {modifiers.length > 0 &&
                 <>
                     <h3 className={'category-headline'} key={keyvar}>Modifiers</h3>
-                    {modifiers.map((item) =>
+                    {modifiers.map((item, index) =>
                         <WbbEditViewExtraModifier
-                            key={item.GetTrueName()}
+                            key={item.GetTrueName()+index}
                             warbprop={item}
                             index={modifiers.indexOf(item)}
                         />
@@ -52,9 +52,9 @@ const WbbModifiersList = () => {
             {fireteams.length > 0 &&
                 <>
                     <h3 className={'category-headline'}>Fireteams</h3>
-                    {fireteams.map((item) =>
+                    {fireteams.map((item, index) =>
                         <WbbEditViewExtraModifier
-                            key={item.GetTrueName()}
+                            key={item.GetTrueName() + index}
                             warbprop={item}
                             index={modifiers.indexOf(item)}
                         />
@@ -65,9 +65,9 @@ const WbbModifiersList = () => {
             {locations.length > 0 &&
                 <>
                     <h3 className={'category-headline'}>Exploration Choices</h3>
-                    {locations.map((item) =>
+                    {locations.map((item, index) =>
                         <WbbEditViewExtraModifier
-                            key={item.GetTrueName()}
+                            key={item.GetTrueName() + index}
                             warbprop={item}
                             index={modifiers.indexOf(item)}
                         />
