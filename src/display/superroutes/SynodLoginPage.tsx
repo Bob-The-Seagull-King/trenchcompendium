@@ -153,21 +153,6 @@ const SynodLoginPage: React.FC = () => {
                 </div>
             </div>
 
-            {false &&
-                <>
-                    <div className={"container mt-3 pt-3"}>
-                        <SynodUserWarbands/>
-
-                        {isLoggedIn() && (
-                            <SynodUpdateWarband/>
-                        )}
-
-                        {isLoggedIn() && (
-                            <SynodCreateWarband/>
-                        )}
-                    </div>
-                </>
-            }
             <Modal_LoginWarbandMerge
                 show={showWarbandMergeModal}
                 onClose={() => {
