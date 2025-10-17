@@ -18,6 +18,7 @@ const SynodLoginPage: React.FC = () => {
     const [visbibleLogin, setvisbibleLogin] = useState(true);
     const [visbibleSignup, setvisbibleSignup] = useState(false);
     const [visbibleReset, setvisbibleReset] = useState(false);
+    const [visibleLocal] = useState(WarbandManager.HasLocalWarbands());
     const [keyVar, setkeyVar] = useState(0);
 
     // Shows the upload warbands modal
@@ -52,7 +53,7 @@ const SynodLoginPage: React.FC = () => {
     }
 
     useEffect(() => {
-        if (isLoggedIn() && userId && !(WarbandManager.HasLocalWarbands())) {
+        if (isLoggedIn() && userId && !visibleLocal) {
             navigate(`/profile/${userId}`,{state: Date.now().toString()})
         }
     }, [userId])
@@ -72,11 +73,11 @@ const SynodLoginPage: React.FC = () => {
                         <div className={"synod-login-wrap synod-login-form"}>
                             <SynodLogin onLoginSuccess={() => {
                                 if (userId) {
-                                    if (!(WarbandManager.HasLocalWarbands())) {
+                                    console.log(visibleLocal)
+                                    if (!visibleLocal) {
                                         navigate(`/profile/${userId}`)
                                     } else {
                                         setShowWarbandMergeModal(true)
-                                        setkeyVar(keyVar + 1);
                                     }
                                 }
                             }} />
@@ -167,17 +168,15 @@ const SynodLoginPage: React.FC = () => {
                     </div>
                 </>
             }
-            <div key={keyVar + (showWarbandMergeModal? "1" : "0")}>
-                <Modal_LoginWarbandMerge
-                    show={showWarbandMergeModal}
-                    onClose={() => {
-                        setShowWarbandMergeModal(false)
-                        if (userId) {
-                            navigate(`/profile/${userId}`)
-                        }
-                    }}
-                />
-            </div>
+            <Modal_LoginWarbandMerge
+                show={showWarbandMergeModal}
+                onClose={() => {
+                    setShowWarbandMergeModal(false)
+                    if (userId) {
+                        navigate(`/profile/${userId}`)
+                    }
+                }}
+            />
         </div>
     );
 };

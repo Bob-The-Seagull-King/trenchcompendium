@@ -94,7 +94,7 @@ export function GetPresentationStatistic(base_stats : ModelStatistics, stat_opti
                 }
             }
             if (add_to_merc) {
-                for (let j = 0; j < option_suite.length; j++) {
+                for (let j = 0; option_suite.length; j++) {
                     const cur_opt = option_suite[j];
                     if (cur_opt.armour != undefined) {armour_op.push(cur_opt.armour)}
                     if (cur_opt.base != undefined) {base_op.push(cur_opt.base)}
