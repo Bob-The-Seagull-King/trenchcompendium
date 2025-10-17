@@ -841,6 +841,25 @@ class WarbandMember extends DynamicContextObject {
         return this.Elite;
     }
 
+    /**
+     * Returns the display string of this fighter's type
+     *
+     * @return string
+     */
+    public GetMemberType () : string {
+        if( this.IsElite() ) {
+            return 'Elite'
+        }
+        if( this.IsTroop() ) {
+            return 'Troop'
+        }
+        if( this.IsMercenary() ) {
+            return 'Mercenary'
+        }
+
+        return 'Troop'
+    }
+
     public GetEquipment() {
         
         const options : RealWarbandPurchaseEquipment[] = [ ];
@@ -2029,6 +2048,21 @@ class WarbandMember extends DynamicContextObject {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns the display string for this member's type
+     * @constructor
+     */
+    public GetMemberState () {
+        if( this.IsDead() ) {
+            return 'Dead'
+        }
+        if( this.IsReserve()) {
+            return 'Reserve'
+        }
+
+        return 'Active'
     }
 
     public async GetMaxScars() {

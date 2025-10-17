@@ -91,57 +91,66 @@ const WbbJsonLDSchema: React.FC = () => {
     const wb_data = {
         '@context'      : 'https://schema.org',
         '@type'         : 'WebPage',
-        '@id'           : wb_url,
+        '@id'           : wb_url+'#webpage',
         'url'           : wb_url,
         "inLanguage"    : "en",
         "name"          : UserWarband.GetName(),
-        'identifier'    : 'warband-' + warband.id,
 
-        'about'         : {
-            '@type'         : 'Thing',
-            'name'          : UserWarband.GetFactionName(),
-            'url'           : faction_URL,
-        },
-        ...(UserWarband.GetWarbandNotes() && { description: UserWarband.GetWarbandNotes() }),
-        ...(UserWarband.GetLore() && { text: UserWarband.GetLore() }),
-        "additionalProperty": [
-            { "@type": "PropertyValue", "name": "Rating (Glory)",
-                "value": UserWarband.GetCostDucats(),   "unitText": "Glory"
+        "mainEntity": {
+            '@type'         : 'Collection',
+            '@id'           : wb_url,
+            'url'           : wb_url,
+            "name"          : UserWarband.GetName(),
+            'identifier'    : 'warband-' + warband.id,
+            "mainEntityOfPage": {
+                "@id": wb_url+'#webpage'
             },
-            { "@type": "PropertyValue", "name": "Rating (Ducats)",
-                "value": UserWarband.GetCostGlory(),  "unitText": "Ducats"
+            'about'         : {
+                '@type'         : 'Thing',
+                'name'          : UserWarband.GetFactionName(),
+                'url'           : faction_URL,
             },
-            { "@type": "PropertyValue", "name": "Value (Ducats)",
-                "value": UserWarband.GetCostDucatsTotal(), "unitText": "Ducats"
-            },
-            { "@type": "PropertyValue", "name": "Value (Glory)",
-                "value": UserWarband.GetCostGloryTotal(),   "unitText": "Glory"
-            },
-            { "@type": "PropertyValue", "name": "Victory Points",
-                "value": UserWarband.GetVictoryPoints()
-            },
-            { "@type": "PropertyValue", "name": "Failed Promotions",
-                "value": UserWarband.Context.FailedPromotions
-            },
-            { "@type": "PropertyValue", "name": "Campaign Round",
-                "value": UserWarband.GetCampaignCycleView()
-            },
-            { "@type": "PropertyValue", "name": "Campaign Notes",
-                "value": UserWarband.GetCampaignNotes()
-            }
-        ],
-        "hasPart": [
-            {
-                "@type": "ItemList",
-                "name": "Members",
-                "itemListElement": wb_members
-            },
-            {
-                "@type": "ItemList",
-                "name": "Exploration Locations",
-                "itemListElement": wb_locations
-            },
-        ]
+            ...(UserWarband.GetWarbandNotes() && { description: UserWarband.GetWarbandNotes() }),
+            ...(UserWarband.GetLore() && { text: UserWarband.GetLore() }),
+            "additionalProperty": [
+                { "@type": "PropertyValue", "name": "Rating (Glory)",
+                    "value": UserWarband.GetCostDucats(),   "unitText": "Glory"
+                },
+                { "@type": "PropertyValue", "name": "Rating (Ducats)",
+                    "value": UserWarband.GetCostGlory(),  "unitText": "Ducats"
+                },
+                { "@type": "PropertyValue", "name": "Value (Ducats)",
+                    "value": UserWarband.GetCostDucatsTotal(), "unitText": "Ducats"
+                },
+                { "@type": "PropertyValue", "name": "Value (Glory)",
+                    "value": UserWarband.GetCostGloryTotal(),   "unitText": "Glory"
+                },
+                { "@type": "PropertyValue", "name": "Victory Points",
+                    "value": UserWarband.GetVictoryPoints()
+                },
+                { "@type": "PropertyValue", "name": "Failed Promotions",
+                    "value": UserWarband.Context.FailedPromotions
+                },
+                { "@type": "PropertyValue", "name": "Campaign Round",
+                    "value": UserWarband.GetCampaignCycleView()
+                },
+                { "@type": "PropertyValue", "name": "Campaign Notes",
+                    "value": UserWarband.GetCampaignNotes()
+                }
+            ],
+            "hasPart": [
+                {
+                    "@type": "ItemList",
+                    "name": "Members",
+                    "itemListElement": wb_members
+                },
+                {
+                    "@type": "ItemList",
+                    "name": "Exploration Locations",
+                    "itemListElement": wb_locations
+                },
+            ]
+        }
     }
 
     /**
