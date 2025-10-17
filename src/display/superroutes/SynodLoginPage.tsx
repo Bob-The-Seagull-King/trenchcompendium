@@ -72,12 +72,11 @@ const SynodLoginPage: React.FC = () => {
                     {visbibleLogin &&
                         <div className={"synod-login-wrap synod-login-form"}>
                             <SynodLogin onLoginSuccess={() => {
-                                if (userId) {
-                                    console.log(visibleLocal)
-                                    if (!visibleLocal) {
+                                if(visibleLocal) {
+                                    setShowWarbandMergeModal(true)
+                                } else {
+                                    if (userId) {
                                         navigate(`/profile/${userId}`)
-                                    } else {
-                                        setShowWarbandMergeModal(true)
                                     }
                                 }
                             }} />

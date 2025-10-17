@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFloppyDisk, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faFloppyDisk, faXmark} from "@fortawesome/free-solid-svg-icons";
 import AlertCustom from "../generics/AlertCustom";
 import { ToolsController } from "../../../classes/_high_level_controllers/ToolsController";
 import { SumWarband, WarbandManager } from "../../../classes/saveitems/Warband/WarbandManager";
@@ -24,7 +24,9 @@ const Modal_LoginWarbandMerge: React.FC<ModalLoginWarbandMergeProps> = ({
         
     const [manager, setmanager] = useState<null | WarbandManager>();
     const [locals, setlocals] = useState<SumWarband[]>([]);
-    
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+
     useEffect(() => {
         async function HandleManager() {
             const Manager : ToolsController = ToolsController.getInstance();
@@ -37,7 +39,9 @@ const Modal_LoginWarbandMerge: React.FC<ModalLoginWarbandMergeProps> = ({
     }, [])
 
     const uploadLocalWarbands = () => {
-        
+
+        setIsLoading(true);
+
         const Manager : ToolsController = ToolsController.getInstance();
         Manager.UserWarbandManager.UploadWarbands().then(() => {onClose()})
         
@@ -83,15 +87,25 @@ const Modal_LoginWarbandMerge: React.FC<ModalLoginWarbandMergeProps> = ({
                     </ul>
                 </AlertCustom>
 
-                <button
-                    className={'btn btn-primary w-100 mb-3'}
-                    onClick={() => {
-                        uploadLocalWarbands();
-                    }}
-                >
-                    <FontAwesomeIcon icon={faFloppyDisk} className={'me-2'}/>
-                    {'Upload warbands'}
-                </button>
+                {isLoading ? (
+                    <button
+                        className={'btn btn-primary w-100 mb-3'}
+                        disabled={true}
+                    >
+                        <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin me-2'}/>
+                        {'Uploading'}
+                    </button>
+                ):(
+                    <button
+                        className={'btn btn-primary w-100 mb-3'}
+                        onClick={() => {
+                            uploadLocalWarbands();
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faFloppyDisk} className={'me-2'}/>
+                        {'Upload warbands'}
+                    </button>
+                )}
             </Modal.Body>
         </Modal>
     );
