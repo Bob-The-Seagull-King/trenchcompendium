@@ -22,11 +22,6 @@
         <!-- 1) Referrer-Policy, damit FC euren Origin sieht -->
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-            // Pre-init the global queue so Array.isArray(window.adsbygoogle) is true even before the library loads
-            window.adsbygoogle = window.adsbygoogle || [];
-            // Default to Non-Personalized Ads until consent; Klaro will override later
-            // window.adsbygoogle.requestNonPersonalizedAds = 0;
-        </script>
 
         <!-- 4) FC-Debug-Logs + Consent Mode Hook -->
         <script>
