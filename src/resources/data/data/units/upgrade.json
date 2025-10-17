@@ -1392,17 +1392,17 @@
                     }
                 ],
                 "additions": [
-                    "kw_critical"
+                    "kw_shrapnel"
                 ]
             }
         },
         "description": [            
             {
                 "tags": {"desc_type" : "default"},
-                "content": "Allows the Butcher Knight to ingore the Off-Hand special rule (-1 DICE to attacks with an off-hand weapon) and gives them the CRITICAL keyword on any melee weapon they choose to wield for an additional +5 ducats.",
+                "content": "Allows the Butcher Knight to ingore the Off-Hand special rule (-1 DICE to attacks with an off-hand weapon) and gives them the SHRAPNEL keyword on any melee weapon they choose to wield for an additional +5 ducats.",
                 "glossary": [
                     {"val": "-1 DICE", "id": "kw_minusdice"},
-                    {"val": "CRITICAL", "id": "kw_critical"}
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
                 ]
             }
         ],
