@@ -1,31 +1,79 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
 import SynodFactionImage from "../../utility/SynodFactionImage";
 import SynodImage from "../../utility/SynodImage";
 import SynodImageWithCredit from "../../utility/SynodImageWithCredits";
+import {ROUTES} from "../../resources/routes-constants";
+import {SYNOD} from "../../resources/api-constants";
 
 const CampaignSetup: React.FC = () => {
 
     const navigate = useNavigate();
 
+    const [isLoading, setisloading] = useState<boolean>(false);
     const [campaignName, setCampaignName] = useState<string>("");
     const [campaignDescription, setCampaignDescription] = useState<string>("");
 
-    const handleCreateCampaign = () => {
+    const handleCreateCampaign = async () => {
+
+        setisloading(true);
+        if (!campaignName?.trim()) {
+            alert("Please enter a campaign name.");
+            return;
+        }
+
+        const url = SYNOD.URL + "/wp-json/synod/v1/campaigns/create";
         // TODO: Replace with API call to /campaigns/create
 
-        alert('TODO create campaign here');
+        const token = localStorage.getItem('jwtToken')
+        const headers: Record<string, string> = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        };
+        if (token) headers["Authorization"] = `Bearer ${token}`;
 
-        console.log("Creating campaign with data:", {
-            title: campaignName,
-            description: campaignDescription
-        });
+        const payload: any = {
+            title: campaignName.trim(),
+        };
+        if (campaignDescription?.trim()) {
+            payload.description = campaignDescription.trim();
+        }
 
-        // navigate after creation
-        // navigate(`/campaigns/${newCampaignId}`);
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(payload),
+            });
+
+            // Expect WP Error format
+            const data = await res.json().catch(() => null);
+
+            if (!res.ok) {
+                const msg =
+                    data?.message ||
+                    `HTTP ${res.status} ${res.statusText}`;
+                throw new Error(msg);
+            }
+
+            console.log("Campaign created:", data);
+
+            // Laut deiner Beispielstruktur:
+            const newCampaignId =
+                data?.campaign_id ?? data?.id ?? data?.post_id;
+
+            if (newCampaignId) {
+                navigate(`/campaigns/${newCampaignId}`);
+            } else {
+                alert("Campaign created but unable to find it. Please reload the page");
+            }
+        } catch (err: any) {
+            console.error("Error creating campaign:", err);
+            alert(`Campaign could not be created:\n${err?.message ?? err}`);
+        }
     };
 
     return (
@@ -87,13 +135,25 @@ const CampaignSetup: React.FC = () => {
 
                                     {/* Create Campaign Button */}
                                     <div className="mb-3">
-                                        <button
-                                            className="btn btn-primary"
-                                            onClick={handleCreateCampaign}
-                                            disabled={!campaignName.trim()}
-                                        >
-                                            Create Campaign
-                                        </button>
+                                        {isLoading ? (
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={handleCreateCampaign}
+                                                disabled={true}
+                                            >
+                                                <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin me-2'} />
+                                                Creating Campaign
+                                            </button>
+
+                                        ):(
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={handleCreateCampaign}
+                                                disabled={!campaignName.trim() || isLoading}
+                                            >
+                                                Create Campaign
+                                            </button>
+                                        )}
                                     </div>
                                 </form>
                             </div>

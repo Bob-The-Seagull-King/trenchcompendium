@@ -7,20 +7,30 @@ import CampaignWarbands from "./components/CampaignWarbands";
 import CampaignPlayers from "./components/CampaignPlayers";
 import CMManagePanel from "./components/CMManagePanel";
 import CMHistory from "./components/CMHistory";
+import {Campaign} from "../../classes/saveitems/Campaign/Campaign";
+
+
 
 const CampaignManagerContent: React.FC = () => {
     const { userId, isLoggedIn } = useAuth()
 
-    const { campaign } = useCampaign();
+    const { campaign, loading, error, reload } = useCampaign();
 
-    console.log( campaign );
-    if (!campaign) return (
+    if (error) return (
+        <div className="container py-4">
+            <p style={{color:'crimson'}}>Error: {error}</p>
+            <button onClick={reload}>Retry</button>
+        </div>
+    );
+
+    if (!campaign || loading) return (
         <div className={'LoadingOverlay-wrap-100vh'}>
             <LoadingOverlay
                 message={'Loading Campaign'}
             />
         </div>
     );
+
 
     return (
         <div className="CampaignManager">
@@ -38,7 +48,7 @@ const CampaignManagerContent: React.FC = () => {
                         <div className={'col-12 col-md-7'}>
                             <CampaignSummary />
 
-                            <CMHistory />
+                            {/*<CMHistory />*/}
                         </div>
 
                         <div className={'col-12 col-md-5'}>

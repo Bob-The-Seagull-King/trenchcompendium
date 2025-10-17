@@ -6,6 +6,8 @@ import CMPlayerListEntry from "../micro-components/CMPlayerListEntry";
 const CampaignPlayers: React.FC = () => {
     const { campaign } = useCampaign();
 
+
+
     return (
         <div className="CampaignPlayers CampaignManager-card">
             <div className={'CampaignManager-card-title'}>
@@ -16,7 +18,7 @@ const CampaignPlayers: React.FC = () => {
 
             <div className={'CampaignManager-card-content'}>
                 <ul className={'players-list'}>
-                    {campaign.GetPlayers().map((player, idx) => (
+                    {campaign?.GetPlayers().map((player, idx) => (
                         <li key={idx} className={'player'}>
                             <CMPlayerListEntry player={player}/>
                         </li>

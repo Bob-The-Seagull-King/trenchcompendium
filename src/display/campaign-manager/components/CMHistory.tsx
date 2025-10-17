@@ -11,6 +11,10 @@ const CMHistory: React.FC = () => {
 
     const { campaign } = useCampaign();
 
+    if( !campaign) {
+        return null;
+    }
+
     return (
         <div className="CMHistory">
             <h2>

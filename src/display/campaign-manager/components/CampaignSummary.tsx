@@ -9,6 +9,10 @@ const CampaignSummary: React.FC = () => {
     const { campaign } = useCampaign();
     const { userId, isLoggedIn } = useAuth()
 
+    if( !campaign) {
+        return null;
+    }
+
     return (
         <div className="CampaignSummary CampaignManager-card">
             <div className={'CampaignManager-card-title'}>
@@ -57,7 +61,6 @@ const CampaignSummary: React.FC = () => {
                 <CMLatestAnnouncement />
 
                 <CMProgressGraph />
-
             </div>
         </div>
     );

@@ -1,24 +1,119 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import {Campaign} from "../classes/saveitems/Campaign/Campaign";
+// context/CampaignContext.tsx
+import React, {
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+    useCallback,
+    ReactNode,
+    useRef,
+} from "react";
+import { SYNOD } from "../resources/api-constants";
+import { Campaign, CampaignResponseDTO } from "../classes/saveitems/Campaign/Campaign";
 
-interface CampaignContextType {
-    campaign: Campaign;
-}
+type CampaignContextType = {
+    campaign: Campaign | null;
+    loading: boolean;
+    error: string | null;
+    reload: () => void;
+};
 
 const CampaignContext = createContext<CampaignContextType | undefined>(undefined);
 
-export const CampaignProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+type ProviderProps = {
+    children: ReactNode;
+    campaignId: string | number;
+};
+
+export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId }) => {
+    // Hold exactly one Campaign instance for the provider lifetime.
     const [campaign] = useState<Campaign>(() => new Campaign());
 
+    // UI state
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // Force consumers to rerender after mutating the same instance
+    const [version, setVersion] = useState(0);
+
+    // Keep the latest abort controller to cancel in-flight fetches on id change/unmount
+    const abortRef = useRef<AbortController | null>(null);
+
+    const reload = useCallback(async () => {
+        // Cancel any previous fetch
+        if (abortRef.current) abortRef.current.abort();
+        const controller = new AbortController();
+        abortRef.current = controller;
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            const res = await fetch(
+                `${SYNOD.URL}/wp-json/synod/v1/campaigns/${campaignId}`,
+                {
+                    method: "GET",
+                    headers: { Accept: "application/json" },
+                    signal: controller.signal,
+                }
+            );
+
+            // Parse JSON (gracefully handle empty/invalid bodies)
+            let data: CampaignResponseDTO | null = null;
+            try {
+                data = (await res.json()) as CampaignResponseDTO;
+            } catch {
+                data = null;
+            }
+
+            if (!res.ok || !data) {
+                const msg = (data as any)?.message || `HTTP ${res.status} ${res.statusText}`;
+                throw new Error(msg);
+            }
+
+            // Hydrate the domain instance in-place
+            campaign.hydrate(data);
+
+            // Bump version so consumers re-render (same instance, new data inside)
+            setVersion(v => v + 1);
+        } catch (e: any) {
+            // Ignore AbortError (route changes/unmount)
+            if (e?.name !== "AbortError") {
+                setError(e?.message ?? "Failed to load campaign.");
+            }
+        } finally {
+            // Only clear loading if this request is still the active one
+            if (!controller.signal.aborted) setLoading(false);
+        }
+    }, [campaign, campaignId]);
+
+    // Initial load + reload on id change
+    useEffect(() => {
+        if (!campaignId) return;
+        reload();
+        return () => {
+            if (abortRef.current) abortRef.current.abort();
+        };
+    }, [campaignId, reload]);
+
     return (
-        <CampaignContext.Provider value={{ campaign }}>
+        <CampaignContext.Provider
+            value={{
+                campaign: campaign ?? null,
+                loading,
+                error,
+                reload,
+            }}
+            // Consumers will re-render when loading/error change or when `reload()` bumps data via setVersion.
+            // `version` is not in the value to keep a stable reference; UI updates via state above.
+        >
             {children}
         </CampaignContext.Provider>
     );
 };
 
 export const useCampaign = (): CampaignContextType => {
-    const context = useContext(CampaignContext);
-    if (!context) throw new Error('useCampaign must be used within a CampaignProvider');
-    return context;
+    const ctx = useContext(CampaignContext);
+    if (!ctx) throw new Error("useCampaign must be used within a CampaignProvider");
+    return ctx;
 };

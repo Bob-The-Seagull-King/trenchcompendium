@@ -4,24 +4,13 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import CMPlayerSmall from "./CMPlayerSmall";
+import {CampaignWarband} from "../../../classes/saveitems/Campaign/Campaign";
 
 
 interface CMHistoryGameProps {
     game: {
         date: string;
-        warbands: {
-            warbandName: string;
-            warbandImageId: number;
-            warbandId: number;
-            warbandImageURL: string;
-            playerName: string;
-            playerProfileUrl: string;
-            playerId: number;
-            playerImageId: number;
-            playerImageURL: string;
-            warbandRating: string;
-            warbandRound: number;
-        }[];
+        warbands: CampaignWarband[];
     }
 }
 
@@ -47,16 +36,16 @@ const CMHistoryGame: React.FC<CMHistoryGameProps> = (game) => {
                                          key={index}
                                     >
                                         <SynodImageWithCredit
-                                            imageId={warband.warbandImageId}
+                                            imageId={warband.ImageId || 0}
                                             className={'CMHistoryGame-Game-warband-image'}
                                         />
 
                                         <div className={'CMHistoryGame-Game-text'}>
                                             <div className={'CMHistoryGame-Game-warband-name'}>
-                                                {warband.warbandName}
+                                                {warband.Name}
                                             </div>
                                             <div className={'CMHistoryGame-Game-player-name'}>
-                                                {warband.playerName}
+                                                {warband.PlayerName}
                                             </div>
                                         </div>
                                     </div>
@@ -71,9 +60,9 @@ const CMHistoryGame: React.FC<CMHistoryGameProps> = (game) => {
                     <CMPlayerSmall
                         key={index}
                         player={{
-                            playerId: warband.playerId,
-                            playerName: warband.playerName,
-                            playerImageId: warband.playerImageId
+                            playerId: warband.PlayerId,
+                            playerName: warband.PlayerName,
+                            playerImageId: warband.PlayerImageId
                         }}
                     />
 
@@ -95,7 +84,7 @@ const CMHistoryGame: React.FC<CMHistoryGameProps> = (game) => {
                             {'Winner: '}
                         </strong>
                         <span>
-                            {game.game.warbands[1].warbandName}
+                            {game.game.warbands[1].Name}
                         </span>
                     </div>
 

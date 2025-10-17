@@ -17,42 +17,42 @@ const CampaignOverview: React.FC = () => {
 
 
     // Dummy-Data
-    const dummyCampaigns: Campaign[] = [
-        new Campaign({
-            id: "1",
-            name: "The Iron Crusade",
-            players: [
-                {
-                    playerName: "Iron Lord",
-                    playerProfileUrl: "profile/ironlord",
-                    playerId: 10,
-                    playerImageId: 3001,
-                    playerStatus: "Free Member",
-                    playerImageURL:
-                        "https://synod.trench-companion.com/wp-content/uploads/2025/07/Chorister-Profile-Picture.jpg",
-                },
-            ],
-            warbands: [],
-            created: new Date("2025-06-01"),
-        }),
-        new Campaign({
-            id: "2",
-            name: "Shadows of New Antioch",
-            players: [
-                {
-                    playerName: "Shadowmaster",
-                    playerProfileUrl: "profile/shadowmaster",
-                    playerId: 11,
-                    playerImageId: 3002,
-                    playerStatus: "Supporter",
-                    playerImageURL:
-                        "https://synod.trench-companion.com/wp-content/uploads/2025/07/Yuzbasi-Captain-Profile-Picture-300x300.jpg",
-                },
-            ],
-            warbands: [],
-            created: new Date("2025-07-15"),
-        }),
-    ];
+    // const dummyCampaigns: Campaign[] = [
+    //     new Campaign({
+    //         id: "1",
+    //         name: "The Iron Crusade",
+    //         players: [
+    //             {
+    //                 playerName: "Iron Lord",
+    //                 playerProfileUrl: "profile/ironlord",
+    //                 playerId: 10,
+    //                 playerImageId: 3001,
+    //                 playerStatus: "Free Member",
+    //                 playerImageURL:
+    //                     "https://synod.trench-companion.com/wp-content/uploads/2025/07/Chorister-Profile-Picture.jpg",
+    //             },
+    //         ],
+    //         warbands: [],
+    //         created: new Date("2025-06-01"),
+    //     }),
+    //     new Campaign({
+    //         id: "2",
+    //         name: "Shadows of New Antioch",
+    //         players: [
+    //             {
+    //                 playerName: "Shadowmaster",
+    //                 playerProfileUrl: "profile/shadowmaster",
+    //                 playerId: 11,
+    //                 playerImageId: 3002,
+    //                 playerStatus: "Supporter",
+    //                 playerImageURL:
+    //                     "https://synod.trench-companion.com/wp-content/uploads/2025/07/Yuzbasi-Captain-Profile-Picture-300x300.jpg",
+    //             },
+    //         ],
+    //         warbands: [],
+    //         created: new Date("2025-07-15"),
+    //     }),
+    // ];
 
     const navigate = useNavigate();
 
@@ -62,13 +62,13 @@ const CampaignOverview: React.FC = () => {
                 <h1 className="">{'Your Campaigns'}</h1>
 
                 <div className={'row'}>
-                    {dummyCampaigns.map((campaign) => (
-                        <CampaignProvider key={campaign.id} >
-                            <PopoverProvider>
-                                <CMCampaignListItem campaign={campaign} />
-                            </PopoverProvider>
-                        </CampaignProvider>
-                    ))}
+                    {/*{dummyCampaigns.map((campaign) => (*/}
+                    {/*    <CampaignProvider key={campaign.id} >*/}
+                    {/*        <PopoverProvider>*/}
+                    {/*            <CMCampaignListItem campaign={campaign} />*/}
+                    {/*        </PopoverProvider>*/}
+                    {/*    </CampaignProvider>*/}
+                    {/*))}*/}
 
                     <div className={'col'}>
                         <CustomNavLink

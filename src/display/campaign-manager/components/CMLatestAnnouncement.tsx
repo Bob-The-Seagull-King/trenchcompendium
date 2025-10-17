@@ -5,7 +5,26 @@ import CMContextualPopover from "./CMContextualPopover";
 const CMLatestAnnouncement: React.FC = () => {
     const { campaign } = useCampaign();
 
-    const announcement = campaign.GetLatestAnnouncement();
+    if( !campaign) {
+        return null;
+    }
+
+    const announcement = campaign.GetLatestAnnouncement(); // CampaignAnnouncement | null
+    if (!announcement) {
+        // @TODO create better empty state
+        return (
+            <div className="CMLatestAnnouncement">
+                <h3 className="CMLatestAnnouncement-headline">Latest Announcement</h3>
+                <p className="text-muted">No announcements yet.</p>
+            </div>
+        );
+    }
+
+    // Format the date from the Date getter
+    const dateStr = new Intl.DateTimeFormat(navigator.language, {
+        dateStyle: "medium",
+        timeStyle: "short",
+    }).format(announcement.Date);
 
     return (
         <div className="CMLatestAnnouncement">
@@ -21,14 +40,15 @@ const CMLatestAnnouncement: React.FC = () => {
 
             <div className={'CMLatestAnnouncement-content'}>
                 <h4 className={'CMLatestAnnouncement-title'}>
-                    {announcement.title}
+                    {announcement.Author.Nickname}
                 </h4>
                 <div className={'CMLatestAnnouncement-date'}>
-                    {announcement.date}
+                    {dateStr}
                 </div>
-                <p className={'CMLatestAnnouncement-text'}>
-                    {announcement.text}
-                </p>
+                <div className={'CMLatestAnnouncement-text'}
+                     dangerouslySetInnerHTML={{ __html: announcement.Html }}
+                >
+                </div>
             </div>
 
         </div>

@@ -5,35 +5,29 @@ import {useNavigate} from "react-router-dom";
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import CMContextualPopover from "../components/CMContextualPopover";
+import {CampaignUser} from "../../../classes/saveitems/Campaign/Campaign";
 
 // @TODO: this is only dummy data
 interface CMPlayerListEntryProps {
-    player: {
-        playerName: string;
-        playerProfileUrl: string;
-        playerId: number;
-        playerImageId: number;
-        playerStatus: string;
-        playerImageURL: string;
-    };
+    player: CampaignUser;
 }
 
 const CMPlayerListEntry: React.FC<CMPlayerListEntryProps> = ({ player }) => {
     const navigate = useNavigate();
 
-
     return (
         <div className="CMPlayerListEntry">
             <CustomNavLink
                 classes={'user-name'}
-                link={`/profile/${player.playerId}`}
+                link={`/profile/${player.Id}`}
                 runfunc={() => {
-                    navigate(`/profile/${player.playerId}`, {state: Date.now().toString()})
+                    navigate(`/profile/${player.Id}`, {state: Date.now().toString()})
                 }}>
 
                 <div className={'pfp-wrap'}>
                     <SynodImageWithCredit
-                        imageId={player.playerImageId}
+                        imageId={player.AvatarId}
+                        size={'small'}
                         className={'pfp'}
                     />
                 </div>
@@ -41,19 +35,19 @@ const CMPlayerListEntry: React.FC<CMPlayerListEntryProps> = ({ player }) => {
 
             <CustomNavLink
                 classes={'user-name'}
-                link={`/profile/${player.playerId}`}
+                link={`/profile/${player.Id}`}
                 runfunc={() => {
-                    navigate(`/profile/${player.playerId}`, {state: Date.now().toString()})
+                    navigate(`/profile/${player.Id}`, {state: Date.now().toString()})
                 }}>
-                {player.playerName}
+                {player.Name}
             </CustomNavLink>
 
             <div className={'user-status'}>
-                {player.playerStatus}
+                {player.GetSupporterStatus()}
             </div>
 
             <CMContextualPopover
-                id={`player-${player.playerId}`}
+                id={`player-${player.Id}`}
                 type="player"
                 item={player} // this is a placeholder
             />

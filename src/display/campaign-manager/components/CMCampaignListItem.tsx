@@ -64,9 +64,9 @@ const CMCampaignListItem: React.FC<CMCampaignListItemProps> = ({ campaign }) => 
 
         <CustomNavLink
             classes={'CMCampaignListItem-outer'}
-            link={`/campaigns/${campaign.GetID()}`}
+            link={`/campaigns/${campaign.GetId()}`}
             runfunc={() => {
-                navigate(`/campaigns/${campaign.GetID()}`,
+                navigate(`/campaigns/${campaign.GetId()}`,
                     {state: Date.now().toString()})
             }}>
             <div className="CMCampaignListItem">

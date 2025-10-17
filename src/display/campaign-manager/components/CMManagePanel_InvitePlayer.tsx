@@ -25,6 +25,10 @@ const dummyPlayers: DummyPlayer[] = [
 const CMManagePanel_InvitePlayer: React.FC = () => {
     const { campaign } = useCampaign();
 
+    if( !campaign) {
+        return null;
+    }
+
     const [show, setShow] = useState<boolean>(false);
     const [selectedPlayerIds, setSelectedPlayerIds] = useState<string[]>([]);
 

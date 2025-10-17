@@ -29,6 +29,10 @@ interface CMContextualPopoverProps {
 const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, item }) => {
 
     const { campaign } = useCampaign();
+    if( !campaign) {
+        return null;
+    }
+
     const { userId } = useAuth()
 
     const { activePopoverId, setActivePopoverId } = usePopover();

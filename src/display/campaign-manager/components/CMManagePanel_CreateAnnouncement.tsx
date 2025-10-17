@@ -9,14 +9,17 @@ import {useCampaign} from "../../../context/CampaignContext";
 const CMManagePanel_CreateAnnouncement: React.FC = () => {
     const { campaign } = useCampaign();
 
+    if( !campaign) {
+        return null;
+    }
+
     const [show, setShow] = useState<boolean>(false);
     const [announcementTitle, setAnnouncementTitle] = useState<string>('');
     const [announcement, setAnnouncement] = useState<string>('');
 
     // handler function
     const handleSubmit = () => {
-        campaign.CreateAnnouncement(announcement);
-        alert ('TODO: create announcement here')
+        campaign.CreateAnnouncement(announcementTitle, announcement);
         setShow(false);
     };
 
@@ -81,7 +84,7 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
                         onClick={handleSubmit}
                         disabled={announcement.trim() === ''}
                     >
-                        Update VP
+                        {'Create announcement'}
                     </Button>
                 </Modal.Footer>
             </Modal>

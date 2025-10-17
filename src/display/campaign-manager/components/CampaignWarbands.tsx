@@ -6,6 +6,9 @@ import CMWarbandListEntry from "../micro-components/CMWarbandListEntry";
 const CampaignWarbands: React.FC = () => {
     const { campaign } = useCampaign();
 
+    if( !campaign) {
+        return null;
+    }
 
     return (
         <div className="CampaignWarbands CampaignManager-card">

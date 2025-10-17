@@ -4,23 +4,13 @@ import CMRoundNumber from "./CMRoundNumber";
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import CMContextualPopover from "../components/CMContextualPopover";
+import {CampaignWarband} from "../../../classes/saveitems/Campaign/Campaign";
 
 // @TODO: this is only dummy data
 interface CMWarbandListEntryProps {
-    warband: {
-        warbandName: string;
-        warbandImageId: number;
-        warbandId: number;
-        warbandImageURL: string;
-        playerName: string;
-        playerProfileUrl: string;
-        playerId: number;
-        playerImageId: number;
-        playerImageURL: string;
-        warbandRating: string;
-        warbandRound: number;
-    };
+    warband: CampaignWarband;
 }
+
 
 const CMWarbandListEntry: React.FC<CMWarbandListEntryProps> = ({ warband }) => {
 
@@ -30,43 +20,45 @@ const CMWarbandListEntry: React.FC<CMWarbandListEntryProps> = ({ warband }) => {
         <div className="CMWarbandListEntry">
             <CustomNavLink
                 classes={'wb-image-wrap'}
-                link={`/warband/detail/${warband.warbandId}`}
+                link={`/warband/detail/${warband.Id}`}
                 runfunc={() => {
-                    navigate(`/warband/detail/${warband.warbandId}`)
+                    navigate(`/warband/detail/${warband.Id}`)
                 }}>
+
                 <SynodImageWithCredit
-                    imageId={warband.warbandImageId}
+                    imageId={warband.ImageId || 0}
                     className={''}
+                    size={'small'}
                 />
-                <CMRoundNumber round={warband.warbandRound} />
+                {/*<CMRoundNumber round={warband.warbandRound} />*/}
             </CustomNavLink>
 
 
             <div className={'CMWarbandListEntry-text'}>
                 <CustomNavLink
                     classes={'CMWarbandListEntry-wb-name'}
-                    link={`/warband/detail/${warband.warbandId}`}
+                    link={`/warband/detail/${warband.Id}`}
                     runfunc={() => {
-                        navigate(`/warband/detail/${warband.warbandId}`)
+                        navigate(`/warband/detail/${warband.Id}`)
                     }}>
-                    {warband.warbandName}
+                    {warband.Name}
                 </CustomNavLink>
                 <div className={'CMWarbandListEntry-wb-rating'}>
-                    {warband.warbandRating}
+                    {warband.RatingDucats}
                 </div>
 
                 <CustomNavLink
                     classes={'CMWarbandListEntry-player-name'}
-                    link={`/profile/${warband.playerId}`}
+                    link={`/profile/${warband.PlayerId}`}
                     runfunc={() => {
-                        navigate(`/profile/${warband.playerId}`)
+                        navigate(`/profile/${warband.PlayerId}`)
                     }}>
-                    {warband.playerName}
+                    {warband.PlayerName}
                 </CustomNavLink>
             </div>
 
             <CMContextualPopover
-                id={`warband-${warband.playerId}`}
+                id={`warband-${warband.PlayerId}`}
                 type="warband"
                 item={warband} // this is a placeholder
             />
