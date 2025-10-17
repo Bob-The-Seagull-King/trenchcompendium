@@ -9,7 +9,8 @@ import React, {
     useRef,
 } from "react";
 import { SYNOD } from "../resources/api-constants";
-import { Campaign, CampaignResponseDTO } from "../classes/saveitems/Campaign/Campaign";
+import { Campaign, ICampaign } from "../classes/saveitems/Campaign/Campaign";
+import { CampaignFactory } from "../factories/warband/CampaignFactory";
 
 type CampaignContextType = {
     campaign: Campaign | null;
@@ -22,12 +23,12 @@ const CampaignContext = createContext<CampaignContextType | undefined>(undefined
 
 type ProviderProps = {
     children: ReactNode;
-    campaignId: string | number;
+    campaignId: number;
 };
 
 export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId }) => {
     // Hold exactly one Campaign instance for the provider lifetime.
-    const [campaign] = useState<Campaign>(() => new Campaign());
+    const [campaign, setCampaign] = useState<Campaign | null>(null);
 
     // UI state
     const [loading, setLoading] = useState<boolean>(true);
@@ -49,31 +50,7 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
         setError(null);
 
         try {
-            const res = await fetch(
-                `${SYNOD.URL}/wp-json/synod/v1/campaigns/${campaignId}`,
-                {
-                    method: "GET",
-                    headers: { Accept: "application/json" },
-                    signal: controller.signal,
-                }
-            );
-
-            // Parse JSON (gracefully handle empty/invalid bodies)
-            let data: CampaignResponseDTO | null = null;
-            try {
-                data = (await res.json()) as CampaignResponseDTO;
-            } catch {
-                data = null;
-            }
-
-            if (!res.ok || !data) {
-                const msg = (data as any)?.message || `HTTP ${res.status} ${res.statusText}`;
-                throw new Error(msg);
-            }
-
-            // Hydrate the domain instance in-place
-            campaign.hydrate(data);
-
+            setCampaign(await CampaignFactory.GetCampaignPublicByID(campaignId))
             // Bump version so consumers re-render (same instance, new data inside)
             setVersion(v => v + 1);
         } catch (e: any) {

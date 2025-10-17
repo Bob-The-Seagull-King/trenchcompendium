@@ -1,10 +1,9 @@
 import React from 'react';
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
-import CMRoundNumber from "./CMRoundNumber";
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import CMContextualPopover from "../components/CMContextualPopover";
-import {CampaignWarband} from "../../../classes/saveitems/Campaign/Campaign";
+import {CampaignWarband} from "../../../classes/saveitems/Campaign/CampaignWarband";
 
 // @TODO: this is only dummy data
 interface CMWarbandListEntryProps {

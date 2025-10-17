@@ -1,198 +1,22 @@
 // classes/saveitems/Campaign/Campaign.ts
 
-// ---------- API DTOs (shapes returned by your WP REST API) ----------
-export interface CampaignUserDTO {
-    id?: number;               // in campaign_players
-    user_id?: number;          // in warband_user
-    nickname: string;
-    is_premium?: boolean;
-    profile_picture?: {
-        id: number;
-        image_id: number;
-        urls: Record<string, string>;     // sizes → url
-        source_title?: string;
-        source_url?: string;
-    };
-}
+import { CampaignFactory } from "../../../factories/warband/CampaignFactory";
+import { CampaignAnnouncement, ICampaignAnnouncement } from "./CampaignAnnouncement";
+import { ICampaignUser, CampaignUser } from "./CampaignUser";
+import { ICampaignWarband, CampaignWarband } from "./CampaignWarband";
 
-export interface CampaignWarbandDTO {
-    warband_id: number;
-    faction_slug: string;
-    faction_name: string;
-    warband_name: string;
-    warband_user: CampaignUserDTO;
-    warband_image?: {
-        image_id: number;
-        urls: Record<string, string>;
-        source_title?: string;
-        source_url?: string;
-    };
-    warband_rating_ducats_current: number;
-    warband_rating_glory_current: number;
-    warband_vp_current: number;
-}
-
-export interface CampaignAnnouncementDTO {
-    announcement_id: number;
-    announcement_title: string;
-    announcement_content: string;       // HTML
-    announcement_date: number;          // unix ts (seconds)
-    announcement_author: CampaignUserDTO;
-}
-
-export interface CampaignResponseDTO {
+export interface ICampaign {
     campaign_id: number;
     campaign_admin_id: string;
     campaign_name: string;
     campaign_description: string;
-    campaign_latest_announcement?: CampaignAnnouncementDTO | null;
-    campaign_warbands: CampaignWarbandDTO[];
+    campaign_latest_announcement?: ICampaignAnnouncement | null;
+    campaign_warbands: ICampaignWarband[];
     campaign_warbands_invited: string[];
-    campaign_players: CampaignUserDTO[];
+    campaign_players: ICampaignUser[];
     campaign_players_invited: string[];
-    campaign_announcements: CampaignAnnouncementDTO[];
+    campaign_announcements: ICampaignAnnouncement[];
 }
-
-// ---------- Domain: User ----------
-export class CampaignUser {
-    private _id: number;
-    private _nickname: string;
-    private _isPremium: boolean;
-    private _avatarUrls?: Record<string, string>;
-    private _avatarSourceTitle?: string;
-    private _avatarSourceUrl?: string;
-    private _avatarId = 0;       // e.g. WP attachment id
-
-    private constructor(
-        id: number,
-        nickname: string,
-        isPremium: boolean,
-        avatarUrls?: Record<string, string>,
-        avatarSourceTitle?: string,
-        avatarSourceUrl?: string,
-        avatarId?: number,
-    ) {
-        this._id = id ?? 0;
-        this._nickname = nickname;
-        this._isPremium = isPremium;
-        this._avatarUrls = avatarUrls;
-        this._avatarSourceTitle = avatarSourceTitle;
-        this._avatarSourceUrl = avatarSourceUrl;
-        this._avatarId = avatarId ?? 0;
-    }
-
-    static FromApi(dto: CampaignUserDTO): CampaignUser {
-        const id = (dto.id ?? dto.user_id)!; // API provides either id or user_id
-        return new CampaignUser(
-            id,
-            dto.nickname,
-            !!dto.is_premium,
-            dto.profile_picture?.urls,
-            dto.profile_picture?.source_title,
-            dto.profile_picture?.source_url,
-            dto.profile_picture?.image_id,
-        );
-    }
-
-    get Id() { return this._id; }
-    get Nickname() { return this._nickname; }
-    get Name() { return this._nickname; }
-    get IsPremium() { return this._isPremium; }
-    get AvatarUrls() { return this._avatarUrls; }
-    get AvatarSourceTitle() { return this._avatarSourceTitle; }
-    get AvatarSourceUrl() { return this._avatarSourceUrl; }
-    get AvatarId() { return this._avatarId; }
-
-    // --- Complex Getters ---
-
-    GetSupporterStatus () : string {
-        if( this.IsPremium ) {
-            return 'Supporter';
-        } else {
-            return 'Free Member'
-        }
-    }
-
-}
-
-// ---------- Domain: Announcement ----------
-export class CampaignAnnouncement {
-    private _id = 0;
-    private _title = "";
-    private _html = "";
-    private _dateTs = 0;
-    private _author!: CampaignUser;
-
-    // private constructor() {}
-
-    static FromApi(dto: CampaignAnnouncementDTO): CampaignAnnouncement {
-        const a = new CampaignAnnouncement();
-        a._id = dto.announcement_id;
-        a._title = dto.announcement_title;
-        a._html = dto.announcement_content ?? "";
-        a._dateTs = dto.announcement_date ?? 0;
-        a._author = CampaignUser.FromApi(dto.announcement_author);
-        return a;
-    }
-
-    get Id() { return this._id; }
-    get Title() { return this._title; }
-    get Html() { return this._html; }
-    get Date() { return new Date(this._dateTs * 1000); }
-    get Author() { return this._author; }
-}
-
-// ---------- Domain: Warband ----------
-export class CampaignWarband {
-    private _id = 0;
-    private _name = "";
-    private _factionSlug = "";
-    private _factionName = "";
-    private _owner!: CampaignUser;
-    private _imageId? = 0;
-    private _imageUrls?: Record<string, string>;
-    private _imageSourceTitle?: string;
-    private _imageSourceUrl?: string;
-    private _ratingDucats = 0;
-    private _ratingGlory = 0;
-    private _victoryPoints = 0;
-
-    // private constructor() {}
-
-    static FromApi(dto: CampaignWarbandDTO): CampaignWarband {
-        const w = new CampaignWarband();
-        w._id = dto.warband_id;
-        w._name = dto.warband_name;
-        w._factionSlug = dto.faction_slug;
-        w._factionName = dto.faction_name;
-        w._owner = CampaignUser.FromApi(dto.warband_user);
-        w._imageId = dto.warband_image?.image_id;
-        w._imageUrls = dto.warband_image?.urls;
-        w._imageSourceTitle = dto.warband_image?.source_title;
-        w._imageSourceUrl = dto.warband_image?.source_url;
-        w._ratingDucats = dto.warband_rating_ducats_current ?? 0;
-        w._ratingGlory = dto.warband_rating_glory_current ?? 0;
-        w._victoryPoints = dto.warband_vp_current ?? 0;
-        return w;
-    }
-
-    get Id() { return this._id; }
-    get Name() { return this._name; }
-    get FactionSlug() { return this._factionSlug; }
-    get FactionName() { return this._factionName; }
-    get Owner() { return this._owner; }
-    get ImageId() { return this._imageId; }
-    get ImageUrls() { return this._imageUrls; }
-    get RatingDucats() { return this._ratingDucats; }
-    get RatingGlory() { return this._ratingGlory; }
-    get VictoryPoints() { return this._victoryPoints; }
-
-    get PlayerId() { return this._owner.Id; }
-    get PlayerName() { return this._owner.Nickname; }
-
-    get PlayerImageId() { return this._owner.AvatarId; }
-}
-
 // ---------- Domain: Campaign (root) ----------
 export class Campaign {
     // Core fields
@@ -209,45 +33,46 @@ export class Campaign {
     private _announcements: CampaignAnnouncement[] = [];
     private _latestAnnouncement: CampaignAnnouncement | null = null;
 
-    constructor() {
-        // Keep empty default instance; Context will call hydrate() later.
+    constructor(data : ICampaign) {
+        this._id = data.campaign_id ?? null;
+        this._adminId = data.campaign_admin_id ?? null;
+        this._name = data.campaign_name ?? "";
+        this._description = data.campaign_description ?? "";
+        this._warbandsInvited = Array.isArray(data.campaign_warbands_invited) ? [...data.campaign_warbands_invited] : [];
     }
 
-    // --- Mapper: turn API DTO into a fully-initialized domain object (in-place) ---
-    public hydrate(dto: CampaignResponseDTO) {
-        // Basic fields
-        this._id = dto.campaign_id ?? null;
-        this._adminId = dto.campaign_admin_id ?? null;
-        this._name = dto.campaign_name ?? "";
-        this._description = dto.campaign_description ?? "";
+    public async BuildWarbands(data : ICampaign) {
+        
+        for (let i = 0; i < data.campaign_warbands.length; i++) {
+            const NewPlayer = await CampaignFactory.CreateCampaignWarband(data.campaign_warbands[i]);
+            this._warbands.push(NewPlayer);
+        }
+    }
 
-        // Warbands
-        this._warbands = Array.isArray(dto.campaign_warbands)
-            ? dto.campaign_warbands.map(CampaignWarband.FromApi)
+    public async BuildPlayers(data : ICampaign) {
+        
+        for (let i = 0; i < data.campaign_players.length; i++) {
+            const NewPlayer = await CampaignFactory.CreateCampaignUser(data.campaign_players[i]);
+            this._players.push(NewPlayer);
+        }
+
+        this._playersInvited = Array.isArray(data.campaign_players_invited)
+            ? [...data.campaign_players_invited]
             : [];
+    }
 
-        // Invites
-        this._warbandsInvited = Array.isArray(dto.campaign_warbands_invited)
-            ? [...dto.campaign_warbands_invited]
-            : [];
+    public async BuildAnnouncements(data : ICampaign) {
+        
+        for (let i = 0; i < data.campaign_announcements.length; i++) {
+            const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i]);
+            this._announcements.push(NewPlayer);
+        }
 
-        // Players
-        this._players = Array.isArray(dto.campaign_players)
-            ? dto.campaign_players.map(CampaignUser.FromApi)
-            : [];
+        if (data.campaign_latest_announcement) {
+            const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement);
+            this._latestAnnouncement = (NewPlayer);
 
-        this._playersInvited = Array.isArray(dto.campaign_players_invited)
-            ? [...dto.campaign_players_invited]
-            : [];
-
-        // Announcements
-        this._announcements = Array.isArray(dto.campaign_announcements)
-            ? dto.campaign_announcements.map(CampaignAnnouncement.FromApi)
-            : [];
-
-        this._latestAnnouncement = dto.campaign_latest_announcement
-            ? CampaignAnnouncement.FromApi(dto.campaign_latest_announcement)
-            : null;
+        }
     }
 
     // --- Public getters UI can use ---
@@ -285,12 +110,10 @@ export class Campaign {
 
 
     public InvitePlayers( ids: string[]) {
-
         console.log('@TODO: invite players here');
     }
 
     public CreateAnnouncement (title: string, content: string) {
-
         console.log('@TODO: create announcement with');
         console.log(title);
         console.log(content);

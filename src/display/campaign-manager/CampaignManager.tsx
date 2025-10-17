@@ -17,12 +17,13 @@ const CampaignManager: React.FC = () => {
     const { id } = useParams<{ id: string }>();
 
     // @TODO: add better error here
-    if (!id) {
+    if (!id || isNaN(parseInt(id))) {
         return <div className="container py-4">No campaign id in route.</div>;
     }
+    
 
     return (
-        <CampaignProvider campaignId={id}>
+        <CampaignProvider campaignId={parseInt(id)}>
             <PopoverProvider>
                 <CampaignManagerContent />
             </PopoverProvider>

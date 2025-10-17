@@ -4,7 +4,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import CMPlayerSmall from "./CMPlayerSmall";
-import {CampaignWarband} from "../../../classes/saveitems/Campaign/Campaign";
+import {CampaignWarband} from "../../../classes/saveitems/Campaign/CampaignWarband";
 
 
 interface CMHistoryGameProps {
