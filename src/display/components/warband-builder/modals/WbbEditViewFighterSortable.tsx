@@ -4,6 +4,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { RealWarbandPurchaseModel } from '../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { DndContext } from '@dnd-kit/core';
+import WbbFighterJsonLDSchema from "../../JSON-LD-Schema/WbbFighterJsonLDSchema";
 
 interface WbbEditViewFighterSortableProps {
     fighter: RealWarbandPurchaseModel;
@@ -56,6 +57,10 @@ const WbbEditViewFighterSortable: React.FC<WbbEditViewFighterSortableProps> = ({
                 index={index}
                 onClick={onClick}
                 isActive={isActive}
+            />
+
+            <WbbFighterJsonLDSchema
+                fighter={fighter}
             />
         </div>
     );

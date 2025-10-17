@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import SynodFactionImage from "../../utility/SynodFactionImage";
 import CustomNavLink from "../components/subcomponents/interactables/CustomNavLink";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 interface WPPost {
     id: number;
@@ -14,6 +15,7 @@ interface WPPost {
     date: string;
     slug: string;
     featured_media?: number;
+    excerpt: { rendered: string };
     _embedded?: {
         author?: { name: string }[];
     };
@@ -117,6 +119,10 @@ const BlogArticlePage: React.FC = () => {
 
     return (
         <div className="BlogArticlePage container">
+            <PageMetaInformation
+                title={post.title.rendered}
+                description={post.excerpt.rendered.replace(/<[^>]+>/g, '')}
+            />
 
             <article className={'article-wrap'}>
                 {post.featured_media &&

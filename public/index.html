@@ -23,6 +23,23 @@
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 
+        <!-- 2) (Optional) Temporärer CSS-Bumper gegen evtl. globales iframe-hiding -->
+        <style>
+            iframe[src*="fundingchoicesmessages.google.com"]{
+                display:block!important;visibility:visible!important;opacity:1!important;
+            }
+        </style>
+
+        <!-- 3) FC: Controlled Messaging -> explizit freigeben (falls irgendwas gated) -->
+        <script>
+            // MUSS vor FC/AdSense definiert sein
+            window.googlefc = window.googlefc || {};
+            window.googlefc.controlledMessagingFunction = function(message) {
+                try { console.log('[FC] controlledMessagingFunction: forcing proceed'); } catch(e){}
+                message.proceed(true); // erzwingt, dass Messages überhaupt angezeigt werden dürfen
+            };
+        </script>
+
         <!-- 4) FC-Debug-Logs + Consent Mode Hook -->
         <script>
             window.googlefc = window.googlefc || {};

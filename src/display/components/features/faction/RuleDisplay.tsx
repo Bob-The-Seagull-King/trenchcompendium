@@ -86,8 +86,8 @@ const RuleDisplay = (props: any) => {
                 {Object.keys(upgradeoptions).length > 0 &&
                     <>
                     {
-                        Object.keys(upgradeoptions).map((item, index) => (
-                            <React.Fragment key={`upgradeoptions-${index}`}>
+                        Object.keys(upgradeoptions).map((item) => (
+                            <>
                                 { ( showCollapse || !showSimple ) &&
                                     <div className="RuleDisplay-upgradeoptions">
                                         <RulesCollapsibleContent
@@ -120,7 +120,7 @@ const RuleDisplay = (props: any) => {
                                         )) /* Abilities */}
                                     </>
                                 }
-                            </React.Fragment>
+                            </>
                         ))
                     }
                     </>

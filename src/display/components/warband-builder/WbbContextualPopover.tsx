@@ -969,8 +969,6 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                                     wordBreak: 'break-word'
                                 }}>
                                 {ttsModelText}
-
-                                    {/*{(item as RealWarbandPurchaseModel).model.GetTTSExportText('full')}*/}
                             </pre>
                             }
                         </div>

@@ -138,11 +138,41 @@ class WarbandManager {
         return null;
     }
 
+    public static HasLocalWarbands() {
+        const data = localStorage.getItem('userwarbanditem');  
+        try {
+            const ItemList: ISumWarband[] = JSON.parse(data || "");
+            console.log(ItemList)
+            return ItemList.length > 0;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    public async GrabLocalItems() {
+        const TempList: SumWarband[] = [];  
+        const data = localStorage.getItem('userwarbanditem');  
+        try {
+            const ItemList: ISumWarband[] = JSON.parse(data || "");
+            for (let i = 0; i < ItemList.length; i++) {
+                TempList.push(
+                    {
+                        id: ItemList[i].id,
+                        warband_data:    await WarbandFactory.CreateUserWarband(ItemList[i].warband_data, ItemList[i].id)
+                    })
+            }
+            return TempList;
+        } catch (e) {
+            undefined;
+        }
+        return TempList;
+    }
+
     /**
      * Gets all of the saved items.
      */
-    public async GrabItems() {
-        if (this.UserProfile != null) {
+    public async GrabItems(forcelocal = false) {
+        if (this.UserProfile != null && !forcelocal) {
             this.ListOfWarbands = this.UserProfile.Warbands;
             return this.UserProfile.Warbands;
         }
@@ -177,19 +207,19 @@ class WarbandManager {
         this.UpdateLocalStorage();
     }
     public UpdateLocalStorage() {
-  const _list: ISumWarband[] = [];
+    const _list: ISumWarband[] = [];
 
-  for (let i = 0; i < this.CurWarbands().length; i++) {
-    try {
-      const data = this.CurWarbands()[i].warband_data.ConvertToInterface();
+    for (let i = 0; i < this.CurWarbands().length; i++) {
+        try {
+        const data = this.CurWarbands()[i].warband_data.ConvertToInterface();
 
-      _list.push({
-        id: this.CurWarbands()[i].id,
-        warband_data: data,
-      });
-    } catch (e) {
-      console.warn("Conversion failed for index", i, e);
-    }
+        _list.push({
+            id: this.CurWarbands()[i].id,
+            warband_data: data,
+        });
+        } catch (e) {
+        console.warn("Conversion failed for index", i, e);
+        }
   }
 
   try {
@@ -452,6 +482,29 @@ class WarbandManager {
                 })
             this.SetStorage();
         }
+    }
+
+    public async UploadWarbands() {
+        await this.GrabUser()
+        console.log(this.UserProfile);
+        if (this.UserProfile != null) {
+            const WarbandList = await this.GrabLocalItems()
+            for (let i = 0; i < WarbandList.length; i++) {
+                const CurWarband = WarbandList[i]
+                const ID_Get = CurWarband.warband_data.ConvertToInterface()
+                ID_Get.id =  this.CalcID(ID_Get.name);
+                const id  = await this.CreateWarbandSynod(ID_Get)
+                const NewMember : UserWarband = await WarbandFactory.CreateUserWarband((ID_Get), id);
+                
+                this.CurWarbands().push(
+                    {
+                        id: Number(id),
+                        warband_data: NewMember
+                    })
+            }
+        }
+        const str = JSON.stringify([]);
+        localStorage.setItem("userwarbanditem", str);
     }
 
     /**

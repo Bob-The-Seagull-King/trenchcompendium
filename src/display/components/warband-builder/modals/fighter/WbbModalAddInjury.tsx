@@ -66,8 +66,8 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
             </Modal.Header>
 
             <Modal.Body key={keyvar}>
-                {available.map((injury) => (
-                    <>
+                {available.map((injury, index) => (
+                    <React.Fragment key={index}>
                         <div
                             key={injury.ID}
                             className={`select-item ${selectedId === injury.ID ? 'selected' : ''}`}
@@ -83,7 +83,7 @@ const WbbModalAddInjury: React.FC<WbbModalAddInjuryProps> = ({ show, onClose, on
                                 {returnDescription(injury, injury.Description)}
                             </div>
                         }
-                    </>
+                    </React.Fragment>
 
                 ))}
             </Modal.Body>

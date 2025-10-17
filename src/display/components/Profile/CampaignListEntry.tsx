@@ -37,9 +37,9 @@ const CampaignListEntry: React.FC<CampaignListEntryProps> = ({
         <div className="CampaignListEntry">
             <CustomNavLink
                 classes={'CampaignListEntry-image-wrap'}
-                link={`/campaigns/${campaignID}`}
+                link={`/campaign/${campaignID}`}
                 runfunc={() => {
-                    navigate(`/campaigns/${campaignID}`)
+                    navigate(`/campaign/${campaignID}`)
                 }}>
                 <SynodImage
                     imageId={campaignImageID}
@@ -52,7 +52,7 @@ const CampaignListEntry: React.FC<CampaignListEntryProps> = ({
                     classes={'campaign-name'}
                     link={`/campaign/${campaignID}`}
                     runfunc={() => {
-                        navigate(`/campaigns/${campaignID}`)
+                        navigate(`/campaign/${campaignID}`)
                     }}>
                     {campaignName}
                 </CustomNavLink>

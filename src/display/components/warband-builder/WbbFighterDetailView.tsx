@@ -387,14 +387,14 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
             <div className={'fighter-card-collapse-wrap'}>
                 {/* Profile Options */}
                 {(edit_mode && complexstate.statchoices.length > 0) &&
-                    <WbbFighterCollapse title="Profile Options" initiallyOpen={true}>
+                    <WbbFighterCollapse title="Profile Options" initiallyOpen={false}>
                         <>
-                            {complexstate.statchoices.map((item) =>
+                            {complexstate.statchoices.map((item, index) =>
 
                                     <WbbEditFighterStatOption
                                         fighter={warbandmember}
                                         options={item}
-                                        key={complexstate.statchoices.indexOf(item)}
+                                        key={complexstate.statchoices.indexOf(item) +'-'+ index}
                                     />
                             )}
                         </>
@@ -411,13 +411,12 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                         {Object.keys(complexstate.upgrades).filter((item) => (
                             (edit_mode) || (complexstate.upgrades[item].upgrades.filter((subitem : MemberUpgradePresentation) => subitem.purchase != null).length > 0)
                         )).map((item, index) => (
-                            <>
+                            <React.Fragment key={index}>
                                 {/* If Goetic and has 0 options -> do not show */}
                                 {(complexstate.upgrades[item].limit > 0 || item != "goetic" )&&
                                     <WbbFighterCollapse
                                         title={makestringpresentable(item)}
                                         initiallyOpen={false}
-                                        key={index}
                                     >
                                         <>
                                             {item != "upgrades" &&
@@ -434,7 +433,7 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                                         </>
                                     </WbbFighterCollapse>
                                 }
-                            </>
+                            </React.Fragment>
                         ))}
                     </>
                 }
@@ -893,10 +892,9 @@ const WbbFighterDetailView: React.FC<WbbFighterDetailViewProps> = ({ warbandmemb
                 }
 
                 {/* STL Promotions */}
-                {(!play_mode) && (fighter.CurModel.ID && warband?.warband_data?.Faction.MyFaction.ID) &&
+                {(!play_mode) &&
                     <StlFinderCollapse
                         model_slug={fighter.CurModel.ID}
-                        faction_slug={warband?.warband_data?.Faction.MyFaction.ID}
                     />
                 }
             </div>
