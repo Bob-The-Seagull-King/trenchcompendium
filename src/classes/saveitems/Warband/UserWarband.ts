@@ -1975,11 +1975,6 @@ class UserWarband extends DynamicContextObject {
         }
 
         for (let i = 0; i < RefRels.length; i++) {
-            if (RefRels[i].EquipmentItem.ID == "eq_rocketpropelledgrenade" && use_explor == false) {
-                console.log("ME")
-                console.log(containsTag(RefRels[i].Tags, "exploration_only"))
-                console.log(!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration || this.IsUnRestricted)
-            }
             if (!containsTag(RefRels[i].Tags, "exploration_only") || use_exploration || this.IsUnRestricted) {
                 BaseRels.push(RefRels[i]);
             }
@@ -1996,10 +1991,6 @@ class UserWarband extends DynamicContextObject {
                 BaseRels,
                 null
             )
-        }
-
-        if (BaseRels.filter(item => item.EquipmentItem.ID == "eq_rocketpropelledgrenade").length > 0 && use_explor == false) {
-            console.log("FOUND IT")
         }
 
         let FactionEquipRestrictionList : EquipmentRestriction[] = []
@@ -2126,10 +2117,6 @@ class UserWarband extends DynamicContextObject {
                     }
                 }
             }
-        }
-
-        if (ListOfRels.filter(item => item.EquipmentItem.ID == "eq_rocketpropelledgrenade").length > 0 && use_explor == false) {
-            console.log("FOUND IT")
         }
 
         return ListOfRels

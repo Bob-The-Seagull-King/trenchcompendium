@@ -5663,13 +5663,13 @@ export const BaseContextCallTable : CallEventTable = {
         async onGainEquipment(this: EventRunner, eventSource : any, trackVal : WarbandPurchase, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, equipmentHolder : any) {
             const FacModModule = await import("../../factories/features/ModelFactory")
             if (context_func["model_purchases"]) {
+                trackVal.Discount = trackVal.ItemCost;
+                trackVal.CountCap = false;
                 for (let i = 0; i < context_func["model_purchases"].length; i++) {
                     const ModelName = context_func["model_purchases"][i]
                     const ModelFaction = await FacModModule.ModelFactory.CreateNewFactionModel(ModelName, null)
                     await warband.AddFighter([ModelFaction]);
                 }
-                trackVal.Discount = trackVal.ItemCost;
-                trackVal.CountCap = false;
             }
         }
     },
