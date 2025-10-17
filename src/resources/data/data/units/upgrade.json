@@ -1649,6 +1649,10 @@
                         ]
                     }
                 ]
+            },
+            "override_flat": {
+                "id": ["md_sorcerer"],
+                "selections": { "type": "factionequipmentrelationship" }
             }
         },
         "description": [            
