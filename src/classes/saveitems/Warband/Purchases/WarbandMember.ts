@@ -1107,24 +1107,6 @@ class WarbandMember extends DynamicContextObject {
     }
 
     /**
-     * The base ducats cost of the fighter on recruitment
-     *
-     * @return: int
-     */
-    GetBaseCostDucats () {
-        return 50;
-    }
-
-    /**
-     * The base glory cost of the fighter on recruitment
-     *
-     * @return: int
-     */
-    GetBaseCostGlory () {
-        return 0;
-    }
-
-    /**
      * Return the model slug / id
      * - is used to grab images for model
      *
