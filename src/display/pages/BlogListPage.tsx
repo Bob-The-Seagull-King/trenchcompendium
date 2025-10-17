@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../resources/routes-constants';
 import BlogArticlePreview from "../components/blog/BlogArticlePreview";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
 
 interface WPPost {
     id: number;
@@ -49,6 +50,11 @@ const BlogListPage: React.FC = () => {
 
     return (
         <div className="BlogListPage container">
+            <PageMetaInformation
+                title={'Trench Companion Blog'}
+                description={'Stay up to date with the latest progress on the Trench Companion project. Here we share development updates, feature previews, design insights, and community news — all straight from the trenches.'}
+            />
+
             <h1 className="mb-4">Trench Companion Blog</h1>
 
             <p className={'mb-4'}>
