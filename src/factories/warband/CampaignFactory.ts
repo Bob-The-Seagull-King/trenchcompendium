@@ -11,7 +11,13 @@ const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms)
 class CampaignFactory {
     
     static async CreateCampaign(data: ICampaign) {
+        const cache = SynodDataCache.getInstance();
+        const isValid = (cache.CheckCampaignObjectCache(data.campaign_id))
+        if (isValid == false) {
+            return cache.campaignObjectCache[data.campaign_id];
+        }
         const rule = new Campaign(data);
+        cache.AddCampaignObjectCache(data.campaign_id, rule);
         await rule.BuildWarbands(data);
         await rule.BuildPlayers(data);
         await rule.BuildAnnouncements(data);
