@@ -57,11 +57,9 @@ const RulesAnchorLinks: React.FC<ContentsCollection> = (props: any) => {
             </div>
             <Collapse in={open}>
                 <div className={'rules-page-anchors-content'}>
-                    {props.listofcontents.map((item: ContentsLink, index: number) => (
-                        <React.Fragment key={`item-${index}`}>
-                            ReturnItemLink(item)
-                        </React.Fragment>
-                    ))}
+                    {props.listofcontents.map((item: ContentsLink) =>
+                        ReturnItemLink(item)
+                    )}
                 </div>
             </Collapse>
         </div>
