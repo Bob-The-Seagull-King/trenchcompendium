@@ -30,7 +30,6 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hy
     const [_keyvar, setkeyvar] = useState(0);
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
 
-
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null && overrideplay != true) {
             choice.UserUpdateSelection((foundOption? foundOption.id : null)).then(() => { 
@@ -83,7 +82,7 @@ const WbbOptionSelect: React.FC<WbbEditSelectionProps> = ({choice,  property, hy
     }
     
     useEffect(() => {
-            SetModelOptions();
+        SetModelOptions();
     }, [updateKey]);
     
     return (
