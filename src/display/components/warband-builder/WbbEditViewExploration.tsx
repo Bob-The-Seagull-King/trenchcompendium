@@ -98,10 +98,10 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
 
                         {(location.SelfDynamicProperty.OptionChoice.MyOptions.length > 0 ) && 
                             <ul className={'exploration-description-options'}>
-                                {location.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
-                                    <div key={location.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
-                                        {item.Selections.map((selectedchoice) =>
-                                            <div key={item.Selections.indexOf(selectedchoice)}>
+                                {location.SelfDynamicProperty.OptionChoice.MyOptions.map((item, index) =>
+                                    <div key={location.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item) + '' + index}>
+                                        {item.Selections.map((selectedchoice, index) =>
+                                            <div key={item.Selections.indexOf(selectedchoice) + '' + index}>
                                                 <li  className={'exploration-description-option'}>
                                                     <span className={'option-name'}>
                                                         {selectedchoice.display_str}
@@ -125,9 +125,9 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                         }
                         {location.SelfDynamicProperty.Selections.length > 0 &&
                             <>
-                            {location.SelfDynamicProperty.Selections.map((item) =>
+                            {location.SelfDynamicProperty.Selections.map((item, index) =>
                                 <div
-                                    key={location.SelfDynamicProperty.Selections.indexOf(item)}>
+                                    key={location.SelfDynamicProperty.Selections.indexOf(item) + '' + index}>
                                         <WbbOptionSelect
                                             leadtext={"Your Choice: "}
                                             property={location}
@@ -142,31 +142,30 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                         <div className="stash-items-wrap">
                             <div className={'stash-items-category'}>
                                 {location.Consumables.map((item: WarbandConsumable, index: number) => (
-                                    
-                                            <WbbExploration_Selection_Parent
-                                                key={index}
-                                                property={item}
-                                                doshow={false}
-                                                dochange={false}
-                                                updatestate={() => {undefined}}
-                                            />
+                                    <WbbExploration_Selection_Parent
+                                        key={'parent-'+index}
+                                        property={item}
+                                        doshow={false}
+                                        dochange={false}
+                                        updatestate={() => {undefined}}
+                                    />
                                 ))}
                             </div>
                         </div>
                         }
 
-                        <div key={keyvar}>
+                        <div key={'sub-props-'+keyvar}>
                         {location.SubProperties.length > 0 &&
                             <>
-                                {location.SubProperties.map((item) =>
+                                {location.SubProperties.map((item, index) =>
                                     <div
-                                        key={location!.SubProperties.indexOf(item)}
+                                        key={location!.SubProperties.indexOf(item) + '' + index}
                                     >
                                         {item.SelfDynamicProperty.Selections.length > 0 &&
                                             <>
-                                            {item.SelfDynamicProperty.Selections.map((subitem) =>
+                                            {item.SelfDynamicProperty.Selections.map((subitem, index2) =>
                                                 <div
-                                            key={location!.SelfDynamicProperty.Selections.indexOf(subitem)}
+                                            key={location!.SelfDynamicProperty.Selections.indexOf(subitem) + '' + index2}
                                             >
                                            {subitem.Option.Tags.base_loc == undefined &&
                                                 <WbbOptionSelect
@@ -181,22 +180,20 @@ const WbbEditViewExploration: React.FC<WbbEditViewExplorationProps> = ({  locati
                                     </div>
                                 )}
                                 </>
-                            }</div>
-                        
+                            }
+                        </div>
+
                         {/* Bottom info and apply action */}
                         {contextMessage.length > 0 &&
-                        <div key={keyvar} className={'alert-exploration alert-exploration-info'}>
-                            <span>
-                                {contextMessage.map((item, index) => 
-                                <span key={index}>
-                                    {item + " "}
-                                </span>)}
-                            </span>
-                        </div>
+                            <div key={'alert-' + keyvar} className={'alert-exploration alert-exploration-info'}>
+                                <span>
+                                    {contextMessage.map((item, index) =>
+                                    <span key={'alert-' + index}>
+                                        {item + " "}
+                                    </span>)}
+                                </span>
+                            </div>
                         }
-
-
-                        
                     </div>
                 </div>
             </Collapse>

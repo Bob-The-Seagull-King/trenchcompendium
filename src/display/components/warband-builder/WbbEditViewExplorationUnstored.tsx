@@ -201,12 +201,12 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                         {/* Show option descriptions if any */}
                         {(CheckRelevantBaseOptions(location.base_item).length > 0 )  &&
                             <ul className={'exploration-description-options'}>
-                                {CheckRelevantBaseOptions(location.base_item).map((item) => 
-                                    <div key={CheckRelevantBaseOptions(location.base_item).indexOf(item)}>
+                                {CheckRelevantBaseOptions(location.base_item).map((item, index) =>
+                                    <div key={CheckRelevantBaseOptions(location.base_item).indexOf(item) + '' + index}>
                                         {item.baseopt.Tags.base_loc != undefined &&
                                             <>
-                                                {item.baseopt.Selections.map((choice) =>
-                                                    <li key={item.baseopt.Selections.indexOf(choice)} className={'exploration-description-option'}>
+                                                {item.baseopt.Selections.map((choice, index) =>
+                                                    <li key={item.baseopt.Selections.indexOf(choice) + '' + index} className={'exploration-description-option'}>
                                                         <span className={'option-name'}>
                                                             {choice.display_str}
                                                         </span>
@@ -234,7 +234,7 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                             <>
                                 {CheckRelevantBaseOptions(location.base_item).map((item, index) =>
                                     <WbbExploration_OptionSelect_Radio
-                                        key={location.base_item.options.indexOf(item)}
+                                        key={location.base_item.options.indexOf(item) + '' + index}
                                         options={item}
                                         curSelection={location.selected_options[index]? location.selected_options[index] : null}
                                         onChange={UpdateSelectedOptionIDs}
@@ -248,12 +248,16 @@ const WbbEditViewExplorationUnstored: React.FC<WbbEditViewExplorationProps> = ({
                             <div>
                                 {(location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.length > 0 ) && 
                                     <ul className={'exploration-description-options'}>
-                                        {location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.map((item) => 
-                                            <div key={location.true_obj!.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item)}>
+                                        {location.true_obj.SelfDynamicProperty.OptionChoice.MyOptions.map((item, index) =>
+                                            <div
+                                                key={location.true_obj!.SelfDynamicProperty.OptionChoice.MyOptions.indexOf(item) + '' + index}
+                                            >
                                                 {(item.Tags.base_loc == undefined && item.Tags.hide_info == undefined) &&
                                                     <>
-                                            {item.Selections.map((selectedchoice) => 
-                                                <div key={item.Selections.indexOf(selectedchoice)}>
+                                            {item.Selections.map((selectedchoice, index) =>
+                                                <div
+                                                    key={item.Selections.indexOf(selectedchoice) + '' + index}
+                                                >
                                                 <li  className={'exploration-description-option'}>
                                                     <span className={'option-name'}>
                                                         {selectedchoice.display_str}
