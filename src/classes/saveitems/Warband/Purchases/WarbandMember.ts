@@ -2037,6 +2037,18 @@ class WarbandMember extends DynamicContextObject {
         }
     }
 
+    /**
+     * Is this model in reserve?
+     * @return boolean
+     */
+    public IsReserve () {
+        if (this.State == 'reserved') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public async GetMaxScars() {
         if (this.GeneralCache.max_scars != null) {
             return this.GeneralCache.max_scars
