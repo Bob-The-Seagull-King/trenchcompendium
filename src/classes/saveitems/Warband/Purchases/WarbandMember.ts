@@ -3053,11 +3053,11 @@ class WarbandMember extends DynamicContextObject {
                 "overrideMercenarySkip",
                 this,
                 [],
-                false,
+                this.IsMercenary(),
                 null
             )
 
-            if (!SkipEquip) {
+            if (SkipEquip) {
                 return false;
             }
         }
