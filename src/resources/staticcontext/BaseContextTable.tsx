@@ -2400,18 +2400,27 @@ export const BaseContextCallTable : CallEventTable = {
     },
     replace_model: {
         event_priotity: 0,
-        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband) {
+        async onGainUpgrade(this: EventRunner, eventSource : any, trackVal : WarbandMember, context_func : ContextEventEntry, context_static : ContextObject, context_main : DynamicContextObject | null, warband : UserWarband, purchase: WarbandPurchase) {
             
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
             
             if (context_func["new_id"]) {
                 const NewModel = await ModelFactory.CreateNewModel(context_func["new_id"], null);
                 trackVal.Tags["original_model_id"] = trackVal.CurModel.GetID();
-                if (context_func["mod_price"]) {
-                    if (trackVal.Tags["cost_mod_ducats"]) {
-                        trackVal.Tags["cost_mod_ducats"] += context_func["mod_price"]
-                    } else {
-                        trackVal.Tags["cost_mod_ducats"] = context_func["mod_price"]
+                const Val = trackVal.GetMyPurchase();
+                if (context_func["new_price"]) {
+                    if (Val != null) {
+                        const OldPrice = Val.ItemCost
+                        trackVal.Tags["old_price"] = OldPrice; 
+                        Val.ItemCost = context_func["new_price"]
+                        Val.Discount = context_func["new_price"] - OldPrice
+                    }
+                }
+                if (context_func["self_discount"]) {
+                    if (purchase != null) {
+                        const basecost = purchase.ItemCost
+                        purchase.ItemCost = 0
+                        purchase.Discount = -basecost
                     }
                 }
                 
@@ -2422,9 +2431,11 @@ export const BaseContextCallTable : CallEventTable = {
 
             const { ModelFactory } = await import("../../factories/features/ModelFactory");
             const oldval = trackVal.Tags["original_model_id"]
-            if (context_func["mod_price"]) {
-                if (trackVal.Tags["cost_mod_ducats"]) {
-                    trackVal.Tags["cost_mod_ducats"]  = (trackVal.Tags["cost_mod_ducats"] as number) -(context_func["mod_price"] as number)
+            const Val = trackVal.GetMyPurchase();
+            if (trackVal.Tags["old_price"]) {
+                if (Val != null) {
+                    Val.ItemCost = trackVal.Tags["old_price"] as number
+                    Val.Discount = 0
                 }
             }
             if (oldval != null) {

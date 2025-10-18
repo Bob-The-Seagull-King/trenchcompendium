@@ -229,6 +229,17 @@ class WarbandMember extends DynamicContextObject {
         this.IsUnRestricted = restricted;
     }
     
+    public GetMyPurchase() {
+        if (this.MyContext instanceof UserWarband) {
+            const FighterList = this.MyContext.GetFighters();
+            for (let i = 0; i < FighterList.length; i++) {
+                if (FighterList[i].model.ID == this.ID) {
+                    return FighterList[i].purchase
+                }
+            }
+        }
+        return null;
+    }
 
     public async RebuildProperties() {
         this.GeneralCache = {}
@@ -1870,7 +1881,7 @@ class WarbandMember extends DynamicContextObject {
         await eventmon.runEvent(
             "onGainUpgrade",
             NewRuleProperty,
-            [this.MyContext],
+            [this.MyContext, NewPurchase],
             null,
             this
         )
