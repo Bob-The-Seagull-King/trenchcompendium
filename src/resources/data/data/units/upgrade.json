@@ -857,7 +857,7 @@
         "source": "core",
         "tags": {"trait": true},
         "contextdata": {
-            "replace_model": { "new_id" : "md_trenchpilgrim_martyr", "mod_price": -30},
+            "replace_model": { "new_id" : "md_trenchpilgrim_martyr", "new_price": 45, "self_discount": true},
             "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
             "reset_scar": {},
             "reset_skill": {}
