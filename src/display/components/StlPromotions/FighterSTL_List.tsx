@@ -139,7 +139,7 @@ const FighterSTL_List: React.FC<FighterStlListProps> = ({ model_slug = "", isOpe
                 <div className="stl-results">
                     {/* Loop over buckets, then items; item rendering is delegated */}
                     {BUCKETS.map((bucket, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             {data[bucket].length > 0 &&
                                 <div
                                     key={`section-${index}`}
@@ -164,7 +164,7 @@ const FighterSTL_List: React.FC<FighterStlListProps> = ({ model_slug = "", isOpe
                                     </div>
                                 </div>
                             }
-                        </>
+                        </React.Fragment>
                     ))}
                 </div>
             ) : (

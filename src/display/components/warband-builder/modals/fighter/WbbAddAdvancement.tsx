@@ -91,16 +91,16 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
                     </div>
                 }
 
-                {available.map((adv) => (
+                {available.map((adv, index) => (
                     <WbbGeneralCollapse
-                        key={adv.skillgroup.ID}
+                        key={adv.skillgroup.ID + '' + index}
                         title={makestringpresentable(adv.skillgroup.GetTrueName())}
                         initiallyOpen={false}
                         nopad={true}
                     >
                         <>
-                            {adv.list.map((skl) =>
-                                <>
+                            {adv.list.map((skl, index) =>
+                                <React.Fragment key={index}>
                                     <div
                                         key={skl.ID}
                                         className={`select-item ${selectedId === skl.ID ? 'selected' : ''}`}
@@ -121,7 +121,7 @@ const WbbModalAddAdvancement: React.FC<WbbModalAddAdvancementProps> = ({ show, o
                                             {returnDescription(skl, skl.Description)}
                                         </div>
                                     }
-                                </>
+                                </React.Fragment>
                             )}
                         </>
                     </WbbGeneralCollapse>

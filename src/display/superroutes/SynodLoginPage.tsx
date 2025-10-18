@@ -10,12 +10,19 @@ import SynodUpdateWarband from "../../utility/SynodUpdateWarband";
 import SynodUserWarbands from "../../utility/SynodUserWarbands";
 import {useAuth} from "../../utility/AuthContext";
 import SynodImage from "../../utility/SynodImage";
+import Modal_LoginWarbandMerge from "../components/Profile/Modal_LoginWarbandMerge";
+import { WarbandManager } from '../../classes/saveitems/Warband/WarbandManager';
 
 const SynodLoginPage: React.FC = () => {
 
     const [visbibleLogin, setvisbibleLogin] = useState(true);
     const [visbibleSignup, setvisbibleSignup] = useState(false);
     const [visbibleReset, setvisbibleReset] = useState(false);
+    const [visibleLocal] = useState(WarbandManager.HasLocalWarbands());
+    const [keyVar, setkeyVar] = useState(0);
+
+    // Shows the upload warbands modal
+    const [showWarbandMergeModal, setShowWarbandMergeModal] = useState(false);
 
     const { userId, login, logout, authToken } = useAuth();
 
@@ -46,7 +53,7 @@ const SynodLoginPage: React.FC = () => {
     }
 
     useEffect(() => {
-        if (isLoggedIn() && userId) {
+        if (isLoggedIn() && userId && !visibleLocal) {
             navigate(`/profile/${userId}`,{state: Date.now().toString()})
         }
     }, [userId])
@@ -65,8 +72,12 @@ const SynodLoginPage: React.FC = () => {
                     {visbibleLogin &&
                         <div className={"synod-login-wrap synod-login-form"}>
                             <SynodLogin onLoginSuccess={() => {
-                                if (userId) {
-                                    navigate(`/profile/${userId}`)
+                                if(visibleLocal) {
+                                    setShowWarbandMergeModal(true)
+                                } else {
+                                    if (userId) {
+                                        navigate(`/profile/${userId}`)
+                                    }
                                 }
                             }} />
 
@@ -141,22 +152,15 @@ const SynodLoginPage: React.FC = () => {
                 </div>
             </div>
 
-            {false &&
-                <>
-                    <div className={"container mt-3 pt-3"}>
-                        <SynodUserWarbands/>
-
-                        {isLoggedIn() && (
-                            <SynodUpdateWarband/>
-                        )}
-
-                        {isLoggedIn() && (
-                            <SynodCreateWarband/>
-                        )}
-                    </div>
-                </>
-            }
-
+            <Modal_LoginWarbandMerge
+                show={showWarbandMergeModal}
+                onClose={() => {
+                    setShowWarbandMergeModal(false)
+                    if (userId) {
+                        navigate(`/profile/${userId}`)
+                    }
+                }}
+            />
         </div>
     );
 };

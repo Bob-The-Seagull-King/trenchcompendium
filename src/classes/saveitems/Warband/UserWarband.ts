@@ -1312,13 +1312,13 @@ class UserWarband extends DynamicContextObject {
      * - excluding dead models
      * @param discount
      */
-    public GetDucatCost(discount = false) {
+    public GetDucatCost(discount = false, include_dead = true) {
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
 
             // Only count non-dead models
             const WbMember = this.Models[i].HeldObject as WarbandMember;
-            if( WbMember.IsDead() ) {
+            if( WbMember.IsDead() && !include_dead ) {
                 continue;
             }
 
@@ -1328,11 +1328,11 @@ class UserWarband extends DynamicContextObject {
         return TotalDucatCost
     }
 
-    public GetDucatRatingCost() {
+    public GetDucatRatingCost(include_dead = false) {
         
         let TotalDucatCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
-            if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+            if ((this.Models[i].HeldObject as WarbandMember).State == "active" || include_dead) {
                 if (this.Models[i].CountCap == false) {
                     continue;
                 }
@@ -1364,14 +1364,14 @@ class UserWarband extends DynamicContextObject {
      * - excluding dead models
      * @param discount
      */
-    public GetGloryCost(discount = false) {
+    public GetGloryCost(discount = false, include_dead = true) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
 
             // Only count non-dead models
             const WbMember = this.Models[i].HeldObject as WarbandMember;
-            if( WbMember.IsDead() ) {
+            if( WbMember.IsDead() && !include_dead) {
                 continue;
             }
 
@@ -1383,12 +1383,12 @@ class UserWarband extends DynamicContextObject {
         return TotalGloryCost
     }
 
-    public GetGloryRatingCost() {
+    public GetGloryRatingCost(include_dead = false) {
         
         let TotalGloryCost = 0;
         for (let i = 0; i < this.Models.length; i++) {
             if (this.Models[i].CountCap == false) {continue;}
-            if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+            if ((this.Models[i].HeldObject as WarbandMember).State == "active" || include_dead) {
                 TotalGloryCost += this.Models[i].GetTotalGlory();
             }
         }

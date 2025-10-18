@@ -42,7 +42,7 @@ const WbbViewLocations = () => {
 
                     {locations.map((item, index) => 
                         <WbbEditViewExploration
-                            key={index}
+                            key={'location-' + index}
                             location={item}
                         />
                     )}
