@@ -44,7 +44,7 @@ export class Campaign {
     public async BuildWarbands(data : ICampaign) {
         
         for (let i = 0; i < data.campaign_warbands.length; i++) {
-            const NewPlayer = await CampaignFactory.CreateCampaignWarband(data.campaign_warbands[i]);
+            const NewPlayer = await CampaignFactory.CreateCampaignWarband(data.campaign_warbands[i], this);
             this._warbands.push(NewPlayer);
         }
     }

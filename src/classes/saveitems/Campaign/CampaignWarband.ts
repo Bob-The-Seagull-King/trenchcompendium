@@ -2,6 +2,8 @@ import { WarbandFactory } from "../../../factories/warband/WarbandFactory";
 import { CampaignFactory } from "../../../factories/warband/CampaignFactory";
 import { SumWarband } from "../Warband/WarbandManager";
 import { ICampaignUser, CampaignUser } from "./CampaignUser";
+import { ContextObject } from "../../contextevent/contextobject";
+import { Campaign } from "./Campaign";
 
 export interface ICampaignWarband {
     warband_id: number;
@@ -22,7 +24,7 @@ export interface ICampaignWarband {
 
 
 // ---------- Domain: Warband ----------
-export class CampaignWarband {
+export class CampaignWarband extends ContextObject {
     private _id = 0;
     private _name = "";
     private _factionSlug = "";
@@ -36,8 +38,16 @@ export class CampaignWarband {
     private _ratingDucats = 0;
     private _ratingGlory = 0;
     private _victoryPoints = 0;
+    private _parent!: Campaign;
 
-    public constructor(data : ICampaignWarband) {        
+    public constructor(data : ICampaignWarband, parent : Campaign) {
+        super({
+            contextdata: {},
+            id: data.warband_id.toString(),
+            name: data.warband_name,
+            source: "",
+            tags: {}
+        }, null)     
         this._id = data.warband_id;
         this._name = data.warband_name;
         this._factionSlug = data.faction_slug;
@@ -49,6 +59,7 @@ export class CampaignWarband {
         this._ratingDucats = data.warband_rating_ducats_current ?? 0;
         this._ratingGlory = data.warband_rating_glory_current ?? 0;
         this._victoryPoints = data.warband_vp_current ?? 0;
+        this._parent = parent;
     }
 
     public async BuildUser(data : ICampaignWarband) {
@@ -58,10 +69,13 @@ export class CampaignWarband {
 
     public async BuildWarband(data : ICampaignWarband) {
         this._warband = await WarbandFactory.GetWarbandPublicByID(data.warband_id)
+        if (this._warband != null) {
+            this._warband.warband_data.MyContext = this;
+        }
     }
 
     get Id() { return this._id; }
-    get Name() { return this._name; }
+    get WarbandName() { return this._name; }
     get FactionSlug() { return this._factionSlug; }
     get FactionName() { return this._factionName; }
     get Owner() { return this._owner; }

@@ -59,13 +59,13 @@ class CampaignFactory {
         return rule;
     }
 
-    static async CreateCampaignWarband(data : ICampaignWarband) {
+    static async CreateCampaignWarband(data : ICampaignWarband, parent : Campaign) {
         const cache = SynodDataCache.getInstance();
         const isValid = (cache.CheckCampaignWarbandCache(data.warband_id))
         if (isValid == false) {
             return cache.campaignWarbandCache[data.warband_id];
         }
-        const rule = new CampaignWarband(data);
+        const rule = new CampaignWarband(data, parent);
         cache.AddCampaignWarbandCache(data.warband_id, rule);
         await rule.BuildUser(data);
         await rule.BuildWarband(data);
