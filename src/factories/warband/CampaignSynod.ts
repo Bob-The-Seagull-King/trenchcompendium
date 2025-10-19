@@ -146,7 +146,7 @@ export async function WarbandRemove(data : ICampaignWarbandInvite, submits : ISu
 }
 
 export async function AnnouncementCreate(data : ICampaignAnnouncementBasics, submits : ISubmitBasics) {
-    if (data.campaign_id == undefined) { return 400; }
+    if (data.campaign_id == undefined) { return null; }
     const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/campaigns/announcement-create`, {
         method: 'POST',
         headers: {
@@ -160,7 +160,7 @@ export async function AnnouncementCreate(data : ICampaignAnnouncementBasics, sub
 }
 
 export async function AnnouncementEdit(data : ICampaignAnnouncementBasics, submits : ISubmitBasics) {
-    if (data.announcement_id == undefined) { return 400; }
+    if (data.announcement_id == undefined) { return null; }
     const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/campaigns/announcement-edit`, {
         method: 'POST',
         headers: {
@@ -174,7 +174,7 @@ export async function AnnouncementEdit(data : ICampaignAnnouncementBasics, submi
 }
 
 export async function AnnouncementDelete(data : ICampaignAnnouncementBasics, submits : ISubmitBasics) {
-    if (data.announcement_id == undefined) { return 400; }
+    if (data.announcement_id == undefined) { return null; }
     const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/campaigns/announcement-delete`, {
         method: 'POST',
         headers: {

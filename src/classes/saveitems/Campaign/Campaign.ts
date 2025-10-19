@@ -17,10 +17,10 @@ export interface ICampaign {
     campaign_players_invited: string[];
     campaign_announcements: ICampaignAnnouncement[];
 }
-// ---------- Domain: Campaign (root) ----------
+
 export class Campaign {
     // Core fields
-    private _id: number | null = null;
+    private _id: number;
     private _adminId: string | null = null;
     private _name = "";
     private _description = "";
@@ -76,12 +76,13 @@ export class Campaign {
     }
 
     // --- Public getters UI can use ---
-    public GetId(): number | null { return this._id; }
+    public GetId(): number { return this._id; }
     public GetAdminId(): string | null { return this._adminId; }
     public GetName(): string { return this._name; }
     public GetDescription(): string { return this._description; }
 
     public GetWarbands(): CampaignWarband[] { return this._warbands; }
+    public GetWarbandIDList(): number[] { return this._warbands.map(item => (item.WarbandID)); }
     public GetPlayers(): CampaignUser[] { return this._players; }
     public GetAnnouncements(): CampaignAnnouncement[] { return this._announcements; }
     public GetLatestAnnouncement(): CampaignAnnouncement | null { return this._latestAnnouncement; }
@@ -106,6 +107,22 @@ export class Campaign {
         if (Number.isNaN(adminIdNum)) return false;  // ungültige Zahl
 
         return adminIdNum === userID;
+    }
+
+    public IsInvited(userID : number) : boolean {
+        for (let i = 0; i < this._playersInvited.length; i++) {
+            const pl : number = parseInt(this._playersInvited[i])
+            if (pl == userID && !Number.isNaN(pl)) { return true; }
+        }  
+        return false;
+    }
+
+    public IsInvitedWarband(userID : number) : boolean {
+        for (let i = 0; i < this._warbandsInvited.length; i++) {
+            const pl : number = parseInt(this._warbandsInvited[i])
+            if (pl == userID && !Number.isNaN(pl)) { return true; }
+        }  
+        return false;
     }
 
 

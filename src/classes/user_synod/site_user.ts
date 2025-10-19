@@ -101,6 +101,15 @@ class SiteUser {
         }
     }
 
+    public GetWarbandIDList() {
+        const list : number[] = [];
+
+        for (let i = 0 ; i < this.Warbands.length; i++) {
+            list.push(this.Warbands[i].id)
+        }
+
+        return list;
+    }
 
     public async BuildFriends() {
         this.BuiltFriends = []

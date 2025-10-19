@@ -30,7 +30,7 @@ export class CampaignWarband extends ContextObject {
     private _factionSlug = "";
     private _factionName = "";
     private _owner!: CampaignUser;
-    private _warband!: SumWarband | null;
+    private _warband!: SumWarband;
     private _imageId? = 0;
     private _imageUrls?: Record<string, string>;
     private _imageSourceTitle?: string;
@@ -68,7 +68,10 @@ export class CampaignWarband extends ContextObject {
     }
 
     public async BuildWarband(data : ICampaignWarband) {
-        this._warband = await WarbandFactory.GetWarbandPublicByID(data.warband_id)
+        const warband = await WarbandFactory.GetWarbandPublicByID(data.warband_id)
+        if (warband != null) {
+            this._warband = warband
+        }
         if (this._warband != null) {
             this._warband.warband_data.MyContext = this;
         }
@@ -80,6 +83,7 @@ export class CampaignWarband extends ContextObject {
     get FactionName() { return this._factionName; }
     get Owner() { return this._owner; }
     get ImageId() { return this._imageId; }
+    get WarbandID() { return this._warband.id }
     get ImageUrls() { return this._imageUrls; }
     get RatingDucats() { return this._ratingDucats; }
     get RatingGlory() { return this._ratingGlory; }

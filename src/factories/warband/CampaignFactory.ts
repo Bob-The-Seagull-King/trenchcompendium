@@ -126,6 +126,30 @@ class CampaignFactory {
         return null;
     }
 
+    static async ResetCampaign( val : Campaign ) : Promise<Campaign | null> {
+        const synodcache : SynodDataCache = SynodDataCache.getInstance();
+        delete synodcache.campaignDataCache[val.GetId()];
+        delete synodcache.callCampaignCache[val.GetId()];
+        delete synodcache.campaignObjectCache[val.GetId()];
+
+        const announcements_list = val.GetAnnouncements();
+        const warbands_list = val.GetWarbands();
+        const players_list = val.GetPlayers();
+
+        for (let i = 0 ; i < announcements_list.length; i++) {
+            delete synodcache.campaignAnnouncementCache[announcements_list[i].Id]
+        }
+        for (let i = 0 ; i < warbands_list.length; i++) {
+            delete synodcache.campaignWarbandCache[warbands_list[i].Id]
+        }
+        for (let i = 0 ; i < players_list.length; i++) {
+            delete synodcache.campaignUserCache[players_list[i].Id]
+        }
+
+        const NewCampaign = await CampaignFactory.GetCampaignPublicByID(val.GetId())
+        return NewCampaign;
+    }
+
 }
 
 export {CampaignFactory}
