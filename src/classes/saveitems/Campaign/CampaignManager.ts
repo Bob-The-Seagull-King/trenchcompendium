@@ -158,7 +158,7 @@ class CampaignManager {
             if (this.ListOfCampaigns[i].IsAdmin(this.UserProfile.GetUserId())) {
                 this.ListOfAdminCampaigns.push(this.ListOfCampaigns[i]);
             }
-            if (this.ListOfCampaigns[i].GetWarbandIDList().some( ai => UserWarbands)) {
+            if (this.ListOfCampaigns[i].GetWarbandIDList().some( ai => UserWarbands.includes(ai))) {
                 this.ListOfWarbandCampaigns.push(this.ListOfCampaigns[i])
             }
         }
