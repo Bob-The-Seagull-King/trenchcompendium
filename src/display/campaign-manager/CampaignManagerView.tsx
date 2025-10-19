@@ -12,7 +12,7 @@ import CampaignManagerContent from "./CampaignManagerContent";
 import {PopoverProvider} from "../../context/PopoverContext";
 import {useParams} from "react-router-dom";
 
-const CampaignManager: React.FC = () => {
+const CampaignManagerView: React.FC = () => {
     const { userId, isLoggedIn } = useAuth()
     const { id } = useParams<{ id: string }>();
 
@@ -31,4 +31,4 @@ const CampaignManager: React.FC = () => {
     );
 };
 
-export default CampaignManager;
+export default CampaignManagerView;

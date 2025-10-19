@@ -1,3 +1,4 @@
+import { CampaignManager } from '../saveitems/Campaign/CampaignManager';
 import { ScenarioGenerator } from '../feature/scenario/ScenarioGenerator';
 import { WarbandManager } from '../saveitems/Warband/WarbandManager';
 
@@ -12,7 +13,8 @@ class ToolsController {
     private static instance: ToolsController;
     
     RandomScenarioManager;
-    UserWarbandManager
+    UserWarbandManager;
+    UserCampaignManager;
 
     /**
      * Initializes all controllers, this also means all initialization
@@ -20,8 +22,10 @@ class ToolsController {
      */
     constructor () {
         this.UserWarbandManager = new WarbandManager();
+        this.UserCampaignManager = new CampaignManager();
         this.RandomScenarioManager = new ScenarioGenerator();
         this.UserWarbandManager.GetItemsAll();
+        this.UserCampaignManager.GrabUser();
     }
 
     // Gets the single instance of the cache
