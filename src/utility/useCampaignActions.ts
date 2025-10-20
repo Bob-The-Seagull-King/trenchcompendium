@@ -1,6 +1,6 @@
 import { useCampaign } from "../context/CampaignContext";
 import { useCallback } from "react";
-import {InviteDecline, InviteMake} from "../factories/warband/CampaignSynod";
+import {InviteDecline, InviteMake, PlayerRemove} from "../factories/warband/CampaignSynod";
 
 function getToken(): string | null {
     return localStorage.getItem("jwtToken");
@@ -106,5 +106,24 @@ export function useCampaignActions() {
         [campaign, reload]
     );
 
-    return { invitePlayer, invitePlayers, cancelInvite };
+    const removePlayer = useCallback(
+        async (playerId: number, opts?: { skipReload?: boolean }) => {
+            if (!campaign) throw new Error("Campaign not loaded.");
+            const token = getToken();
+            if (!token) throw new Error("Missing auth token.");
+
+            const res = await PlayerRemove(
+                { campaign_id: campaign.GetId(), player_id: playerId },
+                { token }
+            );
+
+            if (res?.status === 200 && !opts?.skipReload) {
+                await reload();
+            }
+            return res;
+        },
+        [campaign, reload]
+    );
+
+    return { invitePlayer, invitePlayers, cancelInvite, removePlayer };
 }

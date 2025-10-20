@@ -35,7 +35,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         return null;
     }
 
-    const { cancelInvite } = useCampaignActions();
+    const { cancelInvite, removePlayer } = useCampaignActions();
     const [busy, setBusy] = useState(false);
 
     const { userId } = useAuth()
@@ -80,11 +80,23 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
      */
     const [showRemovePlayerModal, setshowRemovePlayerModal] = useState(false);
     // Remove a player
-    const handleRemovePlayer = () => {
-        // @TODO: remove player here
-        // @TODO: grab player ID from player object?
-        alert ('@TODO: remove player here');
-    }
+    const handleRemovePlayer = useCallback(async () => {
+        try {
+            setBusy(true);
+            setActivePopoverId(null);          // Popover schließen
+            const res = await removePlayer(item.Id); // item ist CampaignUser
+
+            if (res?.status !== 200) {
+                console.error("Remove player failed:", res);
+            }
+            // Erfolg: useCampaignActions -> reload() -> Context lädt neu
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setBusy(false);
+            setshowRemovePlayerModal(false);   // Modal schließen
+        }
+    }, [removePlayer, item.Id, setActivePopoverId]);
 
     const [showChangeAdminModal, setshowChangeAdminModal] = useState(false);
     // Remove a player
@@ -422,10 +434,19 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     }>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={withStopPropagation(handleRemovePlayer)}>
-                        <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
-                        Remove Player
-                    </Button>
+
+                    {busy ? (
+                        <Button variant="danger" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'} />
+                            Removing Player
+                        </Button>
+                    ):(
+                        <Button variant="danger" onClick={withStopPropagation(handleRemovePlayer)}>
+                            <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
+                            Remove Player
+                        </Button>
+                    )}
+
                 </Modal.Footer>
             </Modal>
 
