@@ -42,6 +42,9 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
     const abortRef = useRef<AbortController | null>(null);
 
     const reload = useCallback(async () => {
+
+        console.log('triggered data reload');
+
         if (abortRef.current) abortRef.current.abort();
         const controller = new AbortController();
         abortRef.current = controller;
@@ -50,14 +53,14 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
         setError(null);
 
         try {
-            const obj = await CampaignFactory.GetCampaignPublicByID(campaignId);
+            const obj = await CampaignFactory.GetCampaignPublicByID(campaignId, { force: true });
             setCampaign(obj);
         } catch (e: any) {
             if (e?.name !== "AbortError") setError(e?.message ?? "Failed to load campaign.");
         } finally {
             if (!controller.signal.aborted) setLoading(false);
         }
-    }, [campaignId]); // <-- nur campaignId
+    }, [campaignId]);
 
     // Initial load + reload on id change
     useEffect(() => {

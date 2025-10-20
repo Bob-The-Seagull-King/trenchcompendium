@@ -2,10 +2,19 @@
 import React, {useState} from 'react';
 import {Button, Modal} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheckCircle, faEnvelopeCircleCheck, faUserCheck, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {
+    faCheckCircle,
+    faCircleNotch,
+    faEnvelopeCircleCheck,
+    faUserCheck,
+    faXmark
+} from "@fortawesome/free-solid-svg-icons";
 import {useCampaign} from "../../../context/CampaignContext";
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import CMContextualPopover from "./CMContextualPopover";
+import AlertCustom from "../../components/generics/AlertCustom";
+import {useCampaignActions} from "../../../utility/useCampaignActions";
+
 
 interface DummyPlayer {
     id: string;
@@ -25,22 +34,38 @@ const dummyPlayers: DummyPlayer[] = [
 const CMManagePanel_InvitePlayer: React.FC = () => {
     const { campaign } = useCampaign();
 
+    const { invitePlayer, invitePlayers } = useCampaignActions();
+
     if( !campaign) {
         return null;
     }
 
     const [show, setShow] = useState<boolean>(false);
-    const [selectedPlayerIds, setSelectedPlayerIds] = useState<string[]>([]);
+    const [selectedPlayerIds, setSelectedPlayerIds] = useState<number[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState<string | null>(null);
 
-    const toggleSelect = (id: string) => {
+    const toggleSelect = (id: number) => {
         setSelectedPlayerIds(prev =>
             prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id]
         );
     };
 
-    const handleSubmit = () => {
-        campaign.InvitePlayers(selectedPlayerIds);
-        alert('TODO: Invite players here');
+    const handleSubmit = async () => {
+        if (!selectedPlayerIds.length) return;
+
+        try {
+            setLoading(true);
+            const summary = await invitePlayers(selectedPlayerIds); // reload am Ende bei Erfolg
+
+            setSelectedPlayerIds([]);
+            setShow(false);
+        } catch (e: any) {
+            console.log(e?.message ?? "Invites failed.");
+        } finally {
+            setLoading(false);
+        }
+
         setShow(false);
 
         // @TODO: refresh state for UI here
@@ -68,39 +93,40 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div>{'Invite your friends to this campaign'}</div>
-                    <ul className="player-list">
-                        {dummyPlayers.map(player => (
+                    {(campaign.GetInvitablePlayers_full())? (
+                        <ul className="player-list">
+
+                        {(campaign?.GetInvitablePlayers_full() ?? []).map((player) => (
                             <li
-                                key={player.id}
+                                key={player.Id}
                                 className={`player-item 
-                                ${selectedPlayerIds.includes(player.id) ? 'selected' : ''} 
-                                ${player.isInCampaign ? 'already-in' : ''}
-                                ${player.isInvited ? 'invited' : ''}
+                                ${selectedPlayerIds.includes(player.Id) ? 'selected' : ''} 
+                                ${campaign.IsJoined(player.Id) ? 'already-in' : ''}
+                                ${campaign.IsInvited(player.Id) ? 'invited' : ''}
                                 `}
                                 onClick={() => {
-                                    if(!player.isInCampaign && !player.isInvited) {
-                                        toggleSelect(player.id);
+                                    if (!campaign.IsJoined(player.Id) && !campaign.IsInvited(player.Id)) {
+                                        toggleSelect(player.Id);
                                     }
                                 }}
                             >
                                 <div className={'player-image-wrap'}>
                                     <SynodImageWithCredit
-                                        imageId={player.imageId}
+                                        imageId={player.AvatarId}
                                         className={'player-image'}
                                     />
                                 </div>
 
                                 <div className={'player-text'}>
                                     <div className={'player-name'}>
-                                        {player.name}
+                                        {player.Nickname}
                                     </div>
-                                    {player.isInCampaign && // If player is already in campaign
+                                    {campaign.IsJoined(player.Id) && // If player is already in campaign
                                         <div className={'player-status'}>
                                             {'Joined'}
                                         </div>
                                     }
-                                    {(player.isInvited ) && // @TODO: If player is invited
+                                    {(campaign.IsInvited(player.Id)) && // @TODO: If player is invited
                                         <div className={'player-status'}>
                                             {'Invited'}
                                         </div>
@@ -108,7 +134,7 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
                                 </div>
 
                                 {/* @TODO: use actual player data*/}
-                                {player.isInvited &&
+                                {campaign.IsInvited(player.Id) &&
                                     <CMContextualPopover
                                         id={`player-invite-${2}`}
                                         type="player-invite"
@@ -116,33 +142,60 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
                                     />
                                 }
 
-                                {player.isInCampaign &&
-                                    <FontAwesomeIcon icon={faUserCheck} className={'player-icon player-icon-in-campaign'}/>
+                                {campaign.IsJoined(player.Id) &&
+                                    <FontAwesomeIcon icon={faUserCheck}
+                                                     className={'player-icon player-icon-in-campaign'}/>
                                 }
 
-                                {selectedPlayerIds.includes(player.id) &&
-                                    <FontAwesomeIcon icon={faCheckCircle} className={'player-icon player-icon-selected'}/>
+                                {selectedPlayerIds.includes(player.Id) &&
+                                    <FontAwesomeIcon icon={faCheckCircle}
+                                                     className={'player-icon player-icon-selected'}/>
                                 }
                             </li>
                         ))}
                     </ul>
-                </Modal.Body>
+                    ) : (
+                        <AlertCustom
+                        type={'info'}>
+                            <h4>
+                                {'No friends to invite'}
+                            </h4>
+                            <p>
+                                {'You can only invite your friends. Add your friends first and then add them to your campaign'}
+                            </p>
+                        </AlertCustom>
+                    )
+                }
+            </Modal.Body>
 
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShow(false)}>
-                        Cancel
-                    </Button>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShow(false)}>
+                    Cancel
+                </Button>
+
+                {!loading ? (
                     <Button
                         variant="primary"
                         onClick={handleSubmit}
                         disabled={selectedPlayerIds.length === 0}
                     >
-                        Invite Selected
+                        Invite Selected {`(${selectedPlayerIds.length})`}
                     </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
-    );
+                ):(
+                    <Button
+                        variant="primary"
+                        disabled={true}
+                    >
+                        <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin me-2'} />
+                        {'Inviting Players'}
+                    </Button>
+                )}
+
+            </Modal.Footer>
+        </Modal>
+</>
+)
+    ;
 };
 
 export default CMManagePanel_InvitePlayer;

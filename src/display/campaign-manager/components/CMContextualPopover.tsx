@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useCampaign} from "../../../context/CampaignContext";
 import {RealWarbandPurchaseModel} from "../../../classes/saveitems/Warband/Purchases/WarbandPurchase";
 import {usePopover} from "../../../context/PopoverContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
+    faCircleNotch,
     faCopy,
     faCrown,
     faEdit,
@@ -15,6 +16,7 @@ import {
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import {Button, Modal, Popover} from "react-bootstrap";
 import {useAuth} from "../../../utility/AuthContext";
+import {useCampaignActions} from "../../../utility/useCampaignActions";
 
 
 interface CMContextualPopoverProps {
@@ -28,15 +30,19 @@ interface CMContextualPopoverProps {
  */
 const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, item }) => {
 
-    const { campaign } = useCampaign();
+    const { campaign, reload } = useCampaign();
     if( !campaign) {
         return null;
     }
+
+    const { cancelInvite } = useCampaignActions();
+    const [busy, setBusy] = useState(false);
 
     const { userId } = useAuth()
 
     const { activePopoverId, setActivePopoverId } = usePopover();
     const isActive = activePopoverId === id;
+
     const handleToggle = () => {
         setActivePopoverId(isActive ? null : id);
     };
@@ -119,15 +125,26 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     /** End Warband Invite Actions */
 
     /**
-     * Player Invite Actions
+     * Cancel player invite
      */
-    const [showCancelPlayerInviteModal, setshowCancelPlayerInviteModal] = useState(false);
-    // Remove a warband
-    const handleCancelPlayerInvite = () => {
-        // @TODO: Cancel player invite here
-        // @TODO: grab player ID from object?
-        alert ('@TODO: cancel player invite here');
-    }
+    const handleCancelPlayerInvite = useCallback(async () => {
+        try {
+            setBusy(true);
+            setActivePopoverId(null);
+            // item.Id ist number (aus CampaignUser Getter)
+            const res = await cancelInvite(item.Id);
+
+            if (res?.status !== 200) {
+                // optional: zeig Fehler-UI
+                console.error("Cancel invite failed:", res);
+            }
+            // Erfolg: CampaignContext lädt automatisch via cancelInvite() -> reload()
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setBusy(false);
+        }
+    }, [cancelInvite, item.Id]);
     /** End Player Invite Actions */
 
     /** Hides popover when a modal is opened */
@@ -140,7 +157,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
             || showRemoveWarbandModal
             || showChangeAdminModal
             || showCancelWarbandInviteModal
-            || showCancelPlayerInviteModal
         ) {
             setActivePopoverId(null);
         }
@@ -151,7 +167,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         showRemoveWarbandModal,
         showChangeAdminModal,
         showCancelWarbandInviteModal,
-        showCancelPlayerInviteModal,
     ]);
 
     if(type === 'announcement' && ( !userId || !campaign.IsAdmin(userId))) {
@@ -231,7 +246,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                             {(type === 'player-invite') &&
                                 <>
                                     <div className="action"
-                                         onClick={withStopPropagation(() => setshowCancelPlayerInviteModal(true))}>
+                                         onClick={withStopPropagation(() => handleCancelPlayerInvite())}>
                                         <FontAwesomeIcon icon={faTimes} className="icon-inline-left-l"/>
                                         {'Cancel Invite'}
                                     </div>
@@ -242,9 +257,15 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     </Popover.Body>
                 }>
 
-                <div className="CM-item-actions" onClick={(e) => e.stopPropagation()}>
-                    <FontAwesomeIcon icon={faEllipsisVertical}/>
-                </div>
+                { !busy ? (
+                    <div className="CM-item-actions" onClick={(e) => e.stopPropagation()}>
+                        <FontAwesomeIcon icon={faEllipsisVertical}/>
+                    </div>
+                ): (
+                    <div className="CM-item-actions">
+                        <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin'}/>
+                    </div>
+                )}
             </OverlayTrigger>
 
 
@@ -551,51 +572,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                         Cancel
                     </Button>
                     <Button variant="danger" onClick={withStopPropagation(handleCancelWarbandInvite)}>
-                        <FontAwesomeIcon icon={faTimes} className={'icon-inline-left'} />
-                        Cancel Invite
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-            {/** Cancel Player Invite Modal */}
-            <Modal show={showCancelPlayerInviteModal} onHide={() => setshowCancelPlayerInviteModal(false)} centered>
-                <Modal.Header closeButton={false}>
-                    <Modal.Title>{`Cancel Warband Invite`}</Modal.Title>
-
-                    <FontAwesomeIcon
-                        icon={faXmark}
-                        className="modal-close-icon"
-                        role="button"
-                        onClick={
-                            (e) => {
-                                e.stopPropagation();
-                                setshowCancelPlayerInviteModal(false);
-                            }}
-                    />
-                </Modal.Header>
-
-                <Modal.Body>
-                    {'Are you sure you want to cancel the invite to this player?'}
-
-                    {/* @TODO: output warband details here*/}
-                    <div className={'my-3'}>
-                        <strong>
-                            {'Player Name here'}
-                        </strong>
-                    </div>
-
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={
-                        (e) => {
-                            e.stopPropagation();
-                            setshowCancelPlayerInviteModal(false);
-                        }
-                    }>
-                        Cancel
-                    </Button>
-                    <Button variant="danger" onClick={withStopPropagation(handleCancelPlayerInvite)}>
                         <FontAwesomeIcon icon={faTimes} className={'icon-inline-left'} />
                         Cancel Invite
                     </Button>

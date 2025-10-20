@@ -1,38 +1,29 @@
-import { SumWarband } from '../../classes/saveitems/Warband/WarbandManager';
-import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
-import { SYNOD } from '../../resources/api-constants';
-import { Campaign, ICampaign } from '../../classes/saveitems/Campaign/Campaign';
-import { CampaignUser, ICampaignUser } from '../../classes/saveitems/Campaign/CampaignUser';
-import { CampaignAnnouncement, ICampaignAnnouncement } from '../../classes/saveitems/Campaign/CampaignAnnouncement';
-import { CampaignWarband, ICampaignWarband } from '../../classes/saveitems/Campaign/CampaignWarband';
+// factories/warband/CampaignFactory.ts
 
-const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
+import {SynodDataCache} from "../../classes/_high_level_controllers/SynodDataCache";
+import {Campaign, ICampaign} from "../../classes/saveitems/Campaign/Campaign";
+import {SYNOD} from "../../resources/api-constants";
+import {CampaignWarband, ICampaignWarband} from "../../classes/saveitems/Campaign/CampaignWarband";
+import {CampaignAnnouncement, ICampaignAnnouncement} from "../../classes/saveitems/Campaign/CampaignAnnouncement";
+import {CampaignUser, ICampaignUser} from "../../classes/saveitems/Campaign/CampaignUser";
 
 class CampaignFactory {
-    
     static async CreateCampaign(data: ICampaign) {
-        const cache = SynodDataCache.getInstance();
-        const isValid = (cache.CheckCampaignObjectCache(data.campaign_id))
-        if (isValid) {
-            return cache.campaignObjectCache[data.campaign_id];
-        }
+        // Always create a fresh Campaign instance so React gets a new reference
         const rule = new Campaign(data);
-        cache.AddCampaignObjectCache(data.campaign_id, rule);
         await rule.BuildWarbands(data);
         await rule.BuildPlayers(data);
         await rule.BuildAnnouncements(data);
-        
         return rule;
     }
 
-    static async CreateCampaignUser(data : ICampaignUser) {
-        const id = (data.id ?? data.user_id)!; // API provides either id or user_id
+    static async CreateCampaignUser(data: ICampaignUser) {
+        const id = (data.id ?? data.user_id)!;
         const cache = SynodDataCache.getInstance();
-        const isValid = (cache.CheckCampaignUserCache(id))
-        if (isValid) {
+        if (cache.CheckCampaignUserCache(id)) {
             return cache.campaignUserCache[id];
         }
-        const rule = new CampaignUser(
+        const user = new CampaignUser(
             id,
             data.nickname,
             !!data.is_premium,
@@ -40,112 +31,80 @@ class CampaignFactory {
             data.profile_picture?.source_title,
             data.profile_picture?.source_url,
             data.profile_picture?.image_id,
-        )
-        cache.AddCampaignUserCache(id, rule);
-        await rule.BuildSelfUser();
-        return rule;
+        );
+        cache.AddCampaignUserCache(id, user);
+        await user.BuildSelfUser();
+        return user;
     }
 
-    static async CreateCampaignAnnouncement(data : ICampaignAnnouncement) {
+    static async CreateCampaignAnnouncement(data: ICampaignAnnouncement) {
         const cache = SynodDataCache.getInstance();
-        const isValid = (cache.CheckCampaignAnnouncementCache(data.announcement_id))
-        if (isValid ) {
+        if (cache.CheckCampaignAnnouncementCache(data.announcement_id)) {
             return cache.campaignAnnouncementCache[data.announcement_id];
         }
-        const rule = new CampaignAnnouncement(data);
-        cache.AddCampaignAnnouncementCache(data.announcement_id, rule);
-        await rule.BuildUser(data);
-
-        return rule;
+        const a = new CampaignAnnouncement(data);
+        cache.AddCampaignAnnouncementCache(data.announcement_id, a);
+        await a.BuildUser(data);
+        return a;
     }
 
-    static async CreateCampaignWarband(data : ICampaignWarband, parent : Campaign) {
+    static async CreateCampaignWarband(data: ICampaignWarband, parent: Campaign) {
         const cache = SynodDataCache.getInstance();
-        const isValid = (cache.CheckCampaignWarbandCache(data.warband_id))
-        if (isValid ) {
+        if (cache.CheckCampaignWarbandCache(data.warband_id)) {
             return cache.campaignWarbandCache[data.warband_id];
         }
-        const rule = new CampaignWarband(data, parent);
-        cache.AddCampaignWarbandCache(data.warband_id, rule);
-        await rule.BuildUser(data);
-        await rule.BuildWarband(data);
-
-        return rule;
+        const wb = new CampaignWarband(data, parent);
+        cache.AddCampaignWarbandCache(data.warband_id, wb);
+        await wb.BuildUser(data);
+        await wb.BuildWarband(data);
+        return wb;
     }
 
-    static async GetCampaignPublicByID(_val: number): Promise<Campaign | null> {
-        const synodcache = SynodDataCache.getInstance();
-        let userdata: ICampaign | undefined;
+    static async GetCampaignPublicByID(id: number, opts?: { force?: boolean }): Promise<Campaign | null> {
+        const cache = SynodDataCache.getInstance();
+        let data: ICampaign | undefined;
 
-        // 1) raw cache present?
-        if (synodcache.CheckCampaignCache(_val)) {
-            userdata = synodcache.campaignDataCache[_val];
+        // Only use data cache if not forced
+        if (!opts?.force && cache.CheckCampaignCache(id)) {
+            data = cache.campaignDataCache[id];
         }
 
-        // 2) in-flight? wait
-        if (!userdata && synodcache.CheckCampaignCallCache(_val)) {
+        if (!data && cache.CheckCampaignCallCache(id)) {
+            // wait up to ~100s for any in-flight request
             const EMERGENCY_OUT = 1000;
-            let count = 0;
-            while (!synodcache.CheckCampaignCache(_val) && count < EMERGENCY_OUT) {
-                await delay(100);
-                count++;
+            let n = 0;
+            while (!cache.CheckCampaignCache(id) && n < EMERGENCY_OUT) {
+                await new Promise(r => setTimeout(r, 100));
+                n++;
             }
-            if (synodcache.CheckCampaignCache(_val)) {
-                userdata = synodcache.campaignDataCache[_val];
-            }
+            data = cache.campaignDataCache[id];
         }
 
-        // 3) fetch if still missing
-        if (!userdata) {
-            synodcache.AddCampaignCallCache(_val);
-
-            const controller = new AbortController();
-            const response = await fetch(
-                `${SYNOD.URL}/wp-json/synod/v1/campaigns/${_val}`,
-                { method: "GET", headers: { Accept: "application/json" }, signal: controller.signal }
+        if (!data) {
+            cache.AddCampaignCallCache(id);
+            const res = await fetch(
+                `${SYNOD.URL}/wp-json/synod/v1/campaigns/${id}`,
+                { method: 'GET', headers: { Accept: 'application/json' } }
             );
-
-            if (response.status === 400 || response.status === 404) {
-                return null;
-            }
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status} ${response.statusText}`);
-            }
-
-            const json = (await response.json()) as ICampaign;
-            synodcache.AddCampaignCache(_val, json);
-            userdata = json;
+            if (res.status === 400) return null;
+            const json = (await res.json()) as ICampaign;
+            cache.AddCampaignCache(id, json);
+            data = json;
         }
 
-        // 4) build object from raw
-        const campaign = await CampaignFactory.CreateCampaign(userdata);
-        return campaign;
+        // Always return a fresh Campaign instance
+        return data ? CampaignFactory.CreateCampaign(data) : null;
     }
 
-    static async ResetCampaign( val : Campaign ) : Promise<Campaign | null> {
-        const synodcache : SynodDataCache = SynodDataCache.getInstance();
-        delete synodcache.campaignDataCache[val.GetId()];
-        delete synodcache.callCampaignCache[val.GetId()];
-        delete synodcache.campaignObjectCache[val.GetId()];
+    static async ResetCampaign(val: Campaign): Promise<Campaign | null> {
+        const cache = SynodDataCache.getInstance();
+        delete cache.campaignDataCache[val.GetId()];
+        delete cache.callCampaignCache[val.GetId()];
+        delete cache.campaignObjectCache[val.GetId()];
 
-        const announcements_list = val.GetAnnouncements();
-        const warbands_list = val.GetWarbands();
-        const players_list = val.GetPlayers();
-
-        for (let i = 0 ; i < announcements_list.length; i++) {
-            delete synodcache.campaignAnnouncementCache[announcements_list[i].Id]
-        }
-        for (let i = 0 ; i < warbands_list.length; i++) {
-            delete synodcache.campaignWarbandCache[warbands_list[i].Id]
-        }
-        for (let i = 0 ; i < players_list.length; i++) {
-            delete synodcache.campaignUserCache[players_list[i].Id]
-        }
-
-        const NewCampaign = await CampaignFactory.GetCampaignPublicByID(val.GetId())
-        return NewCampaign;
+        // clear sub-caches if du wirklich hart resetten willst …
+        return CampaignFactory.GetCampaignPublicByID(val.GetId(), { force: true });
     }
-
 }
 
-export {CampaignFactory}
+export { CampaignFactory };

@@ -14,7 +14,8 @@ export interface ICampaign {
     campaign_warbands: ICampaignWarband[];
     campaign_warbands_invited: string[];
     campaign_players: ICampaignUser[];
-    campaign_players_invited: string[];
+    campaign_players_invited: ICampaignUser[];
+    campaign_players_invitable: ICampaignUser[];
     campaign_announcements: ICampaignAnnouncement[];
 }
 
@@ -29,11 +30,15 @@ export class Campaign {
     private _warbands: CampaignWarband[] = [];
     private _warbandsInvited: string[] = [];
     private _players: CampaignUser[] = [];
-    private _playersInvited: string[] = [];
+    private _playersInvited: CampaignUser[] = [];
+    private _playersInvitable: CampaignUser[] = [];
     private _announcements: CampaignAnnouncement[] = [];
     private _latestAnnouncement: CampaignAnnouncement | null = null;
 
     constructor(data : ICampaign) {
+
+        console.log(data);
+
         this._id = data.campaign_id ?? null;
         this._adminId = data.campaign_admin_id ?? null;
         this._name = data.campaign_name ?? "";
@@ -50,15 +55,29 @@ export class Campaign {
     }
 
     public async BuildPlayers(data : ICampaign) {
-        
-        for (let i = 0; i < data.campaign_players.length; i++) {
-            const NewPlayer = await CampaignFactory.CreateCampaignUser(data.campaign_players[i]);
-            this._players.push(NewPlayer);
-        }
 
-        this._playersInvited = Array.isArray(data.campaign_players_invited)
-            ? [...data.campaign_players_invited]
-            : [];
+        // Parallel faszer; Sorting stays via map()
+        const [joined, invited, invitable] = await Promise.all([
+            Promise.all(
+                (data.campaign_players ?? []).map((u) =>
+                    CampaignFactory.CreateCampaignUser(u)
+                )
+            ),
+            Promise.all(
+                (data.campaign_players_invited ?? []).map((u) =>
+                    CampaignFactory.CreateCampaignUser(u)
+                )
+            ),
+            Promise.all(
+                (data.campaign_players_invitable ?? []).map((u) =>
+                    CampaignFactory.CreateCampaignUser(u)
+                )
+            ),
+        ]);
+
+        this._players = joined;
+        this._playersInvited = invited;
+        this._playersInvitable = invitable;
     }
 
     public async BuildAnnouncements(data : ICampaign) {
@@ -71,9 +90,9 @@ export class Campaign {
         if (data.campaign_latest_announcement) {
             const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement);
             this._latestAnnouncement = (NewPlayer);
-
         }
     }
+
 
     // --- Public getters UI can use ---
     public GetId(): number { return this._id; }
@@ -86,6 +105,42 @@ export class Campaign {
     public GetPlayers(): CampaignUser[] { return this._players; }
     public GetAnnouncements(): CampaignAnnouncement[] { return this._announcements; }
     public GetLatestAnnouncement(): CampaignAnnouncement | null { return this._latestAnnouncement; }
+    public GetInvitedPlayers(): CampaignUser[] { return this._playersInvited; }
+    public GetInvitablePlayers(): CampaignUser[] { return this._playersInvitable; }
+
+    /**
+     * Returns a list of players that can be or have been invited or joined
+     * - sorted by username
+     */
+    public GetInvitablePlayers_full(): CampaignUser[] {
+        // Merge joined, invited, invitable (dedupe by user id)
+        const merged = new Map<number, CampaignUser>();
+
+        // helper to add unique users while preserving first occurrence
+        const addUnique = (arr: CampaignUser[]) => {
+            for (const u of arr) {
+                const key = Number(u.Id);
+                if (!merged.has(key)) merged.set(key, u);
+            }
+        };
+
+        addUnique(this._players);          // joined
+        addUnique(this._playersInvited);   // invited
+        addUnique(this._playersInvitable); // can be invited
+
+        // sort alphabetically by nickname (case-insensitive), then by id as tiebreaker
+        return Array.from(merged.values()).sort((a, b) => {
+            const nameA = (a.Nickname ?? "").trim();
+            const nameB = (b.Nickname ?? "").trim();
+            const cmp = nameA.localeCompare(nameB, undefined, {
+                sensitivity: "base",
+                numeric: true,
+            });
+            if (cmp !== 0) return cmp;
+            return Number(a.Id) - Number(b.Id);
+        });
+    }
+
 
     // --- Convenience helpers ---
     public GetWarbandById(id: number): CampaignWarband | undefined {
@@ -109,12 +164,19 @@ export class Campaign {
         return adminIdNum === userID;
     }
 
-    public IsInvited(userID : number) : boolean {
-        for (let i = 0; i < this._playersInvited.length; i++) {
-            const pl : number = parseInt(this._playersInvited[i])
-            if (pl == userID && !Number.isNaN(pl)) { return true; }
-        }  
-        return false;
+    /**
+     * Check if a player is invited to this campaign
+     * @param userID
+     */
+    public IsInvited(userID: number): boolean {
+        return this._playersInvited.some(u => u.Id === userID);
+    }
+    /**
+     * Check if a player joined this campaign
+     * @param userID
+     */
+    public IsJoined(userID: number): boolean {
+        return this._players.some(u => u.Id === userID);
     }
 
     public IsInvitedWarband(userID : number) : boolean {
@@ -126,7 +188,7 @@ export class Campaign {
     }
 
 
-    public InvitePlayers( ids: string[]) {
+    public InvitePlayers( ids: number[]) {
         console.log('@TODO: invite players here');
     }
 

@@ -60,7 +60,7 @@ const CampaignSummary: React.FC = () => {
 
                 <CMLatestAnnouncement />
 
-                <CMProgressGraph />
+                {/*<CMProgressGraph />*/}
             </div>
         </div>
     );
