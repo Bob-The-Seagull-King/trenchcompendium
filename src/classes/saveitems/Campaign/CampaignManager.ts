@@ -36,7 +36,7 @@ interface ISubmitBasics {
 
 class CampaignManager {
     private UserProfile : SiteUser | null = null;
-    private Complete : boolean = false;
+    private Complete = false;
 
     public ListOfCampaigns : Campaign[] = [];
     public ListOfWarbandCampaigns : Campaign[] = [];
@@ -45,7 +45,7 @@ class CampaignManager {
     public ListOfInvites : Campaign[] = [];
     public ListOfWarbandInvites : Campaign[] = [];
 
-    public constructor() {}
+    // public constructor() {}
 
     public async BuildCampaigns() { // @TODO Lane
         undefined;
