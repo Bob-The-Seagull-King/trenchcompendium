@@ -181,10 +181,20 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         showCancelWarbandInviteModal,
     ]);
 
+    // Only admins can edit any option
+    if( !userId || !campaign.IsAdmin(userId)) {
+        return null;
+    }
+
+    // Only admins can edit announcements
     if(type === 'announcement' && ( !userId || !campaign.IsAdmin(userId))) {
         return null;
     }
 
+    // do not show any options if these are options for the admin (none are applicable)
+    if( type === 'player' && campaign.IsAdmin(item.Id) ) {
+        return null;
+    }
 
     return (
         <div className="CMContextualPopover">
@@ -218,16 +228,22 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                             {/** Player actions */}
                             {(type === 'player') &&
                                 <>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setshowRemovePlayerModal(true))}>
-                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Remove Player'}
-                                    </div>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setshowChangeAdminModal(true))}>
-                                        <FontAwesomeIcon icon={faCrown} className="icon-inline-left-l"/>
-                                        {'Make Admin'}
-                                    </div>
+                                    { !campaign.IsAdmin(item.Id) &&
+                                        <div className="action"
+                                        onClick={withStopPropagation(() => setshowRemovePlayerModal(true))}
+                                        >
+                                            <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                            {'Remove Player'}
+                                        </div>
+                                    }
+
+                                    {!campaign.IsAdmin(item.Id) &&
+                                        <div className="action"
+                                             onClick={withStopPropagation(() => setshowChangeAdminModal(true))}>
+                                            <FontAwesomeIcon icon={faCrown} className="icon-inline-left-l"/>
+                                            {'Make Admin'}
+                                        </div>
+                                    }
                                 </>
                             }
 
