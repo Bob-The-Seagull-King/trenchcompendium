@@ -1,4 +1,4 @@
-import { AdminChange, AnnouncementCreate, AnnouncementDelete, AnnouncementEdit, InviteAccept, InviteDecline, InviteMake, PlayerRemove, WarbandAccept, WarbandCancel, WarbandInvite, WarbandRemove } from "../../../factories/warband/CampaignSynod";
+import { AdminChange, AnnouncementCreate, AnnouncementDelete, AnnouncementEdit, GetPlayerCampaignInvites, GetPlayerCampaigns, InviteAccept, InviteDecline, InviteMake, PlayerRemove, WarbandAccept, WarbandCancel, WarbandInvite, WarbandRemove } from "../../../factories/warband/CampaignSynod";
 import { UserFactory } from "../../../factories/synod/UserFactory";
 import { SiteUser } from "../../user_synod/site_user";
 import { Campaign } from "./Campaign";
@@ -62,6 +62,44 @@ class CampaignManager {
 
     public RemoveLoggedUser() {
         this.UserProfile = null;
+    }
+
+    public IsComplete() {
+        return this.Complete;
+    }
+
+    public async BuildAll() {
+        this.Complete = false;
+        this.ListOfCampaigns = [];
+        this.ListOfInvites = [];
+        if (this.UserProfile == null) {
+            await this.GrabUser();
+        }
+        const submission = this.GetUserSubmitBasics(true);
+        if (submission != null) {
+            const campaigns = await GetPlayerCampaigns(submission)
+            if (campaigns != null) {
+                const json = (await campaigns.json()) as number[];
+                for (let i = 0; i < json.length; i++) {
+                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(json[i]);
+                    if (CampaignVal != null) {
+                        this.ListOfCampaigns.push(CampaignVal)
+                    }
+                }
+            }
+            const invites = await GetPlayerCampaignInvites(submission)
+            if (invites != null) {
+                const json = (await invites.json()) as number[];
+                for (let i = 0; i < json.length; i++) {
+                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(json[i]);
+                    if (CampaignVal != null) {
+                        this.ListOfInvites.push(CampaignVal)
+                    }
+                }
+            }
+        }
+        this.SortMyCampaigns();
+        this.Complete = true;
     }
 
     public async GrabUser() {

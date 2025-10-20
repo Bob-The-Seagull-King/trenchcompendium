@@ -25,7 +25,7 @@ class ToolsController {
         this.UserCampaignManager = new CampaignManager();
         this.RandomScenarioManager = new ScenarioGenerator();
         this.UserWarbandManager.GetItemsAll();
-        this.UserCampaignManager.GrabUser();
+        this.UserCampaignManager.BuildAll();
     }
 
     // Gets the single instance of the cache
