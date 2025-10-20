@@ -2820,7 +2820,7 @@
         ],
         "options": [],
         "keywords": [],
-        "modifiers": ["Ignore Armour"]
+        "modifiers": ["Ignore Armour when down"]
     },
     {
         "id": "eq_heavyballisticshield",
