@@ -88,8 +88,13 @@ export class Campaign {
         }
 
         if (data.campaign_latest_announcement) {
-            const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement);
-            this._latestAnnouncement = (NewPlayer);
+            const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement);
+
+            if(NewAnnouncement.Id == undefined) {
+                this._latestAnnouncement = null;
+            } else {
+                this._latestAnnouncement = (NewAnnouncement);
+            }
         }
     }
 
