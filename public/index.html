@@ -13,7 +13,7 @@
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
          <link href="/static/css/main.c02abf55.css" rel="stylesheet">
-         <title>Trench Companion | The officially supported Trench Crusade ressource</title>
+         <title>Trench Companion | The officially supported Trench Crusade resource</title>
          <meta name="description" content="The official resource for Trench Crusade" data-react-helmet="true">
          <meta property="og:description" content="The official resource for Trench Crusade" data-react-helmet="true">
          <meta property="og:title" content="Trench Companion | Trench Companion" data-react-helmet="true">
@@ -30,63 +30,103 @@
             }
         </style>
 
-        <!-- 3) FC: Controlled Messaging -> explizit freigeben (falls irgendwas gated) -->
+        <!-- Data Layer + Consent-Defaults + TCF -->
         <script>
-            // MUSS vor FC/AdSense definiert sein
-            window.googlefc = window.googlefc || {};
-            window.googlefc.controlledMessagingFunction = function(message) {
-                try { console.log('[FC] controlledMessagingFunction: forcing proceed'); } catch(e){}
-                message.proceed(true); // erzwingt, dass Messages überhaupt angezeigt werden dürfen
-            };
-        </script>
-
-        <!-- 4) FC-Debug-Logs + Consent Mode Hook -->
-        <script>
-            window.googlefc = window.googlefc || {};
-            window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-            window.googlefc.callbackQueue.push({
-                CONSENT_API_READY: () => console.log('[FC] CONSENT_API_READY'),
-                CONSENT_DATA_READY: () => console.log('[FC] CONSENT_DATA_READY'),
-                CONSENT_MODE_DATA_READY: () => {
-                    const vals = window.googlefc.getGoogleConsentModeValues &&
-                        window.googlefc.getGoogleConsentModeValues();
-                    console.log('[FC] CONSENT_MODE_DATA_READY', vals);
-                }
-            });
-        </script>
-
-        <!-- 5) FC-Script EXPLIZIT laden (nicht nur via Auto-Ads) -->
-        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>
-
-        <!-- 6) AdSense Auto-Ads (kann die CMP auch laden; doppelt ist ok) -->
-        <script async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"
-                crossorigin="anonymous"></script>
-
-        <!-- 1) Data Layer + gtag-Wrapper + Consent-Defaults + TCF -->
-        <script>
-            // Data Layer anlegen, bevor GTM geladen wird
             window.dataLayer = window.dataLayer || [];
             function gtag(){ dataLayer.push(arguments); }
 
-            // Consent-Defaults: alles "denied" bis zur Nutzerentscheidung
-            gtag('consent', 'default', {
-                ad_storage:         'denied',
-                analytics_storage:  'denied',
-                ad_user_data:       'denied',
-                ad_personalization: 'denied',
-                wait_for_update:    500
+            // bis zur Entscheidung: alles denied
+            gtag('consent','default',{
+                ad_storage:'denied',
+                analytics_storage:'denied',
+                ad_user_data:'denied',
+                ad_personalization:'denied',
+                wait_for_update:500
             });
 
-            // IAB TCF Unterstützung aktivieren (empfohlen)
-            // Quelle: "Implement the Transparency & Consent Framework"
-            window['gtag_enable_tcf_support'] = true;
+            // TCF-Brücke aktivieren (Google liest TCF-Strings)
+            window.gtag_enable_tcf_support = true;
         </script>
 
-
+        <!--  FC-Callbacks: Consent-Mode-Werte -> gtag('consent','update'), dann GTM laden -->
         <script>
-            console.log('2.0');
+            (function(){
+                var gtmLoaded = false;
+
+                function loadGTM(){
+                    if (gtmLoaded) return; gtmLoaded = true;
+                    // *** OFFIZIELLES GTM-BOOTSTRAP-SNIPPET ***
+                    (function(w,d,s,l,i){
+                        w[l]=w[l]||[];
+                        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                        var f=d.getElementsByTagName(s)[0],
+                            j=d.createElement(s),
+                            dl=l!='dataLayer'?'&l='+l:'';
+                        j.async=true;
+                        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                        f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','GTM-NFVT7W7X');
+                }
+
+                function mapConsentValues(status) {
+                    try {
+                        var E = googlefc.ConsentModePurposeStatusEnum;
+                        var m = function(v){ return v===E.CONSENT_MODE_PURPOSE_STATUS_GRANTED ? 'granted' : 'denied'; };
+                        gtag('consent','update', {
+                            ad_storage:         m(status.adStoragePurposeConsentStatus),
+                            analytics_storage:  m(status.analyticsStoragePurposeConsentStatus),
+                            ad_user_data:       m(status.adUserDataPurposeConsentStatus),
+                            ad_personalization: m(status.adPersonalizationPurposeConsentStatus)
+                        });
+                    } catch(e) {/* bleibt auf defaults */}
+                }
+
+                window.googlefc = window.googlefc || {};
+                googlefc.callbackQueue = googlefc.callbackQueue || [];
+
+                // Debug-Logs (optional)
+                googlefc.callbackQueue.push({
+                    CONSENT_API_READY:        function(){ console.log('[FC] CONSENT_API_READY'); },
+                    CONSENT_DATA_READY:       function(){ console.log('[FC] CONSENT_DATA_READY'); },
+                    CONSENT_MODE_DATA_READY:  function(){
+                        console.log('[FC] CONSENT_MODE_DATA_READY',
+                            (googlefc.getGoogleConsentModeValues && googlefc.getGoogleConsentModeValues()) || '(no values)');
+                        var vals = googlefc.getGoogleConsentModeValues && googlefc.getGoogleConsentModeValues();
+                        if (vals) mapConsentValues(vals);
+                        loadGTM();
+                    }
+                });
+
+                // Fallback: falls FC-Callback nicht feuert → GTM trotzdem laden (bleibt denied-konform)
+                setTimeout(loadGTM, 1500);
+            })();
         </script>
+
+        <!-- Optional: googlefcPresent Iframe -->
+<!--        <script>-->
+<!--            (function signalGooglefcPresent() {-->
+<!--                if (!window.frames['googlefcPresent']) {-->
+<!--                    if (document.body) {-->
+<!--                        var iframe = document.createElement('iframe');-->
+<!--                        iframe.style = 'width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;display:none;';-->
+<!--                        iframe.name  = 'googlefcPresent';-->
+<!--                        document.body.appendChild(iframe);-->
+<!--                    } else {-->
+<!--                        setTimeout(signalGooglefcPresent, 0);-->
+<!--                    }-->
+<!--                }-->
+<!--            })();-->
+<!--        </script>-->
+
+        <!-- Funding Choices (Google CMP) -->
+        <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>
+
+        <!-- AdSense Auto-Ads injected by adsmanager -->
+<!--        <script async-->
+<!--                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"-->
+<!--                crossorigin="anonymous"-->
+<!--                onload="window.adsenseScriptLoaded=true; window.dispatchEvent(new Event('adsense:loaded'))">-->
+<!--        </script>-->
 
     </head>
 
@@ -97,7 +137,6 @@
                     height="0" width="0" style="display:none;visibility:hidden"></iframe>
         </noscript>
 
-        </noscript>
          <noscript>You need to enable JavaScript to run this app.</noscript>
 
 

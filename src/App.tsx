@@ -133,7 +133,7 @@ const App: React.FC = () => {
 
                                 <FooterMain />
                             </ImageCreditPopoverProvider>
-                            {/*<AdsenseManager />*/}
+                            <AdsenseManager />
                             <TrackingManager />
                             <AppVersionChecker />
 
