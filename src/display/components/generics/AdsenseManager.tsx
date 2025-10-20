@@ -4,11 +4,15 @@ import { useAuth } from '../../../utility/AuthContext';
 import { useLocation } from 'react-router-dom';
 
 const LIVE_HOSTS = new Set(['trench-companion.com', 'www.trench-companion.com']);
-const isLiveHost = typeof window !== 'undefined' && LIVE_HOSTS.has(window.location.hostname);
+const isLiveHost =
+    typeof window !== 'undefined' && LIVE_HOSTS.has(window.location.hostname);
+
 const ADSENSE_CLIENT = 'ca-pub-3744837400491966';
 const ADSENSE_SCRIPT_ID = 'adsense-auto-ads-script';
 
-console.log('adsmanager loaded');
+// Interaction-Buffer: 5 Minuten
+const INTERACTION_GAP_MS = 5 * 60 * 1000;
+
 
 function hasAdsApi(): boolean {
     const w = window as any;
@@ -30,27 +34,31 @@ function injectAutoAdsScript() {
 }
 
 function removeAutoAdsScriptAndHide() {
-    // Script entfernen
     const el = document.getElementById(ADSENSE_SCRIPT_ID);
     if (el && el.parentNode) el.parentNode.removeChild(el);
 
-    // Laufende Anfragen pausieren & Einblendungen verbergen (falls Nutzer im laufenden Betrieb Premium wurde)
+    // Laufende Anfragen pausieren & sichtbare Einblendungen verbergen
     try {
         (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-        (window as any).adsbygoogle.pauseAdRequests = 1; // harmless, falls nicht unterstützt
+        (window as any).adsbygoogle.pauseAdRequests = 1;
     } catch {
         console.log('error removeAutoAdsScriptAndHide');
     }
-    // Sichtbare Auto-Ads-Container ausblenden
-    document.querySelectorAll('ins.adsbygoogle, div[id^="google_ads_iframe_"], div[data-anchor-status]').forEach((node) => {
-        (node as HTMLElement).style.display = 'none';
-    });
+    document
+        .querySelectorAll(
+            'ins.adsbygoogle, div[id^="google_ads_iframe_"], div[data-anchor-status]'
+        )
+        .forEach((node) => {
+            (node as HTMLElement).style.display = 'none';
+        });
 }
 
 export const AdsenseManager: React.FC = () => {
     const { SiteUser } = useAuth();
     const location = useLocation();
-    const initialized = useRef(false);
+
+    const initializedRef = useRef(false);
+    const lastInteractionPushRef = useRef(0);
 
     const isPremium = !!SiteUser?.Premium?.IsPremium;
     const canLoadAds = isLiveHost && !isPremium;
@@ -61,23 +69,25 @@ export const AdsenseManager: React.FC = () => {
             injectAutoAdsScript();
         } else {
             removeAutoAdsScriptAndHide();
+            initializedRef.current = false;
+            lastInteractionPushRef.current = 0;
         }
     }, [canLoadAds]);
 
     // Erstes Enable (nachdem Script da ist)
     useEffect(() => {
         if (!canLoadAds) return;
-        if (initialized.current) return;
+        if (initializedRef.current) return;
         if (!hasAdsApi()) return;
         try {
             (window as any).adsbygoogle.push({});
-            initialized.current = true;
+            initializedRef.current = true;
         } catch {
             console.log('error processing canloadAds 2');
         }
     }, [canLoadAds]);
 
-    // SPA: bei jeder Navigation AdSense „anstupsen“
+    // SPA: bei jeder Navigation AdSense "anstupsen"
     useEffect(() => {
         if (!canLoadAds) return;
         if (!hasAdsApi()) return;
@@ -87,6 +97,34 @@ export const AdsenseManager: React.FC = () => {
             console.log('error processing canloadAds');
         }
     }, [canLoadAds, location.pathname, location.search]);
+
+    // Interaktions-Nudge mit 5-Minuten-Puffer
+    useEffect(() => {
+        if (!canLoadAds) return;
+
+        const handler = () => {
+            if (!hasAdsApi()) return;
+            const now = Date.now();
+            if (now - lastInteractionPushRef.current < INTERACTION_GAP_MS) return;
+            try {
+                (window as any).adsbygoogle.push({});
+                lastInteractionPushRef.current = now;
+            } catch {
+                // still ok, wir ignorieren einzelne Fehler
+            }
+        };
+
+        const opts: AddEventListenerOptions = { passive: true };
+        const evts: Array<keyof WindowEventMap> = [
+            'click',
+            'keydown',
+            'touchstart',
+            'scroll',
+        ];
+
+        evts.forEach((e) => window.addEventListener(e, handler, opts));
+        return () => evts.forEach((e) => window.removeEventListener(e, handler as any));
+    }, [canLoadAds]);
 
     return null;
 };
