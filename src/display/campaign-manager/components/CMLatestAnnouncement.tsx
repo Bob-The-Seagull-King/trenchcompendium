@@ -10,6 +10,7 @@ const CMLatestAnnouncement: React.FC = () => {
     }
 
     const announcement = campaign.GetLatestAnnouncement(); // CampaignAnnouncement | null
+
     if (!announcement) {
         // @TODO create better empty state
         return (
