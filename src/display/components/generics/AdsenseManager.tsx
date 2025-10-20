@@ -54,7 +54,7 @@ function removeAutoAdsScriptAndHide() {
 }
 
 export const AdsenseManager: React.FC = () => {
-    const { SiteUser } = useAuth();
+    const {SiteUser} = useAuth();
     const location = useLocation();
 
     const initializedRef = useRef(false);
@@ -114,7 +114,7 @@ export const AdsenseManager: React.FC = () => {
             }
         };
 
-        const opts: AddEventListenerOptions = { passive: true };
+        const opts: AddEventListenerOptions = {passive: true};
         const evts: Array<keyof WindowEventMap> = [
             'click',
             'keydown',
@@ -126,5 +126,20 @@ export const AdsenseManager: React.FC = () => {
         return () => evts.forEach((e) => window.removeEventListener(e, handler as any));
     }, [canLoadAds]);
 
-    return null;
+    if( canLoadAds ) {
+        return (
+            <ins key={location.pathname}
+                className="adsbygoogle"
+                 data-ad-client="ca-pub-3744837400491966"
+                 data-ad-slot="7868779249"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true">
+
+            </ins>
+        );
+    } else {
+        return null
+    }
+
+
 };
