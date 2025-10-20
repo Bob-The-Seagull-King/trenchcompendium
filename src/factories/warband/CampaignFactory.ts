@@ -13,7 +13,7 @@ class CampaignFactory {
     static async CreateCampaign(data: ICampaign) {
         const cache = SynodDataCache.getInstance();
         const isValid = (cache.CheckCampaignObjectCache(data.campaign_id))
-        if (isValid == false) {
+        if (isValid) {
             return cache.campaignObjectCache[data.campaign_id];
         }
         const rule = new Campaign(data);
@@ -29,7 +29,7 @@ class CampaignFactory {
         const id = (data.id ?? data.user_id)!; // API provides either id or user_id
         const cache = SynodDataCache.getInstance();
         const isValid = (cache.CheckCampaignUserCache(id))
-        if (isValid == false) {
+        if (isValid) {
             return cache.campaignUserCache[id];
         }
         const rule = new CampaignUser(
@@ -49,7 +49,7 @@ class CampaignFactory {
     static async CreateCampaignAnnouncement(data : ICampaignAnnouncement) {
         const cache = SynodDataCache.getInstance();
         const isValid = (cache.CheckCampaignAnnouncementCache(data.announcement_id))
-        if (isValid == false) {
+        if (isValid ) {
             return cache.campaignAnnouncementCache[data.announcement_id];
         }
         const rule = new CampaignAnnouncement(data);
@@ -62,7 +62,7 @@ class CampaignFactory {
     static async CreateCampaignWarband(data : ICampaignWarband, parent : Campaign) {
         const cache = SynodDataCache.getInstance();
         const isValid = (cache.CheckCampaignWarbandCache(data.warband_id))
-        if (isValid == false) {
+        if (isValid ) {
             return cache.campaignWarbandCache[data.warband_id];
         }
         const rule = new CampaignWarband(data, parent);
