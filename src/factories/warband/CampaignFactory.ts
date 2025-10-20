@@ -73,57 +73,53 @@ class CampaignFactory {
         return rule;
     }
 
-    static async GetCampaignPublicByID( _val : number) : Promise<Campaign | null> {
-        const synodcache : SynodDataCache = SynodDataCache.getInstance();
-        let userdata : any = undefined;
+    static async GetCampaignPublicByID(_val: number): Promise<Campaign | null> {
+        const synodcache = SynodDataCache.getInstance();
+        let userdata: ICampaign | undefined;
 
+        // 1) raw cache present?
         if (synodcache.CheckCampaignCache(_val)) {
-            userdata = (synodcache.campaignDataCache[_val]);
+            userdata = synodcache.campaignDataCache[_val];
         }
 
-        if (synodcache.CheckCampaignCallCache(_val)) {
-            const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
-            let count_check = 0;
-            while ((!synodcache.CheckCampaignCache(_val)) && (count_check < EMERGENCY_OUT)) {
+        // 2) in-flight? wait
+        if (!userdata && synodcache.CheckCampaignCallCache(_val)) {
+            const EMERGENCY_OUT = 1000;
+            let count = 0;
+            while (!synodcache.CheckCampaignCache(_val) && count < EMERGENCY_OUT) {
                 await delay(100);
-                count_check += 1;
-            }                   
-            userdata = (synodcache.campaignDataCache[_val]);
+                count++;
+            }
+            if (synodcache.CheckCampaignCache(_val)) {
+                userdata = synodcache.campaignDataCache[_val];
+            }
         }
 
-        if (!synodcache.CheckCampaignCache(_val)) {
+        // 3) fetch if still missing
+        if (!userdata) {
             synodcache.AddCampaignCallCache(_val);
 
             const controller = new AbortController();
-            const response : Response = await fetch(
-                            `${SYNOD.URL}/wp-json/synod/v1/campaigns/${_val}`,
-                            {
-                                method: "GET",
-                                headers: { Accept: "application/json" },
-                                signal: controller.signal,
-                            }
-                        );
+            const response = await fetch(
+                `${SYNOD.URL}/wp-json/synod/v1/campaigns/${_val}`,
+                { method: "GET", headers: { Accept: "application/json" }, signal: controller.signal }
+            );
 
-            // warband does not exist -> same as default return
-            if( response.status === 400 ) {
+            if (response.status === 400 || response.status === 404) {
                 return null;
             }
-
-            if (response) {
-                const json : any = await response.json();          
-                userdata = json.warband_data
-                synodcache.AddCampaignCache(_val, json.warband_data)
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status} ${response.statusText}`);
             }
+
+            const json = (await response.json()) as ICampaign;
+            synodcache.AddCampaignCache(_val, json);
+            userdata = json;
         }
 
-        if (userdata != undefined) {
-            try {
-                const user = await CampaignFactory.CreateCampaign(JSON.parse(userdata) as ICampaign)
-                return user;
-            } catch (e) {console.log(e)}
-        }
-
-        return null;
+        // 4) build object from raw
+        const campaign = await CampaignFactory.CreateCampaign(userdata);
+        return campaign;
     }
 
     static async ResetCampaign( val : Campaign ) : Promise<Campaign | null> {

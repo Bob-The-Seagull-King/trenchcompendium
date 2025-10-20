@@ -23,7 +23,7 @@ const CampaignManagerView: React.FC = () => {
     
 
     return (
-        <CampaignProvider campaignId={parseInt(id)}>
+        <CampaignProvider campaignId={Number(id)}>
             <PopoverProvider>
                 <CampaignManagerContent />
             </PopoverProvider>

@@ -75,9 +75,9 @@ class SynodDataCache {
     campaignObjectCache: Record<number, Campaign> = {}; // Cache of warband data
     callCampaignCache: Record<number, boolean> = {};  // Objects that haven't been found, but are currently already being searched for
         
-    public CheckCampaignCache(key : number) { return (this.campaignDataCache[key]) } // Sees if an object is in the cache
-    public CheckCampaignObjectCache(key : number) { return (this.campaignObjectCache[key] == null) } // Sees if an object is in the cache
-    public CheckCampaignCallCache(key : number) { return (this.callCampaignCache[key]) } // Sees if an object is in the process of being found
+    public CheckCampaignCache(key : number) { return this.campaignDataCache[key] !== undefined;  } // Sees if an object is in the cache
+    public CheckCampaignObjectCache(key : number) { return this.campaignObjectCache[key] !== undefined; } // Sees if an object is in the cache
+    public CheckCampaignCallCache(key : number) { return this.campaignObjectCache[key] !== undefined;  } // Sees if an object is in the process of being found
 
     public AddCampaignCache(key : number, data : ICampaign) { this.campaignDataCache[key] = data; } // Adds an object to the cache
     public AddCampaignObjectCache(key : number, data : Campaign) { this.campaignObjectCache[key] = data; } // Adds an object to the cache
@@ -88,21 +88,21 @@ class SynodDataCache {
     
     campaignUserCache: Record<number, CampaignUser> = {}; // Cache of warband data
         
-    public CheckCampaignUserCache(key : number) { return (this.campaignUserCache[key] == null) } // Sees if an object is in the cache
+    public CheckCampaignUserCache(key : number) { return this.campaignUserCache[key] !== undefined;  } // Sees if an object is in the cache
     public AddCampaignUserCache(key : number, data : CampaignUser) { this.campaignUserCache[key] = data; } // Adds an object to the cache
     
     /* Campaigns Announcement */
     
     campaignAnnouncementCache: Record<number, CampaignAnnouncement> = {}; // Cache of warband data
         
-    public CheckCampaignAnnouncementCache(key : number) { return (this.campaignAnnouncementCache[key] == null) } // Sees if an object is in the cache
+    public CheckCampaignAnnouncementCache(key : number) { return this.campaignAnnouncementCache[key] !== undefined; } // Sees if an object is in the cache
     public AddCampaignAnnouncementCache(key : number, data : CampaignAnnouncement) { this.campaignAnnouncementCache[key] = data; } // Adds an object to the cache
     
     /* Campaigns Warband */
     
     campaignWarbandCache: Record<number, CampaignWarband> = {}; // Cache of warband data
         
-    public CheckCampaignWarbandCache(key : number) { return (this.campaignWarbandCache[key] == null) } // Sees if an object is in the cache
+    public CheckCampaignWarbandCache(key : number) { return this.campaignWarbandCache[key] !== undefined; } // Sees if an object is in the cache
     public AddCampaignWarbandCache(key : number, data : CampaignWarband) { this.campaignWarbandCache[key] = data; } // Adds an object to the cache
 
 }

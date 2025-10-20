@@ -27,6 +27,7 @@ type ProviderProps = {
 };
 
 export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId }) => {
+
     // Hold exactly one Campaign instance for the provider lifetime.
     const [campaign, setCampaign] = useState<Campaign | null>(null);
 
@@ -41,7 +42,6 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
     const abortRef = useRef<AbortController | null>(null);
 
     const reload = useCallback(async () => {
-        // Cancel any previous fetch
         if (abortRef.current) abortRef.current.abort();
         const controller = new AbortController();
         abortRef.current = controller;
@@ -50,19 +50,14 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
         setError(null);
 
         try {
-            setCampaign(await CampaignFactory.GetCampaignPublicByID(campaignId))
-            // Bump version so consumers re-render (same instance, new data inside)
-            setVersion(v => v + 1);
+            const obj = await CampaignFactory.GetCampaignPublicByID(campaignId);
+            setCampaign(obj);
         } catch (e: any) {
-            // Ignore AbortError (route changes/unmount)
-            if (e?.name !== "AbortError") {
-                setError(e?.message ?? "Failed to load campaign.");
-            }
+            if (e?.name !== "AbortError") setError(e?.message ?? "Failed to load campaign.");
         } finally {
-            // Only clear loading if this request is still the active one
             if (!controller.signal.aborted) setLoading(false);
         }
-    }, [campaign, campaignId]);
+    }, [campaignId]); // <-- nur campaignId
 
     // Initial load + reload on id change
     useEffect(() => {
