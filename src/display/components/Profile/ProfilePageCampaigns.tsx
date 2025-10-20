@@ -1,81 +1,74 @@
-/**
- * The campaigns list on profiles
- */
-
-import React from 'react'
-import UserListEntry from "./UserListEntry";
+// ProfilePageCampaigns.tsx
+import React from "react";
+import { CampaignProvider } from "../../../context/CampaignContext";
+import { SiteUser } from "../../../classes/user_synod/site_user";
+import { SiteUserPublic } from "../../../classes/user_synod/user_public";
 import CampaignListEntry from "./CampaignListEntry";
-import {SiteUser} from "../../../classes/user_synod/site_user";
-import {SiteUserPublic} from "../../../classes/user_synod/user_public";
+import CampaignListEntryInvitaion from "./CampaignListEntryInvitaion";
 
 interface ProfilePageCampaignsProps {
     userData: SiteUser | SiteUserPublic | null;
 }
 
+// Helper type guards
+function hasJoinedGetter(
+    u: SiteUser | SiteUserPublic | null
+): u is SiteUser | SiteUserPublic {
+    return !!u && typeof (u as any).GetCampaignIDList === "function";
+}
+function hasInvitesGetter(u: SiteUser | SiteUserPublic | null): u is SiteUser {
+    return !!u && typeof (u as any).GetCampaignInviteIDList === "function";
+}
+
 const ProfilePageCampaigns: React.FC<ProfilePageCampaignsProps> = ({ userData }) => {
+    if (!userData) return null;
 
-    // @TODO: Replace with Synod Data
-    const campaigns: {
-        campaignID: number;
-        campaignImageID: number;
-        campaignName: string;
-        campaignStatus: 'active' | 'complete';
-    }[] = [
-        // {
-        //     campaignID: 1,
-        //     campaignImageID: 178,
-        //     campaignName: 'Crusade of Avarice',
-        //     campaignStatus: 'active',
-        // },
-        // {
-        //     campaignID: 2,
-        //     campaignImageID: 185,
-        //     campaignName: 'TC 2025 - MS lorem',
-        //     campaignStatus: 'active',
-        // },
-        // {
-        //     campaignID: 4,
-        //     campaignImageID: 214,
-        //     campaignName: 'A very cool Campaign name',
-        //     campaignStatus: 'complete',
-        // },
+    const joinedIds = hasJoinedGetter(userData) ? userData.GetCampaignIDList() : [];
+    const inviteIds = hasInvitesGetter(userData) ? userData.GetCampaignInviteIDList() : [];
 
-    ]
+    const hasJoined = joinedIds.length > 0;
+    const hasInvites = inviteIds.length > 0;
 
+    console.log('inviteIds');
+    console.log(inviteIds);
     return (
         <div className="ProfilePageCampaigns">
-            <div className={'profile-card'}>
-                <div className={'profile-card-head'}>
-                    {'Campaigns'}
-                </div>
+            <div className="profile-card">
+                <div className="profile-card-head">Campaigns</div>
 
-                <div className={'profile-card-content'}>
-                    {campaigns.length > 0 ? (
-                        <ul className={'campaigns-list'}>
-                            {campaigns.map((campaign) => (
-                                <li key={campaign.campaignID} className={'campaign'}>
-                                    <CampaignListEntry
-                                        campaignID={campaign.campaignID}
-                                        campaignImageID={campaign.campaignImageID}
-                                        campaignName={campaign.campaignName}
-                                        campaignStatus={campaign.campaignStatus}
-                                    />
+                <div className="profile-card-content">
+                    {hasInvites && (
+                        <ul className="campaigns-list">
+                            LOREM
+                            {inviteIds.map((id) => (
+                                <li key={`inv-${id}`} className="campaign invited">
+                                    <CampaignProvider campaignId={id}>
+                                        <CampaignListEntryInvitaion />
+                                    </CampaignProvider>
                                 </li>
                             ))}
                         </ul>
-                    ) : (
-                        <div className="campaigns-list-empty">
-                            {'No campaigns found for this user.'}
-                            <br/>
-                            <br/>
-                            {'This feature is still in developement, stay tuned for the next update.'}
-                        </div>
                     )}
 
+                    {hasJoined && (
+                        <ul className="campaigns-list">
+                            {joinedIds.map((id) => (
+                                <li key={id} className="campaign">
+                                    <CampaignProvider campaignId={id}>
+                                        <CampaignListEntry />
+                                    </CampaignProvider>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
+                    {!hasJoined && !hasInvites && (
+                        <div className="campaigns-list-empty">No campaigns found for this user.</div>
+                    )}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProfilePageCampaigns
+export default ProfilePageCampaigns;

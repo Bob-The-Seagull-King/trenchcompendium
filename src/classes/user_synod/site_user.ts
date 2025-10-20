@@ -23,6 +23,7 @@ interface ISiteUser {
     plan_id : string,
     sub_id : string,
     premium_until : number
+    campaign_invites: number[]
 }
 
 export interface ISynodWarband {
@@ -64,6 +65,7 @@ class SiteUser {
     Warbands : SumWarband[] = [];
     ProfilePic : SynodProfilePicData;
     Campaigns : number[] = []
+    CampaignInvites : number[] = []
     Premium : PremiumInfo;
     SelfData : ISiteUser;
     
@@ -82,6 +84,18 @@ class SiteUser {
             PremiumUntil : data.premium_until
         }
         this.SelfData = data
+
+        this.Campaigns = Array.isArray(data.campaigns)
+            ? data.campaigns
+                .map((v) => Number(v))
+                .filter((v) => Number.isFinite(v))
+            : [];
+
+        this.CampaignInvites = Array.isArray(data.campaign_invites)
+            ? data.campaign_invites
+                .map((v) => Number(v))
+                .filter((v) => Number.isFinite(v))
+            : [];
     }
 
     public async GenerateWarbands(data: ISiteUser) {
@@ -119,6 +133,14 @@ class SiteUser {
                 this.BuiltFriends.push(newFriend);
             }
         }
+    }
+
+    public GetCampaignIDList(): number[] {
+        return [...this.Campaigns]; // Kopie zurückgeben
+    }
+
+    public GetCampaignInviteIDList(): number[] {
+        return [...this.CampaignInvites];
     }
 
     public async ReBuildFriends() {
@@ -164,10 +186,9 @@ class SiteUser {
                     warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface())
                 })
         }
-        const requestfriendlist : number[] = []
-        for (let i = 0; i < this.Campaigns.length; i++) {
-            requestfriendlist.push(this.Campaigns[i])
-        }
+
+        const campaignIds: number[] = [...this.Campaigns];
+        const campaignInviteIds: number[] = [...this.CampaignInvites];
 
         const _objint : ISiteUser = {
             id : this.ID,
@@ -177,7 +198,8 @@ class SiteUser {
             friend_requests : this.Requests,
             warbands: warbandlist,
             profile_picture: this.ProfilePic,
-            campaigns: requestfriendlist,
+            campaigns: campaignIds,
+            campaign_invites: campaignInviteIds,
             is_premium: this.Premium.IsPremium,
             plan_id : this.Premium.PlanId,
             sub_id : this.Premium.SubId,

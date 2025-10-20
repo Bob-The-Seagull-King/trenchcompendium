@@ -43,6 +43,13 @@ class SiteUserPublic {
         this.Achievements = data.achievements;
         this.Premium = data.is_premium;
         this.SelfData = data;
+
+        this.Campaigns = Array.isArray(data.campaigns)
+            ? data.campaigns
+                .map((v) => Number(v))
+                .filter((v) => Number.isFinite(v))
+            : [];
+
     }
 
     public async BuildFriends() {
@@ -63,6 +70,10 @@ class SiteUserPublic {
                 this.BuiltFriends.push(newFriend);
             }
         }
+    }
+
+    public GetCampaignIDList(): number[] {
+        return [...this.Campaigns]; // Kopie zurückgeben
     }
 
     public async BuildWarbands(data: ISiteUserPublic) {
@@ -92,10 +103,8 @@ class SiteUserPublic {
                     warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface())
                 })
         }
-        const requestfriendlist : number[] = []
-        for (let i = 0; i < this.Campaigns.length; i++) {
-            requestfriendlist.push(this.Campaigns[i])
-        }
+
+        const campaignIds: number[] = [...this.Campaigns];
 
         const _objint : ISiteUserPublic = {
             is_premium: this.Premium,
@@ -105,7 +114,7 @@ class SiteUserPublic {
             friends: this.Friends,
             warbands: warbandlist,
             profile_picture: this.ProfilePic,
-            campaigns: requestfriendlist
+            campaigns: campaignIds
         }
         this.SelfData = _objint
         return _objint;
@@ -247,6 +256,8 @@ class SiteUserPublic {
     public GetUserStatus () {
         return (this.Premium == true)? '❤️ Supporter' : 'Free Member'
     }
+
+
 }
 
 export {ISiteUserPublic, SiteUserPublic}
