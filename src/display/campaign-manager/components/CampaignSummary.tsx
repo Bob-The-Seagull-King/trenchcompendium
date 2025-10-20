@@ -1,7 +1,7 @@
 import React from 'react';
 import {useCampaign} from "../../../context/CampaignContext";
-import CMTextarea from "../micro-components/CMTextarea";
 import {useAuth} from "../../../utility/AuthContext";
+import CMTextarea from '../micro-components/CMTextArea';
 import CMLatestAnnouncement from "./CMLatestAnnouncement";
 import CMProgressGraph from "./CMProgressGraph";
 

@@ -56,6 +56,9 @@ import AppVersionChecker from "./display/components/generics/AppVersionChecker";
 import StaticCreatorApplication from "./display/pages/StaticCreatorApplication";
 import DevImport from "./display/pages/DevImport";
 import {AdsenseManager} from "./display/components/generics/AdsenseManager";
+import CampaignOverview from "./display/campaign-manager/CampaignOverview";
+import CampaignSetup from "./display/campaign-manager/CampaignSetup";
+import CampaignManagerView from "./display/campaign-manager/CampaignManagerView";
 
 
 const App: React.FC = () => {
@@ -129,6 +132,11 @@ const App: React.FC = () => {
                                     <Route path="/blog" element={<BlogListPage />} />
                                     <Route path="/blog/:slug" element={<BlogArticlePage />} />
                                     <Route path="/dev-import/" element={<DevImport />} />
+
+                                    {/* Campaign Manager Routes*/}
+                                    <Route path="/campaigns" element={<CampaignOverview />} />
+                                    <Route path="/campaigns/new" element={<CampaignSetup />} />
+                                    <Route path="/campaigns/:id" element={<CampaignManagerView />} />
                                 </Routes>
 
                                 <FooterMain />
