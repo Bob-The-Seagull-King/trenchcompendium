@@ -38,7 +38,9 @@ function removeAutoAdsScriptAndHide() {
     try {
         (window as any).adsbygoogle = (window as any).adsbygoogle || [];
         (window as any).adsbygoogle.pauseAdRequests = 1; // harmless, falls nicht unterstützt
-    } catch {}
+    } catch {
+        console.log('error removeAutoAdsScriptAndHide');
+    }
     // Sichtbare Auto-Ads-Container ausblenden
     document.querySelectorAll('ins.adsbygoogle, div[id^="google_ads_iframe_"], div[data-anchor-status]').forEach((node) => {
         (node as HTMLElement).style.display = 'none';
@@ -70,7 +72,9 @@ export const AdsenseManager: React.FC = () => {
         try {
             (window as any).adsbygoogle.push({});
             initialized.current = true;
-        } catch {}
+        } catch {
+            console.log('error processing canloadAds 2');
+        }
     }, [canLoadAds]);
 
     // SPA: bei jeder Navigation AdSense „anstupsen“
@@ -79,7 +83,9 @@ export const AdsenseManager: React.FC = () => {
         if (!hasAdsApi()) return;
         try {
             (window as any).adsbygoogle.push({});
-        } catch {}
+        } catch {
+            console.log('error processing canloadAds');
+        }
     }, [canLoadAds, location.pathname, location.search]);
 
     return null;
