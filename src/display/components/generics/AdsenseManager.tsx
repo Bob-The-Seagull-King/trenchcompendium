@@ -8,6 +8,8 @@ const isLiveHost = typeof window !== 'undefined' && LIVE_HOSTS.has(window.locati
 const ADSENSE_CLIENT = 'ca-pub-3744837400491966';
 const ADSENSE_SCRIPT_ID = 'adsense-auto-ads-script';
 
+console.log('adsmanager loaded');
+
 function hasAdsApi(): boolean {
     const w = window as any;
     return !!w.adsbygoogle && typeof w.adsbygoogle.push === 'function';
