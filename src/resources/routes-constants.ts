@@ -4,6 +4,8 @@ export const ROUTES = {
     COMPENDIUM_ROUTE: '/compendium/*',
     WARBAND: '/warband/',
     WARBAND_ROUTE: '/warband/*',
+    CAMPAIGN: '/campaigns/',
+    CAMPAIGN_ROUTE: '/campaigns/*',
     HOME_ROUTE: '*',
     LOGIN_ROUTE: '/login/',
     PROFILE_VIEW_ROUTE: '/profile/:id',

@@ -156,6 +156,23 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                             </CustomNavLink>
 
                             <CustomNavLink
+                                classes={'menu-lvl-1-item-main'}
+                                link={ROUTES.CAMPAIGN}
+                                runfunc={() => {
+                                    setActiveView('wbb');
+                            }}>
+                                <span className={'title'}>
+                                    {'Warband Builder'}
+                                </span>
+
+                                <SynodImageWithCredit
+                                    imageId={2840}
+                                    className={''}
+                                    size={'large'}
+                                />
+                            </CustomNavLink>
+
+                            <CustomNavLink
                                 classes={'menu-lvl-1-item-main minor'}
                                 link={ROUTES.PAGE_BLOG_BASE}
                                 runfunc={() => {
