@@ -19,16 +19,16 @@
          <meta property="og:title" content="Trench Companion | Trench Companion" data-react-helmet="true">
          <meta property="og:type" content="website" data-react-helmet="true">
 
-        <!-- 1) Referrer-Policy, damit FC euren Origin sieht -->
+        <!-- 1) Referrer-Policy, so FC sees Origin -->
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 
-        <!-- 2) (Optional) Temporärer CSS-Bumper gegen evtl. globales iframe-hiding -->
-        <style>
-            iframe[src*="fundingchoicesmessages.google.com"]{
-                display:block!important;visibility:visible!important;opacity:1!important;
-            }
-        </style>
+        <!-- 2) (Optional) Temp CSS-Bumper for potential globale iframe-hiding -->
+<!--        <style>-->
+<!--            iframe[src*="fundingchoicesmessages.google.com"]{-->
+<!--                display:block!important;visibility:visible!important;opacity:1!important;-->
+<!--            }-->
+<!--        </style>-->
 
         <!-- Data Layer + Consent-Defaults + TCF -->
         <script>
@@ -44,18 +44,18 @@
                 wait_for_update:500
             });
 
-            // TCF-Brücke aktivieren (Google liest TCF-Strings)
+            // Activate TCF-Bridge  (Google reads TCF-Strings)
             window.gtag_enable_tcf_support = true;
         </script>
 
-        <!--  FC-Callbacks: Consent-Mode-Werte -> gtag('consent','update'), dann GTM laden -->
+        <!--  FC-Callbacks: Consent-Mode-Values -> gtag('consent','update'), later load GTM -->
         <script>
             (function(){
                 var gtmLoaded = false;
 
                 function loadGTM(){
                     if (gtmLoaded) return; gtmLoaded = true;
-                    // *** OFFIZIELLES GTM-BOOTSTRAP-SNIPPET ***
+                    // *** Official GTM-BOOTSTRAP-SNIPPET ***
                     (function(w,d,s,l,i){
                         w[l]=w[l]||[];
                         w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
@@ -97,7 +97,7 @@
                     }
                 });
 
-                // Fallback: falls FC-Callback nicht feuert → GTM trotzdem laden (bleibt denied-konform)
+                // Fallback: if FC-Callback does not fire → Load GTM anyways (denied-konform)
                 setTimeout(loadGTM, 1500);
             })();
         </script>
