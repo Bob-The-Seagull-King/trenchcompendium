@@ -90,50 +90,52 @@ const App: React.FC = () => {
                         <Router >
                             <ImageCreditPopoverProvider>
 
-                                <SuperHeader controller={compendiumcontroller}/>
+                            <SuperHeader controller={compendiumcontroller}/>
 
-                                <ScrollToTop/>
+                            <ScrollToTop/>
 
-                                {/*<MaintananceNotice />*/}
+                            {/*<MaintananceNotice />*/}
 
-                                <Routes>
-                                    <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
-                                    <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
-                                    <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
-                                    <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
-                                    <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} />
-                                    <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
+                            <Routes>
+                                <Route path={ROUTES.HOME_ROUTE} element={<HomeRoute />} />
+                                <Route path={ROUTES.COMPENDIUM_ROUTE} element={<CompendiumRoute controller={compendiumcontroller} />} />
+                                <Route path={ROUTES.WARBAND_ROUTE} element={<WarbandRoute controller={toolcontroller} />} />
+                                <Route path={ROUTES.LOGIN_ROUTE} element={<SynodLoginPage />} /> {/* Login Page */}
+                                <Route path={ROUTES.PROFILE_SETTINGS_ROUTE} element={<ProfileSettingsPage />} />
+                                <Route path={ROUTES.PROFILE_VIEW_ROUTE} element={<ProfilePage />} />
 
-                                    {/* Static Pages - Legal */}
-                                    <Route path={ROUTES.PAGE_LEGAL} element={<StaticLegalNotice />} /> {/* Legal Notice Page */}
-                                    <Route path={ROUTES.PAGE_PRIVCACY} element={<StaticPrivacy />} /> {/* Privacy Page */}
-                                    <Route path={ROUTES.PAGE_TERMS} element={<StaticTermsAndConditions />} /> {/* Terms and Conditions */}
-                                    <Route path={ROUTES.PAGE_WITHDRAWAL} element={<StaticWithdrawal />} /> {/* Withdrawal Page */}
+                                {/* Static Pages - Legal */}
+                                <Route path={ROUTES.PAGE_LEGAL} element={<StaticLegalNotice />} /> {/* Legal Notice Page */}
+                                <Route path={ROUTES.PAGE_PRIVCACY} element={<StaticPrivacy />} /> {/* Privacy Page */}
+                                <Route path={ROUTES.PAGE_TERMS} element={<StaticTermsAndConditions />} /> {/* Terms and Conditions */}
+                                <Route path={ROUTES.PAGE_WITHDRAWAL} element={<StaticWithdrawal />} /> {/* Withdrawal Page */}
 
-                                    {/* Static Pages - Trench Companion */}
-                                    <Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> {/* Contact Page */}
-                                    <Route path={ROUTES.COMPANION_ABOUT} element={<StaticAbout />} /> {/* About Page */}
+                                {/* Static Pages - Trench Companion */}
+                                <Route path={ROUTES.PAGE_CONTACT} element={<StaticContact />} /> {/* Contact Page */}
+                                <Route path={ROUTES.COMPANION_ABOUT} element={<StaticAbout />} /> {/* About Page */}
 
-                                    {/* Static Pages - Creators */}
-                                    <Route path={ROUTES.PAGE_CREATOR_APPLICATION} element={<StaticCreatorApplication />} /> {/* Membership Plan Selection Page */}
+                                {/* Static Pages - Creators */}
+                                <Route path={ROUTES.PAGE_CREATOR_APPLICATION} element={<StaticCreatorApplication />} /> {/* Membership Plan Selection Page */}
 
-                                    {/* Static Pages - Content */}
-                                    <Route path={ROUTES.PAGE_MEMBERSHIP} element={<StaticPremiumMembership />} /> {/* Withdrawal Page */}
-                                    <Route path={ROUTES.PAGE_SUPPORTER_PACKS} element={<StaticSupporterPacks />} /> {/* Withdrawal Page */}
-                                    <Route path={ROUTES.PAGE_COLLABORATE} element={<StaticCollaborate />} /> {/* Withdrawal Page */}
+                                {/* Static Pages - Content */}
+                                <Route path={ROUTES.PAGE_MEMBERSHIP} element={<StaticPremiumMembership />} /> {/* Withdrawal Page */}
+                                <Route path={ROUTES.PAGE_SUPPORTER_PACKS} element={<StaticSupporterPacks />} /> {/* Withdrawal Page */}
+                                <Route path={ROUTES.PAGE_COLLABORATE} element={<StaticCollaborate />} /> {/* Withdrawal Page */}
 
-                                    {/* Static Pages - Membership & Purchases */}
-                                    <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
+                                {/* Static Pages - Membership & Purchases */}
+                                <Route path={ROUTES.PAGE_PLAN_SELECTION} element={<StaticPlanSelection />} /> {/* Membership Plan Selection Page */}
 
-                                    {/* Blog Pages */}
-                                    <Route path="/blog" element={<BlogListPage />} />
-                                    <Route path="/blog/:slug" element={<BlogArticlePage />} />
-                                    <Route path="/dev-import/" element={<DevImport />} />
-                                </Routes>
+                                {/* Blog Pages */}
+                                <Route path="/blog" element={<BlogListPage />} />
+                                <Route path="/blog/:slug" element={<BlogArticlePage />} />
+                                <Route path="/dev-import/" element={<DevImport />} />
+                            </Routes>
 
-                                <FooterMain />
+                            <AdsenseManager />
+
+                            <FooterMain />
                             </ImageCreditPopoverProvider>
-                            {/*<AdsenseManager />*/}
+
                             <TrackingManager />
                             <AppVersionChecker />
 
