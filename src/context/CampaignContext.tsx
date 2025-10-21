@@ -17,6 +17,8 @@ type CampaignContextType = {
     loading: boolean;
     error: string | null;
     reload: () => void;
+    reloadCampaignDisplay: () => void;
+    updateKey : number;
 };
 
 const CampaignContext = createContext<CampaignContextType | undefined>(undefined);
@@ -34,6 +36,11 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
     // UI state
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [statekey, setstatekey] = useState(0);
+
+    const reloadCampaignDisplay = () => {
+        setstatekey(statekey + 1)
+    }
 
     // Force consumers to rerender after mutating the same instance
     const [version, setVersion] = useState(0);
@@ -76,6 +83,8 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
             value={{
                 campaign: campaign ?? null,
                 loading,
+                reloadCampaignDisplay,
+                updateKey : statekey,
                 error,
                 reload,
             }}

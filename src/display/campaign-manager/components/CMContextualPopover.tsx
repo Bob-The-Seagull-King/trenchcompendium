@@ -17,6 +17,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import {Button, Modal, Popover} from "react-bootstrap";
 import {useAuth} from "../../../utility/AuthContext";
 import {useCampaignActions} from "../../../utility/useCampaignActions";
+import { ToolsController } from "../../../classes/_high_level_controllers/ToolsController";
+import { CampaignWarband } from "../../../classes/saveitems/Campaign/CampaignWarband";
 
 
 interface CMContextualPopoverProps {
@@ -30,7 +32,7 @@ interface CMContextualPopoverProps {
  */
 const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, item }) => {
 
-    const { campaign, reload } = useCampaign();
+    const { campaign, reload, reloadCampaignDisplay, updateKey } = useCampaign();
     if( !campaign) {
         return null;
     }
@@ -117,9 +119,13 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     const [showRemoveWarbandModal, setshowRemoveWarbandModal] = useState(false);
     // Remove a warband
     const handleRemoveWarband = () => {
-        // @TODO: remove warband here
-        // @TODO: grab warband ID from object?
-        alert ('@TODO: remove warband here');
+        if (campaign != null && campaign != undefined && type == "warband") {
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+            Tools.UserCampaignManager.ForceRemoveWarband(campaign.GetId(), (item as CampaignWarband).WarbandID).then(() => {
+                reloadCampaignDisplay();
+            })})
+        }
     }
 
     /** End Warband Actions */
