@@ -21,6 +21,12 @@ export class CampaignAnnouncement {
     // private constructor() {}
 
     public constructor(dto: ICampaignAnnouncement) {
+
+        // @TODO: not all campaigns have announcements.
+        // If no announcement is present in campaign BuildUser crashes
+        console.log('dto');
+        console.log(dto); // dto possibly empty
+
         this._id = dto.announcement_id;
         this._title = dto.announcement_title;
         this._html = dto.announcement_content ?? "";
@@ -28,7 +34,6 @@ export class CampaignAnnouncement {
     }
 
     public async BuildUser(data : ICampaignAnnouncement) {
-        
         const NewPlayer = await CampaignFactory.CreateCampaignUser(data.announcement_author);
         this._author = (NewPlayer);
     }
