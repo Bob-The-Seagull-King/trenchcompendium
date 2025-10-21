@@ -1,0 +1,50 @@
+
+.WbbRoundNumber
+    position: relative
+    display: inline-block
+    z-index: 2
+    font-family: $font-headline
+    font-size: 18px
+    width: 40px
+    height: 40px
+    line-height: 40px
+    vertical-align: middle
+    text-align: center
+    padding-top: 2px
+    color: $color-text
+
+    &:before
+        content: ""
+        display: block
+        position: absolute
+        z-index: -1
+        top: 0
+        left: 0
+        width: 40px
+        height: 40px
+        border: 2px solid $color-text
+        transform-origin: center
+        transform: rotate(45deg)
+
+        background-color: $color-highlight-bg-2
+
+    &.smaller
+        font-size: 13px
+        width: 30px
+        height: 30px
+        line-height: 30px
+        padding-top: 1px
+
+        &:before
+            width: 30px
+            height: 30px
+
+    &.state-previous
+        &:before
+            border-color: $color-text-muted
+            background-color: $color-bg-3
+    &.state-next
+        opacity: 0.5
+        &:before
+            border-color: $color-text-muted
+            background-color: $color-bg-3

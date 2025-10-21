@@ -28,7 +28,7 @@ interface IControllerProp {
     responseshow : string;
 }
 
-type MenuView = 'main' | 'compendium' | 'wbb';
+type MenuView = 'main' | 'compendium' | 'wbb' | 'cm';
 
 
 const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
@@ -91,6 +91,8 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
             setActiveView('compendium');
         } else if (path.startsWith('/warband')) {
             setActiveView('wbb');
+        } else if (path.startsWith('/campaigns')) {
+            setActiveView('cm');
         } else {
             setActiveView('main');
         }
@@ -150,6 +152,23 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
 
                                 <SynodImageWithCredit
                                     imageId={2840}
+                                    className={''}
+                                    size={'large'}
+                                />
+                            </CustomNavLink>
+
+                            <CustomNavLink
+                                classes={'menu-lvl-1-item-main'}
+                                link={ROUTES.CAMPAIGN}
+                                runfunc={() => {
+                                    setActiveView('cm');
+                            }}>
+                                <span className={'title'}>
+                                    {'Campaign Manager'}
+                                </span>
+
+                                <SynodImageWithCredit
+                                    imageId={2841}
                                     className={''}
                                     size={'large'}
                                 />
@@ -255,6 +274,11 @@ const OffcanvasMenu: React.FC<IControllerProp> = (prop) => {
                             onBack={() => setActiveView('main')}
                             onNavigate={() => handleClose()}
                         />
+                    )}
+                    {activeView === 'cm' && (
+                        <>
+                            {'@TODO: show campaign links here'}
+                        </>
                     )}
 
                     <OffcanvasMenuSettings/>

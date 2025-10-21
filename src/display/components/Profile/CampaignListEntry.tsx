@@ -7,62 +7,43 @@ import React from 'react'
 import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import {useNavigate} from "react-router-dom";
+import {useCampaign} from "../../../context/CampaignContext";
 
-interface CampaignListEntryProps {
-    campaignID: number
-    campaignImageID: number
-    campaignName: string
-    campaignStatus: string
-}
 
-const CampaignListEntry: React.FC<CampaignListEntryProps> = ({
-        campaignID,
-        campaignImageID,
-        campaignName,
-        campaignStatus
-    }) => {
+
+const CampaignListEntry: React.FC = () => {
+
+    const { campaign, reload } = useCampaign();
 
     const navigate = useNavigate();
 
-
-    let status_string = '';
-    if( campaignStatus == 'active') {
-        status_string = 'Campaign active';
-    } else {
-        status_string = 'Campaign closed';
+    if( !campaign ) {
+        return (
+            <>
+                {'Joined - can not be loaded or is loading'}
+            </>
+        );
     }
 
-
     return (
-        <div className="CampaignListEntry">
+        <div className={'CampaignListEntry'}>
             <CustomNavLink
-                classes={'CampaignListEntry-image-wrap'}
-                link={`/campaign/${campaignID}`}
+                classes={'CampaignListEntry-name'}
+                link={`/campaign/${campaign?.GetId()}`}
                 runfunc={() => {
-                    navigate(`/campaign/${campaignID}`)
-                }}>
-                <SynodImage
-                    imageId={campaignImageID}
-                    className={'CampaignListEntry-image'}
-                />
+                    navigate(`/campaign/${campaign?.GetId()}`)
+                }}
+            >
+                {campaign.GetName()}
             </CustomNavLink>
 
-            <div className={'CampaignListEntry-text'}>
-                <CustomNavLink
-                    classes={'campaign-name'}
-                    link={`/campaign/${campaignID}`}
-                    runfunc={() => {
-                        navigate(`/campaign/${campaignID}`)
-                    }}>
-                    {campaignName}
-                </CustomNavLink>
-
-                <div className={'campaign-status'}>
-                    {status_string}
-                </div>
+            <div className={'CampaignListEntry-players'}>
+                {'Players: '}
+                {campaign.GetPlayers().map(p => p.Nickname).join(', ')}
             </div>
+
         </div>
-    )
+    );
 }
 
 export default CampaignListEntry

@@ -45,8 +45,7 @@ const HomeRoute: React.FC = () => {
                             </div>
 
                             <div className={'col-12 col-md-6'}>
-                                <MenuComponent Title={"Campaign Manager"} Route={"campaign/"} bgImageID={2841}
-                                               comingSoon={true}
+                                <MenuComponent Title={"Campaign Manager"} Route={"campaigns/"} bgImageID={2841}
                                 />
                             </div>
 
