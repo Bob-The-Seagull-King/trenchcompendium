@@ -32,7 +32,7 @@ interface CMContextualPopoverProps {
  */
 const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, item }) => {
 
-    const { campaign, reload, reloadCampaignDisplay, updateKey } = useCampaign();
+    const { campaign, reload, reloadCampaignDisplay, updateCampaignKey } = useCampaign();
     if( !campaign) {
         return null;
     }
