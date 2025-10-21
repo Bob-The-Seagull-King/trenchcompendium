@@ -190,7 +190,7 @@ export async function AnnouncementDelete(data : ICampaignAnnouncementBasics, sub
 export async function GetPlayerCampaigns(submits : ISubmitBasics) {
     if (submits.id == undefined) { return null; }
     const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user/campaigns/`+submits.id, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Authorization': `Bearer ${submits.token}`,
             'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ export async function GetPlayerCampaigns(submits : ISubmitBasics) {
 export async function GetPlayerCampaignInvites(submits : ISubmitBasics) {
     if (submits.id == undefined) { return null; }
     const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user/campaign-invites/`+submits.id, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Authorization': `Bearer ${submits.token}`,
             'Content-Type': 'application/json',
