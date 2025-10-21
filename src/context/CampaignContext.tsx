@@ -18,7 +18,7 @@ type CampaignContextType = {
     error: string | null;
     reload: () => void;
     reloadCampaignDisplay: () => void;
-    updateKey : number;
+    updateCampaignKey : number;
 };
 
 const CampaignContext = createContext<CampaignContextType | undefined>(undefined);
@@ -84,7 +84,7 @@ export const CampaignProvider: React.FC<ProviderProps> = ({ children, campaignId
                 campaign: campaign ?? null,
                 loading,
                 reloadCampaignDisplay,
-                updateKey : statekey,
+                updateCampaignKey : statekey,
                 error,
                 reload,
             }}
