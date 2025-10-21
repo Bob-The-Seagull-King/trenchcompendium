@@ -1963,7 +1963,7 @@
         "tags": {},
         "name": "Automatic Rifle",
         "contextdata": {},
-        "faction_id": ["fc_hereticlegion","fc_trenchpilgrim_fv_warpilgimageofsaintmethodius","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
+        "faction_id": ["fc_hereticlegion","fc_hereticlegion_fv_knightsofavarice","fc_hereticlegion_fv_trenchghosts","fc_hereticlegion_fv_hereticnavalraidingparty"],
         "equipment_id": "eq_automaticrifle",
         "cost": 2,
         "costtype": 1,

@@ -874,6 +874,13 @@ class UserWarband extends DynamicContextObject {
             }
         }
 
+        if (fighter.model.IsElite()) {
+            const canAddElite = await this.CanAddMoreElite();
+            if (!canAddElite) {
+                return "Warband cannot have more ELITE models.";
+            }
+        }
+
         const Check = await fighter.model.CanCopySelf();
 
         if (Check.length > 0) {
@@ -1449,6 +1456,20 @@ class UserWarband extends DynamicContextObject {
                 6,
                 this
             )
+
+            const FightersAlive = this.GetFighters();
+
+            for (let i = 0; i < FightersAlive.length; i++) {
+                if (FightersAlive[i].model.State == "active" || FightersAlive[i].model.State == "reserved") {
+                    result = await EventProc.runEvent(
+                        "getNumberOfElite",
+                        FightersAlive[i].model,
+                        [],
+                        result,
+                        this
+                    )
+                }
+            }
         }
 
         return this.GetNumElite() < result;
@@ -1749,7 +1770,10 @@ class UserWarband extends DynamicContextObject {
 
     public async GetEliteFighterOptions() : Promise<FactionModelRelationship[]> {
         const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
-
+        const CanAddElite = await this.CanAddMoreElite();
+        if (!CanAddElite) {
+            return []
+        }
         return ListOfRels.filter(item => item.Model.getKeywordIDs().includes("kw_elite"))
     }
 

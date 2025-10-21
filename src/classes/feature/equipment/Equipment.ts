@@ -13,6 +13,8 @@ import { FactionEquipmentRelationship, IFactionEquipmentRelationship } from '../
 import { EquipmentFactory } from '../../../factories/features/EquipmentFactory';
 import { Requester } from '../../../factories/Requester';
 import {returnDescription} from "../../../utility/util";
+import { Ability } from '../ability/Ability';
+import { AbilityFactory } from '../../../factories/features/AbilityFactory';
 
 interface IEquipment extends IStaticOptionContextObject {
     description: [],
@@ -22,6 +24,7 @@ interface IEquipment extends IStaticOptionContextObject {
     stats : EquipmentStats,
     modifiers : string[],
     distance: number
+    abilities?: string[]
 }
 
 interface EquipmentStats {
@@ -88,6 +91,7 @@ class Equipment extends StaticOptionContextObject {
     public Stats;
     public Modifiers;
     public Distance;
+    public Abilities: Ability[] = [];
     
     public EquipmentItems : FactionEquipmentRelationship[] = []
 
@@ -112,6 +116,14 @@ class Equipment extends StaticOptionContextObject {
         for (let i = 0; i < keywords.length; i++) {
             const KeywordObj = KeywordFactory.CreateNewKeyword(keywords[i], this);
             this.KeyWord.push(KeywordObj);
+        }
+    }
+
+    // Build a model's abilities
+    public async BuildAbilities(abilities : string[]) {
+        for (let i = 0; i < abilities.length; i++) {
+            const AbilityObj = await AbilityFactory.CreateNewAbility(abilities[i], this);
+            this.Abilities.push(AbilityObj);
         }
     }
 
