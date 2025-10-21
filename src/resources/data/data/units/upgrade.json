@@ -1379,7 +1379,7 @@
     },
     {
         "id": "up_plagueknightrankofferocity",
-        "name": "Knight of Twin CLeavers",
+        "name": "Knight of Twin Cleavers",
         "source": "core",
         "tags": {"trait": true, "special_category": "knight_ranks"},
         "contextdata": { 
