@@ -64,6 +64,12 @@ class CampaignManager {
         this.UserProfile = null;
     }
 
+    public async RunInit() {
+        if (!this.IsComplete()) {
+            await this.BuildAll();
+        }
+    }
+
     public IsComplete() {
         return this.Complete;
     }
