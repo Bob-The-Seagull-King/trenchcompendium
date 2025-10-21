@@ -6,6 +6,7 @@ import GenericHover from "../generics/GenericHover";
 import KeywordDisplay from "../features/glossary/KeywordDisplay";
 import {returnDescription} from "../../../utility/util";
 import {useGlobalState} from "../../../utility/globalstate";
+import RulesModelDisplayAbility from './RulesModelDisplayAbility';
 
 interface RulesEquipmentEntryProps {
     equipment: Equipment;
@@ -105,13 +106,19 @@ const RulesEquipmentEntry: React.FC<RulesEquipmentEntryProps> = ({ equipment }) 
             }
 
             {/* Rules Text */}
-            {equipment.GetDescription() &&
+            {(equipment.GetDescription() || equipment.Abilities.length > 0) &&
                 <div className={'rules-text-element'}>
                     <div className={'text-label'}>
                         {'Rules'}
                     </div>
                     <p>
                         {equipment.GetDescription()}
+                        {equipment.Abilities.map((item) => (
+                            <React.Fragment
+                                key={"equip_ability_" + equipment.ID + "_ability_id_" + item.ID}>
+                                <RulesModelDisplayAbility data={item}/>
+                            </React.Fragment>
+                        ))}
                     </p>
                 </div>
             }

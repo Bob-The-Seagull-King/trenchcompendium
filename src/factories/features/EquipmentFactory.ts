@@ -27,6 +27,9 @@ class EquipmentFactory {
             cache.AddToCache('equipment', rule);
         }
         await rule.BuildFactionEquipment(_rule.id);
+        if (_rule.abilities) {
+            await rule.BuildAbilities(_rule.abilities);
+        }
         return rule;
     }
         

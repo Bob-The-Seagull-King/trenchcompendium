@@ -15,6 +15,7 @@ import ItemStat from '../../../components/subcomponents/description/ItemStat';
 import { makestringpresentable } from '../../../../utility/functions';
 import DisplayFactionEquipmenWideDisplay from './DisplayFactionEquipmentWideDisplay';
 import ItemRow from '../../../components/subcomponents/description/ItemRow';
+import RulesModelDisplayAbility from '../../../components/rules-content/RulesModelDisplayAbility';
 
 const EquipmentDisplay = (props: any) => {
     const abilityObject: Equipment = props.data
@@ -84,10 +85,16 @@ const EquipmentDisplay = (props: any) => {
                     </>
                 }
                 
-                {abilityObject.Description.length > 0 &&
+                {(abilityObject.Description.length > 0|| abilityObject.Abilities.length > 0 ) &&
                 <div className="borderstyler borderthin bordergrey">
                     <div className="  size-default colourBasicText  ">
                     {returnDescription(abilityObject, abilityObject.Description)}
+                    {abilityObject.Abilities.map((item) => (
+                            <React.Fragment
+                                key={"equip_ability_" + abilityObject.ID + "_ability_id_" + item.ID}>
+                                <RulesModelDisplayAbility data={item}/>
+                            </React.Fragment>
+                        ))}
                     </div>
                 </div>
                 }
