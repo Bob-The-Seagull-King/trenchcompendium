@@ -49,7 +49,7 @@ class WarbandUpdater {
     }
 
     public async RunUpdate(wb : IUserWarband) : Promise<IUserWarband> {
-        const TagVal = wb.tags[UPDATETAGNAME]
+        const TagVal = wb.tags? wb.tags[UPDATETAGNAME] : "0"
         const CurrentVer = (typeof TagVal === "string") ? parseInt(TagVal) : 0
         let ref_wb = wb;
 

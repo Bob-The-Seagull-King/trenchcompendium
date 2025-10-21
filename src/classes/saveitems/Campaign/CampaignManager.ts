@@ -45,16 +45,6 @@ class CampaignManager {
     public ListOfInvites : Campaign[] = [];
     public ListOfWarbandInvites : Campaign[] = [];
 
-    // public constructor() {}
-
-    public async BuildCampaigns() { // @TODO Lane
-        undefined;
-    }
-
-    public async BuildInvites() { // @TODO Lane
-        undefined;
-    }
-
     public async SetLoggedUser(id : number) {
         const NewUser : SiteUser | null = await UserFactory.CreatePrivateUserByID(id);
         this.UserProfile = NewUser;

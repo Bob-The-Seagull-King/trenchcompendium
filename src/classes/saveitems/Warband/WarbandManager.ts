@@ -142,7 +142,6 @@ class WarbandManager {
         const data = localStorage.getItem('userwarbanditem');  
         try {
             const ItemList: ISumWarband[] = JSON.parse(data || "");
-            console.log(ItemList)
             return ItemList.length > 0;
         } catch (e) {
             return false;
@@ -486,7 +485,6 @@ class WarbandManager {
 
     public async UploadWarbands() {
         await this.GrabUser()
-        console.log(this.UserProfile);
         if (this.UserProfile != null) {
             const WarbandList = await this.GrabLocalItems()
             for (let i = 0; i < WarbandList.length; i++) {
