@@ -84,16 +84,20 @@ export class Campaign {
         
         for (let i = 0; i < data.campaign_announcements.length; i++) {
             const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i]);
-            this._announcements.push(NewPlayer);
+            if (NewPlayer != null) {
+                this._announcements.push(NewPlayer);
+            }
         }
 
-        if (data.campaign_latest_announcement) {
+        if (data.campaign_latest_announcement != null) {
             const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement);
-
-            if(NewAnnouncement.Id == undefined) {
-                this._latestAnnouncement = null;
-            } else {
-                this._latestAnnouncement = (NewAnnouncement);
+            
+            if (NewAnnouncement != null) {
+                if(NewAnnouncement.Id == undefined) {
+                    this._latestAnnouncement = null;
+                } else {
+                    this._latestAnnouncement = (NewAnnouncement);
+                }
             }
         }
     }
