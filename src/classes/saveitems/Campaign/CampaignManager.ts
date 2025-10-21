@@ -167,6 +167,7 @@ class CampaignManager {
     }
 
     public async ResetCampaignByID(_val : number) {
+        this.Complete = false;
         let NewCampaign : Campaign | null = null;
         let IndexVal : number | null = null;
         for (let i = 0; i < this.ListOfCampaigns.length; i++) {
@@ -181,6 +182,7 @@ class CampaignManager {
             this.ListOfCampaigns[IndexVal] = NewCampaign;
             this.SortMyCampaigns();
         }
+        this.Complete = true;
     }
 
     public SortMyCampaigns() {
