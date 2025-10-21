@@ -1456,6 +1456,20 @@ class UserWarband extends DynamicContextObject {
                 6,
                 this
             )
+
+            const FightersAlive = this.GetFighters();
+
+            for (let i = 0; i < FightersAlive.length; i++) {
+                if (FightersAlive[i].model.State == "active" || FightersAlive[i].model.State == "reserved") {
+                    result = await EventProc.runEvent(
+                        "getNumberOfElite",
+                        FightersAlive[i].model,
+                        [],
+                        6,
+                        this
+                    )
+                }
+            }
         }
 
         return this.GetNumElite() < result;
