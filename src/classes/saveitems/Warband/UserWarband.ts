@@ -1465,7 +1465,7 @@ class UserWarband extends DynamicContextObject {
                         "getNumberOfElite",
                         FightersAlive[i].model,
                         [],
-                        6,
+                        result,
                         this
                     )
                 }
