@@ -190,12 +190,27 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     /**
      * Warband Invite Actions
      */
-    const [showCancelWarbandInviteModal, setshowCancelWarbandInviteModal] = useState(false);
-    // Remove a warband
+    // Cancel a warband invite
+
     const handleCancelWarbandInvite = () => {
-        // @TODO: Cancel warband invite here
-        // @TODO: grab warband ID from object?
-        alert ('@TODO: cancel warband invite here');
+
+
+        if (campaign != null && type == "warband-invite") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.CampaignWarbandReject(
+                    campaign.GetId(),
+                    item.id
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    toast.success('Cancelled warband invite')
+                })
+            })
+        }
     }
     /** End Warband Invite Actions */
 
@@ -230,7 +245,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
             || showRemovePlayerModal
             || showRemoveWarbandModal
             || showChangeAdminModal
-            || showCancelWarbandInviteModal
         ) {
             setActivePopoverId(null);
         }
@@ -240,7 +254,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         showRemovePlayerModal,
         showRemoveWarbandModal,
         showChangeAdminModal,
-        showCancelWarbandInviteModal,
     ]);
 
     // Only admins can edit any option
@@ -325,7 +338,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                             {(type === 'warband-invite') &&
                                 <>
                                     <div className="action"
-                                         onClick={withStopPropagation(() => setshowCancelWarbandInviteModal(true))}>
+                                         onClick={withStopPropagation(() => handleCancelWarbandInvite())}>
                                         <FontAwesomeIcon icon={faTimes} className="icon-inline-left-l"/>
                                         {'Cancel Invite'}
                                     </div>
@@ -667,51 +680,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                             Remove Warband
                         </Button>
                     )}
-                </Modal.Footer>
-            </Modal>
-
-            {/** Cancel Warband Invite Modal */}
-            <Modal show={showCancelWarbandInviteModal} onHide={() => setshowCancelWarbandInviteModal(false)} centered>
-                <Modal.Header closeButton={false}>
-                    <Modal.Title>{`Cancel Warband Invite`}</Modal.Title>
-
-                    <FontAwesomeIcon
-                        icon={faXmark}
-                        className="modal-close-icon"
-                        role="button"
-                        onClick={
-                            (e) => {
-                                e.stopPropagation();
-                                setshowCancelWarbandInviteModal(false);
-                            }}
-                    />
-                </Modal.Header>
-
-                <Modal.Body>
-                    {'Are you sure you want to cancel the invite to this warband?'}
-
-                    {/* @TODO: output warband details here*/}
-                    <div className={'my-3'}>
-                        <strong>
-                            {'warband Name here'}
-                        </strong>
-                    </div>
-
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={
-                        (e) => {
-                            e.stopPropagation();
-                            setshowCancelWarbandInviteModal(false);
-                        }
-                    }>
-                        Cancel
-                    </Button>
-                    <Button variant="danger" onClick={withStopPropagation(handleCancelWarbandInvite)}>
-                        <FontAwesomeIcon icon={faTimes} className={'icon-inline-left'} />
-                        Cancel Invite
-                    </Button>
                 </Modal.Footer>
             </Modal>
 

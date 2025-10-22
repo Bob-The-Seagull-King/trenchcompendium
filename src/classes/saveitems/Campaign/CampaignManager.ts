@@ -171,11 +171,21 @@ class CampaignManager {
         return false;
     }
 
+    /**
+     * Is this warband invited to the campaign?
+     * @param id
+     * @param _wb
+     * @constructor
+     */
     public IsInvitedWarband(id : number, _wb : number) {
+
+        // @TODO: this.ListOfWarbandInvites is empty
+        console.log(this.ListOfWarbandInvites);
+
         if (this.UserProfile == null) { return false; }
-        for (let i = 0; i < this.ListOfInvites.length; i++) {
-            if (this.ListOfInvites[i].GetId() != id) { continue; }
-            if (this.ListOfInvites[i].IsInvitedWarband(_wb)) {
+        for (let i = 0; i < this.ListOfWarbandInvites.length; i++) {
+            if (this.ListOfWarbandInvites[i].GetId() != id) { continue; }
+            if (this.ListOfWarbandInvites[i].IsInvitedWarband(_wb)) {
                 return true;
             }
         }
@@ -340,10 +350,20 @@ class CampaignManager {
     }
 
     public async CampaignWarbandReject(_campaign_id : number, _warband_id : number) {
+
+        console.log('---');
+        console.log(_campaign_id);
+        console.log(_warband_id);
         const Submit = this.GetUserSubmitBasics(false);
+
+        console.log(Submit);
+        console.log(this.UserProfile);
+
         if (Submit == null || this.UserProfile == null) { return 400; }
         if (this.IsInvitedWarband(_campaign_id, _warband_id)) {
-            
+
+            console.log('-d--');
+
             const responseVal = await WarbandCancel({campaign_id: _campaign_id, warband_id : _warband_id }, Submit)
             if (responseVal.status == 200) {
                 await this.MoveInviteCampiagn(_campaign_id, false);
