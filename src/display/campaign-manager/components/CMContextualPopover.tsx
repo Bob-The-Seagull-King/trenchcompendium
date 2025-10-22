@@ -19,6 +19,11 @@ import {useAuth} from "../../../utility/AuthContext";
 import {useCampaignActions} from "../../../utility/useCampaignActions";
 import { ToolsController } from "../../../classes/_high_level_controllers/ToolsController";
 import { CampaignWarband } from "../../../classes/saveitems/Campaign/CampaignWarband";
+import {CampaignUser} from "../../../classes/saveitems/Campaign/CampaignUser";
+import {toast} from "react-toastify";
+import {CampaignAnnouncement} from "../../../classes/saveitems/Campaign/CampaignAnnouncement";
+import CampaignPlayers from "./CampaignPlayers";
+import AlertCustom from "../../components/generics/AlertCustom";
 
 
 interface CMContextualPopoverProps {
@@ -60,18 +65,52 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
      * Announcement Actions
      */
     const [showEditAnnouncementModal, setshowEditAnnouncementModal] = useState(false);
-    const [showConfirmDeleteAnnouncementModal, setshowConfirmDeleteAnnouncemenrModal] = useState(false);
+    const [showConfirmDeleteAnnouncementModal, setshowConfirmDeleteAnnouncementModal] = useState(false);
+    const [announcementTitle, setAnnouncementTitle] = useState((item as CampaignAnnouncement).Title );
+    const [announcementHTML, setAnnouncementHTML] = useState((item as CampaignAnnouncement).Html);
 
     // Edit an announcement
     const handleEditAnnouncement = () => {
-        // @TODO: save edit announcemenet here
-        alert ('@TODO: save edit announcemenet here');
+        if (campaign != null && type == "announcement") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.EditAnnouncement(
+                    campaign.GetId(),
+                    item,
+                    announcementTitle,
+                    announcementHTML,
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setshowEditAnnouncementModal(false);   // close Modal
+                    toast.success('Saved announcement')
+                })
+            })
+        }
     }
 
     // Delete an announcement
     const handleDeleteAnnouncement = () => {
-        // @TODO: delete announcemenet here
-        alert ('@TODO: delete announcemenet here');
+        if (campaign != null && type == "announcement") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.DeleteAnnouncement(
+                    campaign.GetId(),
+                    item
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setshowConfirmDeleteAnnouncementModal(false);   // close Modal
+                    toast.success('Deleted announcement')
+                })
+            })
+        }
     }
 
     /** End Announcement actions*/
@@ -83,31 +122,42 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     const [showRemovePlayerModal, setshowRemovePlayerModal] = useState(false);
     // Remove a player
     const handleRemovePlayer = useCallback(async () => {
-        try {
+        if (campaign != null && type == "player") {
             setBusy(true);
-            setActivePopoverId(null);          // Popover schließen
-            const res = await removePlayer(item.Id); // item ist CampaignUser
+            setActivePopoverId(null); // Close popover
 
-            if (res?.status !== 200) {
-                console.error("Remove player failed:", res);
-            }
-            // Erfolg: useCampaignActions -> reload() -> Context lädt neu
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setBusy(false);
-            setshowRemovePlayerModal(false);   // Modal schließen
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.ForceRemovePlayer(campaign.GetId(), (item as CampaignUser).Id).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setshowRemovePlayerModal(false);   // close Modal
+                    toast.success('Removed player from campaign')
+                })})
         }
     }, [removePlayer, item.Id, setActivePopoverId]);
 
     const [showChangeAdminModal, setshowChangeAdminModal] = useState(false);
     // Remove a player
     const handleChangeAdmin = () => {
-        // @TODO: Change Campaign Admin here
-        // @TODO: grab player ID from player object?
-        alert ('@TODO: change admin here');
-    }
+        if (campaign != null && type == "player") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
 
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.ChangeCampaignAdmin(
+                    campaign.GetId(),
+                    (item as CampaignUser).Id
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setshowChangeAdminModal(false);   // close Modal
+                    toast.success('Admin Changed')
+                })
+            })
+        }
+    }
     /** End Player actions*/
 
 
@@ -119,11 +169,18 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     const [showRemoveWarbandModal, setshowRemoveWarbandModal] = useState(false);
     // Remove a warband
     const handleRemoveWarband = () => {
-        if (campaign != null && campaign != undefined && type == "warband") {
+        if (campaign != null && type == "warband") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
+
             const Tools = ToolsController.getInstance();
             Tools.UserCampaignManager.RunInit().then(() => {
             Tools.UserCampaignManager.ForceRemoveWarband(campaign.GetId(), (item as CampaignWarband).WarbandID).then(() => {
                 reloadCampaignDisplay();
+                setBusy(false);
+                setshowRemoveWarbandModal(false);   // close Modal
+                toast.success('Removed warband from campaign')
+
             })})
         }
     }
@@ -169,7 +226,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     // Enter Modal state var here to listen to it
     useEffect(() => {
         if (showEditAnnouncementModal
-            || showConfirmDeleteAnnouncementModal
             || showConfirmDeleteAnnouncementModal
             || showRemovePlayerModal
             || showRemoveWarbandModal
@@ -224,7 +280,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                                     </div>
 
                                     <div className="action"
-                                         onClick={withStopPropagation(() => setshowConfirmDeleteAnnouncemenrModal(true))}>
+                                         onClick={withStopPropagation(() => setshowConfirmDeleteAnnouncementModal(true))}>
                                         <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
                                         {'Delete Announcement'}
                                     </div>
@@ -327,11 +383,12 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     <label className="form-label">
                         {'Announcement title'}
                     </label>
+
                     <input
                         className="form-control form-control-sm mb-3"
                         type="text"
-                        // value={''}
-                        // onChange={(e) => setAnnouncementTitle(e.target.value)}
+                        value={announcementTitle}
+                        onChange={(e) => setAnnouncementTitle(e.target.value)}
                         placeholder="Announcement title"
                         required
                     />
@@ -345,8 +402,8 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     <textarea
                         id="announcement-textarea"
                         className="form-control mt-2"
-                        // value={announcement}
-                        // onChange={(e) => setAnnouncement(e.target.value)}
+                        value={announcementHTML}
+                        onChange={(e) => setAnnouncementHTML(e.target.value)}
                         rows={5}
                         placeholder="Enter your message here..."
                     />
@@ -361,15 +418,23 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     }>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={withStopPropagation(handleEditAnnouncement)}>
-                        <FontAwesomeIcon icon={faFloppyDisk} className={'icon-inline-left'} />
-                        Save
-                    </Button>
+
+                    {busy ? (
+                        <Button variant="primary" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'} />
+                            Saving
+                        </Button>
+                    ):(
+                        <Button variant="primary" onClick={withStopPropagation(handleEditAnnouncement)}>
+                            <FontAwesomeIcon icon={faFloppyDisk} className={'icon-inline-left'} />
+                            Save
+                        </Button>
+                    )}
                 </Modal.Footer>
             </Modal>
 
             {/** Delete Announcement Confirm Modal */}
-            <Modal show={showConfirmDeleteAnnouncementModal} onHide={() => setshowConfirmDeleteAnnouncemenrModal(false)} centered>
+            <Modal show={showConfirmDeleteAnnouncementModal} onHide={() => setshowConfirmDeleteAnnouncementModal(false)} centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>{`Delete Announcement`}</Modal.Title>
 
@@ -380,7 +445,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                         onClick={
                             (e) => {
                                 e.stopPropagation();
-                                setshowConfirmDeleteAnnouncemenrModal(false);
+                                setshowConfirmDeleteAnnouncementModal(false);
                         }}
                     />
                 </Modal.Header>
@@ -388,16 +453,17 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 <Modal.Body>
                     {'Are you sure you want to delete this announcement?'}
 
-                    {/* @TODO: output announcement here*/}
                     <div className={'announcement-titl mt-3'}>
                         <strong>
-                            Lorem title
+                            {(item as CampaignAnnouncement).Title}
                         </strong>
                     </div>
-                    <div className={'small announcement-date'}>lorem date</div>
+                    <div className={'small announcement-date'}>
+                        {(item as CampaignAnnouncement).DateStr}
+                    </div>
 
                     <p className={'small mt-2'}>
-                        {'Lorem ipsum'}
+                        {(item as CampaignAnnouncement).Html}
                     </p>
 
                 </Modal.Body>
@@ -406,15 +472,23 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     <Button variant="secondary" onClick={
                         (e) => {
                             e.stopPropagation();
-                            setshowConfirmDeleteAnnouncemenrModal(false);
+                            setshowConfirmDeleteAnnouncementModal(false);
                         }
                     }>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={withStopPropagation(handleDeleteAnnouncement)}>
-                        <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
-                        Delete
-                    </Button>
+
+                    {busy ? (
+                        <Button variant="danger" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'} />
+                            Deleting
+                        </Button>
+                    ):(
+                        <Button variant="danger" onClick={withStopPropagation(handleDeleteAnnouncement)}>
+                            <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
+                            Delete
+                        </Button>
+                    )}
                 </Modal.Footer>
             </Modal>
 
@@ -438,10 +512,9 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 <Modal.Body>
                     {'Are you sure you want to remove this player from your campaign?'}
 
-                    {/* @TODO: output player details here*/}
                     <div className={'my-3'}>
                         <strong>
-                            {'Player Name here'}
+                            {(item as CampaignUser).Nickname}
                         </strong>
                     </div>
 
@@ -492,25 +565,28 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 <Modal.Body>
                     {'Are you sure you want to make this player the admin of your campaign?'}
 
-                    {/* @TODO: change to custom alert */}
-                    <div className={'alert alert-danger my-3'}>
-                        <div className={'mb-3'}>
+                    <AlertCustom
+                        type={'danger'}
+                        className={'mt-3'}
+                    >
+                        <h5 className={'mb-3'}>
                             <strong>
                                 {'Caution'}
                             </strong>
-                        </div>
+                        </h5>
                         <div>
                             {'You will transfer your admin rights to this player:'}
                             <br/>
+                            <br/>
                             <strong>
-                                {/* @TODO: add player Name here */}
-                                {'Player Name'}
+                                {(item as CampaignUser).Nickname}
                             </strong>
                             <br/>
                             <br/>
                             {'You will still stay a player in this campaign but will lose your admin status if you do.'}
                         </div>
-                    </div>
+
+                    </AlertCustom>
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -522,10 +598,18 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     }>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={withStopPropagation(handleChangeAdmin)}>
-                        <FontAwesomeIcon icon={faCrown} className={'icon-inline-left'} />
-                        Change Admin
-                    </Button>
+
+                    {busy ? (
+                        <Button variant="primary" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'}/>
+                            Changing Admin
+                        </Button>
+                    ):(
+                        <Button variant="danger" onClick={withStopPropagation(handleChangeAdmin)}>
+                            <FontAwesomeIcon icon={faCrown} className={'icon-inline-left'} />
+                            Change Admin
+                        </Button>
+                    )}
                 </Modal.Footer>
             </Modal>
 
@@ -551,10 +635,9 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 <Modal.Body>
                     {'Are you sure you want to remove this warband from your campaign?'}
 
-                    {/* @TODO: output warband details here*/}
                     <div className={'my-3'}>
                         <strong>
-                            {'warband Name here'}
+                            {(item as CampaignWarband).WarbandName}
                         </strong>
                     </div>
 
@@ -569,10 +652,21 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     }>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={withStopPropagation(handleRemoveWarband)}>
-                        <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
-                        Remove Warband
-                    </Button>
+
+                    {busy ? (
+                        <Button variant="danger" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'} />
+                            Removing Warband
+                        </Button>
+                    ):(
+                        <Button
+                            variant="danger"
+                            onClick={withStopPropagation(handleRemoveWarband)}
+                        >
+                            <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
+                            Remove Warband
+                        </Button>
+                    )}
                 </Modal.Footer>
             </Modal>
 

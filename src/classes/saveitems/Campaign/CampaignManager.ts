@@ -368,10 +368,10 @@ class CampaignManager {
             const Submit = this.GetUserSubmitBasics(false);
             if (Submit == null) { return 400; }
             const responseVal = await AnnouncementEdit({announcement_id: announcement.Id, description: body, title: _title }, Submit)
-                if (responseVal != null && responseVal.status == 200) {
-                    await this.ResetCampaignByID(_campaign_id);
-                }
-                return responseVal;
+            if (responseVal != null && responseVal.status == 200) {
+                await this.ResetCampaignByID(_campaign_id);
+            }
+            return responseVal;
         }
     }
 
