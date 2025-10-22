@@ -10,7 +10,7 @@ export interface ICampaign {
     campaign_admin_id: string;
     campaign_name: string;
     campaign_description: string;
-    campaign_latest_announcement?: ICampaignAnnouncement | null;
+    campaign_latest_announcement?: ICampaignAnnouncement[];
     campaign_warbands: ICampaignWarband[];
     campaign_warbands_invited: string[];
     campaign_players: ICampaignUser[];
@@ -81,7 +81,6 @@ export class Campaign {
     }
 
     public async BuildAnnouncements(data : ICampaign) {
-        
         for (let i = 0; i < data.campaign_announcements.length; i++) {
             const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i]);
             if (NewPlayer != null) {
@@ -90,15 +89,18 @@ export class Campaign {
         }
 
         if (data.campaign_latest_announcement != null) {
-            const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement);
-            
-            if (NewAnnouncement != null) {
-                if(NewAnnouncement.Id == undefined) {
-                    this._latestAnnouncement = null;
-                } else {
-                    this._latestAnnouncement = (NewAnnouncement);
+            if (data.campaign_latest_announcement.length > 0) {
+                const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement[0]);
+                            
+                if (NewAnnouncement != null) {
+                    if(NewAnnouncement.Id == undefined) {
+                        this._latestAnnouncement = null;
+                    } else {
+                        this._latestAnnouncement = (NewAnnouncement);
+                    }
                 }
             }
+            
         }
     }
 
