@@ -13,7 +13,7 @@ const CMManagePanel: React.FC = () => {
     const { userId } = useAuth()
 
     // do not show if current user is not admin
-    if ( !campaign || campaign.GetAdminId() !== userId ) {
+    if ( !campaign || !userId || !campaign.IsAdmin(userId) ) {
         return null;
     }
 

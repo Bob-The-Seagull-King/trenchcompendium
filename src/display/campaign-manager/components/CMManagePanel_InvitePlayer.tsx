@@ -14,6 +14,8 @@ import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import CMContextualPopover from "./CMContextualPopover";
 import AlertCustom from "../../components/generics/AlertCustom";
 import {useCampaignActions} from "../../../utility/useCampaignActions";
+import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
+import {toast} from "react-toastify";
 
 
 interface DummyPlayer {
@@ -54,21 +56,32 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
     const handleSubmit = async () => {
         if (!selectedPlayerIds.length) return;
 
-        try {
+        if (campaign != null ) {
             setLoading(true);
-            const summary = await invitePlayers(selectedPlayerIds); // reload am Ende bei Erfolg
 
-            setSelectedPlayerIds([]);
-            setShow(false);
-        } catch (e: any) {
-            console.log(e?.message ?? "Invites failed.");
-        } finally {
-            setLoading(false);
+            const Tools = ToolsController.getInstance();
+            await Tools.UserCampaignManager.RunInit();
+
+            for (const id of selectedPlayerIds) {
+                try {
+                    const res = await Tools.UserCampaignManager.CampaignInviteCreate(
+                        campaign.GetId(),
+                        id
+                    );
+                    if (res != 400){
+                        toast.success('Player invited')
+                    } else{
+                        toast.error('Player invite error')
+                    }
+                } catch (e) {
+                    toast.error('Could not invite player(s)')
+                }
+            }
+
+            setLoading(false); // reset loading state
+            setShow(false);   // close Modal
+            setSelectedPlayerIds([]); // reset ids
         }
-
-        setShow(false);
-
-        // @TODO: refresh state for UI here
     };
 
     return (
@@ -136,7 +149,8 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
                                 {/* @TODO: use actual player data*/}
                                 {campaign.IsInvited(player.Id) &&
                                     <CMContextualPopover
-                                        id={`player-invite-${2}`}
+                                        key={`invite-modal-playercontext-${player.Id}`}
+                                        id={`player-invite-${player.Id}`}
                                         type="player-invite"
                                         item={player} // this is a placeholder
                                     />
