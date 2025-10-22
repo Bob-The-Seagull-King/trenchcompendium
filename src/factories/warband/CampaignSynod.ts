@@ -15,7 +15,11 @@ export async function CreateNewCampaign(data : ICampaignBasics, submits : ISubmi
 }
 
 export async function UpdateCampaign(data : ICampaignBasics, submits : ISubmitBasics) {
-    if (data.id == undefined) { return 400; }
+    if (data.id == undefined) { return {status: 400}; }
+
+    console.log('update campaign');
+    console.log(data);
+
     const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/campaigns/update`, {
         method: 'POST',
         headers: {
@@ -24,6 +28,8 @@ export async function UpdateCampaign(data : ICampaignBasics, submits : ISubmitBa
         },
         body: JSON.stringify(data),
     })
+
+    console.log(response);
 
     return response;
 }

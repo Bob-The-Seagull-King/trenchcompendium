@@ -1,4 +1,20 @@
-import { AdminChange, AnnouncementCreate, AnnouncementDelete, AnnouncementEdit, GetPlayerCampaignInvites, GetPlayerCampaigns, InviteAccept, InviteDecline, InviteMake, PlayerRemove, WarbandAccept, WarbandCancel, WarbandInvite, WarbandRemove } from "../../../factories/warband/CampaignSynod";
+import {
+    AdminChange,
+    AnnouncementCreate,
+    AnnouncementDelete,
+    AnnouncementEdit,
+    GetPlayerCampaignInvites,
+    GetPlayerCampaigns,
+    InviteAccept,
+    InviteDecline,
+    InviteMake,
+    PlayerRemove,
+    UpdateCampaign,
+    WarbandAccept,
+    WarbandCancel,
+    WarbandInvite,
+    WarbandRemove
+} from "../../../factories/warband/CampaignSynod";
 import { UserFactory } from "../../../factories/synod/UserFactory";
 import { SiteUser } from "../../user_synod/site_user";
 import { Campaign } from "./Campaign";
@@ -52,6 +68,12 @@ class CampaignManager {
 
     public RemoveLoggedUser() {
         this.UserProfile = null;
+    }
+
+    public async RunInit() {
+        if (!this.IsComplete()) {
+            await this.BuildAll();
+        }
     }
 
     public IsComplete() {
@@ -149,9 +171,19 @@ class CampaignManager {
         return false;
     }
 
+    /**
+     * Is this warband invited to the campaign?
+     * @param id
+     * @param _wb
+     * @constructor
+     */
     public IsInvitedWarband(id : number, _wb : number) {
+
+        // @TODO: this.ListOfWarbandInvites is empty
+        console.log(this.ListOfWarbandInvites);
+
         if (this.UserProfile == null) { return false; }
-        for (let i = 0; i < this.ListOfInvites.length; i++) {
+        for (let i = 0; i < this.ListOfWarbandInvites.length; i++) {
             if (this.ListOfWarbandInvites[i].GetId() != id) { continue; }
             if (this.ListOfWarbandInvites[i].IsInvitedWarband(_wb)) {
                 return true;
@@ -161,6 +193,7 @@ class CampaignManager {
     }
 
     public async ResetCampaignByID(_val : number) {
+        this.Complete = false;
         let NewCampaign : Campaign | null = null;
         let IndexVal : number | null = null;
         for (let i = 0; i < this.ListOfCampaigns.length; i++) {
@@ -175,6 +208,7 @@ class CampaignManager {
             this.ListOfCampaigns[IndexVal] = NewCampaign;
             this.SortMyCampaigns();
         }
+        this.Complete = true;
     }
 
     public SortMyCampaigns() {
@@ -243,11 +277,32 @@ class CampaignManager {
         }
     }
 
+    /**
+     * Cancel a player campaign invite
+     * @param _campaign_id
+     * @param playerId
+     */
+    public async CampaignInviteCancel(_campaign_id: number, playerId: number) {
+        const Submit = this.GetUserSubmitBasics(false);
+        if (Submit == null || this.UserProfile == null) { return 400; }
+
+        // @TODO: check if user with playerId is invited to this campaign
+        const responseVal = await InviteDecline({campaign_id: _campaign_id, player_id: playerId }, Submit)
+        if (responseVal.status == 200) {
+            await this.MoveInviteCampiagn(_campaign_id, false);
+        }
+        return responseVal;
+    }
+
+    /**
+     * Reject a player campaign invite
+     * @param _campaign_id
+     */
     public async CampaignInviteReject(_campaign_id: number) {
         const Submit = this.GetUserSubmitBasics(false);
         if (Submit == null || this.UserProfile == null) { return 400; }
         if (this.IsInvited(_campaign_id)) {
-            
+
             const responseVal = await InviteDecline({campaign_id: _campaign_id, player_id: this.UserProfile.GetUserId() }, Submit)
             if (responseVal.status == 200) {
                 await this.MoveInviteCampiagn(_campaign_id, false);
@@ -295,10 +350,20 @@ class CampaignManager {
     }
 
     public async CampaignWarbandReject(_campaign_id : number, _warband_id : number) {
+
+        console.log('---');
+        console.log(_campaign_id);
+        console.log(_warband_id);
         const Submit = this.GetUserSubmitBasics(false);
+
+        console.log(Submit);
+        console.log(this.UserProfile);
+
         if (Submit == null || this.UserProfile == null) { return 400; }
         if (this.IsInvitedWarband(_campaign_id, _warband_id)) {
-            
+
+            console.log('-d--');
+
             const responseVal = await WarbandCancel({campaign_id: _campaign_id, warband_id : _warband_id }, Submit)
             if (responseVal.status == 200) {
                 await this.MoveInviteCampiagn(_campaign_id, false);
@@ -360,10 +425,10 @@ class CampaignManager {
             const Submit = this.GetUserSubmitBasics(false);
             if (Submit == null) { return 400; }
             const responseVal = await AnnouncementEdit({announcement_id: announcement.Id, description: body, title: _title }, Submit)
-                if (responseVal != null && responseVal.status == 200) {
-                    await this.ResetCampaignByID(_campaign_id);
-                }
-                return responseVal;
+            if (responseVal != null && responseVal.status == 200) {
+                await this.ResetCampaignByID(_campaign_id);
+            }
+            return responseVal;
         }
     }
 
@@ -376,6 +441,25 @@ class CampaignManager {
                     await this.ResetCampaignByID(_campaign_id);
                 }
                 return responseVal;
+        }
+    }
+
+    public async UpdateCampaign (_campaign_id : number, title: string, description : string){
+        if (this.InCampaign(_campaign_id)) {
+            const Submit = this.GetUserSubmitBasics(false);
+            if (Submit == null) { return 400; }
+            const responseVal = await UpdateCampaign(
+            {
+                    id: _campaign_id,
+                    title: title,
+                    description: description
+                },
+                Submit
+            )
+            if (responseVal != null && responseVal.status == 200) {
+                await this.ResetCampaignByID(_campaign_id);
+            }
+            return responseVal;
         }
     }
 

@@ -84,16 +84,20 @@ export class Campaign {
         
         for (let i = 0; i < data.campaign_announcements.length; i++) {
             const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i]);
-            this._announcements.push(NewPlayer);
+            if (NewPlayer != null) {
+                this._announcements.push(NewPlayer);
+            }
         }
 
-        if (data.campaign_latest_announcement) {
+        if (data.campaign_latest_announcement != null) {
             const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement);
-
-            if(NewAnnouncement.Id == undefined) {
-                this._latestAnnouncement = null;
-            } else {
-                this._latestAnnouncement = (NewAnnouncement);
+            
+            if (NewAnnouncement != null) {
+                if(NewAnnouncement.Id == undefined) {
+                    this._latestAnnouncement = null;
+                } else {
+                    this._latestAnnouncement = (NewAnnouncement);
+                }
             }
         }
     }
@@ -184,17 +188,30 @@ export class Campaign {
         return this._players.some(u => u.Id === userID);
     }
 
-    public IsInvitedWarband(userID : number) : boolean {
+    public IsInvitedWarband(warband_id : number) : boolean {
         for (let i = 0; i < this._warbandsInvited.length; i++) {
             const pl : number = parseInt(this._warbandsInvited[i])
-            if (pl == userID && !Number.isNaN(pl)) { return true; }
+            if (pl == warband_id && !Number.isNaN(pl)) { return true; }
         }  
+        return false;
+    }
+    public IsJoinedWarband(warband_id : number) : boolean {
+        for (let i = 0; i < this.GetWarbandIDList().length; i++) {
+            const pl : number = this.GetWarbandIDList()[i]
+            if (pl == warband_id && !Number.isNaN(pl)) { return true; }
+        }
         return false;
     }
 
 
-    public InvitePlayers( ids: number[]) {
-        console.log('@TODO: invite players here');
+    /**
+     * Returns a list of all warbands that all invited users in this campaign have
+     */
+    public GetInvitableWarbands() : CampaignWarband[] {
+        const players = this.GetPlayers();
+
+        return this.GetWarbands()
+
     }
 
     public CreateAnnouncement (title: string, content: string) {

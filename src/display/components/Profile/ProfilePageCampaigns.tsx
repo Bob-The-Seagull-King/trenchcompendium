@@ -29,8 +29,6 @@ const ProfilePageCampaigns: React.FC<ProfilePageCampaignsProps> = ({ userData })
     const hasJoined = joinedIds.length > 0;
     const hasInvites = inviteIds.length > 0;
 
-    console.log('inviteIds');
-    console.log(inviteIds);
     return (
         <div className="ProfilePageCampaigns">
             <div className="profile-card">
@@ -38,16 +36,22 @@ const ProfilePageCampaigns: React.FC<ProfilePageCampaignsProps> = ({ userData })
 
                 <div className="profile-card-content">
                     {hasInvites && (
-                        <ul className="campaigns-list">
-                            LOREM
-                            {inviteIds.map((id) => (
-                                <li key={`inv-${id}`} className="campaign invited">
-                                    <CampaignProvider campaignId={id}>
-                                        <CampaignListEntryInvitaion />
-                                    </CampaignProvider>
-                                </li>
-                            ))}
-                        </ul>
+                        <>
+                            <ul className="campaigns-list">
+                                {inviteIds.map((id) => (
+                                    <li key={`inv-${id}`} className="campaign invited">
+                                        <CampaignProvider campaignId={id}>
+                                            <CampaignListEntryInvitaion/>
+                                        </CampaignProvider>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {hasJoined &&
+                                <div className={'spacer-20'}></div>
+                            }
+                        </>
+
                     )}
 
                     {hasJoined && (
@@ -55,7 +59,7 @@ const ProfilePageCampaigns: React.FC<ProfilePageCampaignsProps> = ({ userData })
                             {joinedIds.map((id) => (
                                 <li key={id} className="campaign">
                                     <CampaignProvider campaignId={id}>
-                                        <CampaignListEntry />
+                                        <CampaignListEntry/>
                                     </CampaignProvider>
                                 </li>
                             ))}

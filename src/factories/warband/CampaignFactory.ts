@@ -38,6 +38,7 @@ class CampaignFactory {
     }
 
     static async CreateCampaignAnnouncement(data: ICampaignAnnouncement) {
+        if (data == null || data == undefined) {return null;}
         const cache = SynodDataCache.getInstance();
         if (cache.CheckCampaignAnnouncementCache(data.announcement_id)) {
             return cache.campaignAnnouncementCache[data.announcement_id];

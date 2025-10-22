@@ -18,8 +18,6 @@ export class CampaignAnnouncement {
     private _dateTs = 0;
     private _author!: CampaignUser;
 
-    // private constructor() {}
-
     public constructor(dto: ICampaignAnnouncement) {
         this._id = dto.announcement_id;
         this._title = dto.announcement_title;
@@ -28,7 +26,6 @@ export class CampaignAnnouncement {
     }
 
     public async BuildUser(data : ICampaignAnnouncement) {
-        
         const NewPlayer = await CampaignFactory.CreateCampaignUser(data.announcement_author);
         this._author = (NewPlayer);
     }
@@ -37,5 +34,14 @@ export class CampaignAnnouncement {
     get Title() { return this._title; }
     get Html() { return this._html; }
     get Date() { return new Date(this._dateTs * 1000); }
+
+    // Return data as readable string
+    get DateStr() {
+        return new Intl.DateTimeFormat('de-DE', {
+            day: '2-digit',
+            month: '2-digit',   // 'long' → "August"
+            year: 'numeric',
+        }).format(this.Date);
+    }
     get Author() { return this._author; }
 }
