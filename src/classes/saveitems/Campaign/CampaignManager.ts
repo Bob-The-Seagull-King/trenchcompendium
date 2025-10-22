@@ -424,6 +424,25 @@ class CampaignManager {
         }
     }
 
+    public async UpdateCampaign (_campaign_id : number, title: string, description : string){
+        if (this.InCampaign(_campaign_id)) {
+            const Submit = this.GetUserSubmitBasics(false);
+            if (Submit == null) { return 400; }
+            const responseVal = await UpdateCampaign(
+            {
+                    id: _campaign_id,
+                    title: title,
+                    description: description
+                },
+                Submit
+            )
+            if (responseVal != null && responseVal.status == 200) {
+                await this.ResetCampaignByID(_campaign_id);
+            }
+            return responseVal;
+        }
+    }
+
 }
 
 export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics}
