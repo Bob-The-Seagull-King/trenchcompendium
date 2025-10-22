@@ -1,4 +1,20 @@
-import { AdminChange, AnnouncementCreate, AnnouncementDelete, AnnouncementEdit, GetPlayerCampaignInvites, GetPlayerCampaigns, InviteAccept, InviteDecline, InviteMake, PlayerRemove, WarbandAccept, WarbandCancel, WarbandInvite, WarbandRemove } from "../../../factories/warband/CampaignSynod";
+import {
+    AdminChange,
+    AnnouncementCreate,
+    AnnouncementDelete,
+    AnnouncementEdit,
+    GetPlayerCampaignInvites,
+    GetPlayerCampaigns,
+    InviteAccept,
+    InviteDecline,
+    InviteMake,
+    PlayerRemove,
+    UpdateCampaign,
+    WarbandAccept,
+    WarbandCancel,
+    WarbandInvite,
+    WarbandRemove
+} from "../../../factories/warband/CampaignSynod";
 import { UserFactory } from "../../../factories/synod/UserFactory";
 import { SiteUser } from "../../user_synod/site_user";
 import { Campaign } from "./Campaign";
@@ -251,11 +267,32 @@ class CampaignManager {
         }
     }
 
+    /**
+     * Cancel a player campaign invite
+     * @param _campaign_id
+     * @param playerId
+     */
+    public async CampaignInviteCancel(_campaign_id: number, playerId: number) {
+        const Submit = this.GetUserSubmitBasics(false);
+        if (Submit == null || this.UserProfile == null) { return 400; }
+
+        // @TODO: check if user with playerId is invited to this campaign
+        const responseVal = await InviteDecline({campaign_id: _campaign_id, player_id: playerId }, Submit)
+        if (responseVal.status == 200) {
+            await this.MoveInviteCampiagn(_campaign_id, false);
+        }
+        return responseVal;
+    }
+
+    /**
+     * Reject a player campaign invite
+     * @param _campaign_id
+     */
     public async CampaignInviteReject(_campaign_id: number) {
         const Submit = this.GetUserSubmitBasics(false);
         if (Submit == null || this.UserProfile == null) { return 400; }
         if (this.IsInvited(_campaign_id)) {
-            
+
             const responseVal = await InviteDecline({campaign_id: _campaign_id, player_id: this.UserProfile.GetUserId() }, Submit)
             if (responseVal.status == 200) {
                 await this.MoveInviteCampiagn(_campaign_id, false);

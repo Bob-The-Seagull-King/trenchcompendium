@@ -24,6 +24,7 @@ import {toast} from "react-toastify";
 import {CampaignAnnouncement} from "../../../classes/saveitems/Campaign/CampaignAnnouncement";
 import CampaignPlayers from "./CampaignPlayers";
 import AlertCustom from "../../components/generics/AlertCustom";
+import {ICampaignUserInvite} from "../../../classes/saveitems/Campaign/CampaignManager";
 
 
 interface CMContextualPopoverProps {
@@ -202,24 +203,24 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     /**
      * Cancel player invite
      */
-    const handleCancelPlayerInvite = useCallback(async () => {
-        try {
+    const handleCancelPlayerInvite  = () => {
+        if (campaign != null && type == "player-invite") {
             setBusy(true);
-            setActivePopoverId(null);
-            // item.Id ist number (aus CampaignUser Getter)
-            const res = await cancelInvite(item.Id);
+            setActivePopoverId(null); // Close popover
 
-            if (res?.status !== 200) {
-                // optional: zeig Fehler-UI
-                console.error("Cancel invite failed:", res);
-            }
-            // Erfolg: CampaignContext lädt automatisch via cancelInvite() -> reload()
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setBusy(false);
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.CampaignInviteCancel(
+                    campaign.GetId(),
+                    (item as CampaignUser).Id
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    toast.success('Cancelled player invite')
+                })
+            })
         }
-    }, [cancelInvite, item.Id]);
+    };
     /** End Player Invite Actions */
 
     /** Hides popover when a modal is opened */
@@ -492,7 +493,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 </Modal.Footer>
             </Modal>
 
-            {/**Remove Player Modal */}
+            {/** Remove Player Modal */}
             <Modal show={showRemovePlayerModal} onHide={() => setshowRemovePlayerModal(false)} centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>{`Remove Player`}</Modal.Title>
