@@ -207,9 +207,8 @@ const CMManagePanel_InvitePlayer: React.FC = () => {
 
             </Modal.Footer>
         </Modal>
-</>
-)
-    ;
+    </>
+    );
 };
 
 export default CMManagePanel_InvitePlayer;

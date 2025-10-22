@@ -106,7 +106,7 @@ const ProfilePage: React.FC = () => {
             const privateData = await UserFactory.CreatePrivateUserByID(Number(id));
             if (requestId !== fetchRequestId.current) return; // Abort if a newer request started
             if (privateData) {
-            data = privateData;
+                data = privateData;
             }
         }
 
@@ -114,7 +114,7 @@ const ProfilePage: React.FC = () => {
             const publicData = await UserFactory.CreatePublicUserByID(Number(id));
             if (requestId !== fetchRequestId.current) return;
             if (publicData) {
-            data = publicData;
+                data = publicData;
             }
         }
 

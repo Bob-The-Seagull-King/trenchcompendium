@@ -43,7 +43,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         return null;
     }
 
-    const { cancelInvite, removePlayer } = useCampaignActions();
     const [busy, setBusy] = useState(false);
 
     const { userId } = useAuth()
@@ -122,7 +121,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
      */
     const [showRemovePlayerModal, setshowRemovePlayerModal] = useState(false);
     // Remove a player
-    const handleRemovePlayer = useCallback(async () => {
+    const handleRemovePlayer = () => {
         if (campaign != null && type == "player") {
             setBusy(true);
             setActivePopoverId(null); // Close popover
@@ -136,7 +135,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     toast.success('Removed player from campaign')
                 })})
         }
-    }, [removePlayer, item.Id, setActivePopoverId]);
+    };
 
     const [showChangeAdminModal, setshowChangeAdminModal] = useState(false);
     // Remove a player

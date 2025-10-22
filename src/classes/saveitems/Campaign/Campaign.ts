@@ -188,17 +188,30 @@ export class Campaign {
         return this._players.some(u => u.Id === userID);
     }
 
-    public IsInvitedWarband(userID : number) : boolean {
+    public IsInvitedWarband(warband_id : number) : boolean {
         for (let i = 0; i < this._warbandsInvited.length; i++) {
             const pl : number = parseInt(this._warbandsInvited[i])
-            if (pl == userID && !Number.isNaN(pl)) { return true; }
+            if (pl == warband_id && !Number.isNaN(pl)) { return true; }
         }  
+        return false;
+    }
+    public IsJoinedWarband(warband_id : number) : boolean {
+        for (let i = 0; i < this.GetWarbandIDList().length; i++) {
+            const pl : number = this.GetWarbandIDList()[i]
+            if (pl == warband_id && !Number.isNaN(pl)) { return true; }
+        }
         return false;
     }
 
 
-    public InvitePlayers( ids: number[]) {
-        console.log('@TODO: invite players here');
+    /**
+     * Returns a list of all warbands that all invited users in this campaign have
+     */
+    public GetInvitableWarbands() : CampaignWarband[] {
+        const players = this.GetPlayers();
+
+        return this.GetWarbands()
+
     }
 
     public CreateAnnouncement (title: string, content: string) {
