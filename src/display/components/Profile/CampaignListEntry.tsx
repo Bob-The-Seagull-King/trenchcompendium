@@ -8,6 +8,7 @@ import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import {useNavigate} from "react-router-dom";
 import {useCampaign} from "../../../context/CampaignContext";
+import LoadingOverlay from "../generics/Loading-Overlay";
 
 
 
@@ -19,9 +20,12 @@ const CampaignListEntry: React.FC = () => {
 
     if( !campaign ) {
         return (
-            <>
-                {'Joined - can not be loaded or is loading'}
-            </>
+            <div className={'CampaignListEntry loading'}>
+                <LoadingOverlay
+                    message={'Loading Campaign'}
+                    variant={'small-icon'}
+                />
+            </div>
         );
     }
 
