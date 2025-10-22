@@ -152,8 +152,8 @@ class CampaignManager {
     public IsInvitedWarband(id : number, _wb : number) {
         if (this.UserProfile == null) { return false; }
         for (let i = 0; i < this.ListOfInvites.length; i++) {
-            if (this.ListOfInvites[i].GetId() != id) { continue; }
-            if (this.ListOfInvites[i].IsInvitedWarband(_wb)) {
+            if (this.ListOfWarbandInvites[i].GetId() != id) { continue; }
+            if (this.ListOfWarbandInvites[i].IsInvitedWarband(_wb)) {
                 return true;
             }
         }
