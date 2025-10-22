@@ -29,9 +29,9 @@ const CampaignListEntry: React.FC = () => {
         <div className={'CampaignListEntry'}>
             <CustomNavLink
                 classes={'CampaignListEntry-name'}
-                link={`/campaign/${campaign?.GetId()}`}
+                link={`/campaigns/${campaign?.GetId()}`}
                 runfunc={() => {
-                    navigate(`/campaign/${campaign?.GetId()}`)
+                    navigate(`/campaigns/${campaign?.GetId()}`)
                 }}
             >
                 {campaign.GetName()}

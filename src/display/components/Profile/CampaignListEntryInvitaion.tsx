@@ -3,20 +3,27 @@
  */
 
 
-import React from 'react'
+import React, {useState} from 'react'
 import SynodImage from "../../../utility/SynodImage";
 import CustomNavLink from "../subcomponents/interactables/CustomNavLink";
 import {useNavigate} from "react-router-dom";
 import {useCampaign} from "../../../context/CampaignContext";
+import LoadingOverlay from "../generics/Loading-Overlay";
+import {Button} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
+import {toast} from "react-toastify";
 
 
 
 const CampaignListEntryInvitaion: React.FC = () => {
 
-    const { campaign, reload } = useCampaign();
+    const { campaign, reload, reloadCampaignDisplay } = useCampaign();
 
     const navigate = useNavigate();
 
+    const [busy, setBusy] = useState(false);
 
     // let status_string = '';
     // if( campaignStatus == 'active') {
@@ -28,24 +35,98 @@ const CampaignListEntryInvitaion: React.FC = () => {
 
     if ( !campaign ) {
         return (
-            <>
-                {'Invited - can not be loaded or is loading'}
-            </>
+            <div className={'CampaignListEntry CampaignListEntryInvitaion'}>
+                <LoadingOverlay
+                    message={'Loading Invite'}
+                    variant={'small-icon'}
+                />
+            </div>
         );
-
     }
+
+
+    const handleAcceptCampaignInvite = () => {
+        if (campaign != null) {
+            setBusy(true);
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.CampaignInviteAccept(
+                    campaign.GetId()
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    toast.success('Accepted campaign invite')
+                })
+            })
+        }
+    }
+
+    const handleDeclineCampaignInvite = () => {
+        if (campaign != null) {
+            setBusy(true);
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.CampaignInviteReject(
+                    campaign.GetId()
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    toast.success('Declined campaign invite')
+                })
+            })
+        }
+    }
+
+
 
     return (
         <div className={'CampaignListEntry CampaignListEntryInvitaion'}>
+            <div className={'fw-bold'}>{'New Campaign Invite'}</div>
             <CustomNavLink
                 classes={'CampaignListEntry-name'}
-                link={`/campaign/${campaign?.GetId()}`}
+                link={`/campaigns/${campaign?.GetId()}`}
                 runfunc={() => {
-                    navigate(`/campaign/${campaign?.GetId()}`)
+                    navigate(`/campaigns/${campaign?.GetId()}`)
                 }}
             >
-                Inv: {campaign.GetName()}
+                {campaign.GetName()}
             </CustomNavLink>
+
+            <div className={'CampaignListEntry-players'}>
+                {'Players: '}
+                {campaign.GetPlayers().map(p => p.Nickname).join(', ')}
+            </div>
+
+            { busy ? (
+                <>
+                    <div className={'loading-wrapper'}>
+                    </div>
+                    <LoadingOverlay
+                        message={'Loading'}
+                        variant={'small-icon'}
+                    />
+                </>
+
+            ): (
+                <div className={'CampaignListEntry-actions'}>
+                    <Button
+                        variant={'primary'} className={'btn-sm me-3'}
+                        onClick={handleAcceptCampaignInvite}
+                    >
+                        <FontAwesomeIcon icon={faCheck} className={'me-2'}/>
+                        {'Accept'}
+                    </Button>
+                    <Button
+                        variant={'secondary'} className={'btn-sm'}
+                        onClick={handleDeclineCampaignInvite}
+                    >
+                        <FontAwesomeIcon icon={faTimes} className={'me-2'}/>
+                        {'Decline'}
+                    </Button>
+                </div>
+            )}
         </div>
     );
 
