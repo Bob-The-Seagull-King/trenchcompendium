@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useCampaign} from "../../../context/CampaignContext";
 import {useAuth} from "../../../utility/AuthContext";
 import CMTextarea from '../micro-components/CMTextArea';
 import CMLatestAnnouncement from "./CMLatestAnnouncement";
 import CMProgressGraph from "./CMProgressGraph";
+import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
+import {toast} from "react-toastify";
+import {CampaignAnnouncement} from "../../../classes/saveitems/Campaign/CampaignAnnouncement";
 
 const CampaignSummary: React.FC = () => {
     const { campaign } = useCampaign();
@@ -11,6 +14,29 @@ const CampaignSummary: React.FC = () => {
 
     if( !campaign) {
         return null;
+    }
+
+    const [busy, setBusy] = useState(false);
+    const [campaignTitle, setCampaignTitle] = useState(campaign.GetName());
+    const [campaignDescription, setCampaignDescription] = useState(campaign.GetDescription());
+
+    // Changes the campaign description
+    const handleChangeCampaignDescription = ( text: string) => {
+        if (campaign != null ) {
+            setBusy(true);
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.UpdateCampaign(
+                    campaign.GetId(),
+                    campaign.GetName(),
+                    text
+                ).then(() => {
+                    setBusy(false);
+                    toast.success('Description changed')
+                })
+            })
+        }
     }
 
     return (
@@ -53,8 +79,9 @@ const CampaignSummary: React.FC = () => {
                     <CMTextarea
                         initialText={campaign.GetDescription()}
                         title={'Description'}
-                        onSave={ () => alert('CM Notes ->text changed')}
+                        onSave={ handleChangeCampaignDescription }
                         canEdit={campaign.IsAdmin(userId ? userId : 0)}
+                        isBusy={busy}
                     />
                 </div>
 

@@ -2,16 +2,18 @@
 import React, {useState} from 'react';
 import {useCampaign} from "../../../context/CampaignContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFloppyDisk, faPen} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faFloppyDisk, faPen} from "@fortawesome/free-solid-svg-icons";
+import {Button} from "react-bootstrap";
 
 interface CMTextareaProps {
     initialText: string; // the current text
     title: string; // title for the textarea
     onSave: (newText: string) => void; // function on save
     canEdit?: boolean; // boolean capas
+    isBusy?: boolean;
 }
 
-const CMTextarea: React.FC<CMTextareaProps> = ({ initialText, title, onSave, canEdit }) => {
+const CMTextarea: React.FC<CMTextareaProps> = ({ initialText, title, onSave, canEdit, isBusy }) => {
     const { campaign } = useCampaign();
     const [text, setText] = useState<string>(initialText);
     const [showTextarea, setShowTextarea] = useState(false);
@@ -36,19 +38,35 @@ const CMTextarea: React.FC<CMTextareaProps> = ({ initialText, title, onSave, can
                 {canEdit &&
                     <>
                         {(!showTextarea) ? (
-                            <div className={'btn btn-primary btn-sm'}
-                                 onClick={() => setShowTextarea(true)}
-                            >
-                                <FontAwesomeIcon icon={faPen} className={'icon-inline-left'}/>
-                                Edit
-                            </div>
+                            <>
+                                {isBusy ? (
+                                    <Button
+                                        variant={"primary"}
+                                        className={'btn-sm'}
+                                        disabled={true}
+                                    >
+                                        <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin me-2'}/>
+                                        Saving
+                                    </Button>
+
+                                ):(
+                                    <Button
+                                        variant={"primary"}
+                                        className={'btn-sm'}
+                                        onClick={() => setShowTextarea(true)}
+                                    >
+                                        <FontAwesomeIcon icon={faPen} className={'me-2'}/>
+                                        Edit
+                                    </Button>
+                                )}
+                            </>
                         ) : (
-                            <div className={'btn btn-primary'}
+                            <div className={'btn btn-primary btn-sm'}
                                  onClick={() => {
                                      handleSave()
                                  }}
                             >
-                                <FontAwesomeIcon icon={faFloppyDisk} className={'icon-inline-left'}/>
+                                <FontAwesomeIcon icon={faFloppyDisk} className={'me-2'}/>
                                 Save
                             </div>
                         )}
