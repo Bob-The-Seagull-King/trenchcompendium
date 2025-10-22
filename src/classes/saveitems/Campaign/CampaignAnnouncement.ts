@@ -34,5 +34,14 @@ export class CampaignAnnouncement {
     get Title() { return this._title; }
     get Html() { return this._html; }
     get Date() { return new Date(this._dateTs * 1000); }
+
+    // Return data as readable string
+    get DateStr() {
+        return new Intl.DateTimeFormat('de-DE', {
+            day: '2-digit',
+            month: '2-digit',   // 'long' → "August"
+            year: 'numeric',
+        }).format(this.Date);
+    }
     get Author() { return this._author; }
 }
