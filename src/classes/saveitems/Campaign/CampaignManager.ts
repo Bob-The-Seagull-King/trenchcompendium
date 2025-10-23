@@ -114,6 +114,15 @@ class CampaignManager {
                     }
                 }
             }
+            const warbandinvites = await this.UserProfile?.GetAllWarbandInvites()
+            if (warbandinvites != null) {
+                for (let i = 0; i < warbandinvites.length; i++) {
+                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(warbandinvites[i]);
+                    if (CampaignVal != null) {
+                        this.ListOfWarbandInvites.push(CampaignVal)
+                    }
+                }
+            }
         }
         this.SortMyCampaigns();
         this.Complete = true;
@@ -191,10 +200,6 @@ class CampaignManager {
      * @constructor
      */
     public IsInvitedWarband(id : number, _wb : number) {
-
-        // @TODO: this.ListOfWarbandInvites is empty
-        console.log(this.ListOfWarbandInvites);
-
         if (this.UserProfile == null) { return false; }
         for (let i = 0; i < this.ListOfWarbandInvites.length; i++) {
             if (this.ListOfWarbandInvites[i].GetId() != id) { continue; }

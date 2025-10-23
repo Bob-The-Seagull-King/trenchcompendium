@@ -98,6 +98,14 @@ class SiteUser {
             : [];
     }
 
+    public GetAllWarbandInvites() {
+        let InviteList : number[] = []
+        for (let i = 0; i < this.Warbands.length; i++) {
+            InviteList = InviteList.concat(this.Warbands[i].warband_data.GetCampaignInvites())
+        }
+        return InviteList;
+    }
+
     public async GenerateWarbands(data: ISiteUser) {
         for (let i = 0; i < data.warbands.length; i++) {
             if (this.Warbands.filter((val : SumWarband) => val.id == data.warbands[i].id).length > 0) { continue; }
