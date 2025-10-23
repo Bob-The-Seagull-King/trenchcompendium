@@ -3,6 +3,9 @@ import {useCampaign} from "../../../context/CampaignContext";
 import CMContextualPopover from "./CMContextualPopover";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
+import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
+import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
+import {useNavigate} from "react-router-dom";
 
 const CMLatestAnnouncement: React.FC = () => {
     const { campaign } = useCampaign();
@@ -10,6 +13,7 @@ const CMLatestAnnouncement: React.FC = () => {
     if( !campaign) {
         return null;
     }
+    const navigate = useNavigate();
 
     const announcement = campaign.GetLatestAnnouncement(); // CampaignAnnouncement | null
 
@@ -42,10 +46,21 @@ const CMLatestAnnouncement: React.FC = () => {
 
             <div className={'CMLatestAnnouncement-content'}>
                 <h4 className={'CMLatestAnnouncement-title'}>
-                    {announcement.Author.Nickname}
+                    {announcement.Title}
                 </h4>
                 <div className={'CMLatestAnnouncement-date'}>
                     {announcement.DateStr}
+                </div>
+
+                <div className={'CMLatestAnnouncement-author'}>
+                    <CustomNavLink
+                        classes={'CMLatestAnnouncement-author-link'}
+                        link={`/profile/${announcement.Author.Id}`}
+                        runfunc={() => {
+                            navigate(`/profile/${announcement.Author.Id}`)
+                        }}>
+                        {announcement.Author.Name}
+                    </CustomNavLink>
                 </div>
                 <div className={'CMLatestAnnouncement-text-wrap'}>
                     <p
