@@ -31,6 +31,7 @@ import { Skill } from '../../feature/ability/Skill';
 import { ExplorationFactory } from '../../../factories/features/ExplorationFactory';
 import { SumWarband, WarbandManager } from './WarbandManager';
 import { ConvertToTTSExport } from './Converter/TTSExporter';
+import { CampaignWarband } from '../Campaign/CampaignWarband';
 
 interface WarbandDebt {
     ducats : number,
@@ -92,6 +93,7 @@ interface IUserWarband extends IContextObject {
     fireteams: IWarbandProperty[],
     consumables: IWarbandConsumable[],
     restrictions_list : string[]
+    warband_invites? : number[]
 }
 
 class UserWarband extends DynamicContextObject {
@@ -115,6 +117,7 @@ class UserWarband extends DynamicContextObject {
     public ModelRelCache : CachedFactionModel = {}
     public GeneralCache : GeneralEventCache = {}
     public PostID : number;
+    public WarbandInvites : number[] = []
 
     public DumpCache() {
         this.EquipmentRelCache = {}
@@ -162,6 +165,11 @@ class UserWarband extends DynamicContextObject {
             this.Restrictions = data.restrictions_list;
         } else {
             this.Restrictions = []
+        }
+        if (data.warband_invites != undefined) {
+            this.WarbandInvites = data.warband_invites;
+        } else {
+            this.WarbandInvites = []
         }
         this.IsUnRestricted = (this.Restrictions.includes("unrestricted"))
     }
@@ -1201,10 +1209,13 @@ class UserWarband extends DynamicContextObject {
      * - This Data could be retrieved from a campaign object.
      * - We need to preserve the method to set these values by user input
      */
-    /** @TODO Returns the name of the campaign for the warband
-     * - can use Campaign Info
-     */
     public GetCampaignName() {
+        if (this.MyContext != null) {
+            if (this.MyContext instanceof CampaignWarband) {
+                const Name = this.MyContext.Owner.Name;
+                return Name;
+            }
+        }
         return 'No Campaign connected';
     }
 
@@ -1212,11 +1223,7 @@ class UserWarband extends DynamicContextObject {
      * Get an array of campaign invites for this warband
      */
     public GetCampaignInvites () : number[] {
-        // @TODO: return array of invites. Invites are now part of the get warband data API Endpoint
-        return [
-            123,
-            53353
-        ];
+        return this.WarbandInvites
     }
 
     /**
