@@ -10,6 +10,8 @@ import CMHistory from "./components/CMHistory";
 import {Campaign} from "../../classes/saveitems/Campaign/Campaign";
 import CMContextualPopover from "./components/CMContextualPopover";
 import CMCampaignInviteThis from "./components/CMCampaignInviteThis";
+import {useNavigate} from "react-router-dom";
+import {ROUTES} from "../../resources/routes-constants";
 
 
 
@@ -17,13 +19,11 @@ const CampaignManagerContent: React.FC = () => {
     const { userId, isLoggedIn } = useAuth()
 
     const { campaign, loading, error, reload } = useCampaign();
+    const navigate = useNavigate();
 
-    if (error) return (
-        <div className="container py-4">
-            <p style={{color:'crimson'}}>Error: {error}</p>
-            <button onClick={reload}>Retry</button>
-        </div>
-    );
+    if (error) {
+        navigate( ROUTES.CAMPAIGN)
+    }
 
     if (!campaign || loading) return (
         <div className={'LoadingOverlay-wrap-100vh'}>
