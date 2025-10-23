@@ -167,10 +167,11 @@ export class Campaign {
     }
     public IsAdmin (userID: number) : boolean {
         const adminIdStr = this.GetAdminId();        // string | null
+
         if (adminIdStr == null) return false;        // null-safe
 
         const adminIdNum = parseInt(adminIdStr, 10); // string -> number
-        if (Number.isNaN(adminIdNum)) return false;  // ungültige Zahl
+        if (Number.isNaN(adminIdNum)) return false;  // invalid number
 
         return adminIdNum === userID;
     }

@@ -142,6 +142,10 @@ class CampaignManager {
         }
     }
 
+    /**
+     * Is this user the campaign admin?
+     * @param id | campaign ID
+     */
     public OwnsCampaign(id : number) {
         for (let i = 0; i < this.ListOfAdminCampaigns.length; i++) {
             if (this.ListOfAdminCampaigns[i].GetId() == id) {
@@ -355,18 +359,10 @@ class CampaignManager {
 
     public async CampaignWarbandReject(_campaign_id : number, _warband_id : number) {
 
-        console.log('---');
-        console.log(_campaign_id);
-        console.log(_warband_id);
         const Submit = this.GetUserSubmitBasics(false);
-
-        console.log(Submit);
-        console.log(this.UserProfile);
 
         if (Submit == null || this.UserProfile == null) { return 400; }
         if (this.IsInvitedWarband(_campaign_id, _warband_id)) {
-
-            console.log('-d--');
 
             const responseVal = await WarbandCancel({campaign_id: _campaign_id, warband_id : _warband_id }, Submit)
             if (responseVal.status == 200) {
@@ -388,8 +384,17 @@ class CampaignManager {
         }
     }
 
+    /**
+     * Removes a player from the campaign
+     * @param _campaign_id
+     * @param _player_id
+     */
     public async ForceRemovePlayer(_campaign_id : number, _player_id : number) {
-        if (this.OwnsCampaign(_campaign_id)) {
+
+        if (
+            this.OwnsCampaign(_campaign_id) || // is the admin
+            this.UserProfile?.GetUserId() == _player_id // is the player self
+        ) {
             const Submit = this.GetUserSubmitBasics(false);
             if (Submit == null) { return 400; }
             const responseVal = await PlayerRemove({campaign_id: _campaign_id, player_id : _player_id }, Submit)

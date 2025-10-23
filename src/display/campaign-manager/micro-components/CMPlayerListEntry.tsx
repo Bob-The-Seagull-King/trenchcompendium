@@ -9,6 +9,7 @@ import {CampaignUser} from "../../../classes/saveitems/Campaign/CampaignUser";
 import {useCampaign} from "../../../context/CampaignContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCrown} from "@fortawesome/free-solid-svg-icons";
+import {useAuth} from "../../../utility/AuthContext";
 
 // @TODO: this is only dummy data
 interface CMPlayerListEntryProps {
@@ -18,7 +19,23 @@ interface CMPlayerListEntryProps {
 const CMPlayerListEntry: React.FC<CMPlayerListEntryProps> = ({ player }) => {
     const navigate = useNavigate();
     const { campaign, reload, reloadCampaignDisplay, updateCampaignKey } = useCampaign();
+    const { userId, isLoggedIn } = useAuth()
 
+    if( !campaign ) {
+        return (
+            <>
+                {/* @TODO: add loading state*/}
+            </>
+        );
+    }
+
+    const uid = userId; // kann number | string | null sein, je nach deinem Auth-Context
+
+    const isSelf =
+        uid != null && Number(uid) === Number(player.Id);
+
+    const isAdmin =
+        uid != null && campaign.IsAdmin(Number(uid));
 
     return (
         <div className="CMPlayerListEntry">
@@ -54,11 +71,22 @@ const CMPlayerListEntry: React.FC<CMPlayerListEntryProps> = ({ player }) => {
                 {player.GetSupporterStatus()}
             </div>
 
-            <CMContextualPopover
-                id={`player-${player.Id}`}
-                type="player"
-                item={player} // this is a placeholder
-            />
+            {isSelf && !isAdmin &&
+                <CMContextualPopover
+                    id={`player-${player.Id}`}
+                    type="player-self"
+                    item={player}
+                />
+            }
+
+            {userId && campaign.IsAdmin(userId) &&
+                <CMContextualPopover
+                    id={`player-${player.Id}`}
+                    type="player"
+                    item={player}
+                />
+            }
+
         </div>
     );
 };

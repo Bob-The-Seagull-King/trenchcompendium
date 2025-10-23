@@ -32,7 +32,7 @@ import {ROUTES} from "../../../resources/routes-constants";
 
 interface CMContextualPopoverProps {
     id: string;
-    type: 'announcement' | 'player' | 'warband' | 'warband-invite' | 'player-invite' | 'campaign';
+    type: 'announcement' | 'player' | 'warband' | 'warband-invite' | 'player-invite' | 'campaign' | 'player-self';
     item: any;
 }
 
@@ -63,7 +63,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         e.stopPropagation();
         fn();
     };
-
 
     /**
      * Campaign Actions
@@ -109,8 +108,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     setBusy(false);
                     setShowDeleteCampaignModal(false);   // close Modal
                     navigate( ROUTES.CAMPAIGN, {state: Date.now().toString()})
-
-                    // @TODO: redirect to campaigns overview page
                     toast.success('Campaign name changed')
                 })
             })
@@ -219,6 +216,25 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     }
     /** End Player actions*/
 
+    /**
+     * Player self actions
+     */
+    const [showLeaveCampaignModal, setshowLeaveCampaignModal] = useState(false);
+    const handleLeavePlayer = () => {
+        if (campaign != null && type == "player-self") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.ForceRemovePlayer(campaign.GetId(), (item as CampaignUser).Id).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setshowLeaveCampaignModal(false);   // close Modal
+                    toast.success('You have left the campaign')
+                })})
+        }
+    };
 
 
 
@@ -319,10 +335,16 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         showDeleteCampaignModal,
     ]);
 
-    // Only admins can edit any option
-    if( !userId || !campaign.IsAdmin(userId)) {
+    // Only logged in users can edit any option
+    if( !userId ) {
         return null;
     }
+    // only admins can edit general things
+    if( !campaign.IsAdmin(userId) && type != 'player-self' ) {
+        return null;
+    }
+
+
 
     // Only admins can edit announcements
     if(type === 'announcement' && ( !userId || !campaign.IsAdmin(userId))) {
@@ -402,6 +424,17 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                                 </>
                             }
 
+
+                            {/** Player self actions */}
+                            {(type === 'player-self') &&
+                                <>
+                                    <div className="action"
+                                         onClick={withStopPropagation(() => setshowLeaveCampaignModal(true))}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Leave Campaign'}
+                                    </div>
+                                </>
+                            }
 
                             {/** Warband actions */}
                             {(type === 'warband') &&
@@ -756,6 +789,52 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                         <Button variant="danger" onClick={withStopPropagation(handleRemovePlayer)}>
                             <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
                             Remove Player
+                        </Button>
+                    )}
+
+                </Modal.Footer>
+            </Modal>
+
+            {/** Player Leave Campaign Modal */}
+            <Modal show={showLeaveCampaignModal} onHide={() => setshowLeaveCampaignModal(false)} centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{`Leave Campaign`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setshowLeaveCampaignModal(false);
+                            }}
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    {'Are you sure you want to leave this campaign?'}
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setshowLeaveCampaignModal(false);
+                        }
+                    }>
+                        Cancel
+                    </Button>
+
+                    {busy ? (
+                        <Button variant="primary" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'} />
+                            Leaving Campaign
+                        </Button>
+                    ):(
+                        <Button variant="primary" onClick={withStopPropagation(handleLeavePlayer)}>
+                            <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
+                            Leave Campaign
                         </Button>
                     )}
 
