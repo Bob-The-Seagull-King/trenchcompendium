@@ -211,26 +211,6 @@ export class Campaign {
         return false;
     }
 
-
-    /**
-     * Returns a list of all warbands that all invited users in this campaign have
-     */
-    public GetInvitableWarbands() : CampaignWarband[] {
-        const players = this.GetPlayers();
-
-        return this.GetWarbands()
-
-    }
-
-    /**
-    * This returns a dummy game
-    * @TODO
-    */
-    GetDummyGame () {
-        return {
-            warbands: this.GetWarbands(),
-            date: '04.07.2025'
-        };
-    }
+    
 }
 

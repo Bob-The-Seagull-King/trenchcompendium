@@ -107,4 +107,3 @@ const CMCampaignInviteThis: React.FC = () => {
 };
 
 export default CMCampaignInviteThis;
-export { CMCampaignInviteThis };
