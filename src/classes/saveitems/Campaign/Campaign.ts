@@ -188,6 +188,7 @@ export class Campaign {
     public IsInvited(userID: number): boolean {
         return this._playersInvited.some(u => u.Id === userID);
     }
+
     /**
      * Check if a player joined this campaign
      * @param userID
@@ -196,6 +197,10 @@ export class Campaign {
         return this._players.some(u => u.Id === userID);
     }
 
+    /**
+     * Is a warband invited to this campaign?
+     * @param warband_id
+     */
     public IsInvitedWarband(warband_id : number) : boolean {
         for (let i = 0; i < this._warbandsInvited.length; i++) {
             const pl : number = parseInt(this._warbandsInvited[i])
@@ -211,6 +216,6 @@ export class Campaign {
         return false;
     }
 
-    
+
 }
 
