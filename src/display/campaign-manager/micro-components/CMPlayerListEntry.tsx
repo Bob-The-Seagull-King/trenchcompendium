@@ -11,7 +11,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCrown} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "../../../utility/AuthContext";
 
-// @TODO: this is only dummy data
 interface CMPlayerListEntryProps {
     player: CampaignUser;
 }

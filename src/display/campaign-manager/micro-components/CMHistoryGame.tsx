@@ -55,19 +55,19 @@ const CMHistoryGame: React.FC<CMHistoryGameProps> = (game) => {
                     })}
                 </div>
 
-                <div className={'CMHistoryGame-Players'}>
-                {game.game.warbands.map((warband, index) => (
-                    <CMPlayerSmall
-                        key={index}
-                        player={{
-                            playerId: warband.PlayerId,
-                            playerName: warband.PlayerName,
-                            playerImageId: warband.PlayerImageId
-                        }}
-                    />
+                {/*<div className={'CMHistoryGame-Players'}>*/}
+                {/*{game.game.warbands.map((warband, index) => (*/}
+                {/*    <CMPlayerSmall*/}
+                {/*        key={index}*/}
+                {/*        player={{*/}
+                {/*            playerId: warband.PlayerId,*/}
+                {/*            playerName: warband.PlayerName,*/}
+                {/*            playerImageId: warband.PlayerImageId*/}
+                {/*        }}*/}
+                {/*    />*/}
 
-                    ))}
-                </div>
+                {/*))}*/}
+                {/*</div>*/}
 
                 <div className={'CMHistoryGame-Game-stats'}>
                     <div className={'stats-scenario'}>

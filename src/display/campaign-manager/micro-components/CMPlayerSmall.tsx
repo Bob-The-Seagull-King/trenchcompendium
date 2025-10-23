@@ -3,17 +3,14 @@ import {useCampaign} from "../../../context/CampaignContext";
 import CustomNavLink from "../../components/subcomponents/interactables/CustomNavLink";
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import {useNavigate} from "react-router-dom";
+import {CampaignUser} from "../../../classes/saveitems/Campaign/CampaignUser";
 
 
 
-type CMPlayerSmallProps = {
+interface CMPlayerSmallProps {
+    player: CampaignUser;
     useNav?: boolean; // should this be a navigatable element?
-    player: {
-        playerId: number;
-        playerName: string;
-        playerImageId: number;
-    };
-};
+}
 
 /**
  * The history Panel in the Campaign Manager
@@ -30,7 +27,7 @@ const CMPlayerSmall: React.FC<CMPlayerSmallProps> = ({ useNav = true, player }) 
                     className={'player-image-wrap'}
                 >
                     <SynodImageWithCredit
-                        imageId={player.playerImageId}
+                        imageId={player.Id}
                         className={''}
                     />
                 </div>
@@ -38,7 +35,7 @@ const CMPlayerSmall: React.FC<CMPlayerSmallProps> = ({ useNav = true, player }) 
                 <div
                     className={'CMHistoryPlayer-name'}
                 >
-                    {player.playerName}
+                    {player.Name}
                 </div>
             </div>
         )
@@ -48,23 +45,23 @@ const CMPlayerSmall: React.FC<CMPlayerSmallProps> = ({ useNav = true, player }) 
         <div className="CMPlayerSmall">
             <CustomNavLink
                 classes={'player-image-wrap'}
-                link={`/profile/${player.playerId}`}
+                link={`/profile/${player.Id}`}
                 runfunc={() => {
-                    navigate(`/profile/${player.playerId}`, {state: Date.now().toString()})
+                    navigate(`/profile/${player.Id}`, {state: Date.now().toString()})
                 }}>
                 <SynodImageWithCredit
-                    imageId={player.playerImageId}
+                    imageId={player.AvatarId}
                     className={''}
                 />
             </CustomNavLink>
 
             <CustomNavLink
                 classes={'CMHistoryPlayer-name'}
-                link={`/profile/${player.playerId}`}
+                link={`/profile/${player.Id}`}
                 runfunc={() => {
-                    navigate(`/profile/${player.playerId}`, {state: Date.now().toString()})
+                    navigate(`/profile/${player.Id}`, {state: Date.now().toString()})
                 }}>
-                {player.playerName}
+                {player.Name}
             </CustomNavLink>
         </div>
     );

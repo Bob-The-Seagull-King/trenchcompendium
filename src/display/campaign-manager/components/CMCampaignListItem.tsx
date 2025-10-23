@@ -54,11 +54,7 @@ const CMCampaignListItem: React.FC = () => {
                                 <div className={'CMCampaignListItem-player-col col-12 col-sm-6 col-md-4'} key={index}>
                                     <CMPlayerSmall
                                         useNav={false}
-                                        player={{
-                                            playerId: player.Id,
-                                            playerName: player.Nickname,
-                                            playerImageId: player.AvatarId
-                                        }}
+                                        player={player}
                                     />
                                 </div>
                             ))}

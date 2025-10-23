@@ -17,9 +17,34 @@
 
     .CMHistoryAnnouncement-message
         font-size: 14px
+        line-height: 1.4em
+        white-space: pre-line
+        margin-bottom: 10px
+        position: relative
 
-        .show-more
-            display: inline-block
-            margin-left: 3px
-            opacity: 0.7
-            cursor: pointer
+        &.is-long
+            max-height: 7em
+            overflow: hidden
+
+            &:not(.is-expanded)
+                &:after
+                    content: ""
+                    position: absolute
+                    z-index: 2
+                    bottom: 0
+                    left: 0
+                    width: 100%
+                    display: block
+                    height: 1.4em
+                    background: linear-gradient(0deg, $color-bg-1 0%, transparent 100%)
+
+        &.is-expanded
+            max-height: none
+            overflow: auto
+
+
+    .show-more
+        display: inline-block
+        opacity: 0.7
+        cursor: pointer
+

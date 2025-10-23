@@ -58,7 +58,7 @@ const CampaignManagerContent: React.FC = () => {
 
                             <CampaignSummary />
 
-                            {/*<CMHistory />*/}
+                            <CMHistory />
                         </div>
 
                         <div className={'col-12 col-md-5'}>

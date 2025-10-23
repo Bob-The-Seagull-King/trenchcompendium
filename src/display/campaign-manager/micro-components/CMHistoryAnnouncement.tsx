@@ -3,16 +3,12 @@ import {useCampaign} from "../../../context/CampaignContext";
 import CMPlayerSmall from "./CMPlayerSmall";
 import WbbContextualPopover from "../../components/warband-builder/WbbContextualPopover";
 import CMContextualPopover from "../components/CMContextualPopover";
+import {CampaignAnnouncement} from "../../../classes/saveitems/Campaign/CampaignAnnouncement";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
 
 type CMHistoryAnnouncementProps = {
-    announcement: {
-        title: string;
-        date: string;
-        message: string;
-        playerName: string;
-        playerId: number;
-        playerImageId: number;
-    };
+    announcement: CampaignAnnouncement;
 };
 
 /**
@@ -23,45 +19,41 @@ const CMHistoryAnnouncement: React.FC<CMHistoryAnnouncementProps> = ({ announcem
     const [expanded, setExpanded] = useState(false);
 
     const CHAR_LIMIT = 200;
-    const isLong = announcement.message.length > CHAR_LIMIT;
-    const displayText = expanded
-        ? announcement.message
-        : isLong
-            ? announcement.message.slice(0, CHAR_LIMIT) + "... "
-            : announcement.message;
+    const isLong = announcement.MarkupHtml.length > CHAR_LIMIT; // change this
 
     return (
         <div className="CMHistoryAnnouncement">
             <h3 className={'CMHistoryAnnouncement-title'}>
-                {announcement.title}
+                {announcement.Title}
 
                 <CMContextualPopover
-                    id={`announcement-${announcement.title}`}
+                    id={`announcement-${announcement.Id}`}
                     type="announcement"
-                    item={announcement} // this is a placeholder
+                    item={announcement}
                 />
             </h3>
-            <div className={'CMHistoryAnnouncement-date'}>{announcement.date}</div>
+
+            <div className={'CMHistoryAnnouncement-date'}>{announcement.DateStr}</div>
 
             <CMPlayerSmall
-                player={{
-                    playerId: 3,
-                    playerName: 'Emitoo',
-                    playerImageId: 2818
-                }}
+                player={announcement.Author}
             />
 
-            <p className="CMHistoryAnnouncement-message">
-                {displayText}
+            <div className="CMHistoryAnnouncement-message-wrap" >
+                <p
+                    className={`CMHistoryAnnouncement-message ${isLong ? 'is-long' : ''} ${expanded ? 'is-expanded' : ''}`}
+                    dangerouslySetInnerHTML={{ __html: announcement.MarkupHtml }}></p>
+
                 {!expanded && isLong && (
                     <span
-                        className="show-more"
+                        className="show-more small"
                         onClick={() => setExpanded(true)}
                     >
-                    {'more'}
+                    {'Show more'}
+                        <FontAwesomeIcon icon={faChevronDown} className={'ms-2'}/>
                     </span>
                 )}
-            </p>
+            </div>
         </div>
     );
 };

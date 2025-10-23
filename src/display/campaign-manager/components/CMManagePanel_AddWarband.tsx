@@ -91,9 +91,6 @@ const CMManagePanel_AddWarband: React.FC = () => {
         };
     }, [playersKey]); // neu ausführen, wenn sich die Spielerliste ändert
 
-    console.log('items');
-    console.log(items);
-
     // UI
     const [loadingActions, setLoadingActions] = useState(false);
     const [show, setShow] = useState<boolean>(false);

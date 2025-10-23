@@ -7,6 +7,7 @@ import {faCircleNotch, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {useCampaign} from "../../../context/CampaignContext";
 import {toast} from "react-toastify";
 import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
+import AlertCustom from "../../components/generics/AlertCustom";
 
 const CMManagePanel_CreateAnnouncement: React.FC = () => {
     const { campaign, reloadCampaignDisplay } = useCampaign();
@@ -92,10 +93,29 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
                         placeholder="Enter your message here..."
                         required
                     />
+
+                    <AlertCustom
+                        type={'info'}
+                        className={'mt-3'}
+                    >
+                        <div className={'fw-bold'}>{'You can use the following markdown'}</div>
+                        <div className={'mt-2'}>
+                            <div>
+                                {'**Bold text**'} → <strong>{'Bold text'}</strong>
+                            </div>
+                            <div>
+                                {'*Italic text*'} → <em>{'Italic text'}</em>
+                            </div>
+                            <div>
+                                {'[Linktext](https://example.com)'} → <a href={"/"} rel={'nofollow noreferrer noopener'}
+                                                                        target={'_blank'}>{'Linktext'}</a>
+                            </div>
+                        </div>
+                    </AlertCustom>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShow(false)}>
+                <Button variant="secondary" onClick={() => setShow(false)}>
                         Cancel
                     </Button>
 
