@@ -47,7 +47,7 @@ const CMLatestAnnouncement: React.FC = () => {
                     {dateStr}
                 </div>
                 <div className={'CMLatestAnnouncement-text'}
-                     dangerouslySetInnerHTML={{ __html: announcement.Html }}
+                     dangerouslySetInnerHTML={{ __html: announcement.MarkupHtml }}
                 >
                 </div>
             </div>
