@@ -364,112 +364,114 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 onToggle={handleToggle}
                 rootClose={true}
                 overlay={
-                    <Popover.Body className="popover CM-item-actions-popover">
-                        <div className="actions">
+                    <Popover id={`cm-popover-${id}`} className="CM-item-actions-popover">
+                        <Popover.Body className="popover CM-item-actions-popover">
+                            <div className="actions">
 
-                            {/** Campaign Actions */}
-                            {(type === 'campaign') &&
-                                <>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setShowEditCampaignNameModal(true))}>
-                                        <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
-                                        {'Rename Campaign'}
-                                    </div>
-
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setShowDeleteCampaignModal(true))}>
-                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Delete Campaign'}
-                                    </div>
-                                </>
-                            }
-
-                            {/** Announcement Actions */}
-                            {(type === 'announcement') &&
-                                <>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setshowEditAnnouncementModal(true))}>
-                                        <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
-                                        {'Edit Announcement'}
-                                    </div>
-
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setshowConfirmDeleteAnnouncementModal(true))}>
-                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Delete Announcement'}
-                                    </div>
-                                </>
-                            }
-
-                            {/** Player actions */}
-                            {(type === 'player') &&
-                                <>
-                                    { !campaign.IsAdmin(item.Id) &&
+                                {/** Campaign Actions */}
+                                {(type === 'campaign') &&
+                                    <>
                                         <div className="action"
-                                        onClick={withStopPropagation(() => setshowRemovePlayerModal(true))}
-                                        >
+                                             onClick={withStopPropagation(() => setShowEditCampaignNameModal(true))}>
+                                            <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
+                                            {'Rename Campaign'}
+                                        </div>
+
+                                        <div className="action"
+                                             onClick={withStopPropagation(() => setShowDeleteCampaignModal(true))}>
                                             <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                            {'Remove Player'}
+                                            {'Delete Campaign'}
                                         </div>
-                                    }
+                                    </>
+                                }
 
-                                    {!campaign.IsAdmin(item.Id) &&
+                                {/** Announcement Actions */}
+                                {(type === 'announcement') &&
+                                    <>
                                         <div className="action"
-                                             onClick={withStopPropagation(() => setshowChangeAdminModal(true))}>
-                                            <FontAwesomeIcon icon={faCrown} className="icon-inline-left-l"/>
-                                            {'Make Admin'}
+                                             onClick={withStopPropagation(() => setshowEditAnnouncementModal(true))}>
+                                            <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
+                                            {'Edit Announcement'}
                                         </div>
-                                    }
-                                </>
-                            }
+
+                                        <div className="action"
+                                             onClick={withStopPropagation(() => setshowConfirmDeleteAnnouncementModal(true))}>
+                                            <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                            {'Delete Announcement'}
+                                        </div>
+                                    </>
+                                }
+
+                                {/** Player actions */}
+                                {(type === 'player') &&
+                                    <>
+                                        { !campaign.IsAdmin(item.Id) &&
+                                            <div className="action"
+                                            onClick={withStopPropagation(() => setshowRemovePlayerModal(true))}
+                                            >
+                                                <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                                {'Remove Player'}
+                                            </div>
+                                        }
+
+                                        {!campaign.IsAdmin(item.Id) &&
+                                            <div className="action"
+                                                 onClick={withStopPropagation(() => setshowChangeAdminModal(true))}>
+                                                <FontAwesomeIcon icon={faCrown} className="icon-inline-left-l"/>
+                                                {'Make Admin'}
+                                            </div>
+                                        }
+                                    </>
+                                }
 
 
-                            {/** Player self actions */}
-                            {(type === 'player-self') &&
-                                <>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setshowLeaveCampaignModal(true))}>
-                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Leave Campaign'}
-                                    </div>
-                                </>
-                            }
+                                {/** Player self actions */}
+                                {(type === 'player-self') &&
+                                    <>
+                                        <div className="action"
+                                             onClick={withStopPropagation(() => setshowLeaveCampaignModal(true))}>
+                                            <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                            {'Leave Campaign'}
+                                        </div>
+                                    </>
+                                }
 
-                            {/** Warband actions */}
-                            {(type === 'warband') &&
-                                <>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => setshowRemoveWarbandModal(true))}>
-                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                        {'Remove Warband'}
-                                    </div>
-                                </>
-                            }
+                                {/** Warband actions */}
+                                {(type === 'warband') &&
+                                    <>
+                                        <div className="action"
+                                             onClick={withStopPropagation(() => setshowRemoveWarbandModal(true))}>
+                                            <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                            {'Remove Warband'}
+                                        </div>
+                                    </>
+                                }
 
-                            {/** Warband Invite actions */}
-                            {(type === 'warband-invite') &&
-                                <>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => handleCancelWarbandInvite())}>
-                                        <FontAwesomeIcon icon={faTimes} className="icon-inline-left-l"/>
-                                        {'Cancel Invite'}
-                                    </div>
-                                </>
-                            }
+                                {/** Warband Invite actions */}
+                                {(type === 'warband-invite') &&
+                                    <>
+                                        <div className="action"
+                                             onClick={withStopPropagation(() => handleCancelWarbandInvite())}>
+                                            <FontAwesomeIcon icon={faTimes} className="icon-inline-left-l"/>
+                                            {'Cancel Invite'}
+                                        </div>
+                                    </>
+                                }
 
-                            {/** Player Invite actions */}
-                            {(type === 'player-invite') &&
-                                <>
-                                    <div className="action"
-                                         onClick={withStopPropagation(() => handleCancelPlayerInvite())}>
-                                        <FontAwesomeIcon icon={faTimes} className="icon-inline-left-l"/>
-                                        {'Cancel Invite'}
-                                    </div>
-                                </>
-                            }
+                                {/** Player Invite actions */}
+                                {(type === 'player-invite') &&
+                                    <>
+                                        <div className="action"
+                                             onClick={withStopPropagation(() => handleCancelPlayerInvite())}>
+                                            <FontAwesomeIcon icon={faTimes} className="icon-inline-left-l"/>
+                                            {'Cancel Invite'}
+                                        </div>
+                                    </>
+                                }
 
-                        </div>
-                    </Popover.Body>
+                            </div>
+                        </Popover.Body>
+                    </Popover>
                 }>
 
                 { !busy ? (
