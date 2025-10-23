@@ -268,7 +268,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
 
     const handleCancelWarbandInvite = () => {
 
-
         if (campaign != null && type == "warband-invite") {
             setBusy(true);
             setActivePopoverId(null); // Close popover

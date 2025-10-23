@@ -1209,6 +1209,17 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
+     * Get an array of campaign invites for this warband
+     */
+    public GetCampaignInvites () : number[] {
+        // @TODO: return array of invites. Invites are now part of the get warband data API Endpoint
+        return [
+            123,
+            53353
+        ];
+    }
+
+    /**
      * - can use Campaign Info
      * - uses VP for the currently active cylce
      */

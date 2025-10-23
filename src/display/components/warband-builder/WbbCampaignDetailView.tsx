@@ -12,6 +12,8 @@ import { Patron } from '../../../classes/feature/skillgroup/Patron';
 import { ToolsController } from '../../../classes/_high_level_controllers/ToolsController';
 import WbbEditFailedPromotionsModal from './modals/warband/WbbEditFailedPromotionsModal';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import WbbCampaignInvite from "./micro-elements/WbbCampaignInvite";
+import {CampaignProvider} from "../../../context/CampaignContext";
 
 interface WbbCampaignDetailViewProps {
     onClose: () => void;
@@ -106,10 +108,25 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
             </div>
 
             <div className={'detail-view-content'} key={setKeyvar.toString() + "_" + updateKey.toString()}>
+
+                {warband.warband_data.GetCampaignInvites().length > 0 &&
+                    <>
+                        {warband.warband_data.GetCampaignInvites().map((invite_id, index) => (
+                            <CampaignProvider
+                                key={index}
+                                campaignId={Number(invite_id)}
+                            >
+                                <WbbCampaignInvite />
+                            </CampaignProvider>
+                        ))}
+                    </>
+                }
+
                 <div className={'detail-section-title'}>
                     {'Campaign Details'}
                 </div>
 
+                {/*{warband.warband_data.GetCampaignInvites()}*/}
                 <div className={'detail-section-text-element'}>
                     <strong>
                         {'Campaign Round: '}

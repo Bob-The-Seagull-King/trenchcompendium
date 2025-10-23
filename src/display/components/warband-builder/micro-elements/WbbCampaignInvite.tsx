@@ -1,31 +1,32 @@
 // CMCampaignInviteThis.tsx
 import React, {useState} from "react";
-import {useCampaign} from "../../../context/CampaignContext";
-import {useAuth} from "../../../utility/AuthContext";
-import LoadingOverlay from "../../components/generics/Loading-Overlay";
-import {SiteUser} from "../../../classes/user_synod/site_user";
-import {SiteUserPublic} from "../../../classes/user_synod/user_public";
+import {useAuth} from "../../../../utility/AuthContext";
+import {useCampaign} from "../../../../context/CampaignContext";
+import LoadingOverlay from "../../generics/Loading-Overlay";
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
+import {ToolsController} from "../../../../classes/_high_level_controllers/ToolsController";
 import {toast} from "react-toastify";
+import {useWarband} from "../../../../context/WarbandContext";
 
 
 
-const CMCampaignInviteThis: React.FC = () => {
 
-    const { campaign, reload, reloadCampaignDisplay } = useCampaign();
+const WbbCampaignInvite: React.FC = () => {
 
     const { userId, isLoggedIn } = useAuth()
-
     const [busy, setBusy] = useState(false);
+    const { campaign, reload, reloadCampaignDisplay } = useCampaign();
+    const { warband, reloadDisplay, updateKey } = useWarband();
 
-    if( !userId || !campaign) {
+    // not all components can be loaded
+    if( !userId || !campaign || !warband) {
         return null;
     }
 
-    if(!campaign.IsInvited(userId)) {
+    // Double checking if warband is invited
+    if(!campaign.IsInvitedWarband(warband.warband_data.GetPostId())) {
         return null;
     }
 
@@ -33,12 +34,15 @@ const CMCampaignInviteThis: React.FC = () => {
         if (campaign != null) {
             setBusy(true);
 
+            console.log('accepting wb invite');
             const Tools = ToolsController.getInstance();
             Tools.UserCampaignManager.RunInit().then(() => {
-                Tools.UserCampaignManager.CampaignInviteAccept(
-                    campaign.GetId()
+                Tools.UserCampaignManager.CampaignWarbandAccept(
+                    campaign.GetId(),
+                    warband.warband_data.GetPostId()
                 ).then(() => {
                     reloadCampaignDisplay();
+                    reloadDisplay();
                     setBusy(false);
                     toast.success('Joined Campaign')
                 })
@@ -50,12 +54,16 @@ const CMCampaignInviteThis: React.FC = () => {
         if (campaign != null) {
             setBusy(true);
 
+            console.log('cancelling wb invite');
+
             const Tools = ToolsController.getInstance();
             Tools.UserCampaignManager.RunInit().then(() => {
-                Tools.UserCampaignManager.CampaignInviteReject(
-                    campaign.GetId()
+                Tools.UserCampaignManager.CampaignWarbandReject(
+                    campaign.GetId(),
+                    warband.warband_data.GetPostId()
                 ).then(() => {
                     reloadCampaignDisplay();
+                    reloadDisplay();
                     setBusy(false);
                     toast.success('Invite declined')
                 })
@@ -63,17 +71,16 @@ const CMCampaignInviteThis: React.FC = () => {
         }
     }
 
-
     return (
-        <div className={`CMCampaignInviteThis`}>
+        <div className={`WbbCampaignInvite`}>
             <div className={'fw-bold'}>
                 {'Campaign invite'}
             </div>
             <div className={'small'}>
-                {'You are invited to this campaign. Click below to join or decline the invitation.'}
+                {'This warband is invited to a campaign. Click below to join or decline the invitation.'}
             </div>
 
-            { busy ? (
+            {busy ? (
                 <>
                     <div className={'loading-wrapper'}>
                     </div>
@@ -83,8 +90,8 @@ const CMCampaignInviteThis: React.FC = () => {
                     />
                 </>
 
-            ): (
-                <div className={'CampaignListEntry-actions'}>
+            ) : (
+                <div className={'WbbCampaignInvite-actions'}>
                     <Button
                         variant={'primary'} className={'btn-sm me-3'}
                         onClick={handleAcceptCampaignInvite}
@@ -103,6 +110,6 @@ const CMCampaignInviteThis: React.FC = () => {
             )}
         </div>
     );
-};
+}
 
-export default CMCampaignInviteThis;
+export default WbbCampaignInvite;
