@@ -13,7 +13,6 @@ import {useCampaign} from "../../../context/CampaignContext";
 import SynodImageWithCredit from "../../../utility/SynodImageWithCredits";
 import CMContextualPopover from "./CMContextualPopover";
 import AlertCustom from "../../components/generics/AlertCustom";
-import {useCampaignActions} from "../../../utility/useCampaignActions";
 import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
 import {toast} from "react-toastify";
 
@@ -36,7 +35,6 @@ const dummyPlayers: DummyPlayer[] = [
 const CMManagePanel_InvitePlayer: React.FC = () => {
     const { campaign } = useCampaign();
 
-    const { invitePlayer, invitePlayers } = useCampaignActions();
 
     if( !campaign) {
         return null;

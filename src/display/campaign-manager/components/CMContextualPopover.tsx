@@ -16,7 +16,6 @@ import {
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import {Button, Modal, Popover} from "react-bootstrap";
 import {useAuth} from "../../../utility/AuthContext";
-import {useCampaignActions} from "../../../utility/useCampaignActions";
 import { ToolsController } from "../../../classes/_high_level_controllers/ToolsController";
 import { CampaignWarband } from "../../../classes/saveitems/Campaign/CampaignWarband";
 import {CampaignUser} from "../../../classes/saveitems/Campaign/CampaignUser";
