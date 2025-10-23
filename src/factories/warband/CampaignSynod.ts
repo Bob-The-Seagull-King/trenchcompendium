@@ -1,8 +1,21 @@
 import { SYNOD } from "../../resources/api-constants";
-import { ICampaignBasics, ICampaignUserInvite, ISubmitBasics, ICampaignWarbandInvite, ICampaignAnnouncementBasics } from "../../classes/saveitems/Campaign/CampaignManager";
+import { ICampaignBasics, ICampaignUserInvite, ISubmitBasics, ICampaignWarbandInvite, ICampaignAnnouncementBasics, IDeleteCampaign } from "../../classes/saveitems/Campaign/CampaignManager";
 
 export async function CreateNewCampaign(data : ICampaignBasics, submits : ISubmitBasics) {
     const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/campaigns/create`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${submits.token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+
+    return response;
+}
+
+export async function DeleteACampaign(data : IDeleteCampaign, submits : ISubmitBasics) {
+    const response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/campaigns/delete`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${submits.token}`,

@@ -3,6 +3,7 @@ import {
     AnnouncementCreate,
     AnnouncementDelete,
     AnnouncementEdit,
+    DeleteACampaign,
     GetPlayerCampaignInvites,
     GetPlayerCampaigns,
     InviteAccept,
@@ -26,6 +27,10 @@ interface ICampaignBasics {
     id? : number,
     title : string,
     description: string
+}
+
+interface IDeleteCampaign {
+    campaign_id: number
 }
 
 interface ICampaignUserInvite {
@@ -198,6 +203,16 @@ class CampaignManager {
             }
         }
         return false;
+    }
+
+    public RemoveCampaignByID(_val : number) {
+        for (let i = 0; i < this.ListOfCampaigns.length; i++) {
+            if (this.ListOfCampaigns[i].GetId() == _val) {
+                this.ListOfCampaigns.splice(i, 1);
+                break;
+            }
+        }
+        this.SortMyCampaigns();
     }
 
     public async ResetCampaignByID(_val : number) {
@@ -473,23 +488,17 @@ class CampaignManager {
     }
 
     public async DeleteCampaign ( _campaign_id : number ) {
-        /**
-         * @TODO delete Campaign here:
-         * POST /wp-json/synod/v1/campaigns/delete
-         *
-         * Args: {
-         * "campaign_id": <id>
-         * }
-         *
-         * Response: {
-         * "status": "success",
-         * "message": "Campaign deleted"
-         * }
-         *
-         */
-        alert ();
+        if (this.OwnsCampaign(_campaign_id)) {
+            const Submit = this.GetUserSubmitBasics(false);
+            if (Submit == null) { return 400; }
+            const responseVal = await DeleteACampaign({campaign_id: _campaign_id }, Submit)
+                if (responseVal.status == 200) {
+                    this.RemoveCampaignByID(_campaign_id);
+                }
+                return responseVal;
+        }
     }
 
 }
 
-export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics}
+export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics, IDeleteCampaign}
