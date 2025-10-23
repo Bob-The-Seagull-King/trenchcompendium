@@ -3,25 +3,45 @@
 import React, {useState} from 'react';
 import {Button, Modal} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faCircleNotch, faXmark} from "@fortawesome/free-solid-svg-icons";
 import {useCampaign} from "../../../context/CampaignContext";
+import {toast} from "react-toastify";
+import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
 
 const CMManagePanel_CreateAnnouncement: React.FC = () => {
-    const { campaign } = useCampaign();
+    const { campaign, reloadCampaignDisplay } = useCampaign();
 
     if( !campaign) {
         return null;
     }
 
+    const [busy, setBusy] = useState<boolean>(false); // loading state
     const [show, setShow] = useState<boolean>(false);
     const [announcementTitle, setAnnouncementTitle] = useState<string>('');
     const [announcement, setAnnouncement] = useState<string>('');
 
     // handler function
-    const handleSubmit = () => {
-        campaign.CreateAnnouncement(announcementTitle, announcement);
-        setShow(false);
-    };
+
+
+    const handleAddAnnouncement = () => {
+        if (campaign != null ) {
+            setBusy(true);
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.AddAnnouncement(
+                    campaign.GetId(),
+                    announcementTitle,
+                    announcement,
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setShow(false);   // close Modal
+                    toast.success('Announcement created')
+                })
+            })
+        }
+    }
 
 
     return (
@@ -45,7 +65,6 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-
                     <div className={'mb-3'}>
                         <label className="form-label">
                             {'Announcement title'}
@@ -79,13 +98,26 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
                     <Button variant="secondary" onClick={() => setShow(false)}>
                         Cancel
                     </Button>
-                    <Button
-                        variant="primary"
-                        onClick={handleSubmit}
-                        disabled={announcement.trim() === ''}
-                    >
-                        {'Create announcement'}
-                    </Button>
+
+                    {busy ? (
+                        <Button
+                            variant="primary"
+                            disabled={true}
+                        >
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin me-2'} />
+                            {'Creating announcement'}
+                        </Button>
+                    ):(
+                        <Button
+                            variant="primary"
+                            onClick={handleAddAnnouncement}
+                            disabled={announcement.trim() === ''}
+                        >
+                            {'Create announcement'}
+                        </Button>
+                    )}
+
+
                 </Modal.Footer>
             </Modal>
         </>

@@ -217,12 +217,6 @@ export class Campaign {
 
     }
 
-    public CreateAnnouncement (title: string, content: string) {
-        console.log('@TODO: create announcement with');
-        console.log(title);
-        console.log(content);
-    }
-
     /**
     * This returns a dummy game
     * @TODO
