@@ -653,7 +653,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                         className="form-control mt-2"
                         value={announcementHTML}
                         onChange={(e) => setAnnouncementHTML(e.target.value)}
-                        rows={5}
+                        rows={10}
                         placeholder="Enter your message here..."
                     />
                 </Modal.Body>

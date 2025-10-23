@@ -23,6 +23,10 @@ const CampaignSummary: React.FC = () => {
     // Changes the campaign description
     const handleChangeCampaignDescription = ( text: string) => {
         if (campaign != null ) {
+            if(text == campaign.GetDescription()) {
+                return; // no changes
+            }
+
             setBusy(true);
 
             const Tools = ToolsController.getInstance();

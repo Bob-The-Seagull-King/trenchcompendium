@@ -146,3 +146,76 @@ export function returnParagraphsDescription(baseObject: any, objectArray : any[]
         </>
     )
 }
+
+// ---------------------------------------------
+// Markdown -> safe HTML (small Subset)
+// Supports: **bold**, *italic*, [Text](https://url)
+// ---------------------------------------------
+export function renderMiniMarkdown(md: string): string {
+    const escapeHtml = (s: string) =>
+        s
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+
+    const sanitizeUrl = (url: string): string | null => {
+        try {
+            const u = new URL(url);
+            if (u.protocol === "http:" || u.protocol === "https:") {
+                return u.toString();
+            }
+        } catch (_) { /* noop */ }
+        return null;
+    };
+
+    // Emphasis only for already escaped Text
+    const applyEmphasis = (escaped: string) => {
+        // **bold**
+        escaped = escaped.replace(/\*\*(.+?)\*\*/gs, "<strong>$1</strong>");
+
+        // *italic*  (vermeidet **…**)
+        escaped = escaped.replace(
+            /(^|[^*])\*(?!\s)([^*]+?)\*(?!\*)/g,
+            "$1<em>$2</em>"
+        );
+
+        return escaped;
+    };
+
+    // escape complete html
+    let text = escapeHtml(md || "");
+
+    // Extract links and replace with placeholder
+    //    Supports Bold/Italic in Link-Label
+    const linkHTML: string[] = [];
+    text = text.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        (_m, label: string, href: string) => {
+            const safe = sanitizeUrl(href);
+            if (!safe) {
+                // Ungültige URL -> nur Label ausgeben (mit Emphasis möglich)
+                return applyEmphasis(escapeHtml(label));
+            }
+            const labelEscaped = escapeHtml(label);
+            const labelWithEmphasis = applyEmphasis(labelEscaped);
+
+            const html =
+                `<a href="${safe}" target="_blank" rel="nofollow noopener">` +
+                `${labelWithEmphasis}</a>`;
+
+            const token = `@@L${linkHTML.length}@@`;
+            linkHTML.push(html);
+            return token;
+        }
+    );
+
+    // Emphasis remaining Text
+    text = applyEmphasis(text);
+
+    // Reset link Placeholder
+    text = text.replace(/@@L(\d+)@@/g, (_m, i: string) => linkHTML[+i] || "");
+
+    return text;
+}

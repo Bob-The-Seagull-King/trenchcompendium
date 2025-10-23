@@ -8,6 +8,7 @@ import {useCampaign} from "../../../context/CampaignContext";
 import {toast} from "react-toastify";
 import {ToolsController} from "../../../classes/_high_level_controllers/ToolsController";
 import AlertCustom from "../../components/generics/AlertCustom";
+import CMMarkdownTip from "../micro-components/CMMarkdownTip";
 
 const CMManagePanel_CreateAnnouncement: React.FC = () => {
     const { campaign, reloadCampaignDisplay } = useCampaign();
@@ -89,29 +90,12 @@ const CMManagePanel_CreateAnnouncement: React.FC = () => {
                         className="form-control mt-2"
                         value={announcement}
                         onChange={(e) => setAnnouncement(e.target.value)}
-                        rows={5}
+                        rows={10}
                         placeholder="Enter your message here..."
                         required
                     />
 
-                    <AlertCustom
-                        type={'info'}
-                        className={'mt-3'}
-                    >
-                        <div className={'fw-bold'}>{'You can use the following markdown'}</div>
-                        <div className={'mt-2'}>
-                            <div>
-                                {'**Bold text**'} → <strong>{'Bold text'}</strong>
-                            </div>
-                            <div>
-                                {'*Italic text*'} → <em>{'Italic text'}</em>
-                            </div>
-                            <div>
-                                {'[Linktext](https://example.com)'} → <a href={"/"} rel={'nofollow noreferrer noopener'}
-                                                                        target={'_blank'}>{'Linktext'}</a>
-                            </div>
-                        </div>
-                    </AlertCustom>
+                    <CMMarkdownTip />
                 </Modal.Body>
 
                 <Modal.Footer>
