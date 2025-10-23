@@ -160,6 +160,10 @@ class CampaignManager {
         return false;
     }
 
+    /**
+     * Is this user invited to this campaign?
+     * @param id
+     */
     public IsInvited(id : number) {
         if (this.UserProfile == null) { return false; }
         for (let i = 0; i < this.ListOfInvites.length; i++) {

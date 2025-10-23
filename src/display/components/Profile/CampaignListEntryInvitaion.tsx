@@ -25,14 +25,6 @@ const CampaignListEntryInvitaion: React.FC = () => {
 
     const [busy, setBusy] = useState(false);
 
-    // let status_string = '';
-    // if( campaignStatus == 'active') {
-    //     status_string = 'Campaign active';
-    // } else {
-    //     status_string = 'Campaign closed';
-    // }
-
-
     if ( !campaign ) {
         return (
             <div className={'CampaignListEntry CampaignListEntryInvitaion'}>

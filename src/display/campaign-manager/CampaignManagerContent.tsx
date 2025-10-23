@@ -9,6 +9,7 @@ import CMManagePanel from "./components/CMManagePanel";
 import CMHistory from "./components/CMHistory";
 import {Campaign} from "../../classes/saveitems/Campaign/Campaign";
 import CMContextualPopover from "./components/CMContextualPopover";
+import CMCampaignInviteThis from "./components/CMCampaignInviteThis";
 
 
 
@@ -53,6 +54,8 @@ const CampaignManagerContent: React.FC = () => {
                 <div className={'container'}>
                     <div className={'row'}>
                         <div className={'col-12 col-md-7'}>
+                            <CMCampaignInviteThis />
+
                             <CampaignSummary />
 
                             {/*<CMHistory />*/}
