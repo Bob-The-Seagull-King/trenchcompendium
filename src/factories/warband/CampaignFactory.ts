@@ -18,6 +18,7 @@ class CampaignFactory {
     }
 
     static async CreateCampaignUser(data: ICampaignUser) {
+
         const id = (data.id ?? data.user_id)!;
         const cache = SynodDataCache.getInstance();
         if (cache.CheckCampaignUserCache(id)) {
@@ -38,13 +39,15 @@ class CampaignFactory {
     }
 
     static async CreateCampaignAnnouncement(data: ICampaignAnnouncement) {
-        if (data == null || data == undefined) {return null;}
+
+        if (data == null) {return null;}
         const cache = SynodDataCache.getInstance();
         if (cache.CheckCampaignAnnouncementCache(data.announcement_id)) {
             return cache.campaignAnnouncementCache[data.announcement_id];
         }
         const a = new CampaignAnnouncement(data);
         cache.AddCampaignAnnouncementCache(data.announcement_id, a);
+
         await a.BuildUser(data);
         return a;
     }
@@ -89,6 +92,7 @@ class CampaignFactory {
             );
             if (res.status === 400) return null;
             const json = (await res.json()) as ICampaign;
+
             cache.AddCampaignCache(id, json);
             data = json;
         }

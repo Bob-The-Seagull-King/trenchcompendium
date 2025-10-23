@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useCampaign} from "../../../context/CampaignContext";
 import CMContextualPopover from "./CMContextualPopover";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 
 const CMLatestAnnouncement: React.FC = () => {
     const { campaign } = useCampaign();
@@ -21,11 +23,10 @@ const CMLatestAnnouncement: React.FC = () => {
         );
     }
 
-    // Format the date from the Date getter
-    const dateStr = new Intl.DateTimeFormat(navigator.language, {
-        dateStyle: "medium",
-        timeStyle: "short",
-    }).format(announcement.Date);
+    const [expanded, setExpanded] = useState(false);
+
+    const CHAR_LIMIT = 200;
+    const isLong = announcement.MarkupHtml.length > CHAR_LIMIT;
 
     return (
         <div className="CMLatestAnnouncement">
@@ -44,14 +45,35 @@ const CMLatestAnnouncement: React.FC = () => {
                     {announcement.Author.Nickname}
                 </h4>
                 <div className={'CMLatestAnnouncement-date'}>
-                    {dateStr}
+                    {announcement.DateStr}
                 </div>
-                <div className={'CMLatestAnnouncement-text'}
-                     dangerouslySetInnerHTML={{ __html: announcement.MarkupHtml }}
-                >
+                <div className={'CMLatestAnnouncement-text-wrap'}>
+                    <p
+                        className={`CMLatestAnnouncement-text ${isLong ? 'is-long' : ''} ${expanded ? 'is-expanded' : ''}`}
+                        dangerouslySetInnerHTML={{__html: announcement.MarkupHtml}}
+                    >
+                    </p>
+
+                    {!expanded && isLong && (
+                        <span
+                            className="show-more small"
+                            onClick={() => setExpanded(true)}
+                        >
+                            {'Show more'}
+                            <FontAwesomeIcon icon={faChevronDown} className={'ms-2'}/>
+                        </span>
+                    )}
+                    {expanded && isLong && (
+                        <span
+                            className="show-less small"
+                            onClick={() => setExpanded(false)}
+                        >
+                            {'Show less'}
+                            <FontAwesomeIcon icon={faChevronUp} className={'ms-2'}/>
+                        </span>
+                    )}
                 </div>
             </div>
-
         </div>
     );
 };

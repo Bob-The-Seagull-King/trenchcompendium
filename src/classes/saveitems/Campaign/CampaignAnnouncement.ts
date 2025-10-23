@@ -26,6 +26,7 @@ export class CampaignAnnouncement {
     }
 
     public async BuildUser(data : ICampaignAnnouncement) {
+
         const NewPlayer = await CampaignFactory.CreateCampaignUser(data.announcement_author);
         this._author = (NewPlayer);
     }

@@ -10,7 +10,7 @@ export interface ICampaign {
     campaign_admin_id: string;
     campaign_name: string;
     campaign_description: string;
-    campaign_latest_announcement?: ICampaignAnnouncement[];
+    campaign_latest_announcement?: ICampaignAnnouncement;
     campaign_warbands: ICampaignWarband[];
     campaign_warbands_invited: string[];
     campaign_players: ICampaignUser[];
@@ -36,8 +36,6 @@ export class Campaign {
     private _latestAnnouncement: CampaignAnnouncement | null = null;
 
     constructor(data : ICampaign) {
-
-        console.log(data);
 
         this._id = data.campaign_id ?? null;
         this._adminId = data.campaign_admin_id ?? null;
@@ -82,25 +80,32 @@ export class Campaign {
 
     public async BuildAnnouncements(data : ICampaign) {
         for (let i = 0; i < data.campaign_announcements.length; i++) {
-            const NewPlayer = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i]);
-            if (NewPlayer != null) {
-                this._announcements.push(NewPlayer);
+            const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i]);
+            if (NewAnnouncement != null) {
+                this._announcements.push(NewAnnouncement);
             }
         }
 
-        if (data.campaign_latest_announcement != null) {
-            if (data.campaign_latest_announcement.length > 0) {
-                const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_latest_announcement[0]);
-                            
-                if (NewAnnouncement != null) {
-                    if(NewAnnouncement.Id == undefined) {
-                        this._latestAnnouncement = null;
-                    } else {
-                        this._latestAnnouncement = (NewAnnouncement);
-                    }
-                }
-            }
-            
+
+        //@Lane, please check. This is my attempt at fixing the latest announcement error
+        // -> Somehow latest announcement sometimes is sometimes an empty array which is truthy and causing the crash
+        const latestRaw: any = (data as any).campaign_latest_announcement;
+
+        let latestObj: any = null;
+        if (Array.isArray(latestRaw)) {
+            console.warn('campaign_latest_announcement unexpectedly is array, taking first element', latestRaw);
+            latestObj = latestRaw[0] ?? null;
+        } else if (latestRaw && typeof latestRaw === 'object') {
+            latestObj = latestRaw;
+        } else if (latestRaw != null) {
+            console.warn('campaign_latest_announcement malformed:', latestRaw);
+        }
+
+        if (latestObj) {
+            const latest = await CampaignFactory.CreateCampaignAnnouncement(latestObj);
+            this._latestAnnouncement = latest ?? null;
+        } else {
+            this._latestAnnouncement = null;
         }
     }
 

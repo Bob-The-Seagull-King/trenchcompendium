@@ -23,7 +23,40 @@
     .CMLatestAnnouncement-text
         font-size: 14px
         white-space: pre-line
-        margin: 0
+        line-height: 1.4em
+        position: relative
+
+        margin-bottom: 10px
+
+        &.is-long
+            max-height: 8.4em
+            overflow: hidden
+
+            &:not(.is-expanded)
+                &:after
+                    content: ""
+                    position: absolute
+                    z-index: 2
+                    bottom: 0
+                    left: 0
+                    width: 100%
+                    display: block
+                    height: 1.6em
+                    background: linear-gradient(0deg, $color-bg-3 0%, transparent 100%)
+
+        &.is-expanded
+            max-height: none
+            overflow: auto
+
+    .show-more,
+    .show-less
+        display: inline-block
+        opacity: 0.8
+        cursor: pointer
+
+        &:hover
+            opacity: 1
+
     .CMLatestAnnouncement-content
         padding: 15px
         background-color: $color-bg-3

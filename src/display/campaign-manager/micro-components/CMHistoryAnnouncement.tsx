@@ -5,7 +5,7 @@ import WbbContextualPopover from "../../components/warband-builder/WbbContextual
 import CMContextualPopover from "../components/CMContextualPopover";
 import {CampaignAnnouncement} from "../../../classes/saveitems/Campaign/CampaignAnnouncement";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
+import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 
 type CMHistoryAnnouncementProps = {
     announcement: CampaignAnnouncement;
@@ -19,7 +19,7 @@ const CMHistoryAnnouncement: React.FC<CMHistoryAnnouncementProps> = ({ announcem
     const [expanded, setExpanded] = useState(false);
 
     const CHAR_LIMIT = 200;
-    const isLong = announcement.MarkupHtml.length > CHAR_LIMIT; // change this
+    const isLong = announcement.MarkupHtml.length > CHAR_LIMIT;
 
     return (
         <div className="CMHistoryAnnouncement">
@@ -52,6 +52,15 @@ const CMHistoryAnnouncement: React.FC<CMHistoryAnnouncementProps> = ({ announcem
                     {'Show more'}
                         <FontAwesomeIcon icon={faChevronDown} className={'ms-2'}/>
                     </span>
+                )}
+                {expanded && isLong && (
+                    <span
+                        className="show-less small"
+                        onClick={() => setExpanded(false)}
+                    >
+                            {'Show less'}
+                        <FontAwesomeIcon icon={faChevronUp} className={'ms-2'}/>
+                        </span>
                 )}
             </div>
         </div>
