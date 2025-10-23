@@ -463,6 +463,24 @@ class CampaignManager {
         }
     }
 
+    public async DeleteCampaign ( _campaign_id : number ) {
+        /**
+         * @TODO delete Campaign here:
+         * POST /wp-json/synod/v1/campaigns/delete
+         *
+         * Args: {
+         * "campaign_id": <id>
+         * }
+         *
+         * Response: {
+         * "status": "success",
+         * "message": "Campaign deleted"
+         * }
+         *
+         */
+        alert ();
+    }
+
 }
 
 export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics}

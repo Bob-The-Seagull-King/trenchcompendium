@@ -8,6 +8,7 @@ import CampaignPlayers from "./components/CampaignPlayers";
 import CMManagePanel from "./components/CMManagePanel";
 import CMHistory from "./components/CMHistory";
 import {Campaign} from "../../classes/saveitems/Campaign/Campaign";
+import CMContextualPopover from "./components/CMContextualPopover";
 
 
 
@@ -39,6 +40,12 @@ const CampaignManagerContent: React.FC = () => {
                     <h1>
                         {campaign.GetName()}
                     </h1>
+
+                    <CMContextualPopover
+                        id={`campaign`}
+                        type="campaign"
+                        item={campaign} // this is a placeholder
+                    />
                 </div>
             </div>
 

@@ -25,11 +25,14 @@ import {CampaignAnnouncement} from "../../../classes/saveitems/Campaign/Campaign
 import CampaignPlayers from "./CampaignPlayers";
 import AlertCustom from "../../components/generics/AlertCustom";
 import {ICampaignUserInvite} from "../../../classes/saveitems/Campaign/CampaignManager";
+import {Campaign} from "../../../classes/saveitems/Campaign/Campaign";
+import {useNavigate} from "react-router-dom";
+import {ROUTES} from "../../../resources/routes-constants";
 
 
 interface CMContextualPopoverProps {
     id: string;
-    type: 'announcement' | 'player' | 'warband' | 'warband-invite' | 'player-invite';
+    type: 'announcement' | 'player' | 'warband' | 'warband-invite' | 'player-invite' | 'campaign';
     item: any;
 }
 
@@ -42,6 +45,7 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
     if( !campaign) {
         return null;
     }
+    const navigate = useNavigate();
 
     const [busy, setBusy] = useState(false);
 
@@ -59,6 +63,61 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         e.stopPropagation();
         fn();
     };
+
+
+    /**
+     * Campaign Actions
+     */
+    const [showEditCampaignNameModal, setShowEditCampaignNameModal] = useState(false);
+    const [campaignTitle, setCampaignTitle] = useState(campaign.GetName() );
+
+    const handleEditCampaignName = () => {
+        if (campaign != null && type == "campaign") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.UpdateCampaign(
+                    campaign.GetId(), // campaign ID
+                    campaignTitle, // new title
+                    campaign.GetDescription(), // keep the description
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setShowEditCampaignNameModal(false);   // close Modal
+                    toast.success('Campaign name changed')
+                })
+            })
+        }
+    }
+
+    const [showDeleteCampaignModal, setShowDeleteCampaignModal] = useState(false);
+    const [deleteConfirmInput, setDeleteConfirmInput] = useState('');
+
+    const handleDeleteCampaign = () => {
+        if (campaign != null && type == "campaign") {
+            setBusy(true);
+            setActivePopoverId(null); // Close popover
+
+            const Tools = ToolsController.getInstance();
+            Tools.UserCampaignManager.RunInit().then(() => {
+                Tools.UserCampaignManager.DeleteCampaign(
+                    campaign.GetId(), // campaign ID
+                ).then(() => {
+                    reloadCampaignDisplay();
+                    setBusy(false);
+                    setShowDeleteCampaignModal(false);   // close Modal
+                    navigate( ROUTES.CAMPAIGN, {state: Date.now().toString()})
+
+                    // @TODO: redirect to campaigns overview page
+                    toast.success('Campaign name changed')
+                })
+            })
+
+            alert ('delete this campaign');
+        }
+    }
 
 
     /**
@@ -245,6 +304,8 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
             || showRemovePlayerModal
             || showRemoveWarbandModal
             || showChangeAdminModal
+            || showEditCampaignNameModal
+            || showDeleteCampaignModal
         ) {
             setActivePopoverId(null);
         }
@@ -254,6 +315,8 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
         showRemovePlayerModal,
         showRemoveWarbandModal,
         showChangeAdminModal,
+        showEditCampaignNameModal,
+        showDeleteCampaignModal,
     ]);
 
     // Only admins can edit any option
@@ -282,6 +345,23 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 overlay={
                     <Popover.Body className="popover CM-item-actions-popover">
                         <div className="actions">
+
+                            {/** Campaign Actions */}
+                            {(type === 'campaign') &&
+                                <>
+                                    <div className="action"
+                                         onClick={withStopPropagation(() => setShowEditCampaignNameModal(true))}>
+                                        <FontAwesomeIcon icon={faEdit} className="icon-inline-left-l"/>
+                                        {'Rename Campaign'}
+                                    </div>
+
+                                    <div className="action"
+                                         onClick={withStopPropagation(() => setShowDeleteCampaignModal(true))}>
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Campaign'}
+                                    </div>
+                                </>
+                            }
 
                             {/** Announcement Actions */}
                             {(type === 'announcement') &&
@@ -371,6 +451,132 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 )}
             </OverlayTrigger>
 
+            {/** Edit Campaign Name Modal */}
+            <Modal show={showEditCampaignNameModal} onHide={() => setShowEditCampaignNameModal(false)}
+                   className={'CMManagePanel_EditCampaignName_Modal'}
+                   centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{`Edit Campaign Name`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setShowEditCampaignNameModal(false);
+                            }}
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    <label className="form-label">
+                        {'Campaign Name'}
+                    </label>
+
+                    <input
+                        className="form-control form-control-sm mb-3"
+                        type="text"
+                        value={campaignTitle}
+                        onChange={(e) => setCampaignTitle(e.target.value)}
+                        placeholder="Campaign Name"
+                        required
+                    />
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setShowEditCampaignNameModal(false);
+                        }
+                    }>
+                        Cancel
+                    </Button>
+
+                    {busy ? (
+                        <Button variant="primary" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'} />
+                            Saving
+                        </Button>
+                    ):(
+                        <Button variant="primary" onClick={withStopPropagation(handleEditCampaignName)}>
+                            <FontAwesomeIcon icon={faFloppyDisk} className={'icon-inline-left'} />
+                            Save
+                        </Button>
+                    )}
+                </Modal.Footer>
+            </Modal>
+
+            {/** Delete Campaign Confirmation Modal */}
+            <Modal show={showDeleteCampaignModal} onHide={() => setShowDeleteCampaignModal(false)} centered>
+                <Modal.Header closeButton={false}>
+                    <Modal.Title>{`Delete Campaign`}</Modal.Title>
+
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        className="modal-close-icon"
+                        role="button"
+                        onClick={
+                            (e) => {
+                                e.stopPropagation();
+                                setShowDeleteCampaignModal(false);
+                            }}
+                    />
+                </Modal.Header>
+
+                <Modal.Body>
+                    <AlertCustom
+                        type={'danger'}
+                    >
+                        {'Do you really want to delete this campaign? This action can not be undone.'}
+                    </AlertCustom>
+
+                    <div className={'mt-3'}>
+                        <label className="form-label small" htmlFor={'delete-warband-confirm'}>
+                            {"Type 'Confirm' to delete your warband."}
+                        </label>
+                        <input
+                            type="text" id={'delete-warband-confirm'}
+                            className="form-control"
+                            placeholder={'Confirm'}
+                            value={deleteConfirmInput}
+                            onChange={(e) => setDeleteConfirmInput(e.target.value)}
+                        />
+
+                    </div>
+
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={
+                        (e) => {
+                            e.stopPropagation();
+                            setShowDeleteCampaignModal(false);
+                        }
+                    }>
+                        Cancel
+                    </Button>
+
+                    {busy ? (
+                        <Button variant="danger" disabled={true}>
+                            <FontAwesomeIcon icon={faCircleNotch} className={'fa-spin icon-inline-left'} />
+                            Deleting
+                        </Button>
+                    ):(
+                        <Button
+                            variant="danger"
+                            onClick={withStopPropagation(handleDeleteCampaign)}
+                            disabled={deleteConfirmInput !== 'Confirm'}
+                        >
+                            <FontAwesomeIcon icon={faTrash} className={'icon-inline-left'} />
+                            Delete Campaign
+                        </Button>
+                    )}
+                </Modal.Footer>
+            </Modal>
+
 
             {/** Edit Announcement  Modal */}
             <Modal show={showEditAnnouncementModal} onHide={() => setshowEditAnnouncementModal(false)}
@@ -392,7 +598,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                 </Modal.Header>
 
                 <Modal.Body>
-                    {/* @TODO: hook up input data here*/}
                     <label className="form-label">
                         {'Announcement title'}
                     </label>
@@ -411,7 +616,6 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     >
                         {'Announcement text'}
                     </label>
-                    {/* @TODO: hook up textarea data here*/}
                     <textarea
                         id="announcement-textarea"
                         className="form-control mt-2"
