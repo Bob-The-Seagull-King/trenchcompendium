@@ -59,14 +59,11 @@ const CampaignSetup: React.FC = () => {
                 throw new Error(msg);
             }
 
-            console.log("Campaign created:", data);
-
-            // Laut deiner Beispielstruktur:
             const newCampaignId =
                 data?.campaign_id ?? data?.id ?? data?.post_id;
 
             if (newCampaignId) {
-                navigate(`/campaigns/${newCampaignId}`);
+                navigate(`${ROUTES.CAMPAIGN}${newCampaignId}`);
             } else {
                 alert("Campaign created but unable to find it. Please reload the page");
             }
