@@ -23,13 +23,6 @@
         <meta name="referrer" content="strict-origin-when-cross-origin" />
 
 
-        <!-- 2) (Optional) Temp CSS-Bumper for potential globale iframe-hiding -->
-<!--        <style>-->
-<!--            iframe[src*="fundingchoicesmessages.google.com"]{-->
-<!--                display:block!important;visibility:visible!important;opacity:1!important;-->
-<!--            }-->
-<!--        </style>-->
-
         <!-- Data Layer + Consent-Defaults + TCF -->
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -102,31 +95,8 @@
             })();
         </script>
 
-        <!-- Optional: googlefcPresent Iframe -->
-<!--        <script>-->
-<!--            (function signalGooglefcPresent() {-->
-<!--                if (!window.frames['googlefcPresent']) {-->
-<!--                    if (document.body) {-->
-<!--                        var iframe = document.createElement('iframe');-->
-<!--                        iframe.style = 'width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;display:none;';-->
-<!--                        iframe.name  = 'googlefcPresent';-->
-<!--                        document.body.appendChild(iframe);-->
-<!--                    } else {-->
-<!--                        setTimeout(signalGooglefcPresent, 0);-->
-<!--                    }-->
-<!--                }-->
-<!--            })();-->
-<!--        </script>-->
-
         <!-- Funding Choices (Google CMP) -->
         <script async src="https://fundingchoicesmessages.google.com/i/pub-3744837400491966?ers=1"></script>
-
-        <!-- AdSense Auto-Ads injected by adsmanager -->
-<!--        <script async-->
-<!--                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3744837400491966"-->
-<!--                crossorigin="anonymous"-->
-<!--                onload="window.adsenseScriptLoaded=true; window.dispatchEvent(new Event('adsense:loaded'))">-->
-<!--        </script>-->
 
     </head>
 
