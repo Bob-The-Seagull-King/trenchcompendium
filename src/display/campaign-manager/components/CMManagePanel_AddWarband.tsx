@@ -89,10 +89,10 @@ const CMManagePanel_AddWarband: React.FC = () => {
         return () => {
             cancelled = true;
         };
-    }, [playersKey]); // neu ausführen, wenn sich die Spielerliste ändert
+    }, [playersKey]); // refresh if player list changes
 
     // UI
-    const [loadingActions, setLoadingActions] = useState(false);
+    const [loadingActions, setLoadingActions] = useState(false); // is submitting the form
     const [show, setShow] = useState<boolean>(false);
     const [expandedPlayers, setExpandedPlayers] = useState<number[]>([]);
     const [selectedWarbandIds, setSelectedWarbandIds] = useState<number[]>([]);
@@ -109,6 +109,11 @@ const CMManagePanel_AddWarband: React.FC = () => {
         if (campaign.IsInvitedWarband(warbandId) || campaign.IsJoinedWarband(warbandId)) {
             return; // not selectable
         }
+
+        if( loadingActions) { // disable actions when already loading
+            return;
+        }
+
 
         setSelectedWarbandIds((prev) =>
             prev.includes(warbandId)
