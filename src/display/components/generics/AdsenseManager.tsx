@@ -10,7 +10,7 @@ const isLiveHost =
 const ADSENSE_CLIENT = 'ca-pub-3744837400491966';
 const ADSENSE_SCRIPT_ID = 'adsense-auto-ads-script';
 
-// Interaction-Buffer: 5 Minuten
+// Interaction-Buffer: 5 Minutes
 const INTERACTION_GAP_MS = 5 * 60 * 1000;
 
 
@@ -34,38 +34,65 @@ function injectAutoAdsScript() {
 }
 
 function removeAutoAdsScriptAndHide() {
+    // Remove ALL adsense scripts
+    document
+        .querySelectorAll('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')
+        .forEach((s) => s.parentNode?.removeChild(s));
+
+    // if own script was loaded - remove if possible
     const el = document.getElementById(ADSENSE_SCRIPT_ID);
     if (el && el.parentNode) el.parentNode.removeChild(el);
 
-    // Laufende Anfragen pausieren & sichtbare Einblendungen verbergen
+    // Cancel running requests
     try {
         (window as any).adsbygoogle = (window as any).adsbygoogle || [];
         (window as any).adsbygoogle.pauseAdRequests = 1;
     } catch {
-        console.log('error removeAutoAdsScriptAndHide');
+        // Do nothing
     }
-    document
-        .querySelectorAll(
-            'ins.adsbygoogle, div[id^="google_ads_iframe_"], div[data-anchor-status]'
-        )
-        .forEach((node) => {
-            (node as HTMLElement).style.display = 'none';
-        });
+
+    // Remove ALL known auto ads implementations
+    const selectors = [
+        'ins.adsbygoogle',
+        'div[id^="google_ads_iframe_"]',
+        'iframe[id^="google_ads_iframe_"]',
+        'div[data-anchor-status]',
+        '#google_vignette',
+        '.google-auto-placed', // in-page Auto Ads
+    ];
+    document.querySelectorAll(selectors.join(',')).forEach((node) => {
+        node.parentNode?.removeChild(node);
+    });
+
+    // Reset states
+    try {
+        (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+        (window as any).adsbygoogle.loaded = false;
+    } catch {
+        // Do nothing
+    }
 }
 
 export const AdsenseManager: React.FC = () => {
-    const {SiteUser} = useAuth();
+    const {SiteUser, loadingUser } = useAuth();
     const location = useLocation();
 
     const initializedRef = useRef(false);
     const lastInteractionPushRef = useRef(0);
 
     const isPremium = !!SiteUser?.Premium?.IsPremium;
-    const canLoadAds = isLiveHost && !isPremium;
+    const canLoadAds = isLiveHost && !loadingUser && !isPremium;
 
-    // Script je nach Premium-Status injizieren/entfernen
+    // Inject script based on premium state
     useEffect(() => {
         if (canLoadAds) {
+            try {
+                (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+                (window as any).adsbygoogle.pauseAdRequests = 0;     // unpause ad requests
+                delete (window as any).adsbygoogle.loaded;           // optional safer reset
+            } catch {
+                // do nothing
+            }
             injectAutoAdsScript();
         } else {
             removeAutoAdsScriptAndHide();
@@ -74,7 +101,23 @@ export const AdsenseManager: React.FC = () => {
         }
     }, [canLoadAds]);
 
-    // Erstes Enable (nachdem Script da ist)
+    // event listener to when adsense has actually loaded
+    useEffect(() => {
+        if (!canLoadAds) return;
+
+        function onAdsenseLoaded() {
+            if (!hasAdsApi() || initializedRef.current) return;
+            try {
+                (window as any).adsbygoogle.push({});
+                initializedRef.current = true;
+            } catch {/* noop */}
+        }
+
+        window.addEventListener('adsense:loaded', onAdsenseLoaded);
+        return () => window.removeEventListener('adsense:loaded', onAdsenseLoaded);
+    }, [canLoadAds]);
+
+    // First enable (after script is available)
     useEffect(() => {
         if (!canLoadAds) return;
         if (initializedRef.current) return;
@@ -87,7 +130,7 @@ export const AdsenseManager: React.FC = () => {
         }
     }, [canLoadAds]);
 
-    // SPA: bei jeder Navigation AdSense "anstupsen"
+    // SPA: nudge Adsense on navigation ()
     useEffect(() => {
         if (!canLoadAds) return;
         if (!hasAdsApi()) return;
@@ -98,7 +141,7 @@ export const AdsenseManager: React.FC = () => {
         }
     }, [canLoadAds, location.pathname, location.search]);
 
-    // Interaktions-Nudge mit 5-Minuten-Puffer
+    // Interaction nudge with 5 minute buffer
     useEffect(() => {
         if (!canLoadAds) return;
 
@@ -110,7 +153,7 @@ export const AdsenseManager: React.FC = () => {
                 (window as any).adsbygoogle.push({});
                 lastInteractionPushRef.current = now;
             } catch {
-                // still ok, wir ignorieren einzelne Fehler
+                // still ok, we ignore single errors
             }
         };
 

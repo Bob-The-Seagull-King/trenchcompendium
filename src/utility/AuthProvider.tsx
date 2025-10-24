@@ -8,13 +8,15 @@ import { SYNOD } from '../resources/api-constants';
 // Create the provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [authToken, setAuthToken] = useState<string | null>(null);
-    const [userId, setUserId] = useState<number | null>(null);
+    const [userId, setUserId] = useState<number | null | undefined>(undefined);
 
     const [SiteUser, setSiteUser] = useState<SiteUser | null>(null);
-    const [loadingUser, setLoadingUser] = useState(true);
+    const [loadingUser, setLoadingUser] = useState(true); // is this currently trying to load a user
     const [isLoggedIn, setIsLoggedIn] = useState((!!authToken && !!userId));
 
-    // Load saved credentials from localStorage
+    /**
+     * Load saved credentials from localStorage
+     */
     useEffect(() => {
         const storedToken = localStorage.getItem('jwtToken');
         const storedUserId = localStorage.getItem('synodUserId');
@@ -30,15 +32,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             } else {
                 localStorage.removeItem('jwtToken');
                 localStorage.removeItem('synodUserId');
-                localStorage.removeItem('lastrecordedlogindate');   
+                localStorage.removeItem('lastrecordedlogindate');
+                setUserId(null);
             }
         } else {
             localStorage.removeItem('jwtToken');
             localStorage.removeItem('synodUserId');
-            localStorage.removeItem('lastrecordedlogindate');   
+            localStorage.removeItem('lastrecordedlogindate');
+            setUserId(null);
+
         }
     }, []);
 
+    /**
+     * Refresh the users login creds
+     * @constructor
+     */
     async function UpdateTokenValue() {
         const token = localStorage.getItem('jwtToken')
         const response = await fetch(`${SYNOD.URL}/wp-json/synod-auth/v1/refresh`, {
@@ -54,6 +63,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setAuthToken(json.token);
     }
 
+    /**
+     * Set user credentials on login
+     * @param token
+     * @param id
+     */
     const login = (token: string, id: number) => {
         localStorage.setItem('jwtToken', token);
         localStorage.setItem('synodUserId', id.toString());
@@ -65,8 +79,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setAuthToken(token);
         setUserId(id);
         setIsLoggedIn((!!authToken && !!userId));
+
+        setLoadingUser(false); // after a login -> No more loading required
     };
 
+    /**
+     * Set user credentials on logout
+     * @param token
+     * @param id
+     */
     const logout = () => {
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('synodUserId');
@@ -77,6 +98,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setAuthToken(null);
         setUserId(null);
         setIsLoggedIn((!!authToken && !!userId));
+
+        setLoadingUser(false);  // after a logout -> No more loading required
     };
 
 
@@ -89,11 +112,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
      */
     useEffect(() => {
         const fetchUserData = async () => {
-            if (!userId) {
+
+            // when user ID tried to load and its not available
+            // -> User is definitely NOT logged in
+            if (userId == null) {
                 setSiteUser(null);
-                setLoadingUser(false);
+
+                setLoadingUser(false); // no more loading required
                 return;
             }
+
+            setLoadingUser(true); // will load the user next
 
             try {
                 const user = await UserFactory.CreatePrivateUserByID(userId);
@@ -102,7 +131,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 console.error('Error loading user data:', err);
                 setSiteUser(null);
             } finally {
-                setLoadingUser(false);
+                setLoadingUser(false); // user loading has finished
             }
         };
 

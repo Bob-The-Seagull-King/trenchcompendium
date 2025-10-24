@@ -4,7 +4,7 @@ import {SiteUser} from "../classes/user_synod/site_user";
 // Define the shape of your global state
 interface AuthContextType {
     authToken: string | null;
-    userId: number | null;
+    userId: number | null | undefined;
     isLoggedIn: boolean;
     reloadIsLoggedIn: () => void;
     login: (token: string, id: number) => void;
