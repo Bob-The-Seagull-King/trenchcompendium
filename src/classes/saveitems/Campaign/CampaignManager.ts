@@ -3,7 +3,6 @@ import {
     AnnouncementCreate,
     AnnouncementDelete,
     AnnouncementEdit,
-    DeleteACampaign,
     GetPlayerCampaignInvites,
     GetPlayerCampaigns,
     InviteAccept,
@@ -27,10 +26,6 @@ interface ICampaignBasics {
     id? : number,
     title : string,
     description: string
-}
-
-interface IDeleteCampaign {
-    campaign_id: number
 }
 
 interface ICampaignUserInvite {
@@ -114,15 +109,6 @@ class CampaignManager {
                     }
                 }
             }
-            const warbandinvites = await this.UserProfile?.GetAllWarbandInvites()
-            if (warbandinvites != null) {
-                for (let i = 0; i < warbandinvites.length; i++) {
-                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(warbandinvites[i]);
-                    if (CampaignVal != null) {
-                        this.ListOfWarbandInvites.push(CampaignVal)
-                    }
-                }
-            }
         }
         this.SortMyCampaigns();
         this.Complete = true;
@@ -195,29 +181,23 @@ class CampaignManager {
 
     /**
      * Is this warband invited to the campaign?
-     * @param id
-     * @param _wb
+     * @param campaignId
+     * @param warbandId
      * @constructor
      */
-    public IsInvitedWarband(id : number, _wb : number) {
+    public IsInvitedWarband(campaignId : number, warbandId : number) {
+
+        // @TODO: this.ListOfWarbandInvites is empty
+        console.log(this.ListOfWarbandInvites);
+
         if (this.UserProfile == null) { return false; }
         for (let i = 0; i < this.ListOfWarbandInvites.length; i++) {
-            if (this.ListOfWarbandInvites[i].GetId() != id) { continue; }
-            if (this.ListOfWarbandInvites[i].IsInvitedWarband(_wb)) {
+            if (this.ListOfWarbandInvites[i].GetId() != campaignId) { continue; }
+            if (this.ListOfWarbandInvites[i].IsInvitedWarband(warbandId)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public RemoveCampaignByID(_val : number) {
-        for (let i = 0; i < this.ListOfCampaigns.length; i++) {
-            if (this.ListOfCampaigns[i].GetId() == _val) {
-                this.ListOfCampaigns.splice(i, 1);
-                break;
-            }
-        }
-        this.SortMyCampaigns();
     }
 
     public async ResetCampaignByID(_val : number) {
@@ -493,17 +473,23 @@ class CampaignManager {
     }
 
     public async DeleteCampaign ( _campaign_id : number ) {
-        if (this.OwnsCampaign(_campaign_id)) {
-            const Submit = this.GetUserSubmitBasics(false);
-            if (Submit == null) { return 400; }
-            const responseVal = await DeleteACampaign({campaign_id: _campaign_id }, Submit)
-                if (responseVal.status == 200) {
-                    this.RemoveCampaignByID(_campaign_id);
-                }
-                return responseVal;
-        }
+        /**
+         * @TODO delete Campaign here:
+         * POST /wp-json/synod/v1/campaigns/delete
+         *
+         * Args: {
+         * "campaign_id": <id>
+         * }
+         *
+         * Response: {
+         * "status": "success",
+         * "message": "Campaign deleted"
+         * }
+         *
+         */
+        alert ();
     }
 
 }
 
-export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics, IDeleteCampaign}
+export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics}
