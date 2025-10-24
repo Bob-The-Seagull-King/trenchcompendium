@@ -152,6 +152,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ friend_obj,
                         onToggle={() => setShowPopover(!showPopover)}
                         rootClose={true} // closes when clicking outside
                         overlay={
+                        <Popover>
                             <Popover.Body className="popover UserListEntry-options-popover">
                                 <div className={'actions'}>
                                     <div
@@ -163,6 +164,7 @@ const UserListEntry: React.FC<UserListEntryProps> = ({ friend_obj,
                                     </div>
                                 </div>
                             </Popover.Body>
+                        </Popover>
                         }>
                         <div className={'UserListEntry-actions'}
                              onClick={(e) => e.stopPropagation()}>
