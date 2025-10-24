@@ -15,8 +15,6 @@ interface LoadingOverlayProps {
 
 const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ message = 'Loading', override = false, variant = '' }) => {
 
-    console.log(variant);
-
     return (
         <div className={`LoadingOverlay ${variant}`}>
             <div className="LoadingOverlay-inner">

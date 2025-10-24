@@ -9,6 +9,8 @@ import SynodImage from "../../../utility/SynodImage";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 import CustomNavLink from '../subcomponents/interactables/CustomNavLink';
 import LoadingOverlay from '../generics/Loading-Overlay';
+import UserNotification from "../Profile/micro-components/UserNotification";
+import {useAuth} from "../../../utility/AuthContext";
 
 /**
  * This is a list item of a warband for the WBB overview page.
@@ -29,6 +31,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
     const [showPopover, setShowPopover] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const { userId, isLoggedIn } = useAuth()
 
     /**
      *
@@ -97,9 +100,28 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                             </div>
 
                             <div className={'item-campaign'}>
-                                {item.warband_data.GetCampaignName()}
+                                <div className={'d-inline-block position-relative'}>
+                                    {/* Only show info on pending invites when owner views a wb that has not already joined a campaign*/}
+                                    {(item.warband_data.GetCampaignInvites().length > 0 &&
+                                    !item.warband_data.GetCampaignId() &&
+                                    userId && item.warband_data.IsOwner(userId)) ? (
+                                        <>
+                                            {'Campaign Invite pending'}
+                                            <UserNotification
+                                                content={'!'}
+                                                size={'small'}
+                                            />
+                                        </>
+                                    ):(
+                                        // Otherwise show campaign Name
+                                        <>
+                                            {item.warband_data.GetCampaignName()}
+                                        </>
+                                    )}
+                                </div>
+
                                 <br />
-                                {'Campaign Cycle: ' + item.warband_data.GetCampaignCycleView()}
+                                {'Campaign Round: ' + item.warband_data.GetCampaignCycleView()}
                             </div>
                             </>
                     </div>

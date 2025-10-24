@@ -188,6 +188,7 @@ class CampaignManager {
     public IsInvitedWarband(campaignId : number, warbandId : number) {
 
         // @TODO: this.ListOfWarbandInvites is empty
+        console.log('this.ListOfWarbandInvites');
         console.log(this.ListOfWarbandInvites);
 
         if (this.UserProfile == null) { return false; }

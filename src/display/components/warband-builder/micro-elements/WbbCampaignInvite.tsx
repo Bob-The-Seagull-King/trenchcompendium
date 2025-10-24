@@ -17,24 +17,36 @@ const WbbCampaignInvite: React.FC = () => {
 
     const { userId, isLoggedIn } = useAuth()
     const [busy, setBusy] = useState(false);
-    const { campaign, reload, reloadCampaignDisplay } = useCampaign();
+    const { campaign, reload, loading, reloadCampaignDisplay } = useCampaign();
     const { warband, reloadDisplay, updateKey } = useWarband();
 
     // not all components can be loaded
-    if( !userId || !campaign || !warband) {
+    if( !userId || (!campaign && !loading) || !warband) {
         return null;
     }
 
-    // Double checking if warband is invited
-    if(!campaign.IsInvitedWarband(warband.warband_data.GetPostId())) {
+    // Double-checking if warband is invited
+    if( !loading && !campaign?.IsInvitedWarband(warband.warband_data.GetPostId()) ||
+        (userId && !warband.warband_data.IsOwner(userId))
+    ) {
         return null;
+    }
+
+    if( loading && userId && warband.warband_data.IsOwner(userId)) {
+        return (
+            <div className={`WbbCampaignInvite`}>
+                <LoadingOverlay
+                    message={'Loading Campaign Invites'}
+                    variant={'small-icon'}
+                />
+            </div>
+        );
     }
 
     const handleAcceptCampaignInvite = () => {
         if (campaign != null) {
             setBusy(true);
 
-            console.log('accepting wb invite');
             const Tools = ToolsController.getInstance();
             Tools.UserCampaignManager.RunInit().then(() => {
                 Tools.UserCampaignManager.CampaignWarbandAccept(

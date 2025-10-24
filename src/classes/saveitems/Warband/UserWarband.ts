@@ -1227,6 +1227,28 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
+     * is the user with Id the owner of this warband?
+     * @param userId
+     */
+    public IsOwner (userId : number) : boolean {
+        return true;
+    }
+
+    /**
+     * Returns a connected campaign ID
+     * - or false if no campaign
+     * @constructor
+     */
+    public GetCampaignId () : number | false {
+        // @TODO: return a connected campaign ID - @Lane, this is also in the warband data now as an array of IDs
+        // - usually it's just one element, and we always just use the first one.
+
+        // return 53353;
+
+        return false;
+    }
+
+    /**
      * - can use Campaign Info
      * - uses VP for the currently active cylce
      */
