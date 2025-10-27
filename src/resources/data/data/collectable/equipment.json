@@ -7042,7 +7042,7 @@
         "lore": [     ],
         "options": [],
         "keywords": [],
-        "modifiers": []
+        "modifiers": ["+1D to Hit"]
     },
     {
         "id": "eq_butcherbayonet",
