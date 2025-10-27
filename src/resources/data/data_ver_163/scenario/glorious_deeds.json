@@ -1,0 +1,775 @@
+[
+    {
+        "id": "gd_sniper",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Sniper",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy ELITE in Cover with a shooting attack at Long Range.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"},{"val": "Cover", "id": "gl_cover"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_lordofwar",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Lord of War",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take two or more enemy models Out of Action in a single turn with melee attacks with one of your own models."
+            }
+        ]
+    },
+    {
+        "id": "gd_castthemdown",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Cast Them Down",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Make an enemy fall from a height of 3” or more thanks to your action (shooting, melee, Supernatural Power etc.)."
+            }
+        ]
+    },
+    {
+        "id": "gd_bloodletting",
+        "source": "core",
+        "tags": { "random_gen_group": 3 },
+        "contextdata": { },
+        "name": "Bloodletting",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Make one of your enemies suffer a sixth BLOOD MARKER with an attack from one of your models.",
+            "glossary": [{"val": "BLOOD MARKER", "id": "kw_bloodmarker"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_holdyourground",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Hold Your Ground",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Pass a Morale Test."
+            }
+        ]
+    },
+    {
+        "id": "gd_suicidalbravery",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Suicidal Bravery",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Charge two enemy models with one of yours during a single Activation."
+            }
+        ]
+    },
+    {
+        "id": "gd_resistandbite",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Resist and Bite",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy with a model that is Down."
+            }
+        ]
+    },
+    {
+        "id": "gd_reaper",
+        "source": "core",
+        "tags": { "random_gen_group": 3 },
+        "contextdata": { },
+        "name": "Reaper",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take at least three enemies Out of Action with one of your models during the battle with any ACTION the model has.",
+            "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_sharpshooter",
+        "source": "core",
+        "tags": { "random_gen_group": 3 },
+        "contextdata": { },
+        "name": "Sharpshooter",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy in Cover while shooting from Long Range. Auto-hit weapons, grenades and weapons with a blast radius do not count.",
+            "glossary": [{"val": "Cover", "id": "gl_cover"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_feignedretreat",
+        "source": "core",
+        "tags": { "random_gen_group": 3 },
+        "contextdata": { },
+        "name": "Feigned Retreat",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Retreat from Melee Combat and then shoot and hit the enemy you escaped from during the same Activation."
+            }
+        ]
+    },
+    {
+        "id": "gd_fickleluck",
+        "source": "core",
+        "tags": { "random_gen_group": 3 },
+        "contextdata": { },
+        "name": "Fickle Luck",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Use 2+ BLOOD MARKERS on a single enemy to give one of their ACTIONS -2 DICE (or more).",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "ACTIONS", "id": "kw_action"},
+                {"val": "-2 DICE", "id": "kw_minusdice"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_headhunter",
+        "source": "core",
+        "tags": { "random_gen_group": 3 },
+        "contextdata": { },
+        "name": "Head Hunter",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take two enemies Out of Action with Ranged attacks with a single model."
+            }
+        ]
+    },
+    {
+        "id": "gd_riskitall",
+        "source": "core",
+        "tags": { "random_gen_group": 1 },
+        "contextdata": { },
+        "name": "Risk It All",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Succeed in two or more RISKY ACTIONS with one model during a single Activation.",
+            "glossary": [
+                {"val": "RISKY ACTIONS", "id": "kw_riskyaction"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_livedangerously",
+        "source": "core",
+        "tags": { "random_gen_group": 1 },
+        "contextdata": { },
+        "name": "Live Dangerously",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Retreat from Melee Combat twice with one model during the game."
+            }
+        ]
+    },
+    {
+        "id": "gd_killerinstinct",
+        "source": "core",
+        "tags": { "random_gen_group": 1 },
+        "contextdata": { },
+        "name": "Killer Instinct",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take two enemies Out of Action with one model in melee during the battle."
+            }
+        ]
+    },
+    {
+        "id": "gd_noescape",
+        "source": "core",
+        "tags": { "random_gen_group": 1 },
+        "contextdata": { },
+        "name": "No Escape",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Successfully charge an enemy you cannot see."
+            }
+        ]
+    },
+    {
+        "id": "gd_castthemdown",
+        "source": "core",
+        "tags": { "random_gen_group": 1 },
+        "contextdata": { },
+        "name": "Cast Them Down",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Make an enemy fall from a height of 3”+ due to your action (shooting, melee, Supernatural Power etc)."
+            }
+        ]
+    },
+    {
+        "id": "gd_showofmercy",
+        "source": "core",
+        "tags": { "random_gen_group": 1 },
+        "contextdata": { },
+        "name": "Show of Mercy",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Retreat from Melee Combat with an enemy that is Down."
+            }
+        ]
+    },
+    {
+        "id": "gd_victorious",
+        "source": "core",
+        "tags": { "random_gen_group": 2 },
+        "contextdata": { },
+        "name": "Victorious",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Win the game."
+            }
+        ]
+    },
+    {
+        "id": "gd_bloodsacrifice",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Blood Sacrifice",
+        "description":  [
+            {
+            "tags": {},
+            "content": "One of your models takes at least three enemies out of action during the battle."
+            }
+        ]
+    },
+    {
+        "id": "gd_resistandbite",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Resist and Bite",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy with a model that is Down.",
+            "glossary": [{"val": "Down", "id": "gl_down"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_relichunter",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Relic Hunter",
+        "description":  [
+            {
+            "tags": {},
+            "content": "One of your models claims at least two different Reliquary Markers during the game."
+            }
+        ]
+    },
+    {
+        "id": "gd_protecttherelic",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Protect the Relic",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy that is touching one of the Reliquary Markers."
+            }
+        ]
+    },
+    {
+        "id": "gd_killtheirleaders",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Kill Their Leaders",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out all the ELITES you nominated as targets.",
+            "glossary": [{"val": "ELITES", "id": "kw_elite"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_deathfromabove",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Death From Above",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy with a melee attack ACTION benefitting from a Diving Charge.",
+            "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_kingofthehill",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "King of the Hill",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Control all three Objectives at the same time."
+            }
+        ]
+    },
+    {
+        "id": "gd_highriskhighreward",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "High Risk, High Reward",
+        "description":  [
+            {
+            "tags": {},
+            "content": " Your nominated model to be kept alive takes out one of the target enemy ELITES.",
+            "glossary": [{"val": "ELITES", "id": "kw_elite"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_survivetotellthetale",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Survive to Tell the Tale",
+        "description":  [
+            {
+            "tags": {},
+            "content": "A model is hit by two mines during the battle and is not taken Out of Action."
+            }
+        ]
+    },
+    {
+        "id": "gd_intothetrenches",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Into the Trenches",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Charge an enemy model in a trench and take it Out of Action during the same turn."
+            }
+        ]
+    },
+    {
+        "id": "gd_headshot",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Headshot",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Retreat from melee combat with an enemy and then take them out with a ranged attack ACTION during the same Activation.",
+            "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_goodhunting",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Good Hunting",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy in a trench with a ranged attack at Long Range."
+            }
+        ]
+    },
+    {
+        "id": "gd_throwthemback",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Throw Them Back",
+        "description":  [
+            {
+            "tags": {},
+            "content": "As a Defender, take an enemy in a trench Out of Action when there were no defenders in the trench before you activated the model that takes the enemy out."
+            }
+        ]
+    },
+    {
+        "id": "gd_daringraid",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Daring Raid",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Attacker completes this Glorious Deed if they destroy one Objective Marker in the opponent’s Deployment Zone."
+            }
+        ]
+    },
+    {
+        "id": "gd_rampage",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Rampage",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Attacker completes this Glorious Deed if a single model destroys 2+ Objective Markers."
+            }
+        ]
+    },
+    {
+        "id": "gd_stopthemintheirtracks",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Stop Them in Their Tracks",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Defender completes this Glorious Deed if they take an enemy model Out of Action in the Attacker’s Deployment Zone."
+            }
+        ]
+    },
+    {
+        "id": "gd_savethesupplies",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Save the Supplies",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The Defender completes this Glorious Deed if four or more supplies are left at the end of the fourth turn."
+            }
+        ]
+    },
+    {
+        "id": "gd_nostoneleftunturned",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "No Stone Left Unturned",
+        "description":  [
+            {
+            "tags": {},
+            "content": "The same model successfully opens two wagons."
+            }
+        ]
+    },
+    {
+        "id": "gd_notonmywatch",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Not on My Watch",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out an enemy operating the Gun Turret with a ranged attack at Long Range."
+            }
+        ]
+    },
+    {
+        "id": "gd_supplyrun",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Supply Run",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Successfully extract at least two crates from the map. The model that extracts the second crate gets the Glory Point."
+            }
+        ]
+    },
+    {
+        "id": "gd_meatgrinder",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Meat Grinder",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take out three enemies using the Gun Turret with the same model."
+            }
+        ]
+    },
+    {
+        "id": "gd_kingofthehill_train",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "King of the Hill",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Have a model spend at least three consecutive turns on the top of the hill, within 3” of a wagon and without suffering any BLOOD MARKERS.",
+            "glossary": [{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_overtheenemyline",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Over the Enemy Line",
+        "description":  [
+            {
+            "tags": {},
+            "content": " Successfully extract a crate through the opposing player’s deployment zone."
+            }
+        ]
+    },
+    {
+        "id": "gd_theshoreisours",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "The Shore is Ours",
+        "description":  [
+            {
+            "tags": {},
+            "content": "As the Attacker, win the game by taking control of the Main Structure Objective Building for two full consecutive turns. Your last activated model to have entered the Main Structure (and that was not taken Out of Action) gains the Glory Point."
+            }
+        ]
+    },
+    {
+        "id": "gd_theheadofthesnake",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "The Head of the Snake",
+        "description":  [
+            {
+            "tags": {},
+            "content": "As the Defender, take half of the Attacker’s ELITE models Out of Action (rounded down) with the same model.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_battlefieldlegend",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Battlefield Legend",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take at least two enemy models Out of Action with the same model during the battle with any ACTIONS the model has, without suffering any BLOOD MARKER. If the model suffers a BLOOD MARKER but reduces it back to zero, the count resets and the model is now eligible to score this deed again if they meet the necessary requirements stated above.",
+            "glossary": [
+                {"val": "ACTIONS", "id": "kw_action"},
+                {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_bloodcloud",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Blood Cloud",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take at least three enemy models Out of Action with one of your models using a weapon with the Keyword BLAST.",
+            "glossary": [{"val": "BLAST", "id": "kw_blast"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_coldbloodedkiller",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Cold-Blooded Killer",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Use 2+ BLOOD MARKERS on a Melee Attack of one of your models to take an enemy ELITE model Out of Action in a single Activation.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_ghostofshores",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Ghost of Shores",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take an enemy ELITE model Out of Action with one of your models with the Keywords INFILTRATOR or SKIRMISHER.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "INFILTRATOR", "id": "kw_infiltrator"},
+                {"val": "SKIRMISHER", "id": "kw_skirmisher"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_ratcatcher",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Rat Catcher",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Disperse a Swarm of Rats that has taken another model Out of Action, with a model armed with a weapon with the Keyword FIRE.",
+            "glossary": [{"val": "FIRE", "id": "kw_fire"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_bloodybeast",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Bloody Beast",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take the Beast Out of Action with a model that has at least 2+ BLOOD MARKERS at the start of its Activation.",
+            "glossary": [{"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}]
+            }
+        ]
+    },
+    {
+        "id": "gd_dragonslayer",
+        "source": "core",
+        "tags": {  },
+        "contextdata": {
+            "override_points": {
+                "value": 2
+            }
+         },
+        "name": "Dragon Slayer",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take the Dragon Out of Action with one of your models (that is on top of it) using a melee weapon. This Deed is worth two Glory Points."
+            }
+        ]
+    },
+    {
+        "id": "gd_genocidal",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Genocidal",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Take at least three Peasants Out of Action with the same model."
+            }
+        ]
+    },
+    {
+        "id": "gd_opportunist",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Opportunist",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Use a Peasant during its Activation to lure the Dragon into moving over an enemy model. Your model whose turn was prior to the Peasant’s gains the Glory Point."
+            }
+        ]
+    },
+    {
+        "id": "gd_offmyback",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Off My Back",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Make an enemy model that is on top of the Dragon fall due to your action (shooting, melee, Supernatural Power etc)."
+            }
+        ]
+    },
+    {
+        "id": "gd_firewithfire",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Fire With Fire",
+        "description":  [
+            {
+            "tags": {},
+            "content": "Inflict 2+ BLOOD MARKERS on the Dragon with the same model, using a weapon with either the Keyword FIRE, GAS or SHRAPNEL.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "FIRE", "id": "kw_fire"},
+                {"val": "GAS", "id": "kw_gas"},
+                {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+            ]
+            }
+        ]
+    },
+    {
+        "id": "gd_battlefieldvivisection",
+        "source": "core",
+        "tags": {  },
+        "contextdata": { },
+        "name": "Battlefield Vivisection",
+        "description":  [
+            {
+            "tags": {},
+            "content": "If a total of 3 or more enemy models engaged in melee combat with the Combat Biologist are taken Out of Action during the Battle, add +1 Glory Point to your total earned at the end of the game."
+            }
+        ]
+    }
+]

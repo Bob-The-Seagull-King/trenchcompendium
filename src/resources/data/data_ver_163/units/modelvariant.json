@@ -1,0 +1,1610 @@
+[
+    {
+        "id": "md_janissaries_mv_dervish",
+        "name": "Dervish",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "exception": [
+                    {
+                        "equipment": "eq_reinforcedarmour"
+                    }
+                ],
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_janissaries"
+                    }
+                ]
+            }
+        },
+        "base_id": "md_janissaries",
+        "variant_name": "Fidai_Of_Alamut",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Alamut is also a home to a renegade sect of Ismaili Dervishes, warrior monks sworn to poverty and a lethal way of fighting. They accompany the Assassins on their secret missions as an act of piety and payment for their shelter, and their whirling dance of death has been the end of many a disbeliever."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : ["kw_strong"],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_whirlingdervishes"]
+    },
+    {
+        "id": "md_janissaries_mv_faris",
+        "name": "Fāris",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_janissaries"
+                    }
+                ]
+            }},
+        "base_id": "md_janissaries",
+        "variant_name": "House_Of_Wisdom",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Each Alchemist dispatched on such a journey is an irreplaceable loss, and since they operate under their own authority, they cannot expect direct support from the Sultan’s forces. Many noble Fāris warriors have taken oaths to protect these scholars in their journeys, as well as their own Kavass bodyguards sworn to fight and die in defence of their Masters."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_elite"],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_janissaries_mv_officer",
+        "name": "Janissary Officer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_janissaries"
+                    }
+                ]
+            }},
+        "base_id": "md_janissaries",
+        "variant_name": "Defenders_Of_The_Iron_Wall",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_elite"],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_azeb_mv_kavass",
+        "name": "Kavass",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_azeb"
+                    }
+                ]
+            }},
+        "base_id": "md_azeb",
+        "variant_name": "House_Of_Wisdom",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Many noble Fāris warriors have taken oaths to protect these scholars in their journeys, as well as their own Kavass bodyguards sworn to fight and die in defence of their Masters. Kavass are sworn guardians of the House of Wisdom. "
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_sultanateassassin_mv_masterassassin",
+        "name": "Master Assassin",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_sultanateassassin"
+                    }
+                ]
+            }},
+        "base_id": "md_sultanateassassin",
+        "variant_name": "Fidai_Of_Alamut",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_tough"],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_azeb_mv_acolyte",
+        "name": "Assassin Acolyte",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_azeb"
+                    }
+                ]
+            }},
+        "base_id": "md_azeb",
+        "variant_name": "Fidai_Of_Alamut",
+        "lore": [     
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These warbands are known as Fida’i (which means ‘Sacrifice’), dedicated to completing their mission and returning to Alamut to receive rewards said to be able to match those of Paradise itself. They are led by a Master Assassin: one of the deadly Hands of Alamut, with two fully-trained members of the Order. A number of trainee acolytes will serve them during the mission, eager to prove their mettle and be initiated into the Order of Assassins."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_yuzbasicaptain_mv_silahdar",
+        "name": "Silahdar",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_sultanatesapper"
+                    }
+                ]
+            }
+        },
+        "base_id": "md_yuzbasicaptain",
+        "variant_name": "Defenders_Of_The_Iron_Wall",
+        "lore": [   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Military expeditions over the Great Iron Wall into No Man’s Land carry many risks, and their commanders are field officers known as Yüzbaşı. They are expected to lead from the front and their selection is solely on merit, with no consideration given to family pedigree or wealth."
+            },
+            { "tags": {"desc_type": "gap"} },      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The commanders of the Iron Wall units come from amongst the personal bodyguards of the Sultan known as Silahdar."
+            }
+        ],
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Yüzbaşı can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List and can use any Sapper Only choices from the Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_strong"],
+        "cut_abilities" : ["ab_mubarizun"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_mamlukfaris_mv_sipahi",
+        "name": "Sipahi Automaton Cavalry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_mamlukfaris"
+                    }
+                ]
+            }},
+        "base_id": "md_mamlukfaris",
+        "variant_name": "Defenders_Of_The_Iron_Wall",
+        "lore": [   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Sipahi Automaton Cavalry often serves as infantry in the Iron Wall units to reinforce areas under severe pressure."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {
+            "potential": 0,
+            "mercenary": false
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_trenchdog_guarddog",
+        "name": "Guard Dog",
+        "source": "core",
+        "tags": {"dog": true},
+        "contextdata": {
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Base",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These dogs both warn their masters of impending danger and fight fiercely for their company."
+            }
+        ],
+        "team": "none",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_guarddog"]
+    },
+    {
+        "id": "md_trenchdog_attackdog",
+        "name": "Attack Dog",
+        "source": "westfalia",
+        "tags": {"dog": true},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Base",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These ferocious hounds are trained by the Brigade to accompany their masters into the fray."
+            }
+        ],
+        "team": "none",
+        "stats" : {
+            "melee": 1
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_trenchdog_mercydog",
+        "name": "Mercy Dog",
+        "source": "core",
+        "tags": {"dog": true},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Base",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mercy dogs carry a Medi-Kit."
+            }
+        ],
+        "team": "none",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_mercydog"]
+    },
+    {
+        "id": "md_trenchdog_martyrdomdog",
+        "name": "Martyrdom Dog",
+        "source": "core",
+        "tags": {"dog": true},
+        "contextdata": {
+            "mercenary_add_equipment": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_martyrdomdevice"
+                    }
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    },
+                    {
+                    "type": "id",
+                    "model": "md_ecclesiasticprisoner"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Base",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Trench Pilgrims often enthusiastically strap their dogs with explosives so they can partake in a glorious martyrdom operation."
+            }
+        ],
+        "team": "none",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_martyrdomdog"]
+    },
+    {
+        "id": "md_trenchdog_hellhound",
+        "name": "Hellhound",
+        "source": "core",
+        "tags": {"dog": true},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchdog"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_trenchdog",
+        "variant_name": "Base",
+        "lore": [                      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This horrifying infernal canine is the size of a small pony, and within its tortured belly rage flames of Hell itself. It howls in constant agony and rage in combat."
+            }
+        ],
+        "team": "none",
+        "stats" : {
+            "melee": 1
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_hellhound"]
+    },
+    {
+        "id": "md_annointedheavyinfantry_trenchghost",
+        "name": "Annointed Heavy Infantry (Trench Ghost)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_annointedheavyinfantry"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_annointedheavyinfantry",
+        "variant_name": "Trench_Ghost",
+            "lore": [               
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Heavily armed and armoured assault troops. Their skin is burned and blistering from their ordained pilgrimages to Hell and back."
+            }
+        ],
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Anointed are always equipped with a suit of Reinforced Armour which are included in the cost. This armour can never be removed. Otherwise they can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury and may purchase a Trench Shield.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_heretichorister_barbedwirebanshee",
+        "name": "Barbed Wire Banshee",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_heretichorister"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_heretichorister",
+        "variant_name": "Trench_Ghost",
+            "lore": [],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : ["ab_unholyhymns"],
+        "new_abilities" : ["ab_deathwail"]
+    },
+    {
+        "id": "md_hereticpriest_mammonpriest",
+        "name": "Heretic Priest of Mammon",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_hereticpriest"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_hereticpriest",
+        "variant_name": "Knights_of_Avarice",
+            "lore": [],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : ["ab_puppetmaster"],
+        "new_abilities" : ["ab_powersofthepriestofmammon"]
+    },
+    {
+        "id": "md_artillerywitch_gaswitch",
+        "name": "Artillery Witches of Mammon",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_artillerywitch"
+                    }
+                ]
+            }
+            },
+        "base_id": "md_artillerywitch",
+        "variant_name": "Knights_of_Avarice",
+            "lore": [],
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_combatmedic_mv_pilgrim",
+        "name": "Combat Medic (Pilgrim)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "modify_equipment_block": {}  ,
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_combatmedic"
+                    }
+                ]
+            }},
+        "base_id": "md_combatmedic",
+        "variant_name": "Trench_Pilgrim",
+        "team": "faithful",
+        "stats" : {
+            "potential": 2,
+            "mercenary": true
+        },
+        "cut_keywords" : ["kw_antioch"],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_goeticwarlock_mv_knightsofavarice",
+        "name": "Goetic Warlock",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "modify_equipment_block": {}  ,
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_goeticwarlock"
+                    }
+                ]
+            }},
+        "base_id": "md_goeticwarlock",
+        "variant_name": "Knights_of_Avarice",
+        "team": "hell",
+        "stats" : {
+            "potential": 0,
+            "mercenary": false
+        },
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_ecclesiasticprisoner_sacredaffliction",
+        "name": "Ecclesiastic Prisoner (Sacred Affliction)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_ecclesiasticprisoner"
+                    }
+                ]
+            }},
+        "base_id": "md_ecclesiasticprisoner",
+        "variant_name": "Procession_of_the_Sacred_Affliction",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_warprophet_tenthplague",
+        "name": "War Prophet (Cavalcade of the Tenth Plague)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_warprophet"
+                    }
+                ]
+            }},
+        "base_id": "md_warprophet",
+        "variant_name": "Cavalcade_of_the_Tenth_Plague",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_layingonhands"],
+        "new_abilities" : ["ab_wrathofgod"]
+    },
+    {
+        "id": "md_anchoriteshrine_saintmethodius",
+        "name": "Anchorite Shrine (War Pilgrimage of Saint Methodius)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "melee",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "tag",
+                        "value": "methodius"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "tag": "weapon",
+                        "res_type": "tag",
+                        "value": "methodius",
+                        "limit": 1
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "tag",
+                        "value": "methodius",
+                        "limit": 2
+                    }
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_anchoriteshrine"
+                    }
+                ]
+            }
+        },
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can only buy two pieces of equipment made for Shrine Anchorites. Each Anchorite is equipped with a special suit of armour (reflected in the profile), a Combat Helmet, and a Bonebreaker Mace. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The shrine is also equipped with a Catherine Wheel, which you may swap out for another of its special Anchorite Weapons. The Anchorite may make one attack ACTION with each of these weapons and may make no other attacks during its Activation (so if holding the Catherine Wheel it attack in melee with the Wheel and its Mace, at range it can attack with its sole ranged weapon if equipped)."
+            }
+        ],
+        "base_id": "md_anchoriteshrine",
+        "variant_name": "War_Pilgrimage_of_Saint_Methodius",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "ranged": 0
+        },
+        "cut_abilities" : ["ab_brokenonthewheel"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_stigmaticnun_saintmethodius",
+        "name": "Stigmatic Nun (War Pilgrimage of Saint Methodius)",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_stigmaticnun"
+                    }
+                ]
+            }},
+        "base_id": "md_stigmaticnun",
+        "variant_name": "War_Pilgrimage_of_Saint_Methodius",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_trenchcleric_lector",
+        "name": "Lector",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchcleric"
+                    }
+                ]
+            }},
+        "base_id": "md_trenchcleric",
+        "variant_name": "Papal_States_Intervention_Force",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_trenchclericpowers"],
+        "new_abilities" : ["ab_trenchclericpowers_lector"]
+    },
+    {
+        "id": "md_trenchcleric_erie",
+        "name": "Eire Warrior Priest",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchcleric"
+                    }
+                ]
+            }},
+        "base_id": "md_trenchcleric",
+        "variant_name": "Eire_Rangers",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_trenchclericpowers"],
+        "new_abilities" : ["ab_trenchclericpowers_erie"]
+    },
+    {
+        "id": "md_trenchcleric_ethiopia",
+        "name": "Holy Warrior",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchcleric"
+                    }
+                ]
+            }},
+        "base_id": "md_trenchcleric",
+        "variant_name": "Expeditionary_Forced_of_Abyssinia",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : ["ab_trenchclericpowers"],
+        "new_abilities" : ["ab_trenchclericpowers_ethiopia"]
+    },
+    {
+        "id": "md_lieutenant_eire",
+        "name": "Eire Lieutenant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_lieutenant"
+                    }
+                ]
+            }},
+        "base_id": "md_lieutenant",
+        "variant_name": "Eire_Rangers",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : ["kw_skirmisher"],
+        "stats" : {},
+        "cut_abilities" : ["ab_onmycommand"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_lieutenant_alba",
+        "name": "Highland Lieutenant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_lieutenant"
+                    }
+                ]
+            }},
+        "base_id": "md_lieutenant",
+        "variant_name": "Alba",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : ["kw_strong"],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_mechanisedheavyinfantry_alba",
+        "name": "Highland Mechanised Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }},
+        "base_id": "md_mechanisedheavyinfantry",
+        "variant_name": "Alba",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "ranged": 0,
+            "melee": 1
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_mechanisedheavyinfantry_abyssianna",
+        "name": "Abyssinian Mechanised Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_mechanisedheavyinfantry"
+                    }
+                ]
+            }},
+        "base_id": "md_mechanisedheavyinfantry",
+        "variant_name": "Expeditionary_Forced_of_Abyssinia",
+        "team": "faithful",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Abyssinian Heavy Infantry always wear Light Machine Armour which counts as Reinforced Armour (32mm Base). This is reflected in the cost and profile above. They can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "stats" : {
+            "ranged": 1,
+            "melee": 0
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_grailthrall_flythrall",
+        "name": "Fly Thrall",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "Base",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_grailthrall_flybereaved",
+        "name": "Fly Bereaved",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "Dirge_of_the_Great_Hegemon",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_grailthrall_bereaved",
+        "name": "Bereaved",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            },
+            "model_equipment_restriction": {
+                "removed": [    
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "added": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_musicalinstrument"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_troopflag"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "Dirge_of_the_Great_Hegemon",
+        "team": "hell",
+        "description": [
+
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Thralls can be equipped with ranged weapons, troop flags, or instruments, but nothing else. They do not suffer penalties for fighting unarmed."
+            }
+        ],
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "ranged": 0
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_plagueknight_executor",
+        "name": "Executor",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_plagueknight"
+                    }
+                ]
+            }},
+        "base_id": "md_plagueknight",
+        "variant_name": "Dirge_of_the_Great_Hegemon",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : ["kw_tough"],
+        "stats" : {
+            "ranged": 1
+        },
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_wretched_court",
+        "name": "Wretched",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "weapon",
+                        "value": true
+                    }
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_wretched"
+                    }
+                ]
+            }
+        },
+        "base_id": "md_wretched",
+        "variant_name": "Court_Of_The_Seven_Headed_Serpent",
+        "team": "hell",
+        "lore": [               
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These unfortunate souls possess not a drop of demon blood. They act as disposable shock troops or are used as subjects of torture to power the Goetic magic of the sorcerers and other users of the dark arts. Captured during one of the hunts of the Court, sold to the devils in the heretic domains or having the misfortune to have foolishly pushed through in the places where the borders of the world are thin, their minds are scarred by witnessing the horror of damnation while still alive. Willing to do anything to escape their fate a million times worse than death, they grasp at the thinnest of straws. Should a wretch bring down a mighty opponent, the Law of Hell is clear: the mortal will gain its freedom, in memory and honour of the First Rebellion when there was war in Heaven and blood of the angels painted the firmament red."
+            }
+        ],
+        "description": [    
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The wretched can be equipped with any melee weapon, armour and equipment from the Court Armoury. None of their weapons, armour or equipment can cost more than 10 ducats each. They must be equipped with at least one weapon.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "cut_keywords" : [],
+        "keywords" : ["kw_thecourt"],
+        "stats" : {
+        },
+        "cut_abilities" : ["ab_darkblessing","ab_chattel"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_yeoman_survivor",
+        "name": "Survivor Yeoman",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_yeoman"
+                    }
+                ]
+            }},
+        "base_id": "md_yeoman",
+        "variant_name": "Common_Exploration",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_takwincreation_golem",
+        "name": "Golem",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "upgrade_budget_free": {
+                "ducats": 60
+            },
+            "upgrade_budget_max": {
+                "ducats": 60
+            },
+            "model_equipment_restriction": {
+                "removed": []
+            },
+            "validate_final_unit_upgrades": {
+                "requirements": [
+                    {
+                        "type": "ducats",
+                        "value": 60,
+                        "subvalue": "maximum"
+                    }
+                ]
+            } 
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The golem cannot be equipped with any weapons, armour or equipment. It can fight in melee without any penalty."
+            }
+        ],
+        "lore": [],
+        "base_id": "md_takwincreation",
+        "variant_name": "Rare_Exploration",
+        "team": "none",
+        "cut_keywords" : [],
+        "keywords" : ["kw_golem"],
+        "stats" : {
+            "potential": 2
+        },
+        "cut_abilities" : ["ab_artificialbody"],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_heretictrooper_mine",
+        "name": "Sarcophagus Mine",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_heretictrooper"
+                    }
+                ]
+            }},
+        "base_id": "md_heretictrooper",
+        "variant_name": "Sarcophagus_Mine",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_trenchpilgrim_martyr",
+        "name": "Martyr-Penitent",
+        "source": "core",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_trenchpilgrim"
+                    }
+                ]
+            }},
+        "base_id": "md_trenchpilgrim",
+        "variant_name": "Martyr_Penitent",
+        "team": "faithful",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_plagueknight_butcherknight",
+        "name": "Butcher Knight",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {             
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [40]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_plagueknight"
+                    }
+                ]
+            }},
+        "base_id": "md_plagueknight",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_ravenousinfection"]
+    },
+    {
+        "id": "md_grailthrall_flythrall_hunger",
+        "name": "Fly Thrall",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {     
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            },          
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [25]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : ["ab_ravenousinfection"]
+    },
+    {
+        "id": "md_grailthrall_hunger",
+        "name": "Grail Thrall",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {        
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            },   
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [25]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_ravenousinfection"]
+    },
+    {
+        "id": "md_houndsoftheblackgrail_prowler",
+        "name": "Prowler",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {      
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_houndsoftheblackgrail"
+                    }
+                ]
+            }},
+        "base_id": "md_houndsoftheblackgrail",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : [],
+        "cut_abilities" : [],
+        "new_abilities" : []
+    },
+    {
+        "id": "md_grailthrall_flythrall_cradle_hunger",
+        "name": "Cradle Fly Thrall",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {     
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            },          
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [25]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {
+            "movement": 6,
+            "movetype": 1
+        },
+        "cut_abilities" : ["ab_undeadfortitude"],
+        "new_abilities" : ["ab_ravenousinfection","ab_specialdeployment_cradle"]
+    },
+    {
+        "id": "md_grailthrall_cradle_hunger",
+        "name": "Cradle Thrall",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {        
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            },   
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [32]
+                        },
+                        {
+                            "base": [25]
+                        }
+                    ]
+                ]
+            },
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_grailthrall"
+                    }
+                ]
+            }},
+        "base_id": "md_grailthrall",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "cut_keywords" : [],
+        "keywords" : [],
+        "stats" : {},
+        "cut_abilities" : [],
+        "new_abilities" : ["ab_ravenousinfection","ab_specialdeployment_cradle"]
+    },
+    {
+        "id": "md_corpseguard_husk",
+        "name": "Dessicated Husk",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": { 
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_corpseguard"
+                    }
+                ]
+            }},
+        "base_id": "md_corpseguard",
+        "variant_name": "The_Great_Hunger",
+        "team": "hell",
+        "stats" : {},
+        "cut_keywords" : [],
+        "keywords" : ["kw_strong"],
+        "cut_abilities" : ["ab_bodyguard_blackgrail"],
+        "new_abilities" : []
+    }
+]

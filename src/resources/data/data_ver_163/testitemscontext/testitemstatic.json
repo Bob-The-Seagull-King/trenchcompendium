@@ -1,0 +1,227 @@
+[
+    {
+        "id": "ts_testitem_a",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "TestA",
+        "teststatic" : 1,
+        "contextdata": {"option_search_viable" : {}},
+        "options": [
+            {
+                "ref_id" : "ot_testitemset_a",
+                "name" : "TestOptionSet",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : ["Preset_A"],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {
+                    "searchtype": "file",
+                    "searchparam": {
+                        "type": "glossary",
+                        "data": []
+                    }
+                }
+            },
+            {
+                "ref_id" : "ot_testitemset_b",
+                "name" : "TestOptionSet",
+                "description" : [],
+                "category" : "contextobject",
+                "parent_level" : 3,
+                "question_name" : "optionSearchEvent",
+                "question" : {
+                    "classes": ["TestBasicFeature"],
+                    "questions": [
+                        {
+                            
+                            "tagq": { "category" : "default"},
+                            "propertyq": {"teststatic":1}
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "ts_testitem_b",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "TestB",
+        "teststatic" : 2,
+        "contextdata": {"option_search_viable" : {}},
+        "options": [
+            {
+                "ref_id" : "ot_testitemset_b",
+                "name" : "TestOptionSet",
+                "description" : [],
+                "category" : "contextobject",
+                "parent_level" : 3,
+                "question_name" : "optionSearchEvent",
+                "question" : {
+                    "classes": ["TestStaticInContextFeature"],
+                    "questions": [
+                        {
+                            
+                            "tagq": { "category" : "default"}
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "el_testselect",
+        "name": "Test Select",
+        "source": "core",
+        "tags": {
+            "exploration_table": "et_commonlocations"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Test."
+            }
+        ],
+        "location_value": 4,
+        "options": [{
+            "ref_id" : "ot_testselect",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_testselect"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "el_testselect_optionA",
+        "name": "Option A",
+        "source": "core",
+        "tags": {
+            "location_option": "el_testselect"
+        },
+        "contextdata": {
+            "consumable": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Test",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_testselect_optionB",
+        "name": "Option B",
+        "source": "core",
+        "tags": {
+            "location_option": "el_testselect"
+        },
+        "contextdata": {"location_rule_option": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Test."
+            }
+        ],
+        "location_value": 4,
+        "options": [{
+            "ref_id" : "ot_testselect_optionB",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "explorationlocation",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "tags",
+                                "value": "location_option",
+                                "equals": true,
+                                "strict": true,
+                                "istag": true,
+                                "tagvalue": "el_testselect_optionB"
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "el_testselect_optionB_suboptionA",
+        "name": "Option B SubOption A",
+        "source": "core",
+        "tags": {
+            "location_option": "el_testselect_optionB"
+        },
+        "contextdata": {
+            "consumable": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Test",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "el_testselect_optionB_suboptionB",
+        "name": "Option B SubOption B",
+        "source": "core",
+        "tags": {
+            "location_option": "el_testselect_optionB"
+        },
+        "contextdata": {
+            "consumable": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Test",
+                "glossary": []
+            }
+        ],
+        "options": []
+    }
+]

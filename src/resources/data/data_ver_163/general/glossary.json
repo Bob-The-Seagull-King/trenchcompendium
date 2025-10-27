@@ -1,0 +1,112 @@
+[
+    {
+        "id": "gl_cover",
+        "source": "core",
+        "tags": {
+            "category" : "attack",
+            "attack": "ranged"
+        },
+        "name": "Cover",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Add -1 DICE to the roll. A model is in cover whenever it is in contact with a piece of scenery that is at least as long as the model’s base. If an attacker can see a model in its entirety, this penalty does not apply. A model cannot gain cover merely from being obscured due to angles, distant scenery or the surface that they are standing on (such as when standing on top of a building).",
+            "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ]
+    },
+    {
+        "id": "gl_explorationdice",
+        "source": "core",
+        "tags": {
+            "category" : "campaign",
+            "exploration": true
+        },
+        "name": "Exploration Dice",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "After the battle, both players are allocated Exploration Dice. Once the players have determined the number of Exploration Dice, each rolls their dice and consults the result by adding the numbers together to get your Exploration Score. For example, if a player rolls three Exploration Dice and the results are 3, 5 and 6, the combined Exploration Score is 14."
+            }
+        ]
+    },
+    {
+        "id": "gl_down",
+        "source": "core",
+        "tags": {
+            "category" : "injury"
+        },
+        "name": "Down",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model that is Down suffers a -1 DICE penalty to all of its ACTIONS. Also it cannot move during its Activation through its own ACTIONS",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+            },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Down condition can either be represented by placing an indicator next to the model (such as a scrap of paper) or by physically turning the model face-down on its side. A model turned on its side will present a different profile for Line-of-Sight targeting, but these two methods of indication are otherwise identical and the model’s controller may decide which to use."
+            },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of its own Activation, a Downed warrior can Stand, but any movement (Move, Dash, Charge, Jump, Climb etc.) it can take is halved. If a model is Downed during its own Activation, it may attempt a RISKY ACTION in order to Stand. Otherwise, it remains Down for the remainder of its Activation.",
+                "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            }
+        ]
+    },
+    {
+        "id": "gl_minorhit",
+        "source": "core",
+        "tags": {
+            "category" : "injury"
+        },
+        "name": "Minor Hit",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 BLOOD MARKER next to the model to represent a wound. Use the dice pips to count the hits inflicted (maximum six per model).",
+                "glossary": [
+                    {"val": "+1 BLOOD MARKER", "id": "kw_bloodmarker"}
+                    ]
+            }
+        ]
+    },
+    {
+        "id": "gl_scar",
+        "source": "core",
+        "tags": {
+            "category" : "campaign"
+        },
+        "name": "Scar",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When you roll on the Injury Chart, unless the rules state otherwise, each injury causes a Battle Scar, so mark this on your warband roster sheet. An ELITE character only has two slots for Battle Scars. This means that if you sustain a third scar, the model dies and can no longer be used in your campaign. If the model has an ability that allows for their revival (such as the Trench Pilgrim), they use it. When they return to life, they ignore the last Battle Scar that killed them. Otherwise, their profile remains the same.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                    ]
+            }
+        ]
+    },
+    {
+        "id": "gl_bloodbath",
+        "source": "core",
+        "tags": {
+            "category" : "attack"
+        },
+        "name": "Bloodbath",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "You can roll an additional D6 on injury rolls at the cost of six BLOOD MARKERS on any model, or at the cost of three BLOOD MARKERS if the target is Down. This means that instead of rolling 2D6 on your typical weapon, you roll 3D6 on your injury roll and add the numbers together. Weapons such as the Artillery Witch’s Infernal Bomb would therefore roll 4D6 and add the results together (3D6+1D6).",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ]
+    }
+]

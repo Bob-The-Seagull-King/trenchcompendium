@@ -1,0 +1,2444 @@
+[
+    {
+        "id": "up_skirmisher",
+        "name": "Skirmisher",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"keyword_mod": {"mods": [{"type": "add", "value": "kw_skirmisher"}]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model is converted to a SKIRMISHER. Unless engaged in melee, when an enemy model declares a charge against any SKIRMISHER, they can immediately move D3” in any direction they wish (except within 1” of any enemy or out of the battlefield). After this manoeuvre, the charging model is moved as normal. This may lead to the charger being unable to enter melee. This move cannot be taken by a model that is Down.",
+                "glossary": [{"val": "SKIRMISHER", "id": "kw_skirmisher"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_infiltrator",
+        "name": "Infiltrator",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"keyword_mod": {"mods": [{"type": "add", "value": "kw_infiltrator"}]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model is converted to an INFILTRATOR. The model can be placed anywhere on the table out of line of sight of any enemies, but at least 8” away from the closest enemy. Deployed after all other models without the Keyword INFILTRATOR.",
+                "glossary": [{"val": "INFILTRATOR", "id": "kw_infiltrator"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_meleemight",
+        "name": "Melee Might",
+        "source": "core",
+        "tags": {"trait": true, "modifier": true},
+        "contextdata": {"upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model increases their Melee characteristic by +1 DICE.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_fierceandbrave",
+        "name": "Fierce and Brave",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"keyword_ignore":  {"value": ["kw_fear"]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model is not affected by the keyword FEAR.",
+                "glossary": [{"val": "FEAR", "id": "kw_fear"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_swissguard",
+        "name": "Swiss Guard",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {"keyword_ignore":  {"value": ["kw_fear"]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model is not affected by the keyword FEAR.",
+                "glossary": [{"val": "FEAR", "id": "kw_fear"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_hallucinogendisguise",
+        "name": "Hallucinogen Disguise",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
+        "contextdata": { "infiltrator_scenario": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "An INFILTRATOR with this ability can be deployed anywhere on the battlefield, including the enemy Deployment Zone, as long as the model is at least 8” away from any enemy models. The model does not have to be out of Line of Sight. Binoculars or Guard Dogs have no effect on this ability.",
+                "glossary": [{"val": "INFILTRATOR", "id": "kw_infiltrator"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_thunderboltofalamut",
+        "name": "Thunderbolt of Alamut",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
+        "contextdata": {"upgrade_stat": { "upgrades" : [{"stat": "movement", "value": 2}]}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model has +2” movement and +1 DICE on its Dash ACTIONS.",
+                "glossary": [{"val": "ACTIONS", "id": "kw_action"},{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_mirageoftime",
+        "name": "Mirage of Time",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
+        "contextdata": {"self_defense_hit" : {"type": "dice", "val": -1}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Both Ranged and Melee attacks against the Assassin suffer -1 DICE penalty when determining if they hit.",
+                "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secretpaths",
+        "name": "Secret Paths",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "art_of_assassination"},
+        "contextdata": {"self_defense_hit" : {"type": "dice", "val": -1}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of the battle, right before the first model is set up, declare whether or not this model will be set up by using Secret Paths. A model using the Secret Paths is not set up on the battlefield at the start of the battle and it may not be activated normally during the first turn."
+            },          
+            { "tags": {"desc_type" : "gap"} },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Starting in the second turn, you may activate these models. When you do, set up the model in contact with an edge of the battlefield but more than 8” away from all enemy models at the start of its activation. If both players have such models, the starting player declares whether one of their models is deployed or not first, followed by the other player. Alternate as normal until all such models have been declared as using Secret Paths or not."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_wings",
+        "name": "Wings",
+        "source": "core",
+        "tags": {
+            "trait": true,
+            "takwin": true
+        },
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "movement", "value": 8},
+                {"stat": "movetype", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus gains a new movement mode: 8”/Flying."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_elementalresistance",
+        "name": "Elemental Resistance",
+        "source": "core",
+        "tags": {"trait": true,
+        "takwin": true},
+        "contextdata": {
+            "ignore_element": {"element": ["kw_fire","kw_gas"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " Attacks made against the Homunculus that have the Keywords FIRE and/or GAS suffer a -1 DICE penalty to injure it. Also the Homunculus does not suffer additional BLOOD MARKERS from attacks with Keywords FIRE and/or GAS.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_massive_size",
+        "name": "Massive Size",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [50]}
+                ]},
+            "keyword_add": {"value": ["kw_tough"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus’ size is increased to huge proportions. It now has a base size of 50mm and it gains the Keyword TOUGH. This formula cannot be combined with the Wings formula.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_enslavedmind",
+        "name": "Enslaved Mind",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "add_fireteam_model" : { "type": "ft_model", "count": 1, "exclusive": true }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus gains the Keyword FIRETEAM along with one model of your choice in the Warband. The other model can only form a Fireteam with this Homunculi, not with any other models.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_humanhands",
+        "name": "Human Hands",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "added": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "eq_trenchshield"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "eq_fireshield"
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " The Homunculus can buy and wield any weapon allowed in the Iron Sultanate warband or House of Wisdom list, though they cannot select ELITE only items, grenades or items limited to specific units (such as Assassins). They can also carry a Trench Shield or a Fire Shield. This will apply to the Additional Arms formula as well. Cannot be combined with the Wings formula.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_inhumanstrength",
+        "name": "Inhuman Strength",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [32]}
+                ]},
+            "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
+            "keyword_add": {"value": ["kw_strong"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The musculature of the Homunculus is reinforced, replaced and strengthened. It now has a base size of 32mm (or 50mm if it also has Massive size). The Homunculus gains +1 DICE to its Melee characteristic and the Keyword STRONG.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_terrifyingappearance",
+        "name": "Terrifying Appearance",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_fear"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whether by captivating beauty or a terrifying appearance, this Homunculus gains the Keyword FEAR.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_additionalarm",
+        "name": "Additional Arm",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "add_arms": {"ranged": 1, "melee": 1}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus can perform an additional attack ACTION in Melee or Ranged combat without any penalty. Therefore, if making attacks with three melee weapons, only a single weapon would need to be declared an Off-Hand weapon (suffering the appropriate penalties). ",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            },        
+            { "tags": {"desc_type" : "gap"} },        
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "It has three hands to carry weapons if combined with Human Hands, and may equip weapons and a shield in any combination, as long as it has hands free to do so. In this case the Homunculi can make up to two Ranged Attack ACTIONS (if it has sufficient weapons and number of hands to carry them), and up to three Melee Attack ACTIONS (if armed with three one-handed weapons); or one Melee Attack ACTION with a two-handed weapon and one Melee Attack ACTION with a one-handed weapon.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_twoheads",
+        "name": "Two Heads",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "override_upgrade_restriction": {
+                "id": [
+                    "rel_md_up_alchemicalformulae_hawkeyes",
+                    "rel_md_up_alchemicalformulae_hypnoticeyes"
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus has two heads and therefore can have two sets of eyes via Alchemical Formula."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_hypnoticeyes",
+        "name": "Hypnotic Eyes",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemies suffer -1 DICE to hit the Homunculus in Melee. Does not affect Sniper Priests or enemies with the keyword BLACK GRAIL. Cannot be combined with Hawk Eyes without Two Heads.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_hawkeyes",
+        "name": "Hawk Eyes",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "ranged", "value": 1}]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The eyesight of the Homunculus is based on that of a predatory bird. It can add +1 DICE to its Ranged Attack characteristic. Cannot be combined with Hypnotic Eyes without Two Heads.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_startlingspeed",
+        "name": "Startling Speed",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus adds +1 DICE to its Dash ACTIONS.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_sealofsolomon",
+        "name": "Seal of Solomon",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "added": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "banned": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_exlixerofalkhidr"
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This Formula greatly enhances the intelligence of the Homunculus and makes it painfully aware of its artificial existence. It can now buy and use Equipment from the Sultanate Warband Armoury as long as it is not limited to ELITE models. Note that one helmet protects a Homunculus with two heads normally and the Two Heads Formula does not allow the purchase of two different kinds of headgear.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_gargantuansize",
+        "name": "Gargantuan Size",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [60]}
+                ]},
+            "restriction_override": {
+                "overrides": [
+                    {
+                    "type": "id",
+                    "model": "md_brazenbull"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "tag": "brazen_bull",
+                        "res_type": "tag",
+                        "value": "brazen_bull",
+                        "limit": 1
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Can only be bought if the Homunculus already has the Human Hands, Inhuman Strength and Massive Size Formulas. The Homunculus now has a Base Size of 60mm and it can now use one Brazen Bull Only weapon."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_alchemicalformulae_regenerativetissue",
+        "name": "Regenerative Tissue",
+        "source": "core",
+        "tags": {"trait": true, "takwin": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Homunculus has an astonishing healing factor and can remove one BLOOD MARKER every time it is Activated, if it has any.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_medicine",
+        "name": "Medicine",
+        "source": "core",
+        "tags": {"action": true, "special_category": "secrets_of_the_house_of_wisdom"},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "res_type": "id",
+                        "value": "eq_medikit"
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This Alchemist is a student of Ibn Sina’s School of Medicine. The model is equipped with tools for healing from the House of Wisdom. The Alchemist can take an ACTION with +1 DICE to remove up to two BLOOD MARKERS or a single INFECTION MARKER from any one friendly model (including themselves) within 1” range or allow one friendly model (including themselves) who is Down to regain their footing. This training and these tools are an improvement upon the standard Medi-Kit and therefore a model with this Secret cannot carry a Medi-Kit.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_cartographyandgeography",
+        "name": "Cartography and Geography",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
+        "contextdata": {
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "model_attatch": {
+                "apply_to_attatch": {
+                    "keyword_add": {"value": ["kw_infiltrator"]}
+                },
+                "restriction": [ 
+                    { "rest_type": "stat", "value": "base", "subvalue": [32], "direction": false },
+                    { "rest_type": "id", "value": false, "subvalue": "md_jabireanalchemist" }
+                ]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist has studied long and hard the sciences of cartography and geometry. At the beginning of each battle, immediately before any models are deployed, up to two models in your warband gain the Keyword INFILTRATOR, This ability cannot affect an Alchemist or a model with a base larger than 32mm. In addition, the warband may re-roll one Exploration dice in the Exploration phase if you wish. The second result stands.",
+                "glossary": [
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_cartographyandgeography_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "hide": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            },
+            {
+                "ref_id" : "ot_cartographyandgeography_b",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "hide": true,
+                "parent_level": 1,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            }
+        ]
+    },
+    {
+        "id": "up_secrets_secretsoftakwin",
+        "name": "Secrets of Takwin",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist has bound their Takwin creature to themselves with unbreakable bonds. If the Alchemist is hit by an attack while within 1” of their Homunculus, you may redirect the hit to the Homunculi instead. Determine the injuries and additional effects exactly as if the weapon just hit the Homunculi."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_chemistryandalchemy",
+        "name": "Chemistry and Alchemy",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Before the battle starts, but after all models (including INFILTRATORS) are deployed, you may place a rectangular elemental obstacle 2” wide and 6” long. It counts both as Difficult Terrain and Dangerous Terrain, and damage it causes has the Keyword FIRE, GAS or SHRAPNEL (chosen when the obstacle is placed). It cannot be placed within 6” of any model or on top of any other Terrain.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "GAS", "id": "kw_gas"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_secrets_philosophypoetrytheology",
+        "name": "Philosophy Poetry and Theology",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "secrets_of_the_house_of_wisdom"},
+        "contextdata": {
+            
+            "keyword_ignore":  {"value": ["kw_fear"]},
+            "model_attatch": {
+                "apply_to_attatch": {
+                   "keyword_ignore":  {"value": ["kw_fear"]}
+                }
+            },
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist is well-versed in the hidden truths of the universe and of the Divine, and has a calm and clear mind. The warband gains +1 DICE to all Morale Rolls, cannot become Shaken and the Alchemist plus another model of your choice is immune to the effects of the Keyword FEAR.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_philosophypoetrytheology_a",
+                "name" : "",
+                "description" : [],
+                "category" : "contextobject",
+                "self_ask": true,
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 1,
+                "hide": true,
+                "question_name": "getMemberOptionsFromWarbandModel"
+            }]
+    },
+    {
+        "id": "up_trenchdog_fireteam",
+        "name": "Loyal Dog",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "add_fireteam_model" : { "type": "ft_model", "count": 1 }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_heretictrooper_hereticlegionnaire",
+        "name": "Heretic Legionnaire",
+        "source": "core",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+            "new_upgrade": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Up to half of your Troopers can pick this upgrade. The Trooper becomes a Legionnaire and chooses to gain +1 DICE for either ranged or melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_legionnaire",
+                "name" : "Legionnaire Training",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "upgrade",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "tags",
+                                    "value": "heretictrooper",
+                                    "equals": true,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": ""
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "up_heretictrooper_hereticlegionnaire_ranged",
+        "name": "Ranged Legionnaire",
+        "source": "core",
+        "tags": {"trait": true,
+                "heretictrooper": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "ranged", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Trooper becomes a Legionnaire with +1 DICE to ranged attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_heretictrooper_hereticlegionnaire_Melee",
+        "name": "Melee Legionnaire",
+        "source": "core",
+        "tags": {"trait": true,
+                "heretictrooper": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "melee", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Trooper becomes a Legionnaire with +1 DICE to melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_trenchghost_sarcophagusmine",
+        "name": "Sarcophagus Mine",
+        "source": "core",
+        "tags": {"action": true },
+        "contextdata": {
+            "activated": {},
+            "replace_model": { "new_id" : "md_heretictrooper_mine"},
+            "set_stat": { "upgrades" : [
+                {"stat": "armour", "value": -3}
+                ]},     
+            "stash_equipment": {},           
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "They gain an armour characteristic of -3, but can carry no other weapons or any other items from the Armoury. In addition, whenever an enemy comes within 3” of the Mine, you can trigger a detonation as described below. Alternatively, you can forgo this and explode the mine during your own Activation of the model with a successful RISKY ACTION with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            },        
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When detonated, the mine explosion is treated as a BLAST 3” weapon targeting the Sarcophagus model with Keyword SHRAPNEL. Models within 1” of the model hit by the explosion roll their injuries with +1 DICE. The Mine itself is taken Out of Action.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "BLAST", "id": "kw_blast"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_zealotstrength",
+        "name": "Zealot Strength",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_strong"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model may have the Keyword STRONG.",
+                "glossary": [
+                    {"val": "STRONG", "id": "kw_strong"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_resurrection",
+        "name": "Martyr Penitent Ressurection",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "replace_model": { "new_id" : "md_trenchpilgrim_martyr", "new_price": 45, "self_discount": true},
+            "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]},
+            "reset_scar": {},
+            "reset_skill": {}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When a Trench Pilgrim dies, you may elect to re-buy them after the battle as a Martyr-Penitent resurrected by a Meta-Christ for a cost of 45 ducats. When hit, any attacks against a Martyr-Penitent add -1 DICE when rolling on the Injury Table. Their Melee bonus is increased to +1 DICE (reflected on the profile above). Martyr-Penitents retain any possessions they had before dying and being resurrected, but lose any Scars and advancements they had if they were ELITE via Campaign promotion.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_wrathofgod",
+        "name": "Wrath of God",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+           "keyword_ignore":  {"value": ["kw_fear"]},            
+           "model_equipment_restriction": {
+               "removed": [
+                   {
+                       "category": "ranged",
+                       "res_type": "all",
+                       "value": ""
+                   }
+               ],
+               "required": [
+                   {
+                       "category": "armour",
+                       "res_type": "tag",
+                       "value": "shield"
+                   }
+               ]
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    },
+                    {
+                        "category": "ranged",
+                        "value": false
+                    }
+                ]
+            } 
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model is immune to FEAR and disregards any BLOOD MARKERS from any source. This model may never wear armour, though they can carry a Trench Shield or Holy Icon Shield. This model may not carry any ranged weapons.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_machinearmour",
+        "name": "Machine Armour",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {          
+                
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [40]}
+                ]},
+           "change_model_equipment": {
+               "removed": [
+                "rel_md_eq_mechanisedheavyinfantry_base"
+               ],
+               "added": [
+                "rel_md_eq_mechanisedheavyinfantry_advanced"
+               ]
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model swaps out its Light Machine Armour for Machine Armour, and its base size increases to 40mm."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_highlandmachinearmour",
+        "name": "Highland Machine Armour",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {          
+                
+            "set_stat": { "upgrades" : [
+                {"stat": "base", "value": [40]}
+                ]},
+           "change_model_equipment": {
+               "removed": [
+                "rel_md_eq_mechanisedheavyinfantry_base"
+               ],
+               "added": [
+                "rel_md_eq_mechanisedheavyinfantry_highland"
+               ]
+           },
+            "remove_stat_option": {
+                "type": "base",
+                "direction": "increase",
+                "options": 
+                    [
+                        [
+                            {
+                                "base": [40]
+                            }
+                        ]
+                    ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model swaps out its Light Machine Armour for Highland Machine Armour, and its base size increases to 40mm."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_fianna",
+        "name": "Fianna",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_mod": {"mods": [
+                {"type": "add", "value": "kw_infiltrator"},
+                {"type": "add", "value": "kw_skirmisher"}
+            ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model gains the keywords INFILTRATOR and SKIRMISHER",
+                "glossary": [
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"},
+                    {"val": "SKIRMISHER", "id": "kw_skirmisher"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_berserker",
+        "name": "Berserker",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+           "keyword_ignore":  {"value": ["kw_fear"]},            
+           "model_equipment_restriction": {
+               "required": [
+                   {
+                       "category": "armour",
+                       "res_type": "tag",
+                       "value": "shield"
+                   }
+               ]
+           },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": false
+                    }
+                ]
+            } 
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " This model is immune to FEAR and disregards any BLOOD MARKERS from any source. Berserkers never wear armour, though they can carry a Trench Shield.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_rapidassault",
+        "name": "Rapid Assault",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model may add +1 DICE to all their Dash ACTIONS.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_chewa",
+        "name": "Chewa",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model gains +1 DICE against enemies that are in melee combat with a model other than the Chewa. If this enemy is in melee with 2+ other models, this bonus is increased to +2 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_vanguard",
+        "name": "Vanguard",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Unless the scenario prohibits use of the special deployment of INFILTRATORS, you may deploy the Vanguard on any table edge as long as they are at least 8” away from any enemy model after INFILTRATORS are deployed. Vanguard can also be deployed in your own deployment zone as standard.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightcompanionofthefly_base",
+        "name": "Knight Companion of the Fly",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": {
+            "new_upgrade": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to Ranged or Melee.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_companion",
+                "name" : "Knight Companion Selection",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "upgrade",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "tags",
+                                    "value": "knightcompanionofthefly",
+                                    "equals": true,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": ""
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "up_plagueknightcompanionofthefly_ranged",
+        "name": "Ranged Knight",
+        "source": "core",
+        "tags": {"trait": true,
+                "knightcompanionofthefly": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "ranged", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Knight gains +1 DICE to ranged attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightcompanionofthefly_melee",
+        "name": "Melee Knight",
+        "source": "core",
+        "tags": {"trait": true,
+                "knightcompanionofthefly": true
+                },
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "melee", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Knight gains +1 DICE to melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightalmoner",
+        "name": "Plague Almoner",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model requires one less BLOOD MARKER/INFECTION MARKER to cause Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrottencross",
+        "name": "Knight of the Rotten Cross",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": {
+            "model_add_equipment": {
+                "additions": [
+                    {
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" }
+                        ]
+                    }
+                ]
+            }
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When acquired, this model may purchase any weapon from the New Antioch or Heretic Legion list. The Knight of the Rotten Cross cannot give its weapon away but can purchase a new one if the old one is lost.",
+                "glossary": [
+                    {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_rottencross",
+            "name" : "Rotten Cross Expanded Armoury Option",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "hide": true,
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "factionequipmentrelationship",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                        ],
+                        "subparams": [
+                        {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_hereticlegion",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        },
+                        {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_cultoftheblackgrail",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        }
+                            
+                        ]
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "up_plagueknightrankofbutcher",
+        "name": "Knightly Rank of Butchery",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": {
+            "upgrade_stat": { "upgrades" : [
+                {"stat": "melee", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Knight gains +1 DICE to melee attacks.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrankbutcherking",
+        "name": "Butcher King",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If at the end of a game, this Butcher Knight is not Out of Action and it has taken at least one enemy model Out of Action with a Melee Attack, gain 1 Glory.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrankofthefeast",
+        "name": "Knightly Rank of the Feast",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Grants a Butcher Knight and any models within 3” of that Butcher knight +1 DICE on Ravenous Infection Tests.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_plagueknightrankofferocity",
+        "name": "Knight of Twin Cleavers",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "knight_ranks"},
+        "contextdata": { 
+            
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "melee"
+                    }
+                ],
+                "additions": [
+                    "kw_shrapnel"
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Allows the Butcher Knight to ingore the Off-Hand special rule (-1 DICE to attacks with an off-hand weapon) and gives them the SHRAPNEL keyword on any melee weapon they choose to wield for an additional +5 ducats.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_infectioushound",
+        "name": "Infectious Hound",
+        "source": "core",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model causes INFECTION MARKERS with their unarmed attacks instead of BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_maddeningbuzz",
+        "name": "Maddening Buzz",
+        "source": "core",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Every ACTION taken by non-BLACK GRAIL models within 8” of a Herald is considered RISKY. Note: This does not affect non-ACTION rolls such as Charge distance rolls, nor does it affect ACTIONS that do not require a roll on the Action Success Chart.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_burninginferno",
+        "name": "Burning Inferno",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a Ranged Attack ACTION with GOETIC (1-3) spell the Sorcerer opens a portal to the Lake of Fire and draws forth a great screaming ball of infernal lava mixed with damned souls. Select a 1x1mm point within 36” that the Sorcerer can see. Next, make a ranged attack ACTION: this attack suffers penalties for Long Range but not for Cover. If the roll fails (i.e. you roll 6 or less), the fireball lands 1” away from its intended location, multiplied by the number representing the degree of failure (for example, if you rolled 5, the fireball lands 2” away, as 7-5=2). The direction is decided by your opponent. The Burning Inferno has the Keyword BLAST X”, where X is the amount of BLOOD MARKERS spent. Additionally, if the Burning Inferno lands directly on top of a model, it ignores that model’s armour. This attack has the Keyword FIRE.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_slavemaster",
+        "name": "Slavemaster",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a GOETIC (1) spell, this model can command any friendly Yoke Fiend within 12” to do one of the following:",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Move: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Yoke Fiend takes a Standard Move ACTION of up to 6”.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Ranged Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " The Yoke Fiend takes a Ranged Attack ACTION with any Ranged weapon it has.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Melee Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Yoke Fiend takes a Melee Attack ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Sacrifice: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Yoke Fiend kills itself (it is removed from the board immediately as a casualty)."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_wrath_chargeofhatred",
+        "name": "Charge of Hatred",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model Charges, it can always move the maximum distance of 12”, although it suffers penalties to this movement as standard (Difficult Terrain, Standing etc.). Additionally, it must make a RISKY ACTION to Charge an enemy model other than the closest one.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_wrath_lessermarkofcain",
+        "name": "Lesser Mark of Cain",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                              
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "An inferior copy of the mark that God-Tyrant YHWH placed on the forehead of Cain, the First Murderer."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Injuries against this model are rolled with -1 DICE.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_wrath_blindrage",
+        "name": "Blind Rage",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model rolls to Dash with +1 DICE.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_envy_enviouseyes",
+        "name": "Envious Eyes",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+            "model_add_equipment": {
+                "additions": [
+                    {
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" },
+                            { "category": "armour" },
+                            { "antitag": "shield" }
+                        ]
+                    }
+                ]
+            },
+            "override_flat": {
+                "id": ["md_sorcerer"],
+                "selections": { "type": "factionequipmentrelationship" }
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model can be equipped with one weapon or suit of armour (excluding shields) from the Trench Pilgrim, New Antioch or Iron Sultanate warband armouries, including ranged weapons. You must pay the cost of this item as standard and, if it is lost, it must be purchased again as soon as you have the funds. This item follows the normal limitations. The model will never willingly trade this item away or allow it to be removed. A Sorcerer with this Power can be equipped with a ranged weapon purchased in this way, even though they can normally only equip melee weapons."
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_enviouseyes",
+            "name" : "Envious Eyes Selections",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "hide": true,
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "factionequipmentrelationship",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                        ],
+                        "subparams": [
+                        {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_trenchpilgrim",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        },
+                        {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_courtofthesevenheadedserpent",
+                                    "equals": false,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": [
+                                
+                            ]
+                        }
+                            
+                        ]
+                    }
+                }                        
+            }
+        }]
+    },
+    {
+        "id": "up_goetic_envy_covetedposition",
+        "name": "Coveted Position",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, this model changes positions with any other model it can see within 12”, as long as the bases of the models fit into their positions. This cannot be done if either model is engaged in Melee Combat.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_envy_whatisyoursismine",
+        "name": "What Is Yours Is Mine",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (1) Spell, this model can remove a BLOOD MARKER or BLESSING MARKER from any model that it can see. This model then gains a marker of that type. This marker can come from models regardless of their Keywords and is separate from the BLOOD MARKER used to cast this spell.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_lust_forbiddenpleasures",
+        "name": "Forbidden Pleasures",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Before the Battle begins, select one model in your warband without the Keyword DEMONIC. It starts the Battle with three BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_lust_exquisitepain",
+        "name": "Exquisite Pain",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (1-2) Spell, this model inflicts X BLOOD MARKERS on an enemy model that it can see, where X is the amount of BLOOD MARKERS spent.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_lust_callofflesh",
+        "name": "Call of Flesh",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell that ends this model’s Activation, beckoning magic fills the air. When the enemy next Activates a model during this Turn, that model must Move as its first ACTION. This Move must be a Retreat if the model started its Activation in Melee Combat with a model other than the caster of this Spell. If that model is Down, it instead Stands and then Moves. During this movement, it moves in a direct path toward the caster of this Spell through any passable terrain, including Dangerous Terrain, Jumping Down etc. The model suffers injuries as normal. It can act normally after taking the prescribed ACTION(S), or attempting to take the prescribed ACTION(S) if it couldn’t, but cannot target the caster of this Spell during this Activation with ranged or melee attacks.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_pride_prouddefiance",
+        "name": "Proud Defiance",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "While this model is on the battlefield, its Warband automatically succeeds Morale Tests."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_pride_tooproudtofall",
+        "name": "Too Proud to Fall",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, when this model would otherwise fall Down for any reason, it instead doesn’t. If used to negate a Down result, this model still suffers any BLOOD MARKER as normal. This Spell can be cast outside of this model’s Activation. Note that if a TOUGH model suffers an Out of Action result, which is then converted into Down, this Spell can be used, but TOUGH is considered to have been used.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_pride_lightofsamael",
+        "name": "Light of Samael",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, this model can hit an enemy model it can see within 24” with punishing light. That model rolls on the Injury Chart. If the target is on a 32mm or smaller base and was not taken Out of Action, it is pushed D6” directly away from the caster of this Spell, stopping if it hits another model or a solid object. They also stop if they would otherwise enter Impassable Terrain or if they would be pushed out of the battlefield.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_sloth_morpheanmind",
+        "name": "Morphean Mind",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The mind of this Demonic creature warps the flow of time so it can take as long as it wishes to decide on its actions."
+                    }
+                ]
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "No more than one BLOOD MARKER at a time can be used to negatively affect an ACTION or RISKY ACTION this model takes.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_sloth_charmofacedia",
+        "name": "Charm of Acedia",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The great aversion to effort possessed by this infernal warrior seeps to nearby creatures or to the very Creation itself, forcing them to bend to its will and thus avoiding the need for the demonic creature to struggle to achieve its aims."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This GOETIC (1) spell can be cast right before the model casting it takes an ACTION involving any model, friend or foe (including the model itself and thus covering Dashing, Climbing, Jumping etc). The target ceases any potential resistance or tension, seeing no point in such effort, making the ACTION succeed automatically with no dice rolled.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_sloth_daemoniummeridianum",
+        "name": "Daemonium Meridianum",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [         
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "It is all but impossible to approach this infernal warrior with any energy or enthusiasm."
+                    }
+                ]
+            },           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Open Terrain within 6” of this model is considered Difficult Terrain for enemy models. Dangerous Terrain within 6” of this model is considered both Dangerous Terrain and Difficult Terrain for enemy models."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_gluttony_bellyofthebeast",
+        "name": "Belly of the Beast",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "This creature is known to feast on vast mounds of flesh before it leaves Hell. If it is cut in battle, its opponents suffer agonizing burns as the acidic contents of their gut gushes all over them."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whenever an enemy model inflicts one or more BLOOD MARKER on this model with a melee attack, that model suffers one BLOOD MARKER.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_gluttony_uncaringgluttony",
+        "name": "Uncaring Gluttony",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "This curse drives its target mad with an unnatural hunger, making them heedless of any danger as it seeks to consume any matter its manipulated mind perceives as edible."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a GOETIC (2) Spell, this model can curse any enemy model that has not been Activated during the Battle with ravenous hunger. Pick any one equipment item (i.e. not weapon or armour) the model is carrying. This item is discarded for the duration of the battle as the model has been chewing on it, rendering the item temporarily unusable.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_gluttony_eateroftheflesh",
+        "name": "Eater of the Flesh",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "An unnatural hunger for the flesh haunts this creature. Whenever the blood of a mortal creature is spilled this demonic entity may consume it through tears in reality, to gorge themselves in viscera and guts."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Whenever a model without the keyword DEMONIC or BLACK GRAIL suffers one or more BLOOD MARKERS in melee combat against this model, you can remove those markers and heal an equal number of BLOOD MARKERS from this model. This model may charge and engage friendly models in melee combat.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_greed_bodyofgold",
+        "name": "Body of Gold",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic" },
+        "contextdata": {
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_golem"},{"type": "remove", "value": "kw_tough"}]}
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "So great is the devotion of this servant of greed that their entire body takes on the aspect of the precious metal."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains the Keyword GOLEM. If the model has the Keyword TOUGH it loses it.",
+                "glossary": [
+                    {"val": "GOLEM", "id": "kw_golem"},
+                    {"val": "TOUGH", "id": "kw_tough"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_greed_blackheart",
+        "name": "Black Heart",
+        "source": "core",
+        "tags": {"action": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Greed has corrupted the heart of this fallen creature to such an extent that within their chest is a gaping hole. When it desires something enough, it bleeds black tar that empowers this servant of avarice."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This GOETIC (1) power allows the model to add +1 DICE to any ACTION it takes. Can be used multiple times per activation, but only once per ACTION.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_goetic_greed_universalgreed",
+        "name": "Universal Greed",
+        "source": "core",
+        "tags": {"trait": true, "special_category": "goetic"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "paragraph", "lore": true},
+                "content": "",
+                "subcontent": [                          
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The greed of others is just as welcome to Hell as that displayed by its own servants."
+                    }
+                ]
+            },          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "For every model in the opposing force that is worth 150 ducats or more, this model gains +1 BLESSING MARKER at the start of the battle.",
+                "glossary": [
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_fruit",
+        "name": "Eat of the Fruit",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "keyword_add": {"value": ["kw_demonic"]}
+        },
+        "description": [           
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model gains the DEMONIC keyword.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_gunsblazing",
+        "name": "Gunslinger",
+        "source": "westfalia",
+        "tags": {"trait": true
+                },
+        "contextdata": {
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "pistol"]
+            },
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "pistol"
+                    }
+                ],
+                "additions": [
+                    "kw_assault"
+                ]
+            }  },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If armed with two “pistols”, this model can make Ranged Attack ACTIONS with both of them when Making a Ranged Attack. In addition, this model suffers no penalty when using a “pistol” as an Off-Hand weapon. It gives normal “pistols” the character uses the Keyword ASSAULT.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "ASSAULT", "id": "kw_assault"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_hunger",
+        "name": "Feral Hunger",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model charges an enemy model, it can always treat the dice roll added to the models movement as the maximum value (6 unless otherwise specified). The model suffers penalties to this movement as standard (Difficult Terrain, Standing etc)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_miasmaofpestilence",
+        "name": "Miasma of Pestilence",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a PUTRESCERE (3) arcana, any models within 6” of the caster are treated as though they are in COVER (-1 DICE from shooting) and it negates any bonuses a model would gain from elevation. This lasts until the caster’s next activation.",
+                "glossary": [
+                    {"val": "PUTRESCERE (3)", "id": "kw_putrescere"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_motherscall",
+        "name": "Mother's Call",
+        "source": "creature_caster",
+        "tags": {"action": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a PUTRESCERE (1) arcana, this model can command any friendly Thrall model within 8” to do one of the following:",
+                "glossary": [
+                    {"val": "PUTRESCERE (1)", "id": "kw_putrescere"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Move: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Standard Move ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Melee Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Melee Attack ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Feast: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall can use their Ravenous Infection Ability, doubling the amount of INFECTION MARKERS from the Ravenous Infection Ability if successful.",
+                                        "glossary": [
+                                            {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This arcana does not require Line of Sight."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_rapturousfeast",
+        "name": "Rapturous Feast",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Great Hunger burns so deeply within the caster, that nearby thralls find their saliva growing thick with digestive fluids in anticipation. Friendly models within 4” of this model (including this model) inflict INFECTION MARKERS instead of BLOOD MARKERS with their melee attacks if they have also made a Charge Action earlier this round.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_vilechurning",
+        "name": "Vile Churning",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a PUTRESCERE (1-2) arcana, any models within 1” of the caster (excluding the caster themselves) without the ARTIFICIAL or DEMONIC Keywords suffer a number of BLOOD MARKERS equal to the number of INFECTION MARKERS spent. This arcana may be cast even if the caster is Engaged in Melee Combat.",
+                "glossary": [
+                    {"val": "PUTRESCERE (1-2)", "id": "kw_putrescere"},
+                    {"val": "ARTIFICIAL", "id": "kw_artificial"},
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_virulentclot",
+        "name": "Virulent Clot",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once per turn the caster may use this PUTRESCERE (2/4/6) arcana immediately before an injury is rolled against the model or any Thrall within 3” of the caster. If it is, deduct 1 from the injury result for every two INFECTION MARKERS spent unless the attack. This attack ignores the FIRE keyword.",
+                "glossary": [
+                    {"val": "PUTRESCERE (2/4/6)", "id": "kw_putrescere"},
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_vomitus",
+        "name": "Vomitus",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a ranged attack ACTION with PUTRESCERE (1-3), this model opens their mouth and spews forth an excessive stream of vileness that burns and causes flesh to erupt into fluid-filled pustules. Do not make a Success Roll for the attack. Instead, measure a straight line 1mm wide and up to 8” long from the attacking model to a point on the ground or a model’s base. The line stops if it reaches any terrain piece that is taller than the model making the Attack. Make an Injury Roll for every model (friend or foe) that is touched by the line, apart from the attacking model itself. Add +1 to Injury Chart rolls per INFECTION MARKER used for the Arcana after the first (e.g. using 2 INFECTION MARKERS gives +1 to Injury Chart rolls, 3 INFECTION MARKERS gives +2 to Injury Chart rolls, etc). This attack inflicts INFECTION MARKERS Instead of BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "PUTRESCERE (1-3)", "id": "kw_putrescere"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_putrescere_weepingbuboes",
+        "name": "Weeping Buboes",
+        "source": "creature_caster",
+        "tags": {"trait": true, "special_category": "arcana_putrescere"
+                },
+        "contextdata": {
+        },
+        "description": [          
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once per turn the caster may use this PUTRESCERE (1) arcana immediately before an injury is rolled against the caster or any model within 8” of the caster. This allows the model to ignore the FIRE keyword until the end of the round.",
+                "glossary": [
+                    {"val": "PUTRESCERE (1)", "id": "kw_putrescere"},
+                    {"val": "FIRE", "id": "kw_fire"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "up_unendingstarvation",
+        "name": "Unending Starvation",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "movement", "value": 1}]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A model with this upgrade adds +1” to their movement Characteristic and may target themselves with the Ravenous Infection Ability. In addition, if this model is more than 1” away from an enemy model, its first action each Activation must be a Move, Charge or Dash Action towards the nearest enemy model (choose in the case of a tie) moving the maximum distance possible."
+            }
+        ],
+        "options": []
+    }
+]

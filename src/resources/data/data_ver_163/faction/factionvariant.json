@@ -1,0 +1,548 @@
+[
+    {
+        "id": "fc_ironsultanate_fv_fidaiofalamut",
+        "name": "Fidai of Alamut - The Cabal of Assassins",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_sultanate"}
+        },
+        "base_id": "fc_ironsultanate",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The pact between the Iron Sultanate and the Assassin fortress of Alamut ensures that the Sultan is served by the exquisitely skilled killers of the Old Man of the Mountain in exchange for independence of the Assassin’s domain."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "But though most outsiders know the Assassins through their service to the forces of the Iron Wall, sometimes during the dark of night small, deadly bands move silently into the hellscape of No Man’s Land. In deepest secrecy Rashid al-Din Sinan, the undisputed ruler of Alamut dispatches his hand-picked disciples on Missions of his own, communicating their orders with no spoken words, signs nor written messages, but talking directly to them in their dreams. What the purpose of such operations is no-one knows, and not even the most sadistic Heretic torturer-priest has been able to make them divulge the secrets of Alamut from captured Assassins. These warbands are known as Fida’i (which means ‘Sacrifice’), dedicated to completing their mission and returning to Alamut to receive rewards said to be able to match those of Paradise itself. They are led by a Master Assassin: one of the deadly Hands of Alamut, with two fully-trained members of the Order. A number of trainee acolytes will serve them during the mission, eager to prove their mettle and be initiated into the Order of Assassins."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Alamut is also a home to a renegade sect of Ismaili Dervishes, warrior monks sworn to poverty and a lethal way of fighting. They accompany the Assassins on their secret missions as an act of piety and payment for their shelter, and their whirling dance of death has been the end of many a disbeliever."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_flockofassassins","rl_masterassassin","rl_assassinacolytes","rl_alamutalone","rl_killingsquad","rl_dervishes","rl_artofassassination"],
+        "options": []
+    },
+    {
+        "id": "fc_ironsultanate_fv_houseofwisdom",
+        "name": "House of Wisdom",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_sultanate"}
+        },
+        "base_id": "fc_ironsultanate",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The House of Wisdom is the pre-eminent centre of learning within the Iron Sultanate. Its libraries, workshops, forges, gardens of exotic and wondrous plants, hospitals and observatories are unmatched. Within its halls are mechanical marvels and weapons from far-off lands, as well as trophies captured by the Sultan’s forces and brought to be examined by the learned scholars of the House of Wisdom. Philosophers and theologists debate in its chambers; ghanzal and qasīda poets compose verses describing the beauty and pain of life. Thus it is no wonder that the House attracts the greatest minds of the age to study in its hallowed halls, from within the Sultanate and far beyond the Iron Wall."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In its laboratories guarded by the faithful Kavass, the Jabirean Alchemists dissect and study the War Beasts of Shaitan so their weaknesses can be laid bare and exploited by the Believers. At such times, their roars of rage and pain echo through the porphyry corridors of the House."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "To maintain a degree of independence, regardless of the royal funding, the House of Wisdom performs many services for the Sultan’s armies. Their best alchemists work with the Sultanate foundries where the Great Cannons of the Iron Wall are cast. Takwin creations are provided to bolster the army of Those Who Believe, as are suits of armour and alchemical ammunition. The House of Wisdom also maintains the Sultanate fleet of airships, which both guard the realms of Those Who Believe against enemy air forces and maintain vigil over lands under darkness. They make regular excursions deep into enemy territory to witness whether the Great Sandstorm still covers the Two Holy Places, reporting any news back to the Sultan."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In exchange, the masters of the House of Wisdom have freedom to despatch their own excursions and expeditions into the lands beyond the wall, to seek tomes of knowledge lost in the dark and terrible days when the forces of Jahannam overran much of the Levant and great cities fell like blossoms of a Jasmine flower in fiery heat. Sometimes they are journeys to capture an especially ferocious beast of the enemy. At other times they seek to capture or kill Heretic Alchemists which they see as both an offence to their craft and a threat to the entire world."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These journeys are exceedingly dangerous and they are not undertaken lightly. Each Alchemist dispatched on such a journey is an irreplaceable loss, and since they operate under their own authority, they cannot expect direct support from the Sultan’s forces. Many noble Fāris warriors have taken oaths to protect these scholars in their journeys, as well as their own Kavass bodyguards sworn to fight and die in defence of their Masters."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_alchemists","rl_prideofjabir","rl_privateventure","rl_nobleguardians","rl_kavass","rl_secretsofthehouseofwisdom","rl_weaponcollections"],
+        "options": []
+    },
+    {
+        "id": "fc_ironsultanate_fv_defendersoftheironwall",
+        "name": "Defenders of the Iron Wall",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_sultanate"}
+        },
+        "base_id": "fc_ironsultanate",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "\"Whoever fears defeat always remains defeated. Do you truly think the Iron Wall alone protects Those Who Believe? For its iron extends into the very hearts of our warriors wherever their duties take them.\""
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Since assuming the throne in the year 1902, Sultan Malik (affectionately nicknamed the ‘Lion Padishah’’ by his troops) has demonstrated a more aggressive policy in waging the Great War. On an ocassion, even detachments from the the million-strong garrison of the Iron Wall are sent on missions beyond the Wall, for the Sultanate has never relinquished the claim to the muslim lands lost to the Heretics. Though the Great Wall still comes under continuous attacks as the forces of Shaitan ceaslessly test the defenses of the Believers, the Sultan refuses to sit idle and fight passively only in defense. Thus the regular troops defending the Iron Wall have sent into missions far more regularly than in the past, hardening the raw recruits into veterans."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When the Defenders of the Iron Wall go into an expedition into No Man’s Land, they utilize their unique way of war to its fullest extent. All warriors have been drilled ceaslessly in marksmanship that takes advantage of elevated positions and using Siege Jezzails in two-man teams. These skills are honed into perfection, and it is almost impossible to dislodge these troops from a well-prepared high ground. Mighty Brazen Bulls form a lynchpin of the defense in close quarters, and can push back even the greatest of enemy champions."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The core of any such warband is often formed around the Sultanate Sappers: experts at demolition, mine-setting and veterans of the bitter battles above and below the Wall. They are superb in the transportation and use of the Field Artillery, erecting defensive positions at a speed that borders on supernatural, and using explosive charges to frustrate their enemies who will be whittled into nothing before they reach the lines of Sultanate’s defenders finish them off with ruthless efficiency."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_silahdar","rl_farfromthesublimegate","rl_sipahi","rl_janissaryofficers","rl_sappercorps","rl_siegejezzailteams","rl_marksmanshipoftheironwall"],
+        "options": []
+    },
+    {
+        "id": "fc_hereticlegion_fv_hereticnavalraidingparty",
+        "name": "Heretic Naval Raiding Party",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_heretic"}
+        },
+        "base_id": "fc_hereticlegion",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Heretic Fleet operates as a semi-autonomous entity under the command of its High Captain and other admirals. The Heretics have their own marine infantry that often operates in small bands, striking deep behind enemy lines and executing smash and grab missions. They are always on the lookout for captives, loot, information, supplies, rare artefacts and any opportunity to express their cruelty and brutality. They are picked from amongst the best soldiers of the Heretic Legions, and have access to equipment and weapons gained from past battles and terrible atrocities they have committed."
+            }
+        ],
+        "team": "hell",
+        "cut_rules" : [],
+        "rules" : ["rl_fastaslightning","rl_closeassaultweapons","rl_lighttroops","rl_letsleepingdogslie","rl_unseenadvance"],
+        "options": []
+    },
+    {
+        "id": "fc_hereticlegion_fv_trenchghosts",
+        "name": "Trench Ghosts",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_heretic"}
+        },
+        "base_id": "fc_hereticlegion",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Sometimes when Heretic troopers die upon a hallowed ground or in presence of an uncorrupted holy relic, they become trapped between planes of existence. Claimed by neither Heaven nor Hell, the Trench Ghosts become Undead – doomed to fight a war without an end, attacking both the Faithful and Heretic alike, hating all life, obeying commands that no living can hear. Their greed for worldly wealth and items of power remains undiminished, and their semi-corporeal bodies are exceedingly difficult to destroy. Their faces, covered with gas masks they no longer have any use for, betray nothing of the agony they endure. In close combat they whisper of the agony of their existence and the pain of their doom which will never give them rest, their broken bodies and shattered minds forced to endure the horrors of war for all eternity. Few can withstand such terror without breaking."
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Tales are told of many Trench Ghost Warbands that haunt No Man’s Land, but the most famous are the Ghosts of Tannenberg, shades of the Heretic force that won the battle of Tannenberg but after sacking the Church of St. Jacob passed into the shadow."
+            }
+        ],
+        "team": "hell",
+        "cut_rules" : [],
+        "rules" : ["rl_horror","rl_semicorporeal","rl_spectral","rl_undead","rl_enemiesofall","rl_lostsouls","rl_slow","rl_sarcophagusmine","rl_barbedwirebanshee","rl_tankpalanquin"],
+        "options": []
+    },
+    {
+        "id": "fc_hereticlegion_fv_knightsofavarice",
+        "name": "Knights of Avarice",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_heretic"}
+        },
+        "base_id": "fc_hereticlegion",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The warbands who follow the Prince of Greed call themselves the Knights of Avarice. Such heretics display their wealth extravagantly and prefer to carry the most expensive and hard-to-acquire weapons, armour and equipment, suffering none to join them who lacks the means to obtain their glittering panoply. They are festooned with chains of gold and the finest silk cloaks, their armour is gilded with gold and decorated with precious stones, and the handles of their great coin hammers are made of the rarest of wood. Yet despite the opulent wealth at display, their finery is tarnished by the blood and soot that spews from the Hellgate, and the delicate artistic filigree of their golden masks is both terrible and beautiful in equal measure. In combat they favour hammers and clubs that break the bones but leave the flesh and blood intact, as well as poison gas and highly accurate rifles. They scorn crude and destructive fire or explosive weapons that could damage any objects of value."
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "After the Knights of Avarice have claimed victory in combat, they scour the battlefield or any settlement they’ve conquered like a swarm of locusts. Anything and everything of value is taken: metals from brass to bronze, silver to gold, art objects, precious stones, livestock, trade goods, rare tomes and scrolls… all are meticulously catalogued and carried away by slaves and demonic beasts of burden or great armoured cars that take the stolen loot to the underground treasure chambers which act as the temples of Mammon. Even the dead are stripped of their flesh with the detached skill of seasoned butchers, ready to be sold at market. Internal organs taken from fallen victims are carefully preserved in alchemical liquids to be sold to the scientists of the infernal laboratories."
+            }, 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "For the Heretics of the Path of Mammon hoarding riches is not mere acquisition of wealth – it is their religious compulsion. Ironically, they gain little pleasure from their vast wealth, as their greed makes them continuously desire ever greater riches. Thus their warbands forever roam No Man’s Land, looking for forgotten treasures or foes to dissect and turn into wealth. For the greed of Mammon will never be sated."
+            }
+        ],
+        "team": "hell",
+        "cut_rules" : [],
+        "rules" : ["rl_preservetheloot","rl_worshipmammon","rl_mammonschosen","rl_corruptmerchants","rl_infernalrivalry","rl_goeticwarlocks","rl_debtorstomammon"],
+        "options": []
+    },
+    {
+        "id": "fc_trenchpilgrim_fv_processionofthesacredaffliction",
+        "name": "Procession of the Sacred Affliction",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_pilgrim"}
+        },
+        "base_id": "fc_trenchpilgrim",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Trench Pilgrims of the Procession of the Sacred Affliction are known for their zeal in close quarter combat, their armour decorated with icons and shields adorned with the depictions of the Saints, which despite appearances can withstand machine gun bullets. The millstones they carry upon their backs are used to tie about the necks of sinners before drowning them in the mud and blood of No Man’s Land. They spurn the use of the Iron Capirotes, believing firmly that faith alone is enough to withstand the horrors of Hell."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_facethyfears","rl_reliquaryarmoury","rl_punishingmillstones","rl_meleefocused","rl_zealotstrength","rl_hammerandanvil","rl_wrathofgod"],
+        "options": []
+    },
+    {
+        "id": "fc_trenchpilgrim_fv_cavalcadeofthetenthplague",
+        "name": "Cavalcade of the Tenth Plague",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_pilgrim"}
+        },
+        "base_id": "fc_trenchpilgrim",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "This Trench Pilgrim Procession traditionally sacrifices lambs before battle, anointing themselves in its blood to ward off the wrath of God. The Pilgrims then draw holy symbols with the blood of the sacrifice upon their bodies, clothing and armour, and then march to battle singing hymns, in certain belief that the blood of the Lamb shields them from any harm."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Firm believers in traditional reading of the Holy Texts, they reject the new doctrines of the Meta-Christ by the Church. They steal Communicants from other Processions and force them to fight for them in penance for being born from Sin."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_bloodsacrifice","rl_heavenawaits","rl_theunclean","rl_dayofhiswrath","rl_stolencommunicants","rl_favourofthelord"],
+        "options": []
+    },
+    {
+        "id": "fc_trenchpilgrim_fv_warpilgimageofsaintmethodius",
+        "name": "War Pilgrimage of Saint Methodius",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_pilgrim"}
+        },
+        "base_id": "fc_trenchpilgrim",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "From the Night of Fire and Blood that laid low the Greater Moravian monastery of Velehrad emerged a single monk of the Orthodox Order of St. Methodius. Though the rest of the brotherhood perished in the catastrophe, slaughtered by a squadron of ruthless Death Commandos, the sole survivor brought with him the books of the Saint and his faith out of the ruin."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "With the loss of the workshops and monastic libraries of Velehrad, it was believed that the secrets of the Anchorite construction were lost, especially since the Church no longer wished to pursue their construction due to advances in armour technology elsewhere. But this was in error. The monk, named brother Akakios, still knew the craft."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Akakios fled to the Theocratia of Hellas and founded a new monastery on the slopes of holy Mount Athos. Many monks lived in the monastic communities on the slopes of the mountain and some were attracted to join their brother. Thus Akakios became the first War Prophet of the Order and many lay members joined or became supporters and, eventually, the foot soldiers of the well-equipped and disciplined War Pilgrimages of St. Methodius. No other Pilgrim Progression can match the methodical and technical approach of the soldiers of the Order."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In their fortified monastery the learned monks hoard and protect the knowledge of modifying the sacred designs of St. Methodius. Their Shrine Anchorites are without a peer and feature many modern weapons and adjustments which allow them to carry modern long-range weaponry. No other warband has such abundant access to Anchorites or the variety of sophisticated weaponry and equipment."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Following the ancient Orthodox creed, the pilgrims of St. Methodius reject many of the teachings and customs of other Pilgrim Processions. They consider the creation of the Communicants as a dangerous heresy and condemn the use of Martyrdom Devices as an affront to God’s commandment against suicide, as well as holding to other beliefs many of the Trench Pilgrims view as an essential part of their crusade against the forces of Inferno. Bitter schisms and arguments with other sects sometimes erupt into violence, and the Church itself accuses the Order of Hetrodoxy of clinging to the outdated Eastern Orthodox faith."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "However, due to their formidable fortress monasteries upon Mount Athos and their undeniable zeal on the battlefield, the Princes of the Church turn a blind eye to the affairs of the followers of St. Methodius, as long as they focus all their zeal in the seemingly impossible task of relieving the city of Trebizond. Here, according to the visions of prophet Akakios, the unsullied faith is still practiced and the Salvation of Mankind will be achieved. To this end, the Order sends one War Pilgrimage after another to the front line. Not one has made it within sight of the fabled walls of Trebizond, but this only increases the zeal of the Order and rouses them into ever greater efforts to reach the City of the Hill."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_anchoritecloister","rl_anchoritearmoury","rl_mortalsin","rl_communicantheresy","rl_treasureinheaven","rl_chasteorder","rl_gunsmithmonks","rl_followersofsaintmethodius"],
+        "options": []
+    },
+    {
+        "id": "fc_newantioch_fv_papalstatesinterventionforce",
+        "name": "Papal States Intervention Force",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Papal states who all operate under the command of the Supreme Pontiff of Rome rather than the Duke of New Antioch are sometimes dispatched to the front lines to perform a specific duty such as hunting down and eliminating dangerous Heretic leaders or recovering artefacts of great spiritual importance."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These Warbands are typically quite small but have access to extremely elite soldiers and specialist equipment. They are led by utterly devoted warrior-monks and priests hand-picked by the Pope."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_specialistforce","rl_swissguard","rl_supremeblessing","rl_farfromhome","rl_vaticansrepresentative","rl_lector"],
+        "options": []
+    },
+    {
+        "id": "fc_newantioch_fc_eirerangers",
+        "name": "Eire Rangers",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Eire is a stronghold of the Church and an ancient centre of learning. Due to the constant and devastating raids of the Heretic Navy, they are bitter enemies of the Infernal forces. The Emerald Isle has endured hunger and ravaged by the Black Grail, as well as a full-fledged invasion aimed at destroying the famed House of Manuscripts where many of the holiest of texts are kept. After this century of ruthless battles and brutal guerrilla warfare against the invaders, the warriors of Eire are now masters of skirmish fighting, hit-and-run tactics and ambushes. Elite Fianna warrior-hunters are especially adept at these guerrilla tactics: they uphold the ancient tradition of a band of roving warriors living off the land. While seen as trouble-makers and godless hellraisers, they are nevertheless expert skirmishers, and easily find employment in the warbands who take the Cross and travel to New Antioch to strike back at the enemy. These warriors adorn themselves with grisly trophies in the manner of their pagan ancestors, carrying skulls of the vanquished – much to the irritation of the Church."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Due to the ravages of the wars, the island nation has few resources for heavy armour or most intricate automatic weapons, but they more than make up for this with their skilled light infantry and knowledge of the lay of the land. So when the Poet-King Tadhg O’Connor dispatches his famed Rangers to aid the Principality of New Antioch instead of paying the yearly tithe of Vienna, the Duke is more than happy to accept these fierce warriors instead."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A rare latent Berserker trait runs in a few warrior bloodlines of Eire. It can be made to manifest with the Chemical Communion of the blood of the Meta-Christ. Such fighters enter a state of battle-rage, where no bullet or blade seems to cause them any harm."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : ["rl_newantiochfireteam"],
+        "rules" : ["rl_fianna","rl_carnyx","rl_hitandruntactics","rl_berserker","rl_stronginfaith","rl_looseorganisation","rl_followersofsaintpatrick","rl_lightinfantry"],
+        "options": []
+    },
+    {
+        "id": "fc_newantioch_fc_stortruppenofthefreestateofprussia",
+        "name": "Stoßtruppen of the Free State of Prussia",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When the need to take out an enemy strongpoint or assault an especially powerful defensive line of trenches or redoubts arises, the Duke of Antioch often calls upon the famed Stoßtruppen forces of the Free State of Prussia. These elite units often operate in deep forward positions, and quite often they carry secret orders or specific missions from the Princes of the Church or the New Antioch High Command."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Free State Shocktroopers are selected and trained specifically to perform lightning assaults, master the firearms of close assault, and operate in Fireteams that are perfectly synchronised in their combined arms tactics. Admittance to this elite group is strictly by merit. All members must be decorated athletes, under 25 years of age, unmarried and must have demonstrated a high level of aggression on the battlefield. Of all the soldiers serving Prussia, Stoßtruppen have by far the highest casualty rate. When inducted into the ranks, all swear an oath at the Köningsber Cathedral: “To each, his own, to me, death”."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : ["rl_newantiochfireteam"],
+        "rules" : ["rl_expertfireteams","rl_mastersofthegrenade","rl_forwardpositions","rl_rapidassault","rl_specialisedequipment","rl_troopselection","rl_lightlyarmoured","rl_lightmelee"],
+        "options": []
+    },
+    {
+        "id": "fc_newantioch_fv_kingdomofalbaassaultdetatchment",
+        "name": "Kingdom of Alba Assault Detatchment",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Hailing from the Scottish Highlands where the Church is strong, these men (and a few fierce women!) come to New Antioch in search of glory, forgiveness of their sins, as well as dreams of acquiring valuable loot to send back to their island home, but above all to get their hands on some Devil-worshippers! "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Heretic submarine fleet harries the shores of the Kingdom constantly, carrying off their young in chains to be sacrificed in the dark altars of the Arch-devils and their hatred towards Hell’s forces runs deep. The fleet of Britain and their famed moving fortress are reserved in guarding their own shores, causing friction and resentment among their northern neighbours, whose coastal defences are far less comprehensive. As is the tradition in Alba, these warbands favour close quarters combat and fierce charges over defence and long-range attacks."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_rampantcharge","rl_meleefocused_alba","rl_highlandmachinearmour","rl_highlandstrength","rl_strainedsupply","rl_bagpipes","rl_brave","rl_claymoresmiths","rl_lightlyarmoured"],
+        "options": []
+    },
+    {
+        "id": "fc_newantioch_fv_expeditionaryforcedofabyssinia",
+        "name": "Expeditionary Forces of Abyssinia",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Most of what was once the ancient realm of Egypt now rests under the Shadow of Hell and the stronghold of the servants of the Prince of Greed, who has long dreamed of plundering the whole continent of its riches. Beautiful Alexandria and even mighty Cairo have fallen, their ports serving as anchorage for the heretic fleet and mustering grounds for Hell’s legions as they strike south and west."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "But thus far, Mammon’s plans to sweep across the northern coast of Africa all the way to Mali and Axum has been frustrated. For this front is every bit as bitterly contested as the European theatre of war. Here the heretic legions are opposed by a coalition of Nubia, Numidia and the Solomonic Empire of Abyssinia (more commonly known as the Ethiopian Empire in Africa) that have thrown their lot together to resist the invader. Blood stains the waters of the Nile as the coalition struggles to contain the grinding offensives of Mammon’s Legion of the Ten Golden Horns. The plan of the Prince of Greed is two-fold: to overcome the holy churches of Lalibela – desecrating and auctioning off the legendary relics within the churches and cathedrals of Axum – and to claim the fabled gold mines of the Queen of Sheba for himself, which he covets beyond any other treasure trove on Earth."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "War has honed the soldiers of Ethiopia into masters of mobile warfare and taking the enemy on in loose formation, a style of fighting well-suited to their rugged country where scarce roads restrict the movements of large armies. Most levies fight armed with rifles, seeking to close in on the enemy to ensure the effectiveness of their volleys; while the Chewa are the warrior-elite, trained in hand-to-hand combat since childhood. They are encouraged to take on lions and other fierce predators as part of their upbringing, and warriors that have taken down a male lion single-handedly have the honour of wearing its mane as a headdress. Their famed war cry “Together! Together!” is often the last thing the invaders hear."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Claiming a direct lineage from the legendary queen of Sheba and King Solomon, the Emperors of Abyssinia are staunch members of the Faithful alliance, and the representative of the African continent in the Sword Congress of Vienna. It is a matter of pride and prestige to the House of Solomon that the tithe to New Antioch is met punctually. So once in seven years the Negarit war drums sound the kitet, the call to arms. The volunteers gather at Axum, the spiritual capital of the nation, where the Ark of the Covenant is said to be kept under the watchful eyes of warrior monks who are born to their role and never leave their post."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "There is never any lack of warriors willing to join the expeditionary force to aid New Antioch. Adventure, unrivalled status given to those who go to serve the Duke and the chance to fight the enemy in their heartlands ensures that the bravest young soldiers compete for the chance to join the expeditionary force."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before being accepted into this force, all volunteers to New Antioch must make a pilgrimage to Abuna Yemata Guh, the chapel that rests on a mountainside at a dizzying height of some 8500 feet. It is the most inaccessible place of worship in the world, and volunteers must travel to receive the blessing from this shrine in the sky carrying their full military kit and gear. Miraculously, there have been exceedingly few deaths caused by soldiers losing their footing and plummeting to their deaths. Each one of those who have fallen have been found to be a heretic infiltrator, and their broken and rotting bodies are left unburied as a warning to those traitors who would defile the sanctity of the shrine."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Once the pilgrimage is done, the forces assemble and are laden with gold, silver, precious stones, icons and holy relics as gifts from the Emperor to the Duke. The warriors of the Emperor march to the hidden ports of the coast that are still free of the enemy. There is no land route for the warriors of Ethiopia to reach the Principality and the Heretic Fleet dominates both the Erythraean Sea and the Red Sea, leaving the perilous crossing of the mediterranean as the only viable option."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Thus there is the war on the waves of the Mediterranean as the Faithful fleet clashes with heretic dreadnoughts. Ships will be sunk and the gold from the mines of the Queen of Sheba is lost to the sea, but when the songs and drums of the warriors of Solomonic Throne can be heard in the harbour and echoing on the famed walls of New Antioch, the citizens know that aid has come once more."
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Fewer than one in ten volunteers ever return to the rock-hewn Churches of Lalibela to give thanks for their deliverance. The rest give their lives in brutal battles in No Man’s Land, like countless millions before them. In the eyes of these survivors one can catch a glimpse of the horrors that have scarred them for life."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_chewa","rl_faithofethiopia","rl_flankingforces","rl_shortrangemarksmanship","rl_abyssianhealers","rl_holywarriors","rl_chieftanpanoply","rl_weaponsofmobilewarfare"],
+        "options": []
+    },
+    {
+        "id": "fc_cultoftheblackgrail_fv_dirgeofthegreathegemon",
+        "name": "Dirge of the Great Hegemon",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_blackgrail"}
+        },
+        "base_id": "fc_cultoftheblackgrail",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In the annals of the Great War two mighty Hegemons of the Black Grail have risen: Yersinia Rex, Emperor of Pestilence, and Febris, the rotting Bride of Beelzebub. Each of them were destroyed, but at an unimaginable cost to the forces of the Great Tyrant YHWH. Even the great Paladin Engelier, the Sword of Heaven, died when confronting the might of a Hegemon."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "With the ascension of a Hegemon, the hideous power of the Black Grail is exalted. Beelzebub grows sleek and fat, and like a magnanimous king, bestowing blessings and gifts upon his most favoured children. Beelzebub’s insidious grip over his Grail Thralls greatly increases. They move with more grace and the exalted blessings of the Grail opens their ruined minds, allowing them to truly witness the rotting glory of the Lord of the Flies, enabling them to understand more complex weaponry. In turn, the nobles that make up the ranks of the Order of the Fly are given kingly gifts from their mighty liege. "
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Full of the ascendant power of the Black Grail, how miserable they become when their Hegemon lord falls in battle. Each Hegemon is unique, and when slain, it can never be re-created. The ecstasy of the Plague Knights in the service of their dread ruler sinks into the deepest despair from which there is no escape. Their strain of the Black Grail is shunned by others of their kind and they are no longer welcome at Ekron, the City of Beelzebub: they are cast out from the Order of the Fly for their failure. The Hegemon’s strain of disease continues spreading and creating thralls, but they are born into a world bereft of their sires, leaving them hopeless and desolated. "
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The eyes of the Plague Knights continuously weep cold black blood as they cry for their lost Dark Paradise that will never be again. The tantalising dream of a great flood of pestilence that cleanses the earth is lost forever. Their mournful wails echo and reverberate through No Man’s Land, a cry of sorrow deeper than any mortal can feel, and agonising rage of black hatred that no mortal comprehends. They compose mournful paeans to their lost Hegemon -beautiful yet disturbing songs that promise nothing but never-ending death."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Such shattered remains of the once-mighty legions of the Hegemon take their vengeance on any opponent regardless of their allegiance, even throwing themselves at other Black Grail warbands in futile acts of regret, trying to feel pain that would at least momentarily dull their aching feeling of loss. But no such hope exists in their eternal damnation."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These bands made up of the strains of fallen Hegemons’ once-mighty legions form everlasting funeral processions for their dead masters. The echo of their dirges accompanies their solemn steps, taking them from nowhere to nowhere. Their eyes are forever stained by the foul tears of the Black Grail and their skin turns black and sloughs off, hanging in tatters like funereal garb. They seek lost artefacts and broken shards of armour and weapons of their lost liege, fashioning disturbing and rusted jewellery from these remains where the Hegemon’s power still lingers beyond the grave. Few things that haunt No Man’s Land are more dangerous – or ghastlier – than these corruption-ridden echoes of the dark past, the funeral processions that last until time itself is no more."
+            }
+            
+        ],
+        "team": "hell",
+        "cut_rules" : ["rl_theorderofthefly"],
+        "rules" : ["rl_theexecutor","rl_thelamenters","rl_thefallen","rl_thelost","rl_thebereaved","rl_dishonoured","rl_hegemonslastblessing","rl_hegemonswill"],
+        "options": []
+    },
+    {
+        "id": "fc_newantioch_fv_redbrigade",
+        "name": "The Red Brigade",
+        "source": "westfalia",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_antioch"}
+        },
+        "base_id": "fc_newantioch",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Red Brigade is made of volunteers who have lost someone close to them in the battles of the Great War. The unit was founded by St. Ernest, the sole survivor of the second battle of Acre; where he lost his brother Wilhelm to the forces of the Heresiarch Berenguer."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "It is said that when his brother fell in comabt Ernest donned the blood-stained helmet of Wilhelm and returned to the fray to kill Heretics until there were no more left to slay. As silence finally fell over the battlefield, Ernest was the sole survivor of either side. Seeing this as an ordained miracle by the Almighty, he gathered the rest of his brother's bloodied armour and returned to the Principality of New Antioch. There he began recruiting volunteers for his vendetta. As a gifted orator driven by the anguish of his loss, Ernest soon gathered a following of many bereaved soldiers like himself. Thus the first Red Brigade was formed and Ernest led his unofficial warband into the No Man's Land on a hunt for Heretics, through ambush and deep strikes at the vulnerable enemy supply lines. His bloodsoaked warriors soon began to resemble their leader in appearance which earned the unit its name."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Their skill and cunning on the battleifled caught the attention of the thrine of New Antioch and the Red Brigade was recognised as an official unit in the ducal armed forces. Since those times the Red Brigade has been used as the personal special operations force by the Duke of New Antioch. These driven soldiers undertake the most dangerous missions where unsustainable casualties would make it impossible to use the regular units. To join the Red Brigade a soldier has to volunteer, bringing to the recruiting officer a piece of kit tarnished by the blood of fallen comrades as proof of their right to serve as a 'Blood Pledge', as the soldiers of the Brigade are known."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "As a unit under the direct command of the Duke, the Red Brigade is granted many privileges while garrisoned within the city, in addition to arms and provisions from the city's stores. Their barracks are located at the ducal palace, and before the Red Brigade leaves for a mission they dine at the table of the Duke and his closest officers, in a lavish banquet known as the Feat of the Dead Men."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Due to their propensity for hunting high-value targets, the Red Brigade is supplied with warhounds from the kennels of the Duke. These loyal beasts give solace and companionship to the troopers and have been trained to provide the soldiers with grenades in the heat of battle when the Red Brigade strive to take heavily defended enemy stringpoints and trenches. Malinois, wolfhounds and mastiffs are especially popular and much-loved by the soldiery of the unit."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Red Brigade are a grim and silent unit, haunted by their losses and long patrols in enemy territory. Often yearning to be reunited with their lost ones; they are willing to accept missions where death is almost certain. This self-destructive attitude chafes many members of the clergy, who do not condone the existence of the unit; as suicide is a motal sin. However, the Brigade has proven itself to be so useful to the Duke that the red-armoured troops have seen continuous service for decades."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "After each fray it is the task of the Quartermaster of the Brigade to gather the arms and red armour of the fallen and redistribute it so new recruits will have a real, tangible link to the fallen. But when faces with a battle where the commander of the Brigade sees there is no hope of survival, it is customary to dispatch one of their soldiers back to New Antioch in order to notify the Duke of the unit's demise. This messenger is chosen by drawing lots and the selected soldier takes the dogtags of the entire unit back to the Home of All Our Hopes, to be hung from the walls of the Chapel of Remembrance; there to join the thousands that have given their lives for the Brigade before."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The last member of the Brigade then asks for a personal audience with the ruling duke or duchess. The traditional greeting in such circumstances by the survivor is as follows:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "\"The Red Brigade has fallen\""
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "To which the rule of New ANtioch solemnly answers:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "\"And the Red Bridage will rise anew\""
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "And thus the recruitment of the new Red Brigade commences and the cycle of violence, revenge, and blood begins once more."
+            }
+        ],
+        "team": "faithful",
+        "cut_rules" : [],
+        "rules" : ["rl_molotovcocktails","rl_wearandtear","rl_noretreat","rl_trenchdogs","rl_gloryhounds","rl_rememberthefallen","rl_liveofftheland","rl_gunsblazing","rl_displeasureofthechurch"],
+        "options": []
+    },
+    {
+        "id": "fc_cultoftheblackgrail_fv_thegreathunger",
+        "name": "The Great Hunger",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {
+            "faction_keyword": {"name": "kw_blackgrail"}
+        },
+        "base_id": "fc_cultoftheblackgrail",
+        "description": [     
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Great Hunger is not merely a disease, nor is it an army - it is a lingering wound upon the world, a festering malignancy left in the wake of Beelzebub’s war against Creation. It is a strain of the Black Grail Virus that is not wielded as a tool of conquest by the Order of the Fly, but rather as a means of ensuring that the corruption endures, even in defeat. Where the armies of the Grail seek to march upon the living, the Hunger seeks only to consume and multiply."
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The forces of the Black Grail taint the land itself. Where their influence takes root, all organic matter becomes a vector for further corruption, twisting and reshaping itself into a form pleasing to Beelzebub. Unlike the immediate, aggressive infections seen in the frontlines of battle, The Great Hunger is subtle, taking hold in the ruined remains of abandoned towns, charnel grounds, and forgotten battlefields. It does not seek to conquer - instead it waits. It endures. Even if a region is reclaimed from the Grail’s influence, the Hunger can lurk beneath the surface for weeks, months, or even years, waiting for the moment when the corruption is no longer expected, no longer feared. It is then, when it is almost forgotten, that The Great Hunger will reemerge, consuming everything, even itself, until nothing is left - nothing but a dormant remnant waiting to rise and feast again."
+            }
+            
+        ],
+        "team": "hell",
+        "cut_rules" : ["rl_theorderofthefly"],
+        "rules" : ["rl_arcanaputrescere","rl_cradleoffilth","rl_dessicatedhusks","rl_greathunger_equipmentrestrictions","rl_greathunger_grailthrallsandflythralls","rl_prowlers","rl_spawnofgluttony","rl_wastenoflesh"],
+        "options": []
+    }
+]
