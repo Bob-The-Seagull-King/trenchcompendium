@@ -4061,7 +4061,9 @@
                     {
                         "res_type": "keyword",
                         "value": "kw_elite"
-                    },
+                    }
+                ],
+                "required": [
                     {
                         "res_type": "equipment_keyword",
                         "value": "kw_bayonetlug"
