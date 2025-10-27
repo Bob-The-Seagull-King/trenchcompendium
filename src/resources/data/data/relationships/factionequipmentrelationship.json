@@ -4061,9 +4061,13 @@
                     {
                         "res_type": "keyword",
                         "value": "kw_elite"
+                    },
+                    {
+                        "res_type": "equipment_keyword",
+                        "value": "kw_bayonetlug"
                     }
                 ]
-            }   
+            } 
         },
         "faction_id": ["fc_cultoftheblackgrail_fv_thegreathunger"],
         "equipment_id": "eq_butcherbayonet",
