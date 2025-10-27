@@ -80,7 +80,9 @@ class SiteUserPublic {
         for (let i = 0; i < data.warbands.length; i++) {
             if (this.Warbands.filter((val : SumWarband) => val.id == data.warbands[i].id).length > 0) { continue; }
             try {
-                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(JSON.parse(data.warbands[i].warband_data), data.warbands[i].id)
+                const parsed = JSON.parse(data.warbands[i].warband_data)
+                parsed["warband_invites"] = data.warbands[i].warband_campaign_invites
+                const newarband : UserWarband = await WarbandFactory.CreateUserWarband(parsed, data.warbands[i].id)
                 this.Warbands.push(
                     {
                         id: data.warbands[i].id,
@@ -100,7 +102,8 @@ class SiteUserPublic {
             warbandlist.push(
                 {
                     id : this.Warbands[i].id,
-                    warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface())
+                    warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface()),
+                    warband_campaign_invites: this.Warbands[i].warband_data.GetCampaignInvites()
                 })
         }
 

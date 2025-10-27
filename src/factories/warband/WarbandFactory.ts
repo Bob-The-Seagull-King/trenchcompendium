@@ -159,6 +159,8 @@ class WarbandFactory {
         if (DataCheck.exploration.templocations) {
             await rule.BuildTempLocations(DataCheck.exploration.templocations);
         }
+        console.log("MADE")
+        console.log(rule.GetCampaignInvites())
         return rule;
     }
 
