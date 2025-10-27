@@ -45,6 +45,10 @@ interface ICampaignAnnouncementBasics {
     description?: string
 }
 
+interface IDeleteCampaign {
+    campaign_id? : number,
+}
+
 interface ISubmitBasics {
     id?: number,
     token : string
@@ -493,4 +497,4 @@ class CampaignManager {
 
 }
 
-export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics}
+export {CampaignManager, ICampaignBasics, ISubmitBasics, ICampaignUserInvite, ICampaignWarbandInvite, ICampaignAnnouncementBasics, IDeleteCampaign}
