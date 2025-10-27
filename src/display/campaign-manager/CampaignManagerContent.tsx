@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useAuth} from "../../utility/AuthContext";
 import {CampaignProvider, useCampaign} from "../../context/CampaignContext";
 import LoadingOverlay from "../components/generics/Loading-Overlay";
@@ -12,6 +12,9 @@ import CMContextualPopover from "./components/CMContextualPopover";
 import CMCampaignInviteThis from "./components/CMCampaignInviteThis";
 import {useNavigate} from "react-router-dom";
 import {ROUTES} from "../../resources/routes-constants";
+import PageMetaInformation from "../components/generics/PageMetaInformation";
+import {renderMiniMarkdown, stripMiniMarkdown} from "../../utility/util";
+import striptags from "striptags";
 
 
 
@@ -25,6 +28,17 @@ const CampaignManagerContent: React.FC = () => {
         navigate( ROUTES.CAMPAIGN)
     }
 
+
+    // Create meta description string
+    const meta = React.useMemo(() => {
+        const raw = campaign?.GetDescription?.() || "";
+        const text = stripMiniMarkdown(raw);
+
+        const maxLen = 160;
+        return text.length > maxLen ? text.slice(0, maxLen - 1) + "…" : text;
+    }, [campaign?.GetDescription()]);
+
+
     if (!campaign || loading) return (
         <div className={'LoadingOverlay-wrap-100vh'}>
             <LoadingOverlay
@@ -36,6 +50,11 @@ const CampaignManagerContent: React.FC = () => {
 
     return (
         <div className="CampaignManager">
+            <PageMetaInformation
+                title={campaign.GetName() + ' - Campaign Manager'}
+                description={meta}
+            />
+
             <div className={'CampaignManager-header'}>
                 <div className={'container'}>
                     <h1>

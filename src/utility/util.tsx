@@ -219,3 +219,27 @@ export function renderMiniMarkdown(md: string): string {
 
     return text;
 }
+
+// Removes Mini-Markdown (**bold**, *italic*, [Text](url)) -> Plain Text
+export function stripMiniMarkdown(md: string): string {
+    if (!md) return "";
+
+    let s = md;
+
+    // [Label](url) -> Label
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
+
+    // **bold** -> bold
+    s = s.replace(/\*\*(.+?)\*\*/gs, "$1");
+
+    // *italic* -> italic
+    s = s.replace(/(^|\s)\*([^\s*][^*]*?)\*/g, "$1$2");
+
+    // // Aufzählungszeichen am Zeilenanfang "* " oder "- " entfernen
+    // s = s.replace(/^\s*[*-]\s+/gm, "");
+
+    // Trim Whitespace
+    s = s.replace(/\s+/g, " ").trim();
+
+    return s;
+}
