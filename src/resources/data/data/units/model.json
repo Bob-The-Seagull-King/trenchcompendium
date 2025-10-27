@@ -3326,6 +3326,6 @@
             "base": [60]
         },
         "keywords" : ["kw_blackgrail","kw_infiltrator","kw_fear"],
-        "abilities" : ["ab_arcanaputrescere_one","ab_plagueriddenflesh","ab_rend","ab_dormanthunger"]
+        "abilities" : ["ab_arcanaputrescere_one","ab_plagueriddenflesh","ab_rend","ab_dormanthunger","ab_gnashingandwailing"]
     }
 ]
