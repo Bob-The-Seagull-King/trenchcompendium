@@ -6966,7 +6966,7 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "This relic grants the wearer an additional attack ACTION in melee combat without penalty. Each time the model is activated, it also receives 1 BLOOD MARKER. Once this has been equipped, it can never be unequipped or removed from the model for any reason.",
+                "content": "This equipment grants the wearer an additional attack ACTION in melee combat without penalty. Each time the attack is used, it also receives 1 BLOOD MARKER. Once this has been equipped, it can never be unequipped or removed from the model for any reason.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
