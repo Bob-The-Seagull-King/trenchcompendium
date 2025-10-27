@@ -110,6 +110,7 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                         show={show}
                         onToggle={(nextShow) => setShow(nextShow)}
                         overlay={
+                        <Popover>
                             <Popover.Body bsPrefix="profile"
                                           className="popover header-user-popover"
                                           id="header-user-popover"
@@ -175,6 +176,7 @@ const BaseHeader: React.FC<IControllerProp> = (prop: any) => {
                                     {'Log out'}
                                 </div>
                             </Popover.Body>
+                        </Popover>
                         }
                     >
                         <div className={'header-login-btn'}>

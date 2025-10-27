@@ -292,7 +292,7 @@
         "contextdata": {},
         "options": [],
         "model_id": ["md_combatmedic","md_combatmedic_mv_pilgrim"],
-        "mandatory_equipment": ["eq_combathelmet","eq_standardarmour","eq_medikit","eq_misericordia"],
+        "mandatory_equipment": ["eq_gasmask","eq_standardarmour","eq_medikit","eq_misericordia"],
         "removable": false
     },
     {
