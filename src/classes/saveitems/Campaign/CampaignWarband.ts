@@ -93,4 +93,9 @@ export class CampaignWarband extends ContextObject {
     get PlayerName() { return this._owner.Nickname; }
 
     get PlayerImageId() { return this._owner.AvatarId; }
+
+    get WarbandUrl () {
+        return window.location.origin+'/warband/detail/' + this.Id;
+    }
+
 }

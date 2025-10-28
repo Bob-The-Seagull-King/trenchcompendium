@@ -1,5 +1,6 @@
 import { UserFactory } from "../../../factories/synod/UserFactory";
 import { SiteUserPublic } from "../../user_synod/user_public";
+import {ROUTES} from "../../../resources/routes-constants";
 
 export interface ICampaignUser {
     id?: number;               // in campaign_players
@@ -59,8 +60,11 @@ export class CampaignUser {
     get AvatarId() { return this._avatarId; }
     get UserPublic() { return this._userObject; }
 
-    // --- Complex Getters ---
+    get ProfileUrl () {
+        return window.location.origin+'/profile/' + this.Id;
+    }
 
+    // --- Complex Getters ---
     GetSupporterStatus () : string {
         if( this.IsPremium ) {
             return 'Supporter';
@@ -68,5 +72,8 @@ export class CampaignUser {
             return 'Free Member'
         }
     }
+
+    // --- Getters from SiteUser ---
+
 
 }
