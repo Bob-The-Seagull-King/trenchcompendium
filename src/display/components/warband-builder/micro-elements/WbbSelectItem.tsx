@@ -11,10 +11,12 @@ export interface WbbSelectItemEquipmentProps {
     id: string; // element ID used for selection
     title: string; // name of the item
     opened: boolean; // opened details?
+    selected?: boolean; // is this option already selected (optional)?
 
     available: boolean; // item available?
 
     onClick: (id: string) => void; // behaviour on click
+
 
     /** Optional props for right-hand info */
     cost?: string; // Full cost string
@@ -35,6 +37,7 @@ function WbbSelectItemEquipment({
        id,
        title,
        opened,
+       selected,
        available,
        onClick,
        cost,
@@ -50,7 +53,7 @@ function WbbSelectItemEquipment({
     return (
         <React.Fragment>
             <div
-                className={`select-item ${opened ? "selected" : ""} ${
+                className={`select-item ${opened || selected ? "selected" : ""} ${
                     available ? "" : "disabled"
                 }`}
                 onClick={() => onClick(id)}

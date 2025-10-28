@@ -35,9 +35,9 @@ const WbbExploration_Selection_GloryPurchase: React.FC<
     const [showModal, setshowModal] = useState(false);
 
     const [selectedoption, setSelectedoption] = useState<ContextObject | null>(property.SelectItem);
-    const OptionList = ((property.FullOptions.length == 0)? property.Options : property.FullOptions)
-
     const [openedID, setOpenedID] = useState<string | null>(null);
+
+    const OptionList = ((property.FullOptions.length == 0)? property.Options : property.FullOptions)
 
     const handleSubmit = (foundOption : IChoice | null) => {
         if (foundOption != null) {
