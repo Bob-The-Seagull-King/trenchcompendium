@@ -1050,7 +1050,7 @@
         "name": "Heavy Ballistic Shield",
         "contextdata": {            
             "faction_eq_restriction": {
-                "permitted": [
+                "required": [
                     {
                         "res_type": "equipment",
                         "value": "eq_machinearmour"
