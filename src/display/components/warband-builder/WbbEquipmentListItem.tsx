@@ -224,7 +224,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
             }
 
             {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.length > 0 &&
-                <span className={'title-choice'}>
+                <>
                     {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.map((option) =>
                         <WbbOptionSelect
                             property={(item.HeldObject as WarbandEquipment).MyEquipment}
@@ -232,7 +232,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             choice={option}
                         />
                     )}
-                </span>
+                </>
             }
         </div>
     );

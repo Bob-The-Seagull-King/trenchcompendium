@@ -172,7 +172,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                             {returnDescription(option.purchase?.HeldObject, ((option.purchase?.HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade).Description)}
                             
                             {((option.purchase?.HeldObject as WarbandProperty).SelfDynamicProperty).Selections.length > 0 &&
-                                <span className={'title-choice'}>
+                                <>
                                     {((option.purchase?.HeldObject as WarbandProperty)).SelfDynamicProperty.Selections.map((item: any) => 
                                         <WbbOptionSelect 
                                             property={((option.purchase?.HeldObject as WarbandProperty))}
@@ -180,7 +180,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                                             choice={item}
                                         />
                                     )}                        
-                                </span>
+                                </>
                             }
                         </>
                         }{option.purchase?.HeldObject == null &&

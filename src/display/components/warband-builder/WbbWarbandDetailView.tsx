@@ -199,7 +199,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         <WbbDetailViewCollapse title="Warband Options" initiallyOpen={true}>
 
                         {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections.length : 0) > 0 &&
-                                <span className={'title-choice'}>
+                                <>
                                     {(warband.warband_data.Faction.MyFaction? warband.warband_data.Faction.MyFaction.SelfDynamicProperty.Selections : []).map((item) => 
                                         <WbbOptionSelect 
                                             property={warband.warband_data.Faction.MyFaction}
@@ -207,7 +207,7 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                                             choice={item}
                                         />
                                     )}                        
-                                </span>
+                                </>
                             }
                         </WbbDetailViewCollapse>
                     }
