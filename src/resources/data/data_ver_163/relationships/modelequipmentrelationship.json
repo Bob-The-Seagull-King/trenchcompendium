@@ -1,0 +1,487 @@
+[
+    {
+        "id": "rel_unarmed",
+        "source": "core",
+        "tags": {},
+        "name": "Unarmed",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_unarmed"],
+        "removable": false
+    },
+    {
+        "id": "rel_unarmed_nopenalty",
+        "source": "core",
+        "tags": {},
+        "name": "Unarmed",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_unarmed_nopenalty"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_sultanatesapper",
+        "source": "core",
+        "tags": {},
+        "name": "Sultanate Sapper Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_sultanatesapper"],
+        "mandatory_equipment": ["eq_shovel"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mercydog",
+        "source": "core",
+        "tags": {},
+        "name": "Mercy Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_trenchdog_mercydog"],
+        "mandatory_equipment": ["eq_medikit"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_crimsoncommunicant",
+        "source": "core",
+        "tags": {},
+        "name": "Crimson Communicant Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_crimsoncommunicant"],
+        "mandatory_equipment": ["eq_atonementbell"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mamlukfarisbase",
+        "source": "core",
+        "tags": {},
+        "name": "Mamluk Faris Equipment",
+        "contextdata": {},
+        "options": [
+            {
+                "ref_id" : "ot_mamlukequipmentpackages",
+                "name" : "Mamluk Faris Loadouts",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "modelequipmentrelationship",
+                        "request":    {
+                            "operator": "or",
+                            "terms": [
+                                {             
+                                    "item": "id",
+                                    "value": "rel_md_eq_mamlukpackage_1",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "rel_md_eq_mamlukpackage_2",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "id",
+                                    "value": "rel_md_eq_mamlukpackage_3",
+                                    "equals": true,
+                                    "strict": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ],
+        "model_id": ["md_mamlukfaris","md_mamlukfaris_mv_sipahi"],
+        "mandatory_equipment": ["eq_jezzail","eq_alchemicalammunition","eq_reinforcedarmour","eq_combathelmet"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mamlukpackage_1",
+        "source": "core",
+        "tags": {},
+        "name": "Polearm and Shield",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_trenchpolearm","eq_trenchshield"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mamlukpackage_2",
+        "source": "core",
+        "tags": {},
+        "name": "Sword and Pistol",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_swordaxe","eq_pistolrevolver"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mamlukpackage_3",
+        "source": "core",
+        "tags": {},
+        "name": "Two-Handed Sword",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_mamlukgreatsword"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_scriptureguardian",
+        "source": "core",
+        "tags": {},
+        "name": "Scripture Guardian Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_scriptureguardian"],
+        "mandatory_equipment": ["eq_combathelmet","eq_reinforcedarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_annointedheavyinfantry",
+        "source": "core",
+        "tags": {},
+        "name": "Annointed Heavy Infantry Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_annointedheavyinfantry"],
+        "mandatory_equipment": ["eq_infernalbrandmark","eq_reinforcedarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_annointedheavyinfantry_trenchghost",
+        "source": "core",
+        "tags": {},
+        "name": "Annointed Heavy Infantry Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_annointedheavyinfantry_trenchghost"],
+        "mandatory_equipment": ["eq_reinforcedarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_warwolfassaultbeast",
+        "source": "core",
+        "tags": {},
+        "name": "War Wolf Assault Beast Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_warwolfassaultbeast"],
+        "mandatory_equipment": ["eq_warwolfchainmaw","eq_warwolfshreddingclaws"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_artillerywtich",
+        "source": "core",
+        "tags": {},
+        "name": "Artillery Witch Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_artillerywitch"],
+        "mandatory_equipment": ["eq_artillerywitchinfernalbomb"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_artillerywtich_mammon",
+        "source": "core",
+        "tags": {},
+        "name": "Artillery Witches of Mammon Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_artillerywitch_gaswitch"],
+        "mandatory_equipment": ["eq_artillerywitchinfernalgasbomb"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_sineater",
+        "source": "core",
+        "tags": {},
+        "name": "Sin Eater Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_sineater"],
+        "mandatory_equipment": ["eq_sineatertenderizermaul","eq_reinforcedarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_geoticwarlock",
+        "source": "core",
+        "tags": {},
+        "name": "Goetic Warlock Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_goeticwarlock","md_goeticwarlock_mv_knightsofavarice"],
+        "mandatory_equipment": ["eq_swordaxe","eq_reinforcedarmour","eq_swordaxe"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_communicant",
+        "source": "core",
+        "tags": {},
+        "name": "Communicant Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_communicant"],
+        "mandatory_equipment": ["eq_communicantcross"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_ecclesiasticprisoner",
+        "source": "core",
+        "tags": {},
+        "name": "Ecclesiastic Prisoner Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_ecclesiasticprisoner"],
+        "mandatory_equipment": ["eq_ironcapriote"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_anchoriteshrine",
+        "source": "core",
+        "tags": {},
+        "name": "Anchorite Shrine Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_anchoriteshrine"],
+        "mandatory_equipment": ["eq_combathelmet","eq_catherinewheel","eq_bonebreakermace"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_anchoriteshrine_saintmethodius",
+        "source": "core",
+        "tags": {},
+        "name": "Anchorite Shrine Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_anchoriteshrine_saintmethodius"],
+        "mandatory_equipment": ["eq_combathelmet","eq_bonebreakermace"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_anchoriteshrine_saintmethodius_wheel",
+        "source": "core",
+        "tags": {"methodius": true},
+        "name": "Anchorite Shrine Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_anchoriteshrine_saintmethodius"],
+        "mandatory_equipment": ["eq_catherinewheel"],
+        "removable": true,
+        "salevalue": 0,
+        "saletype": 1
+    },
+    {
+        "id": "rel_md_eq_combatmedic",
+        "source": "core",
+        "tags": {},
+        "name": "Combat Medic Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_combatmedic","md_combatmedic_mv_pilgrim"],
+        "mandatory_equipment": ["eq_gasmask","eq_standardarmour","eq_medikit","eq_misericordia"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_witchburner",
+        "source": "core",
+        "tags": {},
+        "name": "Witchburner Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_witchburner"],
+        "mandatory_equipment": ["eq_combathelmet","eq_reinforcedarmour","eq_gavelofjustice"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_communicantantitankhunter",
+        "source": "core",
+        "tags": {},
+        "name": "Communicant Anti-Tank Hunter Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_communicantantitankhunter"],
+        "mandatory_equipment": ["eq_trenchclub","eq_trenchclub","eq_combathelmet","eq_antimaterialrifle"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mendelistammomonk",
+        "source": "core",
+        "tags": {},
+        "name": "Mendelist Ammo Monk Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_mendelistammomonk"],
+        "mandatory_equipment": ["eq_gasmask"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_observer",
+        "source": "core",
+        "tags": {},
+        "name": "Observer Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_observer"],
+        "mandatory_equipment": ["eq_standardarmour","eq_gasmask","eq_combathelmet","eq_trenchpolearm","eq_medikit"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_combatbiologist",
+        "source": "core",
+        "tags": {},
+        "name": "Combat Biologist Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_combatbiologist"],
+        "mandatory_equipment": ["eq_standardarmour","eq_gasmask","eq_vivisector"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_stigmaticnun_saintmethodius",
+        "source": "core",
+        "tags": {},
+        "name": "Chaste Stigmatic Nun Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_stigmaticnun_saintmethodius"],
+        "mandatory_equipment": ["eq_standardarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_yeoman",
+        "source": "core",
+        "tags": {},
+        "name": "Yeoman Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_yeoman"],
+        "mandatory_equipment": ["eq_boltactionrifle"],
+        "removable": true,
+        "salevalue": 5,
+        "saletype": 0
+    },
+    {
+        "id": "rel_md_eq_combatengineer",
+        "source": "core",
+        "tags": {},
+        "name": "Combat Engineer Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_combatengineer"],
+        "mandatory_equipment": ["eq_engineerbodyarmour","eq_shovel"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mechanisedheavyinfantry_base",
+        "source": "core",
+        "tags": {},
+        "name": "Mechanised Heavy Infantry Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_mechanisedheavyinfantry","md_mechanisedheavyinfantry_abyssianna","md_mechanisedheavyinfantry_alba"],
+        "mandatory_equipment": ["eq_reinforcedarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mechanisedheavyinfantry_advanced",
+        "source": "core",
+        "tags": {},
+        "name": "Upgraded Mechanised Heavy Infantry Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_machinearmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_mechanisedheavyinfantry_highland",
+        "source": "core",
+        "tags": {},
+        "name": "Upgraded Highland Mechanised Infantry Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": [],
+        "mandatory_equipment": ["eq_highlandmachinearmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_beastofnomansland",
+        "source": "core",
+        "tags": {},
+        "name": "Beast of No Man's Land Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_beastofnomansland"],
+        "mandatory_equipment": ["eq_beastofnomanslandclaws","eq_beastofnomanslandbite"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_thedragon",
+        "source": "core",
+        "tags": {},
+        "name": "The Dragon's Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_thedragon"],
+        "mandatory_equipment": ["eq_thedragon_stomp","eq_thedragon_firebreath","eq_thedragon_tailswipe"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_hunterofthelefthandpath",
+        "source": "core",
+        "tags": {},
+        "name": "Hunter of the Left-Hand Path Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_hunterofthelefthandpath"],
+        "mandatory_equipment": ["eq_bowoflethe"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_hellknight",
+        "source": "core",
+        "tags": {},
+        "name": "Hell Knight Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_hellknight"],
+        "mandatory_equipment": ["eq_infernalironarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_pitlocust",
+        "source": "core",
+        "tags": {},
+        "name": "Pit Locust Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_pitlocust"],
+        "mandatory_equipment": ["eq_reinforcedarmour"],
+        "removable": false
+    },
+    {
+        "id": "rel_md_eq_cradlethralls",
+        "source": "core",
+        "tags": {},
+        "name": "Cradle Thrall Equipment",
+        "contextdata": {},
+        "options": [],
+        "model_id": ["md_grailthrall_cradle_hunger","md_grailthrall_flythrall_cradle_hunger","md_grailthrall_hunger","md_grailthrall_flythrall_hunger"],
+        "mandatory_equipment": ["eq_blightedclaws"],
+        "removable": false
+    }
+]

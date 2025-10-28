@@ -1,0 +1,2317 @@
+[
+    {
+        "id": "es_reroll",
+        "name": "Reroll",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Re-roll any Exploration Dice once.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_extradice",
+        "name": "Extra Dice",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "grab_exploration_dice": {"mod_count": 1}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Roll one extra Exploration Die.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_duplicate",
+        "name": "Duplicate",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "After you roll, select any Exploration Die and add another die with an identical result, including any modifications, to your total.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_split",
+        "name": "Split",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Divide the dice result by two into two separate dice rolls. Round any halves up."
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_setdice",
+        "name": "Set Dice",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Select any one dice and set it to a number you want."
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_seek",
+        "name": "Seek",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Modify one Exploration Dice result by +1.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_circleback",
+        "name": "Circle Back",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Modify one Exploration Dice result by -1.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_combine",
+        "name": "Combine",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "After you roll, select two Exploration Dice and add them together. Then discard them. The value is treated as a single die roll you made. It can be more than 6.",
+                "glossary": [{"val": "Exploration Dice", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "es_lucky",
+        "name": "Lucky",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Roll an extra Exploration Die that is paired with one of your other dice. After you roll, choose one die in the pair to keep and one die in the pair to discard.",
+                "glossary": [{"val": "Exploration Die", "id": "gl_explorationdice"}]
+            }
+        ],
+        "options": [],
+        "skill_group": ["sg_exploration"]
+    },
+    {
+        "id": "sk_patronskill",
+        "name": "Patron Skill",
+        "source": "core",
+        "tags": { "patron": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Pick one of the Skills offered by your patron."
+            }
+        ],
+        "options": [],
+        "table_val": 2,
+        "skill_group": ["sg_meleeandstrength","sg_ranged","sg_stealthandspeed","sg_wildcard"]
+    },
+    {
+        "id": "sk_patronskill_end",
+        "name": "Patron Skill",
+        "source": "core",
+        "tags": { "patron": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Pick one of the Skills offered by your patron."
+            }
+        ],
+        "options": [],
+        "table_val": 12,
+        "skill_group": ["sg_meleeandstrength","sg_ranged","sg_stealthandspeed","sg_wildcard"]
+    },
+    {
+        "id": "sk_standfirm",
+        "name": "Stand Firm",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "activated": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model treats the first Down result it suffers each battle as a Minor Hit.",
+                "glossary": [{"val": "Down", "id": "gl_down"}]
+            }
+        ],
+        "options": [],
+        "table_val": 3,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_parry",
+        "name": "Parry",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemy models suffer -1 DICE to hit this model with melee attacks.",
+                "glossary": [{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 4,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_closequartercombat",
+        "name": "Close Quarter Combat",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": {"enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model is touching a piece of terrain, it gains +1 DICE to hit and injure with melee attacks",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 5,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_relentlesscharge",
+        "name": "Relentless Charge",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {"enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "During any Activation where this model has Charged, it gains +1 DICE to hit with melee attacks.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 6,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_meleeproficiency",
+        "name": "Melee Proficiency",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "melee", "value": 1}]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to the Melee Characteristic of this model.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 7,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_strengthofsamson",
+        "name": "Strength of Samson",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { 
+            "enhance_action" : { "category": ["melee"], "tag": ["melee"]},
+            "keyword_mod": {"mods": [{"type": "add", "value": "kw_strong"}]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains the Keyword STRONG and +1 DICE to injure with melee attacks.",
+                "glossary": [{"val": "STRONG", "id": "kw_strong"},{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 8,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_hardasnails",
+        "name": "Hard as Nails",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": { "activated": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores the first Down result in each battle. If this model is TOUGH, it can instead ignore the Down condition gained when it negates being taken Out of Action using the Keyword TOUGH. Regardless of how this ability is used, it can only be used once per battle.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "Down", "id": "gl_down"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 9,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_champion",
+        "name": "Champion",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model makes a melee attack, it can make an additional melee attack ACTION with a -1 DICE penalty to hit, using a single melee weapon it is equipped with.",
+                "glossary": [{"val": "ACTION", "id": "kw_action"},{"val": "-1 DICE", "id": "kw_minusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 10,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_surgicalstrike",
+        "name": "Surgical Strike",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "One of the Melee Attacks of this model ignores all Armour per each Activation."
+            }
+        ],
+        "options": [],
+        "table_val": 11,
+        "skill_group": ["sg_meleeandstrength"]
+    },
+    {
+        "id": "sk_swordofallah",
+        "name": "Sword of Allah",
+        "source": "core",
+        "tags": { },
+        "contextdata": {"skill_option": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Select any skill you want from the Melee & Strength Skills."
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_swordofallah",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "strictness" : "strict",
+            "single": true,
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "skill",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "skill_group",
+                                "value": "sg_meleeandstrength",
+                                "equals": true,
+                                "strict": true
+                            },
+                            {
+                                "item": "tags",
+                                "value": "patron",
+                                "equals": false,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_exoticwares",
+        "name": "Exotic Wares",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "model_add_equipment": {
+                "additions": [
+                    {
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" },
+                            { "category": "armour" }
+                        ]
+                    }
+                ]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model may buy, at the given cost, any one weapon or armour from the New Antioch Armoury. No other model in the warband may use this item."
+            }
+        ],
+        "options": [{
+            "ref_id" : "ot_newantioch",
+            "name" : "",
+            "description" : [],
+            "category" : "type",
+            "type" : "text",
+            "hide": true,
+            "strictness" : "strict",
+            "predefined_options" : [],
+            "option_context" : {"basic_option_default":{}},
+            "data_search" : {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "factionequipmentrelationship",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_newantioch",
+                                "equals": true,
+                                "strict": true
+                            },
+                            {             
+                                "item": "faction_id",
+                                "value": "fc_ironsultanate",
+                                "equals": false,
+                                "strict": true
+                            }
+                        ],
+                        "subparams": []
+                    }
+                }                        
+            }
+        } ],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_janissarytraining",
+        "name": "Jannisary Training",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "enhance_action" : { "category": ["melee"], "tag": ["melee"]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "During any Activation where the model has Charged, it gains +1 DICE to hit with melee attacks. Additionally, this model ignores any penalties for using an Off-Hand Weapon.",
+                "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_gures",
+        "name": "Güreş",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {  },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores the penalties to ACTION rolls from being Down. Additionally, this model gains +1 DICE to hit and injure Downed enemy models with melee attacks.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Downed", "id": "gl_down"},
+                    {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_rightfullyguided",
+        "name": "Rightfully Guided",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { "activated": {} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the beginning of the battle, select any one ACTION (aside from a Charge or a standard melee/ranged Attack) by any enemy model. This ACTION cannot target, affect or damage the Rightfully Guided model in any way.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_sultanfavour",
+        "name": "Sultan's Favour",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { 
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "model_limit_increase": {
+                "count": 1,
+                "restriction": [
+                    {
+                        "res_type": "keyword",
+                        "val": "kw_ELITE"
+                    }
+                ]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase the number of models that are normally limited (such as Janissaries) by one. This does not include ELITE models.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_sultansfavour",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{},
+                    "filter": {
+                        "restriction": [
+                            {
+                                "res_type": "keyword",
+                                "val": "kw_elite",
+                                "subvalue" : false
+                            }
+                        ]
+                        }
+                    },
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getModelRelationshipsForWarband"
+            }
+        ],
+        "skill_group": ["pt_sublimegate"]
+    },
+    {
+        "id": "sk_sixthsense",
+        "name": "Sixth Sense",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As long as the model has no BLOOD MARKERS, treat any Down result as a Minor Hit instead.",
+                "glossary": [
+                    {"val": "Down", "id": "gl_down"},
+                    {"val": "Minor Hit", "id": "gl_minorhit"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 3,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_assassinate",
+        "name": "Assassinate",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["hit_roll"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains +1 DICE to hit against models that have not been Activated this turn.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 4,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_shadowwalker",
+        "name": "Shadow Walker",
+        "source": "core",
+        "tags": { "trait": true, "enemy_penalty": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Enemy attacks from long range made this model suffer an additional -1 DICE penalty to hit.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 5,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_athletic",
+        "name": "Athletic",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["climb","jump","diving_charge"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to all Climb, Jump and Diving Charge ACTIONS this model takes. Injuries from falling damage against this model are rolled with -1 DICE.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 6,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_sprinter",
+        "name": "Sprinter",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to the Dash ACTIONS this model takes.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 7,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_disengage",
+        "name": "Disengage",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model retreats, enemy models do not get a free attack against it."
+            }
+        ],
+        "options": [],
+        "table_val": 8,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_incoming",
+        "name": "Incoming",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["charge"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model Charges, it rolls an additional D6 and picks the highest result. This is cumulative with other such bonuses."
+            }
+        ],
+        "options": [],
+        "table_val": 9,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_nimble",
+        "name": "Nimble",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model does not suffer any penalty to its movement after its Stands."
+            }
+        ],
+        "options": [],
+        "table_val": 10,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_dodge",
+        "name": "Dodge",
+        "source": "core",
+        "tags": { "trait": true, "enemy_penalty": true },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All ranged attacks made against this model have an additional -1 DICE to hit.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 11,
+        "skill_group": ["sg_stealthandspeed"]
+    },
+    {
+        "id": "sk_hunter",
+        "name": "Hunter",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "action_type": ["attack_range"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores all penalties from Cover when making a ranged attack.",
+                "glossary": [
+                    {"val": "Cover", "id": "gl_cover"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 3,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_gunslinger",
+        "name": "Gunslinger",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "pistol"]
+            } ,
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "tag",
+                        "value": "pistol"
+                    }
+                ],
+                "additions": [
+                    "kw_assault"
+                ]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If armed with two “pistols”, this model can make Ranged Attack ACTIONS with both of them when Making a Ranged Attack. In addition, this model suffers no penalty when using a “pistol” as an Off-Hand weapon. It gives normal “pistols” the character uses the Keyword ASSAULT.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "ASSAULT", "id": "kw_assault"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 4,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_farshot",
+        "name": "Far Shot",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true, "modifier": true },
+        "contextdata": { 
+            "equipment_modifier": {
+                "equipment_type": [
+                    {
+                        "res_type": "tag",
+                        "value": "pistol"
+                    },
+                    {
+                        "res_type": "tag",
+                        "value": "rifle"
+                    },
+                    {
+                        "res_type": "tag",
+                        "value": "jezzail"
+                    }
+                ],
+                "modifier_type": [
+                    {
+                        "type": "range",
+                        "value": 6
+                    }
+                ]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model adds +6” to the range of any pistols, rifles and/or jezzails they carry."
+            }
+        ],
+        "options": [],
+        "table_val": 5,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_sharpeyes",
+        "name": "Sharp Eyes",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "ranged"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores penalties for long range when using ranged weapons."
+            }
+        ],
+        "options": [],
+        "table_val": 6,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_rangedproficiency",
+        "name": "Ranged Proficiency",
+        "source": "core",
+        "tags": {"trait": true },
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "ranged", "value": 1}]} },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to the Ranged Characteristic of this model.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "options": [],
+        "table_val": 7,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_snipersnest",
+        "name": "Sniper's Nest",
+        "source": "core",
+        "tags": {"trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "ranged"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model gains +2 DICE (instead of the usual +1 DICE) when shooting from an elevated position.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 8,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_pointblank",
+        "name": "Point Blank",
+        "source": "core",
+        "tags": {"trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model Makes a Melee Attack, it may make a Melee Attack ACTION with a Ranged Weapon it is equipped with instead of making any Melee Attack ACTIONS. This attack uses the model’s ranged characteristic. It can still use its Ranged Attack normally outside of Melee.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 9,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_hipshot",
+        "name": "Hip Shot",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true, "modifier": true },
+        "contextdata": { 
+            "equipment_add_keyword": {
+                "equip_check": [
+                    {
+                        "check_type": "category",
+                        "value": "ranged"
+                    }
+                ],
+                "additions": [
+                    "kw_assault"
+                ]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any ranged weapons this model is equipped with gain the Keyword ASSAULT.",
+                "glossary": [
+                    {"val": "ASSAULT", "id": "kw_assault"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 10,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_headshot",
+        "name": "Head Shot",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true},
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["equipment", "weapon", "ranged"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ranged attacks of this model ignore armour on a Critical result on the Action Success Chart (12+ result)."
+            }
+        ],
+        "options": [],
+        "table_val": 11,
+        "skill_group": ["sg_ranged"]
+    },
+    {
+        "id": "sk_warluck",
+        "name": "War Luck",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {             
+            "add_scars": { "value": 1} 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 to the maximum Scars your model can sustain.",
+                "glossary": [
+                    {"val": "Scars", "id": "gl_scar"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 3,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_tisbutascratch",
+        "name": "'Tis but a Scratch",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {             
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You may re-roll any injuries on the Injury Chart for this model. The second result stands."
+            }
+        ],
+        "options": [],
+        "table_val": 4,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_badcompany",
+        "name": "Bad Company",
+        "source": "core",
+        "tags": { "trait": true, "faction": true},
+        "contextdata": {      
+            "get_elite_count_cap": { "modify_value": 1 }       
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your warband may have seven ELITE models instead of six.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 5,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_scavenger",
+        "name": "Scavenger",
+        "source": "core",
+        "tags": { "trait": true, "faction": true},
+        "contextdata": {      
+            "get_exploration_skills": { "add_skill": ["es_extradice"] }       
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "While this model is in your warband, your warband has the Extra Dice Exploration Skill.",
+                "glossary": [
+                    {"val": "Exploration", "id": "gl_explorationdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 6,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_skillandexpertise",
+        "name": "Skill & Expertise",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true},
+        "contextdata": {
+            "custom_add_to_action": {
+                "restriction": [
+                    {
+                        "type": "action",
+                        "value": "attack"
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 DICE to any ACTION this model has, except for ranged or melee attack ACTIONS.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 7,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_showoff",
+        "name": "Show Off",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "get_promotion_dice": { "value": 1 }  
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add one additional dice to the Promotion Dice pool after each battle."
+            }
+        ],
+        "options": [],
+        "table_val": 8,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_friendsinhighplaces",
+        "name": "Friends In High Places",
+        "source": "core",
+        "tags": { "trait": true, "faction": true},
+        "contextdata": {
+            "get_exploration_skills": { "add_skill": ["es_reroll","es_reroll"] }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "While this model is in your warband, your warband has the Re-roll Dice Exploration Skill twice.",
+                "glossary": [
+                    {"val": "Exploration", "id": "gl_explorationdice"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 9,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_gloryhound",
+        "name": "Glory Hound",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "gain_glory": {
+                "value": 1
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, if this model was fielded and was not taken Out of Action, your warband gains an additional Glory Point."
+            }
+        ],
+        "options": [],
+        "table_val": 10,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_warstories",
+        "name": "War Stories",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "gain_experience": {
+                "self": false,
+                "others": true,
+                "value": 1
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of the battle, choose any ELITE model in your warband except this one. That model gains +1 Experience Point.",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": [],
+        "table_val": 11,
+        "skill_group": ["sg_wildcard"]
+    },
+    {
+        "id": "sk_firearmprocurement",
+        "name": "Firearm Procurement",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {},
+            "add_onto_warband": {},
+            "purchase_modifier_equipment": {
+                "mod": [
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "ranged"
+                            },
+                            {
+                                "cost": 20,
+                                "costtype": 0,
+                                "req_mod": ">="
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The cost of any ranged eapon worth 20 ducats or more is reduced by 5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_mendelistchemicals",
+        "name": "Mendelist Chemicals",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "BLOOD MARKERS of this model cannot be added to the Injury rolls against this model. Other bonuses to the Injury rolls apply, and Bloodbath against this model works as normal.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_armourandequipmentprocurement",
+        "name": "Armour & Equipment Procurement",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {},
+            "add_onto_warband": {},
+            "purchase_modifier_equipment": {
+                "mod": [
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "armour"
+                            },
+                            {
+                                "cost": 20,
+                                "costtype": 0,
+                                "req_mod": ">="
+                            }
+                        ]
+                    },
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "equipment"
+                            },
+                            {
+                                "cost": 20,
+                                "costtype": 0,
+                                "req_mod": ">="
+                            }
+                        ]
+                    }
+                ]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The cost of any suit of armour or equipment worth 20 ducats or more is reduced by 5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_meleeweaponprocurement",
+        "name": "Melee Weapon Procurement",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_wide": {},
+            "add_onto_warband": {},
+            "purchase_modifier_equipment": {
+                "mod": [
+                    {
+                        "cost": -5,
+                        "requirements": [
+                            {
+                                "category": "melee"
+                            },
+                            {
+                                "cost": 20,
+                                "costtype": 0,
+                                "req_mod": ">="
+                            }
+                        ]
+                    }
+                ]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The cost of any melee weapon worth 20 ducats or more is reduced by 5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_sniperschool",
+        "name": "Sniper School",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_range"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All Ranged attacks of this model need 1 less BLOOD MARKER to cause a Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_specialassaulttraining",
+        "name": "Special Assault Training",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_melee"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "All Melee attacks of this model need 1 less BLOOD MARKER to cause a Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_temporallord"]
+    },
+    {
+        "id": "sk_blessingsofawarriorsaint",
+        "name": "Blessings of a Warrior Saint",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model starts each battle with D3 BLESSINGS DICE.",
+                "glossary": [
+                    {"val": "BLESSINGS DICE", "id": "kw_blessingmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_endurethesuffering",
+        "name": "Endure the Suffering",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {             
+            "add_scars": { "value": 1} 
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Add +1 to the maximum Scars your model can sustain.",
+                "glossary": [
+                    {"val": "Scars", "id": "gl_scar"}
+                ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_dragonslayer",
+        "name": "Dragonslayer",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_melee"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model rolls on the Injury Chart in melee against an enemy that is Down, you don’t have to roll one of the Injury Dice but can set it as 6 and then roll the rest of the dice pool.",
+                "glossary": [
+                    {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_davidandgoliath",
+        "name": "David and Goliath",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_melee"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model makes a Melee Attack ACTION against an enemy model on a 40mm or larger base, they roll 3d6 to hit instead of 2d6, totalling the sum.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_onyourknees",
+        "name": "On Your Knees",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Downed Enemy models in Melee Combat with this model cannot automatically Stand at the start of their Activation.",
+                "glossary": [
+                    {"val": "Downed", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_warriorsprayer",
+        "name": "Warrior's Prayer",
+        "source": "core",
+        "tags": { "action": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a RISKY ACTION, this model causes FEAR until the end of its Activation and may remove a BLOOD MARKER if it has any.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "FEAR", "id": "kw_fear"},
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_warriorsaint"]
+    },
+    {
+        "id": "sk_knowledgeofscience",
+        "name": "Knowledge of Science",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "add_extra_equipment": {
+                "count": 1,
+                "restriction": []
+            }  },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase a LIMIT of any Weapon, piece of Equipment or Armour by 1.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"}
+            ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_knowledgeofscience",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getEquipmentRelationshipsForWarband"
+            }
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_favouredbygod",
+        "name": "Favoured By God",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "gain_glory": {
+                "value": 1
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, your Warband gains an additional Glory Point."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_penniesfromheaven",
+        "name": "Pennies From Heaven",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "gain_ducats": {
+                "dice_value": 5
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, if this model was fielded, your Warband gains an additional D6x5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_organisationalskills",
+        "name": "Organisational Skills",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "model_limit_increase": {
+                "count": 1,
+                "restriction": [
+                    {
+                        "res_type": "keyword",
+                        "val": "kw_ELITE"
+                    }
+                ]
+            }  },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase the number of models that are normally limited by 1. This does not include ELITE Models",
+                "glossary": [
+                    {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_organisationalskills",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{},
+                    "filter": {
+                        "restriction": [
+                            {
+                                "res_type": "keyword",
+                                "val": "kw_elite",
+                                "subvalue" : false
+                            }
+                        ]
+                        }
+                    },
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getModelRelationshipsForWarband"
+            }
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_healingarts",
+        "name": "Healing Arts",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "When this model rolls on the Serious Injuries Chart, it may re-roll. The second result stands."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_walkwithgod",
+        "name": "Walk with God",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "skill_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model can pick any Skill from any Skill Chart available to it, including any Exploration Skill."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_walkwithgod",
+                "name" : "",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "single": true,
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : 
+                
+            {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "skill",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {
+                                "item": "tags",
+                                "value": "patron",
+                                "equals": false,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": [
+                            {
+                                "operator": "or",
+                                "terms": [
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_meleeandstrength",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_exploration",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_ranged",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_stealthandspeed",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_wildcard",
+                                        "equals": true,
+                                        "strict": true
+                                    }
+                                ],
+                                "subparams": []
+                            }
+                        ]
+                    }
+                }   
+            }
+            }
+        ],
+        "skill_group": ["pt_learnedsaint"]
+    },
+    {
+        "id": "sk_blessedmurder",
+        "name": "Blessed Murder",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Each time this model takes an enemy Out of Action via any ACTION it takes, the model with this Skill gains 1 BLESSINGS DICE.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLESSINGS DICE", "id": "kw_blessingmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_sadistic",
+        "name": "Sadistic",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "bonus_type": ["hit_roll","injury_roll"]
+            }
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You gain +1 DICE for all Injury rolls and to Hit Rolls against opponents that are Down.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "Down", "id": "gl_down"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_hellfire",
+        "name": "Hellfire",
+        "source": "core",
+        "tags": { "action": true, "attack": true, "attack_ranged": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model can take a RISKY ACTION. Select a friendly model within 18” of the caster that the caster can see. Draw a straight line between the models which travels along the ground. Every model in the way spontaneously bursts into flames from Hell. Roll on the Injury Chart for each model including the friendly model at the end. The attack has the Keyword FIRE.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                    {"val": "FIRE", "id": "kw_fire"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_30piecesofsilver",
+        "name": "30 Pieces of Silver",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "gain_ducats": {
+                "dice_value": 5
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the end of each battle, if this model was fielded, your Warband gains an additional D6x5 ducats."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_bloodsacrifice",
+        "name": "Blood Sacrifice",
+        "source": "core",
+        "tags": { "action": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "With a successful ACTION, this model can transfer one of its BLOOD MARKERS to any friendly model within 6\".",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_lashofacheron",
+        "name": "Lash of Acheron",
+        "source": "core",
+        "tags": { "action": true, "attack": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "With a successful RISKY ACTION you can select any model within 6”. Roll on the Injury chart for that model immediately. This attack ignores Armour.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_infernalnoble"]
+    },
+    {
+        "id": "sk_cockroachvitality",
+        "name": "Cockroach Vitality",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": { 
+            "bonus_ability": {
+                "action_type": ["attack"]
+            } },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "BLOOD MARKERS cannot be used to penalise the Melee or Ranged Attacks of this model, though otherwise they can be used as normal.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_eyesofthefly",
+        "name": "Eyes of the Fly",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack_range"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model ignores the penalties associated with Cover and Long Range.",
+                "glossary": [
+                    {"val": "Cover", "id": "gl_cover"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_wingsofthefly",
+        "name": "Wings of the Fly",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {            
+            "set_stat": { "upgrades" : [
+                {"stat": "movetype", "value": 1}
+                ]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "If this model has an Infantry Movement characteristic, it gains a Fly Movement characteristic with the same value."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_grailplague",
+        "name": "Grail Plague",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of each battle, select one enemy model without the Keyword BLACK GRAIL. This model starts the game with one INFECTION MARKER.",
+                "glossary": [
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_deceitofbeelzebub",
+        "name": "Deceit of Beelzebub",
+        "source": "core",
+        "tags": { "action": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "As a RISKY ACTION, this model can change places with another model within 8\". Both models are removed from the battlefield and then replaced immediately as close as possible to the other’s location.",
+                "glossary": [
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_knightofthefly",
+        "name": "Knight of the Fly",
+        "source": "core",
+        "tags": { "trait": true,  "enemy_penalty": true },
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ranged Attacks against this model suffer -1 DICE to hit.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_orderofthefly"]
+    },
+    {
+        "id": "sk_moneycanbuyanything",
+        "name": "Money Can Buy Anything",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "warband_general_hook": {},
+            "warband_wide": {}, 
+            "add_onto_warband": {},
+            "add_extra_equipment": {
+                "count": 1,
+                "restriction": []
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can increase a LIMIT of any Weapon, piece of Equipment or Armour by 1.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"}
+            ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_moneycanbuyanything",
+                "name" : "",
+                "description" : [],
+                "self_ask": true,
+                "category" : "contextobject",
+                "option_context" : {"basic_option_default":{}},
+                "dyna_only": true,
+                "parent_level": 7,
+                "question_name": "getEquipmentRelationshipsForWarband"
+            }
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_unsecuredloan",
+        "name": "Unsecured Loan",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "gain_ducats": {
+                "value": 100
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Gain 100 ducats immediately. These ducats are only gained once, at the moment the skill is chosen."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_crookeddice",
+        "name": "Crooked Dice",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {"activated": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Once per game, the model with this Skill can re-roll all the dice of any single dice for one ACTION or an Injury roll it makes.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_plutocracy",
+        "name": "Plutocracy",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "add_fireteam_model" : { "type": "ft_model", "count": 1, "restriction": [ { "rest_type": "elite", "value": false }]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This model may form a FIRETEAM with any one non-ELITE model of the Warband. Further, failing a RISKY ACTION will not end the Activation of either this model or the other model in the FIRETEAM.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_eternaldebt",
+        "name": "Eternal Debt",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {"warband_wide": {}},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Wretched of this Warband are never lost as casualties, as their heads (kept as surety by Mammon) are used to re-grown the lost bodies. All Wretched models of the Warband are considered to make a full recovery after the battle if taken Out of Action."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_aureateskin",
+        "name": "Aureate Skin",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The model with this skill is granted the splendid (yet tarnished) golden skin of their Patron, and their blood turns into molten gold. Each time the model suffers a blood marker, add 5 ducats to your treasury."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_mammon"]
+    },
+    {
+        "id": "sk_infectthemind",
+        "name": "Infect the Mind",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "warband_wide": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "At the start of the battle, after the deployment, select one enemy model. You can move this model up to 6” in any direction you wish, though not into Melee combat, into impassable terrain or out of the battlefield."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_eyeofbeelzebub",
+        "name": "Eye of Beelzebub",
+        "source": "core",
+        "tags": { "action": true},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The overwhelming mental pressure of this emissary of Beelzebub overwhelms any mind. With a successful ACTION this model can force any single enemy model with 24\" that is in cover (but not in Melee combat) to move 1\" to leave the cover. This model is moved by your opponent, and cannot take the model into Melee combat or into another cover.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_silveredtongue",
+        "name": "Silvered Tongue",
+        "source": "core",
+        "tags": { "action": true},
+        "contextdata": {
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "With a successful ACTION this model can force any opponent it is melee combat with to make one of its own Melee attacks against itself. You can choose which weapon to use.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_swinehybrid",
+        "name": "Swine Hybrid",
+        "source": "core",
+        "tags": { "trait": true},
+        "contextdata": {
+            "upgrade_stat": { "upgrades": [{"stat": "movement", "value": 2}]}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Movement Characteristic of this model is increased by 2\"."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_beelzebubswisdom",
+        "name": "Beelzebub's Wisdom",
+        "source": "core",
+        "tags": { "trait": true, "enemy_penalty": true},
+        "contextdata": {},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Infested with the Black Grail, the head of this model is distended and liquid matter oozes out of its many trepanned holes. So great is the sheer willpower of this model that any enemy Charging it can only use their base Movment characteristics and not add D6 to determine if they reach the model or not."
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_feastondisease",
+        "name": "Feast on Disease",
+        "source": "core",
+        "tags": { "trait": true, "bonus": true },
+        "contextdata": {
+            "bonus_ability": {
+                "action_type": ["attack"]
+            }},
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " As long as the target has at least 1 INFECTION MARKER when the attack is made, all attacks of this model need 1 less BLOOD MARKER/INFECTION MARKER to cause a Bloodbath.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+            ]
+            }
+        ],
+        "options": [
+            
+        ],
+        "skill_group": ["pt_antipopeofavignon"]
+    },
+    {
+        "id": "sk_fruitfromthetreeofgoodandevil",
+        "name": "Fruit from the Tree of Good and Evil",
+        "source": "core",
+        "tags": { "trait": true },
+        "contextdata": {
+            "keyword_add": {"value": ["kw_demonic"]},
+            "skill_option": {}
+        },
+        "description": [            
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Any model eating this fruit will immediately gain any Skill of your choice normally available to your Warband/this model (including any Exploration Skill). In addition the model will gain the Keyword DEMONIC.",
+                "glossary": [
+                    {"val": "DEMONIC", "id": "kw_demonic"}
+                ]
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_walkwithgod",
+                "name" : "",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "single": true,
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : 
+                
+            {      
+                "searchtype": "complex",
+                "searchparam":    {
+                    "type": "skill",
+                    "request":    {
+                        "operator": "and",
+                        "terms": [
+                            {
+                                "item": "tags",
+                                "value": "patron",
+                                "equals": false,
+                                "strict": true,
+                                "istag" : true,
+                                "tagvalue": ""
+                            }
+                        ],
+                        "subparams": [
+                            {
+                                "operator": "or",
+                                "terms": [
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_meleeandstrength",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_exploration",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_ranged",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_stealthandspeed",
+                                        "equals": true,
+                                        "strict": true
+                                    },
+                                    {             
+                                        "item": "skill_group",
+                                        "value": "sg_wildcard",
+                                        "equals": true,
+                                        "strict": true
+                                    }
+                                ],
+                                "subparams": []
+                            }
+                        ]
+                    }
+                }   
+            }
+            }
+        ],
+        "skill_group": []
+    }
+]

@@ -1,0 +1,13 @@
+[
+    {
+        "id": "td_testitem",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "Test Dynamic",
+        "contextdata": {"option_search_viable": {"test": "check"}},
+        "teststaticlist" : ["ts_testitem_a","ts_testitem_b"],
+        "teststaticbaselist" : ["tb_testitem_c","tb_testitem_b","tb_testitem_a"]
+    }
+]

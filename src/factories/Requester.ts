@@ -11,12 +11,12 @@ interface IRequest {
 
 class Requester {
 
-    public static GetLanguage() {
-        const language = localStorage.getItem('language');
-        if (language != null) {
-            return language
+    public static GetVersion() {
+        const version = localStorage.getItem('tc_version');
+        if (version != null) {
+            return version
         } else {
-            return 'ln_english'
+            return 'ver_default'
         }
     }
 
@@ -27,9 +27,9 @@ class Requester {
      */
     public static MakeRequest(request: IRequest) {
         request.searchparam.data = GetContentPackData(request)
-        const lan = Requester.GetLanguage();
+        const ver = Requester.GetVersion();
         try {
-            return DataResponder.GetResponse(request.searchparam, request.searchtype, lan)
+            return DataResponder.GetResponse(request.searchparam, request.searchtype, ver)
         } catch (e) {
             return []
         }

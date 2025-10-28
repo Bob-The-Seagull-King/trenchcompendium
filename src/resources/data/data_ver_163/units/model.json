@@ -1,0 +1,3331 @@
+[
+    {
+        "id": "md_janissaries",
+        "name": "Janissary",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Janissaries can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The janissaries are the Sultanate’s elite warriors, raised from childhood in the arts of war. Captured during raids upon the desolate northern and eastern marches beyond the Iron Wall, they are subjected to rigorous martial training and indoctrination from an early age. On the battlefield, Janissaries excel at devastating counter-charges, crushing the enemy elite formations and acting as the bodyguard for high-ranking individuals."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate","kw_strong"],
+        "abilities" : ["ab_countercharge"]
+    },
+    {
+        "id": "md_azeb",
+        "name": "Azeb",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Azebs can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Azebs are soldiers recruited from the multitude of provinces of the sultanate, where every house in twenty is required to equip and provide a warrior to serve the Prince of Those Who Believe. They are often used by their superiors as light skirmishers to harass and tie down the enemies while the heavier troops close in for the kill."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate"],
+        "abilities" : []
+    },
+    {
+        "id": "md_sultanatesapper",
+        "name": "Sultanate Sapper",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Sappers are equipped with shovels. This equipment can never be removed. They can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Sultan’s Sappers are highly respected and valued specialists in the Sultan’s army. They are expected to man the great cannons of the Iron Wall no matter what the enemies throw at them, and since their mighty artillery is prone to overheating, they are easily identified by the terrible burns all over their bodies."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate"],
+        "abilities" : ["ab_minesetting","ab_demine","ab_forwardpositions","ab_fortify"]
+    },
+    {
+        "id": "md_brazenbull",
+        "name": "Brazen Bull",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "ranged",
+                        "res_type": "keyword",
+                        "value": "kw_heavy"
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "keyword",
+                        "value": "kw_heavy"
+                    }
+                ],
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_exlixerofalkhidr"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "tag": "brazen_bull",
+                        "res_type": "tag",
+                        "value": "brazen_bull",
+                        "limit": 2
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Brazen Bull can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury. Due to its vast strength and size it can only use weapons with the Keyword HEAVY – it will simply crush weapons of normal size by accident. It can carry up to two Brazen Bull Only weapons.",
+                "glossary": [
+                    {"val": "HEAVY", "id": "kw_heavy"}
+                ]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Brazen Bull is a monstrous being of immense power and vitality, capable of tearing even the bastard child of a devil clean in half. The Sultan’s armourers equip the Bulls with heavy artillery that even the superhuman Janissaries cannot lift, let alone use in battle: flame cannons, volley guns and holy blades blessed by the Word of the Great Protector."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 0,
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1,
+            "base": [60]
+        },
+        "keywords" : ["kw_sultanate","kw_strong","kw_tough","kw_fear"],
+        "abilities" : ["ab_artificialbody","ab_trample"]
+    },
+    {
+        "id": "md_lionofjabir",
+        "name": "Lion of Jabir",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": { },
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [50]
+                        },
+                        {
+                            "base": [30,60]
+                        }
+                    ]
+                ]
+            },
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_windamulet"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Lions can be equipped with armour (except shields) and Wind Amulets. They cannot be equipped with any other items. They do not suffer penalties for fighting unarmed. You can mount the Lion on two different base sizes as indicated in the profile due to the variance of their shape and size."
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Named after the deadly hunters of the plains, the Lions of Jabir can take many forms, not all of them leonine. Each one is a unique masterwork, grown according to the skills and artistry of the Jabirean scientist that created them. The speed and ferocity of the Lions is nearly unmatched, and some even have strange powers granted by their alchemical birth."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 8,
+            "melee": 1,
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_sultanate"],
+        "abilities" : ["ab_artificialbody","ab_mauling","ab_lionsgrace"]
+    },
+    {
+        "id": "md_jabireanalchemist",
+        "name": "Jabirean Alchemist",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Alchemist can be equipped with any weapon, armour and equipment from the Iron Sultanate Armoury.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Jabirean Alchemist is a master of esoteric powers, able to control fire and ice, metal and liquid; capable of creating intricate mechanical devices and artificial life as well as weapons of calamitous potency. In exchange for the freedom to practise their arts, the Alchemists supply the Sultanate with the peerless Jabirean battle lions, and serve on the front lines where their devastating alchemical compounds melt the flesh from the bones of the Unbelievers, or dissolve through even the toughest enemy armour."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate","kw_elite"],
+        "abilities" : ["ab_masteryoftheelements"]
+    },
+    {
+        "id": "md_yuzbasicaptain",
+        "name": "Yüzbaşı Captain",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Yüzbaşı can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Military expeditions over the Great Iron Wall into No Man’s Land carry many risks, and their commanders are field officers known as Yüzbaşı. They are expected to lead from the front and their selection is solely on merit, with no consideration given to family pedigree or wealth."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate","kw_elite", "kw_tough","kw_leader"],
+        "abilities" : ["ab_mubarizun"]
+    },
+    {
+        "id": "md_sultanateassassin",
+        "name": "Sultanate Assassin",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Assassin can be equipped with any weapon, armour and equipment from the Iron Sultanate Equipment List.",
+                "glossary": [{"val": "Iron Sultanate", "id": "kw_sultanate"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Assassins are a legendary order of mystic warriors, whispered about the world over for their secrecy and ruthlessness. Assassins are able to bend space and time using the sacred rituals and powerful hallucinogens discovered by magi of the order. With this esoteric power they prowl behind enemy lines, hunting their targets with merciless efficiency. They can seemingly appear in two places simultaneously, strike a foe with startling speed and then travel back into time to a moment a few heartbeats before, safe from any retaliation."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_sultanate","kw_elite", "kw_infiltrator"],
+        "abilities" : ["ab_timeslip","ab_temporalassassin"]
+    },
+    {
+        "id": "md_mamlukfaris",
+        "name": "Mamluk Faris",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Mamluk carries a Jezzail with Alchemical Ammunition. They wear a Helmet and Reinforced Armour. In addition, before each battle, you may choose one of several loadouts from their personal armoury"
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Mamluks are an echo of a bygone age, last members of the warrior-elite that once ruled a great empire in Northern Africa. They suffered grievous losses at the earliest stages of the Great War when the Legions of demon Zalambuer emerged from the Hellgate. The Fatimids led their Mamluk forces in a desperate campaign to reclaim the Levant, but of their fate there is no tale. Instead of returning victorious warriors, the slaves of Jahannam rushed through Sinai like an evil wind, razing Alexandria and Cairo to the ground. The remaining Mamluks fought bitterly to protect their homes, but to no avail. Too proud to leave their ancestral homes at the mercy of evil, some of the last Mamluks did not heed the call to migrate beyond the Iron Wall, and instead dispersed throughout the lands they once ruled to fight on – a fight that has never ceased since those dark days."
+            },  
+            {"tags": {"desc_type" : "gap"}},  
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "To this day the Mamluk knights play a deadly game of ambush and sudden raids on the Aegyptian front against Mammon’s legions, making their living as swords for hire, waging an endless war against the Heretics and composing poems of lamentation in memory of their lost and devastated homelands. Generations of war have hardened the Mamluks into peerless warriors, for parents pass on the secrets of Furūsiyya, the martial skills and ethical conduct of the Arabian Knights, to their children. Too few in numbers to wage open war, the Mamluks instead fight alongside any of the Peoples of the Book, making their living by offering their swords to the highest bidder, as long as such a leader promises to fight the forces of Shaytan. They respect noble character and martial prowess above all, and often bond by sharing their way of the sword with an ally they respect."
+            },  
+            {"tags": {"desc_type" : "gap"}},  
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Only a few of the famed artificial heavy warhorses of the Mamluks remain, and they are not risked in open combat unless they are used directly to defend the last few hidden abodes the Mamluks still inhabit in the vast deserts that stretch beyond the Nile delta. However, these tireless steeds are used to take the heavy Mamluk warriors into advanced positions where they can disrupt the enemy’s plans and surprise exposed enemy units."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_swornsword","ab_martialprowess","ab_arabiandestrier"]
+    },
+    {
+        "id": "md_takwincreation",
+        "name": "Takwin Homunculus",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The homunculus cannot be equipped with any weapons, armour or equipment. It can fight in melee without any penalty."
+            },
+            { "tags": {"desc_type" : "gap"} },
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You can bring one Takwin creature for each Alchemist in your warband. Each Takwin creature must be associated with an Alchemist in your warband. If a Takwin creature’s associated Alchemist is killed (typically by acquiring three scars), that Takwin creature cannot be fielded, its equipment cannot be changed and no Alchemical Formulae may be applied to it. When you acquire a new Alchemist, if you have any unallocated Takwin creatures, you must allocate that new Alchemist with one of your unallocated Takwin creatures. Instead of using Glory, you must buy them with ducats as indicated on the list below."
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "To become an Alchemist is no easy task: they undergo many trials on their path to mastery. The second is to create a takwin servant, a Homunculus creature of artificial life and intellect. If the candidate manages to follow the complex formula, as well as the intricate timing and temperature requirements, the creature will emerge after forty days of toil. It will act as the Alchemist’s living tool of creation, for their hands have fine motor skills well beyond even the nimblest craftsman. "
+            },  
+            {"tags": {"desc_type" : "gap"}},  
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Vaguely shaped like a small human, it canchange the consistency of its body to an almost liquid-like slime to squeeze into alchemical chambers to do their master’s bidding in extreme temperatures and in the fog of poisonous chemical fumes. Many aspirants fail here and their creation emerges from its golden celestial sphere a deformed monstrosity, filled with hatred towards its creator. It burrows itself into the Alchemist’s body to consume it from within, wearing its would-be master as a skin."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : [],
+        "abilities" : ["ab_artificialbody","ab_recreation"]
+    },
+    {
+        "id": "md_scriptureguardian",
+        "name": "Scripture Guardian",
+        "source": "core",
+        "tags": {},
+        "contextdata": {     
+            "mercenary_add_equipment": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "restricted",
+                        "value": ""
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "category": "melee",
+                        "res_type": "category",
+                        "value": "",
+                        "limit": 1
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Scripture Guardian carries a Scripture Scroll. It wears reinforced armour and a helmet. In addition, it has 2 arms that can be made to carry one Melee weapon available to your Warband as long as they have no restrictions (such as ELITE only, Assassins only, LIMIT: 2 etc.). You must pay the appropriate cost as standard.",
+                "glossary": [{"val": "ELITE", "id": "kw_elite"},{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Origins of the Scripture Guardians are unknown, but rumours claim they are creations of great masters of Kabbalah. Reports of the Scripture Guardians began to circulate in the early days of the Great War. The destruction of Jerusalem upended great cities and unearthed tombs that should never have been disturbed, their occupants now wandering this unhappy land, endlessly reciting the sacred writings entrusted to them in death. Sometimes a lucky expedition to No Man’s Land can find such a creature, and placing a holy text of their own faith into its hands can turn the Scripture Guardian into a potent ally to whomever aligns with the holy (or indeed desecrated) scroll of tome given to its unyielding grasp."
+            },  
+            {"tags": {"desc_type" : "gap"}},  
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Capable of speaking and reading the One True Language, the Scripture Guardian can unleash the powers it calls upon against anyone its master dictates. It serves its purpose with the single-mindedness of an automaton, unthinking and uncaring. Spoken by the Guardian, the words are empowered with the primordial power of Creation, and can unmake anything, growing in power the longer they target anything in the physical world."
+            }
+        ],
+        "team": "none",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "mercenary": true
+        },
+        "keywords" : ["kw_golem"],
+        "abilities" : ["ab_slow","ab_vengefulscripture"]
+    },
+    {
+        "id": "md_trenchdog",
+        "name": "Trench Dog",
+        "source": "core",
+        "tags": {"dog": true},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Dogs do not suffer penalties for fighting unarmed. In battle they are treated as non-ELITE Troops. War Dogs cannot become ELITE. At an additional cost the dog gains an ability to form a FIRETEAM with any 1 model in your Warband.",
+                "glossary": [{"val": "ELITE", "id": "kw_elite"},{"val": "FIRETEAM", "id": "kw_fireteam"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A great many animals serve in the trenches alongside the soldiers. Wardogs are by far the most common, but tame ocelots, barbary apes, small bears, and other unusual pets abound, while the forces of Hell keep Hellhounds and other infernal beasts as pets."
+            },   
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These loyal canines can be trained to serve in multiple roles: as mercy dogs for on rescuing wounded soldiers, fierce guard dogs, or as messengers."
+            }
+        ],
+        "team": "none",
+        "stats" : {            
+            "movement": 8,
+            "melee": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 3
+        },
+        "keywords" : [],
+        "abilities" : ["ab_fourpaws"]
+    },
+    {
+        "id": "md_deathcommando",
+        "name": "Death Commando",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_silenecedpistol"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_tormentorchain"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_gasgrenades"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Death Commando can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury. The only ranged weapons they can be equipped with are Silenced Pistols, a Tormentor Chain and Gas Grenades.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Silent Killers equipped with stealth generators that hide them from the eyes of God. These terrifying infiltrators have been known to kill entire enemy squads alone."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_elite","kw_infiltrator"],
+        "abilities" : ["ab_hide","ab_stealthgenerator"]
+    },
+    {
+        "id": "md_annointedheavyinfantry",
+        "name": "Annointed Heavy Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Anointed are always equipped with a suit of Reinforced Armour and Infernal brand mark which are included in the cost. This armour can never be removed. Otherwise they can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury and may purchase a Trench Shield.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Heavily armed and armoured assault troops. Their skin is burned and blistering from their ordained pilgrimages to Hell and back."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_heretic","kw_strong"],
+        "abilities" : []
+    },
+    {
+        "id": "md_heretictrooper",
+        "name": "Heretic Trooper",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Heretic Trooper can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can upgrade up to half (rounding down) of your Heretic Troopers into Heretic Legionnaires at the cost of +10 ducats each. You can select to upgrade either the Ranged or Melee characteristic of any of your Legionnaires by +1 DICE. You can choose a different bonus for each Legionnaire.",
+                "glossary": [{"val": "+1 DICE", "id": "kw_plusdice"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "These soldiers make up the bulk of the Heretic forces. They have witnessed the Gate of Hell and survived, damning them for all eternity."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_heretic"],
+        "abilities" : []
+    },
+    {
+        "id": "md_hereticpriest",
+        "name": "Heretic Priest",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Heretic Priest can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The Leader of a Heretic warband. These fallen priests perform all kinds of unholy magics, summoning petrifying demons and creatures using their Goetic spells. Often pledged to a Demon Lord in Hell, such as Pazuzu or Guison, the Profane Gospels they recite terrify church forces, causing ears to bleed and eyeballs to burst in their sockets."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_elite","kw_heretic","kw_tough","kw_leader"],
+        "abilities" : ["ab_puppetmaster"]
+    },
+    {
+        "id": "md_heretichorister",
+        "name": "Heretic Chorister",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Heretic Chorister can be equipped with any weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Suicide is a Mortal Sin, and sacrificing yourself to the glory of Hell is a yet greater affront to God. Some Heretics born with a gift of sonorous voice but little prospects of rising through the ranks but possessing a determination to excel may pursue the dark path of becoming a Chorister."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Such supplicants go to one of the black altars of Heretic abodes at the bottom of the deep inverted pyramid temples dedicated to the greatest of Arch-devils. There they are dressed in the robes of dark devotion, lie on the altar and mutilate themselves to death by carving unholy runes into their flesh. The more wounds they can suffer before perishing, the more pleasing it is said their offering is. The most devout slice their own throats, trying to cut as deep as they can before their miserable life leaves them."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Most such wretches go to their doom in the Lake of Fire, but some are reborn as Choristers after nine days. Their corpses lurch back to their feet, and finish their grisly beheading, and lift their severed heads that begin to sing hymns they have learned in the Inferno. From their self-inflicted wounds spurts cold blood that forms diabolic symbols and changes to match the words of their unholy chorale. They head towards the front lines driven by a call no living can hear and join the Heretic warband of their choosing."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "As their severed heads sing their agonising hymns, the minds of their enemies are filled with visions from the Pits of Hell, weakening both the resolve and strength of those unfortunate enough to hear the dire song of a Chorister. Their hymns are often the first thing a fresh recruit experiences on the battlefield, as their unholy voice rolls across the trenches, proclaiming a never-ending prophecy of the final victory of Hell over Heaven."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": -2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_elite","kw_heretic","kw_fear"],
+        "abilities" : ["ab_unholyhymns"]
+    },
+    {
+        "id": "md_warwolfassaultbeast",
+        "name": "War Wolf Assault Beast",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You cannot buy additional equipment, weapons or armour for War Wolves. Each War Wolf is encased in a nigh impregnable suit of Tartarus Armour that is reflected in its profile above. Additionally, each War Wolf has a set of Shredding Claws and a vicious Chainsaw Mouth. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The weapons are detailed below. The War Wolf may make one attack ACTION with each of these weapons in Melee Combat and may make no other attacks during its Activation (so it can make two attacks per Activation).",
+                "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "This abomination charges through miles of barbed wire to clear a path for the heretic infantry; its uniquely formed head designed to cut clean through it. War Wolves wear unique armour forged in the factories of hell, as seen by the maker’s marks stamped upon it."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 8,
+            "melee": 2,
+            "base": [50],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_fear","kw_heretic","kw_tough","kw_artificial"],
+        "abilities" : ["ab_lopingdash"]
+    },
+    {
+        "id": "md_artillerywitch",
+        "name": "Artillery Witch",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "An Artillery Witch is always equipped with an endless supply of Infernal Bombs (see below) and can carry no other ranged weapons. Otherwise, she can be equipped with any melee weapon, armour or equipment from the Heretic Legion Armoury.",
+                "glossary": [{"val": "Heretic Legion", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Suicide is a Mortal Sin, and sacrificing yourself to the glory of Hell is a yet greater affront to God. Some Heretics born with a gift of sonorous voice but little prospects of rising through the ranks but possessing a determination to excel may pursue the dark path of becoming a Chorister."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_heretic","kw_artificial"],
+        "abilities" : ["ab_levitate","ab_artificiallife"]
+    },
+    {
+        "id": "md_wretched",
+        "name": "Wretched",
+        "source": "core",
+        "tags": {},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "res_type": "ducat",
+                        "value": 10,
+                        "param": "maximum"
+                    },
+                    {
+                        "res_type": "id",
+                        "value": "eq_lockofsamsonshair"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Wretched can be equipped with any melee weapon, armour or equipment from the Heretic Armoury List. None of their weapons, armour or equipment can cost more than 10 ducats each. Every Wretched must be equipped with at least one weapon.",
+                "glossary": [{"val": "Heretic Armoury", "id": "kw_heretic"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Many unfortunates fall into the hands of the Heretic warbands, either during one of their many raids or battles, or purchased from the slave markets within their own territories. Some are foolhardy adventurers who travel into the domains of the damned only to be caught by their watchful patrols."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Their lot is grim and terrible. They are worked to death in the factories of Sixty-Six Lords, butchered for meat, or worst of all, sold or offered to the agents of the Court of the Seven-Headed Serpent to be used as raw power for Goetic Spells."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Yet one path to freedom exists: they can volunteer to serve in the Legions as the lowest of low, the most disposable of penal troops. For the law of Hell is clear: those who rebel against God can gain their freedom if they are deemed to have performed sufficiently great deeds. Thus it is no wonder that many Heretic warbands drive swarms of the Wretched ahead of them to blunt and slow down the enemy assaults."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Wretched are branded with cursed flesh-eating tattoos as a safeguard against escape and heavily drugged to degrade and dull their will, while still leaving their aggression intact. Heretic Elites discard the lives of the Wretched carelessly, as their sacrifice on the battlefield counts as a worthy deed which will be rewarded by their Patrons."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : [],
+        "abilities" : ["ab_lawofhell","ab_darkblessing","ab_chattel"]
+    },
+    {
+        "id": "md_sineater",
+        "name": "Sin Eater",
+        "source": "core",
+        "tags": {},
+        "contextdata": {    
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Sin Eater is equipped with Reinforced Armour and a 2-handed Tenderizer Maul. You cannot alter the Sin Eater’s weapons and equipment in any way."
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Sin Eaters are horrific creatures: once they were mortal men and women, but their overwhelming greed and hunger for human flesh tainted with Sin, combined with the corrupting influence of the Hellgate, has turned them into a form that matches their inner foulness. They’re swollen into monstrous proportions and are always at a point of nearly bursting, yet forever ravenous for more flesh and human sins to devour."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Sin Eater is one of the very few creatures that Beelzebub approves of outside his own followers due its insatiable gluttony."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "base": [50],
+            "armour": 0,
+            "movetype": 0,
+            "mercenary": true,
+            "potential": 2
+        },
+        "keywords" : ["kw_heretic","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_devourtheguilty","ab_vomit"]
+    },
+    {
+        "id": "md_goeticwarlock",
+        "name": "Goetic Warlock",
+        "source": "core",
+        "tags": {},
+        "contextdata": {  
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Warlock wears Reinforced Armour. A Warlock counts as being armed with two swords in Melee combat – its arms are deadly weapons in their own right. You cannot alter the Warlock’s weapons and equipment in any way."
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Goetic Warlocks are horrific creations from the death factories of the 3rd Circle of Hell, manufactured from captured priests, prophets, vicars, rectors and monks. Fiendish machines first burn their flesh away with hellfire, encasing the still-living skeletons in an infernal suit of armour and stamping them with goetic runes. The process is so agonising that they consent to a demonic pact to bring end to their pain. Thus a new Goetic Warlock is born, ready to hunt the living they once swore to protect."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The mere gaze of the warlock causes necrosis and in close quarters they embrace unsuspecting enemies with their iron claws, using their goetic magic to gate themselves to a secluded location where they can finish their victim by slowly shredding them apart. Their favourite method is by skinning their victims alive and using their gruesome trophies as repulsive vellum to write grimoires and unholy religious texts, or wearing the faces of their victims to power their illusionary spells to confound their enemies."
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Due to the rarity of victims required to create Goetic Warlocks, they are only assigned to the Heretic commanders with the greatest renown, need and with the right connections in the twisted web of Heretic politics. Mammon, the great devil of Greed, sells the services of his own personal battalion of Warlocks to the highest bidder."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "mercenary": true,
+            "potential": 2
+        },
+        "keywords" : ["kw_demonic","kw_fear","kw_artificial"],
+        "abilities" : ["ab_goeticportal","ab_barbedembrace","ab_goeticgaze"]
+    },
+    {
+        "id": "md_warprophet",
+        "name": "War Prophet",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The War Prophet can be equipped with any weapons, armour or equipment from the Trench Pilgrims Equipment List.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A charismatic leader and powerful fighter of the Pilgrim group. They are driven by visions of Armageddon, and their preaching and prophecies drive the pilgrimage from one battlefield to the next, as they seek to thwart the forces of Satan and find martyrdom in combat."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim","kw_elite", "kw_leader"],
+        "abilities" : ["ab_loudspeakers","ab_layingonhands","ab_mementomori"]
+    },
+    {
+        "id": "md_castigator",
+        "name": "Castigator",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Castigator can be equipped with any weapons, armour or equipment from the Trench Pilgrims Equipment List.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Tasked with instilling the Fear of God in the troops, this orthodoxy officer keeps the soldiers on the path of righteousness and punishes those who transgress. They are protected by their unwavering faith as well as by the saints they revere."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim","kw_elite"],
+        "abilities" : ["ab_enforcedorthodoxy","ab_whipofgod"]
+    },
+    {
+        "id": "md_communicant",
+        "name": "Communicant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Communicant can be equipped with any weapon, armour and equipment from the Trench Pilgrim Equipment List. They always carry a Communicant Cross (see below).",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Communicants are devotees who consumed the flesh and blood of a Meta-Christ. Strengthened by the divine essence, they grow to enormous size and wounds they suffer close themselves miraculously. They see clearer blind, so blessed crosses are nailed through their eyes."
+                    }
+                ]
+            },    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "On the battlefield they act as line-breakers and bodyguards for Prophets and Castigators, heedlessly walking through enemy fire and mauling their enemies with enormous weapons that a normal man can barely even lift."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": -3,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_pilgrim","kw_elite","kw_strong","kw_tough"],
+        "abilities" : ["ab_miracleofregeneration","ab_bodyguard_pilgrim"]
+    },
+    {
+        "id": "md_crimsoncommunicant",
+        "name": "Crimson Communicant",
+        "source": "westfalia",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Communicant can be equipped with any weapon, armour and equipment from the New Antioch armoury. They always carry an Atonement Bell (see below).",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Wracked with an aching sense of loss and despair, the Crimson Communicants find solace to their pain in the company of the grim Red Brigade. Numb to lesser physical sensations, they actively seek grevious wounds on the battlefield to forget their mental anguish. As a parting gift when leaving the Mendelist monastery, they are each gifted an Atonement Bell."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": -1,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_antioch","kw_elite","kw_strong","kw_tough"],
+        "abilities" : ["ab_strengththroughpain"]
+    },
+    {
+        "id": "md_trenchpilgrim",
+        "name": "Trench Pilgrim",
+        "source": "core",
+        "tags": {},
+        "contextdata": {},
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Trench Pilgrim can be equipped with any weapon, armour and equipment from the Trench Pilgrim Equipment List.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A holy warrior of the trenches. Considers it his religious duty to make pilgrimage to the sacred battlefields to fight the heretic legions. Pilgrims wear the iron capirote to insulate their minds from the horrors of war."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim"],
+        "abilities" : []
+    },
+    {
+        "id": "md_ecclesiasticprisoner",
+        "name": "Ecclesiastic Prisoner",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_martyrdomdevice"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Ecclesiastic Prisoners are equipped with Iron Capirotes and this equipment cannot be removed, except by being Broken on the Wheel. Prisoners fight unarmed in melee, flailing feebly with their manacled arms. The -1D penalty to melee combat is already included in the profile above. Ecclesiastic Prisoners cannot be equipped with any weapons, armour or equipment from the Trench Pilgrims Armoury. They may be equipped with Martyrdom Devices for 35 ducats.",
+                "glossary": [
+                    {"val": "Trench Pilgrims", "id": "kw_pilgrim"},
+                    {"val": "-1D", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Bound in chains, their minds consumed by a desperate resolve, Prisoners surge forward, driven by the hope that their sacrificial charge will somehow cleanse their tarnished souls."
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_pilgrim"],
+        "abilities" : ["ab_awaited","ab_maddash"]
+    },
+    {
+        "id": "md_stigmaticnun",
+        "name": "Stigmatic Nun",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_pistolrevolver"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_automaticpistol"
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "id",
+                        "value": "eq_warcross"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Stigmatic Nuns can be equipped with any melee weapons, armour or equipment from the Trench Pilgrim Armoury. The only ranged weapons that Nuns can be equipped with are pistols, automatic pistols and warcrosses.",
+                "glossary": [{"val": "Trench Pilgrims", "id": "kw_pilgrim"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Blessed with stigmata and unshakeable faith, these swordmaster nuns are the vanguard of any assault by the holy armies."
+                    }
+                ]
+            },    
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "“From henceforth let no man trouble me: for I bear in my body the marks of our Lord and Saviour.” - Galatians 6:17"
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 8,
+            "melee": 1,
+            "ranged": 1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_pilgrim"],
+        "abilities" : ["ab_agile","ab_blessedstigmata"]
+    },
+    {
+        "id": "md_anchoriteshrine",
+        "name": "Anchorite Shrine",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "You cannot buy additional equipment, weapons or armour for Shrine Anchorites. Each Anchorite is equipped with a special suit of armour (reflected in the profile), a Combat Helmet, a Catherine Wheel and a Bonebreaker Mace. These pieces of equipment are built into the integrity of its construction and cannot be removed or lost in any way. The weapons are detailed below. The Anchorite may make one attack ACTION with each of these weapons in Melee Combat and may make no other attacks during its Activation (so it can make two attacks per Activation).",
+                "glossary": [{"val": "ACTION", "id": "kw_action"}]
+            }
+        ],
+        "lore": [      
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A colossal suit of machine armour fuelled by diesel and faith, the Shrine Anchorite stands as a grim symbol of humanity’s despair. Within its spiked, blood-stained interior, the pilot-monk endures a terrible form of penance, his anguished prayers and chants echoing across the battlefield. This grotesque amalgamation of suffering and devotion instils fear in the heart of the heretic, as the anchorite, a malevolent weapon draped in holy iconography and weeping gore, emerges to unleash a symphony of slaughter, where the wretched union of man and machine heralds the demise of all who oppose the Almighty"
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "base": [60],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_pilgrim","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_brokenonthewheel"]
+    },
+    {
+        "id": "md_combatmedic",
+        "name": "Combat Medic",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Medic carries a Misericordia and a Medi-kit. They wear a gas mask and suit of standard armour (reflected on the profile above). You cannot modify the equipment, armour and weapons of the Medic in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Sisters of St. Cosmas are a highly trained elite medical corps, specialising in battlefield first aid and surgeries on the front lines of the Great War."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Sisters take a modified Hippocratic Oath that compels them to help any wounded soldiers of the Faith, no matter how dire the circumstance, as well as dispatching heretics and other enemies they find on the battlefield without pity or mercy."
+                    }
+                ]
+            } ,  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Armed with a combat surgical knife that doubles as a Misericordia, they are as equally adept at saving lives as taking them from those they find lying wounded in No Man’s Land. They carry medical kits with a plethora of battlefield drugs that are especially useful for nullifying the pain of even the most ghastly wounds, and getting soldiers back on their feet and back into the fray, even if just for a few moments so they can accomplish their mission or die trying."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : ["ab_finishthefallen","ab_expertmedic","ab_conventconditioning"]
+    },
+    {
+        "id": "md_witchburner",
+        "name": "Witchburner",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Witchburner is equipped with Reinforced Armour, wears a Helmet and carries a War Gavel (see below). You cannot alter their armour, weapons or equipment in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Witchburners are the field officers of the Inquisition. They are tasked with hunting down and punishing witches, warlocks and heretics that cannot be brought to face justice by conventional means."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "On the battlefield they have the power to channel divine retribution on those deemed to have transgressed against God, causing sinners to burst into flames with mere words of condemnation. Since none are sinless, none are safe from their words of condemnation."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_divinejudgement","ab_ceremonialduty","ab_dignifiedconduct"]
+    },
+    {
+        "id": "md_communicantantitankhunter",
+        "name": "Communicant Anti-Tank Hunter",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Communicant is armed with an anti-materiel rifle and a helmet. They count as being armed with two Trench clubs in Melee combat – its fists are deadly weapons in their own right. Their flesh is hard as iron, so Communicants are considered to be wearing Standard Armour as noted in their profile. You cannot alter their weapons and equipment in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Communicants are partakers of the experimental Chemical Communion – the blood and flesh harvested from a Meta-Christ by the Mendelist monks and applied to the genome of volunteers. The most holy and pious of the Church are chosen to partake of the experimental communion, going through many biological changes to become larger and more durable, greatly enhancing their effectiveness on the battlefield. Their divinely-enhanced strength allows them to carry and shoot massive anti-materiel guns as easily as a normal soldier would wield a simple rifle. The process is uncertain, however, with the possibility for unpredictable side effects. Some lose their ability to speak or their higher brain functions become distracted by the heavenly choir only they can hear, requiring exact commands from their handlers."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Because the Church consistently needs funds to sustain its military operations, Communicants are frequently allocated to the highest bidders among the armies affiliated with New Antioch. Their services are in constant demand as they are able to take out enemy fighting vehicles, heavily armoured troops and strongpoints with a single shot."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [40],
+            "armour": -1,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : ["kw_tough","kw_strong"],
+        "abilities" : ["ab_miracleofregeneration"]
+    },
+    {
+        "id": "md_mendelistammomonk",
+        "name": "Mendelist Ammo Monk",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Monk has no weapons. They wear a gas mask and carry the Ammunition Sacrament (see below). You may not change their armaments in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Order of Mendelist Monks is entrusted with the design of divinely enhanced items and the creation of the Communicants, devotees who have undergone Chemical Communion with an infusion of the synthesised blood of a Meta-Christ."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Brotherhood of Blessed Munitions is one of the sub-sects of the Mendelist Order, whose duty is to provide the faithful with various types of ammunition treated with the chemically altered blood of a Meta-Christ. Such solutions are highly unstable and difficult to handle, and the secrets of their various formulae are jealously guarded."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "On the battlefield, the monks brave enemy fire and infernal terrors, committed to their holy task of bringing the Wrath of the Lord upon the heretics. Their patron, St. Barbara, is said to lift those who die on the battlefield to Everlasting Glory."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_faithfulfollowers","ab_theammunitionsacrement"]
+    },
+    {
+        "id": "md_observer",
+        "name": "Observer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+            "modify_equipment_block": {}  
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Standard Armour, Oculus Helm (counts as Combat Helmet and Gas Mask), Trench Polearm, in-built Medi-Kit. You cannot alter the Observer’s weapons and equipment in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "When the need is great, the Synod of Strategic Prophecy sends Observers to support the war effort. This order of warrior monks lives a life of absolute solitude, sharpening their minds and bodies, making of themselves living weapons in the Hands of God."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Once a soldier joins the order, they never leave the Temple of The Word. The slightest disturbance to their prayers and training interrupts their ability to commune with the Lord of all Creation. Thus the days of the Observers are spent in secluded, cloistered cells, when not practising their martial or mental disciplines."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The rare exception is when they are summoned to the battlefield. Here, amidst the chaos and carnage, their unique abilities can decisively shift the balance in favour of the faithful. Observers wear a specially crafted helmet enabling them to attune to the Voice of God. This remarkable connection grants them the capacity to simultaneously perceive the immediate past, present and future, to a degree. This allows them to perform unrivalled martial feats."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "But a living human is not meant to hear the Holy Words, so it comes at a cost. Since the Voice of God never decays, they must concentrate with superhuman focus to extricate the righteous guidance amidst the narrative spanning from creation’s inception to the present moment. The ceaseless resonance of the Divine Echo ringing in their ears renders sleep impossible. Therefore they must resort to potent sedatives and mind-altering drugs for them to endure the heavy burden of their battlefield role for any length of time."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Observers diligently practice the recitation of the Words of God, granting them the power to issue commands to anyone they address, friend or foe. The special metal of their helmet allows them to replicate the Holy Word as closely as it is possible, compelling any creature in creation to obey them momentarily."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 8,
+            "melee": 2,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_lightningspeed","ab_temporalfuge","ab_eyeofgod","ab_voiceofgod"]
+    },
+    {
+        "id": "md_mechanisedheavyinfantry",
+        "name": "Mechanised Heavy Infantry",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Mechanized Heavy Infantry always wear Light Machine Armour which counts as Reinforced Armour (32mm Base). This is reflected in the cost and profile above. This can be upgraded to Machine Armour (despite not being ELITE and LIMIT: 1) for +10 Ducats (40mm Base). They can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"},
+                    {"val": "ELITE", "id": "kw_elite"},
+                    {"val": "LIMIT", "id": "kw_limit"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Well-armoured, large soldiers who wield the heavy weaponry of the company. They are selected from amongst the best and given heavy chemical enhancements."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch","kw_strong"],
+        "abilities" : []
+    },
+    {
+        "id": "md_lieutenant",
+        "name": "Lieutenant",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Lieutenant can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Lieutenants are leaders of small squads or platoons of New Antioch’s soldiers, playing a fundamental role on the distant frontlines of the Trench Crusade, displaying unwavering resolve in preserving the unity and morale of their troops. Lieutenants might be the favoured son or daughter of a noble family or gained their rank by impressing their superiors with their exceptional strategic acumen and audacious bravery."
+                    }
+                ]
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "In addition to their command role, they are also responsible for acquiring new weapons, arms, equipment and food for their troops. All too often this requires looting the battlefields of No Man’s Land or even raiding settlements, since resupply can be sporadic at best."
+                    }
+                ]
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Having rightfully earned their position, Lieutenants enjoy the privilege of selecting their preferred arms and armour, often with the pick of the rarest battlefield finds. It is not uncommon for a Lieutenant to wield a distinctive weapon, perhaps a family heirloom, an idiosyncratic affectation or an ostentatious piece providing some much-needed swagger"
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch","kw_elite","kw_leader","kw_tough"],
+        "abilities" : ["ab_onmycommand"]
+    },
+    {
+        "id": "md_trenchcleric",
+        "name": "Trench Cleric",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Cleric can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "A holy warrior who looks after the souls of the soldiers in the company, the cleric chants inspiring battle prayers and can perform various miracles such as healing or even smiting the enemy. A cleric often carries a portable shrine on his back to denote his faith in the company’s Patron, be that one of the Saints of their homeland, a mighty Arch-Angel or the Lord himself."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch","kw_elite"],
+        "abilities" : ["ab_trenchclericpowers"]
+    },
+    {
+        "id": "md_sniperpriest",
+        "name": "Sniper Priest",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Sniper Priest can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [{"val": "New Antioch", "id": "kw_antioch"}]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "These devotees of the Church blind themselves ritually as a devotion to God and use only their faith to strike the enemies of the Church. During the Siege of St. Lux stories were told of a sniper priest killing a target three miles away."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": -1,
+            "ranged": 2,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch","kw_elite"],
+        "abilities" : ["ab_aim","ab_absolutefaith"]
+    },
+    {
+        "id": "md_yeoman",
+        "name": "Yeoman",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "category": "ranged",
+                        "value": true
+                    }
+                ]
+            } 
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Each yeoman is equipped with a bolt action rifle at a reduced cost of 5 ducats. You can swap this rifle for another ranged weapon of lower, equal or greater cost. If the cost is greater, you must pay the difference in ducats."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Yeomen can be equipped with any weapon, armour and equipment from the New Antioch Armoury. At the cost of +10 ducats per model, up to two yeomen can be upgraded to Trench Moles (up to three in warbands of over 1000 ducats value), scouts who make use of tunnels that criss-cross No Man’s Land. They gain the Keyword INFILTRATOR.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"},
+                    {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "A basic trooper of New Antioch. Brave men and women who have received standard training and sworn an oath to the Duke of New Antioch. What they lack in combat skills compared to more elite troops they more than make up with their numbers and wide selection of weapons available to them."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : []
+    },
+    {
+        "id": "md_shocktrooper",
+        "name": "Shocktrooper",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Shocktrooper can be equipped with any weapon, armour and equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Assault Troops that specialise in attacking enemy defensive positions. They are masters of rapid assault and melee combat. Experts at combined arms and Fireteam tactics."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : ["ab_shockcharge","ab_assaultdrill"]
+    },
+    {
+        "id": "md_combatengineer",
+        "name": "Combat Engineer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [                    
+                    {
+                        "tag": "shield",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Combat Engineers are equipped with a Shovel and Engineer Body Armour. This equipment and armour can never be removed. A Combat Engineer can be equipped with any weapon or equipment from the New Antioch Armoury.",
+                "glossary": [
+                    {"val": "New Antioch", "id": "kw_antioch"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The combat engineers specialise in destroying bunkers, discovering minefields and building battlefield emplacements. Casualties are extremely high in the combat engineer units, but they consider it an honour to fight and die for New Antioch and the Church."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_antioch"],
+        "abilities" : ["ab_battlefielddemolition","ab_fortifyeng","ab_demineengineer"]
+    },
+    {
+        "id": "md_amalgam",
+        "name": "Amalgam",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "ranged_strong": {},
+            "strong_count": {"value": 2},
+            "set_arms": {"ranged": 0, "melee": 0, "special": 6},
+            "no_shield_combo": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "keyword",
+                        "value": "kw_grenade"
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "armour",
+                        "res_type": "id",
+                        "value": "eq_trenchshield"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_heavy",
+                        "limit": 2
+                    },
+                    {
+                        "res_type": "self",
+                        "value": "",
+                        "limit": 2
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The amalgam has six functional arms. They can carry six one-handed weapons or three double-handed weapons, or any combination thereof, as long as the six arms can carry them. The amalgam uses the Black Grail Armoury for weapons – it never carries any other gear except weapons, though one of its arms may carry a single trench shield (representing pieces of armour it has absorbed). It may not carry Grenades and it can only wield up to two weapons with the same name. The Amalgam can take a Ranged Attack ACTION once per Activation with each ranged weapon it is equipped with and it can take a Melee Attack ACTION once per Activation with each melee weapon it is equipped with. None of its weapons are off-hand weapons. The Amalgam cannot benefit from Shield Combo.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "An Amalgam is a huge, shambling mass of dozens of bodies of infected fallen enemy warriors, insects, mammals and any other living creatures that had the misfortune of succumbing to the agonising blessings of the Black Grail together. These shoggoths shamble across the battlefield like walking mountains of corpulent, diseased flesh, its flailing arms still wielding weapons its victims used in life. Anyone or anything unfortunate enough to be in its path is crushed into a disgusting pulp beneath its elephantine feet. "
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 0,
+            "ranged": 0,
+            "base": [60],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_blackgrail","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_toxic","ab_corpulent","ab_trample_amalgam","ab_unstoppable"]
+    },
+    {
+        "id": "md_plagueknight",
+        "name": "Plague Knight",
+        "source": "core",
+        "tags": {},
+        "contextdata": {         
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "knight_ranks",
+                        "count": 1
+                    }
+                ]
+            },
+            "validate_final_unit_equipment": {
+                "requirements": [
+                    {
+                        "tag": "armour",
+                        "value": true
+                    }
+                ]
+            } 
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Plague Knight cannot be fielded, unless it is equipped with a suit of armour. In addition, a Plague Knight can be equipped with any weapon, armour and equipment from the Black Grail Armoury",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Plague Knight Ranks"
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "You may have one rank per Plague Knight if you pay the necessary cost, as indicated."
+                    }
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Ranking lowliest in the nobility of the Black Grail, these armoured great warriors were once truly depraved worshippers Beelzebub. When the Black Grail came for them, they willingly submitted themselves to the authority of the Lord of Flies. As a result they retain a semblance of sentience and the ability to wield weapons as they did in life. They aspire to win favour in the eyes of Beelzebub and one day be promoted in the hierarchy of the Order of the Fly."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_blackgrail","kw_fear","kw_elite","kw_strong"],
+        "abilities" : ["ab_undeadfortitude"]
+    },
+    {
+        "id": "md_heraldofbeelzebub",
+        "name": "Herald of Beelzebub",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_compoundeyeshelmet"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graildevotee"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graildevotee",
+                        "limit": 1
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Heralds can be equipped with any ranged weapon from the Black Grail Armoury. They cannot be equipped with any other items, except for Compound Eyes Helmets or a single Grail Devotee. When they fight unarmed in Melee Combat, the attack is always modified by Infected Proboscis. One Herald can have the Maddening Buzz ability (see below) at the cost of +10 ducats.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Some victims of the Black Grail suffer a far worse fate than becoming a Thrall. They are bestowed with the black honour by being melded with hell-flies, growing into a grotesque winged insect made of bloated flesh. After this torturous metamorphosis they take to air as Heralds of Beelzebub, the winged squires and scouts of the Order of the Fly. Their vestigial human bodies are still conscious as they are slowly eaten from within to be used as fuel by the Herald, all the while their warped bodies fight for the glory of Hell against their will."
+                    }
+                ]
+            },  
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Heralds are the vanguard in any assault of the Black Grail, and the ear-numbing otherworldly drone of their wings strikes terror in any defender, breaking their focus and sapping their willpower. Heralds wield discarded weapons, contaminated with horrible worms that churn through them, which in turn infect their victims. Each diseased bullet has sentience of its own, finding even the smallest chink in any armour, burrowing into the nervous system and liquefying the internal organs from within."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 10,
+            "melee": 0,
+            "ranged": 0,
+            "base": [40],
+            "armour": 0,
+            "movetype": 1,
+            "potential": 0
+        },
+        "keywords" : ["kw_blackgrail","kw_skirmisher","kw_fear"],
+        "abilities" : ["ab_infectedproboscis","ab_toxic"]
+    },
+    {
+        "id": "md_lordoftumors",
+        "name": "Lord of Tumors",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [50]
+                        },
+                        {
+                            "base": [40]
+                        }
+                    ]
+                ]
+            }
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Lord of Tumours can be equipped with any weapon, armour and equipment from the Black Grail Armoury.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "A high-ranking noble officiant in the Cult of the Black Grail, the Lord of Tumours spreads filth and corruption amongst friend and foe alike. They commune with the Lord of the Flies through a trance-like ecstasy and can channel the very power of the seventh circle of Hell which Beelzebub rules."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 4,
+            "ranged": 1,
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_blackgrail","kw_elite","kw_leader","kw_tough","kw_strong","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_beelzebubstouch"]
+    },
+    {
+        "id": "md_corpseguard",
+        "name": "Corpse Guard",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Corpse Guard can be equipped with any weapon, armour and equipment from the Black Grail Armoury.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Only the strongest human devotees can survive the blessings of the Black Grail. The ones that do are inducted into the ranks of the Corpse Guard, bodyguards to the nobility of the Black Grail. If they serve with distinction, they may one day join the ranks of the Infernal Nobility."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_blackgrail","kw_elite","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_parasitictick","ab_bodyguard_blackgrail"]
+    },
+    {
+        "id": "md_houndsoftheblackgrail",
+        "name": "Hounds of the Black Grail",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Hounds cannot be equipped with any weapons, armour or equipment. They do not suffer penalties for fighting unarmed. At the cost of +5 ducats, they cause INFECTION MARKERS with their unarmed attacks instead of BLOOD MARKERS.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Parasitic carcasses of canines infested with maggots and flies spawned from the body of Beelzebub himself. Their unholy mission is to prowl No Man’s Land and spread diseases and pestilence in the name of their dark master."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 8,
+            "melee": 1,
+            "base": [30,60],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_blackgrail","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_frighteningspeed","ab_diseasecarrier"]
+    },
+    {
+        "id": "md_grailthrall",
+        "name": "Grail Thrall",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Thralls cannot be equipped with any weapons, armour or equipment. They do not suffer penalties for fighting unarmed."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The boons of the Black Grail lead slowly but surely down the path of utter corruption. Only very few of the chosen can withstand the blessings of the Lord of the Flies. Most are turned into Grail Thralls, and join the endless legions of empty, hollowed-out and diseased husks who must obey the whims of the Black Grail nobles for all eternity, while suffering the torment of their countless supernatural infections. "
+                    }
+                ]
+            },      
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Thralls come in two varieties: Grail Thralls that have become almost impervious to pain and Fly Thralls, controlled by the gargantuan hell-flies that have buried their proboscis deep into the central nervous system of their victims, allowing far greater mobility in exchange for less resistance to pain."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 5,
+            "melee": -1,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_blackgrail","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_overwhelminghorde"]
+    },
+    {
+        "id": "md_beastofnomansland",
+        "name": "Beast of No Man's Land",
+        "source": "core",
+        "tags": {"dontshow": true},
+        "contextdata": {            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast model can be up to 60mm tall, placed on a base of 120 x 80mm. It is armed only with its vicious Claws and devastating Bite. These are natural parts of the creature itself and cannot be removed or lost in any way."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast will seek out the nearest model with the most BLOOD MARKERS, driven by its bloodthirsty frenzy. The Beast will Charge the model through the fastest route and will Climb, Jump Over Gaps, Between Ledges of Unequal Heights and Down (as long as the height won’t cause an injury to it) to get at a warband model. However, note that it will not move through Dangerous terrain if it can be avoided. The Beast does not need to have line of sight of a model to Charge it. If the beast cannot Charge a model, it will just Move toward the nearest one.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When the Beast reaches a model, it will make one attack ACTION with each of its Claws and one attack ACTION with its Bite, all in Melee Combat (so it can make three attacks per Activation). If the Beast Charges more than one model, it will split its attacks amongst the opponents.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [  ],
+        "team": "scenario",
+        "stats" : {            
+            "movement": 8,
+            "melee": 2,
+            "base": [120,80],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_fear","kw_tough"],
+        "abilities" : ["ab_unrelenting","ab_resilient"]
+    },
+    {
+        "id": "md_thedragon",
+        "name": "The Dragon",
+        "source": "core",
+        "tags": {"dontshow": true},
+        "contextdata": { 
+            "stat_options": { 
+                "options": [
+                    [
+                        {
+                            "base": [120],
+                            "movement": 10
+                        },
+                        {
+                            "base": [210],
+                            "movement": 9
+                        },
+                        {
+                            "base": [260],
+                            "movement": 8
+                        }
+                    ]
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon’s model must be placed on a base of at least 120mm and can go up to a 300mm base. You can use a Larval Beast to proxy the model, or a Possessed Tank or even an actual Dragon model. The larger the model is the better – however, the less Movement it also has, according to the following metrics:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "On a 120mm to 200mm base = Movement: 10”"
+                            },                  
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "On a 210mm to 250mm base = Movement: 9”"
+                            },                  
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "On a 260mm to 300mm base = Movement: 8”"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon is considered both an enemy model and as Difficult Terrain. When in base contact with it, a warband model can Climb the Dragon, Move through it, beneath it, on it and start or end its movement beneath it or on it. Ideally, the Dragon’s model should be big enough to allow for two models on a 60mm base to stand on top of it (or up to four models on a 25mm base). A model that is on top of the Dragon rolls with +1 DICE to hit it and +1 DICE to injure it. However, note that all ACTIONS taken by a model on top of the Dragon are considered as RISKY. Additionally, when the Dragon uses its Move, any model on top of it must immediately succeed at a RISKY ACTIONS. On a fail, the model is forcibly moved 2” in a direction of the opponent’s choice and is knocked Down. If this movement forces the model to fall from the Dragon, the model’s owner must also roll on the Injury Chart, as per the rules of Falling.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "RISKY", "id": "kw_riskyaction"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When Activated, the Dragon will Move towards the nearest Peasant model via the fastest route possible. The Dragon cannot Charge as usual. Instead, if its movement takes it into contact with a model it counts as charging and engages that model in melee combat, if that is the Dragon’s intended target. When moving toward a targeted model, if the Dragon comes into base contact with another model that it is not targeting, it does not engage in melee combat with it, even if the model intends to engage it. Instead, the Dragon will run right over them. Any model moved over by the Dragon suffers an injury. The player controlling the Dragon immediately rolls on the Injury Chart with +1 DICE to injure, for any models trampled by the Dragon.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When attacked by a warband model, the Dragon will seek out the last warband model that attacked it on its next Activation. The Dragon will Move toward the model via the fastest route possible (even through certain impassable terrain pieces, if possible. See below). The Dragon ignores movement penalties and effects caused by Difficult Terrain and Dangerous Terrain. If the last model that attacked the Dragon is on top of it, or if the Dragon cannot reach the model that attacked it in one Activation, on its next Activation it will shift its focus to either move toward the nearest Peasant model, the last model that attacked it or to leave the area. If the Dragon attacks a targeted model at the start of its turn, it will then use its Movement to either move toward the nearest Peasant model or to leave the area. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that the Dragon does not need to have line of sight to a model to Move toward it. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If there are no more Peasant models present on the table before the end of the game, having either escaped the area (see the Peasant section) or been taken Out of Action, the Dragon will shift its focus to leave the area to continue its rampage elsewhere, using its Movement when Activated to reach the nearest edge of the table. If the Dragon comes into base contact with any of the table’s edges, it successfully leaves the area. See the Victory Conditions section. Note that the Dragon cannot Dash. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Dragon’s limbs function as its weapons. It is armed with its Stomp, its Tail Swipe and its Fire Breath. These are parts of the creature itself and cannot be removed or lost in any way. When the Dragon comes into base contact with a model that it has targeted, it will make two attack ACTIONS with its Stomp in Melee Combat (so it can make two attacks per Activation with this weapon).",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the Dragon engages in Melee combat with multiple models, it will make one attack ACTION against each model, with its Tail Swipe instead (see below). However, after the Dragon is knocked Down twice, as per its Undying special rule (see below), it loses its tail, meaning that it cannot use its Tail Swipe attack any longer.",
+                "glossary": [
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If the Dragon’s movement does not get it into Melee range of a model, or if the model moves away from its Melee range but remains within range to use its Fire Breath, it attacks once with it instead in Ranged Combat."
+            }
+        ],
+        "lore": [  ],
+        "team": "scenario",
+        "stats" : {
+            "melee": 3,
+            "ranged": 3,
+            "base": [120,80],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_fear"],
+        "abilities" : ["ab_undying","ab_resistant","ab_siegeweapon"]
+    },
+    {
+        "id": "md_thepeasant",
+        "name": "The Peasant",
+        "source": "core",
+        "tags": {"dontshow": true},
+        "contextdata": { 
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Peasant has no attacks, equipment or abilities. They can only Move, as per their normal Movement, and cannot Dash. When Activated, a Peasant will always try to move as far away as possible from the Dragon, toward one of the table’s edges. In this path, they should also try to keep as much distance as possible from any warband model. However, note that the Peasant will not Move into Dangerous Terrain and will also try to avoid Difficult Terrain, if possible."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If a Peasant comes into base contact with any of the table’s edges, it successfully leaves the area. Remove the corresponding Peasant model from the board."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The afflicted peasantry’s feeble nature makes them vulnerable in any confrontation. Attacks made against a Peasant are made with +2 DICE to Hit and +2 DICEto injure.",
+                "glossary": [
+                    {"val": "+2 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "lore": [  ],
+        "team": "scenario",
+        "stats" : {            
+            "movement": 6,
+            "base": [25],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : [],
+        "abilities" : []
+    },
+    {
+        "id": "md_yokefiend",
+        "name": "Yoke Fiend",
+        "source": "core",
+        "tags": {},
+        "contextdata": {           
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "ducat",
+                        "value": 30,
+                        "param": "maximum"
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "category": "ranged",
+                        "res_type": "category",
+                        "value": "",
+                        "limit": 1
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Yoke fiends can be equipped with any melee weapon, armour and equipment from the Court Armoury. They can be equipped with any one ranged weapon from the Court Armoury that costs 30 ducats or less.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "A Yoke Fiend stands some seven to eight feet tall, with layers of shivering fat and muscle branded by their masters, carved by the knives of the Hell-Priests to mark them as property of greater demons. They exhibit bestial features such as horns and hooves of cattle or goats, ape-like limbs with immensely dense bones. They hate seeing their own reflections, as in their heart of hearts they know the beauty and glory they have lost for all eternity."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2
+        },
+        "keywords" : ["kw_thecourt","kw_demonic"],
+        "abilities" : ["ab_hateful","ab_torturer"]
+    },
+    {
+        "id": "md_pitlocust",
+        "name": "Pit Locust",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "unarmed_penalty_remove": {},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_crownofhellfire"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Pit Locust wears a suit of Reinforced Armour which is reflected in its profile above. They can have no other armour, weapons and equipment, except for the Crown of Hellfire. They do not suffer penalties for fighting unarmed."
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Pit Locusts are terrifying, horse-sized winged and armoured creatures with twisted faces resembling humans. They fight with rending blades attached to their limbs and with poison stingers."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 8,
+            "melee": 2,
+            "ranged": 0,
+            "base": [30,60],
+            "armour": 0,
+            "movetype": 1,
+            "potential": 1
+        },
+        "keywords" : ["kw_thecourt","kw_demonic","kw_fear"],
+        "abilities" : ["ab_swarmingattack"]
+    },
+    {
+        "id": "md_sorcerer",
+        "name": "Sorcerer",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [ 
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Sorcerer can be equipped with any melee weapon, armour and equipment from the Court Armoury.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Sorcerers come in many forms and manipulate their own bodies to better cast the mighty spells they are charged with. Some have many arms, others multiple heads or countless alterations and terrible improvements – some self-administered, others by force – based on the whims of the Arch-devil and their cabal of High Sorcerers who lead their Goetic strategy. A Sorcerer’s feet do not touch the ground – a distant echo of their angelic past – but instead float across No Man’s Land, chanting the cruel gospel of Hell as they advance. Their dark wisdom and cunning make them equally capable of leading one of the Court’s warbands or acting as advisors to one of the Praetors as they stride forth into the mortal realms."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 1,
+            "base": [50],
+            "armour": 0,
+            "movetype": 1,
+            "potential": 0
+        },
+        "keywords" : ["kw_thecourt","kw_demonic","kw_elite","kw_fear"],
+        "abilities" : ["ab_goetics_sorcerer","ab_blessingsoftheserpentmoon"]
+    },
+    {
+        "id": "md_praetor",
+        "name": "Praetor",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Praetor can be equipped with any weapons, armour and equipment from the Court Armoury.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Praetors are demonic commanders and magistrates within a small corner of the fiefdom of a mighty Arch-Devil or Demon Lord. Each commands small cohorts at their liege’s behest, raised from the denizens within the ever-shifting domains of Hell. Yoke devils muster at their command and Hell Knights bound to blind obedience bend their knees to these field commanders of Hell."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 8,
+            "melee": 3,
+            "ranged": 3,
+            "base": [50],
+            "armour": 0,
+            "movetype": 1,
+            "potential": 0
+        },
+        "keywords" : ["kw_tough","kw_strong","kw_fear","kw_thecourt","kw_demonic","kw_leader","kw_elite"],
+        "abilities" : ["ab_goetics_praetor"]
+    },
+    {
+        "id": "md_hunterofthelefthandpath",
+        "name": "Hunter of the Left-Hand Path",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Hunter can be equipped with any melee weapons, armour (though not Infernal Armour which would disrupt the powers of the Hunter) and equipment from the Court Armoury. The Hunter always carries the Bow of Lethe as its ranged weapon and it cannot swap or lose this weapon. It always takes the use of one of the arms of the Hunter.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The hunters of the Court of the Seven-headed Serpent are followers of the Left-hand Path. They stalk the primordial hinterlands of hell, where they hunt terrifying beasts and perform vile magicks and auguries, using the innards of their still-living prey to discern portents and omens."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 2,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_thecourt","kw_demonic","kw_elite","kw_infiltrator"],
+        "abilities" : ["ab_shadowwalker","ab_lefthandpath","ab_oraclebeastcloak"]
+    },
+    {
+        "id": "md_hellknight",
+        "name": "Hell Knight",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Hell Knights are always equipped with a suit of Infernal Iron Armour which is included in their cost. This armour can never be removed or lost. Hell Knights can be equipped with any weapons, armour and equipment from the Court Armoury.",
+                "glossary": [{"val": "Court", "id": "kw_thecourt"}]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "The silent battalions of Hell, summoned to serve when the Court of the Seven-Headed Serpent seeks sport, are composed of Hell Knights. Their ever-burning banners stream as they march to war, carrying out the bidding of their masters. They are the bannerets of the High Lords of the Court, champions who respond to foolish mortals daring to challenge the hunting parties of the Serpent’s nobility, who embark on hunting excursions beyond the Gate for their amusement."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 2,
+            "ranged": 0,
+            "base": [40],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0
+        },
+        "keywords" : ["kw_thecourt","kw_demonic","kw_strong","kw_elite"],
+        "abilities" : ["ab_goetics_knight","ab_bloodmagic"]
+    },
+    {
+        "id": "md_desecratedsaint",
+        "name": "Desecrated Saint",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "set_arms": { "melee": 3, "ranged": 0, "special": 0},
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ]
+            },
+            "model_equipment_limit": {
+                "maximum": [
+                    {
+                        "res_type": "stat",
+                        "value": "hands_melee",
+                        "subvalue": 2,
+                        "limit": 1
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Desecrated Saint is encased in nigh-impregnable Cocytus Armour reflected on the profile above. This armour cannot be removed or lost. The Desecrated Saint has three functional arms. They can carry up to three melee weapons, only one of which can be a two-handed weapon. The Desecrated Saint can be equipped with any melee weapons from the Court Armoury, and can make a Melee Attack ACTION once per Activation with each melee weapon it is equipped with and suffers no off-hand penaties. ",
+                "glossary": [
+                    {"val": "Court", "id": "kw_thecourt"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            }
+        ],
+        "lore": [ 
+            {
+                "tags": {"desc_type" : "italic"},
+                "content": "Desecrated Saints are the most prized possessions of the Lords of Hell: men and women once destined to become saints, great prophets or holy ones according to God’s Plan, but who were led astray and fell from Grace."
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 3,
+            "base": [60],
+            "armour": -3,
+            "movetype": 0,
+            "potential": 1
+        },
+        "keywords" : ["kw_thecourt","kw_demonic","kw_fear","kw_tough","kw_strong"],
+        "abilities" : ["ab_demonicaura"]
+    },
+    {
+        "id": "md_combatbiologist",
+        "name": "Combat Biologist",
+        "source": "core",
+        "tags": {},
+        "contextdata": {
+            "keyword_ignore": {"value": ["kw_fear"]},
+            "modify_equipment_block": {}
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Combat Biologist always has Standard armour, a Gas Mask, and a Vivisector. You cannot alter the Biologist battlekit in any way."
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Combat Biologists are members of the Pontifical Office of Biological warfare, or in the case of the Sultanate, the Al-Bisţāmī School of Ninety-Nine Names, which trains some failed Alchemist apprentices in a similar fashion. These scholars specialise in battlefield vivisections and collecting samples of the most powerful servants of Hell so they can be studied, in the hopes of finding ways to develop weapons capable of driving the servants of the Pit back to the darkness."
+                    }
+                ]
+            },   
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "Due to their training, hypnotic conditioning and constant exposure to captured specimens, the Combat Biologist enters a battle trance when faced with creatures that normally induce fear in ordinary troopers. They wield vivisectors, polearm blade weapons that combine sophisticated biological warfare agents and the functional brutality of trench warfare."
+                    }
+                ]
+            }
+        ],
+        "team": "faithful",
+        "stats" : {            
+            "movement": 6,
+            "melee": 1,
+            "ranged": 0,
+            "base": [32],
+            "armour": 0,
+            "movetype": 0,
+            "potential": 2,
+            "mercenary": true
+        },
+        "keywords" : [],
+        "abilities" : ["ab_prizespecimens","ab_battlefieldvivisection"]
+    },
+    {
+        "id": "md_matagothag",
+        "name": "Matagot Hag",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {            
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_devouringjaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_blightedclaws"
+                    },
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graildevotee"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Matagot Hag is carried into battle by a writhing swarm of thralls who shield her with fanatical devotion. The Hag and the thrall swarm can never be separated and are treated as one model with a single profile. The Matagot Hag suffers no penalties to their combat ability for being unarmed.  A Matagot hag cannot take any equipment except for Devouring Jaws, Grasping Maw, Grail Devotees, and Blighted Claws.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Matagot Hag is an undying vessel of The Great Hunger and the favoured child of Beelzebub, for in his heart he hates all things in Creation and the natural circle of life. This creature is a wretched husk of a once-human mother cursed to endlessly birth monstrosities. Her bloated and distended body is locked in an obscene cycle of constant regeneration and decay - her flesh splitting open in great, festering ruptures only to stitch itself back together, swollen with the next abomination writhing in her womb. Her skin, stretched thin and sickly pale, is mottled with blackened veins and pulsing sores, her eyes long rotted away, leaving only hollow sockets weeping thick, infectious ichor. The Grail Thralls she births carry her aloft, treating her as a living effigy of gluttony and suffering. Though mindless hunger drives her, the Hag is not without purpose - her whispered, guttural croons are hymns of devotion to Beelzebub, calling forth ever more horrors to devour the world."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 6,
+            "melee": 3,
+            "ranged": 1,
+            "armour": 0,
+            "movetype": 0,
+            "potential": 0,
+            "base": [60]
+        },
+        "keywords" : ["kw_blackgrail","kw_elite","kw_leader","kw_tough","kw_fear"],
+        "abilities" : ["ab_undeadfortitude","ab_pestilent","ab_frenziedfollowers","ab_cadreofflesh","ab_arcanaputrescere"]
+    },
+    {
+        "id": "md_gergorigula",
+        "name": "Gregori Gula",
+        "source": "creature_caster",
+        "tags": {},
+        "contextdata": {            
+            "unarmed_penalty_remove": {},
+            
+            "model_equipment_restriction": {
+                "removed": [
+                    {
+                        "category": "melee",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "ranged",
+                        "res_type": "all",
+                        "value": ""
+                    },
+                    {
+                        "category": "armour",
+                        "res_type": "all",
+                        "value": ""
+                    }
+                ],
+                "required": [
+                    {
+                        "category": "equipment",
+                        "res_type": "id",
+                        "value": "eq_graspingmaw"
+                    }
+                ]
+            }
+        },
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Gregori Gula never carries any type of weapons, armour or equipment, as it has no need for them. A Gregori Gula can make two attacks at no penalty, and suffers no penalties to their combat ability for being unarmed. A Gregori Gula can be equipped with a Grasping Maw.",
+                "glossary": [
+                    {"val": "Black Grail", "id": "kw_blackgrail"}
+                ]
+            }
+        ],
+        "lore": [       
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                       
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "The Gregori Gula are rare, winged predators - gaunt, angelic abominations draped in rotting flesh and hiding a myriad of waiting mouths. Unlike the mindless thralls, they stalk prey with patience, each kill chosen with eerie precision. When struck down, they do not die, but collapse into a dormant cocoon of necrotic tissue, seeping toxins and viral remnants into the battlefield. If a thrall ventures too close, it is consumed, and the Gula rises again, unfurling its wings in a storm of infectious gas that cripples all nearby. The only solution is fire and absolute destruction, for so long as even a trace remains, the Gregori Gula will endure."
+                    }
+                ]
+            }
+        ],
+        "team": "hell",
+        "stats" : {            
+            "movement": 9,
+            "melee": 2,
+            "ranged": 0,
+            "armour": 0,
+            "movetype": 1,
+            "potential": 0,
+            "base": [60]
+        },
+        "keywords" : ["kw_blackgrail","kw_infiltrator","kw_fear"],
+        "abilities" : ["ab_arcanaputrescere_one","ab_plagueriddenflesh","ab_rend","ab_dormanthunger","ab_gnashingandwailing"]
+    }
+]

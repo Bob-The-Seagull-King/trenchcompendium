@@ -1,0 +1,106 @@
+[
+    {
+        "id": "pt_sublimegate",
+        "name": "Sublime Gate",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your patron is one of the high-ranking nobles of the Sultanate: an Emir, Pasha, Vizier or even the Sultan himself."
+            }
+        ]
+    },
+    {
+        "id": "pt_temporallord",
+        "name": "Temporal Lord",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your patron is a powerful noble, perhaps a merchant prince, a high-ranking military officer, a minister, or even the mighty Duke of New Antioch himself."
+            }
+        ]
+    },
+    {
+        "id": "pt_warriorsaint",
+        "name": "Warrior Saint",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your patron is a mighty saint of soldiers and warriors such as Saint George the Dragonslayer, Saint John the Warrior, Saint Joan of Arc, or even Archangel Saint Michael himself. Such Patrons offer great power in personal combat and divine protection on the battlefield."
+            }
+        ]
+    },
+    {
+        "id": "pt_learnedsaint",
+        "name": "Learned Saint",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your Patron is a great teacher saint, such as St. Patrick, St.Thomas Aquinas or St. Methodius. Followers of these Saints emphasise planning, science, strategy and organisational skills."
+            }
+        ]
+    },
+    {
+        "id": "pt_infernalnoble",
+        "name": "Infernal Noble",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your Patron is one of the Fallen, a mighty devil noble such as Baal, Balam, Zepar, Astaroth or Gusion. Such Patrons bestow magical powers, reward evil deeds and enhance the power of sins."
+            }
+        ]
+    },
+    {
+        "id": "pt_orderofthefly",
+        "name": "The Order of the Fly",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your patron is a powerful infernal noble of the Order of the Fly, such as Enlil, Prince Vassago or even Beelzebub the Lord of the Flies himself. Through you, these putrid and mighty devils unleash a tidal wave of corruption upon the mortal world."
+            }
+        ]
+    },
+    {
+        "id": "pt_mammon",
+        "name": "Mammon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your Patron is Mammon, the Prince of Greed, the Treasurer of Hell, and the King of Fools. He appears as a golden-skinned king on an opulent throne, with black scorch marks tarnishing his splendour. He is the most popular patron amongst mortals."
+            }
+        ]
+    },
+    {
+        "id": "pt_antipopeofavignon",
+        "name": "Anti-Pope of Avignon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "description": [            
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your patron is the Anti-Pope of Avignon, the high priest of the Cult of the Black Grail. Whereas most strains of the Black Grail infect the body alone leaving the mind to suffer, the variant that is spread by Missionaries of Beelzebub infects the mind and brain above all else. This is why these Apostles of the Fly are startlingly successful in winning new converts to their cause despite the self-evident ruin caused by embracing the Lord of the Flies."
+            }
+        ]
+    }
+]

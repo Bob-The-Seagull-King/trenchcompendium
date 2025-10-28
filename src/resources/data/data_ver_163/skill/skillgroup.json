@@ -1,0 +1,47 @@
+[
+    {
+        "id": "sg_meleeandstrength",
+        "name": "Melee and Strength Skills",
+        "source": "core",
+        "tags": {
+            "category": "model"
+        },
+        "contextdata": { }
+    },
+    {
+        "id": "sg_exploration",
+        "name": "Exploration Skills",
+        "source": "core",
+        "tags": {
+            "category": "exploration"
+        },
+        "contextdata": { }
+    },
+    {
+        "id": "sg_ranged",
+        "name": "Ranged Skills",
+        "source": "core",
+        "tags": {
+            "category": "model"
+        },
+        "contextdata": { }
+    },
+    {
+        "id": "sg_stealthandspeed",
+        "name": "Stealth & Speed Skills",
+        "source": "core",
+        "tags": {
+            "category": "model"
+        },
+        "contextdata": { }
+    },
+    {
+        "id": "sg_wildcard",
+        "name": "Wildcard Skills",
+        "source": "core",
+        "tags": {
+            "category": "model"
+        },
+        "contextdata": { }
+    }
+]

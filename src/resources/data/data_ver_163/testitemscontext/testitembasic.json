@@ -1,0 +1,32 @@
+[
+    {
+        "id": "tb_testitem_a",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "TestBasicA",
+        "teststatic" : 1,
+        "contextdata": {"option_search_viable" : {}, "test_run" : {"value": 7}}
+    },
+    {
+        "id": "tb_testitem_b",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "TestBasicB",
+        "teststatic" : 2,
+        "contextdata": {"option_search_viable" : {}, "test_run" : {"value": 2}}
+    },
+    {
+        "id": "tb_testitem_c",
+        "source": "core",
+        "tags": {
+            "category" : "default"
+        },
+        "name": "TestBasicC",
+        "teststatic" : 1,
+        "contextdata": {"option_search_viable" : {}, "test_run" : {"value": 5}}
+    }
+]

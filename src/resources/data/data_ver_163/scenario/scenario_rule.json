@@ -1,0 +1,631 @@
+[
+    {
+        "id": "sr_nominatedelites",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Nominated Elites",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "After the deployment, in secret, both players nominate three enemy ELITE models as targets to be eliminated (unless the opponent has a smaller number of ELITE in which case nominate all of them). Each player also nominates one of their own ELITE models that must be kept alive until the end of the game. These score additional Victory Points at the end of the game as follows.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_trenches",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Trenches",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Defender places three 8”-long Trench sections in their Deployment Zone. They can be placed as the Defender wishes and can be continuous, but each section always counts separately for Victory Points (see below)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_mines",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Mines",
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "The Defender then places 12 mine markers on the battlefield, four which will be duds – the defender marks the duds on the side of the marker that is hidden from view (face down). The Defender can place the mines anywhere within the battlefield up to 12” away from their own Deployment Zone as shown, though not inside their own deployment zone."
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "When any model comes within 2” of the centre of a mine counter (players can measure this distance beforehand), flip the counter over to see if it is a dud or not. If the mine is a dud, discard it immediately. If the mine is not a dud, every model within 3” must immediately roll on the Injury Chart to see what happens as a result of the exploding mine. The mines have the Keyword SHRAPNEL, so the models hit by the mine blast suffer an additional BLOOD MARKER unless they have protection against this. Afterwards, remove the mine marker. It is possible to trigger more than one mine at the time.",
+            "glossary": [
+                {"val": "SHRAPNEL", "id": "kw_shrapnel"},
+                {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},            
+            "content": "Some models, such as New Antioch Combat Engineers can remove a mine counter by moving in base contact with it and passing a RISKY ACTION as indicated in their warband entry. Note that when a model attempts this, the mine does not explode until the result of the roll is determined.",
+            "glossary": [{"val": "RISKY ACTION", "id": "kw_riskyaction"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_morale",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Morale",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This is a fight to the finish, so a failed Morale Test will not end the battle. Instead, any warband that fails their Morale Test will be shaken instead. It is possible for both warbands to be shaken."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_gunturret",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Gun Turret",
+        "description":  [
+            {
+            "tags": {"desc_type" : "equipment"},
+            "content": "eq_gunturret"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_mortar",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Mortar",
+        "description":  [
+            {
+            "tags": {"desc_type" : "equipment"},
+            "content": "eq_mortar"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_trainwagons",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Train Wagons",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The derailed train has three wagons. Each wagon is 4” wide (W), 8” long (L) and 5” high (H). The wagons have a set of ladders on both sides, allowing models to climb on top of a wagon as part of their standard Move. A wagon also provides cover to a model that is in base contact with it."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The train was carrying supply crates, containing precious weapons, materials and holy relics. The supply crates are spread between the three wagons."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},            
+                "content": "Place three initial markers representing Objectives on the table as indicated on the map. These markers represent an X quantity of supply crates inside a wagon. The wagons are all closed, making it impossible to see the contents inside."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},            
+                "content": "A wagon can be opened from either side by a model within 1”. The model must roll on the Action Success Chart to force open a wagon’s door. BLOOD MARKERS and BLESSING MARKERS can be used to hinder, or aid, this Action.",
+                "glossary": [
+                    {"val": "BLESSING MARKERS", "id": "kw_blessingmarker"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},            
+                "content": "Upon opening a wagon, the player must then roll a D3:"
+            },
+            {
+                "tags": {"desc_type" : "headless_table"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "1"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "There is one supply crate inside the wagon: Place one Objective Marker beside the model who opened the wagon to represent the crate and remove the previous marker from the table."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "2"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "There are two supply crates inside the wagon: Place two Objective Markers beside the model who opened the wagon to represent the crates and remove the previous marker from the table."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "3"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "There are three supply crates inside the wagon: Place three Objective Markers beside the model who opened the wagon to represent the crates and remove the previous marker from the table."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_supplycrates",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Supply Crates",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},            
+                "content": "During the game, any model that ends its move in contact with a marker can Claim it, without the need for a roll, as long as they’re not engaged in melee combat. The model has then Claimed a crate. A model can end a Claim without the need for a roll at the start of the model’s Activation, dropping the crate within 1” of the model, in a direction of the model’s choice. The same model cannot make a new Claim during that Activation. A model can only Claim one crate at a time and must immediately choose one of the three following options:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [    
+                            {
+                                "tags": {"desc_type" : "default"},            
+                                "content": "",
+                                "subcontent": [                                    
+                                    {
+                                        "tags": {"desc_type" : "paragraph"},            
+                                        "content": "",
+                                        "subcontent": [
+                                            
+                                            {
+                                                "tags": {"desc_type" : "bold"},            
+                                                "content": "Extract Supplies: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},            
+                                                "content": "The model picks up the crate to start extracting it, without the need for a roll. The crates are HEAVY and must be held with all hands a model may have. Any weapons a model might be carrying, or is integrated with, will be rendered unusable while the model is extracting the crate. As long as a model is extracting the crate, it cannot Attack, cannot Dash and any other method of movement (teleportation, Puppet Master etc.) cannot be used to move the model due to the mystical effect of the holy relics inside, other than their standard Move.",
+                                                "glossary": [
+                                                    {"val": "HEAVY", "id": "kw_heavy"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "paragraph"},            
+                                        "content": "At the end of its Activation, the model can pass the crate it is extracting to any friendly model within 1” range, as long as neither model is in melee combat with an enemy model. The model receiving the crate is considered to have ended their Activation this turn, if it has not yet done so. A model extracting a crate can drop it without the need for a roll or be forced to drop it if engaged in melee combat, dropping the crate within 1” of the model in a direction of the model owner’s choice."
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "paragraph"},            
+                                        "content": "A model can also change its choice to Destroy Supplies (see below) without the need for a roll at any point. If a model extracting a crate moves into contact with any table edge, it has escaped with the crate successfully and does not return to the table, in which case remove the Objective Marker representing the extracted supplies from the table and the model that extracted it."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},            
+                                "content": "",
+                                "subcontent": [
+                                    
+                                    {
+                                        "tags": {"desc_type" : "bold"},            
+                                        "content": "Destroy Supplies: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},            
+                                        "content": "The model that has Claimed a crate, or that is extracting it, can attack it as an ACTION. If successful, the crate is destroyed, in which case remove the Objective Marker representing the destroyed supplies from the table.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},            
+                                "content": "",
+                                "subcontent": [
+                                    
+                                    {
+                                        "tags": {"desc_type" : "bold"},            
+                                        "content": "Use Supplies: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},            
+                                        "content": "As an ACTION, a model that has Claimed a crate can attempt to open it and use the relics inside. If successful, gain a BLESSING MARKER, in which case remove the Objective Marker representing the used crate from the table.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"},
+                                            {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},            
+                "content": "An enemy model cannot attack a crate that has been Claimed, or that is being extracted by another model, but they can attack the model normally. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},            
+                "content": "If the model that has Claimed a crate, or is extracting it, is taken Out of Action, the crate is immediately dropped within 3” of the fallen model, in a direction of the enemy’s choice. If it lands in contact with another model, the model can immediately Claim it, except if they’re engaged in melee combat with an enemy model, in which case the crate must be dropped again in a different direction. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},            
+                "content": "If the game ends while a model has a Claimed crate, or is in the process of extracting it, they have failed to either extract it, destroy it or use it, and so it does not count towards the final VPs calculation."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_unforseenevents",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Unforseen Events",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These rules represent the treacherous and often unforeseeable tides of war that can suddenly shift the battle unexpectedly. Starting on the second turn of combat, roll 1D6. On a roll of 1-3, a random event occurs, otherwise the game continues until the start of the next turn, when another roll will be required. These events will always occur at the start of the combat turn, before any model Activation (unless stated otherwise).Upon the occurrence of a random event, roll another 1D6 for the Unforeseen Events chart below to see what exactly happens and follow the directions. No more than one random encounter will ever take place in a single game, so after a random encounter is rolled, a player no longer needs to roll at the start of a combat turn. The entries below refer to the corresponding number rolled and its respective effects:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "1. Rising Fog"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Heavy fog covers the entire combat zone, drastically limiting visibility for all models. All Ranged Attacks have their total range halved, according to the weapon’s profile and respective modifiers that may have been applied (such as scopes etc.) The fog lasts for two turns before it dissipates."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "2. Striding Mercenary"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A Mercenary appears on the ridge overlooking the shore. Witnessing the unfolding carnage, they decide to seize the opportunity and offer their services to the warband with the most Glory Points currently accumulated (if both warbands have the same number of points, roll-off 1D6 to see whom they offer their help to. On a roll of 1-3, the Attacker wins, and a roll of 4-6, the Defender wins the roll-off ). The Mercenary will offer their services to the warband for a single turn, even if they have already hired their maximum number of Mercenary models for 1 Glory Point. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can choose any of the Mercenary units available to your warband and immediately deploy them at least 6” away from any other model in the battlefield, but not within the opponent’s Deployment Zone. You can also deny the Mercenary’s services if you don’t have the required amount of points to pay them."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the end of the turn, the warband that they aided must pay them their required amount of Glory Points before they leave the battlefield. If the warband cannot (or will not) meet the Mercenary’s standard, they leave, but not before taking out their frustration on a random member of the warband (only choose among members of the warband who haven’t been taken Out of Action yet). Roll directly on the Injury Chart for this member, according to the Mercenary’s profile statistics for the attack (the opponent chooses which attack was used), applying any applicable modifiers."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "3. Unearthed Relics"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Relics are suddenly unearthed in the battlefield. Each player places two Objective Markers to represent the relics, for a total of four, each at least 6” away from any Deployment Zone, at least 6” away from each other and at least 6” away from any model. The relics cannot be placed on impassable terrain or surrounded by it. A model that comes into base contact with the relic claims it. The model’s owner decides if it is a holy or unholy relic, according to the restriction of their faction’s warband. The model either gains +1 BLESSING MARKER (for a holy relic) or starts radiating a malignant aura and causes FEAR (for an unholy relic).",
+                "glossary": [
+                    {"val": "BLESSING MARKER", "id": "kw_blessingmarker"},
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "4. The Beast of No Man’s Land"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The scent of blood soaking the ground and the incessant sound of gunfire has brought the attention of a prowling beast. Rumours have been spreading about this fiend. Some say it is a stray War Beast, a hell-spawn abomination that escaped captivity before it could be made into a War Wolf. Others claim it is something much older, something that scarred the earth and fed upon its inhabitants long before the start of the war. Whatever it is, the creature knows no bounds and sees neither friend nor foe, only meat. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Beast must be placed within 6” of a side of the board that is not a Deployment Zone and at least 6” away from a Deployment Zone. The players roll-off to determine on which side of the board the creature will appear. The winning player chooses the board side and the losing player places the creature where they deem fit, according to the parameters above."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Note that the Beast cannot be initially placed anywhere within 12” of a warband model."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "At the end of each of a model’s Activation, the player must roll 1D6. On a roll of 1-4, the Beast is Activated subsequently, before the opponent activates one of their own models. The same player then acts out the Beast’s actions, as described in its profile. If by the end of the turn the Beast hasn’t been activated, it is before the start of the next turn. The Beast can only be Activated once per turn. Below is the Beast’s profile and special rules:"
+            },
+            {
+                "tags": {"desc_type" : "model"},
+                "content": "md_beastofnomansland"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "5. Rat Frenzy"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Rats have infested the trenches ever since the start of the war. Troops wake up to the skittering of their little paws, the grinding of their teeth gnawing and tearing at the dead, and even swarming upon the living when the rotten flesh runs low and dry from the bones of the fallen. The sounds of gunfight, the bombs detonating upon the ground, the spreading of smoke and ash, and the disturbance of the troops storming the shore has stirred the rats’ nest and the pests now scurry out of their holes in a ravenous frenzy, feeding on anything that stands in their way."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Use two templates of 80mm to represent the Swarms of Rats. Use two Swarm of Rats’ models if you have them. The players roll-off to place each Swarm of Rats on the board. The Swarms must be placed within 8” of any piece of terrain, including terrain within Deployment Zones, but cannot be placed over Impassable terrain or surrounded by it, and cannot be placed directly on top of another model or in base contact with them. The Swarms must be placed at least 3” away from any warband model. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Swarms are considered Dangerous Terrain, with +1 DICE to injure. A model can Move through, start its Move or end its movement on a Swarm. If a model comes into base contact with a Swarm, they’re considered to be standing on Dangerous Terrain.",
+                "glossary": [
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If a model armed with a weapon, or that has an ability with the Keyword FIRE or BLAST, and that is not knocked Down, comes into base contact with a Swarm, it can attempt a RISKY ACTION to disperse the Swarm without triggering the Dangerous terrain effect.",
+                "glossary": [
+                    {"val": "FIRE", "id": "kw_fire"},
+                    {"val": "BLAST", "id": "kw_blast"},
+                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "If successful, remove the Swarm from the game board and the Activation of the model is over regardless of any remaining ACTIONS the model might have.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Each Swarm moves 2D6” at the start of each combat turn, before the Activation of any model. They will always move toward the nearest model that is knocked Down or toward the nearest model that is not engaged in melee combat and that is at least 6” away from any other model. The Swarms cannot move toward a model that causes FEAR. The Swarm must have line of sight to the model that is either knocked Down or singled out in order to move toward them. If neither condition is met, the Swarm does not move on that turn.",
+                "glossary": [
+                    {"val": "FEAR", "id": "kw_fear"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Swarms cannot be engaged in any form of combat. The Swarms will stay for D3 turns after which the rats will scurry back to their holes and disappear."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                    "tags": {"desc_type" : "bold"},
+                    "content": "6. Long Lost Stash"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The constant bombardment over the shore uncovers long lost stashes, containing several weapons and items, the spoils of war. Each player places one Objective Marker to represent these stashes to a total of two, each at least 8” away from any Deployment Zone, at least 8” away from each other and at least 6” away from any model. The stashes cannot be placed on impassable terrain or surrounded by it. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model that comes into base contact with the stash claims it. The model’s owner rolls 1D6 for a chance to get one of the following items:"
+            },
+            {
+                "tags": {"desc_type" : "headless_table"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "1"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipmentslim"},
+                                        "content": "eq_trenchshield"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "2"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipmentslim"},
+                                        "content": "eq_standardarmour"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "3"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipmentslim"},
+                                        "content": "eq_grenades"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "4"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipmentslim"},
+                                        "content": "eq_medikit"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "5"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipmentslim"},
+                                        "content": "eq_armourpiercingbullets"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "table_row"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "6"
+                            },
+                            {
+                                "tags": {"desc_type" : "table_item"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "equipmentslim"},
+                                        "content": "eq_grenadelauncher"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The model that claims the stash may immediately equip the item they have looted for the duration of this game."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_thedragon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "The Dragon",
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "The Dragon is activated once per turn. At the end of each of a player’ model Activation, the player must roll a 1D6. On a roll of 5-6, the Dragon is Activated subsequently, before the opponent activates one of their own models. The same player then acts out the Dragon’s actions, as described in its profile. If by the end of the turn the Dragon hasn’t been activated, it is before the start of the next turn. Below is the Dragon’s profile and special rules:"
+            },
+            {
+            "tags": {"desc_type" : "model"},
+            "content": "md_thedragon"
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "sr_thepeasants",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "The Peasants",
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "The villages surrounding the frontlines have been tainted by all sorts of maladies and misfortune. The war has taken its toll on the peasantry, many of which are contaminated with never seen before afflictions. Hence the main reason why they have not been evacuated from the battlefield. However, their taint has attracted the attention of the Dragon. Rescuing them is not an option. They pose a great risk to the troops. "
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "So, putting an end to their miserable lives is the only right thing to do and the order that every warband sent to claim the Dragon’s head has been given to by their higher ups. "
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "All Peasants are deployed at the start of the game (see the Battlefield section). Each Peasant is activated once per turn. At the end of each of a player’ model Activation, the same player also Activates a Peasant model anywhere on the table that hasn’t been Activated yet. The player then acts out the Peasant’s actions, as described in its profile. The players alternate between Activating the Peasants until all have been Activated in that turn. Below is the Peasant’s profile and special rules:"
+            },
+            {
+            "tags": {"desc_type" : "model"},
+            "content": "md_thepeasant"
+            }
+        ],
+        "options": []
+    }
+]
