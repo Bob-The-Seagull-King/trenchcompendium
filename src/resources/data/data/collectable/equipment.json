@@ -7057,7 +7057,15 @@
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_count": {}
+            "ignore_count": {},
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "res_type": "equipment_keyword",
+                        "value": "kw_bayonetlug"
+                    }
+                ]
+            }
         },
         "description": [   
             {
