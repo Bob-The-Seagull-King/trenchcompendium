@@ -535,6 +535,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                 onToggle={handleToggle}
                 rootClose={true}
                 overlay={
+                <Popover>
                     <Popover.Body className="popover Wbb-item-actions-popover">
                         <div className="actions">
                             {type === 'fighter' &&
@@ -719,6 +720,7 @@ const WbbContextualPopover: React.FC<WbbContextualPopoverProps> = ({ id, type, i
                             }
                         </div>
                     </Popover.Body>
+                </Popover>
                 }>
 
                 <div className="Wbb-item-actions" onClick={(e) => e.stopPropagation()}>
