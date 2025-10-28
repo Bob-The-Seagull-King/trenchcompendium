@@ -159,8 +159,6 @@ class WarbandFactory {
         if (DataCheck.exploration.templocations) {
             await rule.BuildTempLocations(DataCheck.exploration.templocations);
         }
-        console.log("MADE")
-        console.log(rule.GetCampaignInvites())
         return rule;
     }
 
@@ -195,6 +193,8 @@ class WarbandFactory {
             if (response) {
                 const json : any = await response.json();          
                 userdata = json.warband_data
+                userdata["warband_invites"] = json.warband_campaign_invites
+                userdata["warband_campaigns"] = json.warband_campaigns
                 synodcache.AddWarbandCache(_val, json.warband_data)
             }
         }

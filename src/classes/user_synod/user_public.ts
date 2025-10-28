@@ -82,6 +82,7 @@ class SiteUserPublic {
             try {
                 const parsed = JSON.parse(data.warbands[i].warband_data)
                 parsed["warband_invites"] = data.warbands[i].warband_campaign_invites
+                parsed["warband_campaigns"] = data.warbands[i].warband_campaigns
                 const newarband : UserWarband = await WarbandFactory.CreateUserWarband(parsed, data.warbands[i].id)
                 this.Warbands.push(
                     {
@@ -103,7 +104,8 @@ class SiteUserPublic {
                 {
                     id : this.Warbands[i].id,
                     warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface()),
-                    warband_campaign_invites: this.Warbands[i].warband_data.GetCampaignInvites()
+                    warband_campaign_invites: this.Warbands[i].warband_data.GetCampaignInvites(),
+                    warband_campaigns: this.Warbands[i].warband_data.GetCampaigns()
                 })
         }
 

@@ -92,8 +92,9 @@ interface IUserWarband extends IContextObject {
     modifiersloc: IWarbandProperty[],
     fireteams: IWarbandProperty[],
     consumables: IWarbandConsumable[],
-    restrictions_list : string[]
-    warband_invites? : number[]
+    restrictions_list : string[],
+    warband_invites? : number[],
+    warband_campaigns? : number[]
 }
 
 class UserWarband extends DynamicContextObject {
@@ -118,6 +119,7 @@ class UserWarband extends DynamicContextObject {
     public GeneralCache : GeneralEventCache = {}
     public PostID : number;
     public WarbandInvites : number[] = []
+    public WarbandCampaigns : number[] = []
 
     public DumpCache() {
         this.EquipmentRelCache = {}
@@ -170,6 +172,11 @@ class UserWarband extends DynamicContextObject {
             this.WarbandInvites = data.warband_invites;
         } else {
             this.WarbandInvites = []
+        }
+        if (data.warband_campaigns != undefined) {
+            this.WarbandCampaigns = data.warband_campaigns;
+        } else {
+            this.WarbandCampaigns = []
         }
         this.IsUnRestricted = (this.Restrictions.includes("unrestricted"))
     }
@@ -1240,12 +1247,21 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     public GetCampaignId () : number | false {
-        // @TODO: return a connected campaign ID - @Lane, this is also in the warband data now as an array of IDs
-        // - usually it's just one element, and we always just use the first one.
-
-        // return 53353;
-
+        
+        if (this.MyContext != null) {
+            if (this.MyContext instanceof CampaignWarband) {
+                const IDVal = this.MyContext.Owner.Id;
+                return IDVal;
+            }
+        }
+        if (this.WarbandCampaigns.length > 0) {
+            return this.WarbandCampaigns[0]
+        }
         return false;
+    }
+
+    public GetCampaigns() {
+        return this.WarbandCampaigns;
     }
 
     /**
