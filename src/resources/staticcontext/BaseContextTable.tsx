@@ -652,6 +652,22 @@ export const BaseContextCallTable : CallEventTable = {
                                     HasMet = true;
                                 }
                             } 
+                             
+                            if (Requirement.res_type == "equipment_keyword") {
+                                let Found = false;
+                                const Equipmentlist = await trackVal.model.GetAllEquipForShow()
+                                for (let k = 0; k < Equipmentlist.length; k++) {
+                                    const Keywords = await Equipmentlist[k].equipment.GetKeywords();
+                                    const ids = Keywords.map(obj => obj.ID);
+                                    if (ids.includes( Requirement.value.toString())) {
+                                        Found = true;
+                                        k = Equipmentlist.length;
+                                    }
+                                }
+                                if (Found == true) {
+                                    HasMet = true;
+                                }
+                            } 
 
                             if (Requirement.res_type == "tag") {
                                 if (containsTag(trackVal.item.EquipmentItem.Tags, Requirement.value.toString()) || containsTag(trackVal.item.Tags, Requirement.value.toString())) {
