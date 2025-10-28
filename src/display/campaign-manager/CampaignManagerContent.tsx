@@ -14,6 +14,7 @@ import {useNavigate} from "react-router-dom";
 import {ROUTES} from "../../resources/routes-constants";
 import PageMetaInformation from "../components/generics/PageMetaInformation";
 import {renderMiniMarkdown, stripMiniMarkdown} from "../../utility/util";
+import CMCampaignJsonLDSchema from "../components/JSON-LD-Schema/CMCampaignJsonLDSchema";
 
 
 
@@ -89,6 +90,7 @@ const CampaignManagerContent: React.FC = () => {
 
 
             </div>
+            {/*<CMCampaignJsonLDSchema />*/}
         </div>
     );
 };
