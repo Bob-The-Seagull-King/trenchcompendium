@@ -89,6 +89,16 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
         });
     }
 
+    const r = Number(warband.warband_data.GetNumReserved() ?? 0);
+    const l = Number(warband.warband_data.GetNumLost() ?? 0);
+    const d = Number(warband.warband_data.GetNumDead() ?? 0);
+
+    const fighterOtherList = [
+        r > 0 && `Reserved: ${r}`,
+        l > 0 && `Lost: ${l}`,
+        d > 0 && `Dead: ${d}`,
+    ].filter(Boolean).join(', ');
+
     return (
         <div className="WbbDetailView WbbWarbandDetailView">
             <div className={'title'}>
@@ -149,6 +159,12 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         {' | '}
                         {'Fielded: '}{warband.warband_data.GetNumFielded()}
                     </div>
+
+                    {fighterOtherList && (
+                        <div className="detail-section-text-element">
+                            <strong>Other: </strong>{fighterOtherList}
+                        </div>
+                    )}
 
                     {warbandErrors.length > 0 &&
                         <AlertCustom

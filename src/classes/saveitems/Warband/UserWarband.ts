@@ -1432,13 +1432,6 @@ class UserWarband extends DynamicContextObject {
         return this.GetGloryCostStash() + this.GetSumCurrentGlory();
     }
 
-    /**
-     * Returns the number of elite fighters in this warband
-     * @constructor
-     */
-    GetNumElite() {
-        return this.GetFighters().filter(f => (f.model.IsElite() && f.model.State != "dead" && f.model.State != "lost")).length;
-    }
 
     public async CanAddMoreElite() {
         
@@ -1480,11 +1473,25 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * Returns the number of troop fighters in this warband
+     * Returns the number of active elite fighters in this warband
+     * @constructor
+     */
+    GetNumElite() {
+        return this.GetFighters().filter(f => (
+            f.model.IsElite() &&
+            f.model.State == "active"
+        )).length;
+    }
+
+    /**
+     * Returns the number of active troop fighters in this warband
      * @constructor
      */
     GetNumTroop() {
-        return this.GetFighters().filter(f => !f.model.IsElite() && !f.model.IsMercenary()).length
+        return this.GetFighters().filter(f => (
+            !f.model.IsTroop() &&
+            f.model.State == "active"
+        )).length
     }
 
     /**
@@ -1492,7 +1499,26 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetNumMercenary() {
-        return this.GetFighters().filter(f => f.model.IsMercenary()).length;
+        return this.GetFighters().filter(f => (
+            f.model.IsMercenary() &&
+            f.model.State == "active"
+        )).length;
+    }
+
+    GetNumReserved() {
+        return this.GetFighters().filter(f => (
+            f.model.State == "reserved"
+        )).length;
+    }
+    GetNumLost() {
+        return this.GetFighters().filter(f => (
+            f.model.State == "lost"
+        )).length;
+    }
+    GetNumDead() {
+        return this.GetFighters().filter(f => (
+            f.model.State == "dead"
+        )).length;
     }
 
     /**
