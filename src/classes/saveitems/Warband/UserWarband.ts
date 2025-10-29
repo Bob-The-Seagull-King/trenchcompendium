@@ -1317,6 +1317,7 @@ class UserWarband extends DynamicContextObject {
      * Returns the cost for all members of this warband as ducats
      * - excluding stash
      * - excluding dead models
+     * - excluding lost models
      * @param discount
      */
     public GetDucatCost(discount = false, include_dead = true) {
@@ -1326,6 +1327,9 @@ class UserWarband extends DynamicContextObject {
             // Only count non-dead models
             const WbMember = this.Models[i].HeldObject as WarbandMember;
             if( WbMember.IsDead() && !include_dead ) {
+                continue;
+            }
+            if( WbMember.IsLost() ) {
                 continue;
             }
 

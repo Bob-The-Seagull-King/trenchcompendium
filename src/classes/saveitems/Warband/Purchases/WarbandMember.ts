@@ -2038,6 +2038,18 @@ class WarbandMember extends DynamicContextObject {
     }
 
     /**
+     * Is this model active?
+     * @return boolean
+     */
+    public IsActive () {
+        if (this.State == 'active') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Is this model dead?
      * @return boolean
      */
@@ -2062,6 +2074,18 @@ class WarbandMember extends DynamicContextObject {
     }
 
     /**
+     * Is this model lost?
+     * @return boolean
+     */
+    public IsLost () {
+        if (this.State == 'lost') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns the display string for this member's type
      * @constructor
      */
@@ -2071,6 +2095,9 @@ class WarbandMember extends DynamicContextObject {
         }
         if( this.IsReserve()) {
             return 'Reserve'
+        }
+        if( this.IsLost()) {
+            return 'Lost'
         }
 
         return 'Active'
