@@ -58,8 +58,8 @@ const RulesOptionSelection: React.FC<RulesEditSelectionProps> = ({
 
                 <Modal.Body>
                     <div className={'select-items-wrap'}>
-                        {choiceparent.Selections.map((option) => (
-                            <>
+                        {choiceparent.Selections.map((option, index) => (
+                            <React.Fragment key={index}>
                                 {allFER ? (
                                     <WbbSelectItemEquipment
                                         key={`select-item-${option.id}`}
@@ -88,7 +88,7 @@ const RulesOptionSelection: React.FC<RulesEditSelectionProps> = ({
                                         {option.display_str}
                                     </div>
                                 )}
-                            </>
+                            </React.Fragment>
                         ))}
                     </div>
                 </Modal.Body>

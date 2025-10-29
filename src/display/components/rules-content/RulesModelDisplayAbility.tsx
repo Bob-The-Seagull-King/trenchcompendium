@@ -19,8 +19,8 @@ const RulesModelDisplayAbility = (props: any) => {
                 </span>
 
                 <p className={'ability-description'}>
-                    {abilityObject.Description.map((item) => (
-                        <React.Fragment key={ability_id+"descriptionDisplay"}>
+                    {abilityObject.Description.map((item, index) => (
+                        <React.Fragment key={ability_id+"descriptionDisplay"+index}>
                             <AdvancedDescriptionItemDisplay data={item} parent={abilityObject}/>
                         </React.Fragment>
                     ))}
