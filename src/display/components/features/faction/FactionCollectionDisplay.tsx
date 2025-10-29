@@ -13,6 +13,7 @@ import PageMetaInformation from "../../generics/PageMetaInformation";
 import {useSynodFactionImageData} from "../../../../utility/useSynodFactionImageData";
 import RulesBannerFaction from '../../../components/rules-content/RulesBannerFaction';
 import RulesHeadlineDisplay from '../../../components/rules-content/RulesHeadlineDisplay';
+import PromotionsSet from "../../generics/PromotionsSet";
 
 const FactionCollectionDisplay = (props: any) => {
     const factioncollectionObject: FactionCollection = props.data
@@ -130,8 +131,11 @@ const FactionCollectionDisplay = (props: any) => {
                         </>
                     }
                 </>
-                    
                 }
+
+                <PromotionsSet
+                    content_id={factioncollectionObject.GetBaseFac().GetID()}
+                />
                 
             </div>
         </ErrorBoundary>

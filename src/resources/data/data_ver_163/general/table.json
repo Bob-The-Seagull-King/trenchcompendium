@@ -1,0 +1,31 @@
+[
+    {
+        "id": "tb_default",
+        "type": "Table",
+        "source": "core",
+        "tags": {},
+        "eventtags": {},
+        "colnames": ["Column_A", "Column_B"],
+        "description": [
+        ],
+        "items": [
+            {
+                "id": "ti_default_01",
+                "type": "TableItem",
+                "source": "core",
+                "tags": {},
+                "eventtags": {},
+                "description": [
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "Test_A"
+                },
+                {
+                    "tags": {"desc_type" : "default"},
+                    "content": "Test_B"
+                }
+                ]
+            }
+        ]
+    }
+]

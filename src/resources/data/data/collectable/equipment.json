@@ -6917,42 +6917,8 @@
         "contextdata": {
             "get_weapon": {}
         },
-        "description": [       
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "",
-                "subcontent": [                    
-                    {
-                        "tags": {"desc_type" : "bold"},
-                        "content": "Pain Amplifier: "
-                    },                
-                    {
-                        "tags": {"desc_type" : "default"},
-                        "content": "Lower the roll needed to achieve a Critical Success for a Melee Attack made by this weapon by 1 for each BLOOD MARKER next to the target by 1 (so an enemy with 1 BLOOD MARKER will suffer a Critical Success on a roll of 11+).",
-                        "glossary": [
-                            {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
-                        ]
-                    } 
-                ]
-            },    
-            {
-                "tags": {"desc_type" : "paragraph"},
-                "content": "",
-                "subcontent": [                    
-                    {
-                        "tags": {"desc_type" : "bold"},
-                        "content": "Inflict Pain: "
-                    },                
-                    {
-                        "tags": {"desc_type" : "default"},
-                        "content": "If an attack made by this weapon against a target, without the ARTIFICIAL Keyword and mounted on a 40mm base or smaller is, a Critical Success, but the target is not taken Out of Action, then the target will move D3\" in a straight line directly away from the attacking model. It will stop if it moves into a friendly model, Impassable Terrain, a terrain piece it cannot cross without having to Climb, or immediately before it would move within 1\" of an enemy model other than the attacker. If the target model would finish the move more than 1\" from the attacking model, then the attacking model and any other models within 1\" of the target model can make an additional Melee Attack on it before it is moved, as if the target were carrying out a retreat move. If this causes the model to move a second time, add D3\" to the distance it is moved but do not attack it again.",
-                        "glossary": [
-                            {"val": "ARTIFICIAL", "id": "kw_artificial"}
-                        ]
-                    } 
-                ]
-            } 
-        ],
+        "abilities": ["ab_painamplifier","ab_inflictpain"],
+        "description": [],
         "lore": [            
             {
                 "tags": {"desc_type" : "italic"},
@@ -7000,7 +6966,7 @@
         "description": [       
             {
                 "tags": {"desc_type" : "paragraph"},
-                "content": "This relic grants the wearer an additional attack ACTION in melee combat without penalty. Each time the model is activated, it also receives 1 BLOOD MARKER. Once this has been equipped, it can never be unequipped or removed from the model for any reason.",
+                "content": "This equipment grants the wearer an additional attack ACTION in melee combat without penalty. Each time the attack is used, it also receives 1 BLOOD MARKER. Once this has been equipped, it can never be unequipped or removed from the model for any reason.",
                 "glossary": [
                     {"val": "ACTION", "id": "kw_action"},
                     {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
@@ -7076,7 +7042,7 @@
         "lore": [     ],
         "options": [],
         "keywords": [],
-        "modifiers": []
+        "modifiers": ["+1D to Hit"]
     },
     {
         "id": "eq_butcherbayonet",
@@ -7086,12 +7052,20 @@
         "category": "melee",
         "distance": null,
         "stats": {
-            "hands_melee": 2,
+            "hands_melee": 0,
             "melee": true
         },
         "contextdata": {
             "get_weapon": {},
-            "ignore_count": {}
+            "ignore_count": {},
+            "model_equipment_restriction": {
+                "required": [
+                    {
+                        "res_type": "equipment_keyword",
+                        "value": "kw_bayonetlug"
+                    }
+                ]
+            }
         },
         "description": [   
             {
@@ -7106,7 +7080,7 @@
         ],
         "lore": [        ],
         "options": [],
-        "keywords": ["kw_cumbersome","kw_shieldcombo","kw_bayonetlug"],
+        "keywords": ["kw_cumbersome", "kw_shieldcombo"],
         "modifiers": ["+1D to Injuries"]
     },
     {

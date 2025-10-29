@@ -32,7 +32,7 @@ const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty, fighter :
             </div>
             
             {advancement.SelfDynamicProperty.Selections.length > 0 &&
-                <span className={'title-choice'}>
+                <>
                     {advancement.SelfDynamicProperty.Selections.map((item) => 
                         <WbbOptionSelect 
                             property={advancement}
@@ -40,7 +40,7 @@ const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty, fighter :
                             choice={item}
                         />
                     )}                        
-                </span>
+                </>
             }
 
             {/* actions */}
@@ -76,7 +76,7 @@ const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty, fighter :
                     </div>
 
                     {advancement.SelfDynamicProperty.Selections.length > 0 &&
-                        <span className={'title-choice'}>
+                        <>
                             {advancement.SelfDynamicProperty.Selections.map((item) =>
                                 <WbbOptionSelect
                                     property={advancement}
@@ -84,7 +84,7 @@ const WbbEditViewAdvancement: React.FC<{ advancement: WarbandProperty, fighter :
                                     choice={item}
                                 />
                             )}
-                        </span>
+                        </>
                     }
                 </Modal.Body>
             </Modal>

@@ -96,6 +96,9 @@ const FactionDisplay = (props: any) => {
             }
         }
 
+        // add promotions to jump to link list
+        ContentsList.push({ name: "Promotions", route: "Promotions"})
+
         return ( <RulesAnchorLinks title={"Contents"} listofcontents={ContentsList}/> )
     }
 

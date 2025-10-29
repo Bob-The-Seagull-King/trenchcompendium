@@ -1,0 +1,3535 @@
+[
+    {
+        "id": "rl_flockofassassins",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Flock of Assassins",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Fida’i of Alamut can have up to three Assassins. The warband must include a Master Assassin that counts as one of the three."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_masterassassin",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Master Assassin",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "A Master Assassin has the Keyword TOUGH. The Master Assassin costs 95 ducats.",
+            "glossary": [{"val": "TOUGH", "id": "kw_tough"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_assassinacolytes",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Assassin Acolytes",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to three Azebs of the warband can have the Keyword INFILTRATOR at the cost of +10 ducats per model.",
+            "glossary": [{"val": "INFILTRATOR", "id": "kw_infiltrator"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_alamutalone",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Alamut Alone",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may not include Yüzbaşı, Alchemist, Janissaries, Lions of Jabir or Brazen Bulls."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_killingsquad",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_to_warband": {},
+            "add_fireteam_warband" : { "type": "ft_standard", "count": 1 }
+         },
+        "name": "Killing Squad",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband may have a single Fireteam. These Fireteams may consist of any two models from your warband. Models in Fireteams gain the Keyword FIRETEAM.",
+            "glossary": [{"val": "FIRETEAM", "id": "kw_fireteam"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dervishes",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Dervishes",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to four Dervishes (use Janissary statistics including Armoury selection, but they cannot use Reinforced Armour). These troops have the Whirling Dervishes special rule instead of the Keyword STRONG.",
+            "glossary": [{"val": "STRONG", "id": "kw_strong"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_artofassassination",
+        "source": "core",
+        "tags": { },
+        "contextdata": {    
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "art_of_assassination",
+                        "count": 1
+                    }
+                ]
+            },
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_artofassassination",
+                "models_id": ["md_sultanateassassin","md_sultanateassassin_mv_masterassassin"]}]
+            }
+        },
+        "name": "Art of Assassination",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Assassin of the warband may buy any one of several abilities at the cost indicated. There cannot be any duplicates in the warband and you can only buy one for each Assassin."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_alchemists",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Alchemists",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The House of Wisdom warband may have up to two Alchemists and must include at least one. This warband treats Alchemist Armour as if they had a LIMIT of 2.",
+            "glossary": [{"val": "LIMIT", "id": "kw_limit"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_prideofjabir",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Pride of Jabir",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to three Lions of Jabir." 
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_privateventure",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Private Venture",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may not include any Azebs, Janissaries, Yüzbaşi or Assassins." 
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_nobleguardians",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Noble Guardians",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to two Fāris – noble warriors sworn to protect the House of Wisdom. They use the Janissary stats but gain the Keyword ELITE.",
+            "glossary": [{"val": "ELITE", "id": "kw_elite"}]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_kavass",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Kavass",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Kavass are sworn guardians of the House of Wisdom. They use Azebs stats but cannot buy the Keyword SKIRMISHER. Instead, up to three Kavass can increase their Melee Characteristic by +1 DICE (to +0D) at the cost of +5 ducats per model.",
+            "glossary": [
+                {"val": "SKIRMISHER", "id": "kw_skirmisher"},
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_secretsofthehouseofwisdom",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "special_category_upgrades": {
+                "upgrades": [
+                    {
+                        "category": "secrets_of_the_house_of_wisdom",
+                        "count": 1
+                    }
+                ]
+            },
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_secretsofthehouseofwisdom",
+                "models_id": ["md_jabireanalchemist"]}]
+            }
+        },
+        "name": "Secrets of the House of Wisdom",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Alchemist of the warband may buy any one of these Abilities at the cost indicated below. You cannot have duplicates of these abilities in the Warband, as the House of Wisdom does not want to risk depleting the number of their scholars in a single discipline."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_weaponcollections",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {},
+            "faction_choose_equipment": {
+                "limit_override": 1,
+                "additions": [
+                    {
+                        "list": "fc_trenchpilgrim",
+                        "count": 1,
+                        "strict_id": true,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" }
+                        ]
+                    },
+                    {
+                        "list": "fc_newantioch",
+                        "count": 1,
+                        "strict_id": true,
+                        "option_id": 1,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" }
+                        ]
+                    }
+                ]
+            }
+        },
+        "name": "Weapon Collections",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "When you create this warband, choose two weapons. These weapons must be found in either the Armouries of New Antioch or the Trench Pilgrims. These weapons must not already be present in the Iron Sultanate Armoury. Your warband may acquire one from New Antioch and one from the Trench Pilgrim armoury, following all of the same limitations and costs of the original lists. Only one weapon can be picked from this list. If lost in battle, it can be repurchased by paying the indicated cost."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_trenchpilgrim",
+                "name" : "Trench Pilgrim Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_trenchpilgrim",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": false,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            },
+            {
+                "ref_id" : "ot_newantioch",
+                "name" : "New Antioch Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": false,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "rl_silahdar",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Silahdar",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The commanders of the Iron Wall units come from amongst the personal bodyguards of the Sultan known as Silahdar. Each Warband must contain one Silahdrar when it is created. They use the Yüzbaşı characteristics, do not have the Mubarizun Ability. Instead they have the Keyword STRONG and can use any Sapper Only choices from the Armoury. They cost 70 ducats.",
+            "glossary": [
+                {"val": "STRONG", "id": "kw_strong"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_farfromthesublimegate",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Far from the Sublime Gate",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Warband may not include any Lions of Jabir, Yüzbaşi or Assassins. They cannot buy the Cloak of Alamut or the Wind Amulet."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_sipahi",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Sipahi",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Sipahi Automaton Cavalry often serves as infantry in the Iron Wall units to reinforce areas under severe pressure. They use characteristics of Mamluk Faris Mercenary. They cost 110 ducats. You cannot modify their equipment in any way. You can have up to 1 Sipahi. Note that this does not stop you from recruiting a Mamluk as a mercenary as well. Sipahi can be promoted as any other non-ELITE model.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_janissaryofficers",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Janissary Officers",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Warband may include up to 2 Janissaries acting as officers. They have Keyword ELITE. The Warband may not have any other Janissaries.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_sappercorps",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Sapper Corps",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The standard divisions assigned to the Iron wall have double-strength Sapper detachment. This Warband may include up to 4 Sappers."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_siegejezzailteams",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {},
+            "add_to_model": {
+                "id": "rl_siegejezzailteams"
+            }
+        },
+        "name": "Siege Jezzail Teams",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All the members of the Warband are trained to use the Siege Jezzails in pairs. When any model of this Warband shoots a Siege Jezzail and they are within 1” of another member of the Warband, they add +1 DICE to their Ranged Attack to hit roll with the Siege Jezzai.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_marksmanshipoftheironwall",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_marksmanshipoftheironwall"
+            }
+        },
+        "name": "Marksmanship of the Iron Wall",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All the members of the Warband practise marksmanship from the dizzying heights of the Iron Wall against targets on the ground below. The Elevated position Ranged bonus for this Warband is +2 DICE instead of the usual +1 DICE.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "+2 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_newantiochfireteam",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+
+            "add_fireteam_warband" : { "type": "ft_antioch", "count": 2 }
+        },
+        "name": "New Antioch Fireteams",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your warband may have up to two Fireteams. These Fireteams may consist of any two models from your warband. Models in Fireteams gain the Keyword FIRETEAM. Fireteams gain the Concentrated Attack rule:",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "FIRETEAM: ",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "This model is part of a FIRETEAM made up of two models. All models that are part of the same FIRETEAM can be activated at the same time without the opponent getting their turn in between and can take their ACTIONS in any order they wish, switching between the two models. Note that if the Activation of either member of the FIRETEAM forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a FIRETEAM.",
+                                "glossary": [
+                                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Concentrated Attack: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",
+                                    "glossary": [
+                                        {"val": "FIRETEAM", "id": "kw_fireteam"},
+                                        {"val": "ACTION", "id": "kw_action"},
+                                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                    ]
+                                }
+                            ]
+                        }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_fastaslightning",
+        "source": "core",
+        "tags": { "bonus": true },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_fastaslightning"
+            },
+            "bonus_ability": {
+                "action_type": ["dash"]
+            }
+        },
+        "name": "Fast as Lightning",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All Models have +1 DICE when taking their Dash ACTIONS.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "ACTIONS", "id": "kw_action"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_closeassaultweapons",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Close Assault Weapons",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband can buy Submachine Guns for 25 ducats per weapon."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lighttroops",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Light Troops",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The force may only include 0-1 Annointed and 0-1 Artillery Witch."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_letsleepingdogslie",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Let Sleeping Dogs Lie",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may not include a War Wolf."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_unseenadvance",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_unseenadvance",
+                "filters": [
+                    {
+                        "type": "keyword",
+                        "value": "kw_elite",
+                        "truth": false
+                    }
+                ]}]
+            }
+        },
+        "name": "Unseen Advance",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to three models without ELITE Keyword can be upgraded into INFILTRATORS at the cost of 10 ducats per Model.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_horror",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_horror"
+            },
+            "keyword_add": {"value": ["kw_fear"]}
+        },
+        "name": "Horror",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the Warband cause FEAR.",
+            "glossary": [
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_semicorporeal",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_semicorporeal"
+            }
+        },
+        "name": "Semi-Corporeal",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Ranged attacks against all models in the Trench Ghost Warband roll injuries with -1 DICE – the undead are hard to kill with bullets! Melee Attacks do not suffer this penalty.",
+            "glossary": [
+                {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_spectral",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_spectral"
+            }
+        },
+        "name": "Spectral",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the warband ignore movement penalties caused by Difficult Terrain, though they cannot move through any objects/terrain. Dangerous terrain affects them as normal."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_undead",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_undead"
+            }
+        },
+        "name": "Undead",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the Trench Ghost warband do not suffer additional BLOOD MARKERS from attacks with the Keyword GAS.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "GAS", "id": "kw_gas"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_enemiesofall",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Enemies of All",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Trench Ghosts cannot use Mercenaries."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lostsouls",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Lost Souls",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": " Since only mortals who have souls become ghosts, this warband may not have any model with the Keyword ARTIFICIAL, such as War Wolves or Artillery Witches. In addition, no model in the warband may have a Hellbound Soul Contract or an Infernal Brand Mark. Any model that has one of these pieces of equipment in their base profile will not have it, although its price stays the same.",
+            "glossary": [
+                {"val": "ARTIFICIAL", "id": "kw_artificial"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_slow",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_slow"
+            }
+        },
+        "name": "Slow",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in Trench Ghost warband have a half Dash distance (i.e. 3”), and they suffer -1 DICE to all attacks against models Retreating from Melee combat.",
+            "glossary": [
+                {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_sarcophagusmine",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_sarcophagusmine",                
+                "models_id": ["md_heretictrooper"]}]
+            }
+        },
+        "name": "Sarcophagus Mine",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the cost of +30 ducats, up to two of the Troopers can be turned into Sarcophagus Mines."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_barbedwirebanshee",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+        },
+        "name": "Barbed Wire Banshee",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Instead of a Chorister, a Trench Ghost warband may include a Barbed Wire Banshee at the same cost. It has the same characteristics as a Chorister with the usual Trench Ghost special rules applied to it, but instead of the Unholy Hymns ability the Banshee has Death Wail."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_tankpalanquin",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Tank Palanquin",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the cost of 60 ducats, the Heretic Priest of the warband can ride a ghostly Tank Palanquin. "
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_worshipmammon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Worship Mammon",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "In a campaign, the patron of the warband will always be Mammon. Instead of the Puppet Master ability, the Heretic Priest of the Knights of Avarice may select the Price of Greed ability if they wish. "
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_mammonschosen",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_to_warband": {},
+            "validate_final_unit": {
+                "requirements": [
+                    {
+                        "type": "ducats",
+                        "value": 80,
+                        "subvalue": "minimum"
+                    }
+                ],
+                "exception": [
+                    {
+                        "type": "id",
+                        "value": "md_wretched"
+                    }
+                ]
+            } 
+        },
+        "name": "Mammon's Chosen",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Knights of Avarice allow only the wealthiest and the best-equipped candidates to join their ranks. Your force may have no models that cost less than 80 ducats (including their equipment)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_corruptmerchants",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {},
+            "faction_choose_equipment": {
+                "additions": [
+                    {
+                        "list": "fc_ironsultanate",
+                        "count": 1,
+                        "option_id": 0,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" },
+                            { "category": "armour" },
+                            { "category": "equipment" },
+                            { "res_type": "id" }
+                        ]
+                    },
+                    {
+                        "list": "fc_newantioch",
+                        "count": 1,
+                        "option_id": 1,
+                        "restriction": [
+                            { "category": "melee" },
+                            { "category": "ranged" },
+                            { "category": "armour" },
+                            { "category": "equipment" },
+                            { "res_type": "id" }
+                        ]
+                    }
+                ]
+            }
+        },
+        "name": "Corrupt Merchants",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Many merchants, traders and moneylenders within the Faithful nations are followers of Mammon and secretly supply the Knights of Avarice with their wares. When creating the warband, select one weapon, suit of armour or other piece of equipment from the New Antioch Armoury and one such item from the Iron Sultanate Armoury. You can acquire this gear exactly as the warband they come from. Any of these items in question must not be already available to the Heretic Warband. All the same limitations of the original lists apply, so there is little point in taking an Assassin’s Dagger (for example) since it can be only used by Assassins. These two selected additions are available to your warband throughout the campaign."
+            }
+        ],
+        "options": [
+            {
+                "ref_id" : "ot_ironsultanate",
+                "name" : "Iron Sultanate Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_ironsultanate",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_hereticlegion",
+                                    "equals": false,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            },
+            {
+                "ref_id" : "ot_newantioch",
+                "name" : "New Antioch Items",
+                "description" : [],
+                "category" : "type",
+                "type" : "text",
+                "strictness" : "strict",
+                "predefined_options" : [],
+                "option_context" : {"basic_option_default":{}},
+                "data_search" : {      
+                    "searchtype": "complex",
+                    "searchparam":    {
+                        "type": "factionequipmentrelationship",
+                        "request":    {
+                            "operator": "and",
+                            "terms": [
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_newantioch",
+                                    "equals": true,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "faction_id",
+                                    "value": "fc_hereticlegion",
+                                    "equals": false,
+                                    "strict": true
+                                },
+                                {             
+                                    "item": "tags",
+                                    "value": "exploration_only",
+                                    "equals": false,
+                                    "strict": true,
+                                    "istag": true,
+                                    "tagvalue": true
+                                }
+                            ],
+                            "subparams": []
+                        }
+                    }                        
+                }
+            }
+        ]
+    },
+    {
+        "id": "rl_preservetheloot",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_extra_eq_restriction": {},
+            "faction_eq_restriction": {
+                "removed": [
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_fire"
+                    },
+                    {
+                        "res_type": "keyword",
+                        "value": "kw_shrapnel"
+                    }
+                ]
+            }
+        },
+        "name": "Preserve the Loot",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Knights of Avarice greatly dislike using weapons that could damage the amount of wealth that can be extracted from the fallen. No weapon with the Keyword FIRE or SHRAPNEL can be used by any model in this warband. In addition, the Artillery Witches of this warband use Gas Bombs: They have the Keyword GAS instead of SHRAPNEL and they ignore armour. Injuries caused by a direct hit are rolled with 2D6 and models within a 3” blast radius are rolled with -1 DICE. In a similar vein, their Grenade Launchers have the GAS keyword instead of the SHRAPNEL keyword, have a -1 DICE to injury rolls and ignore armour.",
+            "glossary": [
+                {"val": "-1 DICE", "id": "kw_minusdice"},
+                {"val": "FIRE", "id": "kw_fire"},
+                {"val": "GAS", "id": "kw_gas"},
+                {"val": "SHRAPNEL", "id": "kw_shrapnel"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_infernalrivalry",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Infernal Rivalry",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Mammon is a rival of Beruth, the great devil of wrath and murder, who is the Patron of Death Commandos. Knights of Avarice may include no Death Commandos."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_goeticwarlocks",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Goetic Warlocks",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Goetic Warlocks are creations of Mammon. This warband may include one for the price of 110 ducats. This Warlock is still a mercenary and obeys all of the rules associated with being a mercenary (such as having fixed equipment and not being able to be promoted to an ELITE throughout the course of a campaign).",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_debtorstomammon",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {}
+        },
+        "name": "Debtors to Mammon",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Wretched of the warband are not tied by Mammon’s Chosen rule."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_facethyfears",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Face Thy Fears",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "No model in the Procession of the Sacred Affliction can wear Iron Capirotes. Those troops with Capirotes in their base profile will not have them, though their cost remains the same."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_reliquaryarmoury",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Reliquary Armoury",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models of this warband (save for the Anchorite) can buy Holy Icon Shields for 20 ducats, not just ELITE models. In addition, warband models with the ELITE Keyword may acquire Holy Icon Armour (see below).",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_punishingmillstones",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {   
+                "id": "rl_punishingmillstones",                            
+                "removed": [
+                    {
+                        "category": "id",
+                        "value": "md_ecclesiasticprisoner_sacredaffliction"
+                    }
+                ]
+            }
+        },
+        "name": "Punishing Millstones",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in the Procession of the Sacred Affliction (except Ecclesiastic Prisoners who are not worthy) add extra +1 DICE to injury rolls in melee against models that are Down.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "Down", "id": "gl_down"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_meleefocused",
+        "source": "core",
+        "tags": { },
+        "contextdata": {  },
+        "name": "Melee-Focused",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband may not have any Machine Guns and only one Punt Gun."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_zealotstrength",
+        "source": "core",
+        "tags": { },
+        "contextdata": {             
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_zealotstrength",                
+                "models_id": ["md_trenchpilgrim"]}]
+            },
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_zealotstrength_pilgrimbase"]
+            }
+         },
+        "name": "Zealot Strength",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to three Trench Pilgrims may purchase the Zealot Strength upgrade."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hammerandanvil",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Hammer and Anvil",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Anti-tank Hammers of this warband are not limited to ELITE.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wrathofgod",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_wrathofgod",                
+                "models_id": ["md_trenchpilgrim","md_castigator"]}]
+            }
+        },
+        "name": "Wrath of God",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "One Trench Pilgrim or Castigator in this warband can be gripped by the vengeful fury of the Lord for +15 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_bloodsacrifice",
+        "source": "core",
+        "tags": { },
+        "contextdata": {  
+        },
+        "name": "Blood Sacrifice",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any model (except Ecclesiastic Prisoners who are not worthy) in the warband can purchase a Sacrificial Lamb (see below)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_heavenawaits",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_resurrection"]
+            } 
+        },
+        "name": "Heaven Awaits",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Cavalcade rejects the doctrine of the Meta-Christ. Their dead Pilgrims cannot be resurrected as Martyr-Penitents."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_theunclean",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "The Unclean",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Cavalcade detests using the unclean Ecclesiastic Prisoners and may have only up to two of them."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dayofhiswrath",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Day of His Wrath",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The War Prophet of this warband cannot use Laying on Hands but can call upon the Wrath of God instead."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_stolencommunicants",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Stolen Communicants",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Communicants cost 3 Glory Points instead of ducats for this warband due to the difficulty of acquiring and indoctrinating them. "
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_favourofthelord",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_warband": {}
+        },
+        "name": "Favour of the Lord",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the start of each turn, you can give any one model in the warband a BLESSING MARKER.",
+            "glossary": [
+                {"val": "BLESSING MARKER", "id": "kw_blessingmarker"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_anchoritecloister",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Anchorite Cloister",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband may buy up to two Anchorite Shrines."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_anchoritearmoury",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Anchorite Armoury",
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "This warband may alter the weaponry and equipment of their Anchorites as indicated below. Anchorites of St. Methodius have +0 DICE to their Ranged Characteristic.",
+            "glossary": [
+                {"val": "+0 DICE", "id": "kw_plusdice"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Due to its construction and immense size, any Anchorite of this warband may use any one of these weapons as a single-handed weapon. The Anchorite may replace its Breaking Wheel with one of these weapons at the cost indicated below. You can change these weapons and equipment between battles, but you must sell the old weapon at half price before installing a new one. "
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Each Shrine Anchorite of the War Pilgrimage of St. Methodius can equip up to two Anchorite-Only equipment pieces."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_mortalsin",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Mortal Sin",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "No Ecclesiastic Prisoner of the warband may be equipped with a Martyrdom Device and no member of the warband can be Broken on the Wheel."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_communicantheresy",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Communicant Heresy",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Pilgrims of St.Methodius oppose the creation of Communicants and therefore cannot include them in their warbands. This includes Mercenaries."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_treasureinheaven",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_resurrection"]
+            } 
+        },
+        "name": "Treasure in Heaven",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Trench Pilgrims of this warband cannot be resurrected as Martyr-Penintents."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_chasteorder",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Chaste Order",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "While they revere the holy stigmata of the nuns of the order, the fathers of the monasteries shun the ecstatic revelry of many Trench Pilgrims and insist on modest dress. All Stigmatic Nuns of the warband must wear Standard Armour. In addition, the warband may only have a maximum of three Stigmatic Nuns."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gunsmithmonks",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Gunsmith Monks",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband can buy Machine Guns (LIMIT: 2) at a cost of 50 ducats each, an Automatic Rifle (LIMIT: 1) for 40 ducats and a Submachine Gun (LIMIT: 1) for 30 ducats.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_followersofsaintmethodius",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Followers of St.Methodius",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Patron of the warband is always a Learned Saint."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_specialistforce",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "get_warband_ducats": {
+                "mod": -200
+            },
+            "get_warband_glory": {
+                "mod": 11
+            }
+        },
+        "name": "Specialist Force",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "A Papal States Intervention Force is recruited with 500 ducats and 11 Glory Points when creating a warband for a campaign. When recruiting a warband for a one-off battle, we recommend using 700 ducats and 15 Glory Points."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_swissguard",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_swissguard",
+                "models_id": ["md_lieutenant"],
+                "filters": [
+                    {
+                        "type": "keyword",
+                        "value": "kw_elite",
+                        "truth": false
+                    }
+                ]}]
+            }
+        },
+        "name": "Swiss Guard",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to four non-ELITE troopers and the Lieutenant can be upgraded into Swiss Guards at the cost of 5 ducats each. They are immune to FEAR.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_supremeblessing",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_armoury_item": {
+                "free_purchases": [
+                    "rel_fc_papalstates_eq_supremepontiffcrucifix"
+                ]
+            }
+        },
+        "name": "Supreme Blessing",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "One model in the warband may carry the crucifix given by the Supreme Pontiff. This model can take further ACTIONS if it fails in an attempted RISKY ACTION. Note that the action fails, but you are allowed to try any other ACTIONS on your profile without losing the Activation. If the crucifix is lost, a new one can be acquired at the cost of 3 Glory Points.",
+            "glossary": [
+                {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                {"val": "ACTIONS", "id": "kw_action"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_farfromhome",
+        "source": "core",
+        "tags": { },
+        "contextdata": {     
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_yeoman_infiltrator"]
+            }
+         },
+        "name": "Far from Home",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Papal Intervention Force may have no Trench Moles."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_vaticansrepresentative",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+         },
+        "name": "Vatican's Representative",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Papal States Warband must include a Trench Cleric but does not have to include a Lieutenant."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lector",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+         },
+        "name": "Lector",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Trench Cleric in the Papal Intervention Force can select the \"Arise and be Healed!\" prayer in addition to the ones usually available to a Trench Cleric."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_fianna",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_fianna",
+                "models_id": ["md_shocktrooper"]}]
+            }
+        },
+        "name": "Fianna",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any Shocktroopers in an Eire Warband can be made a member of Fianna, the famed warrior-hunters. They cost +10 ducats each and have the Keywords SKIRMISHER and INFILTRATOR.",
+            "glossary": [
+                {"val": "SKIRMISHER", "id": "kw_skirmisher"},
+                {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_carnyx",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Carnyx",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your army can purchase a special Carnyx instead of a generic musical instrument. This horn is identical to a musical instrument (including equipment restrictions and LIMIT), except it can be carried by an ELITE model and the model carrying it causes FEAR.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"},
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hitandruntactics",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_hitandruntactics"
+            }
+        },
+        "name": "Hit-and-Run Tactics",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "If a model of this warband uses the Retreat ACTION to move away from Combat, enemies have a -1 DICE penalty to hit rolls with their free attack.",
+            "glossary": [
+                {"val": "ACTION", "id": "kw_action"},
+                {"val": "-1 DICE", "id": "kw_minusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_berserker",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_berserker",
+                "models_id": ["md_lieutenant_eire","md_shocktrooper"]}]
+            }
+        },
+        "name": "Berserker",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Either your Lieutenant or one of the Fianna can be a Berserker. This model is immune to FEAR and disregards any BLOOD MARKERS from any source. Berserkers never wear armour, though they can carry a Trench Shield. Add +15 Ducats to the cost of this model.",
+            "glossary": [
+                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_stronginfaith",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Strong in Faith",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Eire is a bastion of the Church, with many famed warrior-priests who travel to war. The warband may have up to two Trench Clerics and they can each choose to replace their Onwards, Christian Soldiers! ability with \"Away Serpents!\" or \"Arise and be Healed!\"."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_looseorganisation",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+
+            "add_fireteam_warband" : { "type": "ft_antioch", "count": 1 }
+        },
+        "name": "Loose Organisation",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Your warband may only have up to one FIRETEAM from the New Antioch Fireteams feature. Additionally, your Lieutenant loses the On my command! ability and gains the Keyword SKIRMISHER. ",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"},
+                    {"val": "SKIRMISHER", "id": "kw_skirmisher"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "FIRETEAM: ",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "This model is part of a FIRETEAM made up of two models. All models that are part of the same FIRETEAM can be activated at the same time without the opponent getting their turn in between and can take their ACTIONS in any order they wish, switching between the two models. Note that if the Activation of either member of the FIRETEAM forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a FIRETEAM.",
+                                "glossary": [
+                                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Concentrated Attack: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",
+                                    "glossary": [
+                                        {"val": "FIRETEAM", "id": "kw_fireteam"},
+                                        {"val": "ACTION", "id": "kw_action"},
+                                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                    ]
+                                }
+                            ]
+                        }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_followersofsaintpatrick",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Followers of Saint Patrick",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "If playing a Campaign, the patron of the warband is automatically the Learned Saint Saint Patrick."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lightinfantry",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Light Infantry",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband is allowed to field only one Mechanized Heavy Infantry trooper. No model (save for the single Mechanized Heavy Infantry) may carry a HEAVY weapon or wear Heavy or Machine Armour. This does not apply to Combat Engineers’ Satchel Charges.",
+            "glossary": [
+                {"val": "HEAVY", "id": "kw_heavy"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_expertfireteams",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+
+            "add_fireteam_warband" : { "type": "ft_antioch", "count": 3 }
+        },
+        "name": "Expert Fireteams",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You may have up to three FIRETEAMS from the New Antioch Fireteams feature.",
+                "glossary": [
+                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "FIRETEAM: ",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "This model is part of a FIRETEAM made up of two models. All models that are part of the same FIRETEAM can be activated at the same time without the opponent getting their turn in between and can take their ACTIONS in any order they wish, switching between the two models. Note that if the Activation of either member of the FIRETEAM forcefully ends (due to a failed RISKY ACTION for example), it ends both Activations. Allies cannot be part of a FIRETEAM.",
+                                "glossary": [
+                                    {"val": "FIRETEAM", "id": "kw_fireteam"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Concentrated Attack: ",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "If a model in the FIRETEAM makes any kind of Attack ACTION (ranged or melee) against an opponent, where the other member of their FIRETEAM has already hit it with an attack ACTION during the same activation, the cost of a Bloodbath is reduced to three BLOOD MARKERS against this opponent, whether the model is standing or Down.",
+                                    "glossary": [
+                                        {"val": "FIRETEAM", "id": "kw_fireteam"},
+                                        {"val": "ACTION", "id": "kw_action"},
+                                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                    ]
+                                }
+                            ]
+                        }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_mastersofthegrenade",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_mastersofthegrenade"
+            }
+        },
+        "name": "Masters of the Grenade",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Models of the Stoßtruppen Warband add 4” range to all of their GRENADE weapons.",
+            "glossary": [
+                {"val": "GRENADE", "id": "kw_grenade"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_forwardpositions",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_forwardpositions",
+                "models_id": ["md_shocktrooper"]}]
+            }
+        },
+        "name": "Forward Positions",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Up to two Shocktroops can have the Keyword INFILTRATOR at the cost of +10 ducats per model.",
+            "glossary": [
+                {"val": "INFILTRATOR", "id": "kw_infiltrator"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_rapidassault",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_rapidassault",
+                "models_id": ["md_shocktrooper","md_lieutenant"]}]
+            }
+        },
+        "name": "Rapid Assault",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "At the cost of +5 ducats per model, any Shocktroopers and Lieutenants may add +1 DICE to all their Dash ACTIONS.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "ACTIONS", "id": "kw_action"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_specialisedequipment",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Specialised Equipment",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband has LIMIT:4 for Submachine guns. Automatic Shotguns and Automatic Pistols are not limited to ELITE. The warband may have no Grenade Launchers and only one Machine Gun.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"},
+                {"val": "LIMIT", "id": "kw_limit"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_troopselection",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_yeoman_infiltrator"]
+            }
+        },
+        "name": "Troop Selection",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband must have at least two shocktroopers and can have up to eight. the warband can have only one mechanised heavy infantry, one sniper priest and no trench moles."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lightlyarmoured",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Lightly Armoured",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Apart from mechanised heavy infantry and the lieutenant, no model in the warband can be equipped with reinforced or machine armour."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_lightmelee",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "remove_from_model": {
+                "id": ["md_shocktrooper"],
+                "abilities": ["ab_assaultdrill"]
+            }
+        },
+        "name": "Light Melee",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Prussian shocktroopers lose the Assault Drill ability."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_rampantcharge",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {
+                "id": "rl_rampantcharge"
+            }
+        },
+        "name": "Rampant Charge",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "All models in this warband ignore the penalty for Defended Obstacles."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_meleefocused_alba",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Melee Focused",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Mechanized Heavy Infantry of this warband have +1 DICE in melee instead of Ranged Attacks.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_highlandmachinearmour",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_to_model": {
+                "id": "rl_highlandmachinearmour",
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_mechanisedheavyinfantry_alba","md_lieutenant"]
+                    }
+                ]
+            } ,
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_highlandmachinearmour",
+                "models_id": ["md_mechanisedheavyinfantry_alba"]}]
+            }
+        },
+        "name": "Highland Machine Armour",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Models in this warband equipped with machine armour ignore the penalty to charging imposed by the armour."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_highlandstrength",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Highland Strength",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Lieutenant of the warband has the Keyword STRONG.",
+            "glossary": [
+                {"val": "STRONG", "id": "kw_strong"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_strainedsupply",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Strained Supply",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "This warband has LIMIT:1 for Grenade Launchers, Submachine Guns, Machine Guns, Automatic Shotguns and Sniper Rifles.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_bagpipes",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Bagpipes",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband can purchase special bagpipes instead of a generic musical instrument. These bagpipes are identical to a musical instrument (including their equipment restrictions and LIMIT), but friendly models within 4” of the model carrying them are immune to FEAR.",
+            "glossary": [
+                {"val": "LIMIT", "id": "kw_limit"},
+                {"val": "FEAR", "id": "kw_fear"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_brave",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+            "add_to_warband": {} 
+        },
+        "name": "Brave",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband adds +1 DICE to all Morale Tests.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_claymoresmiths",
+        "source": "core",
+        "tags": { },
+        "contextdata": {
+        },
+        "name": "Claymore Smiths",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "An Alba Warband can buy Great Swords for 7 ducats instead of usual 12 ducats."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_chewa",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_chewa",
+                "models_id": ["md_shocktrooper"],
+                "filters": [
+                    {
+                        "type": "keyword",
+                        "value": "kw_elite",
+                        "truth": true
+                    }
+                ]}]
+            }
+        },
+        "name": "Chewa",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Any shocktroopers or ELITE models in an Abyssinian warband can be made a member of Chewa, the traditional warrior-elite. This costs +5 ducats per model and can be done after the model has been recruited. These models gain +1 DICEagainst enemies that are in melee combat with a model other than the Chewa. If this enemy is in melee with 2+ other models, this bonus is increased to +2 DICE.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "+2 DICE", "id": "kw_plusdice"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_faithofethiopia",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Faith of Ethiopia",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The sect of the Sniper Priests does not operate in the Solomonic Dynasty, so your warband cannot contain any Sniper Priests."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_flankingforces",
+        "source": "core",
+        "tags": { },
+        "contextdata": {      
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_flankingforces",                
+                "models_id": ["md_yeoman"]}]
+            },
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_yeoman_infiltrator"]
+            }
+        },
+        "name": "Flanking Forces",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband cannot have Trench Moles, but instead you can upgrade up to four Yeomen to Vanguards at the cost of +5 ducats each. They have the following special rules: Unless the scenario prohibits use of the special deployment of INFILTRATORS, you may deploy the Vanguard on any table edge as long as they are at least 8” away from any enemy model after INFILTRATORS are deployed. Vanguard can also be deployed in your own deployment zone as standard.",
+            "glossary": [
+            {"val": "INFILTRATORS", "id": "kw_infiltrator"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_chieftanpanoply",
+        "source": "core",
+        "tags": { },
+        "contextdata": {     
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_mechanisedheavyinfantry_machinearmour"]
+            }
+        },
+        "name": "Chieftan Panoply",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The Mechanized Infantry of the warband cannot be upgraded to use Machine Armour."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_shortrangemarksmanship",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {   
+                "id": "rl_shortrangemarksmanship",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_yeoman","md_yeoman_survivor","md_lieutenant"]
+                    }
+                ]
+            }
+        },
+        "name": "Short-Range Marksmanship",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Yeomen, Vanguard and the Lieutenant in this warband gain +1 DICE to all hit rolls if they are using their ranged weapons at short range (i.e. half or less of their maximum range). This bonus does not apply to GRENADES or weapons with the Keyword HEAVY.",
+            "glossary": [
+                {"val": "+1 DICE", "id": "kw_plusdice"},
+                {"val": "GRENADES", "id": "kw_grenade"},
+                {"val": "HEAVY", "id": "kw_heavy"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_abyssianhealers",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Abyssian Healers",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband can have up to two Combat Medics."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_holywarriors",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Holy Warriors",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The warband may include up to two Holy Warriors (use Trench Cleric characteristics) and they can each choose to replace their “Onwards, Christian Soldiers!” ability with one of the \"Blessed Palm\" or \"God's Mercy\" abilities."
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_weaponsofmobilewarfare",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "warband_equipment_limit": {
+                
+                "ignore": [
+                    {
+                        "type": "id",
+                        "value": "eq_satchelcharge"
+                    }
+                ],
+                "maximum": [
+                    {
+                        "category": "ranged",
+                        "res_type": "keyword",
+                        "value": "kw_heavy",
+                        "limit": 3
+                    }
+                ]
+            }
+        },
+        "name": "Weapons of Mobile Warfare",
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Your warband can have a maximum of three ranged weapons with the Keyword HEAVY. This limitation does not include satchel charges.",
+            "glossary": [
+                {"val": "HEAVY", "id": "kw_heavy"}
+            ]
+        }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_infectionmarkers",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Infection Markers",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Some attacks by the weaponry of the Black Grail causes their opponents to suffer INFECTION MARKERS. These work in a similar fashion to BLOOD MARKERS. INFECTION MARKERScan be used to modify dice rolls exactly like BLOOD MARKERS (i.e. ACTION rolls and injury rolls and used in Bloodbaths). Use a different coloured dice (the more disgusting the better!) to indicate these markers and place them next to the infected model. ",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "A model may have up to six INFECTION MARKERS and six BLOOD MARKERS at the same time. If a model had any INFECTION MARKERS before, but has none when it is Activated, no new ones are added to the model – though it can still be re-infected by further attacks if a model has one or more INFECTION MARKERS when activated, it gains +1 INFECTION MARKERS.",
+                "glossary": [
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_theorderofthefly",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Order of the Fly",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When your warband is created, you must choose whether it will be led by a Lord of Tumours or a Plague Knight."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Lord of Tumours: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Your warband must include a Lord of Tumours when it is created. Your warband may include up to one Lord of Tumours and up to two Plague Knights."
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Plague Knight: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Your warband must include a Plague Knight when it is created and may include up to three. ",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_grailmorale",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Morale",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Fighting against the Black Grail is a terrifying prospect. Enemy Warbands roll Morale Tests with -1 DICE when fighting a Black Grail Warband. The Court Warbands and other Black Grail Warbands ignore this penalty.",
+                "glossary": [
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_theexecutor",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Executor",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband must include an Executor (use Plague Knight characteristics) who has the Keyword TOUGH and a Ranged characteristic of +1 DICE. The Executor costs 80 ducats.",
+                "glossary": [
+                    {"val": "TOUGH", "id": "kw_tough"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thelamenters",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Lamenters",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband can include up to three Plague Knights (including the Executor) known as The Lamenters."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thefallen",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Fallen",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband cannot include a Lord of Tumours or Amalgam, for all were slain a long time ago."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thelost",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Lost",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The warband may only include a maximum of two Hounds (known as Wailers) and a maximum of two Heralds of Beelzebub (called Weepers)."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_thebereaved",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "The Bereaved",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Grail Thralls and Fly Thralls of the warband are called the Bereaved. Bereaved have a Ranged characteristic of +0 DICE and cost 30 ducats each. Grail Thralls (but not Fly Thralls) can be equipped with ranged weapons, standards and musical instruments from the Black Grail Armoury. ",
+                "glossary": [
+                    {"val": "+0 DICE", "id": "kw_plusdice"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dishonoured",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Dishonoured",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": " No model in the warband may carry a Black Grail Shield or Beelzebub’s Axe. The Lord of the Flies does not suffer failed knights to carry his device."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hegemonslastblessing",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Hegemon's Last Blessing",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This warband has Plague Blade LIMIT:3, Putrid Shotgun LIMIT:3and Viscera Cannon LIMIT:3. Non-ELITE models can be equipped with Viscera Cannons.",
+                "glossary": [
+                    {"val": "LIMIT", "id": "kw_limit"},
+                    {"val": "ELITE", "id": "kw_elite"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_hegemonswill",
+        "source": "core",
+        "tags": { },
+        "contextdata": { 
+            "add_to_model": {   
+                "id": "rl_hegemonswill",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_plagueknight_executor","md_plagueknight"]
+                    }
+                ]
+            }  
+        },
+        "name": "Hegemon's Will",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Using the remnants of the lingering power of a fallen Hegemon, a Plague Knight of the Warband can directly command a nearby Thrall. "
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "During its Activation, a Plague Knight in this warband can remove an INFECTION MARKER from any model in play to enable a friendly Thrall within 18” to use any one of the Actions detailed below. Each Thrall can only be affected by Hegemon’s Will once per Turn, but one Plague Knight may issue commands to multiple Thralls (though not multiple commands to the same Thrall) during a single Activation, if all the conditions are met.",
+                "glossary": [
+                    {"val": "INFECTION MARKER", "id": "kw_infectionmarker"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Move: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a standard Move ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Ranged Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Ranged Attack ACTION with any Ranged weapon it has. ",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Charge: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a standard Charge ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Melee Attack: "
+                                    },{
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "The Thrall takes a Melee Attack ACTION.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_wrath",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_wrath",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            "remove_from_model": {
+                "abilities": ["ab_goetics_praetor"],
+                "id": ["md_praetor"]
+            },
+            "true_add_to_model": {  
+                "list": [
+                    {
+                        "id": "ab_demonicaura_wrath",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_desecratedsaint"]
+                            }
+                        ] 
+                    },
+                    {
+                        "id": "ab_goetics_praetor_wrath",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_praetor"]
+                            }
+                        ] 
+                    }
+                ]
+            }
+        },
+        "name": "Wrath",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Desecrated Saints gain the Aura of Wrath ability. Your warband gains the GOETIC powers Charge of Hatred, Lesser Mark of Cain, and Blind Rage. In addition, your Praetor can only take one GOETIC power or spell.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_envy",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {  
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_envy_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    },
+                    {
+                        "model_key": "rl_sin_envy_captains",
+                        "models_id": ["md_sorcerer","md_praetor"]
+                    }
+                ]
+            },
+            "true_add_to_model": {  
+                "list": [{ 
+                "id": "ab_demonicaura_envy",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]}]
+            }  
+        },
+        "name": "Envy",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Desecrated Saints gain the Aura of Envy ability. Your warband gains the GOETIC powers Envious Eyes, Coveted Position, and Whats Yours is Mine.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_lust",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_lust_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    },
+                    {
+                        "model_key": "rl_sin_lust_captains",
+                        "models_id": ["md_sorcerer","md_praetor"]
+                    }
+                ]
+            },
+            "true_add_to_model": {  
+                "list": [{ 
+                "id": "ab_demonicaura_lust",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]}]
+            }
+        },
+        "name": "Lust",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Desecrated Saints gain the Aura of Lust ability. Your warband gains the GOETIC powers Forbidden Pleasures, Exquisite Pain, and Call of Flesh.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_pride",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {    
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_pride_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    },
+                    {
+                        "model_key": "rl_sin_pride_captains",
+                        "models_id": ["md_sorcerer","md_praetor"]
+                    }
+                ]
+            },
+            "true_add_to_model": {   
+                "list": [{
+                "id": "ab_demonicaura_pride",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]}]
+            }
+        },
+        "name": "Pride",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Desecrated Saints gain the Aura of Pride ability. Your warband gains the GOETIC powers Proud Defiance, Too Proud to Fall, and Light of Samael.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_sloth",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {   
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_sloth_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            "true_add_to_model": {  
+                "list": [{ 
+                "id": "ab_demonicaura_sloth",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]}]
+            }
+        },
+        "name": "Sloth",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Desecrated Saints gain the Aura of Sloth ability. Your warband gains the GOETIC powers Morphean Mind, Charm of Acedia, and Daemonium Meridianum.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_gluttony",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": {  
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_gluttony_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    },
+                    {
+                        "model_key": "rl_sin_gluttony_captains",
+                        "models_id": ["md_sorcerer","md_praetor"]
+                    }
+                ]
+            },
+            "true_add_to_model": {  
+                "list": [{ 
+                "id": "ab_demonicaura_gluttony",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]}]
+            } 
+        },
+        "name": "Gluttony",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Desecrated Saints gain the Aura of Famine ability. Your warband gains the GOETIC powers Belly of the Beast, Uncaring Gluttony, and Eater of the Flesh.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_deadlysin_greed",
+        "source": "core",
+        "tags": {
+            "court_sin": true
+         },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_sin_greed_all",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            "add_patron": {
+                "list": ["pt_mammon"]
+            },
+            "true_add_to_model": {  
+                "list": [{ 
+                "id": "ab_demonicaura_greed",                            
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_desecratedsaint"]
+                    }
+                ]}]
+            }   
+        },
+        "name": "Greed",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Desecrated Saints gain the Aura of Greed ability. Your warband gains the GOETIC powers Body of Gold, Black Heart, and Universal Greed. In addition, warbands of the sin of Greed can take Mammon as their patron.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_noblesofthecourt",
+        "source": "core",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Nobles of the Court",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Your warband must include a Praetor OR a Sorcerer as your leader when it is created. If you select a Praetor as your leader you may include up to one Sorcerer in your warband and vice versa."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_goeticpowersandspells",
+        "source": "core",
+        "tags": {
+         },
+        "contextdata": {   
+            "faction_add_upgrades": {
+                "list": [
+                    {
+                        "model_key": "rl_goeticpowersandspells_inferno",
+                        "models_id": ["md_sorcerer"]
+                    },
+                    {
+                        "model_key": "rl_goeticpowersandspells_slavemaster",
+                        "filters": [
+                            {
+                                "type": "keyword",
+                                "value": "kw_elite",
+                                "truth": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "name": "Goetic Powers and Spells",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Many of the warriors of the Court have access to Goetic abilities – Powers and Spells which use the suffering of mortals as spiritual energy to unleash the reality-bending powers of the Demons. As God’s plan for the universe is disrupted and perverted, the infernal sorcerers and other demonic creatures can use the released primordial energy of Creation to alter reality. Demons have to be quick, however: God’s omnipotence will soon reassert itself and the opportunity for Demons to disturb the world is lost. Thus infernal creatures have a continuous and growing need for human sacrifices, pain and endless warfare to enable their supernatural powers."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Goetic Spells are marked with the Keyword GOETIC (x) where the number in brackets indicates how many BLOOD MARKERS will have to be spent to trigger the effect of the Spell. If multiple numbers or a range of numbers are listed in the brackets, any one of those numbers can be chosen. These BLOOD MARKERS can be taken from any model currently taking part in the battle, be they friendly or enemy models. However, they must come from models that do not have the Keyword DEMONIC or BLACK GRAIL.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                    {"val": "DEMONIC", "id": "kw_demonic"},
+                    {"val": "BLACK GRAIL", "id": "kw_blackgrail"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "BLOOD MARKERS used this way are removed from the game and the described effect of the Goetic Spell or ability then takes effect as described – no ACTION roll is needed, unless outlined in the spell. Despite not requiring an ACTION roll, Goetic Spells are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Goetic Powers are not marked with the Keyword GOETIC (x). These powers are typically passive abilities.",
+                "glossary": [
+                    {"val": "GOETIC", "id": "kw_goetic"},
+                    {"val": "ACTION", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Seven Deadly Sins"
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Many of the warriors of the Court have access to a selection of devastating Spells and other Powers as detailed in the list below which can be purchased at the indicated cost when the model is initially purchased. Depending on the type of model and which Deadly Sin the warband is dedicated to, the selection available to you may vary. All such limitations are clearly marked below."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_molotovcocktails",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Molotov Cocktails",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade can purchase Molotov Cocktails as part of their Armoury at the cost of 5 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wearandtear",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Wear and Tear",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade Warband starts every game with 1 BLOOD MARKER for each 200 full ducats of the total Warband cost. Your opponent can distribute these between your troops, but can only give 1 BLOOD MARKER per model as long as there are no troops with no BLOOD MARKERs left. Max BLOOD MARKERs per model is 2.",
+                "glossary": [
+                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_noretreat",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "add_to_model": {
+                "id": "rl_noretreat"
+            }
+        },
+        "name": "No Retreat",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "No members of this Warband can ever leave Melee Combat voluntarily."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_trenchdogs",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "faction_remove_upgrades": {
+                "upgrades": ["rel_md_up_trenchdog_fireteam"]
+            },
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_trenchdogs",
+                "models_id": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]}]
+            },
+            "remove_from_model": {
+                "id": ["md_trenchdog_mercydog"],
+                "abilities": ["ab_mercydog"]
+            },
+            "true_add_to_model": {  
+                "list": [
+                    {
+                        "id": "ab_brigadedog",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                            }
+                        ] 
+                    },
+                    {
+                        "id": "ab_mercydogbrigade",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_trenchdog_mercydog"]
+                            }
+                        ] 
+                    }
+                ]
+            }
+        },
+        "name": "Trench Dogs",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "The Red Brigade may buy several differenc types of Trench Dogs as detailed in the Troops section of the faction. The number of dogs may not exceed the number of other models. If this happens due to casualties, you cannot buy more dogs until this condition is met once more."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gloryhounds",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": {   
+            "add_to_model": {
+                "id": "rl_gloryhounds",                         
+                "required": [
+                    {
+                        "category": "id",
+                        "value": ["md_trenchdog","md_trenchdog_guarddog","md_trenchdog_mercydog","md_trenchdog_attackdog"]
+                    }
+                ]
+            }
+        },
+        "name": "Glory Hounds",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Soldiers of New Antioch love heroic stories and improbable tall tales. Any dog that is part of the Red Brigade earns 2 Glory Points instead of 1 when they perform any Glorious Deed. Limited to 2 additional Glory Points per game."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_rememberthefallen",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "extra_step": {
+                "stage": 3,
+                "id": "stage_rememberthefallen"
+            }
+        },
+        "name": "Remember the Fallen",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "After the battle, instead of taking the Exploration option or Reinforcement option, the Red Brigade may recover all the weapons, armour, and equipment of all the warriors of their own Warband who died in the battle. This does not include Allies & Mercenaries since they are not Blood Pledges. This allows you to recover even weapons, armour, and equipment that would normally be exclusive to some warriors such as Machine Armour of the Heavy Mechanised Infantry. Note that this does not allow you to exceed the LIMIT of any items - items that would break the rule must be sold."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_liveofftheland",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "step_limit": {
+                "count": 1,
+                "id": "stage_reinforcements"
+            }
+        },
+        "name": "Live off the Land",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Most of the time the Red Brigade operates deep within hostile territory. When playing campaigns, the Red Brigade cannot call for Reinforcements if it did so after their last game. Instead they must choose the Exploration or Remember the Fallen option."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_gunsblazing",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_gunsblazing",
+                "models_id": ["md_lieutenant"]}]
+            }
+        },
+        "name": "Guns Blazing",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "It is the tradition of the Brigade officers to practise the two-pistol fighting style of St. Ernest. Lieutenants of the Warband can buy the Gunslinger Skill for the cost of 5 ducats."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_displeasureofthechurch",
+        "source": "westfailia",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Displeasure of the Church",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Few members of the clergy are willing to serve in the unit due to the disregard of their lives they show. Your warband can have a maximum of two such characters, so you can either have 1 Trench Cleric and 1 Sniper Priest, or 2 Sniper Priests but no Trench Cleric."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_butcherknights",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Butcher Knights",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Plague Knights of the warband are called Butcher Knights. They have the Ravenous Infection rule and are mounted on 32mm or 40mm bases. They may only be equipped with one of the following Knightly Ranks:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Butcher King: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Gain 1 Glory for each enemy model this Butcher Knight took out of action with a Melee Attack ACTION if the knight is not Down or Out of Action at the end of the battle. Costs 10 ducats.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    }
+                                ]
+                            },
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Knightly Rank of the Feast: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Grants a Butcher Knights and any models within 3” of that Butcher knight +1 DICE on Ravenous Infection Tests for an additional +5 ducats."
+                                    }
+                                ]
+                            },
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Knightly Rank of Ferocity: "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Allows the Butcher Knight to ingore the Off-Hand special rule (-1 to attacks with an off-hand weapon) and gives them the CRITICAL keyword on any melee weapon they choose to wield for an additional +5 ducats."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_cradleoffilth",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Cradle of Filth",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "There are those thralls who have become the vanguard of the Great Hunger, and where others seek the comfort of their matron, these thralls push forward in search of fresh meat. A Great Hunger Warband may recruit up to 3 Grail or Fly Thralls equipped with Blighted Claws to your Warband for 2 Glory each instead of their regular cost. Thralls recruited in this way are known as Cradle Thralls. If you are playing a campaign, after deployment, you may deploy up to three Cradle Thralls in reserve onto the battlefield. Cradle Thralls do not count towards your Maximum Field Strength, but do count for the purposes of Morale. In addition, if the scenario you are playing allows Infiltrators to use their special deployment rules, after any Infiltrators have deployed, you can deploy these Cradle Thralls within 1” of any edge of the battlefield and more than 8” away from any enemy models."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_dessicatedhusks",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Desiccated Husks",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Great Hunger Warband may include 0-2 Dessicated Husks. Dessicated Husks use the Corpse Guard Warband Entry, but replace the Bodyguard rule with the STRONG Keyword at no additional cost."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_greathunger_equipmentrestrictions",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Equipment Restrictions",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The Great Hunger often forgoes weapons in order to rend and bite the foe with bare hands and teeth. They cannot be trusted with treasured relics that are Beelzebub’s pride. In addition to this, The Great Hunger functions more like a ravenous horde than a disciplined force, and they prioritize close range combat over long ranged weapons. They do not have access to the following:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Beelzebub’s Axe"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Black Grail Shields"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Troop Standards"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Musical Instruments"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Compound Eyes Helmets"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Any Ranged Weapons except for Shotguns, Black Spot Rifles, Parasite Grenades, and Putrid Shotguns. This restriction does not apply to Glory Items."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_greathunger_grailthrallsandflythralls",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Grail Thralls & Fly Thralls",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Grail and Fly Thralls in a Great Hunger Warband cost 35 ducats, and gain the Ravenous Infection Ability and the Blighted Claws equipment. They may be based on 25mm or 32mm bases, but all Thralls of the same type (Grail or Fly) must be on the same sized base."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In addition, Grail and Fly Thralls may have the Unending Starvation and Grasping Maw equipment."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_prowlers",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": { 
+        },
+        "name": "Prowlers",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "Hounds of the Black Grail of the warband are called Prowlers and may be equipped with a Grasping Maw."
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_spawnofgluttony",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Spawn of Gluttony",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "A Great Hunger Warband must inclde either One (1) Matagot Hag or One (1) Lord of Tumours. It may not include both in a warband. It may include 0-2 Plague Knights (known as Butcher Knights).",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_wastenoflesh",
+        "source": "creature_caster",
+        "tags": { },
+        "contextdata": {   
+        },
+        "name": "Waste No Flesh",
+        "description":  [
+            {
+                "tags": {"desc_type" : "default"},
+                "content": "This warband may not take an Amalgam or Heralds of Beelzebub, as all flesh left on the battleground is consumed before it can manifest as these creatures.",
+                "glossary": []
+            }
+        ],
+        "options": []
+    },
+    {
+        "id": "rl_arcanaputrescere",
+        "source": "creature_caster",
+        "tags": {
+         },
+        "contextdata": {
+            "faction_add_upgrades": {
+                "list": [{
+                "model_key": "rl_arcanaputrescere",
+                "models_id": ["md_lordoftumors"]}]
+            },
+            "true_add_to_model": {  
+                "list": [
+                    {
+                        "id": "ab_arcanaputrescere_one",                            
+                        "required": [
+                            {
+                                "category": "id",
+                                "value": ["md_lordoftumors"]
+                            }
+                        ] 
+                    }
+                ]
+            }},
+        "name": "Arcana Putrescere",
+        "description":  [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Many of the creatures within the Great Hunger have access to the Arcana Putrescere – Powers and Spells which are fueled by the very existence of the Black Grail Virus. Beelzebub’s hatred of all things living manifests itself in weird and horrible ways, and the half-dead hordes have been taught of its use. Speaking the words of power in Corrupt Enochian, they invoke the unholy powers of Ekron and warp reality to their will. As these powers require Beelzebub’s infernal essence to work, the leaders of the warband need to send their followers forth to spread the putrid disease."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Arcana Putrescere spells are marked with the Keyword PUTRESCERE (X) where the number in brackets indicates how many INFECTION MARKERS will have to be spent to trigger the effect of the Arcana. If multiple numbers or a range of numbers are listed in the brackets, any one of those numbers can be chosen.",
+                "glossary": [
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "PUTRESCERE (X)", "id": "kw_putrescere"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Not all of Beelzebub’s favoured are blessed with the arcana, but those who carry rank are often proficient in its use. A MATAGOT HAG may take 0-3 Arcana, a LORD OF TUMOURS may take 0-1 Arcana, and GREGORI GULAS may take 0-1 Arcana."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "These INFECTION MARKERS can be taken from any models within 12” of the caster, be they friendly or enemy models. INFECTION MARKERS used this way are removed from the game and the described effect of the Arcana Putrescere then takes effect as described – no ACTION roll is needed, unless outlined in the Arcana. Despite not requiring an ACTION roll, Arcana being cast through the Arcana Putrescere are ACTIONS and, as with other ACTIONS, spells can only be used by the model once per Activation. Some Arcana Putrescere Powers are not marked with the Keyword PUTRESCRE (X). These powers are typically passive abilities.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"},
+                    {"val": "INFECTION MARKERS", "id": "kw_infectionmarker"},
+                    {"val": "PUTRESCERE (X)", "id": "kw_putrescere"}
+                ]
+            }
+        ],
+        "options": []
+    }
+]

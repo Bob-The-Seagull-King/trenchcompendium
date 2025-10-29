@@ -1,0 +1,26 @@
+[
+    {
+        "id": "et_commonlocations",
+        "name": "Common Locations",
+        "source": "core",
+        "tags": {},
+        "rarity": 1,
+        "contextdata": {}
+    },
+    {
+        "id": "et_rarelocations",
+        "name": "Rare Locations",
+        "source": "core",
+        "tags": {},
+        "rarity": 5,
+        "contextdata": {}
+    },
+    {
+        "id": "et_legendarylocations",
+        "name": "Legendary Locations",
+        "source": "core",
+        "tags": {},
+        "rarity": 10,
+        "contextdata": {}
+    }
+]

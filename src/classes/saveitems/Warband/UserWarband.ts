@@ -896,6 +896,13 @@ class UserWarband extends DynamicContextObject {
             }
         }
 
+        if (fighter.model.IsElite()) {
+            const canAddElite = await this.CanAddMoreElite();
+            if (!canAddElite) {
+                return "Warband cannot have more ELITE models.";
+            }
+        }
+
         const Check = await fighter.model.CanCopySelf();
 
         if (Check.length > 0) {
@@ -1488,13 +1495,6 @@ class UserWarband extends DynamicContextObject {
         return this.GetGloryCostStash() + this.GetSumCurrentGlory();
     }
 
-    /**
-     * Returns the number of elite fighters in this warband
-     * @constructor
-     */
-    GetNumElite() {
-        return this.GetFighters().filter(f => (f.model.IsElite() && f.model.State != "dead" && f.model.State != "lost")).length;
-    }
 
     public async CanAddMoreElite() {
         
@@ -1512,6 +1512,20 @@ class UserWarband extends DynamicContextObject {
                 6,
                 this
             )
+
+            const FightersAlive = this.GetFighters();
+
+            for (let i = 0; i < FightersAlive.length; i++) {
+                if (FightersAlive[i].model.State == "active" || FightersAlive[i].model.State == "reserved") {
+                    result = await EventProc.runEvent(
+                        "getNumberOfElite",
+                        FightersAlive[i].model,
+                        [],
+                        result,
+                        this
+                    )
+                }
+            }
         }
 
         return this.GetNumElite() < result;
@@ -1522,11 +1536,25 @@ class UserWarband extends DynamicContextObject {
     }
 
     /**
-     * Returns the number of troop fighters in this warband
+     * Returns the number of active elite fighters in this warband
+     * @constructor
+     */
+    GetNumElite() {
+        return this.GetFighters().filter(f => (
+            f.model.IsElite() &&
+            f.model.State == "active"
+        )).length;
+    }
+
+    /**
+     * Returns the number of active troop fighters in this warband
      * @constructor
      */
     GetNumTroop() {
-        return this.GetFighters().filter(f => !f.model.IsElite() && !f.model.IsMercenary()).length
+        return this.GetFighters().filter(f => (
+            !f.model.IsTroop() &&
+            f.model.State == "active"
+        )).length
     }
 
     /**
@@ -1534,7 +1562,26 @@ class UserWarband extends DynamicContextObject {
      * @constructor
      */
     GetNumMercenary() {
-        return this.GetFighters().filter(f => f.model.IsMercenary()).length;
+        return this.GetFighters().filter(f => (
+            f.model.IsMercenary() &&
+            f.model.State == "active"
+        )).length;
+    }
+
+    GetNumReserved() {
+        return this.GetFighters().filter(f => (
+            f.model.State == "reserved"
+        )).length;
+    }
+    GetNumLost() {
+        return this.GetFighters().filter(f => (
+            f.model.State == "lost"
+        )).length;
+    }
+    GetNumDead() {
+        return this.GetFighters().filter(f => (
+            f.model.State == "dead"
+        )).length;
     }
 
     /**
@@ -1812,7 +1859,10 @@ class UserWarband extends DynamicContextObject {
 
     public async GetEliteFighterOptions() : Promise<FactionModelRelationship[]> {
         const ListOfRels : FactionModelRelationship[] = await this.GetFighterOptions();
-
+        const CanAddElite = await this.CanAddMoreElite();
+        if (!CanAddElite) {
+            return []
+        }
         return ListOfRels.filter(item => item.Model.getKeywordIDs().includes("kw_elite"))
     }
 

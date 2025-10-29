@@ -144,25 +144,27 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                     }
                     rootClose={true} // closes when clicking outside
                     overlay={
-                        <Popover.Body className="popover Wbb-item-actions-popover">
-                            <div className={'actions'}>
-                                <div
-                                    className={'action action-copy'}
-                                    onClick={handleCopy}
-                                >
-                                    <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
-                                    {'Copy Warband'}
-                                </div>
+                        <Popover>
+                            <Popover.Body className="popover Wbb-item-actions-popover">
+                                <div className={'actions'}>
+                                    <div
+                                        className={'action action-copy'}
+                                        onClick={handleCopy}
+                                    >
+                                        <FontAwesomeIcon icon={faCopy} className="icon-inline-left-l"/>
+                                        {'Copy Warband'}
+                                    </div>
 
-                                <div
-                                    className={'action action-delete'}
-                                    onClick={handleDeleteClick}
-                                >
-                                    <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
-                                    {'Delete Warband'}
+                                    <div
+                                        className={'action action-delete'}
+                                        onClick={handleDeleteClick}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} className="icon-inline-left-l"/>
+                                        {'Delete Warband'}
+                                    </div>
                                 </div>
-                            </div>
-                        </Popover.Body>
+                            </Popover.Body>
+                        </Popover>
                     }>
                     <div className={'Wbb-item-actions'}
                          onClick={(e) => e.stopPropagation()}>

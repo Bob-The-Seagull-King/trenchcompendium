@@ -1,0 +1,2196 @@
+[
+    {
+        "id": "gr_introduction",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Trench Crusade",
+        "item_index": 0,
+        "description":  [
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Trench Crusade is a skirmish-scale tabletop miniature game that will plunge players deep into a horrifying alternate timeline. During the Crusades a heretical band of Templars dared defy the Almighty. Casting aside their sacred vows they unleashed the forces of Hell upon the Earth."
+            },
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "Over 800 years later, in the Year of Our Lord 1914, this brutal, merciless war between the forces of Heaven and Hell rages on. This is not merely a fight for survival – it is a cataclysmic struggle that will decide the very fate of humanity’s soul."
+            },
+            {
+            "tags": {"desc_type" : "default"},
+            "content": "The following rules will immerse you in the trenches, guiding your warband through fierce skirmish battles as you vie for supremacy in No Man’s Land."
+            }
+        ],
+        "sections": [
+            {
+                "title": "What You Need To Play",
+                "description":  [ ],
+                "content": [
+                    {
+                        "title": "Miniatures",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Each player commands a Warband, which typically consists of 6-20 models. While there is no ironclad rule on the scale of models, the heroic 32mm scale is what we use in our games. If you prefer another scale, do not worry – Witchburners will not be dispatched to cleanse you for your lack of scale purity!"
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Tabletop",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "You will also need a gaming surface to play on. We suggest two surface sizes for games: 48” x 48” or 36” x 36”. This allows the game to be played on a typical kitchen table."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Terrain",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Terrain is also necessary, and the more you have of it, the better! Trench Crusade is a game of position and tactics, so different types of elevation, cover and varied terrain pieces will all enhance your gaming experience."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Measuring Tool",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "To measure distances, you will need a tape measure or measuring stick. Trench Crusade uses the Imperial measurement system which means movement is measured in inches."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Dice",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Next, you will require dice. Each player should have eight 6-sided dice (D6s) in their own distinct colours."
+                            }
+                        ]
+                    },
+        
+                    {
+                        "title": "Blood Marker Dice",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Finally, you will need a few red 6-sided dice to represent BLOOD MARKERS (explained in the rules below).",
+                            "glossary": [
+                                {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                            ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Keywords",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Keywords define the core abilities, rules, troop types and damage categories in the game. Each of them is shared by several models/weapons/equipment and are called out with a Keyword. This makes it easy for you to differentiate between descriptive terms and game rules. A model or a weapon may have multiple Keywords. Rules governing all Keywords in the game are listed here."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "gr_gameturnsandactivations",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Game Turns & Activations",
+        "item_index": 1,
+        "sections":  [
+            {
+                "title": "Actions",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once Activated a model can take as many or as few ACTIONS during each Activation as you wish, in any order you choose. However, each ACTION can only be taken once per Activation unless otherwise stated in the rules. Thus you could fire your weapon, then Move and then Dash during the same Activation, or Dash and then Charge and so on.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Common ACTIONS that all models can take are listed below. Be sure to consult the profile of each warrior in your warband to see what ACTIONS their abilities allow them to perform in addition to these.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Several ACTIONS require you to roll on the Action Success Chart (see below) to see if you succeed. If you succeed, you take the ACTION as described in the rules. If you fail, you can still move or take any other ACTIONS the model may have. If the ACTION is classed as a RISKY ACTION and you fail, the activation of the model is over and your opponent can now activate one of their models!",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Common Actions",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Move: ",
+                            "glossary": [
+                                {"val": "", "id": ""}
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "When a model takes this ACTION during its activation, choose one of the three options below. The Move ACTION does not require a roll on the Action Success Chart.",
+                            "glossary": [
+                                {"val": "ACTION", "id": "kw_action"}
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "list"},
+                            "content": "",
+                            "subcontent": [
+                                
+                                {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "Standard Move: "
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "The model moves up to its Movement characteristic."
+                                        }
+                                    ]
+                                },{
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "Charge: "
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "Choose an enemy model (that the charging model can see) within 12” as the target. The charging model then moves directly toward that target via the shortest and most effective route possible determined by distance, with a D6” bonus to its Movement characteristic. This movement can allow the charging model to move within 1” of the target, putting the two models in Melee Combat with each other. A model cannot Charge if they have taken the Make a Ranged Attack ACTION during this Activation, unless they made a single ranged attack with a weapon that has the Keyword ASSAULT.",
+                                            "glossary": [
+                                                {"val": "ACTION", "id": "kw_action"},
+                                                {"val": "ASSAULT", "id": "kw_assault"}
+                                            ]
+                                        }
+                                    ]
+                                },{
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "Retreat: "
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "The model moves up to its Movement characteristic and it may leave Melee Combat during this movement. Each enemy model in Melee Combat with the retreating model may immediately take a Melee Attack ACTION with a single melee weapon that it has. Resolve the effects of this attack before moving the retreating model.",
+                                            "glossary": [
+                                                {"val": "ACTION", "id": "kw_action"}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Dash: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "The model must succeed with a RISKY ACTION. If successful, the model takes the Standard Move ACTION as described above. This can be done in addition to any other ACTIONS.",
+                            "glossary": [
+                                {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                                {"val": "ACTIONS", "id": "kw_action"}
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Make a Ranged Attack: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "The model may shoot with a ranged weapon that it is equipped with. A model engaged in Melee Combat cannot shoot. A model cannot make a Ranged Attack during an Activation in which they have Charged, unless they made a single ranged attack with a weapon that has the Keyword ASSAULT.",
+                            "glossary": [
+                                {"val": "ASSAULT", "id": "kw_assault"}
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Make a Melee Attack: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "If the model is engaged in Melee combat, it may attack as detailed in the Melee Weapon’s entry in the rules. The attacker must be able to see at least part of the target – no Melee attacks through walls!"
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Any Other Actions: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Many models have other possible ACTIONS they can take during their Activations. Refer to the Warband Lists for details.",
+                            "glossary": [
+                                {"val": "ACTIONS", "id": "kw_action"}
+                            ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Risky Actions: "
+                        },
+                        {
+                            "tags": {"desc_type" : "default"},
+                            "content": "If you fail a RISKY ACTION, this always ends the activation of the model and your opponent can now activate one of their models!",
+                            "glossary": [
+                                {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                            ]
+                        }
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Action Success Chart",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "infobox"},
+                    "content": "",
+                    "subcontent": [
+                        {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "When you take an ACTION (including Melee and Ranged Attacks), roll 2D6 and add any +DICE or -DICE from the character’s profile, injuries or other sources, pick the two highest (or lowest if any -DICE were applied) and consult the chart below to see if the ACTION succeeded:",
+                            "glossary": [
+                                {"val": "ACTION", "id": "kw_action"},
+                                {"val": "+DICE", "id": "kw_plusdice"},
+                                {"val": "-DICE", "id": "kw_minusdice"}
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "headless_table"},
+                            "content": "",
+                            "subcontent": [
+                                {
+                                    "tags": {"desc_type" : "table_row"},
+                                    "content": "",
+                                    "subcontent": [
+                                        {
+                                            "tags": {"desc_type" : "table_item_wrap"},
+                                            "content": "2-6"
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "Failure"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "tags": {"desc_type" : "table_row"},
+                                    "content": "",
+                                    "subcontent": [
+                                        {
+                                            "tags": {"desc_type" : "table_item_wrap"},
+                                            "content": "7-11"
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "Success"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "tags": {"desc_type" : "table_row"},
+                                    "content": "",
+                                    "subcontent": [
+                                        {
+                                            "tags": {"desc_type" : "table_item_wrap"},
+                                            "content": "12"
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "table_item"},
+                                            "content": "Critical Success: Ranged and Melee attacks add +1 DICE to injury rolls if your result is a critical success when determining if they hit.",
+                                            "glossary": [
+                                                {"val": "+1 DICE", "id": "kw_plusdice"}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "If you succeed, you take the ACTION as described in the rules. If you fail, you can still move or take any other ACTIONS the model may have access to. If the ACTION fails, and it was RISKY, the model’s Activation ends immediately.",
+                            "glossary": [
+                                {"val": "ACTIONS", "id": "kw_action"},
+                                {"val": "ACTION", "id": "kw_action"},
+                                {"val": "RISKY", "id": "kw_riskyaction"}
+                            ]
+                        }
+                    ]
+                    }
+                ]
+            },            
+            {
+                "title": "End of Activation",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once you have moved the model and taken all ACTIONS you wish, or have failed with any of your RISKY ACTIONS, the Activation of the model ends and your opponent can now Activate one of their models. Keep Activating models as long as either player has any inactivated models left.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"},
+                        {"val": "RISKY", "id": "kw_riskyaction"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once you and your opponent have Activated all of your models once, go to the Morale Phase.",
+                    "glossary": [
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },            
+            {
+                "title": "Morale",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Your warband may abandon the battle if it suffers too many casualties. At the end of any Turn, when at least half of your warband is Down or Out of Action, roll on the Action Success Chart."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If you fail, your warband flees the battlefield and loses the battle immediately. If both warbands are required to take this test, the smaller warband tests first."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        
+                        {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Optional Rule: "
+                        },
+                        {
+                        "tags": {"desc_type" : "default"},
+                        "content": "A warband that loses a Morale Test can decide, instead of fleeing, that their warband is Shaken. Actions taken by models in a Shaken warband are considered RISKY ACTIONS.",
+                        "glossary": [
+                            {"val": "RISKY ACTIONS", "id": "kw_riskyaction"}
+                        ]
+                        }
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "After one turn, the warband recovers to its normal state and is no longer considered Shaken. If it fails a Morale test again (shaken or not), it flees as standard."
+                    }
+                ]
+            },            
+            {
+                "title": "End of Turn",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once both players have Activated all the models in their force once, the turn ends and a new turn begins. The player with the lowest number of models in their force starts the new turn and selects a model to activate."
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Players Activate their models in alternating order. A single Turn consists of both players Activating all their models once."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "For example, the first player will choose a model to Activate, take any ACTIONS available to the model, and then it is time for the next player to activate one of their models.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "You can then choose any model in your warband (that has not yet been Activated) and Activate that model. This model can now Move, take ACTIONS and use special skills and equipment as you see fit. When your model’s Activation is over, your opponent can then Activate one of their models and so on.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The player with the lowest number of models currently remaining on the table will decide who will start with the first Activation at the beginning of each Turn. If both players have the same number of models, roll a D6 and whoever rolls highest gets to decide."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When each player has Activated all their models, the Turn is over."
+            }
+        ]
+    },
+    {
+        "id": "gr_plusdiceandminusdice",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "+DICE and -DICE",
+        "item_index": 2,
+        "sections":  [
+            {
+                "title": "Blood Markers",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "During a battle your warriors can be wounded due to enemy attacks, the use of supernatural powers, falling from great heights and so on – see the Injury Chart for details. This damage is tracked via BLOOD MARKERS. In addition to wounds, they represent exhaustion, concussion, shellshock, physical and mental strain and so on.",
+                    "glossary": [
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each time one of your models suffers such damage, place a BLOOD MARKER (red dice) next to the model to track this damage. Use the pip number on each dice to indicate the number of BLOOD MARKERS the model has. Every time this model takes an ACTION (shooting, melee attacks and so on), your opponent can declare that they are spending one or more BLOOD MARKER it has to add -1 DICE to the dice pool when the roll on the Action Success Chart is made. Multiple markers can be applied to any single roll if the target model has multiple BLOOD MARKER to be converted.",
+                    "glossary": [
+                        {"val": "BLOOD MARKER", "id": "kw_bloodmarker"},
+                        {"val": "ACTION", "id": "kw_action"},
+                        {"val": "-1 DICE", "id": "kw_minusdice"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The BLOOD MARKERS can also be used by your opponent when the model suffers damage from any source. Each marker can be converted into +1 DICE on the Injury Chart roll, making a serious injury far more likely and, just like with ACTIONS, multiple markers can be used to influence a single roll on the Injury Chart.",
+                    "glossary": [
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                        {"val": "+1 DICE", "id": "kw_plusdice"},
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Bloodbath",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "You can roll an additional D6 on injury rolls at the cost of six BLOOD MARKERS on any model, or at the cost of three BLOOD MARKERS if the target is Down. This means that instead of rolling 2D6 on your typical weapon, you roll 3D6 on your injury roll and add the numbers together. Weapons such as the Artillery Witch’s Infernal Bomb would therefore roll 4D6 and add the results together (3D6+1D6).",
+                    "glossary": [
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                    ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "italic"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Gameplay Example: "
+                                    },        {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "A Trench Pilgrim model has sustained a wound during the battle and has two BLOOD MARKERS on them. A Heretic Trooper shoots at the Pilgrim with his trusty bolt action rifle, rolls an 8 and hits! The Heretic player decides to use one of the BLOOD MARKERS to make the shot more likely to injure. The Heretic player rolls 3D6 (2D6 +1 DICE from the spent marker) and consults the Injury Chart. The result is 4, 5 and 1. Since one +DICE was used, the player picks the two highest numbers which total 9. The Pilgrim is taken out of action!",
+                                        "glossary": [
+                                            {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                            {"val": "+1 DICE", "id": "kw_plusdice"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Blessing Markers",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "BLESSING MARKERS are similar to BLOOD MARKERS. Supernatural powers, holy relics and many other sources may grant these to a model, which can then be expended to aid the ACTIONS of the model.",
+                    "glossary": [
+                        {"val": "BLESSING MARKERS", "id": "kw_blessingmarker"},
+                        {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                        {"val": "ACTIONS", "id": "kw_action"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Every time the model takes an ACTION (shooting, dashing, melee attacks and so on), you can declare that they are spending one or more of any BLESSING MARKERS the model has. You can add +1 DICE to the dice pool when any roll on the Action Success Chart is made. Additionally, whenever the opponent makes an injury roll against a model, that model may spend a BLESSING MARKER to apply a -1 DICE penalty to that injury roll. Multiple BLESSING MARKERS can be applied to any single roll if the target model has more than one BLESSING MARKER.",
+                    "glossary": [
+                        {"val": "BLESSING MARKERS", "id": "kw_blessingmarker"},
+                        {"val": "-1 DICE", "id": "kw_minusdice"},
+                        {"val": "+1 DICE", "id": "kw_plusdice"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Rules often have modifiers to dice rolls marked as +DICE and -DICE (for example, shooting from elevated positions adds +1 DICE to ranged attacks against enemies below). These are shown in the format of +1 DICE and -1 DICE. Many models have them on their profile for Melee and Ranged attacks, and things like range, cover and so on can apply them to the dice rolls you make on the Action Success Chart or Injury Chart. For each +DICE, add one dice to the dice pool of the 2D6 roll you are about to make. Thus +1 DICE makes the roll a total of 3D6. Then roll all the dice and pick the two highest numbers. If two +DICE are added, roll 4D6 and pick the two highest and so on.",
+                "glossary": [
+                    {"val": "+DICE", "id": "kw_plusdice"},
+                    {"val": "-DICE", "id": "kw_minusdice"},
+                    {"val": "+1 DICE", "id": "kw_plusdice"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The -DICE works in reverse. For each -1 DICE, add ne dice to the dice pool of the 2D6 roll you are about to make. Thus -1 DICE makes the roll a total of 3D6. Then roll all the dice and pick the two lowest numbers. If -2 DICE are added, roll 4D6 and pick the two lowest and so on.",
+                "glossary": [
+                    {"val": "-DICE", "id": "kw_minusdice"},
+                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                    {"val": "-2 DICE", "id": "kw_minusdice"}
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "italic"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Gameplay Example: "
+                            },        {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A Trench Pilgrim model is shooting at a Heretic trooper with a musket. The Heretic is in cover, which grants -1 DICE to any ranged attacks. The Pilgrim rolls 3D6 and gets 5, 5 and 1. The two lowest numbers are picked for a result of 6. As the Pilgrim needed 7 to hit, the shot missed!",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Before rolling dice, add any +DICE and -DICE to the dice pool. If the pool contains both +DICE and -DICE, remove pairs of opposite dice until only one type is remaining.",
+                "glossary": [
+                    {"val": "+DICE", "id": "kw_plusdice"},
+                    {"val": "-DICE", "id": "kw_minusdice"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "gr_movement",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Movement",
+        "item_index": 3,
+        "sections":  [
+            {
+                "title": "Charging",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Select an enemy model that is within 12” of the charging model to be the target. If the charging model does not have line of sight to its target, it must succeed with a RISKY ACTION before proceeding. Roll a D6 (the charge roll) and add it to the charging model’s Movement characteristic (with a maximum distance of 12”). The charging model must move this distance toward the target by the shortest and most effective route possible by distance. Jumping, Climbing or moving through Dangerous Terrain is always optional during a Charge, even if it is the shortest route, though the new route avoiding such obstacles must still be as short as possible.",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If after completing this movement the charging model is within 1” of the target, the charging model is considered to have successfully charged the target and is now in Melee Combat. If the charging model does not reach its target, the Charge is considered to have failed, but it remains where it is after the movement."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Charging Multiple Enemies: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "A model may target multiple enemies with a single Charge if there is a space that the charging model could occupy (within 12”) that would place it in Melee Combat with every target of its Charge. It still only makes a single Charge."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Interposing Models During a Charge: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "If a charging model would pass within 1” of an enemy model that is not the target of its Charge, its charge immediately ends and it is considered to have charged the interposing model instead." 
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Diving Charge: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "If a charging model jumps down as part of a Charge, it landed within 2” of its target and it jumped from a ledge that was at least 3” (measured from the target’s base) and no more than 6” (measured from the charging model’s landing space), it may convert its Charge into a Diving Charge."
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "paragraph"},
+                                                "content": "Place the charging model in any space within 1” of the target and take a RISKY ACTION. If successful, the charging model gains a +1 DICE bonus to hit and to injure the target, and the charging model ignores the target’s Defended Obstacle bonus (if it has one) for the remainder of its Activation. If the RISKY ACTION fails, the model is Down and is injured as per the rules for Falling.",
+                                                "glossary": [
+                                                    {"val": "RISKY ACTION", "id": "kw_riskyaction"},
+                                                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Climbing",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A model can move up or down ladders, ramps, ropes, stairs and other devices meant for climbing as a normal part of any movement it takes. This costs movement as normal. As a RISKY ACTION, a model may also attempt to climb up or down sheer surfaces, such as walls, but it must have enough remaining movement to clear the entire height. If this RISKY ACTION fails, the model remains where it is.",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Jumping",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "As a RISKY ACTION, a model can jump across a gap of up to half their movement characteristic (measured horizontally). This costs movement as normal and can be taken as any kind of movement that the model has. A model cannot attempt to jump a gap that it does not have enough movement to clear. If this RISKY ACTION fails, the model falls as if it fell from a ledge on either side of the gap of the opponent’s choice.",
+                    "glossary": [
+                        {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                    ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Jumping Between Ledges of Uneven Height: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "If the ledge that the model is jumping to is lower han the ledge that it is jumping from, apply the rules for Jumping Down after the model jumps the gap. If the ledge that the model is jumping to is higher than the ledge that it is jumping from, it can only be up to 1” higher and, if that ledge is at least ½” higher, the jump costs an extra 1” of movement."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Jumping Down: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "A model can voluntarily ‘fall’ from a ledge that it is in base contact with. This never costs movement and can be done as part of any movement that the model has. Additionally, when falling from heights of up to 3” in this way, it does not make an injury roll."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Falling",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "When a model falls, it is moved from its current position to the first space that it can occupy directly beneath it or the ledge that it fell from. If it fell from a height greater than 2”, it must roll on the Injury Chart. For every 3” fallen, add +1 DICE to this injury roll (for example, a fall of 3” would be rolled with +1 DICE and a fall of 6” with +2 DICE).",
+                    "glossary": [
+                        {"val": "+1 DICE", "id": "kw_plusdice"},
+                        {"val": "+2 DICE", "id": "kw_plusdice"}
+                    ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A model can fall through its own action, such as when it fails a RISKY ACTION when jumping over gaps or when jumping down a distance greater than 3”. A model in an elevated position may also fall when it is Downed while within 1” of a ledge. When this happens, the model takes an ACTION. If it succeeds, the model remains Downed where it is. If it fails, the model falls from the nearest ledge.",
+                    "glossary": [
+                        {"val": "RISKY", "id": "kw_riskyaction"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Terrain",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "There are four types of terrain in Trench Crusade: Open, Difficult, Dangerous and Impassable."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Open: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Open terrain is the most common terrain in Trench Crusade. Models can move freely through Open terrain. This includes crossing obstacles of up to 1” high, which does not cost movement. Ladders and ramps are open terrain."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Difficult: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This includes rock beds, swamps, barbed wire and so on. Moving through Difficult Terrain costs double the normal movement of the model."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Dangerous: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This includes barbed wire, minefields, raging fires, areas covered in poisonous gas and so on. Whenever a model moves into, or starts its Activation in, Dangerous Terrain, it must take an ACTION. On a failure, make an injury roll for the model. If the model moved into the Dangerous Terrain, this ACTION is RISKY.",
+                                                "glossary": [
+                                                    {"val": "ACTION", "id": "kw_action"},
+                                                    {"val": "RISKY", "id": "kw_riskyaction"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Impassable: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Models cannot pass through Impassable terrain."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Terrain can be both Difficult and Dangerous."
+                    }
+                ]
+            },
+            {
+                "title": "Movement Types",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "There exist two movement types currently in Trench Crusade: Infantry and Flying. A model can only have one movement type. If it gains a movement of another type, it must choose which movement it keeps."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Infantry: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This movement type covers every model that walks, crawls or gallops along the ground. Models with this movement type obey all of the typical rules for movement."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Flying: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "This movement type covers every model that flies with wings, floats with magic or otherwise hovers above the ground. Flying models treat Difficult and/or Dangerous Terrain as Open Terrain and they do not trigger mines and similar devices. Flying models can climb up and down and they can jump over gaps of up to their Movement characteristic without taking ACTIONS.",
+                                                "glossary": [
+                                                    {"val": "ACTIONS", "id": "kw_action"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "All models in the game can Move when Activated unless otherwise indicated in the rules. Each model can move up to the number of inches indicated in their profile, though they can move less and not at all if you wish. There are a number of general rules that apply to all of the movement that a model takes during its Activation. Certain types of movement, such as Falling or the knockback effect of an Artillery Witch’s Infernal Bomb, are not subject to these rules. Regardless of the type of movement, a model cannot move off the battlefield unless a rule specifically states so."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model cannot enter Melee Combat (within 1” of enemy models) unless it Charges."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model cannot leave Melee Combat (within 1” of enemy models) at any point during Movement unless it is Retreating."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model in Melee Combat cannot otherwise move unless they began their Activation in Melee Combat, take the standard Move ACTION and remain in Melee Combat with every model that they were in Melee Combat with at the start of their Activation.",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model can move through friendly models if it has enough movement to move past them entirely."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model cannot move off the battlefield unless a rule specifically states so."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Movement (including charging) is usually the only action a model can take that does not require you to roll 2D6 to determine whether you are successful or not, unless otherwise noted in the rules."
+            }
+        ]
+    },
+    {
+        "id": "gr_injurychart",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Injury Chart",
+        "item_index": 4,
+        "sections":  [
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "infobox"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "If your attack hits the enemy, it is time to determine the amount of damage the attack has caused. Roll 2D6 (plus any -/+DICE from the model’s profile or other sources), pick the two highest (or lowest if any -DICE were applied) and consult the following table:",
+                        "glossary": [
+                            {"val": "+DICE", "id": "kw_plusdice"},
+                            {"val": "-DICE", "id": "kw_minusdice"}
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "headless_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "1 (or less)"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "No Effect"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "2-6"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Minor Hit"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "7-8"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Down"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "9+"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Out of Action"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "On occasion, a rule will ask you to total more (or less) than 2D6 to determine the outcome of a roll. If the dice roll is modified by +/- DICE, modify the dice pool as normal and keep the highest or lowest number of dice equal to the number of dice in the starting dice pool. For example, if the rule asked you to roll a total of 3D6 with +1 DICE, you would roll four dice and keep and total the highest three dice.",
+                        "glossary": [
+                            {"val": "- DICE", "id": "kw_minusdice"},
+                            {"val": "+1 DICE", "id": "kw_plusdice"}
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Modifiers to Injury Chart rolls (cumulative):"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Trench Shield: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "-1 to injury rolls (can be combined with any Armour)"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Standard Armour: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "-1 to injury rolls"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Reinforced Armour: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "-2 to injury rolls"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Machine Armour: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "-3 to injury rolls (not cumulative with a shield)"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Tough: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "If a TOUGH model would be taken Out Of Action, it is knocked Down instead. After a TOUGH model has been knocked Down in this way once, it can be taken Out of Action as normal.",
+                                                "glossary": [
+                                                    {"val": "TOUGH", "id": "kw_tough"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Target is Down: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Add +1 DICE to the dice pool when determining injuries for a model that is Down.",
+                                                "glossary": [
+                                                    {"val": "Down", "id": "gl_down"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [                                    
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Bloodbath: "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Roll an additional D6 and add it to the injury roll total. Costs six BLOOD MARKERS (three if the target is Down).",
+                                                "glossary": [
+                                                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                                    {"val": "Down", "id": "gl_down"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "No Effect"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "The armour of the target withstands the hit. There is no effect."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Minor Hit"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Add +1 BLOOD MARKER next to the model to represent a wound. Use the dice pips to count the hits inflicted (maximum six per model).",
+                                "glossary": [
+                                    {"val": "BLOOD MARKER", "id": "kw_bloodmarker"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Whenever the wounded model takes an ACTION, the opponent can decide to spend one or more of the BLOOD MARKERS to add -1 DICE to the roll for each of them (i.e. roll 3D6 and pick the two lowest results if you use one marker).",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"},
+                                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "When rolling on the Injury Chart against this model, the opponent can spend one or more of the BLOOD MARKERS to add +1 DICE to the roll for each pip. This makes a severe injury more likely. When you attack a wounded model, you can spend one or more of the markers to add +1 DICE to the attack roll for each marker.",
+                                "glossary": [
+                                    {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Warrior Down!"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Place +1 BLOOD MARKER next to the model and the model goes Down. If the model is already Down, it instead suffers +2 BLOOD MARKERS and remains Down. A model that is Down suffers a -1 DICE penalty to all of its ACTIONS. Also it cannot move during its Activation through its own ACTIONS.",
+                                "glossary": [
+                                    {"val": "+1 BLOOD MARKER", "id": "kw_bloodmarker"},
+                                    {"val": "+2 BLOOD MARKERS", "id": "kw_bloodmarker"},
+                                    {"val": "-1 DICE", "id": "kw_minusdice"},
+                                    {"val": "ACTIONS", "id": "kw_action"},
+                                    {"val": "Down", "id": "gl_down"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "The Down condition can either be represented by placing an indicator next to the model (such as a scrap of paper) or by physically turning the model face-down on its side. A model turned on its side will present a different profile for Line-of-Sight targeting, but these two methods of indication are otherwise identical and the model’s controller may decide which to use.",
+                                "glossary": [
+                                    {"val": "Down", "id": "gl_down"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "At the start of its own Activation, a Downed warrior can Stand, but any movement (Move, Dash, Charge, Jump, Climb etc.) it can take is halved. If a model is Downed during its own Activation, it may attempt a RISKY ACTION in order to Stand. Otherwise, it remains Down for the remainder of its Activation.",
+                                "glossary": [
+                                    {"val": "RISKY ACTION", "id": "kw_riskyaction"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "bold"},
+                                        "content": "Out of Action"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "The warrior suffers a major wound and is out of the game for the rest of the battle – remove the model from the table. Resolve what has happened to the model after the battle as explained in the Serious Injuries section of the rules."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "gr_rangedcombat",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Ranged Combat",
+        "item_index": 5,
+        "sections":  [
+            {
+                "title": "Steps For Ranged Combat",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Choose one Ranged Weapon ACTION, declare a target and check line of sight.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Check if the target is in range of the weapon."
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Determine and apply any +DICE/-DICE that affect the shot.",
+                                        "glossary": [
+                                            {"val": "+DICE", "id": "kw_plusdice"},
+                                            {"val": "-DICE", "id": "kw_minusdice"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll on the Action Success Chart as standard."
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If you hit the enemy, roll on the Injury Chart (see below). Determine and apply any +DICE/-DICE that affect the injury roll.",
+                                        "glossary": [
+                                            {"val": "+DICE", "id": "kw_plusdice"},
+                                            {"val": "-DICE", "id": "kw_minusdice"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If the weapon can shoot multiple times per Activation, resolve the shots one at a time."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Modifiers",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Enemy Behind Cover: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add -1 DICE to the roll. A model is in cover whenever it is in contact with a piece of scenery that is at least as long as the model’s base. If an attacker can see a model in its entirety, this penalty does not apply. A model cannot gain cover merely from being obscured due to angles, distant scenery or the surface that they are standing on (such as when standing on top of a building).",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Long Range: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "If the target is more than half the weapon’s maximum range, add -1 DICE to the roll to determine if the attack hits.",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Shooting From an Elevated Position: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add +1 DICE to hit rolls if the model is taking the shot from a position more than 2” above the target’s ground level (being the floor on which the target’s base rests on). If the target is on a 50mm or larger base, the height must be 4” from the target’s ground level.",
+                                "glossary": [
+                                    {"val": "+1 DICE", "id": "kw_plusdice"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "To shoot at an enemy, a model must have a ranged eapon and be able to see the target. If the model has multiple ranged weapons, you can shoot one of them per Activation. The only way to check what your model can see is to stoop over the tabletop for a model’s eye view for actual line of sight."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Models in Melee combat cannot shoot unless the rules of the weapon indicate otherwise. Some indirect fire weapons have rules that allow you to target models even out of sight – these are clearly explained in the profile for such weapons. Models can see all around themselves (i.e. 360°) and they may be turned freely to face any direction before firing."
+            }
+        ]
+    },
+    {
+        "id": "gr_meleecombat",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Melee Combat",
+        "item_index": 6,
+        "sections":  [
+            {
+                "title": "Steps For Melee Combat",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Declare which melee ACTION you are taking and what opposing model you are targeting.",
+                                        "glossary": [
+                                            {"val": "ACTION", "id": "kw_action"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll on the Action Success Chart using any melee attacks available to the model. Add any +DICE/-DICE from any source such as BLOOD MARKERS, profile of the warrior making the attack etc.",
+                                        "glossary": [
+                                            {"val": "+DICE", "id": "kw_plusdice"},
+                                            {"val": "-DICE", "id": "kw_minusdice"},
+                                            {"val": "BLOOD MARKERS", "id": "kw_bloodmarker"}
+                                        ]
+                                    },                            
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " If the result is successful, roll on the Injury Chart sto determine what happens to the target (unless some Equipment or Special Ability of the model indicates otherwise)."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Modifiers",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Defended obstacle: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add -1 DICE to the roll. The target of a melee attack is considered to be defending an obstacle if it is not Down, it is touching an obstacle, that obstacle is at least ½” high (measured from the target’s base) and that obstacle is between it and its attacker. Common examples of such obstacles are stone walls, earthen ramparts and trenches. Simple hedges, bushes or low fences are often not enough.",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Off-Hand Weapon: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Add -1 DICE to the roll if the attack was made with an Off-Hand Weapon.",
+                                "glossary": [
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Multiple Attacks",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Generally, each model can only attack once in melee, but some can execute multiple attacks due to their natural abilities or special weapons.",
+                        "glossary": [
+                            {"val": "ACTION", "id": "kw_action"}
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Two Melee Weapons: "
+                            },{
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model armed with two melee weapons can take two separate Melee Attack ACTIONS, one with each weapon. One of these weapons, determined before you make your first ACTION roll, is an Off-Hand weapon. Off-Hand weapons suffer -1 DICE to hit.",
+                                "glossary": [
+                                    {"val": "ACTION", "id": "kw_action"},
+                                    {"val": "-1 DICE", "id": "kw_minusdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "If a STRONG model wields a two-handed melee weapon in one hand and a one-handed melee weapon in the other, the one-handed weapon is always regarded as the Off-Hand weapon. Resolve attacks made by a model wielding two melee weapons one at a time, with the Off-Hand weapon last.",
+                        "glossary": [
+                            {"val": "STRONG", "id": "kw_strong"}
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Moving In Combat: ",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "If a model is in Melee combat at the start of their Activation, they may use their Standard Move ACTION while staying within 1” of the enemies they are engaged in combat with. This is most often used to negate the Defended Obstacle bonus. No roll is needed to do this.",
+                        "glossary": [
+                            {"val": "ACTION", "id": "kw_action"}
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "An activated model can use any of its Melee ACTIONS if it is in contact with (i.e. within 1” of ) one or more enemies. Select any melee weapon or attack action available to the model – these are clearly indicated in the characteristics of each weapon entry.",
+                "glossary": [
+                    {"val": "ACTIONS", "id": "kw_action"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "gr_startingawarband",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Starting a Warband",
+        "item_index": 7,
+        "sections":  [
+            {
+                "title": "Choose Your Faction",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each warband in Trench Crusade belongs to a faction fighting in the Great War. Use the faction lists that follow to recruit and equip your warband. These lists provide information about the troop types available, their weapons, armour and equipment options, as well as special rules specific to that faction."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "",
+                    "subcontent": [
+                        
+                        {
+                        "tags": {"desc_type" : "bold"},
+                        "content": "Note: "
+                        },
+                        {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Most warbands have Variant Lists which you can use instead of the main list. These are listed as part of the Warband List entry and they detail how the variant differs from the core list."
+                        }
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Recruit Your Warband",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Once you have selected your faction (and possible Variant), you have 700 ducats to spend on your initial warband. Each model and their equipment (if you choose to buy any) costs a set amount of money. As you make your choices, subtract the money you have “spent” from your total until you have bought all you can. Any unspent ducats are put into the warband’s strongbox and can be used later or hoarded to buy something more expensive."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some items, weapons and armour cost Glory Points instead of ducats to acquire them. Glory Points are earned by performing valorous deeds in battle. Refer to the section on Glory for details. Generally warbands don’t have access to Glory Points when they are created, so these purchases usually happen later on in the campaign."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each warband list details what troops are available to you and in what numbers. Most lists include a model they must have when the warband is created, usually representing its commanding officer. Otherwise you are allowed to purchase as many or as few warriors as you wish. We recommend that the weapons, armour and equipment you choose for your warriors should be represented on the models themselves to make it easier for you and your opponents to play the game."
+                    }
+                ]
+            },
+            {
+                "title": "Keywords",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some troop types, weapons and pieces of equipment have Keywords that give them special abilities, or denote them to be part of a group of models where certain rules apply to all models with the same Keyword. See the section on Keywords for details."
+                    }
+                ],
+                "content": [
+                    {
+                        "title": "Limitations",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Some armaments are more limited in supply. They may have the following Keywords that limit their availability. These limitations are shown in the warband lists as follows:"
+                            },
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "",
+                            "subcontent": [
+                                
+                                {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                                    
+                                    {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [
+                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "LIMIT (X): ",
+                                            "glossary": [
+                                                {"val": "LIMIT (X)", "id": "kw_limit"}
+                                            ]
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "If the piece of equipment has a Keyword LIMIT, then your warband cannot have more than the set number of this type of weapon, armour or equipment. For example, if a Weapon has Keyword LIMIT (2), then your warband can purchase a maximum of two such weapons. If you lose any of these weapons during the campaign, you can buy replacements with available funds up to a maximum of two.",
+                                            "glossary": [
+                                                {"val": "LIMIT (X)", "id": "kw_limit"}
+                                            ]
+                                        }
+                                    ]
+                                    },
+                                    {
+                                    "tags": {"desc_type" : "default"},
+                                    "content": "",
+                                    "subcontent": [
+                                        
+                                        {
+                                            "tags": {"desc_type" : "bold"},
+                                            "content": "ELITE only: ",
+                                            "glossary": [
+                                                {"val": "ELITE", "id": "kw_elite"}
+                                            ]
+                                        },
+                                        {
+                                            "tags": {"desc_type" : "default"},
+                                            "content": "Some weapons, armour or equipment are only usable by troops with the ELITE Keyword. You cannot give them to troops without the ELITE Keyword even if you acquire extras during a campaign.",
+                                            "glossary": [
+                                                {"val": "ELITE", "id": "kw_elite"}
+                                            ]
+                                        }
+                                    ]
+                                    }
+                                ]
+                                }
+                            ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Allies and Mercenaries",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "During the campaign you will have a chance to obtain Glory Points which can be used to purchase powerful troops and famous warriors known as Allies. These will add both numbers and specialist abilities to your warband. They cannot be purchased with ducats – the only way to attract their services is to perform glorious deeds on the battlefield!"
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Allies fight alongside your warband, but they do not benefit or suffer from any special rules or restrictions that your warband might have. For example, a mercenary’s equipment never counts toward the LIMIT for any of the items that they have. Additionally, a Sin Eater (a mercenary available to the Heretic Legions) would not be affected by the Trench Ghost’s unique rules such as Slow and Undead Fortitude. If a rule is capable of affecting Allies, it will explicitly state so.",
+                    "glossary": [
+                        {"val": "LIMIT", "id": "kw_limit"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Purchasable Abilities",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some warbands allow you to purchase optional abilities for your models, such as the Goetic Powers of the Court of the Seven-headed Serpent. Unless otherwise specified, you can only ever buy one copy of any of these abilities for a single model. The same applies to bonuses gained from equipment, such as Martyrdom pills."
+                    }
+                ]
+            },
+            {
+                "title": "Roster",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "You’ll need a warband roster sheet to record the details of your warband. Warbands can be built and recorded on the Trench Companion."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "When you choose a warband, take a warband roster sheet and write down the details of each trooper in the appropriate place. It is a good idea to work out the warband on a piece of scrap paper first, as you will have to juggle the weapons and fighters to get as close to the maximum permitted value of the warband as possible. If you have any cash left after choosing your warband write this down in the space marked Strongbox. You will need to give your warband a name as well as name all your Elites and all your common troopers. It’s up to you to invent suitable names, though you’ll find plenty of inspiration throughout this book."
+                    }
+                ]
+            },{
+                "title": "Characteristics Profile",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "The characteristics of each model are described in their profile. You will find profiles for all models in the appropriate faction list. The information found on the profiles is described here."
+                    }
+                 ],
+                "content": [
+                    {
+                        "title": "Model Name",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "The name of the model is recorded first in any profile."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Movement",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "The distance in inches which the model may move on the battlefield each time it is activated."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Ranged",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "This number indicates how many +DICE/-DICE the model adds to its attack roll when using any ranged weapons. The higher the number, the more skilled a warrior is when using ranged weapons.",
+                            "glossary": [
+                                {"val": "+DICE", "id": "kw_plusdice"},
+                                {"val": "-DICE", "id": "kw_minusdice"}
+                            ]
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Melee",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "This number indicates how many +DICE/-DICE the model adds to its attack roll when making a melee attack. The higher the number, the more skilled a model is.",
+                            "glossary": [
+                                {"val": "+DICE", "id": "kw_plusdice"},
+                                {"val": "-DICE", "id": "kw_minusdice"}
+                            ]
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Armour",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Indicates how well-armoured the model is. This number is subtracted from the roll on the Injury Chart when the model is wounded."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Base",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Indicates the size of the base the model is mounted on."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Equipment",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "This entry lists the equipment, weapons and armour the model is carrying, as well as what options for acquiring additional gear it may have." 
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Abilities",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "If the model has any unique special abilities not covered by the standard rules, they will be described here."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Keywords",
+                        "description":  [
+                            {
+                            "tags": {"desc_type" : "paragraph"},
+                            "content": "Any Keywords the model has will be listed here. These include troop types as well as the most common abilities shared between multiple troop types, each identified by the identical Keyword. The Keywords section explains the rules for each of them."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "In this part of the rules, we will take a detailed look at each warband and provide the information you need to recruit one."
+            }
+        ]
+    },
+    {
+        "id": "gr_equipment",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Equipment",
+        "item_index": 8,
+        "sections":  [
+            {
+                "title": "Ranged Weapons",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "The weapons on the following pages can be used to perform a Ranged Attack Action. Use the Action Success Chart to see if the attack hits as explained in the Combat Rules. Add the number of +DICE/-DICE as indicated by the ranged characteristics entry for the model in the relevant Warband Armoury.",
+                    "glossary": [
+                        {"val": "+DICE", "id": "kw_plusdice"},
+                        {"val": "-DICE", "id": "kw_minusdice"}
+                    ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                            "tags": {"desc_type" : "bold"},
+                            "content": "Note: "
+                            },
+                            {
+                            "tags": {"desc_type" : "default"},
+                            "content": "Ranged weapons cannot be used in melee unless specifically noted by having Range marked as “Melee”."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Melee Weapons",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "All these weapons can be used by a model carrying them to perform a Melee Attack ACTION. Roll on the Action Success Chart to see if the attack hits. Add the number of +DICE/-DICE as indicated by the Melee characteristics entry for the model in the relevant Warband List.",
+                    "glossary": [
+                        {"val": "+DICE", "id": "kw_plusdice"},
+                        {"val": "-DICE", "id": "kw_minusdice"},
+                        {"val": "ACTION", "id": "kw_action"}
+                    ]
+                    }
+                ]
+            },
+            {
+                "title": "Armour",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A model can wear only one suit of armour at a time. Shields can be combined with any Armour unless otherwise indicated."
+                    }
+                ]
+            },
+            {
+                "title": "Equipment",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Unless otherwise noted a model can only carry one piece equipment of the same type. Models may carry multiple different types of equipment, however."
+                    }
+                ]
+            }
+        ],
+        "description": [
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Unless otherwise stated in the rules, each warrior in your warband has the following options for Ranged weapons:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One two-handed ranged weapon OR"
+                            },                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Up to two one-handed ranged weapons."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "They also have the following options for Melee weapons:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One two-handed melee weapon OR"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Up to two one-handed melee weapons."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "All weapon entries clearly indicate if you need one or two hands to effectively use the given weapon. Unless clearly stated in the Range characteristic, a ranged weapon cannot be used in melee combat. Unless they can be used in melee, ranged weapons do not use either hand in melee (leaving both hands free for melee weapons). They always count as ranged weapons for the purposes of determining how many ranged or melee weapons a model can carry."
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Each model can wear a single suit of armour and wear one type of headgear."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Each model can carry one type of grenade."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "A model can have any number of Equipment items, but only one of each type per model."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "The following pieces of Equipment or Armour can be carried by models as indicated in the rules. They take up one of the hands of the model at all times, thus limiting which weapons they may use in combat:"
+            },
+            {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "",
+                "subcontent": [                    
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One shield (most commonly a trench shield) which always takes one hand to use in both melee and ranged combat and cannot be switched out."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One standard/banner/flag which always takes one hand to use in both melee and ranged combat and cannot be switched out."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "One musical instrument which always takes one hand to use in both melee and ranged combat and cannot be switched out."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "gr_scenarios",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Scenarios",
+        "item_index": 9,
+        "sections":  [
+            {
+                "title": "Table Size",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Battles are fought on a table with 4’ x 4’ dimensions. The scenario will always indicate clearly if the table size differs from this."
+                    }
+                ]
+            },
+            {
+                "title": "Setting Up Terrain",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Unless the Scenario states otherwise, use the following rules to set up the scenarios. The player with the lower number of models in their force can place one of the following terrain pieces on the table:"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Building (a tower, house etc.)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Piece of Dangerous Terrain (swamp, barbed wire etc.)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Piece of Difficult Terrain (forest, rocky ground)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Piece of Impassable terrain (12” river with a bridge or ford, sheer cliffs etc.) Maximum two pieces per battle"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Hill"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "One Fence/Wall/other defendable terrain piece (max one per player)"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "6” Section of a Trench"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Each building must be placed:"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                    
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "at least 8” away from any table edge and"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "at least 6” away from the nearest building"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Both players place these large terrain pieces until they have both placed at least three pieces each. In addition, both players should add six smaller terrain pieces like boxes, sandbags, bomb craters, wells, fountains etc. anywhere on the table to create additional cover."
+                    }
+                ]
+            },
+            {
+                "title": "Objective Markers",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Some Scenarios use Objective Markers. You can use flags, coins, banners, beads or other suitable pieces for these markers."
+                    }
+                ]
+            },
+            {
+                "title": "Before the Battle & Pre-Battle Abilities",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Many abilities instruct (or offer) the chance to take an action before the battle begins. These are called Pre-Battle Abilities. Unless otherwise stated, Pre-Battle Abilities are activated and resolved after forces have been assembled and the terrain has been set up, but before models have been deployed."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If both players have Pre-Battle Abilities to resolve at the same time, each player resolves a single Pre-Battle Ability at a time in alternating order, starting with the player who will have the first turn. If multiple Pre-Battle Abilities belonging to the same player need to be resolved at the same time, the player that they belong to may resolve them in any order that they please (unless the abilities specify that they must be activated in a specific order). If one player has resolved all of their Pre-Battle Abilities, the other player may resolve the remainder of theirs."
+                    }
+                ]
+            },
+            {
+                "title": "Victory Points",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "Victory Points (VPs) are used to determine who wins and loses a battle in most scenarios. VPs are often awarded for objectives specific to the scenario you are playing and this is clearly explained in the scenario itself."
+                    },
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "If you are playing the Campaign, the winner always gains 5 VPs if otherwise the result would indicate less."
+                    }
+                ]
+            },
+            {
+                "title": "Duration of the Game",
+                "description":  [
+                    {
+                    "tags": {"desc_type" : "paragraph"},
+                    "content": "A typical game lasts for six Game Turns. Some scenarios have a different duration. These cases are always clearly indicated in the rules for the scenario."
+                    }
+                ]
+            }
+        ],
+        "description": [
+        ]
+    }
+]

@@ -1,6 +1,6 @@
 
 // Data File Imports -----------------------------------
-import { DataByLanguageTable, DataSetTC } from "./DataHandler"
+import { DataByVersionTable, DataSetTC } from "./DataHandler"
 // -----------------------------------------------------
 
 /**
@@ -9,7 +9,7 @@ import { DataByLanguageTable, DataSetTC } from "./DataHandler"
 interface IDataRequest {
     type: string // The data file to search within
     data: []
-    language?: string
+    version?: string
 }
 
 /**
@@ -58,12 +58,12 @@ class DataResponder {
      * @param type The type of data to be searched
      * @returns JSON array of data to search
      */
-    private static GetDataType(type: string, data : any[], language : string | undefined) {
+    private static GetDataType(type: string, data : any[], version : string | undefined) {
         let RelevantSet : DataSetTC;
-        if (language != undefined) {
-            RelevantSet = DataByLanguageTable[language]
+        if (version != undefined) {
+            RelevantSet = DataByVersionTable[version]
         } else {
-            RelevantSet = DataByLanguageTable['ln_english']
+            RelevantSet = DataByVersionTable['ver_default']
         }
         switch(type) {
             case "glossary": {
@@ -186,8 +186,8 @@ class DataResponder {
      * @param search_type the string name of the search type
      * @returns The data returned by the data repo in response to the request
      */
-    public static GetResponse(request: any, search_type : string, language_set : string) {
-        request.language = language_set;
+    public static GetResponse(request: any, search_type : string, version_set : string) {
+        request.version = version_set;
         
         switch(search_type) {
             case "id": {
@@ -217,7 +217,7 @@ class DataResponder {
      * @returns JSON object, either empty or containing the found entry
      */
     public static GetSingleEntry(request: IDataRequestID) {
-        const dataSet = DataResponder.GetDataType(request.type, request.data, request.language)
+        const dataSet = DataResponder.GetDataType(request.type, request.data, request.version)
 
         let i = 0;
         for (i = 0; i < dataSet.length; i++) {
@@ -234,7 +234,7 @@ class DataResponder {
      * @returns JSON array of all data in the specified file
      */
     public static GetFullDataEntry(request: IDataRequest) {
-        const dataSet = DataResponder.GetDataType(request.type, request.data, request.language)
+        const dataSet = DataResponder.GetDataType(request.type, request.data, request.version)
         return JSON.parse(JSON.stringify(dataSet));
     }
 
@@ -244,7 +244,7 @@ class DataResponder {
      * @returns Array of all values associated with the requested key in the requested file
      */
     public static GetAllOfKeyInData(request: IDataRequestID) {
-        const dataSet = DataResponder.GetDataType(request.type, request.data, request.language)
+        const dataSet = DataResponder.GetDataType(request.type, request.data, request.version)
         const valueSet: any = []
 
         let i = 0;
@@ -265,7 +265,7 @@ class DataResponder {
      * @returns Array of string names of tags
      */
     public static GetAllTagsInData(request: IDataRequest) {
-        const dataSet = DataResponder.GetDataType(request.type, request.data, request.language)
+        const dataSet = DataResponder.GetDataType(request.type, request.data, request.version)
         const valueSet: any = []
 
         let i = 0;
@@ -292,7 +292,7 @@ class DataResponder {
      * @returns JSON array of entries in a data file that match the criteria
      */
     public static ComplexSearch(search: IDataRequestComplexSearch) {
-        const dataSet = DataResponder.GetDataType(search.type, search.data, search.language)
+        const dataSet = DataResponder.GetDataType(search.type, search.data, search.version)
         const dataSelect = []
         let i = 0;
         for (i = 0; i < dataSet.length; i++) {

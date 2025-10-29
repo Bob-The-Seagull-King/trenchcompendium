@@ -36,7 +36,7 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarba
             </div>
             
             {injury.SelfDynamicProperty.Selections.length > 0 &&
-                <span className={'title-choice'}>
+                <>
                     {injury.SelfDynamicProperty.Selections.map((item) => 
                         <WbbOptionSelect 
                             property={injury}
@@ -44,7 +44,7 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarba
                             choice={item}
                         />
                     )}                        
-                </span>
+                </>
             }
 
             {!play_mode &&
@@ -79,7 +79,7 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarba
                     </div>
 
                     {injury.SelfDynamicProperty.Selections.length > 0 &&
-                        <span className={'title-choice'}>
+                        <>
                             {injury.SelfDynamicProperty.Selections.map((item) =>
                                 <WbbOptionSelect
                                     property={injury}
@@ -87,7 +87,7 @@ const WbbEditViewInjury: React.FC<{ injury: WarbandProperty, fighter : RealWarba
                                     choice={item}
                                 />
                             )}
-                        </span>
+                        </>
                     }
                 </Modal.Body>
             </Modal>

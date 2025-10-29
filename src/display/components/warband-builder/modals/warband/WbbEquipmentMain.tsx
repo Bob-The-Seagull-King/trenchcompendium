@@ -10,6 +10,7 @@ import { Keyword } from '../../../../../classes/feature/glossary/Keyword';
 import { WarbandPurchase, RealWarbandPurchaseModel } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import {useGlobalState} from "../../../../../utility/globalstate";
+import RulesModelDisplayAbility from '../../../rules-content/RulesModelDisplayAbility';
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -43,12 +44,18 @@ const WbbEquipmentMain: React.FC<EquipmentItemProps> = (props : EquipmentItemPro
             }
 
             {/* Rules Text */}
-            {abilityObject.Description.length > 0 &&
+            {(abilityObject.Description.length > 0 || abilityObject.Abilities.length > 0 ) &&
                 <div className={'text-element text-rules'}>
                     <div className={'text-label'}>
                         {'Rules'}
                     </div>
                     {returnDescription(abilityObject, abilityObject.Description)}
+                    {abilityObject.Abilities.map((item) => (
+                            <React.Fragment
+                                key={"equip_ability_" + abilityObject.ID + "_ability_id_" + item.ID}>
+                                <RulesModelDisplayAbility data={item}/>
+                            </React.Fragment>
+                        ))}
                 </div>
             }
 

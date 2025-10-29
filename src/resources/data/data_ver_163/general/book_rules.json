@@ -1,0 +1,2267 @@
+[
+    {
+        "id": "br_introduction",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Campaigns",
+        "item_index": 0,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "These rules govern playing a series of linked games with your friends. A minimum number of two players are required to complete a campaign, but the more players you can muster, the better! You can also play games against players who are not part of the campaign. Rules on how to do this are explained below."
+            }
+        ],
+        "sections": [
+            {
+                "title": "Beginning the Campaign",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "At the beginning of a Campaign, your warband’s Threshold Value is 700 ducats. This is the maximum combined ducat value of models, items, upgrades and so on that you can field in a single battle. It will increase with each battle you fight during your campaign. You begin with an equal amount of ducats in your warband’s pay chest. This is a reserve of wealth that you will use to recruit and arm your models. Whenever you make a purchase, you must deduct the cost from your pay chest and you must have enough to cover the entire cost."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Some warbands begin campaigns with a higher or lower threshold value and pay chest. This will be clearly outlined in each relevant warband’s section."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Patrons",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Select a Patron for your Warband from the Patrons section of the compendium. The choice of Patron determines which Skill you may select if you roll a Patron Skill on any of the Skill Tables above when your ELITE model gains an Advancement (see Experience and Advancement below). One model cannot have duplicates of the same Patron Skill.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    },
+    {
+        "id": "br_playingacampaigngame",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Playing a Campaign Game",
+        "item_index": 1,
+        "description":  [
+        ],
+        "sections": [
+            {
+                "title": "Selecting a Scenario",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "When determining which Scenario you wish to play, note how many battles you have played in the Campaign thus far, and roll on the appropriate table below. Neither player should play the same scenario twice in a row. If this happens, re-roll until you get a new one."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "If one player has played more battles than the other, then the player with a higher number of battles shows the chart you use. The player with the lower battle count determines who is the Attacker and who is the Defender in each scenario. Otherwise roll a dice to determine who is attacking and who is defending."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "See the Scenarios section for details on each battle."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Campaign Stages",
+                "description":  [
+                    
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Campaigns are divided into 3 Stages: Early, Mid, and Endgame. You play a set number of games in each of these stages before moving on to the next. If two players of the campaign are not on the same stage, the Campaign Stage is determined by the warband of the lower stage. Once a player has played 11 Battles in total they can play no more until all the other players have played 11 games as well."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "At this stage all the players play a game against another player who has also played 11 games. Once all the players have played the Final Battle Scenario, you can determine who has won the Campaign as explained below."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Early Campaign (Battles 1-3)"
+                            },
+                            {
+                                "tags": {"desc_type" : "headed_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "1"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_claimnomansland"},
+                                                        "content": "Claim No Man's Land"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "2"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_huntforheroes"},
+                                                        "content": "Hunt for Heroes"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "3"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Hill 223"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "4"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_relichunt"},
+                                                        "content": "Relic Hunt"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "5"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_supplyraid"},
+                                                        "content": "Supply Raid"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item_wrap"},
+                                                "content": "6"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/randomscenario"},
+                                                        "content": "Random Scenario"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Mid Campaign (Battles 4-9)"
+                            },
+                            {
+                                "tags": {"desc_type" : "headed_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "1"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_huntforheroes"},
+                                                        "content": "Hunt for Heroes"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "2"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_armouredtrain"},
+                                                        "content": "Armoured Train"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "3"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_stormingtheshores"},
+                                                        "content": "Storming the Shores"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "4"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_claimnomansland"},
+                                                        "content": "Claim No Man's Land"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "5"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_dragonhunt"},
+                                                        "content": "Dragon Hunt"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "6"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/randomscenario"},
+                                                        "content": "Random Scenario"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Endgame (Battles 9-11)"
+                            },
+                            {
+                                "tags": {"desc_type" : "headed_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "1"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_trenchwarfar"},
+                                                        "content": "Trench Warfare"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "2"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_dragonhunt"},
+                                                        "content": "Dragon Hunt"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "3"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "From Below"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "4"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "Fields of Glory"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "5"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_stormingtheshores"},
+                                                        "content": "Storming the Shores"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "6"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/randomscenario"},
+                                                        "content": "Random Scenario"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Final Battle"
+                            },
+                            {
+                                "tags": {"desc_type" : "headed_table"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headrow"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Battle Number"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_headitem"},
+                                                "content": "Scenario"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_row"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "12"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "table_item"},
+                                                "content": "",
+                                                "subcontent": [
+                                                    {
+                                                        "tags": {"desc_type" : "link", "url": "/compendium/scenario/sc_greatwar"},
+                                                        "content": "Play the Great War scenario"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Late Joiners to Campaigns",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Players often want to join a Campaign in progress. This is fine, and new forces are purchased with the current Warband Threshold Value of the campaign. In addition, they can tick 1 Experience box per battle the top Warband in the campaign has played and gain the Advancements as if they played the games. This Experience can be divided between the ELITE models as the player sees fit.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Winning the Campaign",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "default"},
+                        "content": "Each Scenario lists the number of Victory Points the players may gain from it. The player with the most Victory Points at the end of the campaign is the winner. All other player rankings are determined by Victory Point totals. At the end of the Campaign, tally the points together to see your ranking on the Campaign leaderboard."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    },{
+        "id": "br_modelsincampaigns",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Models in Campaigns",
+        "item_index": 2,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "At the end of each game the players work out their injuries, how much experience their ELITE warriors have earned and how much loot the warband has collected before returning to its barracks.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Experience is expressed as Experience points which ELITE models receive for surviving each game. This is covered later in the Experience section. When an ELITE warrior has sufficient Experience points they receive a Skill. Normal troopers taking part in a Campaign will also have a chance of becoming an ELITE.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "sections": [
+            {
+                "title": "Injuries and Casualties",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After each Battle, for each model that was taken Out of Action, determine what Injuries they sustained, if ELITE, or whether or not they died from their wounds, if not ELITE. See the rules for Injuries.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Dismissing the Wounded",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After determining Injuries, You can dismiss any warrior you wish after the battle if they have 2+ Scars."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Models Killed in Action",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "When a model is killed all their weapons, armour and equipment are lost in the ruinous tumult of the battlefield. It is not possible to reallocate fallen warriors’ weapons or equipment once they die."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Experience and Skill Advancements",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After each Battle, determine the amount of Experience points your ELITE troops gain, and roll for their new Skill Advancements. Also determine whether any of your standard Troops are promoted into ELITE Status. See the rules for Experience below.",
+                        "glossary": [
+                            {"val": "ELITE", "id": "kw_elite"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    },{
+        "id": "br_warbandlimits",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Warband Limits",
+        "item_index": 3,
+        "description":  [
+        ],
+        "sections": [
+            {
+                "title": "Warband Threshold Value",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "As you play the campaign, the words of your deeds on the battlefield spreads and attracts the attention of your superiors who will allocate more troops and resources at your disposal within their organisation, and make greater reinforcements available to you. This is represented by your Warband Threshold Value. A Warband’s starting value is indicated in the Warband list, and is typically 700 Gold Ducats. This value grows during the Campaign as indicated below (additions to the Value are cumulative). Each Warband’s Threshold Value depends on the number of battles they have played."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Maximum Field Strength",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "The number of models you can field in a single battle is limited as listed in the table below. This maximum increases during the campaign, so in the first battle the maximum number of models you can field is 10, while it increases to 11 for the second battle."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Note that the Warband can be bigger than this, you just cannot field more models in battle than indicated in the table below. Also, some Scenarios limit the number of models below your Max Field Strength. In such cases, follow the Scenario’s instructions."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Note that when your Threshold Value raises, you are not automatically granted any additional troops or equipment, you must either call for Reinforcements (see below), or spend your own stored resources to hire more troops."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "bold"},
+                                "content": "Papal States: "
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "When a Papal States Intervention Force calculates their Warband Threshold Value, or requests Reinforcements, they do so at -200 ducats. For example, such a warband about to play battle 3 in a campaign would have a Warband Threshold Value of 700 ducats."
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Campaign Limits Table",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "headed_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_headrow"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Battle Number"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Threshold Value"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Max Field Strength"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "700"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "10"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "2"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "800"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "11"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "3"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "900"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "12"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "4"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1000"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "13"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "5"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1100"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "14"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "6"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1200"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "15"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "7"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1300"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "16"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "8"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1400"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "17"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "9"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1500"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "18"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "10"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1600"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "19"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "11"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1700"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "20"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "12"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "1800"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "22"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Reinforcements",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "In Trench Crusade all Warbands are part of one of the great military organisations or under the guidance of a powerful patron, and periodically receive reinforcements to offset their combat losses. Thus after each battle you can build up your force back to the current Warband Threshold Value in Gold Ducats if the Warband Value has fallen under this threshold. When you do this, you must first do the following:"
+                    },
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Forego the Exploration & Looting step completely. Your Warband falls back and requests Reinforcements, missing the opportunity to Loot and Explore."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Give up/Sell all Weapons, Armour and Equipment that is not assigned to any of your models. Remember to adhere to the limits of Equipment per model!"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Empty your Paychest of all ducats."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Once you’ve done this, calculate the current value of your warband in ducats."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "You may now buy new troops, weapons, armour and equipment up to the Warband Threshold Value (see above). Do not keep any leftover ducats."
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "The Papal States Intervention Force will also gain 4 Glory Points each time they use the Reinforcement action."
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Disbanding a Warband",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "You may disband your old warband at the end of any game and start again with a new one. All the warriors in the original warband and any equipment and other benefits they acquired are lost."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    },{
+        "id": "br_postbattlesequencesummary",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Post-Battle Sequence Summary",
+        "item_index": 4,
+        "description":  [
+            {
+                "tags": {"desc_type" : "infobox"},
+                "content": "",
+                "subcontent": [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After each battle, all players who took part go through the following set of steps to prepare your Warband for the future battles."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Injuries"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Determine the extent of injuries for each warrior who is Out of Action at the end of the game. Mark any Scars your ELITES suffer. See ",
+                                        "glossary": [
+                                            {"val": "ELITES", "id": "kw_elite"}
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/injury"},
+                                        "content": "Injuries"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " section for details."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/injury"},
+                                        "content": "Injuries and Battle Scars"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Experience & Advancement"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Record experience, gain advancements, and promote heroes for surviving battles. See the "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/injury"},
+                                        "content": "Experience & Advancement"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " section for details."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_experienceandadvancement"},
+                                        "content": "Experience & Advancement"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Increase the Warband Threshold Value"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Increase the Threshold Value of your Warband (see "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Warband Size"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " rules)."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Warband Limits"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Request Reinforcements"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "You may replenish your Warband’s losses until its total value is up to the highest current "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Warband Threshold"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " value if you wish. You must first empty the Warband treasury by giving up all the ducats and stored gear you have first, and you must skip the Exploration step."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_warbandlimits"},
+                                        "content": "Warband Limits"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Looting & Exploration"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll to see what your Warband discovers in the area they are currently occupying. See "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_exploration"},
+                                        "content": "Exploration"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " section for details."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_exploration"},
+                                        "content": "Looting & Exploration"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Hire New Recruits"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "New recruits can be acquired from your Warband List and can be recruited and equipped from your Warband’s Equipment list."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Trade"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Buy items allowed for your Warband. See your Warband Equipment list for the available items. You may also sell any surplus Weapons, Armour and Equipment, and you receive half of their base value (rounding fractions up) from the merchants, including Glory Items."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Use Glory Points"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Use your Glory to attract Mercenaries, acquire special equipment and other benefits. See the rules for "
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "link", "url": "/compendium/campaign/campaign_rules/br_gloryitems"},
+                                        "content": "Glory"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": " for details."
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "rulesbanner", "url": "/compendium/campaign/campaign_rules/br_gloryitems"},
+                                        "content": "Glory Items"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Reallocate Equipment"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Swap equipment between models as desired (provided they are eligible to use it). You can take any armour, weapons and equipment from the Warband Paychest and give them to any eligible models."
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "subheader"},
+                                        "content": "Update Warband Roster"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "paragraph"},
+                                "content": "Update your Warband Roster, including the total cost of the Warband (a total cost in Ducats of all your models and their weapons, armour and equipment). You are now ready for the next battle!"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "sections": [
+        ]
+    },{
+        "id": "br_injuriesandbattlescars",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Injuries and Battle Scars",
+        "item_index": 5,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Whenever one of your ELITE models is taken Out of Action during a Battle, you will have to roll D66 for each such model after the battle ends. Consult the Trauma Chart table below to see what happened to your model. Unless rules state otherwise, each Trauma causes a Battle Scar, so mark this on your Warband roster sheet. You will notice that there are only two Battle Scars slots for your ELITE model. This means that if you sustain a third Battle Scar, this model dies and can no longer be used in your Campaign. If the model has an ability that allows their revival (such as the Trench Pilgrim), they use it. When they return to life, they ignore the last Battle Scar that killed them. Otherwise, their profile remains the same.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "For non-ELITE models that went Out of Action during a battle, simply roll D6 for each model: on a result 1-2, they are dead or irrevocably wounded, and you must remove them from your roster. On a roll of 3+, they survive the battle and fight on as normal.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "If, for whatever reason, one of your soldiers dies, their equipment is lost unless otherwise noted in the rules."
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "You can only have one of each type of Battle Scar per ELITE, unless explicitly stated in its entry. If a model rolls a result that would cause it to gain a Battle Scar that it cannot gain again, re-roll on the chart until a viable result is achieved.",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "sections": [
+        ]
+    },{
+        "id": "br_experienceandadvancement",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Experience and Advancement",
+        "item_index": 6,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "As your warriors fight battles, they will quickly become hardened veterans. Their skills improve, forged in the crucible of the Great War. An ELITE model that took part in a battle and survived (even if they were Taken Out of Action) will gain 1 Experience Point. Mark this on your Roster Sheet. In addition, if any ELITE model performs at least one Glorious Deed, they gain another Experience Point. On your Roster Sheet, check the Experience boxes from left to right: when you reach the following experience you can make a Skill Advancement Roll: (2, 4, 7, 10, 14, 18)",
+            "glossary": [
+                {"val": "ELITE", "id": "kw_elite"}
+            ]
+            }
+        ],
+        "sections": [
+            {
+                "title": "Skill Advancement Rolls",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [                            
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [                                    
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Pick 2 of the following 4 Charts (Melee & Strength Skills, Ranged Skills, Stealth & Speed Skills or Wildcard Skills)."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Roll 2D6 once for each chart to see what Skills you can choose from (See skills section of the compendium)."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If you already have any Skill indicated by the roll(s), choose the next lowest number on the table that has a skill you don’t yet have."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "If there are no such skills left, choose the next highest number on the table that has a skill you don’t yet have."
+                                    },                                
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "Select which of the two Skills generated you want the model to acquire and add it to your Warband roster."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "When a Patron Skill is rolled, you can select any one of the Patron Skills offered by the Patron you have selected (see section on Patrons below)."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Non-Elite Promotions",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "list"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Gather Your Promotion Pool: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Your pool starts with 1 die in it. Add 1 die if you won the battle. Add 1 die for each Glorious Deed that your Warband completed this battle. Some abilities might grant you additional Promotion Dice."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Distribute Your Promotion Dice: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Assign up to 2 Promotion Dice to each Non-ELITE model (up to 3 if that model performed a Glorious Deed during the battle) in your army that is eligible for promotion. If every such model has been assigned 2 Promotion Dice and you have Promotion Dice remaining, you may assign dice so that no model has more than two or more dice than another.",
+                                                "glossary": [
+                                                    {"val": "ELITE", "id": "kw_elite"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Roll Your Promotion Dice: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "In any order you wish, select a Promotion Die and roll it. If it shows a result of 6, that model is promoted. That model gains the Keyword ELITE, it is moved to the ELITE section of your Warband’s roster, and it begins with 0 Experience Points. Only one model can be promoted in this way per post-battle sequence and, once a model is promoted in this way, end this process.",
+                                                "glossary": [
+                                                    {"val": "ELITE", "id": "kw_elite"}
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Track Failed Promotions: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Keep a tally of Promotion Dice rolls you’ve failed thus far, including any from previous games in the campaign. If in total you fail 5 Promotion rolls in a row (regardless how the dice are distributed amongst the models), the 6th one will always succeed. This re-sets the counter."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "default"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "Maximum Elites: "
+                                            },{
+                                                "tags": {"desc_type" : "default"},
+                                                "content": "Your Warband can only have a maximum of 6 ELITES. If you are at maximum, you do not roll for Promotions until your Warband has less than 6 ELITES.",
+                                                "glossary": [
+                                                    {"val": "ELITES", "id": "kw_elite"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Units Which Cannot Be Promoted",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "All of the models in your Warband cannot necessarily be Promoted. This could be due to their inherent limitations, being machines, lack of access to training and/or necessary equipment and so on."
+                    },
+                    {
+                        "tags": {"desc_type" : "headless_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "NEW ANTIOCH"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "-"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "IRON SULTANATE"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "-"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "HERETIC LEGION"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "The Wretched"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "BLACK GRAIL"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Grail Thralls, Amalgam, Grail Hounds"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "TRENCH PILGRIMS"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Ecclesiastic Prisoners, Anchorite Shrine"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "THE COURT"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Yoke Fiends, The Wretched"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "ALLIES"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Note that Allies & Mercenaries cannot become ELITE unless otherwise noted in the rules. Note that models such as Goetic Warlock and Combat Medic that are bought as part of the Warband List can be promoted and can claim ELITE status.",
+                                        "glossary": [
+                                            {"val": "ELITE", "id": "kw_elite"}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Limited Potential",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Some models have a limited capacity to gain Experience and learn new skills. They might be too bestial, have limited in intelligence or have their utmost potential might be supernaturally limited. Such units can only gain 3 Skill Advancements (i.e. 7 Experience Points)."
+                    },
+                    {
+                        "tags": {"desc_type" : "headless_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "NEW ANTIOCH"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "-"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "IRON SULTANATE"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Brazen Bull, Lions of Jabir, Homunculi (House of Wisdom)"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "HERETIC LEGION"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "War Wolf, Artillery Witch"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "BLACK GRAIL"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "-"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "TRENCH PILGRIMS"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Communicant"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "bold"},
+                                                "content": "THE COURT"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Desecrated Saint, Pit Locust"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    },{
+        "id": "br_exploration",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Exploration",
+        "item_index": 7,
+        "description":  [
+        ],
+        "sections": [
+            {
+                "title": "",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "list"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Determine the number of Exploration Dice each player has",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Roll the Exploration Dice",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Modify the Exploration Dice results with Exploration Skills & Items",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Consult the Exploration Table to see if you found a Location"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "Collect Loot worth total combined result of dice rolled X10 ducats"
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Determine the Number of Exploration Dice",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": "After the Battle, both Players are allocated Exploration Dice as shown below. All warbands begin a campaign with the ",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "skillslim"},
+                                "content": "es_reroll"
+                            },
+                            {
+                                "tags": {"desc_type" : "default"},
+                                "content": " Exploration Skill. In addition, the Winner of the Battle can re-roll any 1 of the Exploration Dice during the Looting and Exploration Step.",
+                                "glossary": [
+                                    {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tags": {"desc_type" : "headed_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_headrow"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Number of Battles Fought"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Number of Exploration Dice"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "1-2"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "3"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "3-5"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "4"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "6-9"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "5"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "10+"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "6"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Winner"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "Reroll any 1 dice"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Roll the Exploration Dice",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Once the players have determined the number of Exploration Dice, each rolls their dice and consults the result by adding the numbers together to get their Exploration Score. For example, if a player rolls three Exploration Dice and the results are 3, 5, and 6, the combined Exploration Score is 14.",
+                        "glossary": [
+                            {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Modify the Exploration Dice",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Next, the players can modify the Exploration Dice results with any items, Exploration Skills, Ally abilities and other bonuses in order to improve their chances of finding some rare elusive location and claiming it for their Warbands.",
+                        "glossary": [
+                            {"val": "Exploration Dice", "id": "gl_explorationdice"}
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Consult the Exploration Location Table",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "After you have modified the Exploration roll result, consult the appropriate Exploration Table to see if you have found something of special interest during your exploration. You have to match the number on the Table exactly with your Exploration Score. Too high or too low means you did not find a Location."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Note that each player can find any of specific Location only once during the Campaign, though it is completely legal for two different players to discover the same Location during the same Campaign. We encourage players to maintain a War Journal that tracks the Locations they have found during the Campaign."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "To find out which Exploration Table you should use, consult the following Chart:"
+                    },
+                    {
+                        "tags": {"desc_type" : "headed_table"},
+                        "content": "",
+                        "subcontent": [
+                            {
+                                "tags": {"desc_type" : "table_headrow"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Number of Battles Fought"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_headitem"},
+                                        "content": "Possible Locations"
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "1-2"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": "Common Exploration Locations"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "3-5"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": "Common "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": " or "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare Exploration Locations"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "6-9"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare Exploration Locations"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "tags": {"desc_type" : "table_row"},
+                                "content": "",
+                                "subcontent": [
+                                    {
+                                        "tags": {"desc_type" : "table_item_wrap"},
+                                        "content": "10+"
+                                    },
+                                    {
+                                        "tags": {"desc_type" : "table_item"},
+                                        "content": "",
+                                        "subcontent": [
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_rarelocations"},
+                                                "content": "Rare"
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "default", "url": "/compendium/campaign/explorationtable/et_commonlocations"},
+                                                "content": " or "
+                                            },
+                                            {
+                                                "tags": {"desc_type" : "link", "url": "/compendium/campaign/explorationtable/et_legendarylocations"},
+                                                "content": "Legendary Exploration Locations"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Looting, Foraging, Scavenging and Pillaging",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Whether you found an Exploration Location or not, the player can now collect loot from the battlefield by scavenging, foraging, selling broken weapons and armour to traders, receiving the regular pay from their Patron, hunting, and so on."
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "The value of the Loot you find is equal to 10x the Exploration Score in ducats. So if your Exploration Score was 12, you find 120 ducats from Looting. Add this to your Warband’s Paychest."
+                    }
+                 ],
+                "content": [ ]
+            },
+            {
+                "title": "Warband Exploration Skills",
+                "description":  [
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": "Each Warband Starts the Campaign with the "
+                    },
+                    {
+                        "tags": {"desc_type" : "skillslim"},
+                        "content": "es_reroll"
+                    },
+                    {
+                        "tags": {"desc_type" : "paragraph"},
+                        "content": " Skill. More can be earned during the campaign or by hiring Allies. You can have multiples of any of the Skills on this list."
+                    }
+                 ],
+                "content": [ ]
+            }
+        ]
+    },{
+        "id": "br_gloryitems",
+        "source": "core",
+        "tags": { },
+        "contextdata": { },
+        "name": "Glory Items",
+        "item_index": 8,
+        "description":  [
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Your Warband can acquire Glory items in a few different ways."
+            },
+            {
+            "tags": {"desc_type" : "list"},
+            "content": "",
+            "subcontent": [
+                {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Some can be purchased by your Warband from their own Armoury List, and can be bought at any time during the campaign."
+                },
+                {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "Glory items listed as Exploration Only are only available if you get an opportunity to spend your Glory Points on them during the Exploration & Looting step."
+                },
+                {
+                "tags": {"desc_type" : "paragraph"},
+                "content": "When playing one-off games, you can buy any Glory Items up to the maximum Glory Point limit agreed with your opponent. Select Glory items from the Warband list and from the Exploration Items list."
+                }
+            ]
+            },
+            {
+            "tags": {"desc_type" : "paragraph"},
+            "content": "Glory Items available to the various Warbands in Trench Crusade via exploration are listed in the Exploration Only section of each Faction."
+            }
+        ],
+        "sections": [
+        ]
+    }
+]

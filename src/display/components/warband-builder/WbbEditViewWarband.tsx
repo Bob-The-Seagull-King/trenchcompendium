@@ -34,6 +34,16 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
         RunErrorCheck();
     }, [updateKey])
 
+    const r = Number(warband.warband_data.GetNumReserved() ?? 0);
+    const l = Number(warband.warband_data.GetNumLost() ?? 0);
+    const d = Number(warband.warband_data.GetNumDead() ?? 0);
+
+    const otherList = [
+        r > 0 && `Reserved: ${r}`,
+        l > 0 && `Lost: ${l}`,
+        d > 0 && `Dead: ${d}`,
+    ].filter(Boolean).join(', ');
+
     return (
         <div className={`WbbEditViewWarband warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Warband'}</div>
@@ -42,16 +52,20 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
                 | {warband.warband_data.GetCostGlory()} Glory
             </div>
             <div className="meta-item">
-                <strong>{'Fighters: '}</strong>
+                <strong>{'Fielded: '}</strong>
                 {'Elite: '}{warband.warband_data.GetNumElite()}
-                {' | '}
+                {', '}
                 {'Troop: '}{warband.warband_data.GetNumTroop()}
-                {' | '}
+                {', '}
                 {'Mercenary: '}{warband.warband_data.GetNumMercenary()}
-                {' | '}
-                {'Fielded: '}{warband.warband_data.GetNumFielded()}
-
+                {', '}
+                {'Total: '}{warband.warband_data.GetNumFielded()}
             </div>
+            {otherList && (
+                <div className="meta-item">
+                    <strong>Other: </strong>{otherList}
+                </div>
+            )}
             <div key={keyvar}>
                 { warbandErrors.length > 0 &&
                     <div className="meta-item meta-item-vaidation-error">

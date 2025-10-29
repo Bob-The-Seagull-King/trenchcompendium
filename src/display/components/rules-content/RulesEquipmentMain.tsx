@@ -7,6 +7,7 @@ import GenericHover from '../generics/GenericHover';
 import KeywordDisplay from '../features/glossary/KeywordDisplay';
 import {Equipment, EquipmentStats} from '../../../classes/feature/equipment/Equipment';
 import RulesEquipmentStats from "./RulesEquipmentStats";
+import RulesModelDisplayAbility from './RulesModelDisplayAbility';
 
 
 
@@ -35,12 +36,18 @@ const RulesEquipmentMain = (props: any) => {
             }
 
             {/* Rules Text */}
-            {abilityObject.Description.length > 0 &&
+            {(abilityObject.Description.length > 0|| abilityObject.Abilities.length > 0 ) &&
                 <div className={'text-element text-rules'}>
                     <div className={'text-label'}>
                         {'Rules'}
                     </div>
                     {returnDescription(abilityObject, abilityObject.Description)}
+                    {abilityObject.Abilities.map((item) => (
+                            <React.Fragment
+                                key={"equip_ability_" + abilityObject.ID + "_ability_id_" + item.ID}>
+                                <RulesModelDisplayAbility data={item}/>
+                            </React.Fragment>
+                        ))}
                 </div>
             }
 
