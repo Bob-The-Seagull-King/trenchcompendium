@@ -30,7 +30,8 @@ export interface ISynodWarband {
     id : number // -1 means LOCAL warband
     warband_data : string,
     warband_campaign_invites: number[],
-    warband_campaigns : number[]
+    warband_campaigns : number[],
+    warband_user_id: number
 }
 
 export interface ProfilePictureOption {
@@ -115,6 +116,7 @@ class SiteUser {
                 const parsed = JSON.parse(data.warbands[i].warband_data)
                 parsed["warband_invites"] = data.warbands[i].warband_campaign_invites
                 parsed["warband_campaigns"] = data.warbands[i].warband_campaigns
+                parsed["warband_user"] = this.GetUserId()
                 const newarband : UserWarband = await WarbandFactory.CreateUserWarband(parsed, data.warbands[i].id)
                 this.Warbands.push(
                     {
@@ -198,7 +200,8 @@ class SiteUser {
                     id : this.Warbands[i].id,
                     warband_data: JSON.stringify(this.Warbands[i].warband_data.ConvertToInterface()),
                     warband_campaign_invites: this.Warbands[i].warband_data.GetCampaignInvites(),
-                    warband_campaigns: this.Warbands[i].warband_data.GetCampaigns()
+                    warband_campaigns: this.Warbands[i].warband_data.GetCampaigns(),
+                    warband_user_id: this.GetUserId()
                 })
         }
 

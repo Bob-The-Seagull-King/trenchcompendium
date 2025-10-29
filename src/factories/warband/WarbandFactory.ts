@@ -195,7 +195,8 @@ class WarbandFactory {
                 userdata = json.warband_data
                 userdata["warband_invites"] = json.warband_campaign_invites
                 userdata["warband_campaigns"] = json.warband_campaigns
-                synodcache.AddWarbandCache(_val, json.warband_data)
+                userdata["warband_user"] = json.warband_user_id
+                synodcache.AddWarbandCache(_val, userdata)
             }
         }
 

@@ -94,7 +94,8 @@ interface IUserWarband extends IContextObject {
     consumables: IWarbandConsumable[],
     restrictions_list : string[],
     warband_invites? : number[],
-    warband_campaigns? : number[]
+    warband_campaigns? : number[],
+    warband_user?: number
 }
 
 class UserWarband extends DynamicContextObject {
@@ -120,6 +121,7 @@ class UserWarband extends DynamicContextObject {
     public PostID : number;
     public WarbandInvites : number[] = []
     public WarbandCampaigns : number[] = []
+    public UserID : number;
 
     public DumpCache() {
         this.EquipmentRelCache = {}
@@ -177,6 +179,11 @@ class UserWarband extends DynamicContextObject {
             this.WarbandCampaigns = data.warband_campaigns;
         } else {
             this.WarbandCampaigns = []
+        }
+        if (data.warband_user != undefined) {
+            this.UserID = data.warband_user;
+        } else {
+            this.UserID = -1
         }
         this.IsUnRestricted = (this.Restrictions.includes("unrestricted"))
     }
@@ -1238,7 +1245,7 @@ class UserWarband extends DynamicContextObject {
      * @param userId
      */
     public IsOwner (userId : number) : boolean {
-        return true;
+        return this.UserID == userId;
     }
 
     /**
