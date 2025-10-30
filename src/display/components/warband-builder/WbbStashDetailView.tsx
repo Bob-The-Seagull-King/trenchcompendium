@@ -30,8 +30,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
     const { play_mode, edit_mode, view_mode, print_mode, setMode } = useWbbMode(); // play mode v2
     if (warband == null) return (<div>Loading...</div>);
 
-    const [stash, setStash] = useState(warband.warband_data.GetStash())
-
     const [stashkey, setstashkey] = useState(0)
 
     const [showRangedAddItemToStash, setShowRangedAddItemToStash] = useState(false);
@@ -63,7 +61,6 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
     
     useEffect(() => {
-        setStash(warband.warband_data.GetStash())
         setstashkey(stashkey + 1);
     }, [updateKey]);
 
@@ -83,19 +80,22 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
             <div key={updateKey} className={'detail-view-content'}>
                 <div className="stash-summary mb-3" key={stashkey}>
                     <div>
-                        <strong>Spare Ducats:</strong> {(stash.AmountDucats > 10e10 ? "Unlimited" : stash.AmountDucats) || 0}
+                        <strong>Spare Ducats:</strong> {(warband.warband_data.GetStashedDucats()) > 10e10 ? ("Unlimited") : (warband.warband_data.GetStashedDucats())}
+                    </div>
+
+                    <div>
+                        <strong>Spare Glory:</strong>
+                        {(warband.warband_data.GetStashedGlory() > 10e10) ? ("Unlimited") : (warband.warband_data.GetStashedGlory())}
                     </div>
                     <div>
-                        <strong>Spare Glory:</strong> {(stash.AmountGlory > 10e10 ? "Unlimited" : stash.AmountGlory) || 0}
-                    </div>
-                    <div>
-                        <strong>Value of items:</strong> {stash.ValueDucats} Ducats / {stash.ValueGlory} Glory
+                        <strong>Value of items:</strong> {(warband.warband_data.GetStashedItemsValueDucats())} Ducats
+                        / {warband.warband_data.GetStashedItemsValueGlory()} Glory
                     </div>
 
                     {/* Add Ducats and Glory Buttons*/}
                     {edit_mode &&
                         <div className={'mt-2'}>
-                            {(stash.AmountDucats < 10e10) &&
+                            {(warband.warband_data.GetStashedDucats() < 10e10) &&
                                 <div className={'btn btn-primary'}
                                      onClick={() => setShowAddDucats(true)}
                                      style={{marginRight: "0.5rem"}}>
@@ -103,7 +103,7 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                                     {'Edit Ducats'}
                                 </div>
                             }
-                            {stash.AmountGlory < 10e10 &&
+                            {warband.warband_data.GetStashedGlory() < 10e10 &&
                                 <div className={'btn btn-primary'}
                                      onClick={() => setShowAddGlory(true)}>
                                     <FontAwesomeIcon icon={faTrophy} className="icon-inline-left-l"/>
@@ -116,19 +116,19 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
 
 
                 <div className={'stash-items-title'}>
-                    {'Stashed Items'}
-                </div>
+                {'Stashed Items'}
+            </div>
 
-                <div className="stash-items-wrap">
-                    <div className={'stash-items-category'}>
+            <div className="stash-items-wrap">
+                <div className={'stash-items-category'}>
 
-                        <h3>{'Ranged Weapons'}</h3>
+                    <h3>{'Ranged Weapons'}</h3>
 
-                        {warband?.warband_data.Equipment.filter(item =>
-                                (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" &&
-                                !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
-                                ).length > 0 ? (
-                            <>
+                    {warband?.warband_data.Equipment.filter(item =>
+                        (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" &&
+                            !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
+                    ).length > 0 ? (
+                        <>
                                 {warband?.warband_data.Equipment.filter(item =>
                                 (((item.HeldObject as WarbandEquipment).GetEquipmentItem()).Category == "ranged" &&
                                 !containsTag(((item.HeldObject as WarbandEquipment)).Tags, 'exploration_only'))
@@ -325,14 +325,14 @@ const WbbStashDetailView: React.FC<WbbStashDetailViewProps> = ({ onClose }) => {
                         <WbbEditStashAmountModal
                             show={showAddDucats}
                             onClose={() => setShowAddDucats(false)}
-                            currentcount={stash.AmountDucats}
+                            currentcount={warband.warband_data.GetStashedDucats()}
                             costtype={0}
                             onSubmit={handleUpdateStash}
                         />
                         <WbbEditStashAmountModal
                             show={showAddGlory}
                             onClose={() => setShowAddGlory(false)}
-                            currentcount={stash.AmountGlory}
+                            currentcount={warband.warband_data.GetStashedGlory()}
                             costtype={1}
                             onSubmit={handleUpdateStash}
                         />

@@ -93,7 +93,7 @@ const WbbWarbandListItem: React.FC<WbbWarbandListItemProps> = ({ item, manager, 
                             </div>
 
                             <div className={'item-cost'}>
-                                {item.warband_data.GetCostDucats() + " Ducats" + " | " + item.warband_data.GetCostGlory() + " Glory" }
+                                {item.warband_data.GetRatingDucats() + " Ducats" + " | " + item.warband_data.GetRatingGlory() + " Glory" }
                             </div>
 
                             <div className={'item-campaign'}>

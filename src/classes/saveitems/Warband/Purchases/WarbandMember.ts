@@ -1643,7 +1643,7 @@ class WarbandMember extends DynamicContextObject {
             } else {
                 discount_val += ducatbudget
             }
-            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetSumCurrentDucats() >= (maxccurcostount - discount_val);
+            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetStashedDucats() >= (maxccurcostount - discount_val);
         }
         if (upg.CostType == 1) {
             const glorybudget = await this.GetUpgradeBudgetGlory()
@@ -1652,7 +1652,7 @@ class WarbandMember extends DynamicContextObject {
             } else {
                 discount_val += glorybudget
             }
-            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetSumCurrentGlory() >= (maxccurcostount - discount_val);
+            canaddupgrade = canaddupgrade && (this.MyContext as UserWarband).GetStashedGlory() >= (maxccurcostount - discount_val);
         }
         if (this.IsUnRestricted == true) {
             return {
@@ -2380,10 +2380,10 @@ class WarbandMember extends DynamicContextObject {
             if (countcurrent < oblimit || (oblimit == 0 && AddedOptions[i].Limit == 0)) {
                 
                 if (AddedOptions[i].CostType == 0) {
-                    canadd = (this.MyContext as UserWarband).GetSumCurrentDucats() >= maxccurcostount;
+                    canadd = (this.MyContext as UserWarband).GetStashedDucats() >= maxccurcostount;
                 }
                 if (AddedOptions[i].CostType == 1) {
-                    canadd = (this.MyContext as UserWarband).GetSumCurrentGlory() >= maxccurcostount;
+                    canadd = (this.MyContext as UserWarband).GetStashedGlory() >= maxccurcostount;
                 }
             } else {
                 canadd = false;

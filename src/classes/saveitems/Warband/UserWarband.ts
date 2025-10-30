@@ -426,12 +426,12 @@ class UserWarband extends DynamicContextObject {
         }
 
         // Store Warband Ducats/Glory
-        this.Context.Ratings.rating_ducat = this.GetDucatRatingCost();
-        this.Context.Ratings.rating_glory = this.GetGloryRatingCost();
-        this.Context.Ratings.spare_ducat = this.GetSumCurrentDucats();
-        this.Context.Ratings.spare_glory = this.GetSumCurrentGlory();
-        this.Context.Ratings.stash_rating_ducat = this.GetDucatCostStash();
-        this.Context.Ratings.stash_rating_glory = this.GetGloryCostStash();
+        this.Context.Ratings.rating_ducat = this.GetRatingDucats();
+        this.Context.Ratings.rating_glory = this.GetRatingGlory();
+        this.Context.Ratings.spare_ducat = this.GetStashedDucats();
+        this.Context.Ratings.spare_glory = this.GetStashedGlory();
+        this.Context.Ratings.stash_rating_ducat = this.GetStashedItemsValueDucats();
+        this.Context.Ratings.stash_rating_glory = this.GetStashedItemsValueGlory();
         //
 
         const _objint : IUserWarband = {
@@ -647,48 +647,188 @@ class UserWarband extends DynamicContextObject {
         return this.Faction.GetFaction();
     }
 
-    /** 
-     * Returns the Ducats Value of the Warband Cost as int (without stash)
+    /** * * * * * * * *
+     * Currency
      */
-    public GetCostDucats() {
-        return this.GetDucatRatingCost()
+    private computeCurrency() {
+        // base values
+        const bank_d   = Number(this.Ducats || 0);
+        const bank_g   = Number(this.Glory || 0);
+        const debts_d  = Number(this.Debts?.ducats || 0); // what is debts exactly?
+        const debts_g  = Number(this.Debts?.glory || 0); // what is debts exactly?
+
+        // active fighters
+        let active_d = 0; // cost of active models
+        let active_g = 0; // cost of active models
+        let discounts_active_d = 0; // discount value on active models (ducats)
+        let discounts_active_g = 0; // discount value on active models (glory)
+
+        // reserved fighters
+        let reserve_d = 0; // cost of reserved models
+        let reserve_g = 0; // cost of reserved models
+        let discounts_reserve_d = 0; // discount value on reserve models (ducats)
+        let discounts_reserve_g = 0; // discount value on reserve models (glory)
+
+        // dead & lost fighters
+        let dead_lost_d = 0; // cost of dead and lost models
+        let dead_lost_g = 0; // cost of dead and lost models
+
+        // items
+        let stashedItems_d = 0; // value of stashed items
+        let stashedItems_g = 0; // value of stashed items
+        let discounts_equip_d = 0; // discount value on active models (ducats)
+        let discounts_equip_g = 0; // discount value on active models (glory)
+
+        // Check fighter costs
+        for (let i = 0; i < this.Models.length; i++) {
+            // Active WB members
+            if ((this.Models[i].HeldObject as WarbandMember).State == "active") {
+                if (this.Models[i].CountCap == false) { // @TODO: what is this?
+                    continue;
+                }
+
+                // add to active fighter cost
+                active_d += this.Models[i].GetTotalDucats( false, true );
+                active_g += this.Models[i].GetTotalGlory( false, true );
+
+                // get discounts (cost modification that affect rating but not cost)
+                discounts_active_d += this.Models[i].GetTotalDiscount(0);
+                discounts_active_g += this.Models[i].GetTotalDiscount(1);
+            }
+
+            // Reserved WB members
+            if ((this.Models[i].HeldObject as WarbandMember).State == "reserved") {
+                reserve_d += this.Models[i].GetTotalDucats(false, true);
+                reserve_g += this.Models[i].GetTotalGlory(false, true);
+
+                // get discounts (cost modification that affect rating / value but not cost)
+                discounts_reserve_d += this.Models[i].GetTotalDiscount(0);
+                discounts_reserve_g += this.Models[i].GetTotalDiscount(1);
+            }
+
+            // Dead and lost WB members
+            if (
+                (this.Models[i].HeldObject as WarbandMember).State == "dead" ||
+                (this.Models[i].HeldObject as WarbandMember).State == "lost"
+            ) {
+                dead_lost_d += this.Models[i].GetTotalDucats(false, true);
+                dead_lost_g += this.Models[i].GetTotalGlory(false, true);
+            }
+        }
+
+
+        // Check stashed equipment costs
+        for (let i = 0; i < this.Equipment.length; i++) {
+            if (this.Equipment[i].CountCap == false) {
+                continue;
+            }
+            stashedItems_d += this.Equipment[i].GetTotalDucats(false); // add to total items value
+            stashedItems_g += this.Equipment[i].GetTotalGlory(false); // add to total items value
+
+            discounts_equip_d += this.Equipment[i].GetTotalDiscount(0); // add to items discounts
+            discounts_equip_g += this.Equipment[i].GetTotalDiscount(1); // add to items discounts
+        }
+
+
+        // -- further calculations --
+
+        // Warband Rating (cost of models + value of discounts)
+        const rating_d = active_d + discounts_active_d;
+        const rating_g = active_g + discounts_active_g;
+
+        // stashed currency (bank - all purchases + value of stash discounts - debts)
+        const stashed_d = bank_d - (active_d + reserve_d + dead_lost_d + stashedItems_d) + discounts_equip_d - debts_d; // value of stashed ducats
+        const stashed_g = bank_g - (active_g + reserve_g + dead_lost_g + stashedItems_g) + discounts_equip_g - debts_g; // value of stashed glory
+
+        // total stash value (stashed currency + stashed items value)
+        const stashValue_d = stashedItems_d + stashed_d; // total value of stash (ducats)
+        const stashValue_g = stashedItems_g + stashed_g; // total value of stash (glory)
+
+        // total WB value (All things in the stash + WB rating + reserves)
+        const totalValue_d = stashValue_d + rating_d + (reserve_d + discounts_reserve_d); // total value of warband (ducats)
+        const totalValue_g = stashValue_g + rating_g + (reserve_g + discounts_reserve_g); // total value of warband (glory)
+
+        return {
+            ducats : {
+                bank: bank_d,
+                debts: debts_d,
+                rating: rating_d,
+                total: totalValue_d,
+                reserve: reserve_d,
+                stashedItems: stashedItems_d,
+                stashed: stashed_d,
+                stashValue: stashValue_d
+            },
+            glory: {
+                bank: bank_g,
+                debts: debts_g,
+                rating: rating_g,
+                total: totalValue_g,
+                reserve: reserve_g,
+                stashedItems: stashedItems_g,
+                stashed: stashed_g,
+                stashValue: stashValue_g
+            }
+        };
     }
 
     /**
-     * Returns the total Ducats Value including stash as int
-     * @constructor
+     * Returns the Rating of all active fighters in this warband
+     * @return: number
      */
-    public GetCostDucatsTotal (discount = false) {
-        return this.GetDucatCost(discount) + this.GetDucatCostStash(discount)
+    GetRatingDucats (): number {
+        return this.computeCurrency().ducats.rating;
+    }
+    GetRatingGlory (): number {
+        return this.computeCurrency().glory.rating;
     }
 
     /**
-     * Number of unspent ducats
+     * Returns the stashed Ducats in this warband
      */
-    public GetSumCurrentDucats() {
-        return this.Ducats - this.GetCostDucatsTotal(true) -  this.Debts.ducats
+    GetStashedDucats () : number {
+        console.log(this.computeCurrency());
+
+        return this.computeCurrency().ducats.stashed;
+    }
+    GetStashedGlory () : number {
+        return this.computeCurrency().glory.stashed;
     }
 
     /**
-     * Number of unspent glory
+     * Returns the ducat value of all stashed items in this warband
      */
-    public GetSumCurrentGlory() {
-        return this.Glory - this.GetCostGloryTotal(true) -  this.Debts.glory
+    GetStashedItemsValueDucats () : number {
+        return this.computeCurrency().ducats.stashedItems;
+    }
+    GetStashedItemsValueGlory () : number {
+        return this.computeCurrency().glory.stashedItems;
     }
 
     /**
-     * Returns the Glory Value of the Warband Cost as int (without stash)
+     * Returns the total stash value
      */
-    public GetCostGlory() {
-        return this.GetGloryRatingCost()
+    GetStashValueDucats () : number {
+        return this.computeCurrency().ducats.stashValue;
+    }
+    GetStashValueGlory () : number {
+        return this.computeCurrency().glory.stashValue;
+    }
+
+
+    /**
+     * Returns the total WB value
+     */
+    GetTotalValueDucats () : number {
+        return this.computeCurrency().ducats.total;
+    }
+    GetTotalValueGlory () : number {
+        return this.computeCurrency().glory.total;
     }
 
     /**
-     * Returns the Glory Value of the Warband including stash as int
-     */
-    public GetCostGloryTotal(discount = false) {
-        return this.GetGloryCost(discount) + this.GetGloryCostStash(discount)
-    }
+     * END Currency
+     * * * * * * * * * * * */
 
     /**
      * 
@@ -863,10 +1003,10 @@ class UserWarband extends DynamicContextObject {
             const maxccurcostount = fighter.purchase.ItemCost;
 
             if (fighter.purchase.CostType == 0) {
-                canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
+                canaddupgrade = (this).GetStashedDucats() >= maxccurcostount;
             }
             if (fighter.purchase.CostType == 1) {
-                canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+                canaddupgrade = (this).GetStashedGlory() >= maxccurcostount;
             }
 
             if (!canaddupgrade) {
@@ -1038,10 +1178,10 @@ class UserWarband extends DynamicContextObject {
 
     public HasEnoughDucats(cost : number, costtype : number) {
         if (costtype == 1) {
-            const ducatval = this.GetSumCurrentGlory();
+            const ducatval = this.GetStashedGlory();
             return ducatval >= cost;
         } else {
-            const ducatval = this.GetSumCurrentDucats();
+            const ducatval = this.GetStashedDucats();
             return ducatval >= cost;
         }
     }
@@ -1295,145 +1435,6 @@ class UserWarband extends DynamicContextObject {
      */
     GetBattleCount() {
         return 3;
-    }
-
-    /**
-     * Get the stashed currency as object
-     *
-     */
-    GetStash() {
-        return {
-            ValueDucats: this.GetDucatCostStash(), // stash value in ducats
-            ValueGlory: this.GetGloryCostStash(), // stash value in glory
-            AmountDucats: this.GetSumCurrentDucats(),  // unspent ducats
-            AmountGlory: this.GetSumCurrentGlory(), // unspent glory
-            TotalDucats: this.GetDucatTotalStash(), // total stash value in ducats
-            TotalGlory: this.GetGloryTotalStash(), // total stash value in glory
-            Items: []
-        }
-    }
-
-    /**
-     * Returns the cost for all members of this warband as ducats
-     * - excluding stash
-     * - excluding dead models
-     * - excluding lost models
-     * @param discount
-     */
-    public GetDucatCost(discount = false, include_dead = true) {
-        let TotalDucatCost = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-
-            // Only count non-dead models
-            const WbMember = this.Models[i].HeldObject as WarbandMember;
-            if( WbMember.IsDead() && !include_dead ) {
-                continue;
-            }
-            if( WbMember.IsLost() ) {
-                continue;
-            }
-
-            TotalDucatCost += this.Models[i].GetTotalDucats(false, discount);
-
-        }
-        return TotalDucatCost
-    }
-
-    public GetDucatRatingCost(include_dead = false) {
-        
-        let TotalDucatCost = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-            if ((this.Models[i].HeldObject as WarbandMember).State == "active" || include_dead) {
-                if (this.Models[i].CountCap == false) {
-                    continue;
-                }
-                TotalDucatCost += this.Models[i].GetTotalDucats();
-            }
-        }
-        return TotalDucatCost
-    }
-
-    /**
-     * Gets the value of stashed items in ducats
-     * @param discount
-     */
-    public GetDucatCostStash(discount = false) {
-        
-        let TotalDucatCost = 0;
-        for (let i = 0; i < this.Equipment.length; i++) {
-            if (this.Equipment[i].CountCap == false) {
-                continue;
-            }
-            TotalDucatCost += this.Equipment[i].GetTotalDucats(false, discount);
-        }
-        return TotalDucatCost
-    }
-
-    /**
-     * Returns the cost for all members of this warband as glory
-     * - excluding stash
-     * - excluding dead models
-     * @param discount
-     */
-    public GetGloryCost(discount = false, include_dead = true) {
-        
-        let TotalGloryCost = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-
-            // Only count non-dead models
-            const WbMember = this.Models[i].HeldObject as WarbandMember;
-            if( WbMember.IsDead() && !include_dead) {
-                continue;
-            }
-
-            if (this.Models[i].CountCap == false) {
-                continue;
-            }
-            TotalGloryCost += this.Models[i].GetTotalGlory(false, discount);
-        }
-        return TotalGloryCost
-    }
-
-    public GetGloryRatingCost(include_dead = false) {
-        
-        let TotalGloryCost = 0;
-        for (let i = 0; i < this.Models.length; i++) {
-            if (this.Models[i].CountCap == false) {continue;}
-            if ((this.Models[i].HeldObject as WarbandMember).State == "active" || include_dead) {
-                TotalGloryCost += this.Models[i].GetTotalGlory();
-            }
-        }
-        return TotalGloryCost
-    }
-
-    /**
-     * Gets the value of stashed items in glory
-     * @param discount
-     */
-    public GetGloryCostStash(discount = false) {
-        
-        let TotalGloryCost = 0;
-        for (let i = 0; i < this.Equipment.length; i++) {
-            if (this.Equipment[i].CountCap == false) {continue;}
-            TotalGloryCost += this.Equipment[i].GetTotalGlory(false, discount);
-        }
-        return TotalGloryCost
-    }
-
-    /**
-     * Returns the total value of stashed ducats and items as ducats
-     * @constructor
-     */
-    public GetDucatTotalStash () {
-        return this.GetDucatCostStash() + this.GetSumCurrentDucats();
-    }
-
-    /**
-     * Returns the total value of stashed glory and items as glory
-     * @constructor
-     */
-    public GetGloryTotalStash () {
-        return this.GetGloryCostStash() + this.GetSumCurrentGlory();
     }
 
 
@@ -1903,10 +1904,10 @@ class UserWarband extends DynamicContextObject {
                 }
                 if (count_cost == true && canaddupgrade == true) {
                     if (BaseRels[i].CostType == 0) {
-                        canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
+                        canaddupgrade = (this).GetStashedDucats() >= maxccurcostount;
                     }
                     if (BaseRels[i].CostType == 1) {
-                        canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+                        canaddupgrade = (this).GetStashedGlory() >= maxccurcostount;
                     }
                 }
                 this.ModelRelCache[BaseRels[i].ID] = {
@@ -2150,10 +2151,10 @@ class UserWarband extends DynamicContextObject {
                         let canaddupgrade = true;
 
                         if (BaseRels[i].CostType == 0) {
-                            canaddupgrade = (this).GetSumCurrentDucats() >= maxccurcostount;
+                            canaddupgrade = (this).GetStashedDucats() >= maxccurcostount;
                         }
                         if (BaseRels[i].CostType == 1) {
-                            canaddupgrade = (this).GetSumCurrentGlory() >= maxccurcostount;
+                            canaddupgrade = (this).GetStashedGlory() >= maxccurcostount;
                             if (containsTag(BaseRels[i].Tags, "exploration_only") && exploration_cap && canaddupgrade == true) {
                                 const explore_limit = await this.GetExplorationLimit()
                                 canaddupgrade = maxccurcostount <= explore_limit;
@@ -2313,7 +2314,7 @@ class UserWarband extends DynamicContextObject {
         LineList.push(" ")
 
         LineList.push("Faction: " + this.GetFactionName() )
-        LineList.push("Rating: " + this.GetDucatRatingCost().toString() + " Ducats | "+ this.GetGloryRatingCost().toString() + " Glory" )
+        LineList.push("Rating: " + this.GetRatingDucats().toString() + " Ducats | "+ this.GetRatingGlory().toString() + " Glory" )
         LineList.push("Patron: " + this.GetPatronName())
 
         if (elite.length > 0) {
@@ -2550,11 +2551,8 @@ class UserWarband extends DynamicContextObject {
             LineList.push("## Stash ##")
             LineList.push("  " )
 
-            // add stashed ducats and glory
-            const stash = this.GetStash();
-
-            LineList.push("Stashed Ducats: " + (stash.AmountDucats > 10e10? "Unlimited" : stash.AmountDucats))
-            LineList.push("Unspent Glory: " + (stash.AmountGlory  > 10e10? "Unlimited" : stash.AmountGlory))
+            LineList.push("Stashed Ducats: " + (this.GetStashedDucats() > 10e10? "Unlimited" : this.GetStashedDucats()))
+            LineList.push("Unspent Glory: " + (this.GetStashedGlory()  > 10e10? "Unlimited" : this.GetStashedGlory()))
 
             // Add stashed Equipment
             if( this.Equipment.length > 0) {

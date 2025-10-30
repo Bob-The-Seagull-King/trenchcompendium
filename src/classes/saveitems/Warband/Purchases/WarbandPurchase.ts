@@ -157,6 +157,12 @@ class WarbandPurchase {
         return _objint;
     }
 
+    /**
+     * Get discount for purchase
+     *
+     * @param type (0 (ducats)| 1 (glory))
+     * @return: number
+     */
     public GetTotalDiscount(type : number) {
         let TotalCost = 0;
         if (this.CostType == type) {
