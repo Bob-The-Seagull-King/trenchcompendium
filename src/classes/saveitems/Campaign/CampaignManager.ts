@@ -2,7 +2,7 @@ import {
     AdminChange,
     AnnouncementCreate,
     AnnouncementDelete,
-    AnnouncementEdit,
+    AnnouncementEdit, DeleteACampaign,
     GetPlayerCampaignInvites,
     GetPlayerCampaigns,
     InviteAccept,
@@ -478,21 +478,18 @@ class CampaignManager {
     }
 
     public async DeleteCampaign ( _campaign_id : number ) {
-        /**
-         * @TODO delete Campaign here:
-         * POST /wp-json/synod/v1/campaigns/delete
-         *
-         * Args: {
-         * "campaign_id": <id>
-         * }
-         *
-         * Response: {
-         * "status": "success",
-         * "message": "Campaign deleted"
-         * }
-         *
-         */
-        alert ();
+        if (this.InCampaign(_campaign_id)) {
+            const Submit = this.GetUserSubmitBasics(false);
+            if (Submit == null) { return 400; }
+            const responseVal = await DeleteACampaign(
+                {
+                    campaign_id: _campaign_id }
+                , Submit)
+            if (responseVal != null && responseVal.status == 200) {
+                await this.ResetCampaignByID(_campaign_id);
+            }
+            return responseVal;
+        }
     }
 
 }

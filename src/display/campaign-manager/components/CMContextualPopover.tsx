@@ -107,11 +107,9 @@ const CMContextualPopover: React.FC<CMContextualPopoverProps> = ({ id, type, ite
                     setBusy(false);
                     setShowDeleteCampaignModal(false);   // close Modal
                     navigate( ROUTES.CAMPAIGN, {state: Date.now().toString()})
-                    toast.success('Campaign name changed')
+                    toast.success('Campaign deleted')
                 })
             })
-
-            alert ('delete this campaign');
         }
     }
 
