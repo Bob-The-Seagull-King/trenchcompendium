@@ -21,6 +21,12 @@ const CMHistory: React.FC = () => {
                 {'History'}
             </h2>
 
+            { !campaign.GetAnnouncements().length &&
+                <div className={''}>
+                    {'No history available'}
+                </div>
+            }
+
             { campaign.GetAnnouncements().map((announcement, index) => (
                 <React.Fragment key={index}>
                     <CMHistoryAnnouncement
