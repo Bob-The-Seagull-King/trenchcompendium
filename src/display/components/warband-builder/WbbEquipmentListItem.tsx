@@ -53,9 +53,8 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
         async function GetCanRemove() {
             if (fighter !== null && fighter != undefined) {
-                if ((item.HeldObject as WarbandEquipment).EquipmentCache == null) {
-                    await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)
-                }
+                
+                await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)
                 const cache = (item.HeldObject as WarbandEquipment).EquipmentCache
                 if (cache != null) {
                     setCanRemove(cache.CanRemove)
@@ -85,7 +84,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
             onClick={!play_mode ? () => setShowDetailsModal(true) : undefined}
         >
 
-            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="WbbEquipmentListItem-Detail" centered>
+            <Modal key={keyvar} show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="WbbEquipmentListItem-Detail" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>{ItemValue.GetTrueName()}</Modal.Title>
 
