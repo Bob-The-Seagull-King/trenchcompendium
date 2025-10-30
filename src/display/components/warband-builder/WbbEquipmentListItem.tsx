@@ -53,21 +53,20 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
         async function GetCanRemove() {
             if (fighter !== null && fighter != undefined) {
-                
-                await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)
-                const cache = (item.HeldObject as WarbandEquipment).EquipmentCache
-                if (cache != null) {
-                    setCanRemove(cache.CanRemove)
-                    setCantSwap(cache.CanSwap)
-                    setKeywordList(cache.KeywordsCache)
-                    setrange((item.HeldObject as WarbandEquipment).GetRange())
-                }
-                setKeyvar((prev) => prev + 1)
+                await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)    
             }
+            const cache = (item.HeldObject as WarbandEquipment).EquipmentCache
+            if (cache != null) {
+                setCanRemove(cache.CanRemove)
+                setCantSwap(cache.CanSwap)
+                setKeywordList(cache.KeywordsCache)
+                setrange((item.HeldObject as WarbandEquipment).GetRange())
+            }
+            setKeyvar((prev) => prev + 1)
         }
 
         GetCanRemove();
-    }, [updateKey])
+    }, [updateKey, item, fighter])
 
     function GetIDRel() {
         if (fighter == null || fighter == undefined) {
