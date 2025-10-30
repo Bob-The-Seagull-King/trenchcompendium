@@ -8,6 +8,8 @@ import SynodImage from "../../../utility/SynodImage";
 import {UserWarband} from "../../../classes/saveitems/Warband/UserWarband";
 import SynodFactionImage from "../../../utility/SynodFactionImage";
 import { SumWarband } from '../../../classes/saveitems/Warband/WarbandManager';
+import UserNotification from "./micro-components/UserNotification";
+import {useAuth} from "../../../utility/AuthContext";
 
 interface WarbandListEntryProps {
     warband: SumWarband
@@ -19,6 +21,7 @@ const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
     }) => {
 
     const navigate = useNavigate();
+    const { userId, isLoggedIn } = useAuth()
 
     return (
         <div className="WarbandListEntry">
@@ -37,12 +40,21 @@ const WarbandListEntry: React.FC<WarbandListEntryProps> = ({
 
             <div className={'WarbandListEntry-text'}>
                 <CustomNavLink
-                    classes={'warband-name'}
+                    classes={'warband-name d-inline-block position-relative'}
                     link={`/warband/detail/${warband.id}`}
                     runfunc={() => {
                         navigate(`/warband/detail/${warband.id}`)
                     }}>
                     {warband.warband_data.GetWarbandName()}
+
+                    {(warband.warband_data.GetCampaignInvites().length > 0 &&
+                        !warband.warband_data.GetCampaignId() &&
+                        userId && warband.warband_data.IsOwner(userId)) &&
+                            <UserNotification
+                                content={'!'}
+                                size={'small'}
+                            />
+                    }
                 </CustomNavLink>
 
                 <div className={'warband-faction'}>
