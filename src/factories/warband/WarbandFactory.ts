@@ -14,7 +14,7 @@ import { FactionModelRelationship } from '../../classes/relationship/faction/Fac
 import { FactionEquipmentRelationship } from '../../classes/relationship/faction/FactionEquipmentRelationship';
 import { ModelEquipmentRelationship } from '../../classes/relationship/model/ModelEquipmentRelationship';
 import { Equipment } from '../../classes/feature/equipment/Equipment';
-import { SumWarband } from '../../classes/saveitems/Warband/WarbandManager';
+import { ISumWarband, SumWarband } from '../../classes/saveitems/Warband/WarbandManager';
 import { SynodDataCache } from '../../classes/_high_level_controllers/SynodDataCache';
 import { SYNOD } from '../../resources/api-constants';
 import { containsTag } from '../../utility/functions';
@@ -214,7 +214,7 @@ class WarbandFactory {
         return null;
     }
 
-    static async GetWarbandBasicPublicByID( _val : number) : Promise<SumWarband | null> {
+    static async GetWarbandBasicPublicByID( _val : number) : Promise<ISumWarband | null> {
         const synodcache : SynodDataCache = SynodDataCache.getInstance();
         let userdata : any = undefined;
 

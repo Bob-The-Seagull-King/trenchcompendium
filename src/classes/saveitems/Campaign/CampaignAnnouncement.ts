@@ -32,6 +32,10 @@ export class CampaignAnnouncement {
         this._author = (NewPlayer);
     }
 
+    public async RehydrateUser() {
+        await this._author.RehydrateUser();
+    }
+
     get Id() { return this._id; }
     get Title() { return this._title; }
 

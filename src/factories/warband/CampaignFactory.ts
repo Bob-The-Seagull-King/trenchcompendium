@@ -110,6 +110,30 @@ class CampaignFactory {
         // clear sub-caches if du wirklich hart resetten willst …
         return CampaignFactory.GetCampaignPublicByID(val.GetId(), { force: true }, hydrate);
     }
+
+    static async Rehydratecampaign( val : Campaign) {
+        const WarbandList : CampaignWarband[] = val.GetWarbands()
+        for (let i = 0; i < WarbandList.length; i++) {
+            await WarbandList[i].RehydrateUser();
+            await WarbandList[i].RehydrateWarbands();
+        }
+
+        const UserList : CampaignUser[] = val.GetInvitablePlayers_full();
+        for (let i = 0; i < UserList.length; i++) {
+            await UserList[i].RehydrateUser();
+        }
+
+        const AnnouncementList : CampaignAnnouncement[] = val.GetAnnouncements();
+        for (let i = 0; i < AnnouncementList.length; i++) {
+            await AnnouncementList[i].RehydrateUser();
+        }
+
+        const LatestAnnouncement : CampaignAnnouncement | null = val.GetLatestAnnouncement();
+        if (LatestAnnouncement != null) { 
+            await LatestAnnouncement.RehydrateUser();
+        }
+        
+    }
 }
 
 export { CampaignFactory };

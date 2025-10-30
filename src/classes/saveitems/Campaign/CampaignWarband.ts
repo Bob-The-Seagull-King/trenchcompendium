@@ -1,6 +1,6 @@
 import { WarbandFactory } from "../../../factories/warband/WarbandFactory";
 import { CampaignFactory } from "../../../factories/warband/CampaignFactory";
-import { SumWarband } from "../Warband/WarbandManager";
+import { ISumWarband, SumWarband } from "../Warband/WarbandManager";
 import { ICampaignUser, CampaignUser } from "./CampaignUser";
 import { ContextObject } from "../../contextevent/contextobject";
 import { Campaign } from "./Campaign";
@@ -32,7 +32,7 @@ export class CampaignWarband extends ContextObject {
     private _factionName = "";
     private _owner!: CampaignUser;
     private _warband: SumWarband | null = null;
-    private _warbandBasic: IUserWarband | null = null;
+    private _warbandBasic: ISumWarband | null = null;
     private _imageId = 0;
     private _imageUrls?: Record<string, string>;
     private _imageSourceTitle?: string;
@@ -81,9 +81,25 @@ export class CampaignWarband extends ContextObject {
         } else {
             const warband = await WarbandFactory.GetWarbandBasicPublicByID(data.warband_id);
             if (warband != null) {
-
+                this._warbandBasic = warband;
             }
         }
+    }
+
+    public async RehydrateWarbands() {
+        if (this._warband == null && this._warbandBasic != null) {
+            const warband = await WarbandFactory.CreateUserWarband(this._warbandBasic.warband_data, this._warbandBasic.id)
+            if (warband != null) {
+                this._warband = {id: this._warbandBasic.id, warband_data: warband}
+            }
+            if (this._warband != null) {
+                this._warband.warband_data.MyContext = this;
+            }
+        }
+    }
+
+    public async RehydrateUser() {
+        await this._owner.RehydrateUser();        
     }
 
     get Id() { return this._id; }

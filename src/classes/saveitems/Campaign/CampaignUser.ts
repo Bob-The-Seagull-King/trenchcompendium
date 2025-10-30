@@ -56,6 +56,13 @@ export class CampaignUser {
         }
     }
 
+    public async RehydrateUser() {
+        if (this._userObject == null && this._userBasic != null) {
+            const MyUser = await UserFactory.BuildUserPublic(this._userBasic);
+            this._userObject = MyUser;
+        }
+    }
+
     get Id() { return this._id; }
     get Nickname() { return this._nickname; }
     get Name() { return this._nickname; }
