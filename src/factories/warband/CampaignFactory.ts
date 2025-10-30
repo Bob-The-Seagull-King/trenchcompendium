@@ -19,7 +19,7 @@ class CampaignFactory {
 
     static async CreateCampaignUser(data: ICampaignUser) {
 
-        const id = (data.id ?? data.user_id)!;
+        const id = (data.id? data.id : data.user_id? data.user_id : -1);
         const cache = SynodDataCache.getInstance();
         if (cache.CheckCampaignUserCache(id)) {
             return cache.campaignUserCache[id];
