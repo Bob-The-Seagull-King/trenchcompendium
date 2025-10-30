@@ -137,16 +137,16 @@ const WbbWarbandDetailView: React.FC<WbbWarbandDetailViewProps> = ({  onClose })
                         <strong>
                             {'Rating: '}
                         </strong>
-                        {warband.warband_data.GetCostDucats()} Ducats
-                        | {warband.warband_data.GetCostGlory()} Glory
+                        {warband.warband_data.GetRatingDucats()} Ducats
+                        | {warband.warband_data.GetRatingGlory()} Glory
                     </div>
 
                     <div className={'detail-section-text-element'}>
                         <strong>
                             {'Value: '}
                         </strong>
-                        {warband.warband_data.GetCostDucatsTotal()} Ducats
-                        | {warband.warband_data.GetCostGloryTotal()} Glory
+                        {warband.warband_data.GetTotalValueDucats()} Ducats
+                        | {warband.warband_data.GetTotalValueGlory()} Glory
                     </div>
 
                     <div className={'detail-section-text-element'}>

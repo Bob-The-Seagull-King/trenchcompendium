@@ -13,7 +13,6 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
 
     if (!warband ) return <div>Loading Warband...</div>;
 
-    const stash = warband.warband_data.GetStash();
     const fighters = warband.warband_data.GetFighters();
 
     const [basevariant, setbasevariant] = useState<Faction | null>(null)
@@ -118,7 +117,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Pay Chest'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.AmountDucats}
+                                {warband.warband_data.GetStashedDucats()}
                             </div>
                         </div>
                     </div>
@@ -129,7 +128,7 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Glory Points'}
                             </div>
                             <div className={'warband-value'}>
-                                {stash.AmountGlory}
+                                {warband.warband_data.GetStashedGlory()}
                             </div>
                         </div>
                     </div>
@@ -151,9 +150,9 @@ const WbbPrintViewSimpleOverview: React.FC = () => {
                                 {'Warband Rating'}
                             </div>
                             <div className={'warband-value'}>
-                                {warband.warband_data.GetCostDucats()}{' Ducats'}
+                                {warband.warband_data.GetRatingDucats()}{' Ducats'}
                                 {' | '}
-                                {warband.warband_data.GetCostGlory()}{' Glory'}
+                                {warband.warband_data.GetRatingGlory()}{' Glory'}
                             </div>
                         </div>
                     </div>

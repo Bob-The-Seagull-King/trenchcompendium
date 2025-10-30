@@ -48,8 +48,8 @@ const WbbEditViewWarband: React.FC<WbbEditViewWarbandProps> = ({
         <div className={`WbbEditViewWarband warband-meta ${isActive ? 'active' : ''}`} onClick={onClick}>
             <div className={'meta-headline'}>{'Warband'}</div>
             <div className="meta-item"><strong>Faction:</strong> {warband.warband_data.GetFactionName()}</div>
-            <div className="meta-item"><strong>Rating:</strong> {warband.warband_data.GetCostDucats()} Ducats
-                | {warband.warband_data.GetCostGlory()} Glory
+            <div className="meta-item"><strong>Rating:</strong> {warband.warband_data.GetRatingDucats()} Ducats
+                | {warband.warband_data.GetRatingGlory()} Glory
             </div>
             <div className="meta-item">
                 <strong>{'Fielded: '}</strong>
