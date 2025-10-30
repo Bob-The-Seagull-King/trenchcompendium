@@ -103,6 +103,8 @@ class CampaignManager {
                     }
                 }
             }
+
+            // @TODO: this does nothing as the endpoint does not exist
             const invites = await GetPlayerCampaignInvites(submission)
             if (invites != null) {
                 const json = (await invites.json()) as number[];
@@ -113,6 +115,10 @@ class CampaignManager {
                     }
                 }
             }
+
+            //@TODO: Add warband invites here
+
+
         }
         this.SortMyCampaigns();
         this.Complete = true;
@@ -192,8 +198,8 @@ class CampaignManager {
     public IsInvitedWarband(campaignId : number, warbandId : number) {
 
         // @TODO: this.ListOfWarbandInvites is empty
-        console.log('this.ListOfWarbandInvites');
-        console.log(this.ListOfWarbandInvites);
+        // console.log('this.ListOfWarbandInvites');
+        // console.log(this.ListOfWarbandInvites);
 
         if (this.UserProfile == null) { return false; }
         for (let i = 0; i < this.ListOfWarbandInvites.length; i++) {
@@ -258,6 +264,9 @@ class CampaignManager {
         }
     }
 
+    /**
+     * @TODO: this is not used anywhere and seems bugged
+     */
     public async MoveWarbandInviteCampaign(_val : number, _accepted : boolean) {
         let NewCampaign : Campaign | null = null;
         for (let i = 0; i < this.ListOfWarbandInvites.length; i++) {
@@ -352,7 +361,10 @@ class CampaignManager {
     public async CampaignWarbandAccept(_campaign_id : number, _warband_id : number) {
         const Submit = this.GetUserSubmitBasics(false);
         if (Submit == null || this.UserProfile == null) { return 400; }
-        if (this.IsInvitedWarband(_campaign_id, _warband_id)) {
+
+        // @TODO IsInvitedWarband() does not work. Should be checked so we can double check here
+        // - The IsInvited is checked in the API anyways
+        if (this.IsInvitedWarband(_campaign_id, _warband_id) || _warband_id ) {
             
             const responseVal = await WarbandAccept({campaign_id: _campaign_id, warband_id : _warband_id }, Submit)
             if (responseVal.status == 200) {
@@ -367,7 +379,10 @@ class CampaignManager {
         const Submit = this.GetUserSubmitBasics(false);
 
         if (Submit == null || this.UserProfile == null) { return 400; }
-        if (this.IsInvitedWarband(_campaign_id, _warband_id)) {
+
+        // @TODO IsInvitedWarband() does not work. Should be checked so we can double check here
+        // - The IsInvited is checked in the API anyways
+        if (this.IsInvitedWarband(_campaign_id, _warband_id) || _warband_id ) {
 
             const responseVal = await WarbandCancel({campaign_id: _campaign_id, warband_id : _warband_id }, Submit)
             if (responseVal.status == 200) {

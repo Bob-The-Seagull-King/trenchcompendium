@@ -18,7 +18,6 @@ const CMLatestAnnouncement: React.FC = () => {
     const announcement = campaign.GetLatestAnnouncement(); // CampaignAnnouncement | null
 
     if (!announcement) {
-        // @TODO create better empty state
         return (
             <div className="CMLatestAnnouncement">
                 <h3 className="CMLatestAnnouncement-headline">Latest Announcement</h3>

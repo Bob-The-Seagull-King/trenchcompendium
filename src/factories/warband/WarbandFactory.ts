@@ -193,6 +193,7 @@ class WarbandFactory {
             if (response) {
                 const json : any = await response.json();          
                 userdata = json.warband_data
+                // @TODO: this produces an error
                 userdata["warband_invites"] = json.warband_campaign_invites
                 userdata["warband_campaigns"] = json.warband_campaigns
                 userdata["warband_user"] = json.warband_user_id
