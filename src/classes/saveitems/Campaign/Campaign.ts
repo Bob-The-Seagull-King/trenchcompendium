@@ -44,31 +44,31 @@ export class Campaign {
         this._warbandsInvited = Array.isArray(data.campaign_warbands_invited) ? [...data.campaign_warbands_invited] : [];
     }
 
-    public async BuildWarbands(data : ICampaign) {
+    public async BuildWarbands(data : ICampaign, hydrate = true) {
         
         for (let i = 0; i < data.campaign_warbands.length; i++) {
-            const NewPlayer = await CampaignFactory.CreateCampaignWarband(data.campaign_warbands[i], this);
+            const NewPlayer = await CampaignFactory.CreateCampaignWarband(data.campaign_warbands[i], this, hydrate);
             this._warbands.push(NewPlayer);
         }
     }
 
-    public async BuildPlayers(data : ICampaign) {
+    public async BuildPlayers(data : ICampaign, hydrate = true) {
 
         // Parallel faszer; Sorting stays via map()
         const [joined, invited, invitable] = await Promise.all([
             Promise.all(
                 (data.campaign_players ?? []).map((u) =>
-                    CampaignFactory.CreateCampaignUser(u)
+                    CampaignFactory.CreateCampaignUser(u, hydrate)
                 )
             ),
             Promise.all(
                 (data.campaign_players_invited ?? []).map((u) =>
-                    CampaignFactory.CreateCampaignUser(u)
+                    CampaignFactory.CreateCampaignUser(u, hydrate)
                 )
             ),
             Promise.all(
                 (data.campaign_players_invitable ?? []).map((u) =>
-                    CampaignFactory.CreateCampaignUser(u)
+                    CampaignFactory.CreateCampaignUser(u, hydrate)
                 )
             ),
         ]);
@@ -78,9 +78,9 @@ export class Campaign {
         this._playersInvitable = invitable;
     }
 
-    public async BuildAnnouncements(data : ICampaign) {
+    public async BuildAnnouncements(data : ICampaign, hydrate = true) {
         for (let i = 0; i < data.campaign_announcements.length; i++) {
-            const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i]);
+            const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i], hydrate);
             if (NewAnnouncement != null) {
                 this._announcements.push(NewAnnouncement);
             }
@@ -102,7 +102,7 @@ export class Campaign {
         }
 
         if (latestObj) {
-            const latest = await CampaignFactory.CreateCampaignAnnouncement(latestObj);
+            const latest = await CampaignFactory.CreateCampaignAnnouncement(latestObj, hydrate);
             this._latestAnnouncement = latest ?? null;
         } else {
             this._latestAnnouncement = null;

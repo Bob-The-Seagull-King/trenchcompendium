@@ -214,6 +214,54 @@ class WarbandFactory {
         return null;
     }
 
+    static async GetWarbandBasicPublicByID( _val : number) : Promise<SumWarband | null> {
+        const synodcache : SynodDataCache = SynodDataCache.getInstance();
+        let userdata : any = undefined;
+
+        if (synodcache.CheckWarbandCache(_val)) {
+            userdata = (synodcache.warbandDataCache[_val]);
+        }
+
+        if (synodcache.CheckWarbandCallCache(_val)) {
+            const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
+            let count_check = 0;
+            while ((!synodcache.CheckWarbandCache(_val)) && (count_check < EMERGENCY_OUT)) {
+                await delay(100);
+                count_check += 1;
+            }                   
+            userdata = (synodcache.warbandDataCache[_val]);
+        }
+
+        if (!synodcache.CheckWarbandCache(_val)) {
+            synodcache.AddWarbandCallCache(_val);
+
+            const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/warband/${_val}`)
+
+            // warband does not exist -> same as default return
+            if( response.status === 400 ) {
+                return null;
+            }
+
+            if (response) {
+                const json : any = await response.json();          
+                userdata = json.warband_data
+                // @TODO: this produces an error
+                userdata["warband_invites"] = json.warband_campaign_invites
+                userdata["warband_campaigns"] = json.warband_campaigns
+                userdata["warband_user"] = json.warband_user_id
+                synodcache.AddWarbandCache(_val, userdata)
+            }
+        }
+
+        if (userdata != undefined) {
+            try {
+                return userdata;
+            } catch (e) {console.log(e)}
+        }
+
+        return null;
+    }
+
 }
 
 export {WarbandFactory}

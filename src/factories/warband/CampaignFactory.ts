@@ -8,16 +8,16 @@ import {CampaignAnnouncement, ICampaignAnnouncement} from "../../classes/saveite
 import {CampaignUser, ICampaignUser} from "../../classes/saveitems/Campaign/CampaignUser";
 
 class CampaignFactory {
-    static async CreateCampaign(data: ICampaign) {
+    static async CreateCampaign(data: ICampaign, hydrate = true) {
         // Always create a fresh Campaign instance so React gets a new reference
         const rule = new Campaign(data);
-        await rule.BuildWarbands(data);
-        await rule.BuildPlayers(data);
-        await rule.BuildAnnouncements(data);
+        await rule.BuildWarbands(data, hydrate);
+        await rule.BuildPlayers(data, hydrate);
+        await rule.BuildAnnouncements(data, hydrate);
         return rule;
     }
 
-    static async CreateCampaignUser(data: ICampaignUser) {
+    static async CreateCampaignUser(data: ICampaignUser, hydrate = true) {
 
         const id = (data.id? data.id : data.user_id? data.user_id : -1);
         const cache = SynodDataCache.getInstance();
@@ -34,11 +34,11 @@ class CampaignFactory {
             data.profile_picture?.image_id,
         );
         cache.AddCampaignUserCache(id, user);
-        await user.BuildSelfUser();
+        await user.BuildSelfUser(hydrate);
         return user;
     }
 
-    static async CreateCampaignAnnouncement(data: ICampaignAnnouncement) {
+    static async CreateCampaignAnnouncement(data: ICampaignAnnouncement, hydrate = true) {
 
         if (data == null) {return null;}
         const cache = SynodDataCache.getInstance();
@@ -48,23 +48,23 @@ class CampaignFactory {
         const a = new CampaignAnnouncement(data);
         cache.AddCampaignAnnouncementCache(data.announcement_id, a);
 
-        await a.BuildUser(data);
+        await a.BuildUser(data, hydrate);
         return a;
     }
 
-    static async CreateCampaignWarband(data: ICampaignWarband, parent: Campaign) {
+    static async CreateCampaignWarband(data: ICampaignWarband, parent: Campaign, hydrate = true) {
         const cache = SynodDataCache.getInstance();
         if (cache.CheckCampaignWarbandCache(data.warband_id)) {
             return cache.campaignWarbandCache[data.warband_id];
         }
         const wb = new CampaignWarband(data, parent);
         cache.AddCampaignWarbandCache(data.warband_id, wb);
-        await wb.BuildUser(data);
-        await wb.BuildWarband(data);
+        await wb.BuildUser(data, hydrate);
+        await wb.BuildWarband(data, hydrate);
         return wb;
     }
 
-    static async GetCampaignPublicByID(id: number, opts?: { force?: boolean }): Promise<Campaign | null> {
+    static async GetCampaignPublicByID(id: number, opts?: { force?: boolean }, hydrate = true): Promise<Campaign | null> {
         const cache = SynodDataCache.getInstance();
         let data: ICampaign | undefined;
 
@@ -98,17 +98,17 @@ class CampaignFactory {
         }
 
         // Always return a fresh Campaign instance
-        return data ? CampaignFactory.CreateCampaign(data) : null;
+        return data ? CampaignFactory.CreateCampaign(data, hydrate) : null;
     }
 
-    static async ResetCampaign(val: Campaign): Promise<Campaign | null> {
+    static async ResetCampaign(val: Campaign, hydrate = true): Promise<Campaign | null> {
         const cache = SynodDataCache.getInstance();
         delete cache.campaignDataCache[val.GetId()];
         delete cache.callCampaignCache[val.GetId()];
         delete cache.campaignObjectCache[val.GetId()];
 
         // clear sub-caches if du wirklich hart resetten willst …
-        return CampaignFactory.GetCampaignPublicByID(val.GetId(), { force: true });
+        return CampaignFactory.GetCampaignPublicByID(val.GetId(), { force: true }, hydrate);
     }
 }
 

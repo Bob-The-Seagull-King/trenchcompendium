@@ -1,5 +1,5 @@
 import { UserFactory } from "../../../factories/synod/UserFactory";
-import { SiteUserPublic } from "../../user_synod/user_public";
+import { ISiteUserPublic, SiteUserPublic } from "../../user_synod/user_public";
 import {ROUTES} from "../../../resources/routes-constants";
 
 export interface ICampaignUser {
@@ -26,6 +26,7 @@ export class CampaignUser {
     private _avatarSourceUrl?: string;
     private _avatarId = 0;       // e.g. WP attachment id
     private _userObject : SiteUserPublic | null = null;
+    private _userBasic : ISiteUserPublic | null = null;
 
     public constructor(
         id: number,
@@ -45,9 +46,14 @@ export class CampaignUser {
         this._avatarId = avatarId ?? 0;
     }
     
-    public async BuildSelfUser() {
-        const MyUser = await UserFactory.CreatePublicUserByID(this.Id);
-        this._userObject = MyUser;
+    public async BuildSelfUser(hydrate = true) {
+        if (hydrate) {
+            const MyUser = await UserFactory.CreatePublicUserByID(this.Id);
+            this._userObject = MyUser;
+        } else {
+            const MyUser = await UserFactory.GetPublicUserBasicByID(this.Id);
+            this._userBasic = MyUser;
+        }
     }
 
     get Id() { return this._id; }
@@ -59,6 +65,7 @@ export class CampaignUser {
     get AvatarSourceUrl() { return this._avatarSourceUrl; }
     get AvatarId() { return this._avatarId; }
     get UserPublic() { return this._userObject; }
+    get UserPublicBasic() { return this._userBasic; }
 
     get ProfileUrl () {
         return window.location.origin+'/profile/' + this.Id;

@@ -67,6 +67,46 @@ class UserFactory {
 
         return null;
     }
+
+    
+    static async GetPublicUserBasicByID(_val : number, skipcache = false) {
+
+        const synodcache : SynodDataCache = SynodDataCache.getInstance();
+        let userdata : ISiteUserPublic | undefined = undefined;
+
+        if (synodcache.CheckPublicCache(_val) && skipcache == false) {
+            userdata = (synodcache.publicDataCache[_val]);
+        }
+
+        if (synodcache.CheckPublicCallCache(_val) && skipcache == false) {
+            const EMERGENCY_OUT = 1000; // If we spend 100 seconds on one user, just give up
+            let count_check = 0;
+            while ((!synodcache.CheckPublicCache(_val)) && (count_check < EMERGENCY_OUT)) {
+                await delay(100);
+                count_check += 1;
+            }                   
+            userdata = (synodcache.publicDataCache[_val]);
+        }
+
+        if (!synodcache.CheckPublicCache(_val) || skipcache == true) {
+            synodcache.AddPublicCallCache(_val);
+            
+            const response : Response = await fetch(`${SYNOD.URL}/wp-json/synod/v1/user-public/${_val}`)
+            if (response) {
+                const json : any = await response.json();          
+                userdata = json
+                synodcache.AddPublicCache(_val, json)
+            }
+        }
+
+        if (userdata != undefined) {
+            try {
+                return userdata;
+            } catch (e) {console.log(e)}
+        }
+
+        return null;
+    }
     
     /**
      * 

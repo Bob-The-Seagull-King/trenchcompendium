@@ -26,9 +26,9 @@ export class CampaignAnnouncement {
         this._dateTs = dto.announcement_date ?? 0;
     }
 
-    public async BuildUser(data : ICampaignAnnouncement) {
+    public async BuildUser(data : ICampaignAnnouncement, hydrate = true) {
 
-        const NewPlayer = await CampaignFactory.CreateCampaignUser(data.announcement_author);
+        const NewPlayer = await CampaignFactory.CreateCampaignUser(data.announcement_author, hydrate);
         this._author = (NewPlayer);
     }
 

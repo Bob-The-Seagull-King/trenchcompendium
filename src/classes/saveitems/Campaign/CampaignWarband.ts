@@ -4,6 +4,7 @@ import { SumWarband } from "../Warband/WarbandManager";
 import { ICampaignUser, CampaignUser } from "./CampaignUser";
 import { ContextObject } from "../../contextevent/contextobject";
 import { Campaign } from "./Campaign";
+import { IUserWarband } from "../Warband/UserWarband";
 
 export interface ICampaignWarband {
     warband_id: number;
@@ -30,7 +31,8 @@ export class CampaignWarband extends ContextObject {
     private _factionSlug = "";
     private _factionName = "";
     private _owner!: CampaignUser;
-    private _warband!: SumWarband;
+    private _warband: SumWarband | null = null;
+    private _warbandBasic: IUserWarband | null = null;
     private _imageId = 0;
     private _imageUrls?: Record<string, string>;
     private _imageSourceTitle?: string;
@@ -62,18 +64,25 @@ export class CampaignWarband extends ContextObject {
         this._parent = parent;
     }
 
-    public async BuildUser(data : ICampaignWarband) {
-        const NewPlayer = await CampaignFactory.CreateCampaignUser(data.warband_user);
+    public async BuildUser(data : ICampaignWarband, hydrate = true) {
+        const NewPlayer = await CampaignFactory.CreateCampaignUser(data.warband_user, hydrate);
         this._owner = (NewPlayer);
     }
 
-    public async BuildWarband(data : ICampaignWarband) {
-        const warband = await WarbandFactory.GetWarbandPublicByID(data.warband_id)
-        if (warband != null) {
-            this._warband = warband
-        }
-        if (this._warband != null) {
-            this._warband.warband_data.MyContext = this;
+    public async BuildWarband(data : ICampaignWarband, hydrate = true) {
+        if (hydrate) {
+            const warband = await WarbandFactory.GetWarbandPublicByID(data.warband_id)
+            if (warband != null) {
+                this._warband = warband
+            }
+            if (this._warband != null) {
+                this._warband.warband_data.MyContext = this;
+            }
+        } else {
+            const warband = await WarbandFactory.GetWarbandBasicPublicByID(data.warband_id);
+            if (warband != null) {
+
+            }
         }
     }
 
@@ -83,7 +92,8 @@ export class CampaignWarband extends ContextObject {
     get FactionName() { return this._factionName; }
     get Owner() { return this._owner; }
     get ImageId() : number { return this._imageId; }
-    get WarbandID() { return this._warband.id }
+    get WarbandID() { return this._warband? this._warband.id : -1 }
+    get WarbandBasic() { return this._warbandBasic }
     get ImageUrls() { return this._imageUrls; }
     get RatingDucats() { return this._ratingDucats; }
     get RatingGlory() { return this._ratingGlory; }

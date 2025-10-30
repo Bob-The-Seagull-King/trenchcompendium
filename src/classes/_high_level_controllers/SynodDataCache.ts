@@ -72,6 +72,7 @@ class SynodDataCache {
     /* Campaigns */
     
     campaignDataCache: Record<number, ICampaign> = {}; // Cache of warband data
+    campaignHydratedObjectCache: Record<number, Campaign> = {}; // Cache of warband data
     campaignObjectCache: Record<number, Campaign> = {}; // Cache of warband data
     callCampaignCache: Record<number, boolean> = {};  // Objects that haven't been found, but are currently already being searched for
 
@@ -81,11 +82,15 @@ class SynodDataCache {
     public CheckCampaignObjectCache(key: number) {
         return !!this.campaignObjectCache[key];
     }
+    public CheckCampaignHydratedObjectCache(key: number) {
+        return !!this.campaignHydratedObjectCache[key];
+    }
     public CheckCampaignCallCache(key: number) {
         return !!this.callCampaignCache[key];
     }
     public AddCampaignCache(key : number, data : ICampaign) { this.campaignDataCache[key] = data; } // Adds an object to the cache
     public AddCampaignObjectCache(key : number, data : Campaign) { this.campaignObjectCache[key] = data; } // Adds an object to the cache
+    public AddCampaignHydratedObjectCache(key : number, data : Campaign) { this.campaignHydratedObjectCache[key] = data; } // Adds an object to the cache
     public AddCampaignCallCache(key : number) { this.callCampaignCache[key] = true; } // Adds an identifier when the call for an object is first made
 
     
