@@ -1101,7 +1101,7 @@
         "description": [
             {
                 "tags": {"desc_type" : "equipmentslim"},
-                "content": "eq_sniperscope"
+                "content": "eq_sniperrifle"
             },
             {
                 "tags": {"desc_type" : "default"},

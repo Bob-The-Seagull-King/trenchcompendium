@@ -12,7 +12,6 @@ const WbbPrintViewSimple: React.FC = () => {
 
     if (!warband || !print_mode) return null;
 
-    const stash = warband.warband_data.GetStash();
     const fighters = warband.warband_data.GetFighters();
 
     return (

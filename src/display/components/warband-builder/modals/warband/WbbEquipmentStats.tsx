@@ -9,6 +9,7 @@ import { EventRunner } from '../../../../../classes/contextevent/contexteventhan
 import { getCostType } from '../../../../../utility/functions';
 import { RealWarbandPurchaseModel, WarbandPurchase } from '../../../../../classes/saveitems/Warband/Purchases/WarbandPurchase';
 import { WarbandEquipment } from '../../../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
+import { useWarband } from '../../../../../context/WarbandContext';
 
 
 interface EquipmentItemProps {
@@ -27,6 +28,11 @@ const WbbEquipmentStats: React.FC<EquipmentItemProps> = (props : EquipmentItemPr
     const baseequip = abilityObject;
 
     
+    const { updateKey } = useWarband();
+    const [keyvar, setKeyvar] = useState(0);
+    useEffect(() => {
+        setKeyvar((prev) => prev + 1)
+    }, [updateKey])
 
     /** Range */
     const RangeVal = warbadnequip.GetRange();
@@ -39,7 +45,7 @@ const WbbEquipmentStats: React.FC<EquipmentItemProps> = (props : EquipmentItemPr
     if (statlist.hands_ranged != undefined) {HandValRange += statlist.hands_ranged.toString() + " Hands"}
 
     return (
-        <>
+        <div key={keyvar}>
             {statlist && (RangeVal != "" || (HandValMelee != "" || HandValRange != "") || abilityObject.Modifiers.length > 0 || (cost != null && costtype != null) ) &&
                 <table className={'WbbEquipmentStats'}>
                     <tbody>
@@ -100,7 +106,7 @@ const WbbEquipmentStats: React.FC<EquipmentItemProps> = (props : EquipmentItemPr
                     </tbody>
                 </table>
             }
-        </>
+        </div>
     )
 };
 

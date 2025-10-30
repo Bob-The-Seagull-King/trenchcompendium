@@ -114,19 +114,19 @@ const WbbJsonLDSchema: React.FC = () => {
             ...(UserWarband.GetLore() && { text: UserWarband.GetLore() }),
             "additionalProperty": [
                 { "@type": "PropertyValue", "name": "Rating (Glory)",
-                    "value": UserWarband.GetCostDucats(),   "unitText": "Glory"
+                    "value": UserWarband.GetRatingDucats(),   "unitText": "Glory"
                 },
                 { "@type": "PropertyValue", "name": "Rating (Ducats)",
-                    "value": UserWarband.GetCostGlory(),  "unitText": "Ducats"
+                    "value": UserWarband.GetRatingGlory(),  "unitText": "Ducats"
                 },
                 { "@type": "PropertyValue", "name": "Value (Ducats)",
-                    "value": UserWarband.GetCostDucatsTotal(), "unitText": "Ducats"
+                    "value": UserWarband.GetStashValueDucats(), "unitText": "Ducats"
                 },
                 { "@type": "PropertyValue", "name": "Value (Glory)",
-                    "value": UserWarband.GetCostGloryTotal(),   "unitText": "Glory"
+                    "value": UserWarband.GetTotalValueDucats(),   "unitText": "Glory"
                 },
                 { "@type": "PropertyValue", "name": "Victory Points",
-                    "value": UserWarband.GetVictoryPoints()
+                    "value": UserWarband.GetTotalValueGlory()
                 },
                 { "@type": "PropertyValue", "name": "Failed Promotions",
                     "value": UserWarband.Context.FailedPromotions
