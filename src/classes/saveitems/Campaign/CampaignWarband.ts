@@ -11,7 +11,7 @@ export interface ICampaignWarband {
     faction_name: string;
     warband_name: string;
     warband_user: ICampaignUser;
-    warband_image?: {
+    warband_image: {
         image_id: number;
         urls: Record<string, string>;
         source_title?: string;
@@ -31,7 +31,7 @@ export class CampaignWarband extends ContextObject {
     private _factionName = "";
     private _owner!: CampaignUser;
     private _warband!: SumWarband;
-    private _imageId? = 0;
+    private _imageId = 0;
     private _imageUrls?: Record<string, string>;
     private _imageSourceTitle?: string;
     private _imageSourceUrl?: string;
@@ -52,7 +52,7 @@ export class CampaignWarband extends ContextObject {
         this._name = data.warband_name;
         this._factionSlug = data.faction_slug;
         this._factionName = data.faction_name;
-        this._imageId = data.warband_image?.image_id;
+        this._imageId = data.warband_image.image_id;
         this._imageUrls = data.warband_image?.urls;
         this._imageSourceTitle = data.warband_image?.source_title;
         this._imageSourceUrl = data.warband_image?.source_url;
@@ -82,7 +82,7 @@ export class CampaignWarband extends ContextObject {
     get FactionSlug() { return this._factionSlug; }
     get FactionName() { return this._factionName; }
     get Owner() { return this._owner; }
-    get ImageId() { return this._imageId; }
+    get ImageId() : number { return this._imageId; }
     get WarbandID() { return this._warband.id }
     get ImageUrls() { return this._imageUrls; }
     get RatingDucats() { return this._ratingDucats; }

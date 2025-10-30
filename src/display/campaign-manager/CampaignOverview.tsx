@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {CampaignProvider} from "../../context/CampaignContext";
 import WarbandListEntry from "../components/Profile/WarbandListEntry";
-import CMCampaignListItem from "./components/CMCampaignListItem";
 import {Campaign} from "../../classes/saveitems/Campaign/Campaign";
 import {useAuth} from "../../utility/AuthContext";
 import {PopoverProvider} from "../../context/PopoverContext";
@@ -13,6 +12,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faUser} from "@fortawesome/free-solid-svg-icons";
 import AlertCustom from "../components/generics/AlertCustom";
 import {ROUTES} from "../../resources/routes-constants";
+import CampaignListEntry from "../components/Profile/CampaignListEntry";
 
 const CampaignOverview: React.FC = () => {
 
@@ -29,29 +29,26 @@ const CampaignOverview: React.FC = () => {
                 <h1 className="">{'Your Campaigns'}</h1>
 
                 { isLoggedIn ? (
-
-                    <div className={'row'}>
+                    <>
                         {campaignIds.map((id) => (
                             <CampaignProvider campaignId={id} key={id}>
                                 <PopoverProvider>
-                                    <CMCampaignListItem />
+                                    <CampaignListEntry />
                                 </PopoverProvider>
                             </CampaignProvider>
                         ))}
 
-                        <div className={'col'}>
-                            <CustomNavLink
-                                classes={'CampaignOverview-new-link'}
-                                link={`/campaigns/new`}
-                                runfunc={() => {
-                                    navigate(`${ROUTES.CAMPAIGN}new`, {state: Date.now().toString()})
-                                }}>
-                                <FontAwesomeIcon icon={faPlus} className={'icon-inline-left-l'}/>
+                        <CustomNavLink
+                            classes={'CampaignOverview-new-link'}
+                            link={`/campaigns/new`}
+                            runfunc={() => {
+                                navigate(`${ROUTES.CAMPAIGN}new`, {state: Date.now().toString()})
+                            }}>
+                            <FontAwesomeIcon icon={faPlus} className={'icon-inline-left-l'}/>
 
-                                {'Create new campaign '}
-                            </CustomNavLink>
-                        </div>
-                    </div>
+                            {'Create new campaign '}
+                        </CustomNavLink>
+                    </>
                 ) : (
                     <AlertCustom
                         type={'info'}
