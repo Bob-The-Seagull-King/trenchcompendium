@@ -27,7 +27,7 @@ const CMPlayerSmall: React.FC<CMPlayerSmallProps> = ({ useNav = true, player }) 
                     className={'player-image-wrap'}
                 >
                     <SynodImageWithCredit
-                        imageId={player.Id}
+                        imageId={player.AvatarId}
                         className={''}
                     />
                 </div>
