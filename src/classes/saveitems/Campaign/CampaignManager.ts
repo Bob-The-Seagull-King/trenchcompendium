@@ -258,7 +258,7 @@ class CampaignManager {
         }
     }
 
-    public async MoveWarandInviteCampiagn(_val : number, _accepted : boolean) {
+    public async MoveWarandInviteCampaign(_val : number, _accepted : boolean) {
         let NewCampaign : Campaign | null = null;
         for (let i = 0; i < this.ListOfWarbandInvites.length; i++) {
             if (this.ListOfWarbandInvites[i].GetId() == _val) {
