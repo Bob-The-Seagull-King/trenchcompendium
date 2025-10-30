@@ -22,7 +22,15 @@ const CMLatestAnnouncement: React.FC = () => {
         return (
             <div className="CMLatestAnnouncement">
                 <h3 className="CMLatestAnnouncement-headline">Latest Announcement</h3>
-                <p className="text-muted">No announcements yet.</p>
+                <div className={'CMLatestAnnouncement-content'}>
+                    <div className={'CMLatestAnnouncement-text-wrap'}>
+                        <p
+                            className={`CMLatestAnnouncement-text`}
+                        >
+                            {'No announcements'}
+                        </p>
+                    </div>
+                </div>
             </div>
         );
     }
