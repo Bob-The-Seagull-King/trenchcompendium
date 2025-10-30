@@ -12,6 +12,7 @@ import { DisplayCollectionDataDex, DisplayCollectionType } from './DisplayPageSt
 import BasicButton from '../components/subcomponents/interactables/BasicButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import RulesPageLinks from "../components/rules-content/RulesPageLinks";
+import PromotionsSet from "../components/generics/PromotionsSet";
 
 const PagedCompendiumDisplay = (prop: any) => {
     // Initialize controllers and managers
@@ -93,7 +94,6 @@ const PagedCompendiumDisplay = (prop: any) => {
             navigate('/compendium/'+ DisplayPage.searchId + "/" + (item.HeldItem.ID), {state: Date.now().toString()});
         }
     }
-
 
     // Return result -----------------------------
     return (

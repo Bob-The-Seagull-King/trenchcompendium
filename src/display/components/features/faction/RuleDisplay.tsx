@@ -86,17 +86,17 @@ const RuleDisplay = (props: any) => {
                 {Object.keys(upgradeoptions).length > 0 &&
                     <>
                     {
-                        Object.keys(upgradeoptions).map((item) => (
-                            <>
+                        Object.keys(upgradeoptions).map((item, index) => (
+                            <React.Fragment key={index}>
                                 { ( showCollapse || !showSimple ) &&
                                     <div className="RuleDisplay-upgradeoptions">
                                         <RulesCollapsibleContent
                                             headline={makestringpresentable(item)}
                                             content={
                                                 <>
-                                                    {upgradeoptions[item].map((subitem: ModelUpgradeRelationship) => (
+                                                    {upgradeoptions[item].map((subitem: ModelUpgradeRelationship, index) => (
                                                         <React.Fragment
-                                                            key={"model_ability_" + ruleObject.ID + "_ability_id_" + subitem.ID}>
+                                                            key={"model_ability_" + ruleObject.ID + "_ability_id_" + subitem.ID + index}>
                                                             <RulesModelUpgrade item={subitem}/>
                                                         </React.Fragment>
                                                     )) /* Abilities */}
@@ -112,15 +112,15 @@ const RuleDisplay = (props: any) => {
                                         <div className={'RuleDisplay-Upgrade-Title'}>
                                             {makestringpresentable(item)}
                                         </div>
-                                        {upgradeoptions[item].map((subitem: ModelUpgradeRelationship) => (
+                                        {upgradeoptions[item].map((subitem: ModelUpgradeRelationship, index) => (
                                             <React.Fragment
-                                                key={"model_ability_" + ruleObject.ID + "_ability_id_" + subitem.ID}>
+                                                key={"model_ability_" + ruleObject.ID + "_ability_id_" + subitem.ID + index}>
                                                 <RulesModelUpgrade item={subitem}/>
                                             </React.Fragment>
                                         )) /* Abilities */}
                                     </>
                                 }
-                            </>
+                            </React.Fragment>
                         ))
                     }
                     </>

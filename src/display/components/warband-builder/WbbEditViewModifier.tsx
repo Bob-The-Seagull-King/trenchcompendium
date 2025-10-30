@@ -30,7 +30,7 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
             </div>
 
             {warbprop.SelfDynamicProperty.Selections.length > 0 &&
-                <span className={'title-choice'}>
+                <>
                     {warbprop.SelfDynamicProperty.Selections.map((item) =>
                         <WbbOptionSelect
                             property={warbprop}
@@ -38,7 +38,7 @@ const WbbEditViewModifier: React.FC<WbbEditViewModifierProps> = ({ warbprop, ind
                             choice={item}
                         />
                     )}
-                </span>
+                </>
             }
 
             <div className={'modifier-body'}>

@@ -22,7 +22,7 @@ const BlogArticlePreview: React.FC<BlogArticlePreviewProps> = ({ post }) => {
     return (
         <CustomNavLink
             classes={'BlogArticlePreview'}
-            link={ROUTES.WARBAND}
+            link={`${ROUTES.PAGE_BLOG_BASE}/${post.slug}`}
             runfunc={() => {
                 navigate(`${ROUTES.PAGE_BLOG_BASE}/${post.slug}`);
             }}>

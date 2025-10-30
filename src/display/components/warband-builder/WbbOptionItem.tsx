@@ -13,6 +13,7 @@ import { WarbandProperty } from '../../../classes/saveitems/Warband/WarbandPrope
 import WbbOptionSelect from './modals/warband/WbbOptionSelect';
 import OptionSetStaticDisplay from '../subcomponents/description/OptionSetStaticDisplay';
 import {useWbbMode} from "../../../context/WbbModeContext";
+import AlertCustom from "../generics/AlertCustom";
 
 
 interface WbbOptionItemProps {
@@ -172,7 +173,7 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                             {returnDescription(option.purchase?.HeldObject, ((option.purchase?.HeldObject as WarbandProperty).SelfDynamicProperty.OptionChoice as Upgrade).Description)}
                             
                             {((option.purchase?.HeldObject as WarbandProperty).SelfDynamicProperty).Selections.length > 0 &&
-                                <span className={'title-choice'}>
+                                <>
                                     {((option.purchase?.HeldObject as WarbandProperty)).SelfDynamicProperty.Selections.map((item: any) => 
                                         <WbbOptionSelect 
                                             property={((option.purchase?.HeldObject as WarbandProperty))}
@@ -180,14 +181,25 @@ const WbbOptionItem: React.FC<WbbOptionItemProps> = ({ option, owner, category }
                                             choice={item}
                                         />
                                     )}                        
-                                </span>
+                                </>
                             }
                         </>
-                        }{option.purchase?.HeldObject == null &&
+                        }
+
+                        {/* If this was not chose, show an alert instead of option box */}
+                        {option.purchase?.HeldObject == null &&
                             <>
                                 {returnDescription(option.upgrade, option.upgrade.UpgradeObject.Description)}
-                                
-                                <OptionSetStaticDisplay data={option.upgrade.UpgradeObject.MyOptions} />
+
+                                <AlertCustom
+                                    type={'info'}
+                                    className={'mt-3'}
+                                >
+                                    <div className={'fw-bold'}>Selection missing</div>
+                                    <div>{'You need to apply this upgrade before you can select further options'}</div>
+                                </AlertCustom>
+
+                                {/*<OptionSetStaticDisplay data={option.upgrade.UpgradeObject.MyOptions} />*/}
                             </>
                         }
                     </div>

@@ -11,6 +11,7 @@ import { WarbandPurchase, RealWarbandPurchaseModel } from '../../../../../classe
 import { WarbandEquipment } from '../../../../../classes/saveitems/Warband/Purchases/WarbandEquipment';
 import {useGlobalState} from "../../../../../utility/globalstate";
 import RulesModelDisplayAbility from '../../../rules-content/RulesModelDisplayAbility';
+import { useWarband } from '../../../../../context/WarbandContext';
 
 interface EquipmentItemProps {
     item: WarbandPurchase
@@ -22,9 +23,14 @@ const WbbEquipmentMain: React.FC<EquipmentItemProps> = (props : EquipmentItemPro
     const abilityObject = (((props.item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.OptionChoice as Equipment))
     const [loreshow] = useGlobalState('loreshow');
 
+    const { updateKey } = useWarband();
+    const [keyvar, setKeyvar] = useState(0);
+    useEffect(() => {
+        setKeyvar((prev) => prev + 1)
+    }, [updateKey])
 
     return (
-        <div className={'WbbEquipmentMain'}>
+        <div className={'WbbEquipmentMain'} key={keyvar}>
             {/* Keywords */}
             {abilityObject.KeyWord.length > 0 &&
                 <>

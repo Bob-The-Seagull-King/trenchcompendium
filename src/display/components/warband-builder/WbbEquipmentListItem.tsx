@@ -53,22 +53,20 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
 
         async function GetCanRemove() {
             if (fighter !== null && fighter != undefined) {
-                if ((item.HeldObject as WarbandEquipment).EquipmentCache == null) {
-                    await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)
-                }
-                const cache = (item.HeldObject as WarbandEquipment).EquipmentCache
-                if (cache != null) {
-                    setCanRemove(cache.CanRemove)
-                    setCantSwap(cache.CanSwap)
-                    setKeywordList(cache.KeywordsCache)
-                    setrange((item.HeldObject as WarbandEquipment).GetRange())
-                }
-                setKeyvar((prev) => prev + 1)
+                await (item.HeldObject as WarbandEquipment).BuildNewProperties(fighter.model, item)    
             }
+            const cache = (item.HeldObject as WarbandEquipment).EquipmentCache
+            if (cache != null) {
+                setCanRemove(cache.CanRemove)
+                setCantSwap(cache.CanSwap)
+                setKeywordList(cache.KeywordsCache)
+                setrange((item.HeldObject as WarbandEquipment).GetRange())
+            }
+            setKeyvar((prev) => prev + 1)
         }
 
         GetCanRemove();
-    }, [updateKey])
+    }, [updateKey, item, fighter])
 
     function GetIDRel() {
         if (fighter == null || fighter == undefined) {
@@ -85,7 +83,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
             onClick={!play_mode ? () => setShowDetailsModal(true) : undefined}
         >
 
-            <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="WbbEquipmentListItem-Detail" centered>
+            <Modal key={keyvar} show={showDetailsModal} onHide={() => setShowDetailsModal(false)} className="WbbEquipmentListItem-Detail" centered>
                 <Modal.Header closeButton={false}>
                     <Modal.Title>{ItemValue.GetTrueName()}</Modal.Title>
 
@@ -224,7 +222,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
             }
 
             {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.length > 0 &&
-                <span className={'title-choice'}>
+                <>
                     {(item.HeldObject as WarbandEquipment).MyEquipment.SelfDynamicProperty.Selections.map((option) =>
                         <WbbOptionSelect
                             property={(item.HeldObject as WarbandEquipment).MyEquipment}
@@ -232,7 +230,7 @@ const WbbEquipmentListItem: React.FC<EquipmentItemProps> = ({ item, fighter }) =
                             choice={option}
                         />
                     )}
-                </span>
+                </>
             }
         </div>
     );
