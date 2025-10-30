@@ -121,37 +121,6 @@ const CampaignListEntryInvitaion: React.FC = () => {
             )}
         </div>
     );
-
-    // return (
-    //     <div className="CampaignListEntry">
-    //         <CustomNavLink
-    //             classes={'CampaignListEntry-image-wrap'}
-    //             link={`/campaign/${campaignID}`}
-    //             runfunc={() => {
-    //                 navigate(`/campaign/${campaignID}`)
-    //             }}>
-    //             <SynodImage
-    //                 imageId={campaignImageID}
-    //                 className={'CampaignListEntry-image'}
-    //             />
-    //         </CustomNavLink>
-    //
-    //         <div className={'CampaignListEntry-text'}>
-    //             <CustomNavLink
-    //                 classes={'campaign-name'}
-    //                 link={`/campaign/${campaignID}`}
-    //                 runfunc={() => {
-    //                     navigate(`/campaign/${campaignID}`)
-    //                 }}>
-    //                 {campaignName}
-    //             </CustomNavLink>
-    //
-    //             <div className={'campaign-status'}>
-    //                 {status_string}
-    //             </div>
-    //         </div>
-    //     </div>
-    // )
 }
 
 export default CampaignListEntryInvitaion
