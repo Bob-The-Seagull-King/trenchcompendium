@@ -2577,12 +2577,17 @@ class WarbandMember extends DynamicContextObject {
         const EquippedItems = await this.GetAllEquipForShow();
         const KeyWordList = await this.GetKeywordsFull();
 
+        const KeywordBase : Keyword[] = []
+        const list = faceq.GetKeyWords()
+        for (let i = 0; i < list.length; i++) {
+            KeywordBase.push(list[i])
+        }
         const eventmon : EventRunner = new EventRunner();
         const keywords : Keyword[] = await eventmon.runEvent(
             "findFinalKeywordsForFactionEquipment",
             this,
             [faceq],
-            faceq.GetKeyWords(),
+            KeywordBase,
             null
         )
         const keywordids = keywords.map(obj => obj.ID)
