@@ -19,7 +19,6 @@ const CampaignOverview: React.FC = () => {
     const { isLoggedIn, login, SiteUser } = useAuth()
 
     const campaignIds = SiteUser?.GetCampaignIDList() ?? [];
-    console.log(SiteUser);
 
     const navigate = useNavigate();
 
@@ -31,7 +30,7 @@ const CampaignOverview: React.FC = () => {
                 { isLoggedIn ? (
                     <>
                         {campaignIds.map((id) => (
-                            <CampaignProvider campaignId={id} key={id}>
+                            <CampaignProvider campaignId={id} key={id} hydrate={false}>
                                 <PopoverProvider>
                                     <CampaignListEntry />
                                 </PopoverProvider>

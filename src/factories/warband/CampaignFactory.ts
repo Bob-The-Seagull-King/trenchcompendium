@@ -14,6 +14,10 @@ class CampaignFactory {
         await rule.BuildWarbands(data, hydrate);
         await rule.BuildPlayers(data, hydrate);
         await rule.BuildAnnouncements(data, hydrate);
+
+        // --- mark hydration state on the instance ---
+        rule.isHydrated = !!hydrate;
+
         return rule;
     }
 
@@ -64,7 +68,7 @@ class CampaignFactory {
         return wb;
     }
 
-    static async GetCampaignPublicByID(id: number, opts?: { force?: boolean }, hydrate = true): Promise<Campaign | null> {
+    static async GetCampaignPublicByID(id: number, opts?: { force?: boolean }, hydrate = false): Promise<Campaign | null> {
         const cache = SynodDataCache.getInstance();
         let data: ICampaign | undefined;
 
@@ -97,15 +101,22 @@ class CampaignFactory {
             data = json;
         }
 
+        console.log('hydrate');
+        console.log(hydrate);
+
         // Always return a fresh Campaign instance
         return data ? CampaignFactory.CreateCampaign(data, hydrate) : null;
     }
 
-    static async ResetCampaign(val: Campaign, hydrate = true): Promise<Campaign | null> {
+    static async ResetCampaign(val: Campaign, hydrate?: boolean): Promise<Campaign | null> {
         const cache = SynodDataCache.getInstance();
         delete cache.campaignDataCache[val.GetId()];
         delete cache.callCampaignCache[val.GetId()];
         delete cache.campaignObjectCache[val.GetId()];
+
+        console.log('ResetCampaign');
+        // Decide target hydration: explicit arg wins, otherwise preserve current state
+        const targetHydrate = (typeof hydrate === 'boolean') ? hydrate : !!val.isHydrated;
 
         // clear sub-caches if du wirklich hart resetten willst …
         return CampaignFactory.GetCampaignPublicByID(val.GetId(), { force: true }, hydrate);
@@ -132,6 +143,9 @@ class CampaignFactory {
         if (LatestAnnouncement != null) { 
             await LatestAnnouncement.RehydrateUser();
         }
+
+        // --- mark as hydrated after all related data has been upgraded ---
+        val.isHydrated = true;
         
     }
 }

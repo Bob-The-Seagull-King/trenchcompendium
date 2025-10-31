@@ -40,7 +40,7 @@ const ProfilePageCampaigns: React.FC<ProfilePageCampaignsProps> = ({ userData })
                             <ul className="campaigns-list">
                                 {inviteIds.map((id) => (
                                     <li key={`inv-${id}`} className="campaign invited">
-                                        <CampaignProvider campaignId={id}>
+                                        <CampaignProvider campaignId={id} hydrate={false}>
                                             <CampaignListEntryInvitaion/>
                                         </CampaignProvider>
                                     </li>

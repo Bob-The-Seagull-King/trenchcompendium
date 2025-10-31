@@ -65,6 +65,7 @@ class CampaignManager {
     public ListOfInvites : Campaign[] = [];
     public ListOfWarbandInvites : Campaign[] = [];
 
+
     public async SetLoggedUser(id : number) {
         const NewUser : SiteUser | null = await UserFactory.CreatePrivateUserByID(id);
         this.UserProfile = NewUser;
@@ -91,32 +92,35 @@ class CampaignManager {
         if (this.UserProfile == null) {
             await this.GrabUser();
         }
+        console.log('BuildAll');
+
         const submission = this.GetUserSubmitBasics(true);
         if (submission != null) {
             const campaigns = await GetPlayerCampaigns(submission)
             if (campaigns != null) {
                 const json = (await campaigns.json()) as number[];
                 for (let i = 0; i < json.length; i++) {
-                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(json[i]);
+                    // request lean campaigns for overview lists
+                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(json[i], undefined, false);
                     if (CampaignVal != null) {
                         this.ListOfCampaigns.push(CampaignVal)
                     }
                 }
             }
 
-            // @TODO: this does nothing as the endpoint does not exist
             const invites = await GetPlayerCampaignInvites(submission)
             if (invites != null) {
                 const json = (await invites.json()) as number[];
                 for (let i = 0; i < json.length; i++) {
-                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(json[i]);
+                    // lean invite list
+                    const CampaignVal = await CampaignFactory.GetCampaignPublicByID(json[i], undefined, false);
                     if (CampaignVal != null) {
                         this.ListOfInvites.push(CampaignVal)
                     }
                 }
             }
 
-            //@TODO: Add warband invites here
+            //@TODO: Add warband invites here (also lean)
 
 
         }
@@ -125,7 +129,7 @@ class CampaignManager {
     }
 
     public async GrabUser() {
-        
+
         const storedToken = localStorage.getItem('jwtToken');
         const storedUserId = localStorage.getItem('synodUserId');
         if (storedToken && storedUserId && this.UserProfile == null) {

@@ -115,6 +115,7 @@ const WbbCampaignDetailView: React.FC<WbbCampaignDetailViewProps> = ({ onClose }
                             <CampaignProvider
                                 key={index}
                                 campaignId={Number(invite_id)}
+                                hydrate={false}
                             >
                                 <WbbCampaignInvite />
                             </CampaignProvider>

@@ -35,6 +35,9 @@ export class Campaign {
     private _announcements: CampaignAnnouncement[] = [];
     private _latestAnnouncement: CampaignAnnouncement | null = null;
 
+    // --- ADD: hydration flag the UI/Factory can read ---
+    public isHydrated = false; // CHANGE: default false
+
     constructor(data : ICampaign) {
 
         this._id = data.campaign_id ?? null;
@@ -44,7 +47,7 @@ export class Campaign {
         this._warbandsInvited = Array.isArray(data.campaign_warbands_invited) ? [...data.campaign_warbands_invited] : [];
     }
 
-    public async BuildWarbands(data : ICampaign, hydrate = true) {
+    public async BuildWarbands(data : ICampaign, hydrate= false) {
         
         for (let i = 0; i < data.campaign_warbands.length; i++) {
             const NewPlayer = await CampaignFactory.CreateCampaignWarband(data.campaign_warbands[i], this, hydrate);
@@ -52,7 +55,7 @@ export class Campaign {
         }
     }
 
-    public async BuildPlayers(data : ICampaign, hydrate = true) {
+    public async BuildPlayers(data : ICampaign, hydrate = false) {
 
         // Parallel faszer; Sorting stays via map()
         const [joined, invited, invitable] = await Promise.all([
@@ -78,7 +81,7 @@ export class Campaign {
         this._playersInvitable = invitable;
     }
 
-    public async BuildAnnouncements(data : ICampaign, hydrate = true) {
+    public async BuildAnnouncements(data : ICampaign, hydrate= false) {
         for (let i = 0; i < data.campaign_announcements.length; i++) {
             const NewAnnouncement = await CampaignFactory.CreateCampaignAnnouncement(data.campaign_announcements[i], hydrate);
             if (NewAnnouncement != null) {
@@ -88,7 +91,7 @@ export class Campaign {
 
 
         //@Lane, please check. This is my attempt at fixing the latest announcement error
-        // -> Somehow latest announcement sometimes is sometimes an empty array which is truthy and causing the crash
+        // -> Somehow latest announcement sometimes is an empty array which is truthy and causing the crash
         const latestRaw: any = (data as any).campaign_latest_announcement;
 
         let latestObj: any = null;

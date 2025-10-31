@@ -23,8 +23,8 @@ const CampaignManagerView: React.FC = () => {
     
 
     return (
-        <CampaignProvider campaignId={Number(id)}>
-            <PopoverProvider>
+        <CampaignProvider campaignId={Number(id)} hydrate={true}>
+            <PopoverProvider >
                 <CampaignManagerContent />
             </PopoverProvider>
         </CampaignProvider>
