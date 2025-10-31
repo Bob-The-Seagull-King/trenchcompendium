@@ -119,11 +119,17 @@ class WarbandEquipment extends DynamicContextObject {
             fighter
         )
 
+        const KeywordBase : Keyword[] = []
+        const list = this.GetEquipmentItem().GetKeyWords()
+        for (let i = 0; i < list.length; i++) {
+            KeywordBase.push(list[i])
+        }
+
         const keywords : Keyword[] = await eventmon.runEvent(
             "findFinalKeywordsForEquipment",
             fighter,
             [this],
-            this.GetEquipmentItem().GetKeyWords(),
+            KeywordBase,
             null
         )
 
@@ -180,19 +186,24 @@ class WarbandEquipment extends DynamicContextObject {
     }
 
     public async GetKeywords() : Promise<Keyword[]> {
-        
+        const KeywordBase : Keyword[] = []
+        const list = this.GetEquipmentItem().GetKeyWords()
+        for (let i = 0; i < list.length; i++) {
+            KeywordBase.push(list[i])
+        }
         if (this.MyContext instanceof WarbandMember) {
-        const eventmon : EventRunner = new EventRunner();
+            const eventmon : EventRunner = new EventRunner();
+            
             const keywords = await eventmon.runEvent(
                 "findFinalKeywordsForEquipment",
                 this.MyContext,
                 [this],
-                this.GetEquipmentItem().GetKeyWords(),
+                KeywordBase,
                 null
             )
-            return keywords;
+        return keywords;
         } else {
-            return this.GetEquipmentItem().GetKeyWords();
+            return KeywordBase;
         }
     }
 

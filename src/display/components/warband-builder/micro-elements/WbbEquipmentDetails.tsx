@@ -65,6 +65,26 @@ const WbbEquipmentDetails: React.FC<WbbEquipmentDetailsProps> = ({ equipment, sh
                         </td>
                     </tr>
                 }
+                {equipment.GetHandsMelee().length > 0 &&
+                    <tr>
+                        <td>
+                            Hands (Melee)
+                        </td>
+                        <td>
+                            {equipment.GetHandsMelee()}
+                        </td>
+                    </tr>
+                }
+                {equipment.GetHandsRanged().length > 0 &&
+                    <tr>
+                        <td>
+                            Hands (Ranged)
+                        </td>
+                        <td>
+                            {equipment.GetHandsRanged()}
+                        </td>
+                    </tr>
+                }
             </table>
 
             { keywordlist.length > 0 &&
