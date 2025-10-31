@@ -809,8 +809,6 @@ class UserWarband extends DynamicContextObject {
      * Returns the stashed Ducats in this warband
      */
     GetStashedDucats () : number {
-        console.log(this.computeCurrency());
-
         return this.computeCurrency().ducats.stashed;
     }
     GetStashedGlory () : number {
